@@ -126,6 +126,7 @@
 									</div>
 									<ul class="list-group" style="margin-bottom: 10px;">
 										<br>
+										<?php if(isset($_SESSION['ctc']['empresa'])){ ?>
 										<h5 style="margin-left: 10px;">Datos de la empresa</h5>
 										<hr>
 										<form action="">
@@ -186,7 +187,8 @@
 											</div>
 										</form>
 										<br>
-										<hr>				
+										<hr>
+										<?php } ?>				
 											<?php if($empresa == 1): ?>
 											<?php if($infoEmpresa["actividad"]): ?>
 												<a href="#" id="inline-activity" data-type="select" data-pk="1" data-value="" data-title="Actividad empresa" class="list-group-item editable editable-click" style="color: rgb(152, 166, 173);"><?php echo $infoEmpresa["actividad"]; ?></a>

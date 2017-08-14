@@ -17,6 +17,12 @@
 			display: none;
 		}
 	}
+
+	@media only screen and (max-width: 600px) {
+		.movil{
+			margin-top: 15px;
+		}
+	}
 </style>
 
 <div class="site-header">
@@ -190,14 +196,14 @@
 			<?php endif ?>
 		<?php else: ?>
 
-			<ul class="nav navbar-nav pull-xs-right">
+			<ul class="nav navbar-nav pull-xs-right movil">
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>empleos.php">
 						Empleos
 					</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>ingresar.php"style="color: white;">
+					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>ingresar.php" style="color: white;">
 						Ingresar
 					</a>
 				</li>

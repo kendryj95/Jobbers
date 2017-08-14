@@ -1087,7 +1087,6 @@
 
 					<?php if($data['fecha_nacimiento'] != ""): ?>
 
-					console.log("<?= $data['fecha_nacimiento'] ?>");
 					var f = "<?= $data['fecha_nacimiento'] ?>";
 					var division = f.split("-");
 					var dia = division[2], mes = division[1], anio = division[0];
@@ -1406,6 +1405,8 @@
 						var op = parseInt($(this).attr("data-target"));
 						var str = "";
 						var edit = parseInt($(this).attr("data-edit"));
+						var elemento = $(this);
+						$(elemento).addClass('disabled').text('Guardando...');
 						switch(op) {
 							case 1:
 								if($("#name").val() != "" && $("#lastName").val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
@@ -1483,7 +1484,7 @@
 								data: 'op=1&opt=' + op + str + e,
 								dataType: 'json',
 								success: function(data) {
-									console.log(data);
+									$(elemento).removeClass('disabled').text('Guardar');
 									ele.attr("data-i");
 									if (ele.attr("data-target") != 6) {
 										ele.attr("data-edit", 1);
@@ -1740,8 +1741,6 @@
 								buttonsStyling: false
 							});
 						}
-
-						op = "";
 					});
 				});
 
