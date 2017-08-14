@@ -688,7 +688,7 @@
 							dataType: 'json',
 							success: function(data) {
 								if(data.msg == "OK") {
-									window.location.assign("./");
+									swal("INFORMACIÓN!", "Para confirmar tu registro, revisa la bandeja de tu correo electronico.", "info");
 								}
 							}
 						});

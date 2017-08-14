@@ -32,6 +32,7 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
+
 	<body class="img-cover" style="background-image: url(img/OB82100.jpg);">
 
 
@@ -110,16 +111,20 @@
 								<div class="p-x-2">
 									<div class="row">
 										<div class="col-xs-12">
-											<a href="#" onlogin="Login()" class="btn bg-facebook btn-block label-left m-b-0-25">
+											<a href="javascript:void(0)" onClick="Login()" class="btn bg-facebook btn-block label-left m-b-0-25">
 												<span class="btn-label"><i class="ti-facebook"></i></span>
-												Facebook
+												Regístrate con Facebook
 											</a>
 										</div>
 
+									<!--<div class="col-xs-12">
 										<fb:login-button
+											class="btn bg-facebook btn-block label-left m-b-0-25"
 											scope="public_profile,email"
 											onlogin="Login();">
+											<span>Facebook</span>
 										</fb:login-button>
+									</div>-->
 
 										<!--<div class="col-xs-6">
 											<button type="button" class="btn bg-googleplus btn-block label-left m-b-0-25">
@@ -216,7 +221,7 @@
 			};*/
 
 			function Login() {
-				getUserInfo();
+				//getUserInfo();
 
 				/*FB.login(function(response) {
 				   if (response.authResponse) {
@@ -226,6 +231,28 @@
 					 	console.log('User cancelled login or did not fully authorize.');
 					}
 				},{scope: 'id,name,email,picture'});*/
+
+				FB.login(function(response) {
+
+					if (response.authResponse) {
+						console.log('Welcome!  Fetching your information.... ');
+						//console.log(response); // dump complete info
+						//access_token = response.authResponse.accessToken; //get access token
+						//user_id = response.authResponse.userID; //get FB UID
+						getUserInfo();
+						/*FB.api('/me', function(response) {
+							user_email = response.email; //get user email
+							// you can store this data into your database
+						});*/
+
+					} else {
+						//user hit cancel button
+						console.log('User cancelled login or did not fully authorize.');
+
+					}
+				}, {
+					scope: 'public_profile,email'
+				});
 
 			}
 
@@ -248,7 +275,7 @@
 								});
 								setTimeout(function(){
 									window.location.href = "./";
-								},2);
+								},2000);
 								//window.location.assign("./");
 							}
 							else {
@@ -297,16 +324,15 @@
 									dataType: 'json',
 									success: function(data) {
 										if(data.status == 1) {
-											swal({
+											/*swal({
 												title: 'Información!',
-												text: 'Gracias por registrarte, en breve serás redireccionado a la pagina principal.',
-												timer: 2500,
+												text: 'Para confirmar tu registro, revisa la bandeja de tu correo electronico.',
+												timer: 240000,
 												confirmButtonClass: 'btn btn-primary btn-lg',
 												buttonsStyling: false
-											});
-											setTimeout(function() {
-												window.location.assign("./");
-											}, 3000);
+											});*/
+											swal("INFORMACIÓN!", "Para confirmar tu registro, revisa la bandeja de tu correo electronico.", "info");
+											$('.form-material')[0].reset();
 										}
 										else {
 											swal({

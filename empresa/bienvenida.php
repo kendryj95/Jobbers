@@ -1,10 +1,10 @@
 <?php
-    session_start();
 
     require_once('../classes/DatabasePDOInstance.function.php');
     $db = DatabasePDOInstance();
 
     if (isset($_GET['id']) && isset($_GET['c'])){
+        session_start();
 
         $id = $_GET['id'];
 

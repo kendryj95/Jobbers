@@ -1740,6 +1740,8 @@
 								buttonsStyling: false
 							});
 						}
+
+						op = "";
 					});
 				});
 
