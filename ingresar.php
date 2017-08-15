@@ -1,3 +1,12 @@
+<?php
+	session_start();
+
+	if (isset($_SESSION['ctc']['type'])) {
+		header('Location: ./');
+	}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>

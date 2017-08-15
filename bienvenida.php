@@ -4,6 +4,7 @@
     $db = DatabasePDOInstance();
 
     if (isset($_GET['id']) && isset($_GET['n']) && isset($_GET['a'])){
+        session_start();
 
         $id = $_GET['id'];
         $name = $_GET['n'];
