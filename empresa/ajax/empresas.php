@@ -100,76 +100,83 @@
 				}
 				break;
 			case ADD:
-				$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'empresas'");
-				$uid = $db->getOne("SELECT valor FROM uid");
-				$db->query("INSERT INTO empresas (id, uid, id_imagen, nombre_responsable, apellido_responsable, nombre, razon_social, clave, correo_electronico, telefono, sitio_web, facebook, twitter, instagram, snapchat, fecha_creacion, fecha_actualizacion, cuit) VALUES ('$id', '$uid', '0', '$_REQUEST[name]', '$_REQUEST[lastName]', '$_REQUEST[company]', '$_REQUEST[razon]', '$_REQUEST[password]', '$_REQUEST[email]', '$_REQUEST[phone]', '', '', '', '', '', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$_REQUEST[cuit]')");
+				$exist = $db->getOne("SELECT id FROM empresas WHERE correo_electronico='$_REQUEST[email]'");
+				if($exist) {
+					echo json_encode(array("msg" => 'NO'));
+				} else {
 
-				$idE = $db->getInsertID();
+					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'empresas'");
+					$uid = $db->getOne("SELECT valor FROM uid");
+					$db->query("INSERT INTO empresas (id, uid, id_imagen, nombre_responsable, apellido_responsable, nombre, razon_social, clave, correo_electronico, telefono, sitio_web, facebook, twitter, instagram, snapchat, fecha_creacion, fecha_actualizacion, cuit) VALUES ('$id', '$uid', '0', '$_REQUEST[name]', '$_REQUEST[lastName]', '$_REQUEST[company]', '$_REQUEST[razon]', '$_REQUEST[password]', '$_REQUEST[email]', '$_REQUEST[phone]', '', '', '', '', '', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$_REQUEST[cuit]')");
 
-				$db->query("UPDATE uid SET valor = (valor + 1) WHERE id = 1");
-				$info_plan = $db->getRow("SELECT * FROM planes WHERE id=$_REQUEST[plan]");
-				$db->query("INSERT INTO empresas_planes (id_empresa, id_plan, fecha_creacion, fecha_plan, logo_home, link_empresa) VALUES ('$id', '$info_plan[id]', '".date('Y-m-d')."', '".date('Y-m-d')."', '$info_plan[logo_home]', '$info_plan[link_empresa]')");
-				$serv = $_REQUEST["serv"] == 0 ? 4 : $_REQUEST["serv"];
-				$info_serv = $db->getRow("SELECT * FROM servicios WHERE id=$serv");
-				$db->query("INSERT INTO empresas_servicios (id_empresa, fecha_creacion, fecha_servicio, curriculos_disponibles, filtros_personalizados, id_servicio) VALUES ('$id', '".date('Y-m-d')."', '".date('Y-m-d')."', '$info_serv[curriculos_disponibles]', '$info_serv[filtros_personalizados]', '$info_serv[id]')");
-				
-				$db->query("INSERT INTO empresas_pagos (id_empresa, informacion, plan, servicio, fecha) VALUES ($id, '".(isset($_REQUEST["transaction"]) ? $_REQUEST["transaction"] : 'Plan gratis')."', $_REQUEST[plan], $serv, '".date('Y-m-d')."')");
-				
-				$info = $db->getRow("
-					SELECT
-						id,
-						uid,
-						id_imagen,
-						nombre,
-						sitio_web,
-						facebook,
-						twitter,
-						instagram,
-						snapchat
-					FROM
-						empresas
-					WHERE
-						id = $id
-				");
-				
-				$_SESSION["ctc"]["empresa"] = $info;
-				$_SESSION["ctc"]["id"] = $info["id"];
-				$_SESSION["ctc"]["uid"] = $info["uid"];
-				$_SESSION["ctc"]["name"] = $info["nombre"];
-				$_SESSION["ctc"]["type"] = 1;
-				
-				$_SESSION["ctc"]["plan"] = $info_plan;
-				$_SESSION["ctc"]["servicio"] = $info_serv;
-				if($info["id_imagen"] != 0) {
-					$pic = $db->getOne("SELECT CONCAT(directorio,'/',titulo,'.',extension) FROM imagenes WHERE id=".$info["id_imagen"]);
-					$_SESSION["ctc"]["pic"] = $pic;
+					$idE = $db->getInsertID();
+
+					$db->query("UPDATE uid SET valor = (valor + 1) WHERE id = 1");
+					$info_plan = $db->getRow("SELECT * FROM planes WHERE id=$_REQUEST[plan]");
+					$db->query("INSERT INTO empresas_planes (id_empresa, id_plan, fecha_creacion, fecha_plan, logo_home, link_empresa) VALUES ('$id', '$info_plan[id]', '".date('Y-m-d')."', '".date('Y-m-d')."', '$info_plan[logo_home]', '$info_plan[link_empresa]')");
+					$serv = $_REQUEST["serv"] == 0 ? 4 : $_REQUEST["serv"];
+					$info_serv = $db->getRow("SELECT * FROM servicios WHERE id=$serv");
+					$db->query("INSERT INTO empresas_servicios (id_empresa, fecha_creacion, fecha_servicio, curriculos_disponibles, filtros_personalizados, id_servicio) VALUES ('$id', '".date('Y-m-d')."', '".date('Y-m-d')."', '$info_serv[curriculos_disponibles]', '$info_serv[filtros_personalizados]', '$info_serv[id]')");
+					
+					$db->query("INSERT INTO empresas_pagos (id_empresa, informacion, plan, servicio, fecha) VALUES ($id, '".(isset($_REQUEST["transaction"]) ? $_REQUEST["transaction"] : 'Plan gratis')."', $_REQUEST[plan], $serv, '".date('Y-m-d')."')");
+					
+					$info = $db->getRow("
+						SELECT
+							id,
+							uid,
+							id_imagen,
+							nombre,
+							sitio_web,
+							facebook,
+							twitter,
+							instagram,
+							snapchat
+						FROM
+							empresas
+						WHERE
+							id = $id
+					");
+					
+					$_SESSION["ctc"]["empresa"] = $info;
+					$_SESSION["ctc"]["id"] = $info["id"];
+					$_SESSION["ctc"]["uid"] = $info["uid"];
+					$_SESSION["ctc"]["name"] = $info["nombre"];
+					$_SESSION["ctc"]["type"] = 1;
+					
+					$_SESSION["ctc"]["plan"] = $info_plan;
+					$_SESSION["ctc"]["servicio"] = $info_serv;
+					if($info["id_imagen"] != 0) {
+						$pic = $db->getOne("SELECT CONCAT(directorio,'/',titulo,'.',extension) FROM imagenes WHERE id=".$info["id_imagen"]);
+						$_SESSION["ctc"]["pic"] = $pic;
+					}
+					else {
+						$_SESSION["ctc"]["pic"] = 'avatars/user.png';
+					}
+
+					$destinatario = $_REQUEST['email'];
+					$asunto = "Confirmación de correo electronico - JOBBERS ARGENTINA";
+					$headers = "MIME-Version: 1.0\r\n";
+					$headers .= "Content-type: text/html; charset= iso-8859-1\r\n";
+					$headers .= "From: Jobbers Argentina < administracion@jobbers.com >\r\n";
+
+					$mensaje = "Saludos $_REQUEST[name],<br><br>";
+
+					$nombre_link = str_replace(array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú"),array("%20","a","e","i","o","u","A","E","I","O","U"),$_REQUEST['name']);
+
+					$mensaje .= "Por favor confirma el registro de su empresa en la plataforma de Jobbers Argentina haciendo clic <a href='www.jobbersargentina.com/empresa/bienvenida.php?id=$idE&c=$nombre_link'>aquí</a>. <br><br><br>";
+
+					$enlace = "<a href='www.jobbersargentina.com/empresa/bienvenida.php?id=$idE&c=$nombre_link'>www.jobbersargentina.com/empresa/bienvenida.php?id=$idE&c=$nombre_link</a>";
+
+					$mensaje .= "Si no funciona el enlace anterior puedes acceder a la siguiente URL: $enlace";
+
+					mail($destinatario,$asunto,$mensaje,$headers);
+
+					echo json_encode(array(
+						"msg" => "OK",
+						"data" => $info
+					));
+
 				}
-				else {
-					$_SESSION["ctc"]["pic"] = 'avatars/user.png';
-				}
-
-				$destinatario = $_REQUEST['email'];
-				$asunto = "Confirmación de correo electronico - JOBBERS ARGENTINA";
-				$headers = "MIME-Version: 1.0\r\n";
-				$headers .= "Content-type: text/html; charset= iso-8859-1\r\n";
-				$headers .= "From: Jobbers Argentina < administracion@jobbers.com >\r\n";
-
-				$mensaje = "Saludos $_REQUEST[name],<br><br>";
-
-				$nombre_link = str_replace(array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú"),array("%20","a","e","i","o","u","A","E","I","O","U"),$_REQUEST['name']);
-
-				$mensaje .= "Por favor confirma el registro de su empresa en la plataforma de Jobbers Argentina haciendo clic <a href='www.jobbersargentina.com/empresa/bienvenida.php?id=$idE&c=$nombre_link'>aquí</a>. <br><br><br>";
-
-				$enlace = "<a href='www.jobbersargentina.com/empresa/bienvenida.php?id=$idE&c=$nombre_link'>www.jobbersargentina.com/empresa/bienvenida.php?id=$idE&c=$nombre_link</a>";
-
-				$mensaje .= "Si no funciona el enlace anterior puedes acceder a la siguiente URL: $enlace";
-
-				mail($destinatario,$asunto,$mensaje,$headers);
-
-				echo json_encode(array(
-					"msg" => "OK",
-					"data" => $info
-				));
 				break;
 			case RESET_PASSWORD:
 				$exist = $db->getOne("SELECT id FROM empresas WHERE correo_electronico='$_REQUEST[email]'");

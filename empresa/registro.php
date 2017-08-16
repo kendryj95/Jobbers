@@ -1,4 +1,4 @@
-<?php
+	<?php
 	session_start();
 
 	if(isset($_SESSION["ctc"]["empresa"])) {
@@ -609,6 +609,14 @@
 							success: function(data) {
 								if(data.msg == "OK") {
 									swal("INFORMACIÓN!", "Para confirmar tu registro, revisa la bandeja de tu correo electronico.", "info");
+								} else {
+									swal({
+												title: 'Información!',
+												text: 'El correo electrónico ingresado ya se encuentra en uso.',
+												timer: 3000,
+												confirmButtonClass: 'btn btn-primary btn-lg',
+												buttonsStyling: false
+									});
 								}
 							}
 						});
