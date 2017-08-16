@@ -1398,7 +1398,7 @@
 						var str = "";
 						var edit = parseInt($(this).attr("data-edit"));
 						var elemento = $(this);
-						$(elemento).addClass('disabled').text('Guardando...');
+						
 						switch(op) {
 							case 1:
 								if($("#name").val() != "" && $("#lastName").val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
@@ -1465,6 +1465,7 @@
 								break;
 						}
 						if(band) {
+							$(elemento).addClass('disabled').text('Guardando...');
 							var e = '';
 							var ele = $(this);
 							if(edit == 2) {
@@ -1733,6 +1734,7 @@
 								buttonsStyling: false
 							});
 						}
+						op = "";
 					});
 				});
 
