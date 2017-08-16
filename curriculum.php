@@ -386,9 +386,7 @@
 													<textarea id="descriptionArea" class="form-control"></textarea>
 												</div>
 											</div>
-											<div class="col-md-12" style="text-align: center;">
-												<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a>
-											</div>
+											
 										</div>
 										<div class="col-md-2"></div>
 									</div>
@@ -457,7 +455,7 @@
 
 									<div class="row">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a></div>
+										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a></div>
 										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
 									</div>
 								</div>
@@ -604,9 +602,7 @@
 													<input class="form-control" value="" id="aprob" type="text">
 												</div>
 											</div>
-											<div class="col-md-12" style="text-align: center;margin-top: 25px;">
-												<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar</a>
-											</div>
+											
 										</div>
 										<div class="col-md-2"></div>
 									</div>
@@ -675,7 +671,7 @@
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar</a></div>
+										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar</a></div>
 										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
 									</div>
 								</div>
@@ -730,9 +726,7 @@
 												<?php endforeach ?>
 											</div>
 										</div>
-										<div class="col-md-12" style="text-align: center;margin-top: 25px;">
-											<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="4">Borrar</a>
-										</div>
+										
 									</div>
 
 									<?php $idiomasT = $db->getAll("SELECT trabajadores_idiomas.*, idiomas.nombre as nombre_idioma FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=".$_SESSION["ctc"]["id"]); ?>
@@ -798,7 +792,7 @@
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="4">Guardar</a></div>
+										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="4">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="4">Borrar</a></div>
 										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
 									</div>
 								</div>
@@ -825,9 +819,7 @@
 													<textarea class="form-control" id="descriptionC"></textarea>
 												</div>
 											</div>
-											<div class="col-md-12" style="text-align: center;margin-top: 25px;">
-												<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar</a>
-											</div>
+											
 										</div>
 										<div class="col-md-2"></div>
 									</div>
@@ -890,7 +882,7 @@
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar</a></div>
+										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar</a></div>
 										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
 									</div>
 								</div>
