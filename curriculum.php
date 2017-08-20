@@ -1408,7 +1408,7 @@
 								break;
 							case 2:
 								if($("#company").val() != "" && parseInt($("#rCompany").val()) > 0 && parseInt($("#tCompany").val()) > 0 && $("#tEmployeer").val() != "" && $("#descriptionArea").val() != "") {
-									if(parseInt($("#yearE").val()) > parseInt($("#yearI").val())) {
+									if(parseInt($("#yearE").val()) >= parseInt($("#yearI").val())) {
 										str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val();
 										band = true;
 									}
