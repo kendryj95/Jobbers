@@ -1734,7 +1734,6 @@
 								buttonsStyling: false
 							});
 						}
-						op = "";
 					});
 				});
 
