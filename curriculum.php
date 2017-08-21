@@ -899,8 +899,8 @@
 										<div class="col-md-8">
 											<div class="form-group row" style="margin-top: 10px;">
 												<label for="remuneracion" class="col-xs-4 col-form-label" style="text-align: right;">Remuneración Pretendida <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
-													<input class="form-control" value="" id="remuneracion" type="number" min="1">
+												<div class="col-xs-8">	
+													<input class="form-control" value="" id="remuneracion" type="number" min="2000" step="2000" max="100000">
 												</div>
 											</div>
 											<div class="form-group row" style="margin-top: 10px;">
