@@ -1555,6 +1555,29 @@
 													}
 												});
 											});
+
+											setTimeout(function () {
+												swal({
+												  title: "Advertencia",
+												  text: "Desea agregar más experiencias laborales o pasar a la siguiente fase?",
+												  type: "info",
+												  showCancelButton: true,
+												  confirmButtonColor: "#DD6B55",
+												  confirmButtonText: "Siguiente fase",
+												  cancelButtonText: "Agregar más",
+												  closeOnConfirm: false
+												});
+											},3000);
+											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig3');
+
+											$(".show-swal2.visible .swal2-confirm").click(function() {
+												if($(this).attr('data-action') == 'sig3') {
+													$(this).attr('data-action', '');
+
+													$('.nav .nav-item a[href="#tab3"]').click();
+												}
+											});
+
 											break;
 										case 3:
 											$("#sNivel").val(0);
@@ -1619,6 +1642,30 @@
 													}
 												});
 											});
+
+											setTimeout(function () {
+												swal({
+												  title: "Advertencia",
+												  text: "Desea agregar más estudios o pasar a la siguiente fase?",
+												  type: "info",
+												  showCancelButton: true,
+												  confirmButtonColor: "#DD6B55",
+												  confirmButtonText: "Siguiente fase",
+												  cancelButtonText: "Agregar más",
+												  closeOnConfirm: false
+												});
+											},3000);
+											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig4');
+
+											$(".show-swal2.visible .swal2-confirm").click(function() {
+												if($(this).attr('data-action') == 'sig4') {
+													$(this).attr('data-action', '');
+
+													$('.nav .nav-item a[href="#tab4"]').click();
+													//$('.back-next[data-target="4"]').click();
+												}
+											});
+
 											break;
 										case 4:
 											$("#idioma").val(0);
@@ -1674,6 +1721,31 @@
 													}
 												});
 											});
+
+
+											setTimeout(function () {
+												swal({
+												  title: "Advertencia",
+												  text: "Desea agregar más idiomas o pasar a la siguiente fase?",
+												  type: "info",
+												  showCancelButton: true,
+												  confirmButtonColor: "#DD6B55",
+												  confirmButtonText: "Siguiente fase",
+												  cancelButtonText: "Agregar más",
+												  closeOnConfirm: false
+												});
+											},3000);
+											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig5');
+
+											$(".show-swal2.visible .swal2-confirm").click(function() {
+												if($(this).attr('data-action') == 'sig5') {
+													$(this).attr('data-action', '');
+
+													$('.nav .nav-item a[href="#tab5"]').click();
+													//$('.back-next[data-target="5"]').click();
+												}
+											});
+
 											break;
 										case 5:
 											$("#nameC").val("");
@@ -1712,11 +1784,55 @@
 													}
 												});
 											});
+
+											setTimeout(function () {
+												swal({
+												  title: "Advertencia",
+												  text: "Desea añadir otros conocimientos o pasar a la siguiente fase?",
+												  type: "info",
+												  showCancelButton: true,
+												  confirmButtonColor: "#DD6B55",
+												  confirmButtonText: "Siguiente fase",
+												  cancelButtonText: "Agregar más",
+												  closeOnConfirm: false
+												});
+											},3000);
+											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig6');
+
+											$(".show-swal2.visible .swal2-confirm").click(function() {
+												if($(this).attr('data-action') == 'sig6') {
+													$(this).attr('data-action', '');
+													console.log('asbdasbdoasndas');
+													$('.nav .nav-item a[href="#tab6"]').click();
+													//$('.back-next[data-target="6"]').click();
+												}
+											});
+
 											break;
 										case 6:
-											/*setTimeout(function(){
-												window.location.reload();
-											},2);*/
+											
+											setTimeout(function () {
+												swal({
+												  title: "Advertencia",
+												  text: "Desea ver la vista previa de su CV?",
+												  type: "info",
+												  showCancelButton: true,
+												  confirmButtonColor: "#DD6B55",
+												  confirmButtonText: "Ver CV",
+												  cancelButtonText: "Cancelar",
+												  closeOnConfirm: false
+												});
+											},3000);
+											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig7');
+
+											$(".show-swal2.visible .swal2-confirm").click(function() {
+												if($(this).attr('data-action') == 'sig7') {
+													$(this).attr('data-action', '');
+
+													$('.nav .nav-item a[href="#tab7"]').click();
+													//$('.back-next[data-target="7"]').click();
+												}
+											});
 
 											break;
 									}
