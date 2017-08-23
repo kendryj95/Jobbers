@@ -1485,18 +1485,40 @@
 										ele.attr("data-edit", 2);
 									}
 
-									swal({
+									/*swal({
 										title: 'Información!',
 										text: 'Información almacenada exitosamente.',
 										timer: 2000,
 										confirmButtonClass: 'btn btn-primary btn-lg',
 										buttonsStyling: false
-									});
+									});*/
 
 									switch(op) {
 										case 1:
 											$(".nav-link").removeClass("disabled");
 											$(".back-next").removeClass("disabled");
+
+											swal({
+												  title: "Exito",
+												  text: "Información almacenada exitosamente! Desea pasar a la siguiente fase?",
+												  type: "success",
+												  showCancelButton: true,
+												  confirmButtonColor: "#DD6B55",
+												  confirmButtonText: "Siguiente fase",
+												  cancelButtonText: "Cancelar",
+												  closeOnConfirm: false
+												});
+
+											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig2');
+
+											$(".show-swal2.visible .swal2-confirm").click(function() {
+												if($(this).attr('data-action') == 'sig2') {
+													$(this).attr('data-action', '');
+
+													$('.nav .nav-item a[href="#tab2"]').click();
+												}
+											});
+
 											break;
 										case 2:
 											$("#company").val("");
@@ -1556,18 +1578,17 @@
 												});
 											});
 
-											setTimeout(function () {
 												swal({
-												  title: "Advertencia",
-												  text: "Desea agregar más experiencias laborales o pasar a la siguiente fase?",
-												  type: "info",
+												  title: "Exito",
+												  text: "Información almacenada exitosamente! Desea agregar más experiencias laborales o pasar a la siguiente fase?",
+												  type: "success",
 												  showCancelButton: true,
 												  confirmButtonColor: "#DD6B55",
 												  confirmButtonText: "Siguiente fase",
 												  cancelButtonText: "Agregar más",
 												  closeOnConfirm: false
 												});
-											},3000);
+
 											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig3');
 
 											$(".show-swal2.visible .swal2-confirm").click(function() {
@@ -1643,18 +1664,16 @@
 												});
 											});
 
-											setTimeout(function () {
 												swal({
-												  title: "Advertencia",
-												  text: "Desea agregar más estudios o pasar a la siguiente fase?",
-												  type: "info",
+												  title: "Exito",
+												  text: "Información almacenada exitosamente! Desea agregar más estudios o pasar a la siguiente fase?",
+												  type: "success",
 												  showCancelButton: true,
 												  confirmButtonColor: "#DD6B55",
 												  confirmButtonText: "Siguiente fase",
 												  cancelButtonText: "Agregar más",
 												  closeOnConfirm: false
 												});
-											},3000);
 											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig4');
 
 											$(".show-swal2.visible .swal2-confirm").click(function() {
@@ -1723,18 +1742,16 @@
 											});
 
 
-											setTimeout(function () {
 												swal({
-												  title: "Advertencia",
-												  text: "Desea agregar más idiomas o pasar a la siguiente fase?",
-												  type: "info",
+												  title: "Exito",
+												  text: "Información almacenada exitosamente! Desea agregar más idiomas o pasar a la siguiente fase?",
+												  type: "success",
 												  showCancelButton: true,
 												  confirmButtonColor: "#DD6B55",
 												  confirmButtonText: "Siguiente fase",
 												  cancelButtonText: "Agregar más",
 												  closeOnConfirm: false
 												});
-											},3000);
 											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig5');
 
 											$(".show-swal2.visible .swal2-confirm").click(function() {
@@ -1785,18 +1802,18 @@
 												});
 											});
 
-											setTimeout(function () {
+												
 												swal({
-												  title: "Advertencia",
-												  text: "Desea añadir otros conocimientos o pasar a la siguiente fase?",
-												  type: "info",
+												  title: "Exito",
+												  text: "Información almacenada exitosamente! Desea añadir otros conocimientos o pasar a la siguiente fase?",
+												  type: "success",
 												  showCancelButton: true,
 												  confirmButtonColor: "#DD6B55",
 												  confirmButtonText: "Siguiente fase",
 												  cancelButtonText: "Agregar más",
 												  closeOnConfirm: false
 												});
-											},3000);
+
 											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig6');
 
 											$(".show-swal2.visible .swal2-confirm").click(function() {
@@ -1811,18 +1828,16 @@
 											break;
 										case 6:
 											
-											setTimeout(function () {
 												swal({
-												  title: "Advertencia",
-												  text: "Desea ver la vista previa de su CV?",
-												  type: "info",
+												  title: "Exito",
+												  text: "Información almacenada exitosamente! Desea ver la vista previa de su CV?",
+												  type: "success",
 												  showCancelButton: true,
 												  confirmButtonColor: "#DD6B55",
 												  confirmButtonText: "Ver CV",
 												  cancelButtonText: "Cancelar",
 												  closeOnConfirm: false
 												});
-											},3000);
 											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig7');
 
 											$(".show-swal2.visible .swal2-confirm").click(function() {
