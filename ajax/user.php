@@ -67,14 +67,14 @@
 				$idU = $db->getInsertID();
 
 				$db->query("UPDATE uid SET valor = (valor + 1) WHERE id = 1");
-				$_SESSION["ctc"]["id"] = $id;
+				/*$_SESSION["ctc"]["id"] = $id;
 				$_SESSION["ctc"]["uid"] = $uid;
 				$_SESSION["ctc"]["name"] = $_REQUEST["name"];
 				$_SESSION["ctc"]["lastName"] = $_REQUEST["lastName"];
 				$_SESSION["ctc"]["email"] = $_REQUEST["email"];
 				$_SESSION["ctc"]["type"] = 2;
 				$_SESSION["ctc"]["pic"] = 'avatars/user.png';
-				$_SESSION["ctc"]["postulate"] = 0;
+				$_SESSION["ctc"]["postulate"] = 0;*/
 
 				//$idU = $db->getOne("SELECT id FROM trabajadores ORDER BY id DESC LIMIT 1");
 
