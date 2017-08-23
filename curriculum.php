@@ -1152,6 +1152,13 @@
 										});
 										$("#educacion").html(html);
 									}
+									if (data.experiencias.length > 0) {
+										html = "";
+										data.experiencias.forEach(function(ex){
+											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'</p>';
+										});
+										$('#experiencias').html(html);
+									}
 									if(data.idiomas.length > 0) {
 										html = "";
 										data.idiomas.forEach(function(i) {
