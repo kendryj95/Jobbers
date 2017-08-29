@@ -778,10 +778,12 @@
 					'.',
 					img.extension
 				) AS imagen,
-				tra.calificacion_general
+				tra.calificacion_general,
+				pais.nombre AS pais
 			FROM
 				trabajadores AS tra
 			LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+			INNER JOIN paises pais ON tra.id_pais = pais.id
 			ORDER BY RAND()
 			LIMIT 12
 		");
@@ -1315,7 +1317,7 @@
 										<tbody>
 											<?php if($filtroArea): ?>
 												<tr>
-													<td>
+													<td style="word-break: break-all;">
 														<a style="margin-left: 7px;" class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoArea["nombre"]; ?></a>
 													</td>
 													<td>
@@ -1328,7 +1330,7 @@
 												<?php foreach($areas as $area): ?>
 													<?php if($area["cantidad"] > 0): ?>
 														<tr>
-															<td>
+															<td style="word-break: break-all;">
 																<a style="margin-left: 7px;" class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $area["amigable"] ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><span class="underline"><?php echo $area["nombre"]; ?></span></a>
 															</td>
 															<td>
@@ -1527,15 +1529,34 @@
 							<?php else: ?>
 								<div class="row row-sm">
 									<?php foreach($trabajadores as $trabajador): ?>
-										<div class="col-md-4">
+										<div class="col-md-12">
 											<a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
 												<div class="tra box box-block bg-white user-5">
 													<div class="u-content">
-														<div class="avatar box-96 m-b-2" style="margin-right: 11px;">
-															<img class="b-a-radius-circle" src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="max-height: 90px;height: 100%;">
+														<div class="row">
+															<div class="col-xs-12 col-md-4  text-center">
+																<div class="avatar box-96 m-b-2" style="margin-right: 11px;">
+																<img class="b-a-radius-circle" src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="max-height: 90px;height: 100%;">
+																</div>
+															</div>
+															<div class="col-xs-12 col-md-8">
+																
+																<h4>
+																	<span class="text-black pull-left"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span>
+
+																</h4>
+																<div class="row">
+																	<div class="col-xs-12 col-md-12">
+																		
+																	<div class="pull-left">
+																		<b class="" style="">&nbsp;&nbsp;<?= $trabajador['pais'] ?></b>
+																	</div>
+																	</div>
+																</div>
+																<div style="font-size: 28px;"></div>
+															</div>
 														</div>
-														<h5><span class="text-black"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span></h5>
-														<div style="font-size: 28px;"></div>
+														
 													</div>
 												</div>
 											</a>
