@@ -415,10 +415,15 @@
 					'.',
 					img.extension
 				) AS imagen,
-				tra.calificacion_general
+				tra.calificacion_general,
+				pais.nombre AS pais,
+				ie.sobre_mi,
+				ie.remuneracion_pret
 			FROM
 				trabajadores AS tra
 			LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+			INNER JOIN paises pais ON tra.id_pais = pais.id
+			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 			WHERE 1
 		";
 		$query2 = "
@@ -571,12 +576,17 @@
                     '.',
                     img.extension
                 ) AS imagen,
-                tra.calificacion_general
+                tra.calificacion_general,
+				pais.nombre AS pais,
+				ie.sobre_mi,
+				ie.remuneracion_pret
             FROM
                 trabajadores AS tra
             LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
             LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 			LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+			INNER JOIN paises pais ON tra.id_pais = pais.id
+			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 		";
 		$query2 = "
 			SELECT
@@ -739,12 +749,16 @@
 					'.',
 					img.extension
 				) AS imagen,
-				tra.calificacion_general
+				tra.calificacion_general,
+				pais.nombre AS pais,
+				ie.sobre_mi,
+				ie.remuneracion_pret
 			FROM
 				trabajadores AS tra
 			LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+			INNER JOIN paises pais ON tra.id_pais = pais.id
+			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 			WHERE tra.nombres LIKE '%$busqueda%' OR tra.apellidos LIKE '%$busqueda%'
-			LIMIT $inicial, $final
 		");
 
 		foreach($trabajadores as $k => $t) {
@@ -1261,10 +1275,10 @@
 				cursor: pointer;
 			}			
 			.tra:hover, .tra-f:hover {
-				background-color: #3e70c9 !important;
+				background-color: #DADADA !important;
 			}
 			.tra:hover *, .tra-f:hover * {
-				color: #fff !important;
+				/*color: #fff !important;*/
 			}
 		</style>
 	</head>
@@ -1507,21 +1521,64 @@
 									<div class="row row-sm">
 										<?php foreach($trabajadores as $trabajador): ?>										
 												<div class="col-md-12">
-													<a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
-														<div class="tra-f box box-block bg-white user-5">
-															<div class="u-content" style="text-align: left;display: flex;">
-																<div style="margin-right: 11px;" class="avatar box-96">
-																	<img class="b-a-radius-circle" src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="max-height: 90px;height: 100%;">
+											<a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
+												<div class="tra box box-block bg-white user-5">
+													<div class="u-content">
+														<div class="row">
+															<div class="col-xs-12 col-md-3  text-center">
+																<div class="avatar box-96 m-b-2" style="margin-right: 11px;">
+																<img class="b-a-radius-circle" src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="max-height: 90px;height: 100%;">
 																</div>
-																<div style="display: inline-block;padding-top: 25px;">
-																	<h5 style="margin-bottom: 0px;margin-left: 7px;"><span class="text-black"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span></h5>
-																	<div style="font-size: 28px;display: flex;"></div>
-																</div>
+															</div>
+															<div class="col-xs-12 col-md-6">
+																
+																<h4>
+																	<span class="text-black pull-left"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span>
 
+																</h4>
+																<div class="row">
+																	<div class="col-xs-12 col-md-12">
+																		
+																	<div class="pull-left">
+																		<b class="" style="">&nbsp;&nbsp;<?= $trabajador['pais'] ?></b>
+																	</div>
+																	</div>
+																</div>
+																<div style="font-size: 28px;"></div>
+															</div>
+															<div class="col-xs-12 col-md-3">
+																<button class="btn btn-info" style="margin-bottom: 10px">Ver Perfil</button>
+																<div class="col-xs-12 col-md-12">
+																	<div class="pull-left">
+																		<span style="font-size: 12px">Remuneración Pretendida:</span>
+																		<h3>$ <?= $trabajador['remuneracion_pret'] ?></h3>
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12 col-md-12">
+																<?php
+																	$sobre_mi_len = strlen($trabajador['sobre_mi']);
+																?>
+																<?php if ($sobre_mi_len > 300): 300?>
+																	<span class="summary">
+																		<?php $resumen = substr($trabajador['sobre_mi'], 0, 300) ?>
+																		<?php $completo = substr($trabajador['sobre_mi'], 300) ?>
+																		<p style="text-align: justify;"><?= $resumen ?><span class="complete" style=""><?= $completo ?></span></p>
+																	</span>
+																	
+																	<span>
+																		<a href="javascript:void(0)" class="more">Leer más...</a>
+																	</span>
+																<?php else: ?>
+																	<p style="text-align: justify;"><?= $trabajador['sobre_mi'] ?></p>
+																<?php endif; ?>
 															</div>
 														</div>
-													</a>
+														
+													</div>
 												</div>
+											</a>
+										</div>
 										<?php endforeach ?>	
 										</div>
 								<?php else: ?>	
@@ -1568,7 +1625,22 @@
 																</div>
 															</div>
 															<div class="col-xs-12 col-md-12">
-																<p style="text-align: justify;"><?= $trabajador['sobre_mi'] ?></p>
+																<?php
+																	$sobre_mi_len = strlen($trabajador['sobre_mi']);
+																?>
+																<?php if ($sobre_mi_len > 300): 300?>
+																	<span class="summary">
+																		<?php $resumen = substr($trabajador['sobre_mi'], 0, 300) ?>
+																		<?php $completo = substr($trabajador['sobre_mi'], 300) ?>
+																		<p style="text-align: justify;"><?= $resumen ?><span class="complete" style=""><?= $completo ?></span></p>
+																	</span>
+																	
+																	<span>
+																		<a href="javascript:void(0)" class="more">Leer más...</a>
+																	</span>
+																<?php else: ?>
+																	<p style="text-align: justify;"><?= $trabajador['sobre_mi'] ?></p>
+																<?php endif; ?>
 															</div>
 														</div>
 														
@@ -1581,39 +1653,6 @@
 									<div style="text-align: center">
 										<button class="pagination-next">+ Jobbers</button>
 									</div>
-							<?php endif ?>
-
-							<?php if($cantidadRegistros > 0 && ($filtroActivado || $busqueda)): ?>
-								<div class="btn-toolbar">
-									<div class="btn-group pull-xs-right">
-										<?php
-											$urlParams = "empleos.php";
-											if($filtroArea) {
-												$urlParams .= "?area=$filtroArea";
-												if($filtroSector) {
-													$urlParams .= "&sector=$filtroSector";
-												}
-												if($filtroMomento) {
-													$urlParams .= "&momento=$filtroMomento";
-												}
-											}
-											else {
-												if($busqueda) {
-													$urlParams .= "?busqueda=$busqueda";
-												}
-												elseif($filtroMomento) {
-													$urlParams .= "?momento=$filtroMomento";
-												}
-											}
-
-										?>
-										<a href="<?php echo $pagina > 1 ? ("$urlParams&pagina=" . ($pagina - 1)) : "javascript: void(0);"; ?>" class="btn btn-secondary waves-effect waves-light <?php if($pagina == 1) { echo "disabled"; } ?>">Anterior</a>
-										<?php for($i = 1; $i <= $cantidadPaginas; $i++): ?>
-											<a href="<?php echo "$urlParams&pagina=$i"; ?>" class="btn <?php echo $i == $pagina ? "btn-primary" : "btn-secondary"; ?> waves-effect waves-light"><?php echo $i; ?></a>
-										<?php endfor ?>
-										<a href="<?php echo $pagina < $cantidadPaginas ? ("$urlParams&pagina=" . ($pagina + 1)) : ""; ?>" class="btn btn-secondary waves-effect waves-light <?php if($pagina == $cantidadPaginas) { echo "disabled"; } ?>">Siguiente</a>
-									</div>
-								</div>
 							<?php endif ?>
 
 						</div>
@@ -1630,6 +1669,25 @@
 		var limit_ini = 0;
 
 		$(document).ready(function() {
+
+			$('.complete').hide();
+
+			$('.more').on('click',function(){
+				console.log('boton');
+				var btnMore = $(this).text();
+
+				if (btnMore == 'Leer más...') {
+					$(this).text('Retraer...');
+				} else {
+					$(this).text('Leer más...');
+				}
+				
+				//$(this).siblings('summary').find('span.complete').toggle(function(){
+					//$(this).closest('span.complete').toggle();
+					//$('.more').text('Leer más...');
+				//});
+				$(this).parent().find('.complete').toggle('slow');
+			});
 			
 			$('.pagination-next').on('click',function(){
 
