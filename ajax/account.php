@@ -80,11 +80,11 @@
 					break;
 				case 6:
 					if($id != "" && $id != "undefined") {
-						$db->query("UPDATE trabajadores_infextra SET remuneracion_pret=$_REQUEST[remuneracion], objetivo_laboral='$_REQUEST[objLab]', carta_present = '$_REQUEST[cartaPres]' WHERE id_trabajador=$_REQUEST[i]");
+						$db->query("UPDATE trabajadores_infextra SET remuneracion_pret=$_REQUEST[remuneracion], sobre_mi='$_REQUEST[sobre_mi]' WHERE id_trabajador=$_REQUEST[i]");
 						$data = $db->getAll("SELECT * FROM trabajadores_infextra WHERE id=$id");
 					} else {
 						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores_infextra'");
-						$db->query("INSERT INTO trabajadores_infextra (id_trabajador, remuneracion_pret, objetivo_laboral, carta_present) VALUES ('".$_SESSION["ctc"]["id"]."', $_REQUEST[remuneracion], '$_REQUEST[objLab]', '$_REQUEST[cartaPres]')");
+						$db->query("INSERT INTO trabajadores_infextra (id_trabajador, remuneracion_pret, sobre_mi) VALUES ('".$_SESSION["ctc"]["id"]."', $_REQUEST[remuneracion], '$_REQUEST[sobre_mi]'");
 						$data = $db->getAll("SELECT * FROM trabajadores_infextra WHERE id=$id");
 					}
 					break;

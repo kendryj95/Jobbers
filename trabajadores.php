@@ -779,13 +779,16 @@
 					img.extension
 				) AS imagen,
 				tra.calificacion_general,
-				pais.nombre AS pais
+				pais.nombre AS pais,
+				ie.sobre_mi,
+				ie.remuneracion_pret
 			FROM
 				trabajadores AS tra
 			LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 			INNER JOIN paises pais ON tra.id_pais = pais.id
-			ORDER BY RAND()
-			LIMIT 12
+			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+			ORDER BY tra.id DESC
+			LIMIT 0,5
 		");
 
 		foreach($trabajadores as $k => $t) {
@@ -1527,19 +1530,19 @@
 								</div>
 								<?php endif ?>
 							<?php else: ?>
-								<div class="row row-sm">
+								<div class="row row-sm" id="box-trab">
 									<?php foreach($trabajadores as $trabajador): ?>
 										<div class="col-md-12">
 											<a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
 												<div class="tra box box-block bg-white user-5">
 													<div class="u-content">
 														<div class="row">
-															<div class="col-xs-12 col-md-4  text-center">
+															<div class="col-xs-12 col-md-3  text-center">
 																<div class="avatar box-96 m-b-2" style="margin-right: 11px;">
 																<img class="b-a-radius-circle" src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="max-height: 90px;height: 100%;">
 																</div>
 															</div>
-															<div class="col-xs-12 col-md-8">
+															<div class="col-xs-12 col-md-6">
 																
 																<h4>
 																	<span class="text-black pull-left"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span>
@@ -1555,6 +1558,18 @@
 																</div>
 																<div style="font-size: 28px;"></div>
 															</div>
+															<div class="col-xs-12 col-md-3">
+																<button class="btn btn-info" style="margin-bottom: 10px">Ver Perfil</button>
+																<div class="col-xs-12 col-md-12">
+																	<div class="pull-left">
+																		<span style="font-size: 12px">Remuneración Pretendida:</span>
+																		<h3>$ <?= $trabajador['remuneracion_pret'] ?></h3>
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12 col-md-12">
+																<p style="text-align: justify;"><?= $trabajador['sobre_mi'] ?></p>
+															</div>
 														</div>
 														
 													</div>
@@ -1563,6 +1578,9 @@
 										</div>
 									<?php endforeach ?>	
 								</div>
+									<div style="text-align: center">
+										<button class="pagination-next">+ Jobbers</button>
+									</div>
 							<?php endif ?>
 
 							<?php if($cantidadRegistros > 0 && ($filtroActivado || $busqueda)): ?>
@@ -1608,6 +1626,47 @@
 
 		<?php require_once('includes/libs-js.php'); ?>
 		<script>
+
+		var limit_ini = 0;
+
+		$(document).ready(function() {
+			
+			$('.pagination-next').on('click',function(){
+
+				limit_ini += 5;
+
+				$.ajax({
+					url: 'ajax/trabajadores.php',
+					type: 'POST',
+					dataType: 'json',
+					data: {op: 1, limit_ini: limit_ini},
+					success: function(response){
+
+						var html = "";
+
+						var json_length = Object.keys(response.trabajador).length;
+
+						if (json_length > 0) {
+							response.trabajador.forEach(function(e){
+								html += e;
+							});
+						} else {
+							$('.pagination-next').remove();
+						}
+
+						
+						
+						$('#box-trab').append(html);
+					},
+					error: function(error){
+						console.log('Error en el ajax: '+error);
+					}
+				});
+				
+
+			});
+
+		});
             
 		</script>
 	</body>

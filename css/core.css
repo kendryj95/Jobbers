@@ -8776,6 +8776,22 @@ a.text-grey:focus .underline, a.text-grey:hover .underline {
   background: rgba(255, 255, 255, 0.1);
 }
 
+.pagination-next {
+      padding: 10px 57.6px;
+      line-height: 1.4;
+      border-radius: 3px;
+      color: #fff;
+      background-color: #2f9aee;
+      border-color: #2f9aee;
+      text-decoration: none !important;
+      letter-spacing: .5px;
+}
+
+.pagination-next:hover {
+    background-color: #2B89D3;
+    border-color: #2B89D3;
+}
+
 /* =================================================================
   Animations
 ================================================================= */

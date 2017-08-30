@@ -904,15 +904,9 @@
 												</div>
 											</div>
 											<div class="form-group row" style="margin-top: 10px;">
-												<label for="objLab" class="col-xs-4 col-form-label" style="text-align: right;">Objetivo Laboral <span style="color: red;">*</span></label>
+												<label for="sobre_mi" class="col-xs-4 col-form-label" style="text-align: right;">Sobre mí <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
-													<input type="text" class="form-control" id="objLab">
-												</div>
-											</div>
-											<div class="form-group row" style="margin-top: 10px;">
-												<label for="cartaPres" class="col-xs-4 col-form-label" style="text-align: right;">Carta de Presentación <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
-													<textarea name="" id="cartaPres" class="form-control"></textarea>
+													<textarea name="" id="sobre_mi" class="form-control" style="max-height: 300px"></textarea>
 												</div>
 											</div>
 											<div class="col-md-12" style="text-align: center;margin-top: 25px;">
@@ -1024,10 +1018,8 @@
 												<p style="margin-left: 50px;">
 													<strong>Remuneración pretendida: </strong> $<span
 														id="labelRem"><?= $infoExtra['remuneracion_pret'] ?></span> <br>
-													<strong>Objetivo Laboral: </strong> <span
-														id="labelObjLab"><?= $infoExtra['objetivo_laboral'] ?></span> <br>
-													<strong>Carta de Presentacion: </strong> <span
-														id="labelCartaP"><?= $infoExtra['carta_present'] ?></span> <br>
+													<strong>Sobre mí: </strong> <span
+														id="labelSobreMi"><?= $infoExtra['sobre_mi'] ?></span> <br>
 												</p>
 									</div>
 									<?php endif ?>
@@ -1065,13 +1057,11 @@
 					<?php if(count($infoExtra) > 1): ?>
 
 					var remuneracion = "<?= $infoExtra['remuneracion_pret'] ?>";
+					var sobre_mi = "<?= $infoExtra['sobre_mi'] ?>";
 					remuneracion = parseInt(remuneracion);
-					var objLab = "<?= $infoExtra['objetivo_laboral'] ?>";
-					var cartaPres = "<?= $infoExtra['carta_present'] ?>";
 
 					$('#remuneracion').val(remuneracion);
-					$('#objLab').val(objLab);
-					$('#cartaPres').val(cartaPres);
+					$('#sobre_mi').val(sobre_mi);
 
 					$(".save[data-target=6]").attr('data-edit',2).attr('data-i',<?= $_SESSION['ctc']['id'] ?>);
 
@@ -1143,8 +1133,7 @@
                                     var edad = calcularEdad(data.usuario.fecha_nacimiento);
                                     $("#edad").html((edad)+"años");
                                     $("#labelRem").html(data.info_extra.remuneracion_pret);
-                                    $("#labelObjLab").html(data.info_extra.objetivo_laboral);
-                                    $("#labelCartaP").html(data.info_extra.carta_present);
+                                    $("#labelSobreMi").html(data.info_extra.sobre_mi);
 									var html = "";
 									if(data.educacion.length > 0) {
 										data.educacion.forEach(function(e) {
@@ -1465,8 +1454,8 @@
 								}
 								break;
 							case 6:
-								if($('#remuneracion').val() != '' && $('#objLab').val() != '' && $('#cartaPres').val() != ''){
-									str = '&remuneracion=' + $('#remuneracion').val() + '&objLab=' + $('#objLab').val() + '&cartaPres=' + $('#cartaPres').val();
+								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != ''){
+									str = '&remuneracion=' + $('#remuneracion').val() + '&sobre_mi=' + $('#sobre_mi').val();
 									band = true;
 								}
 								break;
