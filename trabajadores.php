@@ -278,6 +278,8 @@
 					INNER JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 					INNER JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
 					LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+					INNER JOIN paises pais ON tra.id_pais = pais.id
+					INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 					WHERE
 						ti.id_idioma = $idioma[id]
 				";
@@ -351,6 +353,8 @@
 					INNER JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 					INNER JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
 					LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+					INNER JOIN paises pais ON tra.id_pais = pais.id
+					INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 					WHERE
 						te.id_area_estudio = $area[id]
 					AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
@@ -379,6 +383,8 @@
 					INNER JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 					INNER JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
 					LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+					INNER JOIN paises pais ON tra.id_pais = pais.id
+					INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 					WHERE
 						te.id_area_estudio = $area[id]
 				";
@@ -422,6 +428,7 @@
 			FROM
 				trabajadores AS tra
 			LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+			LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
 			INNER JOIN paises pais ON tra.id_pais = pais.id
 			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 			WHERE 1
@@ -545,7 +552,8 @@
 		
 		$cantidadPaginas = ceil($cantidadRegistros / $final);		
 		
-		$query .= "GROUP BY tra.id LIMIT $inicial, $final";
+		#$query .= "GROUP BY tra.id LIMIT $inicial, $final";
+		$query .= "GROUP BY tra.id";
 		
 		$trabajadores = $db->getAll($query);
         
@@ -596,6 +604,8 @@
             LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
             LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 			LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+			INNER JOIN paises pais ON tra.id_pais = pais.id
+			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 		";
 		
 		if($filtroArea) {            
@@ -720,7 +730,8 @@
 		
 		$cantidadPaginas = ceil($cantidadRegistros / $final);
 		
-		$query .= " GROUP BY tra.id LIMIT $inicial, $final";
+		#$query .= " GROUP BY tra.id LIMIT $inicial, $final";
+		$query .= " GROUP BY tra.id";
         
 		$trabajadores = $db->getAll($query);	
 		
@@ -829,6 +840,8 @@
 							LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 							LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
                             LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                            INNER JOIN paises pais ON tra.id_pais = pais.id
+                            INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 							WHERE
 								(
 									TIMESTAMPDIFF(
@@ -866,6 +879,8 @@
 							LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 							LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
                             LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                            INNER JOIN paises pais ON tra.id_pais = pais.id
+                            INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 							WHERE
 								(
 									TIMESTAMPDIFF(
@@ -901,6 +916,8 @@
                         trabajadores AS tra
                     LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
                     LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+					INNER JOIN paises pais ON tra.id_pais = pais.id
+					INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                     WHERE TIMESTAMPDIFF(YEAR,  tra.fecha_nacimiento, CURDATE()) >= $momento[rango_a] AND TIMESTAMPDIFF(YEAR,  tra.fecha_nacimiento, CURDATE()) <= $momento[rango_b]
                 ";
                 
@@ -944,6 +961,8 @@
 								LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 								LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 								LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+								INNER JOIN paises pais ON tra.id_pais = pais.id
+								INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 								WHERE $condt AND te.id_area_estudio = $infoArea[id]
 						";
                         $query .= filtroMomento(true);
@@ -967,6 +986,8 @@
 								LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 								LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 								LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+								INNER JOIN paises pais ON tra.id_pais = pais.id
+								INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 								WHERE $condt AND te.id_area_estudio = $infoArea[id]
 						";
                         
@@ -993,6 +1014,8 @@
 								LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 								LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 								LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+								INNER JOIN paises pais ON tra.id_pais = pais.id
+								INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 								WHERE $condt
 						";
                         
@@ -1019,6 +1042,8 @@
 								LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 								LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 								LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+								INNER JOIN paises pais ON tra.id_pais = pais.id
+								INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 								WHERE $condt
 						";
                         
@@ -1041,6 +1066,8 @@
 							trabajadores AS tra
 						LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 						LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+						INNER JOIN paises pais ON tra.id_pais = pais.id
+						INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 						WHERE $condt
 					";
                     
@@ -1060,6 +1087,8 @@
                                     trabajadores AS tra
                                 LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
                                 LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                                INNER JOIN paises pais ON tra.id_pais = pais.id
+                                INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                                 WHERE $condt
                     ";
                     
@@ -1107,6 +1136,8 @@
 								LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 								LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 								LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+								INNER JOIN paises pais ON tra.id_pais = pais.id
+								INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 								WHERE
 									$condt AND te.id_area_estudio = $infoArea[id]
 						";
@@ -1131,6 +1162,8 @@
 								LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 								LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 								LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+								INNER JOIN paises pais ON tra.id_pais = pais.id
+								INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 								WHERE $condt AND te.id_area_estudio = $infoArea[id]
 						";
 
@@ -1157,6 +1190,8 @@
 								LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 								LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 								LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+								INNER JOIN paises pais ON tra.id_pais = pais.id
+								INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 								WHERE $condt
 						";
                         
@@ -1183,6 +1218,8 @@
 								LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
 								LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 								LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+								INNER JOIN paises pais ON tra.id_pais = pais.id
+								INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 								WHERE $condt
 						";
                         
@@ -1204,7 +1241,9 @@
 						FROM
 							trabajadores AS tra
 						LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-						LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+						LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador					
+						INNER JOIN paises pais ON tra.id_pais = pais.id
+						INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 						WHERE $condt
 					";
                     
@@ -1224,6 +1263,8 @@
                                     trabajadores AS tra
                                 LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
                                 LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                                INNER JOIN paises pais ON tra.id_pais = pais.id
+                                INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                                 WHERE $condt
                     ";                    
                     
