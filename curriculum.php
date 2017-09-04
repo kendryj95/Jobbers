@@ -98,7 +98,7 @@
 									<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4"></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 1: Datos de contacto</h4>
 									<p class="text-muted" style="margin-left: 25px;margin-right: 25px; text-align: justify;">Completa los pasos para llenar tu curriculum y podrás aparecer como candidato para la empresas. Recuerda que los campos marcados con (*) son obligatorios</p>
@@ -271,7 +271,7 @@
 									<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab2" role="tabpanel">
@@ -279,7 +279,7 @@
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 2: Experiencia laboral</h4>
 									<div class="row">
@@ -456,7 +456,7 @@
 									<div class="row">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab3" role="tabpanel">
@@ -464,7 +464,7 @@
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 3: Estudios</h4>
 									<div class="row">
@@ -672,7 +672,7 @@
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar</a></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab4" role="tabpanel">
@@ -680,7 +680,7 @@
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 4: Idiomas</h4>
 									<div class="row" style="margin-top: 10px;">
@@ -793,7 +793,7 @@
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="4">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="4">Borrar</a></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab5" role="tabpanel">
@@ -801,7 +801,7 @@
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 5: Otros conocimientos</h4>
 									<div class="row">
@@ -883,7 +883,7 @@
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar</a></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab6" role="tabpanel">
@@ -891,7 +891,7 @@
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="7" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a></div>
+										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="7" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 6: Información Extra</h4>
 									<div class="row">
@@ -941,6 +941,7 @@
 														<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo date('d/m/y',strtotime($data["fecha_nacimiento"])); ?></span><br>
 														<strong>Edad: </strong> <span id="edad"><?php echo intval(date('Y')) - intval(date('Y', strtotime($data["fecha_nacimiento"]))) . "años"; ?></span><br>
 														<strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $data["correo_electronico"]; ?></span><br>
+														<strong>Telefonos: </strong> <span id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] =! "" ? " / " . $data["telefono_alternativo"] : ''; ?></span><br>
 													</p>
 												</div>
 											</div>
@@ -1123,11 +1124,11 @@
 								data: 'op=7',
 								dataType: 'json',
 								success: function(data) {
-									console.log(data);
 									$("#labelName").html(data.usuario.nombres);
 									$("#labelLastName").html(data.usuario.apellidos);
 									$("#labelCountry").html(data.usuario.pais);
 									$("#labelEmail").html(data.usuario.correo_electronico);
+									$("#labelTlf").html(data.usuario.telefono + " / " + data.usuario.telefono_alternativo);
                                     var fecha = formato(data.usuario.fecha_nacimiento);
 									$("#fecha_nac").html(fecha);
                                     var edad = calcularEdad(data.usuario.fecha_nacimiento);
