@@ -34,7 +34,9 @@
 				tra.instagram,
 				tra.snapchat,
 				tra.id_pais,
-				tra.correo_electronico
+				tra.correo_electronico,
+				tra.telefono,
+				tra.telefono_alternativo
 			FROM
 				trabajadores AS tra
 			LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
@@ -142,6 +144,8 @@
 				<th align="center" width="200px" style="border-bottom: 1px solid #afe1a8;">Ubicacion</th>
 			</tr>
 			';*/
+
+		$tlf_alternativo = $trabajador["telefono_alternativo"] =! "" ? ' / ' . $trabajador["telefono_alternativo"] : '';	
 		
 		$html .= '<p></p><p></p>
 			<table border="0">
@@ -152,6 +156,7 @@
 						<b>Edad: </b> <span id="labelE">'.$edad.'</span><br>
 						<b>Lugar de nacimiento: </b> <span id="labelCountry">'.($trabajador["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$trabajador[id_pais]") : "Sin especificar").'</span><br>
 						<b>Correo electrónico: </b> <span id="labelEmail">'.$trabajador["correo_electronico"].'</span><br>
+						<b>Telefonos: </b> <span id="labelTlf">'.$trabajador["telefono"] . $tlf_alternativo . '</span><br>
 						<a href="http://jobbersargentina.com/trabajador-detalle.php?t='.$trabajador["nombres"].'-'.$trabajador["apellidos"].'-'.$id.'">Visitar perfil</a><br>
 						O copia y pega esto en tu navegador para visitar el perfil
 						<strong>http://jobbersargentina.com/trabajador-detalle.php?t='.$trabajador["nombres"].'-'.$trabajador["apellidos"].'-'.$id.'</strong>
@@ -263,8 +268,7 @@
 			$html .= '
 					<br>
 					<strong>Remuneración Pretendida: </strong> $'.$infoExtra["remuneracion_pret"].'<br>
-					<strong>Objetivo Laboral: </strong> '.$infoExtra["objetivo_laboral"].'<br>
-					<strong>Carta de Presentación: </strong> '.$infoExtra["carta_present"].'
+					<strong>Sobre mí: </strong> '.$infoExtra["sobre_mi"].'
 					<br>
 				';
 
