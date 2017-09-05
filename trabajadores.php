@@ -75,7 +75,9 @@
 		if($filtroIdioma) {
 			$infoIdioma = $GLOBALS["infoIdioma"];
 			$res = $cond ? " AND " : " WHERE ";
-			$res .= " (VERIFICAR_IDIOMA(tra.id, $infoIdioma[id]) = 1)";
+			#$res .= " (VERIFICAR_IDIOMA(tra.id, $infoIdioma[id]) = 1)";
+			echo $infoIdioma['id'];
+			$res .= "ti.id_idioma = $infoIdioma[id]";
 		}
 		return $res;
 	}
@@ -595,6 +597,7 @@
 			LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
 			INNER JOIN paises pais ON tra.id_pais = pais.id
 			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+			LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
 		";
 		$query2 = "
 			SELECT
@@ -604,8 +607,9 @@
             LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
             LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
 			LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-			INNER JOIN paises pais ON tra.id_pais = pais.id
-			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+			LEFT JOIN paises pais ON tra.id_pais = pais.id
+			LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+			LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
 		";
 		
 		if($filtroArea) {            
