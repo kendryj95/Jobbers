@@ -46,7 +46,7 @@
 		WHERE tra.id = $t
 	");
 
-	$experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador=$t");
+	$experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $t ." ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC");
 
 	$educacion = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=$t");
 
@@ -316,6 +316,7 @@
 											</div>
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Experiencia laboral</h4>
 											<div id="experiencias">
+											<?php $mes = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); ?>
 												<?php if($experiencias): ?>
 													<?php foreach($experiencias as $e): ?>
 														<p style="margin-left: 50px;">
@@ -323,6 +324,7 @@
 															<strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
 															<strong>Actividad: </strong> <?php echo $e["actividad_empresa"]; ?><br>
 															<strong>Tipo puesto: </strong> <?php echo $e["tipo_puesto"]; ?><br>
+															<strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"]-1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"]-1] . "/" . $e["ano_egreso"] ?><br>
 														</p>
 													<?php endforeach ?>
 												<?php else: ?>

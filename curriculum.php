@@ -391,7 +391,7 @@
 										<div class="col-md-2"></div>
 									</div>
 
-									<?php $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador=".$_SESSION["ctc"]["id"]); ?>
+									<?php $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id'] ." ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC") ?>
 									<?php if($experiencias): ?>
 										<div class="" id="contentEL">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis empleos anteriores</h4>
@@ -950,6 +950,7 @@
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Experiencia laboral</h4>
 									<div id="experiencias">
+									<?php $mes = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); ?>
 										<?php if($experiencias): ?>
 											<?php foreach($experiencias as $e): ?>
 												<p style="margin-left: 50px;">
@@ -957,6 +958,7 @@
 													<strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
 													<strong>Actividad: </strong> <?php echo $e["actividad_empresa"]; ?><br>
 													<strong>Tipo puesto: </strong> <?php echo $e["tipo_puesto"]; ?><br>
+													<strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"]-1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"]-1] . "/" . $e["ano_egreso"] ?><br>
 												</p>
 											<?php endforeach ?>
 										<?php else: ?>
@@ -1136,6 +1138,7 @@
                                     $("#labelRem").html(data.info_extra.remuneracion_pret);
                                     $("#labelSobreMi").html(data.info_extra.sobre_mi);
 									var html = "";
+									var mes = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 									if(data.educacion.length > 0) {
 										data.educacion.forEach(function(e) {
 											html += '<p style="margin-left: 50px;"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
@@ -1145,7 +1148,7 @@
 									if (data.experiencias.length > 0) {
 										html = "";
 										data.experiencias.forEach(function(ex){
-											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'</p>';
+											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' a ' + mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso + '</p>';
 										});
 										$('#experiencias').html(html);
 									}
