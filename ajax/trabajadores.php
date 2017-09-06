@@ -29,8 +29,8 @@
 			FROM
 				trabajadores AS tra
 			LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-			INNER JOIN paises pais ON tra.id_pais = pais.id
-			INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+			LEFT JOIN paises pais ON tra.id_pais = pais.id
+			LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 			ORDER BY tra.id DESC
 			LIMIT $_REQUEST[limit_ini],5
 		");
