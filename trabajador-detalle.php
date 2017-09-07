@@ -385,8 +385,7 @@
 											<div id="infoExtra">
 												<p style="margin-left: 50px;">
 													<strong>Remuneración pretendida: </strong> $<?= $infoExtra['remuneracion_pret'] ?> <br>
-													<strong>Objetivo Laboral: </strong> <?= $infoExtra['objetivo_laboral'] ?> <br>
-													<strong>Carta de Presentacion: </strong> <?= $infoExtra['carta_present'] ?> <br>
+													<strong>Sobre mí: </strong> <?= $infoExtra['sobre_mi'] ?> <br>
 												</p>
 											</div>
 										</div>
