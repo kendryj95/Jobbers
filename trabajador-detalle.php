@@ -308,6 +308,7 @@
 																<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $trabajador["fecha_nacimiento"] !== NULL ? date('Y-m-d',strtotime($trabajador["fecha_nacimiento"])) : ""; ?></span><br>
 																<strong>Edad: </strong> <span id="edad"><?php echo $trabajador["fecha_nacimiento"] !== NULL ? intval(date('Y')) - intval(date('Y', strtotime($trabajador["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
 																<strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $trabajador["correo_electronico"]; ?></span><br>
+																<strong>Telefonos: </strong> <span id="labelTlf"><?php echo $trabajador["telefono"] . $trabajador["telefono_alternativo"] =! "" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
 															</p>
 														</div>
 													</div>
