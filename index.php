@@ -17,7 +17,7 @@
 	");
 
 
-	if(isset($_SESSION["ctc"]["empresa"]) && !isset($_REQUEST["empresas"])) {
+	/*if(isset($_SESSION["ctc"]["empresa"]) && !isset($_REQUEST["empresas"])) {
 		$trabajadores = $db->getAll("
 			SELECT
 				tra.id,
@@ -44,7 +44,7 @@
 			}
 		}
 	}
-	else {
+	else {*/
 		foreach($areas as $i => $area) {
 			$areas[$i]["cantidad"] = $db->getOne("
 				SELECT
@@ -217,7 +217,7 @@
 					r.s <= $momento[diff_s]
 			");
 		}
-	}
+	//}
 
 	$publicaciones_especiales = $db->getAll("
 		SELECT empresas_publicaciones_especiales.*, CONCAT(imagenes.directorio,'/', imagenes.nombre,'.', imagenes.extension) AS imagen, empresas.nombre AS nombre_empresa FROM empresas_publicaciones_especiales INNER JOIN empresas ON empresas.id=empresas_publicaciones_especiales.id_empresa INNER JOIN empresas_planes ON empresas_planes.id_empresa=empresas.id LEFT JOIN imagenes ON imagenes.id=empresas_publicaciones_especiales.id_imagen WHERE empresas_planes.logo_home=3 ORDER BY RAND()
@@ -542,9 +542,9 @@
 				</div>
 			<?php endif ?>
 
-			<?php if(isset($_SESSION["ctc"]["empresa"]) && !isset($_REQUEST["empresas"])): ?>
+			<?php/* if(isset($_SESSION["ctc"]["empresa"]) && !isset($_REQUEST["empresas"])): */?>
 
-			<div class="row" style="padding: 25px;">
+			<!-- <div class="row" style="padding: 25px;">
 					<div class="col-md-3">
 						<div class="box bg-white">
 							<div class="box-block clearfix">
@@ -552,26 +552,26 @@
 							</div>
 							<table class="table m-md-b-0">
 								<tbody>
-									<?php foreach($areas as $area): ?>
-										<?php if(/*$area["cantidad"] > 0*/true): ?>
+									<?php/* foreach($areas as $area): */?>
+										<?php/* if($area["cantidad"] > 0true): */?>
 											<tr>
 												<td>
-													<a class="link-area" data-area="<?php echo $area["amigable"]; ?>" style="margin-left: 7px;" class="text-primary" href="trabajadores.php?area=<?php echo $area["amigable"]; ?>&pagina=1"><span class="underline"><?php echo $area["nombre"]; ?></span></a>
+													<a class="link-area" data-area="<?php/* echo $area["amigable"]; */?>" style="margin-left: 7px;" class="text-primary" href="trabajadores.php?area=<?php/* echo $area["amigable"]; */?>&pagina=1"><span class="underline"><?php/* echo $area["nombre"]; */?></span></a>
 												</td>
 												<td>
-													<span class="text-muted pull-xs-right"><?php /*echo $area["cantidad"];*/ ?></span>
+													<span class="text-muted pull-xs-right"><?php/* /*echo $area["cantidad"];*/ ?></span>
 												</td>
 											</tr>
-										<?php endif ?>
-									<?php endforeach ?>
+										<?php/* endif */?>
+									<?php/* endforeach */?>
 								</tbody>
 							</table>
 						</div>
 						
-						<?php if($publicidadSection): ?>
+						<?php/* if($publicidadSection): */?>
 							<div class="row" id="ad2">
-								<?php foreach($publicidadSection as $p): ?>
-									<?php
+								<?php/* foreach($publicidadSection as $p): */?>
+									<?php/*
 										$link = "";
 										if (strstr($p["url"], 'http')) {
 											$link = $p["url"];
@@ -579,11 +579,11 @@
 										else {
 											$link = "http://$p[url]";
 										}
-									?>
-									<?php if(isset($p["tipo_publicidad"])): ?>
-										<?php if($p["tipo_publicidad"] == 1): ?>
+									*/?>
+									<?php/* if(isset($p["tipo_publicidad"])): */?>
+										<?php/* if($p["tipo_publicidad"] == 1): */?>
 											<div class="col-md-3">
-												<?php
+												<?php/*
 													if (strstr($link, 'youtu.be')) {
 														$link = str_replace('youtu.be/', 'youtube.com/watch?v=', $link);
 													}
@@ -593,56 +593,56 @@
 														}
 													}
 													$link = str_replace('watch?v=', 'embed/', $link);
-												?>
+												*/?>
 												<div class="box bg-white post post-3">
 													<div class="p-img img-cover youtube-video">
-														<iframe class="youtube-player" type="text/html" width="100%" height="100%" src="<?php echo $link; ?>" frameborder="0"> </iframe>
+														<iframe class="youtube-player" type="text/html" width="100%" height="100%" src="<?php/* echo $link; */?>" frameborder="0"> </iframe>
 													</div>
 												</div>
 											</div>
-										<?php else: ?>
+										<?php/* else: */?>
 											<div class="col-md-3">
 												<div class="box bg-white product product-1">
-													<div class="p-img img-cover" style="background-image: url(img/<?php echo $p["imagen"]; ?>);">
-														<div class="p-status bg-warning"><?php echo $p["titulo"]; ?></div>
+													<div class="p-img img-cover" style="background-image: url(img/<?php/* echo $p["imagen"]; */?>);">
+														<div class="p-status bg-warning"><?php/* echo $p["titulo"]; */?></div>
 														<div class="p-links">
-															<a href="<?php echo $link; ?>"><i class="ti-link"></i></a>
-															<!--<a href="#"><i class="fa fa-star"></i></a>-->
+															<a href="<?php/* echo $link; */?>"><i class="ti-link"></i></a>
+															<a href="#"><i class="fa fa-star"></i></a>
 														</div>
 													</div>
 												</div>
 											</div>
-										<?php endif ?>
-									<?php endif ?>
-								<?php endforeach ?>
+										<?php/* endif */?>
+									<?php/* endif */?>
+								<?php/* endforeach */?>
 							</div>
-						<?php endif ?>
+						<?php/* endif */?>
 					</div>
-
+			
 					<div class="col-md-9">
-
+			
 						<div class="row row-sm">
-							<?php foreach($trabajadores as $trabajador): ?>
+							<?php/* foreach($trabajadores as $trabajador): */?>
 								<div class="col-md-4">
-									<a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
+									<a href="trabajador-detalle.php?t=<?php/* echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; */?>">
 										<div class="tra box box-block bg-white user-5">
 											<div class="u-content">
 												<div class="avatar box-96 m-b-2">
-													<img class="b-a-radius-circle" src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="max-height: 96px;">
+													<img class="b-a-radius-circle" src="img/<?php/* echo $trabajador["imagen"]; */?>" alt="" style="max-height: 96px;">
 												</div>
-												<h5><span class="text-black"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span></h5>
+												<h5><span class="text-black"><?php/* echo "$trabajador[nombres] $trabajador[apellidos]"; */?></span></h5>
 												<div style="font-size: 28px;"></div>
 											</div>
 										</div>
 									</a>
 								</div>
-							<?php endforeach ?>	
+							<?php/* endforeach */?>	
 						</div>
-
+			
 					</div>
-				</div>
+				</div> -->
 
-			<?php else: ?>
+			<?php/* else: */?>
               
               <div class="row">
                   <div class="col-md-3">
@@ -1352,7 +1352,7 @@
 					
 				?>
 
-			<?php endif ?>
+			<?php// endif ?>
 			<br>
 			<?php require_once('includes/footer.php'); ?>
 

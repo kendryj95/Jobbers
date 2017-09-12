@@ -14,10 +14,11 @@
 	$filtroTipo = isset($_REQUEST["tipo"]) ? $_REQUEST["tipo"] : false;
 	$filtroGenero = isset($_REQUEST["genero"]) ? $_REQUEST["genero"] : false;
 	$filtroIdioma = isset($_REQUEST["idioma"]) ? $_REQUEST["idioma"] : false;
+	$filtroLocalidades = isset($_REQUEST["localidad"]) ? $_REQUEST["localidad"] : false;
 
 	$busqueda = isset($_REQUEST["busqueda"]) ? $_REQUEST["busqueda"] : false;
 
-	$filtroActivado = $filtroArea || $filtroMomento || $filtroTipo || $filtroGenero || $filtroIdioma;
+	$filtroActivado = $filtroArea || $filtroMomento || $filtroTipo || $filtroGenero || $filtroIdioma || $filtroLocalidades;
 
 	$cantidadRegistros = 0;
 
@@ -91,40 +92,47 @@
 		$filtroTipo = $GLOBALS["filtroTipo"];
 		$filtroGenero = $GLOBALS["filtroGenero"];
 		$filtroIdioma = $GLOBALS["filtroIdioma"];
+		$filtroLocalidades = $GLOBALS["filtroLocalidades"];
 		
 		$html = '<ol class="breadcrumb no-bg m-b-1">';
 		$html .= '<li class="breadcrumb-item"><a href="./trabajadores.php">JOBBERS</a></li>';
 		
 		if($filtroArea) {
 			$arr[] = array(
-				"href" => crearURL(array( array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))),
+				"href" => crearURL(array( array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
 				"text" => $GLOBALS["infoArea"]["nombre"]
 			);			
 		}
 		
 		if($filtroActivado) {
-			if($filtroMomento || $filtroTipo || $filtroGenero || $filtroIdioma) {
+			if($filtroMomento || $filtroTipo || $filtroGenero || $filtroIdioma || $filtroLocalidades) {
 				if($filtroMomento) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoMomento"]["nombre"]
 					);
 				}
 				if($filtroTipo) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoTipo"]["nombre"]
 					);
 				}
 				if($filtroGenero) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoGenero"]["nombre"]
 					);
 				}
 				if($filtroIdioma) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
+						"text" => $GLOBALS["infoIdioma"]["nombre"]
+					);
+				}
+				if ($filtroLocalidades) {
+					$arr[] = array(
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "idioma", "valor" => $filtroIdioma), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoIdioma"]["nombre"]
 					);
 				}
@@ -329,6 +337,162 @@
             }
         }
     }
+
+    $contLocalidades = 0;
+
+    $localidades = $db->getAll("SELECT id, id_provincia, localidad, 0 as cantidad FROM localidades ORDER BY localidad");
+
+    if ($filtroLocalidades) {
+    	foreach ($localidades as $i => $loc) {
+    		if($loc["localidad"] == $filtroIdioma) {
+    		    $infoLocalidad = $loc;
+    		}
+    	}
+    } else {
+    	if ($filtroActivado) {
+            $arr = array();
+			if($filtroArea) {
+				$infoArea = $db->getRow("
+					SELECT
+						id,
+						nombre
+					FROM
+						areas_estudio
+					WHERE
+						amigable = '$filtroArea'
+				");
+			}
+            foreach($localidades as $i => $loc) {
+				$query = "
+					SELECT
+						tra.id
+					FROM
+						trabajadores AS tra
+					LEFT JOIN trabajadores_idiomas AS ti ON ti.id_trabajador = tra.id
+					LEFT JOIN idiomas AS i ON ti.id_idioma = i.id
+					LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+					LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
+					LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+					LEFT JOIN paises pais ON tra.id_pais = pais.id
+					LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+					WHERE
+						tra.localidad = $loc[id]
+				";
+				
+				if($filtroArea) {
+					$query .= " AND ae.id = $infoArea[id]";
+				}
+				
+				if($filtroMomento) {
+					$query .= " AND " . filtroMomento(true);
+				}
+				
+				if($filtroTipo) {
+					$query .= " AND " . filtroTipo(true);
+				}
+				
+				if($filtroGenero) {
+					$query .= " AND " . filtroGenero(true);
+				}
+				
+				if(!$filtroArea) {
+					$query .= " GROUP BY tra.id";
+				}
+				
+				$query = "SELECT COUNT(*) FROM ($query) AS T";
+				
+				$c = $db->getOne($query);
+				
+				//echo "<br><br><br>$query;<br><br><br>";
+				
+				$contLocalidades += $c;
+				$localidades[$i]["cantidad"] = $c;
+            }
+    	} else {
+    		foreach($localidades as $i => $loc) {
+                $localidades[$i]["cantidad"] = $db->getOne("
+                    SELECT
+                        COUNT(*)
+                    FROM
+                        trabajadores AS tra
+                    WHERE
+                        tra.localidad = $loc[id]
+                ");
+                $contLocalidades += $localidades[$i]["cantidad"];
+            }
+    	}
+    }
+
+
+   /* if(!$filtroLocalidades){
+
+    	$localidades = $db->getAll("SELECT id, id_provincia, localidad, 0 as cantidad FROM localidades ORDER BY localidad");
+
+    	if ($filtroMomento) {
+    		foreach ($localidades as $loc) {
+		    	$query = "
+							SELECT
+								COUNT(tra.id)
+							FROM
+								trabajadores AS tra
+							LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+							LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
+							LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+							LEFT JOIN paises pais ON tra.id_pais = pais.id
+							LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+							WHERE
+								tra.localidad = $loc[id]
+							AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
+						";
+
+						if($filtroTipo) {
+							$query .= filtroTipo(true);
+						}
+						if($filtroGenero) {
+							$query .= filtroGenero(true);
+						}
+						if($filtroIdioma) {
+							$query .= filtroIdioma(true);
+						}
+
+						$c = $db->getOne($query);
+						$localidades[$i]["cantidad"] = $c;
+						$contLocalidades += $c;
+    		}
+
+    		
+    	} else {
+    		foreach ($localidades as $i => $loc) {
+		    	$query = "
+							SELECT
+								COUNT(tra.id)
+							FROM
+								trabajadores AS tra
+							LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+							LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
+							LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+							LEFT JOIN paises pais ON tra.id_pais = pais.id
+							LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+							WHERE
+								tra.localidad = $loc[id]
+						";
+						
+						if($filtroTipo) {
+							$query .= filtroTipo(true);
+						}
+						if($filtroGenero) {
+							$query .= filtroGenero(true);
+						}
+						if($filtroIdioma) {
+							$query .= filtroIdioma(true);
+						}
+
+						$c = $db->getOne($query);
+						$localidades[$i]["cantidad"] = $c;
+						$contLocalidades += $c;
+    		}
+    	}
+    } */
 
 	$contAreas = 0;
 
@@ -1289,6 +1453,8 @@
 		}
         
 	}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -1547,6 +1713,45 @@
 															</td>
 															<td>
 																<span class="text-muted pull-xs-right"><?php echo $idioma["cantidad"]; ?></span>
+															</td>
+														</tr>
+													<?php endif ?>
+												<?php endforeach ?>									
+											<?php endif ?>							
+										</tbody>
+									</table>
+								</div>
+                          	<?php endif ?>
+
+                          	<?php if($contLocalidades > 0 || $filtroLocalidades): ?>
+                           
+							   <div class="box bg-white">
+									<div class="box-block clearfix">
+										<h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Localidades</h5>
+									</div>
+									<table class="table m-md-b-0">
+										<tbody>
+											<?php if($filtroLocalidades): ?>
+												<tr>
+													<td>
+														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroGenero ), array( "clave" => "tipo", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoIdioma["nombre"]; ?><span class="underline"></span></a>
+													</td>
+													<td>
+														<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+															<span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+														<?php endif ?>
+													</td>
+												</tr>
+											<?php else: ?>
+												<?php foreach($localidades as $loc): ?>
+													<?php if($loc["cantidad"] > 0): ?>
+														<!-- <span>Hola mundo</span> -->
+														<tr>
+															<td>
+																<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $loc["localidad"]), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $loc["localidad"]; ?></a>
+															</td>
+															<td>
+																<span class="text-muted pull-xs-right"><?php echo $loc["cantidad"]; ?></span>
 															</td>
 														</tr>
 													<?php endif ?>
