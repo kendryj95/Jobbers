@@ -15,10 +15,11 @@
 	$filtroGenero = isset($_REQUEST["genero"]) ? $_REQUEST["genero"] : false;
 	$filtroIdioma = isset($_REQUEST["idioma"]) ? $_REQUEST["idioma"] : false;
 	$filtroLocalidades = isset($_REQUEST["localidad"]) ? $_REQUEST["localidad"] : false;
+	$filtroProvincia = isset($_REQUEST["provincia"]) ? $_REQUEST["provincia"] : false;
 
 	$busqueda = isset($_REQUEST["busqueda"]) ? $_REQUEST["busqueda"] : false;
 
-	$filtroActivado = $filtroArea || $filtroMomento || $filtroTipo || $filtroGenero || $filtroIdioma || $filtroLocalidades;
+	$filtroActivado = $filtroArea || $filtroMomento || $filtroTipo || $filtroGenero || $filtroIdioma || $filtroLocalidades || $filtroProvincia;
 
 	$cantidadRegistros = 0;
 
@@ -93,47 +94,54 @@
 		$filtroGenero = $GLOBALS["filtroGenero"];
 		$filtroIdioma = $GLOBALS["filtroIdioma"];
 		$filtroLocalidades = $GLOBALS["filtroLocalidades"];
+		$filtroProvincia = $GLOBALS["filtroProvincia"];
 		
 		$html = '<ol class="breadcrumb no-bg m-b-1">';
 		$html .= '<li class="breadcrumb-item"><a href="./trabajadores.php">JOBBERS</a></li>';
 		
 		if($filtroArea) {
 			$arr[] = array(
-				"href" => crearURL(array( array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
+				"href" => crearURL(array( array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia), array( "clave" => "pagina", "valor" => 1 ))),
 				"text" => $GLOBALS["infoArea"]["nombre"]
 			);			
 		}
 		
 		if($filtroActivado) {
-			if($filtroMomento || $filtroTipo || $filtroGenero || $filtroIdioma || $filtroLocalidades) {
+			if($filtroMomento || $filtroTipo || $filtroGenero || $filtroIdioma || $filtroLocalidades || $filtroProvincia) {
 				if($filtroMomento) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoMomento"]["nombre"]
 					);
 				}
 				if($filtroTipo) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoTipo"]["nombre"]
 					);
 				}
 				if($filtroGenero) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoGenero"]["nombre"]
 					);
 				}
 				if($filtroIdioma) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoIdioma"]["nombre"]
 					);
 				}
 				if ($filtroLocalidades) {
 					$arr[] = array(
-						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "idioma", "valor" => $filtroIdioma), array( "clave" => "pagina", "valor" => 1 ))),
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "idioma", "valor" => $filtroIdioma),array("clave" => "provincia", "valor" => $filtroProvincia), array( "clave" => "pagina", "valor" => 1 ))),
 						"text" => $GLOBALS["infoLocalidad"]["localidad"]
+					);
+				}
+				if ($filtroProvincia) {
+					$arr[] = array(
+						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "idioma", "valor" => $filtroIdioma),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))),
+						"text" => $GLOBALS["infoProvincia"]["provincia"]
 					);
 				}
 			}
@@ -340,6 +348,99 @@
                 $contIdiomas += $idiomas[$i]["cantidad"];
             }
         }
+    }
+
+    $contProvincias = 0;
+
+    $provincias = $db->getAll("SELECT id, provincia, 0 as cantidad FROM provincias ORDER BY provincia");
+
+    if ($filtroProvincia) {
+    	foreach ($provincias as $i => $prov) {
+    		if ($prov['provincia'] == $filtroProvincia) {
+    			$infoProvincia = $prov;
+    		}
+    	}
+    } else {
+    	if ($filtroActivado) {
+            $arr = array();
+			if($filtroArea) {
+				$infoArea = $db->getRow("
+					SELECT
+						id,
+						nombre
+					FROM
+						areas_estudio
+					WHERE
+						amigable = '$filtroArea'
+				");
+			}
+            foreach($provincias as $i => $prov) {
+				$query = "
+					SELECT
+						tra.id
+					FROM
+						trabajadores AS tra
+					LEFT JOIN trabajadores_idiomas AS ti ON ti.id_trabajador = tra.id
+					LEFT JOIN idiomas AS i ON ti.id_idioma = i.id
+					LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+					LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
+					LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+					LEFT JOIN paises pais ON tra.id_pais = pais.id
+					LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+					WHERE
+						tra.provincia = $prov[id]
+				";
+				
+				if($filtroArea) {
+					$query .= " AND ae.id = $infoArea[id]";
+				}
+				
+				if($filtroMomento) {
+					$query .= " AND " . filtroMomento(true);
+				}
+				
+				if($filtroTipo) {
+					$query .= " AND " . filtroTipo(true);
+				}
+				
+				if($filtroGenero) {
+					$query .= " AND " . filtroGenero(true);
+				}
+
+				if($filtroIdioma) {
+					$query .= " AND " . filtroIdioma(true);
+				}
+
+				if($filtroLocalidades) {
+					@$query .= " AND " . "tra.localidad = $infoLocalidad[id]";
+				}
+				
+				#if(!$filtroArea) {
+					$query .= " GROUP BY tra.id";
+				#}
+				
+				$query = "SELECT COUNT(*) FROM ($query) AS T";
+				
+				$c = $db->getOne($query);
+				
+				//echo "<br><br><br>$query;<br><br><br>";
+				
+				$contProvincias += $c;
+				$provincias[$i]["cantidad"] = $c;
+            }
+    	} else {
+    		foreach($provincias as $i => $prov) {
+                $provincias[$i]["cantidad"] = $db->getOne("
+                    SELECT
+                        COUNT(*)
+                    FROM
+                        trabajadores AS tra
+                    WHERE
+                        tra.provincia = $prov[id]
+                ");
+                $contProvincias += $provincias[$i]["cantidad"];
+            }
+    	}
     }
 
     $contLocalidades = 0;
@@ -760,6 +861,10 @@
 						$query .= "AND tra.localidad = $infoLocalidad[id]";
 						$query2 .= "AND tra.localidad = $infoLocalidad[id]";
 				}
+				if ($filtroProvincia) {
+					$query .= "AND tra.provincia = $infoProvincia[id]";
+					$query2 .= "AND tra.provincia = $infoProvincia[id]";
+				}
 			}
 			
 			if($filtroTipo) {
@@ -782,6 +887,10 @@
 			if ($filtroLocalidades) {
 				$query .= "AND tra.localidad = $infoLocalidad[id]";
 				$query2 .= "AND tra.localidad = $infoLocalidad[id]";
+			}
+			if ($filtroProvincia) {
+				$query .= "AND tra.provincia = $infoProvincia[id]";
+				$query2 .= "AND tra.provincia = $infoProvincia[id]";
 			}
 		}
 		else {           
@@ -813,6 +922,10 @@
 					$query .= "AND tra.localidad = $infoLocalidad[id]";
 					$query2 .= "AND tra.localidad = $infoLocalidad[id]";
 				}
+				if ($filtroProvincia) {
+					$query .= "AND tra.provincia = $infoProvincia[id]";
+					$query2 .= "AND tra.provincia = $infoProvincia[id]";
+				}
 			}
             else {
                 if($filtroTipo) {
@@ -833,6 +946,10 @@
 						$query .= "AND tra.localidad = $infoLocalidad[id]";
 						$query2 .= "AND tra.localidad = $infoLocalidad[id]";
 					}
+					if ($filtroProvincia) {
+						$query .= "AND tra.provincia = $infoProvincia[id]";
+						$query2 .= "AND tra.provincia = $infoProvincia[id]";
+					}
                 }
                 else {
                     if($filtroGenero) {
@@ -848,16 +965,40 @@
 							$query .= "AND tra.localidad = $infoLocalidad[id]";
 							$query2 .= "AND tra.localidad = $infoLocalidad[id]";
 						}
+						if ($filtroProvincia) {
+							$query .= "AND tra.provincia = $infoProvincia[id]";
+							$query2 .= "AND tra.provincia = $infoProvincia[id]";
+						}
                     }
 					else {
 						if($filtroIdioma) {
 							$tmp = filtroIdioma(false);
 							$query .= $tmp;
 							$query2 .= $tmp;
+
+							if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							$query2 .= "AND tra.localidad = $infoLocalidad[id]";
+							}
+
+							if ($filtroProvincia) {
+								$query .= "AND tra.provincia = $infoProvincia[id]";
+								$query2 .= "AND tra.provincia = $infoProvincia[id]";
+							}
 						} else {
 							if ($filtroLocalidades) {
 							$query .= "WHERE tra.localidad = $infoLocalidad[id]";
 							$query2 .= "WHERE tra.localidad = $infoLocalidad[id]";
+
+								if ($filtroProvincia) {
+									$query .= "AND tra.provincia = $infoProvincia[id]";
+									$query2 .= "AND tra.provincia = $infoProvincia[id]";
+								}
+							} else {
+								if ($filtroProvincia) {
+									$query .= "WHERE tra.provincia = $infoProvincia[id]";
+									$query2 .= "WHERE tra.provincia = $infoProvincia[id]";
+								}
 							}
 						}
 					}
@@ -1003,6 +1144,11 @@
                     	$query .= "AND tra.localidad = $infoLocalidad[id]";
                     	
                     }
+
+                    if ($filtroProvincia) {
+                    	$query .= "AND tra.provincia = $infoProvincia[id]";
+                    	
+                    }
                     
                     $query .= "
 							GROUP BY
@@ -1047,6 +1193,10 @@
                     	$query .= "AND tra.localidad = $infoLocalidad[id]";
                     	
                     }
+                    if ($filtroProvincia) {
+                    	$query .= "AND tra.provincia = $infoProvincia[id]";
+                    	
+                    }
 
                     $query .= "
 							GROUP BY
@@ -1073,9 +1223,14 @@
                 $query .= filtroGenero(true);
                 $query .= filtroIdioma(true);
                 if ($filtroLocalidades) {
-                    	$query .= "AND tra.localidad = $infoLocalidad[id]";
+                    $query .= "AND tra.localidad = $infoLocalidad[id]";
                     	
-                    }
+                }
+
+                if ($filtroProvincia) {
+                	$query .= "AND tra.provincia = $infoProvincia[id]";
+                	
+                }
                 
                 $query = "SELECT COUNT(*) FROM ($query GROUP BY tra.id) AS T";
 			}
@@ -1124,6 +1279,10 @@
                     		$query .= "AND tra.localidad = $infoLocalidad[id]";
                     	
                     	}
+                    	if ($filtroProvincia) {
+                    		$query .= "AND tra.provincia = $infoProvincia[id]";
+                    		
+                    	}
                         $query .= "
                             GROUP BY
                                 tra.id
@@ -1151,6 +1310,10 @@
 						$query .= filtroIdioma(true);
 						if ($filtroLocalidades) {
 							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
+						if ($filtroProvincia) {
+							$query .= "AND tra.provincia = $infoProvincia[id]";
 							
 						}
                         
@@ -1186,6 +1349,10 @@
 							$query .= "AND tra.localidad = $infoLocalidad[id]";
 							
 						}
+						if ($filtroProvincia) {
+							$query .= "AND tra.provincia = $infoProvincia[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1217,6 +1384,10 @@
 							$query .= "AND tra.localidad = $infoLocalidad[id]";
 							
 						}
+						if ($filtroProvincia) {
+							$query .= "AND tra.provincia = $infoProvincia[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1246,6 +1417,10 @@
 						$query .= "AND tra.localidad = $infoLocalidad[id]";
 						
 					}
+					if ($filtroProvincia) {
+						$query .= "AND tra.provincia = $infoProvincia[id]";
+						
+					}
 				}
 				else {
                     $query = "
@@ -1268,6 +1443,10 @@
 					$query .= filtroIdioma(true);
 					if ($filtroLocalidades) {
 						$query .= "AND tra.localidad = $infoLocalidad[id]";
+						
+					}
+					if ($filtroProvincia) {
+						$query .= "AND tra.provincia = $infoProvincia[id]";
 						
 					}
                     
@@ -1324,6 +1503,10 @@
 							$query .= "AND tra.localidad = $infoLocalidad[id]";
 							
 						}
+						if ($filtroProvincia) {
+							$query .= "AND tra.provincia = $infoProvincia[id]";
+							
+						}
                         $query .= "
                             GROUP BY
                                 tra.id
@@ -1351,6 +1534,10 @@
 						$query .= filtroIdioma(true);
 						if ($filtroLocalidades) {
 							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
+						if ($filtroProvincia) {
+							$query .= "AND tra.provincia = $infoProvincia[id]";
 							
 						}
                         
@@ -1386,6 +1573,10 @@
 							$query .= "AND tra.localidad = $infoLocalidad[id]";
 							
 						}
+						if ($filtroProvincia) {
+							$query .= "AND tra.provincia = $infoProvincia[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1417,6 +1608,10 @@
 							$query .= "AND tra.localidad = $infoLocalidad[id]";
 							
 						}
+						if ($filtroProvincia) {
+							$query .= "AND tra.provincia = $infoProvincia[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1446,6 +1641,10 @@
 						$query .= "AND tra.localidad = $infoLocalidad[id]";
 						
 					}
+					if ($filtroProvincia) {
+						$query .= "AND tra.provincia = $infoProvincia[id]";
+						
+					}
 				}
 				else {
                     $query = "
@@ -1468,6 +1667,10 @@
 					$query .= filtroIdioma(true);
 					if ($filtroLocalidades) {
 						$query .= "AND tra.localidad = $infoLocalidad[id]";
+						
+					}
+					if ($filtroProvincia) {
+						$query .= "AND tra.provincia = $infoProvincia[id]";
 						
 					}
                     
@@ -1578,7 +1781,7 @@
 											<?php if($filtroArea): ?>
 												<tr>
 													<td style="word-break: break-all;">
-														<a style="margin-left: 7px;" class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoArea["nombre"]; ?></a>
+														<a style="margin-left: 7px;" class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoArea["nombre"]; ?></a>
 													</td>
 													<td>
 														<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
@@ -1591,7 +1794,7 @@
 													<?php if($area["cantidad"] > 0): ?>
 														<tr>
 															<td style="word-break: break-all;">
-																<a style="margin-left: 7px;" class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $area["amigable"] ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><span class="underline"><?php echo $area["nombre"]; ?></span></a>
+																<a style="margin-left: 7px;" class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $area["amigable"] ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><span class="underline"><?php echo $area["nombre"]; ?></span></a>
 															</td>
 															<td>
 																<span class="text-muted pull-xs-right"><?php echo $area["cantidad"]; ?></span>
@@ -1615,7 +1818,7 @@
 											<?php if($filtroMomento): ?>
 												<tr>
 													<td>
-														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoMomento["nombre"]; ?><span class="underline"></span></a>
+														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoMomento["nombre"]; ?><span class="underline"></span></a>
 													</td>
 													<td>
 														<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
@@ -1628,7 +1831,7 @@
 													<?php if($momento["cantidad"] > 0): ?>
 														<tr>
 															<td>
-																<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $momento["amigable"] ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $momento["nombre"]; ?></a>
+																<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $momento["amigable"] ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $momento["nombre"]; ?></a>
 															</td>
 															<td>
 																<span class="text-muted pull-xs-right"><?php echo $momento["cantidad"]; ?></span>
@@ -1652,7 +1855,7 @@
                                         <?php if($filtroTipo): ?>
 											<tr>
 												<td>
-													<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoTipo["nombre"]; ?><span class="underline"></span></a>
+													<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoTipo["nombre"]; ?><span class="underline"></span></a>
 												</td>
 												<td>
 													<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
@@ -1665,7 +1868,7 @@
 												<?php if($tipo["cantidad"] > 0): ?>
 													<tr>
 														<td>
-															<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $tipo["amigable"] ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $tipo["nombre"]; ?></a>
+															<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $tipo["amigable"] ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $tipo["nombre"]; ?></a>
 														</td>
 														<td>
 															<span class="text-muted pull-xs-right"><?php echo $tipo["cantidad"]; ?></span>
@@ -1690,7 +1893,7 @@
 											<?php if($filtroGenero): ?>
 												<tr>
 													<td>
-														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoGenero["nombre"]; ?><span class="underline"></span></a>
+														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoGenero["nombre"]; ?><span class="underline"></span></a>
 													</td>
 													<td>
 														<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
@@ -1703,7 +1906,7 @@
 													<?php if($genero["cantidad"] > 0): ?>
 														<tr>
 															<td>
-																<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $genero["amigable"] ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $genero["nombre"]; ?></a>
+																<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $genero["amigable"] ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $genero["nombre"]; ?></a>
 															</td>
 															<td>
 																<span class="text-muted pull-xs-right"><?php echo $genero["cantidad"]; ?></span>
@@ -1728,7 +1931,7 @@
 											<?php if($filtroIdioma): ?>
 												<tr>
 													<td>
-														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroGenero ), array( "clave" => "tipo", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoIdioma["nombre"]; ?><span class="underline"></span></a>
+														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroGenero ), array( "clave" => "tipo", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoIdioma["nombre"]; ?><span class="underline"></span></a>
 													</td>
 													<td>
 														<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
@@ -1741,7 +1944,7 @@
 													<?php if($idioma["cantidad"] > 0): ?>
 														<tr>
 															<td>
-																<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $idioma["amigable"] ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $idioma["nombre"]; ?></a>
+																<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "localidad", "valor" => $filtroLocalidades), array( "clave" => "idioma", "valor" => $idioma["amigable"] ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $idioma["nombre"]; ?></a>
 															</td>
 															<td>
 																<span class="text-muted pull-xs-right"><?php echo $idioma["cantidad"]; ?></span>
@@ -1784,6 +1987,45 @@
 															</td>
 															<td>
 																<span class="text-muted pull-xs-right"><?php echo $loc["cantidad"]; ?></span>
+															</td>
+														</tr>
+													<?php endif ?>
+												<?php endforeach ?>									
+											<?php endif ?>							
+										</tbody>
+									</table>
+								</div>
+                          	<?php endif ?>
+
+                          	<?php if($contProvincias > 0 || $filtroProvincia): ?>
+                           
+							   <div class="box bg-white">
+									<div class="box-block clearfix">
+										<h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Provincias</h5>
+									</div>
+									<table class="table m-md-b-0">
+										<tbody>
+											<?php if($filtroProvincia): ?>
+												<tr>
+													<td>
+														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroGenero ), array( "clave" => "tipo", "valor" => $filtroIdioma ),array( "clave" => "tipo", "valor" => $filtroLocalidades ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoProvincia["provincia"] ?><span class="underline"></span></a>
+													</td>
+													<td>
+														<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+															<span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+														<?php endif ?>
+													</td>
+												</tr>
+											<?php else: ?>
+												<?php foreach($provincias as $prov): ?>
+													<?php if($prov["cantidad"] > 0): ?>
+														<!-- <span>Hola mundo</span> -->
+														<tr>
+															<td>
+																<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array( "clave" => "tipo", "valor" => $filtroLocalidades ),array("clave" => "provincia", "valor" => $prov["provincia"]), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $prov["provincia"]; ?></a>
+															</td>
+															<td>
+																<span class="text-muted pull-xs-right"><?php echo $prov["cantidad"]; ?></span>
 															</td>
 														</tr>
 													<?php endif ?>
