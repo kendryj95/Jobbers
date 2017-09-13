@@ -33,7 +33,7 @@
 			LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 			GROUP BY tra.id
 			ORDER BY ie.sobre_mi DESC, tra.id DESC
-			LIMIT $_REQUEST[limit_ini],5
+			LIMIT $_REQUEST[limit_ini],15
 		");
 
 			$data['trabajador'] = array();

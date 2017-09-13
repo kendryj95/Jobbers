@@ -133,7 +133,7 @@
 				if ($filtroLocalidades) {
 					$arr[] = array(
 						"href" => crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "idioma", "valor" => $filtroIdioma), array( "clave" => "pagina", "valor" => 1 ))),
-						"text" => $GLOBALS["infoIdioma"]["nombre"]
+						"text" => $GLOBALS["infoLocalidad"]["localidad"]
 					);
 				}
 			}
@@ -308,6 +308,10 @@
 				if($filtroGenero) {
 					$query .= " AND " . filtroGenero(true);
 				}
+
+				if($filtroLocalidades) {
+					@$query .= " AND " . "tra.localidad = $infoLocalidad[id]";
+				}
 				
 				if(!$filtroArea) {
 					$query .= " GROUP BY tra.id";
@@ -344,7 +348,7 @@
 
     if ($filtroLocalidades) {
     	foreach ($localidades as $i => $loc) {
-    		if($loc["localidad"] == $filtroIdioma) {
+    		if($loc["localidad"] == $filtroLocalidades) {
     		    $infoLocalidad = $loc;
     		}
     	}
@@ -394,10 +398,14 @@
 				if($filtroGenero) {
 					$query .= " AND " . filtroGenero(true);
 				}
-				
-				if(!$filtroArea) {
-					$query .= " GROUP BY tra.id";
+
+				if($filtroIdioma) {
+					$query .= " AND " . filtroIdioma(true);
 				}
+				
+				#if(!$filtroArea) {
+					$query .= " GROUP BY tra.id";
+				#}
 				
 				$query = "SELECT COUNT(*) FROM ($query) AS T";
 				
@@ -422,77 +430,6 @@
             }
     	}
     }
-
-
-   /* if(!$filtroLocalidades){
-
-    	$localidades = $db->getAll("SELECT id, id_provincia, localidad, 0 as cantidad FROM localidades ORDER BY localidad");
-
-    	if ($filtroMomento) {
-    		foreach ($localidades as $loc) {
-		    	$query = "
-							SELECT
-								COUNT(tra.id)
-							FROM
-								trabajadores AS tra
-							LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-							LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
-							LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-							LEFT JOIN paises pais ON tra.id_pais = pais.id
-							LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-							WHERE
-								tra.localidad = $loc[id]
-							AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
-						";
-
-						if($filtroTipo) {
-							$query .= filtroTipo(true);
-						}
-						if($filtroGenero) {
-							$query .= filtroGenero(true);
-						}
-						if($filtroIdioma) {
-							$query .= filtroIdioma(true);
-						}
-
-						$c = $db->getOne($query);
-						$localidades[$i]["cantidad"] = $c;
-						$contLocalidades += $c;
-    		}
-
-    		
-    	} else {
-    		foreach ($localidades as $i => $loc) {
-		    	$query = "
-							SELECT
-								COUNT(tra.id)
-							FROM
-								trabajadores AS tra
-							LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-							LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
-							LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-							LEFT JOIN paises pais ON tra.id_pais = pais.id
-							LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-							WHERE
-								tra.localidad = $loc[id]
-						";
-						
-						if($filtroTipo) {
-							$query .= filtroTipo(true);
-						}
-						if($filtroGenero) {
-							$query .= filtroGenero(true);
-						}
-						if($filtroIdioma) {
-							$query .= filtroIdioma(true);
-						}
-
-						$c = $db->getOne($query);
-						$localidades[$i]["cantidad"] = $c;
-						$contLocalidades += $c;
-    		}
-    	}
-    } */
 
 	$contAreas = 0;
 
@@ -533,6 +470,11 @@
 				if($filtroIdioma) {
 					$query .= filtroIdioma(true);
 				}
+
+				if ($filtroLocalidades) {
+					$query .= "AND tra.localidad = $infoLocalidad[id]";
+				}
+
 				$c = $db->getOne($query);
 				$areas[$i]["cantidad"] = $c;
 				$contAreas += $c;
@@ -562,6 +504,11 @@
 				if($filtroIdioma) {
 					$query .= filtroIdioma(true);
 				}
+
+				if ($filtroLocalidades) {
+					$query .= "AND tra.localidad = $infoLocalidad[id]";
+				}
+
 				$c = $db->getOne($query);
 				$areas[$i]["cantidad"] = $c;
 				$contAreas += $c;
@@ -809,6 +756,10 @@
 					$query .= $tmp;
 					$query2 .= $tmp;
 				}
+				if ($filtroLocalidades) {
+						$query .= "AND tra.localidad = $infoLocalidad[id]";
+						$query2 .= "AND tra.localidad = $infoLocalidad[id]";
+				}
 			}
 			
 			if($filtroTipo) {
@@ -827,6 +778,10 @@
 				$tmp = filtroIdioma(true);
 				$query .= $tmp;
 				$query2 .= $tmp;
+			}
+			if ($filtroLocalidades) {
+				$query .= "AND tra.localidad = $infoLocalidad[id]";
+				$query2 .= "AND tra.localidad = $infoLocalidad[id]";
 			}
 		}
 		else {           
@@ -854,6 +809,10 @@
 					$query .= $tmp;
 					$query2 .= $tmp;
 				}
+				if ($filtroLocalidades) {
+					$query .= "AND tra.localidad = $infoLocalidad[id]";
+					$query2 .= "AND tra.localidad = $infoLocalidad[id]";
+				}
 			}
             else {
                 if($filtroTipo) {
@@ -870,6 +829,10 @@
 						$query .= $tmp;
 						$query2 .= $tmp;
 					}
+					if ($filtroLocalidades) {
+						$query .= "AND tra.localidad = $infoLocalidad[id]";
+						$query2 .= "AND tra.localidad = $infoLocalidad[id]";
+					}
                 }
                 else {
                     if($filtroGenero) {
@@ -881,12 +844,21 @@
 							$query .= $tmp;
 							$query2 .= $tmp;
 						}
+						if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							$query2 .= "AND tra.localidad = $infoLocalidad[id]";
+						}
                     }
 					else {
 						if($filtroIdioma) {
 							$tmp = filtroIdioma(false);
 							$query .= $tmp;
 							$query2 .= $tmp;
+						} else {
+							if ($filtroLocalidades) {
+							$query .= "WHERE tra.localidad = $infoLocalidad[id]";
+							$query2 .= "WHERE tra.localidad = $infoLocalidad[id]";
+							}
 						}
 					}
                 }
@@ -899,7 +871,7 @@
 		
 		#$query .= " GROUP BY tra.id LIMIT $inicial, $final";
 		$query .= " GROUP BY tra.id";
-        
+
 		$trabajadores = $db->getAll($query);	
 		
 		if($trabajadores) {
@@ -981,7 +953,7 @@
 			LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 			GROUP BY tra.id
 			ORDER BY ie.sobre_mi DESC, tra.id DESC
-			LIMIT 0,5
+			LIMIT 0,15
 		");
 
 		foreach($trabajadores as $k => $t) {
@@ -1027,6 +999,10 @@
                     $query .= filtroTipo(true);
                     $query .= filtroGenero(true);
                     $query .= filtroIdioma(true);
+                    if ($filtroLocalidades) {
+                    	$query .= "AND tra.localidad = $infoLocalidad[id]";
+                    	
+                    }
                     
                     $query .= "
 							GROUP BY
@@ -1067,7 +1043,11 @@
                     $query .= filtroTipo(true);
                     $query .= filtroGenero(true);
                     $query .= filtroIdioma(true);
-                    
+                    if ($filtroLocalidades) {
+                    	$query .= "AND tra.localidad = $infoLocalidad[id]";
+                    	
+                    }
+
                     $query .= "
 							GROUP BY
 								tra.id
@@ -1092,6 +1072,10 @@
                 $query .= filtroTipo(true);
                 $query .= filtroGenero(true);
                 $query .= filtroIdioma(true);
+                if ($filtroLocalidades) {
+                    	$query .= "AND tra.localidad = $infoLocalidad[id]";
+                    	
+                    }
                 
                 $query = "SELECT COUNT(*) FROM ($query GROUP BY tra.id) AS T";
 			}
@@ -1136,6 +1120,10 @@
                         $query .= filtroMomento(true);
                         $query .= filtroGenero(true);
 						$query .= filtroIdioma(true);
+						if ($filtroLocalidades) {
+                    		$query .= "AND tra.localidad = $infoLocalidad[id]";
+                    	
+                    	}
                         $query .= "
                             GROUP BY
                                 tra.id
@@ -1161,6 +1149,10 @@
                         
                         $query .= filtroGenero(true);
 						$query .= filtroIdioma(true);
+						if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1190,6 +1182,10 @@
                         $query .= filtroMomento(true);
                         $query .= filtroGenero(true);
 						$query .= filtroIdioma(true);
+						if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1217,6 +1213,10 @@
                         
                         $query .= filtroGenero(true);
 						$query .= filtroIdioma(true);
+						if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1242,6 +1242,10 @@
                     $query .= filtroMomento(true);
                     $query .= filtroGenero(true);
 					$query .= filtroIdioma(true);
+					if ($filtroLocalidades) {
+						$query .= "AND tra.localidad = $infoLocalidad[id]";
+						
+					}
 				}
 				else {
                     $query = "
@@ -1262,6 +1266,10 @@
                     
                     $query .= filtroGenero(true);
 					$query .= filtroIdioma(true);
+					if ($filtroLocalidades) {
+						$query .= "AND tra.localidad = $infoLocalidad[id]";
+						
+					}
                     
                     $query .= "
                         GROUP BY
@@ -1312,6 +1320,10 @@
                         $query .= filtroMomento(true);
                         $query .= filtroTipo(true);
 						$query .= filtroIdioma(true);
+						if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
                         $query .= "
                             GROUP BY
                                 tra.id
@@ -1337,6 +1349,10 @@
 
                         $query .= filtroTipo(true);
 						$query .= filtroIdioma(true);
+						if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1366,6 +1382,10 @@
                         $query .= filtroMomento(true);
                         $query .= filtroTipo(true);
 						$query .= filtroIdioma(true);
+						if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1393,6 +1413,10 @@
                         
                         $query .= filtroTipo(true);
 						$query .= filtroIdioma(true);
+						if ($filtroLocalidades) {
+							$query .= "AND tra.localidad = $infoLocalidad[id]";
+							
+						}
                         
                         $query .= "
                             GROUP BY
@@ -1418,6 +1442,10 @@
                     $query .= filtroMomento(true);
                     $query .= filtroTipo(true);
 					$query .= filtroIdioma(true);
+					if ($filtroLocalidades) {
+						$query .= "AND tra.localidad = $infoLocalidad[id]";
+						
+					}
 				}
 				else {
                     $query = "
@@ -1438,6 +1466,10 @@
                     
                     $query .= filtroTipo(true);
 					$query .= filtroIdioma(true);
+					if ($filtroLocalidades) {
+						$query .= "AND tra.localidad = $infoLocalidad[id]";
+						
+					}
                     
                     $query .= "
                         GROUP BY
@@ -1734,7 +1766,7 @@
 											<?php if($filtroLocalidades): ?>
 												<tr>
 													<td>
-														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroGenero ), array( "clave" => "tipo", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoIdioma["nombre"]; ?><span class="underline"></span></a>
+														<a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroGenero ), array( "clave" => "tipo", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoLocalidad["localidad"] ?><span class="underline"></span></a>
 													</td>
 													<td>
 														<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
@@ -1943,7 +1975,7 @@
 			
 			$('.pagination-next').on('click',function(){
 
-				limit_ini += 5;
+				limit_ini += 15;
 
 				$.ajax({
 					url: 'ajax/trabajadores.php',
