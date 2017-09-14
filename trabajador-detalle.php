@@ -30,6 +30,7 @@
 				img.extension
 			) AS imagen,
 			tra.telefono,
+			tra.telefono_alternativo,
 			tra.fecha_nacimiento,
 			tra.calificacion_general,
 			tra.sitio_web,
