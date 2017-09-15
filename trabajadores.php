@@ -736,6 +736,12 @@
 					img.extension
 				) AS imagen,
 				tra.calificacion_general,
+				tra.sitio_web,
+				tra.facebook,
+				tra.twitter,
+				tra.instagram,
+				tra.snapchat,
+				tra.linkedin,
 				pais.nombre AS pais,
 				ie.sobre_mi,
 				ie.remuneracion_pret
@@ -899,6 +905,12 @@
                     img.extension
                 ) AS imagen,
                 tra.calificacion_general,
+                tra.sitio_web,
+				tra.facebook,
+				tra.twitter,
+				tra.instagram,
+				tra.snapchat,
+				tra.linkedin,
 				pais.nombre AS pais,
 				ie.sobre_mi,
 				ie.remuneracion_pret
@@ -1180,6 +1192,12 @@
 					img.extension
 				) AS imagen,
 				tra.calificacion_general,
+				tra.sitio_web,
+				tra.facebook,
+				tra.twitter,
+				tra.instagram,
+				tra.snapchat,
+				tra.linkedin,
 				pais.nombre AS pais,
 				ie.sobre_mi,
 				ie.remuneracion_pret
@@ -1223,6 +1241,12 @@
 					img.extension
 				) AS imagen,
 				tra.calificacion_general,
+				tra.sitio_web,
+				tra.facebook,
+				tra.twitter,
+				tra.instagram,
+				tra.snapchat,
+				tra.linkedin,
 				pais.nombre AS pais,
 				ie.sobre_mi,
 				ie.remuneracion_pret
@@ -2413,7 +2437,15 @@
 							<?php if($filtroActivado || $busqueda || $busquedaAvanzada): ?>
 								<?php if($cantidadRegistros > 0): ?>
 									<div class="row row-sm">
-										<?php foreach($trabajadores as $trabajador): ?>										
+										<?php foreach($trabajadores as $trabajador): ?>	
+											<?php
+												$sitio_web = $trabajador["sitio_web"] != "" || $trabajador["sitio_web"] != NULL ? "<a target='_blank' href='".$trabajador["sitio_web"]."' style='margin-right: 5px'><i class='fa fa-internet-explorer fa-2x' aria-hidden='true'></i></a>" : "";
+												$facebook = $trabajador["facebook"] != "" || $trabajador["facebook"] != NULL ? "<a target='_blank' href='".$trabajador["facebook"]."' style='margin-right: 5px'><i class='fa fa-facebook fa-2x' aria-hidden='true'></i></a>" : "";
+												$twitter = $trabajador["twitter"] != "" || $trabajador["twitter"] != NULL ? "<a target='_blank' href='".$trabajador["twitter"]."' style='margin-right: 5px'><i class='fa fa-twitter fa-2x' aria-hidden='true'></i></a>" : "";
+												$snapchat = $trabajador["snapchat"] != "" || $trabajador["snapchat"] != NULL ? "<a target='_blank' href='".$trabajador["snapchat"]."' style='margin-right: 5px'><i class='fa fa-snapchat-square fa-2x' aria-hidden='true'></i></a>" : "";
+												$instagram = $trabajador["instagram"] != "" || $trabajador["instagram"] != NULL ? "<a target='_blank' href='".$trabajador["instagram"]."' style='margin-right: 5px'><i class='fa fa-instagram fa-2x' aria-hidden='true'></i></a>" : "";
+												$linkedin = $trabajador["linkedin"] != "" || $trabajador["linkedin"] != NULL ? "<a target='_blank' href='".$trabajador["linkedin"]."' style='margin-right: 5px'><i class='fa fa-linkedin fa-2x' aria-hidden='true'></i></a>" : "";
+											?>									
 												<div class="col-md-12">
 											<a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
 												<div class="tra box box-block bg-white user-5">
@@ -2436,6 +2468,14 @@
 																	<div class="pull-left">
 																		<b class="" style="">&nbsp;&nbsp;<?= $trabajador['pais'] ?></b>
 																	</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-12 col-md-12">
+																		<div class="pull-left">
+																			<?= $sitio_web . " " . $facebook . " " . $twitter . " " . $instagram . " " . $snapchat . " " . $linkedin ?>
+																			
+																		</div>
 																	</div>
 																</div>
 																<div style="font-size: 28px;"></div>
@@ -2483,6 +2523,14 @@
 							<?php else: ?>
 								<div class="row row-sm" id="box-trab">
 									<?php foreach($trabajadores as $trabajador): ?>
+										<?php
+											$sitio_web = $trabajador["sitio_web"] != "" || $trabajador["sitio_web"] != NULL ? "<a target='_blank' href='".$trabajador["sitio_web"]."' style='margin-right: 5px'><i class='fa fa-internet-explorer fa-2x' aria-hidden='true'></i></a>" : "";
+											$facebook = $trabajador["facebook"] != "" || $trabajador["facebook"] != NULL ? "<a target='_blank' href='".$trabajador["facebook"]."' style='margin-right: 5px'><i class='fa fa-facebook fa-2x' aria-hidden='true'></i></a>" : "";
+											$twitter = $trabajador["twitter"] != "" || $trabajador["twitter"] != NULL ? "<a target='_blank' href='".$trabajador["twitter"]."' style='margin-right: 5px'><i class='fa fa-twitter fa-2x' aria-hidden='true'></i></a>" : "";
+											$snapchat = $trabajador["snapchat"] != "" || $trabajador["snapchat"] != NULL ? "<a target='_blank' href='".$trabajador["snapchat"]."' style='margin-right: 5px'><i class='fa fa-snapchat-square fa-2x' aria-hidden='true'></i></a>" : "";
+											$instagram = $trabajador["instagram"] != "" || $trabajador["instagram"] != NULL ? "<a target='_blank' href='".$trabajador["instagram"]."' style='margin-right: 5px'><i class='fa fa-instagram fa-2x' aria-hidden='true'></i></a>" : "";
+											$linkedin = $trabajador["linkedin"] != "" || $trabajador["linkedin"] != NULL ? "<a target='_blank' href='".$trabajador["linkedin"]."' style='margin-right: 5px'><i class='fa fa-linkedin fa-2x' aria-hidden='true'></i></a>" : "";
+										?>
 										<div class="col-md-12">
 											<a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
 												<div class="tra box box-block bg-white user-5">
@@ -2499,12 +2547,20 @@
 																	<span class="text-black pull-left"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span>
 
 																</h4>
-																<div class="row">
+																<div class="row" style="margin-bottom: 10px">
 																	<div class="col-xs-12 col-md-12">
 																		
-																	<div class="pull-left">
-																		<b class="" style="">&nbsp;&nbsp;<?= $trabajador['pais'] ?></b>
+																		<div class="pull-left">
+																			<b class="" style="">&nbsp;&nbsp;<?= $trabajador['pais'] ?></b>
+																		</div>
 																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-12 col-md-12">
+																		<div class="pull-left">
+																			<?= $sitio_web . " " . $facebook . " " . $twitter . " " . $instagram . " " . $snapchat . " " . $linkedin ?>
+																			
+																		</div>
 																	</div>
 																</div>
 																<div style="font-size: 28px;"></div>

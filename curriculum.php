@@ -265,6 +265,43 @@
 													<input class="form-control" value="<?php echo $data["telefono_alternativo"]; ?>" id="phoneAlt" type="text">
 												</div>
 											</div>
+											<h5>Mis redes Sociales</h5>
+											<hr>
+											<div class="form-group row">
+												<label for="web" class="col-xs-4 col-form-label" style="text-align: right;">Sitio Web</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["sitio_web"]  ?>" id="web" type="text">
+												</div>
+											</div><div class="form-group row">
+												<label for="fb" class="col-xs-4 col-form-label" style="text-align: right;">Facebook</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["facebook"]  ?>" id="fb" type="text">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="tw" class="col-xs-4 col-form-label" style="text-align: right;">Twitter</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["twitter"]  ?>" id="tw" type="text">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="ig" class="col-xs-4 col-form-label" style="text-align: right;">Instagram</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["instagram"]  ?>" id="ig" type="text">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="snap" class="col-xs-4 col-form-label" style="text-align: right;">Snapchat</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["snapchat"]  ?>" id="snap" type="text">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="lkd" class="col-xs-4 col-form-label" style="text-align: right;">Linkedin</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["linkedin"] ?>" id="lkd" type="text">
+												</div>
+											</div>
 										</div>
 										<div class="col-md-2"></div>
 									</div>
@@ -1402,7 +1439,7 @@
 						switch(op) {
 							case 1:
 								if($("#name").val() != "" && $("#lastName").val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
-									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&province='+$("#province").val() + '&city='+$("#city").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val();
+									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&province='+$("#province").val() + '&city='+$("#city").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
 									band = true;
 								}
 								break;
