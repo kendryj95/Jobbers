@@ -34,11 +34,11 @@
 					break;
 				case 2:
 					if($id != "" && $id != "undefined") {
-						$db->query("UPDATE trabajadores_experiencia_laboral SET nombre_empresa='$_REQUEST[company]', id_pais='$_REQUEST[rCompany]', id_actividad_empresa='$_REQUEST[tCompany]', tipo_puesto='$_REQUEST[tEmployeer]', mes_ingreso='$_REQUEST[monthI]', ano_ingreso='$_REQUEST[yearI]', mes_egreso='$_REQUEST[monthE]', ano_egreso='$_REQUEST[yearE]', descripcion_tareas='$_REQUEST[descriptionArea]' WHERE id=$_REQUEST[i]");
+						$db->query("UPDATE trabajadores_experiencia_laboral SET nombre_empresa='$_REQUEST[company]', id_pais='$_REQUEST[rCompany]', id_actividad_empresa='$_REQUEST[tCompany]', tipo_puesto='$_REQUEST[tEmployeer]', mes_ingreso='$_REQUEST[monthI]', ano_ingreso='$_REQUEST[yearI]', mes_egreso='$_REQUEST[monthE]', ano_egreso='$_REQUEST[yearE]', nombre_encargado='$_REQUEST[nom_enc]', tlf_encargado='$_REQUEST[tlf_enc]', descripcion_tareas='$_REQUEST[descriptionArea]' WHERE id=$_REQUEST[i]");
 					}
 					else {
 						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores_experiencia_laboral'");
-						$db->query("INSERT INTO trabajadores_experiencia_laboral (id_trabajador, nombre_empresa, id_pais, id_actividad_empresa, tipo_puesto, mes_ingreso, ano_ingreso, mes_egreso, ano_egreso, descripcion_tareas) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[company]', '$_REQUEST[rCompany]', '$_REQUEST[tCompany]', '$_REQUEST[tEmployeer]', '$_REQUEST[monthI]', '$_REQUEST[yearI]', '$_REQUEST[monthE]', '$_REQUEST[yearE]', '$_REQUEST[descriptionArea]')");
+						$db->query("INSERT INTO trabajadores_experiencia_laboral (id_trabajador, nombre_empresa, id_pais, id_actividad_empresa, tipo_puesto, mes_ingreso, ano_ingreso, mes_egreso, ano_egreso, nombre_encargado, tlf_encargado, descripcion_tareas) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[company]', '$_REQUEST[rCompany]', '$_REQUEST[tCompany]', '$_REQUEST[tEmployeer]', '$_REQUEST[monthI]', '$_REQUEST[yearI]', '$_REQUEST[monthE]', '$_REQUEST[yearE]', '$_REQUEST[nom_enc]', '$_REQUEST[tlf_enc]', '$_REQUEST[descriptionArea]')");
 					}
 					$data = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id=$id");
 					break;

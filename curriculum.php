@@ -1,16 +1,16 @@
 <?php
-	session_start();
-	if(!isset($_SESSION["ctc"]["id"])) {
-		header("Location: ./");
-	}
-	require_once('classes/DatabasePDOInstance.function.php');
-	$db = DatabasePDOInstance();
-	$data = $db->getRow("SELECT * FROM trabajadores WHERE id=".$_SESSION["ctc"]["id"]);
-	$infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador =". $_SESSION['ctc']['id']);
-	$attr = '';
-	if($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 ||  $data["id_tipo_documento_identificacion"] == 0 ||  $data["id_pais"] == 0 ||  $data["provincia"] == "" ||  $data["localidad"] == "" ||  $data["calle"] == "" ||  $data["nombres"] == "" ||  $data["apellidos"] == "" ||  $data["numero_documento_identificacion"] == "" || $data["fecha_nacimiento"] == "" || $data["telefono"] == "" || $data["correo_electronico"] == "") {
-		$attr = 'disabled';
-	}
+session_start();
+if (!isset($_SESSION["ctc"]["id"])) {
+    header("Location: ./");
+}
+require_once 'classes/DatabasePDOInstance.function.php';
+$db        = DatabasePDOInstance();
+$data      = $db->getRow("SELECT * FROM trabajadores WHERE id=" . $_SESSION["ctc"]["id"]);
+$infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador =" . $_SESSION['ctc']['id']);
+$attr      = '';
+if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_documento_identificacion"] == 0 || $data["id_pais"] == 0 || $data["provincia"] == "" || $data["localidad"] == "" || $data["calle"] == "" || $data["nombres"] == "" || $data["apellidos"] == "" || $data["numero_documento_identificacion"] == "" || $data["fecha_nacimiento"] == "" || $data["telefono"] == "" || $data["correo_electronico"] == "") {
+    $attr = 'disabled';
+}
 
 ?>
 
@@ -27,7 +27,7 @@
 
 		<!-- Title -->
 		<title>JOBBERS - Mi cuenta</title>
-		<?php require_once('includes/libs-css.php'); ?>
+		<?php require_once 'includes/libs-css.php';?>
 		<link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-daterangepicker/daterangepicker.css">
 
@@ -49,13 +49,13 @@
 			<div class="preloader"></div>
 
 			<!-- Sidebar -->
-			<?php require_once('includes/sidebar.php'); ?>
+			<?php require_once 'includes/sidebar.php';?>
 
 			<!-- Sidebar second -->
-			<?php require_once('includes/sidebar-second.php'); ?>
+			<?php require_once 'includes/sidebar-second.php';?>
 
 			<!-- Header -->
-			<?php require_once('includes/header.php'); ?>
+			<?php require_once 'includes/header.php';?>
 
 			<div class="site-content">
 				<!-- Content -->
@@ -143,9 +143,9 @@
 												<div class="col-xs-6">
 													<select name="" id="dia" class="custom-select">
 														<option value="0">Sel</option>
-														<?php for($i = 1;$i<=31;$i++): ?>
-															<option value="<?= $i < 10 ? '0'.$i : $i ?>"><?= $i ?></option>
-														<?php endfor; ?>
+														<?php for ($i = 1; $i <= 31; $i++): ?>
+															<option value="<?=$i < 10 ? '0' . $i : $i?>"><?=$i?></option>
+														<?php endfor;?>
 													</select>
 
 
@@ -167,9 +167,9 @@
 
 													<select name="" id="anio" class="custom-select">
 														<option value="0">Sel</option>
-														<?php for($i = 1950;$i<=intval(date('Y'));$i++): ?>
-														<option value="<?= $i ?>"><?= $i ?></option>
-														<?php endfor; ?>
+														<?php for ($i = 1950; $i <= intval(date('Y')); $i++): ?>
+														<option value="<?=$i?>"><?=$i?></option>
+														<?php endfor;?>
 													</select>
 												</div>
 											</div>
@@ -180,10 +180,10 @@
 												<div class="col-md-8">
 													<select class="custom-select" id="country" style="width: 100%;">
 														<option value="0">Seleccione</option>
-														<?php $countries = $db->getAll("SELECT * FROM paises ORDER BY nombre ASC"); ?>
-														<?php foreach($countries as $c): ?>
+														<?php $countries = $db->getAll("SELECT * FROM paises ORDER BY nombre ASC");?>
+														<?php foreach ($countries as $c): ?>
 															<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
-														<?php endforeach ?>
+														<?php endforeach?>
 													</select>
 												</div>
 											</div>
@@ -194,10 +194,10 @@
 												<div class="col-md-8">
 													<select class="custom-select" id="estadoCivil" style="width: 100%;">
 														<option value="0">Seleccione</option>
-														<?php $estado_civil = $db->getAll("SELECT * FROM estados_civiles"); ?>
-														<?php foreach($estado_civil as $e): ?>
+														<?php $estado_civil = $db->getAll("SELECT * FROM estados_civiles");?>
+														<?php foreach ($estado_civil as $e): ?>
 															<option value="<?php echo $e["id"]; ?>"><?php echo $e["nombre"]; ?></option>
-														<?php endforeach ?>
+														<?php endforeach?>
 													</select>
 												</div>
 											</div>
@@ -206,10 +206,10 @@
 												<div class="col-md-4">
 													<select class="custom-select" style="width: 100%;" id="dni">
 														<option value="0">Seleccione</option>
-														<?php $tipos_documento_identificacion = $db->getAll("SELECT * FROM tipos_documento_identificacion"); ?>
-														<?php foreach($tipos_documento_identificacion as $t): ?>
+														<?php $tipos_documento_identificacion = $db->getAll("SELECT * FROM tipos_documento_identificacion");?>
+														<?php foreach ($tipos_documento_identificacion as $t): ?>
 															<option value="<?php echo $t["id"]; ?>"><?php echo $t["nombre"]; ?></option>
-														<?php endforeach ?>
+														<?php endforeach?>
 													</select>
 												</div>
 												<div class="col-md-2" style="text-align: right;"><label for="numberdni" style="margin-top: 6px;">Número <span style="color: red;">*</span></label></div>
@@ -217,7 +217,7 @@
 													<input class="form-control" value="<?php echo $data["numero_documento_identificacion"]; ?>" id="numberdni" type="text">
 												</div>
 											</div>
-											<?php $provincias = $db->getAll("SELECT * FROM provincias") ?>
+											<?php $provincias = $db->getAll("SELECT * FROM provincias")?>
 											<div class="row" style="margin-top: 10px;">
 												<div class="col-md-4" style="text-align: right;">
 													<label for="province" style="margin-top: 6px;">Provincia <span style="color: red;">*</span></label>
@@ -228,12 +228,12 @@
                                                         <option value="0">Seleccione</option>
                                                         <?php foreach ($provincias as $val): ?>
                                                             <option
-                                                                value="<?= $val['id'] ?>"><?= $val['provincia'] ?></option>
-                                                        <?php endforeach; ?>
+                                                                value="<?=$val['id']?>"><?=$val['provincia']?></option>
+                                                        <?php endforeach;?>
                                                     </select>
 												</div>
 											</div>
-                                            <?php $localidades = $db->getAll("SELECT * FROM localidades WHERE id_provincia=". $data['provincia']) ?>
+                                            <?php $localidades = $db->getAll("SELECT * FROM localidades WHERE id_provincia=" . $data['provincia'])?>
 											<div class="row" style="margin-top: 10px;">
 												<div class="col-md-4" style="text-align: right;">
 													<label for="city" style="margin-top: 6px;">Localidad / Ciudad <span style="color: red;">*</span></label>
@@ -241,9 +241,9 @@
 												<div class="col-md-8">
                                                     <select name="city" id="city" class="custom-select">
                                                         <option value="0">Seleccione</option>
-                                                        <?php foreach($localidades as $val): ?>
-                                                            <option value="<?= $val['id'] ?>"><?= $val['localidad'] ?></option>
-                                                        <?php endforeach; ?>
+                                                        <?php foreach ($localidades as $val): ?>
+                                                            <option value="<?=$val['id']?>"><?=$val['localidad']?></option>
+                                                        <?php endforeach;?>
                                                     </select>
 												</div>
 											</div>
@@ -266,34 +266,36 @@
 												</div>
 											</div>
 											<h5>Mis redes Sociales</h5>
+												<span style="color: grey; font-size: 10px">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
+
 											<hr>
 											<div class="form-group row">
 												<label for="web" class="col-xs-4 col-form-label" style="text-align: right;">Sitio Web</label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["sitio_web"]  ?>" id="web" type="text">
+													<input class="form-control" value="<?php echo $data["sitio_web"] ?>" id="web" type="text">
 												</div>
 											</div><div class="form-group row">
 												<label for="fb" class="col-xs-4 col-form-label" style="text-align: right;">Facebook</label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["facebook"]  ?>" id="fb" type="text">
+													<input class="form-control" value="<?php echo $data["facebook"] ?>" id="fb" type="text">
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="tw" class="col-xs-4 col-form-label" style="text-align: right;">Twitter</label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["twitter"]  ?>" id="tw" type="text">
+													<input class="form-control" value="<?php echo $data["twitter"] ?>" id="tw" type="text">
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="ig" class="col-xs-4 col-form-label" style="text-align: right;">Instagram</label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["instagram"]  ?>" id="ig" type="text">
+													<input class="form-control" value="<?php echo $data["instagram"] ?>" id="ig" type="text">
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="snap" class="col-xs-4 col-form-label" style="text-align: right;">Snapchat</label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["snapchat"]  ?>" id="snap" type="text">
+													<input class="form-control" value="<?php echo $data["snapchat"] ?>" id="snap" type="text">
 												</div>
 											</div>
 											<div class="form-group row">
@@ -305,7 +307,7 @@
 										</div>
 										<div class="col-md-2"></div>
 									</div>
-									<div class="row">
+									<div class="row" style="margin-top: 10px">
 										<div class="col-md-4"></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
 										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
@@ -335,9 +337,9 @@
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="rCompany">
 														<option value="0">Seleccione</option>
-														<?php foreach($countries as $c): ?>
+														<?php foreach ($countries as $c): ?>
 															<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
-														<?php endforeach ?>
+														<?php endforeach?>
 													</select>
 												</div>
 											</div>
@@ -348,10 +350,10 @@
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="tCompany">
 														<option value="0">Seleccione</option>
-														<?php $actividades = $db->getAll("SELECT * FROM actividades_empresa"); ?>
-														<?php foreach($actividades as $a): ?>
+														<?php $actividades = $db->getAll("SELECT * FROM actividades_empresa");?>
+														<?php foreach ($actividades as $a): ?>
 															<option value="<?php echo $a["id"]; ?>"><?php echo $a["nombre"]; ?></option>
-														<?php endforeach ?>
+														<?php endforeach?>
 													</select>
 												</div>
 											</div>
@@ -384,9 +386,9 @@
 												<div class="col-md-2" style="text-align: right;"><label for="yearI" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
 												<div class="col-md-3">
 													<select class="custom-select" style="width: 100%;" id="yearI">
-														<?php for($i=1950; $i<intval(date('Y'))+1; $i++): ?>
+														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-														<?php endfor ?>
+														<?php endfor?>
 													</select>
 												</div>
 											</div>
@@ -411,10 +413,20 @@
 												<div class="col-md-2" style="text-align: right;"><label for="yearE" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
 												<div class="col-md-3">
 													<select class="custom-select" style="width: 100%;" id="yearE">
-														<?php for($i=1950; $i<intval(date('Y'))+1; $i++): ?>
+														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-														<?php endfor ?>
+														<?php endfor?>
 													</select>
+												</div>
+											</div>
+
+											<div class="row" style="margin-top: 10px;">
+												<div class="col-md-4" style="text-align: right;"><label for="" style="margin-top: 6px;">Datos del encargado </label></div>
+												<div class="col-md-4">
+													<input type="text" class="form-control" id="nom_enc" placeholder="Nombre del encargado">
+												</div>
+												<div class="col-md-4">
+													<input type="tel" class="form-control" id="tlf_enc" placeholder="Telefono del encargado" title="Incluya el codigo de area" pattern="[0-9]">
 												</div>
 											</div>
 											<div class="form-group row" style="margin-top: 10px;">
@@ -423,13 +435,13 @@
 													<textarea id="descriptionArea" class="form-control"></textarea>
 												</div>
 											</div>
-											
+
 										</div>
 										<div class="col-md-2"></div>
 									</div>
 
-									<?php $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id'] ." ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC") ?>
-									<?php if($experiencias): ?>
+									<?php $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id'] . " ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC")?>
+									<?php if ($experiencias): ?>
 										<div class="" id="contentEL">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis empleos anteriores</h4>
 											<div class="row" style="margin-bottom: 25px;">
@@ -446,7 +458,7 @@
 															</tr>
 														</thead>
 														<tbody id="t2">
-															<?php foreach($experiencias as $e): ?>
+															<?php foreach ($experiencias as $e): ?>
 																<tr>
 																	<td><?php echo $e["nombre_empresa"]; ?></td>
 																	<td><?php echo $e["nombre_pais"]; ?></td>
@@ -459,7 +471,7 @@
 																		</div>
 																	</td>
 																</tr>
-															<?php endforeach ?>
+															<?php endforeach?>
 														</tbody>
 													</table>
 												</div>
@@ -488,7 +500,7 @@
 												<div class="col-md-1"></div>
 											</div>
 										</div>
-									<?php endif ?>
+									<?php endif?>
 
 									<div class="row">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
@@ -514,10 +526,10 @@
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="sNivel">
 														<option value="0">Seleccione</option>
-														<?php $nivel_estudio = $db->getAll("SELECT * FROM nivel_estudio"); ?>
-														<?php foreach($nivel_estudio as $n): ?>
+														<?php $nivel_estudio = $db->getAll("SELECT * FROM nivel_estudio");?>
+														<?php foreach ($nivel_estudio as $n): ?>
 															<option value="<?php echo $n["id"]; ?>"><?php echo $n["nombre"]; ?></option>
-														<?php endforeach ?>
+														<?php endforeach?>
 													</select>
 												</div>
 											</div>
@@ -547,10 +559,10 @@
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="areaS">
 														<option value="0">Seleccione</option>
-														<?php $areas_estudio = $db->getAll("SELECT * FROM areas_estudio"); ?>
-														<?php foreach($areas_estudio as $a): ?>
+														<?php $areas_estudio = $db->getAll("SELECT * FROM areas_estudio");?>
+														<?php foreach ($areas_estudio as $a): ?>
 															<option value="<?php echo $a["id"]; ?>"><?php echo $a["nombre"]; ?></option>
-														<?php endforeach ?>
+														<?php endforeach?>
 													</select>
 												</div>
 											</div>
@@ -569,9 +581,9 @@
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="countryS">
 														<option value="0">Seleccione</option>
-														<?php foreach($countries as $c): ?>
+														<?php foreach ($countries as $c): ?>
 															<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
-														<?php endforeach ?>
+														<?php endforeach?>
 													</select>
 												</div>
 											</div>
@@ -596,9 +608,9 @@
 												<div class="col-md-2" style="text-align: right;"><label for="yearIn" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
 												<div class="col-md-3">
 													<select class="custom-select" style="width: 100%;" id="yearIn">
-														<?php for($i=1950; $i<intval(date('Y'))+1; $i++): ?>
+														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-														<?php endfor ?>
+														<?php endfor?>
 													</select>
 												</div>
 											</div>
@@ -623,9 +635,9 @@
 												<div class="col-md-2" style="text-align: right;"><label for="yearFi" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
 												<div class="col-md-3">
 													<select class="custom-select" style="width: 100%;" id="yearFi">
-														<?php for($i=1950; $i<intval(date('Y'))+1; $i++): ?>
+														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-														<?php endfor ?>
+														<?php endfor?>
 													</select>
 												</div>
 											</div>
@@ -639,13 +651,13 @@
 													<input class="form-control" value="" id="aprob" type="text">
 												</div>
 											</div>
-											
+
 										</div>
 										<div class="col-md-2"></div>
 									</div>
 
-									<?php $educacion = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=".$_SESSION["ctc"]["id"]); ?>
-									<?php if($educacion): ?>
+									<?php $educacion = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=" . $_SESSION["ctc"]["id"]);?>
+									<?php if ($educacion): ?>
 										<div class="" id="contentED">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis estudios</h4>
 											<div class="row" style="margin-bottom: 25px;">
@@ -662,7 +674,7 @@
 															</tr>
 														</thead>
 														<tbody id="t3">
-															<?php foreach($educacion as $e): ?>
+															<?php foreach ($educacion as $e): ?>
 																<tr>
 																	<td><?php echo $e["nivel"]; ?></td>
 																	<td><?php echo $e["nombre_pais"]; ?></td>
@@ -675,7 +687,7 @@
 																		</div>
 																	</td>
 																</tr>
-															<?php endforeach ?>
+															<?php endforeach?>
 														</tbody>
 													</table>
 												</div>
@@ -704,7 +716,7 @@
 												<div class="col-md-1"></div>
 											</div>
 										</div>
-									<?php endif ?>
+									<?php endif?>
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
@@ -725,10 +737,10 @@
 										<div class="col-md-6">
 											<select class="custom-select" style="width: 100%;" id="idioma">
 												<option selected value="0">Seleccione</option>
-												<?php $idiomas = $db->getAll("SELECT * FROM idiomas"); ?>
-												<?php foreach($idiomas as $i): ?>
+												<?php $idiomas = $db->getAll("SELECT * FROM idiomas");?>
+												<?php foreach ($idiomas as $i): ?>
 													<option value="<?php echo $i["id"]; ?>"><?php echo $i["nombre"]; ?></option>
-												<?php endforeach ?>
+												<?php endforeach?>
 											</select>
 										</div>
 									</div>
@@ -738,14 +750,14 @@
 										<div class="col-md-8">
 											<div class="row">
 												<div class="col-md-1"></div>
-												<?php $nivel_idioma = $db->getAll("SELECT * FROM nivel_idioma"); ?>
-												<?php foreach($nivel_idioma as $i => $n): ?>
+												<?php $nivel_idioma = $db->getAll("SELECT * FROM nivel_idioma");?>
+												<?php foreach ($nivel_idioma as $i => $n): ?>
 													<label class="custom-control custom-radio col-md-2">
 														<input id="rad<?php echo $i; ?>" name="nivelO" class="custom-control-input" type="radio" value="<?php echo $n["id"]; ?>">
 														<span class="custom-control-indicator"></span>
 														<span class="custom-control-description"><?php echo $n["nombre"]; ?></span>
 													</label>
-												<?php endforeach ?>
+												<?php endforeach?>
 											</div>
 										</div>
 									</div>
@@ -754,20 +766,20 @@
 										<div class="col-md-8">
 											<div class="row">
 												<div class="col-md-1"></div>
-												<?php foreach($nivel_idioma as $i => $n): ?>
+												<?php foreach ($nivel_idioma as $i => $n): ?>
 													<label class="custom-control custom-radio col-md-2">
 														<input id="rad<?php echo $i; ?>" name="nivelE" class="custom-control-input" type="radio" value="<?php echo $n["id"]; ?>">
 														<span class="custom-control-indicator"></span>
 														<span class="custom-control-description"><?php echo $n["nombre"]; ?></span>
 													</label>
-												<?php endforeach ?>
+												<?php endforeach?>
 											</div>
 										</div>
-										
+
 									</div>
 
-									<?php $idiomasT = $db->getAll("SELECT trabajadores_idiomas.*, idiomas.nombre as nombre_idioma FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=".$_SESSION["ctc"]["id"]); ?>
-									<?php if($idiomasT): ?>
+									<?php $idiomasT = $db->getAll("SELECT trabajadores_idiomas.*, idiomas.nombre as nombre_idioma FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=" . $_SESSION["ctc"]["id"]);?>
+									<?php if ($idiomasT): ?>
 										<div class="" id="contentID">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis idiomas</h4>
 											<div class="row" style="margin-bottom: 25px;">
@@ -783,9 +795,9 @@
 															</tr>
 														</thead>
 														<tbody id="t4">
-															<?php foreach($idiomasT as $i): ?>
-																<?php $nivel_oral = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]"); ?>
-																<?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]"); ?>
+															<?php foreach ($idiomasT as $i): ?>
+																<?php $nivel_oral    = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]");?>
+																<?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]");?>
 																<tr>
 																	<td><?php echo $i["nombre_idioma"]; ?></td>
 																	<td><?php echo $nivel_oral; ?></td>
@@ -797,7 +809,7 @@
 																		</div>
 																	</td>
 																</tr>
-															<?php endforeach ?>
+															<?php endforeach?>
 														</tbody>
 													</table>
 												</div>
@@ -825,7 +837,7 @@
 												<div class="col-md-1"></div>
 											</div>
 										</div>
-									<?php endif ?>
+									<?php endif?>
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
@@ -856,13 +868,13 @@
 													<textarea class="form-control" id="descriptionC"></textarea>
 												</div>
 											</div>
-											
+
 										</div>
 										<div class="col-md-2"></div>
 									</div>
 
-									<?php $otros_conocimientos = $db->getAll("SELECT * FROM trabajadores_otros_conocimientos WHERE id_trabajador=".$_SESSION["ctc"]["id"]); ?>
-									<?php if($otros_conocimientos): ?>
+									<?php $otros_conocimientos = $db->getAll("SELECT * FROM trabajadores_otros_conocimientos WHERE id_trabajador=" . $_SESSION["ctc"]["id"]);?>
+									<?php if ($otros_conocimientos): ?>
 										<div class="" id="contentOC">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis otros conocimientos</h4>
 											<div class="row" style="margin-bottom: 25px;">
@@ -877,7 +889,7 @@
 															</tr>
 														</thead>
 														<tbody id="t5">
-															<?php foreach($otros_conocimientos as $o): ?>
+															<?php foreach ($otros_conocimientos as $o): ?>
 																<tr>
 																	<td><?php echo $o["nombre"]; ?></td>
 																	<td><?php echo $o["descripcion"]; ?></td>
@@ -888,7 +900,7 @@
 																		</div>
 																	</td>
 																</tr>
-															<?php endforeach ?>
+															<?php endforeach?>
 														</tbody>
 													</table>
 												</div>
@@ -915,7 +927,7 @@
 												<div class="col-md-1"></div>
 											</div>
 										</div>
-									<?php endif ?>
+									<?php endif?>
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
@@ -936,7 +948,7 @@
 										<div class="col-md-8">
 											<div class="form-group row" style="margin-top: 10px;">
 												<label for="remuneracion" class="col-xs-4 col-form-label" style="text-align: right;">Remuneración Pretendida <span style="color: red;">*</span></label>
-												<div class="col-xs-8">	
+												<div class="col-xs-8">
 													<input class="form-control" value="" id="remuneracion" type="number" min="2000" step="2000" max="100000">
 												</div>
 											</div>
@@ -975,10 +987,10 @@
 														<strong>Nombres: </strong> <span id="labelName"><?php echo $data["nombres"]; ?></span><br>
 														<strong>Apellidos: </strong> <span id="labelLastName"><?php echo $data["apellidos"]; ?></span><br>
 														<strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $data["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$data[id_pais]") : "Sin especificar"; ?></span><br>
-														<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo date('d/m/y',strtotime($data["fecha_nacimiento"])); ?></span><br>
+														<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo date('d/m/y', strtotime($data["fecha_nacimiento"])); ?></span><br>
 														<strong>Edad: </strong> <span id="edad"><?php echo intval(date('Y')) - intval(date('Y', strtotime($data["fecha_nacimiento"]))) . "años"; ?></span><br>
 														<strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $data["correo_electronico"]; ?></span><br>
-														<strong>Telefonos: </strong> <span id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] =! "" ? " / " . $data["telefono_alternativo"] : ''; ?></span><br>
+														<strong>Telefonos: </strong> <span id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] = !"" ? " / " . $data["telefono_alternativo"] : ''; ?></span><br>
 													</p>
 												</div>
 											</div>
@@ -987,82 +999,82 @@
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Experiencia laboral</h4>
 									<div id="experiencias">
-									<?php $mes = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); ?>
-										<?php if($experiencias): ?>
-											<?php foreach($experiencias as $e): ?>
+									<?php $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");?>
+										<?php if ($experiencias): ?>
+											<?php foreach ($experiencias as $e): ?>
 												<p style="margin-left: 50px;">
 													<strong>Empresa: </strong> <?php echo $e["nombre_empresa"]; ?><br>
 													<strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
 													<strong>Actividad: </strong> <?php echo $e["actividad_empresa"]; ?><br>
 													<strong>Tipo puesto: </strong> <?php echo $e["tipo_puesto"]; ?><br>
-													<strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"]-1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"]-1] . "/" . $e["ano_egreso"] ?><br>
+													<strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?><br>
 												</p>
-											<?php endforeach ?>
+											<?php endforeach?>
 										<?php else: ?>
 											<p style="margin-left: 50px;">Sin registros</p>
-										<?php endif ?>
+										<?php endif?>
 									</div>
 
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Estudios</h4>
 									<div id="educacion">
-										<?php if($educacion): ?>
-											<?php foreach($educacion as $e): ?>
+										<?php if ($educacion): ?>
+											<?php foreach ($educacion as $e): ?>
 												<p style="margin-left: 50px;">
 													<strong>Nivel estudio: </strong> <?php echo $e["nivel"]; ?><br>
 													<strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
 													<strong>Estado estudio: </strong> <?php echo $e["estado_estudio"]; ?><br>
 													<strong>Área estudio: </strong> <?php echo $e["nombre_estudio"]; ?><br>
 												</p>
-											<?php endforeach ?>
+											<?php endforeach?>
 										<?php else: ?>
 											<p style="margin-left: 50px;">Sin registros</p>
-										<?php endif ?>
+										<?php endif?>
 									</div>
 
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Idiomas</h4>
 									<div id="idiomas">
-										<?php if($idiomasT): ?>
-											<?php foreach($idiomasT as $i): ?>
-												<?php $nivel_oral = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]"); ?>
-												<?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]"); ?>
+										<?php if ($idiomasT): ?>
+											<?php foreach ($idiomasT as $i): ?>
+												<?php $nivel_oral    = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]");?>
+												<?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]");?>
 												<p style="margin-left: 50px;">
 													<strong>Idioma: </strong> <?php echo $i["nombre_idioma"]; ?><br>
 													<strong>Nivel Oral: </strong> <?php echo $nivel_oral; ?><br>
 													<strong>Nivel escrito: </strong> <?php echo $nivel_escrito; ?><br>
 												</p>
-											<?php endforeach ?>
+											<?php endforeach?>
 										<?php else: ?>
 											<p style="margin-left: 50px;">Sin registros</p>
-										<?php endif ?>
+										<?php endif?>
 									</div>
 
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Otros conocimientos</h4>
 									<div id="otros_conocimientos">
-										<?php if($otros_conocimientos): ?>
-											<?php foreach($otros_conocimientos as $o): ?>
+										<?php if ($otros_conocimientos): ?>
+											<?php foreach ($otros_conocimientos as $o): ?>
 												<p style="margin-left: 50px;">
 													<strong>Título: </strong> <?php echo $o["nombre"]; ?><br>
 													<strong>Descripción: </strong> <?php echo $o["descripcion"]; ?><br>
 												</p>
-											<?php endforeach ?>
+											<?php endforeach?>
 										<?php else: ?>
 											<p style="margin-left: 50px;">Sin registros</p>
-										<?php endif ?>
+										<?php endif?>
 									</div>
 
-									<?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador=". $_SESSION['ctc']['id']); ?>
-									<?php if($infoExtra): ?>
+									<?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador=" . $_SESSION['ctc']['id']);?>
+									<?php if ($infoExtra): ?>
 
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Información Extra</h4>
 									<div id="infoExtra">
 												<p style="margin-left: 50px;">
 													<strong>Remuneración pretendida: </strong> $<span
-														id="labelRem"><?= $infoExtra['remuneracion_pret'] ?></span> <br>
+														id="labelRem"><?=$infoExtra['remuneracion_pret']?></span> <br>
 													<strong>Sobre mí: </strong> <span
-														id="labelSobreMi"><?= $infoExtra['sobre_mi'] ?></span> <br>
+														id="labelSobreMi"><?=$infoExtra['sobre_mi']?></span> <br>
 												</p>
 									</div>
-									<?php endif ?>
+									<?php endif?>
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
@@ -1075,11 +1087,11 @@
 					</div>
 				</div>
 				<!-- Footer -->
-				<?php require_once('includes/footer.php'); ?>
+				<?php require_once 'includes/footer.php';?>
 			</div>
 		</div>
 
-		<?php require_once('includes/libs-js.php'); ?>
+		<?php require_once 'includes/libs-js.php';?>
 
 		<script type="text/javascript" src="vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="vendor/moment/moment.js"></script>
@@ -1094,22 +1106,22 @@
 						$("li.nav-item:nth-child(6) > a:nth-child(1)").click();
 					}
 
-					<?php if(count($infoExtra) > 1): ?>
+					<?php if (count($infoExtra) > 1): ?>
 
-					var remuneracion = "<?= $infoExtra['remuneracion_pret'] ?>";
-					var sobre_mi = "<?= $infoExtra['sobre_mi'] ?>";
+					var remuneracion = "<?=$infoExtra['remuneracion_pret']?>";
+					var sobre_mi = "<?=$infoExtra['sobre_mi']?>";
 					remuneracion = parseInt(remuneracion);
 
 					$('#remuneracion').val(remuneracion);
 					$('#sobre_mi').val(sobre_mi);
 
-					$(".save[data-target=6]").attr('data-edit',2).attr('data-i',<?= $_SESSION['ctc']['id'] ?>);
+					$(".save[data-target=6]").attr('data-edit',2).attr('data-i',<?=$_SESSION['ctc']['id']?>);
 
-					<?php endif; ?>
+					<?php endif;?>
 
-					<?php if($data['fecha_nacimiento'] != ""): ?>
+					<?php if ($data['fecha_nacimiento'] != ""): ?>
 
-					var f = "<?= $data['fecha_nacimiento'] ?>";
+					var f = "<?=$data['fecha_nacimiento']?>";
 					var division = f.split("-");
 					var dia = division[2], mes = division[1], anio = division[0];
 
@@ -1117,7 +1129,7 @@
 					$("#mes").val(mes);
 					$("#anio").val(anio);
 
-					<?php endif; ?>
+					<?php endif;?>
 
                     $('#province').change(function(){
 
@@ -1185,7 +1197,11 @@
 									if (data.experiencias.length > 0) {
 										html = "";
 										data.experiencias.forEach(function(ex){
-											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' a ' + mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso + '</p>';
+
+											let nom_encargado = ex.nombre_encargado == null ? 'No Aplica' : ex.nombre_encargado;
+											let tlf_encargado = ex.tlf_encargado == null ? 'No Aplica' : ex.tlf_encargado;
+
+											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' a ' + mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso + '<br> <strong>Nombre del Encargado: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '</p>';
 										});
 										$('#experiencias').html(html);
 									}
@@ -1233,7 +1249,7 @@
 						clearBtn: true
 					});
 
-					<?php if($experiencias): ?>
+					<?php if ($experiencias): ?>
 					$(".modifyEL").click(function() {
 						currentParent = $(this).closest("tr");
 						var target = $(this).attr("data-target");
@@ -1263,9 +1279,9 @@
 							}
 						});
 					});
-					<?php endif ?>
+					<?php endif?>
 
-					<?php if($educacion): ?>
+					<?php if ($educacion): ?>
 					$(".modifyES").click(function() {
 						currentParent = $(this).closest("tr");
 						var target = $(this).attr("data-target");
@@ -1298,9 +1314,9 @@
 							}
 						});
 					});
-					<?php endif ?>
+					<?php endif?>
 
-					<?php if($idiomasT): ?>
+					<?php if ($idiomasT): ?>
 					$(".modifyI").click(function() {
 						currentParent = $(this).closest("tr");
 						var target = $(this).attr("data-target");
@@ -1333,9 +1349,9 @@
 						});
 					});
 
-					<?php endif ?>
+					<?php endif?>
 
-					<?php if($otros_conocimientos): ?>
+					<?php if ($otros_conocimientos): ?>
 					$(".modifyOC").click(function() {
 						currentParent = $(this).closest("tr");
 						var target = $(this).attr("data-target");
@@ -1358,7 +1374,7 @@
 							}
 						});
 					});
-					<?php endif ?>
+					<?php endif?>
 
 					loadEvents();
 
@@ -1435,7 +1451,7 @@
 						var str = "";
 						var edit = parseInt($(this).attr("data-edit"));
 						var elemento = $(this);
-						
+
 						switch(op) {
 							case 1:
 								if($("#name").val() != "" && $("#lastName").val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
@@ -1446,10 +1462,9 @@
 							case 2:
 								if($("#company").val() != "" && parseInt($("#rCompany").val()) > 0 && parseInt($("#tCompany").val()) > 0 && $("#tEmployeer").val() != "" && $("#descriptionArea").val() != "") {
 									if(parseInt($("#yearE").val()) >= parseInt($("#yearI").val())) {
-										str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val();
+										str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val()+'&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
 										band = true;
-									}
-									else {
+									} else {
 										swal({
 											title: 'Información!',
 											text: 'El año de egreso debe ser mayor que el año de ingreso',
@@ -1458,6 +1473,16 @@
 											buttonsStyling: false
 										});
 									}
+								}
+
+								if ($('#nom_enc').val() != "" && $('#tlf_enc').val() == ""){
+
+										band = false;
+
+								} else if ($('#nom_enc').val() == "" && $('#tlf_enc').val() != ""){
+
+										band = false;
+
 								}
 								break;
 							case 3:
@@ -1839,7 +1864,7 @@
 												});
 											});
 
-												
+
 												swal({
 												  title: "Exito",
 												  text: "Información almacenada exitosamente! Desea añadir otros conocimientos o pasar a la siguiente fase?",
@@ -1864,7 +1889,7 @@
 
 											break;
 										case 6:
-											
+
 												swal({
 												  title: "Exito",
 												  text: "Información almacenada exitosamente! Desea ver la vista previa de su CV?",
