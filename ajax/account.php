@@ -233,7 +233,7 @@
 			
 			$provincia = $_POST['provincia'];
 			
-			$json['localidades'] = $db->getAll("SELECT * FROM localidades WHERE id_provincia=". $provincia);
+			$json['localidades'] = $db->getAll("SELECT * FROM localidades WHERE id_provincia=". $provincia . " ORDER BY localidad");
 			
 			echo json_encode($json);
 			break;
