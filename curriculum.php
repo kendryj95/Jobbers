@@ -421,7 +421,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											</div>
 
 											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;"><label for="" style="margin-top: 6px;">Datos del encargado </label></div>
+												<div class="col-md-4" style="text-align: right;"><label for="" style="margin-top: 6px;">Solicitar Referencias </label></div>
 												<div class="col-md-4">
 													<input type="text" class="form-control" id="nom_enc" placeholder="Nombre del encargado">
 												</div>
@@ -1101,9 +1101,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 				$(document).ready(function(){
 
 					var view = <?php echo isset($_GET["o"]) ? 1 : 0; ?>;
-					var postulate = <?php echo $_SESSION["ctc"]["postulate"]; ?>;
+					var postulate = <?php echo isset($_SESSION["ctc"]["postulate"]) ? $_SESSION["ctc"]["postulate"] : 0; ?>;
 					if(view == 1 && postulate == 1) {
-						$("li.nav-item:nth-child(6) > a:nth-child(1)").click();
+						$("li.nav-item:nth-child(7) > a:nth-child(1)").click();
 					}
 
 					<?php if (count($infoExtra) > 1): ?>
@@ -1201,7 +1201,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											let nom_encargado = ex.nombre_encargado == null ? 'No Aplica' : ex.nombre_encargado;
 											let tlf_encargado = ex.tlf_encargado == null ? 'No Aplica' : ex.tlf_encargado;
 
-											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' a ' + mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso + '<br> <strong>Nombre del Encargado: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '</p>';
+											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' a ' + mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '</p>';
 										});
 										$('#experiencias').html(html);
 									}

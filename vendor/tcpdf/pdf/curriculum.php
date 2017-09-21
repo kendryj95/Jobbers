@@ -16,32 +16,32 @@ if ($id) {
     require_once 'tcpdf_include.php';
 
     $trabajador = $db->getRow("
-		SELECT
-				tra.nombres,
-				tra.apellidos,
-				CONCAT(
-					img.directorio,
-					'/',
-					img.nombre,
-					'.',
-					img.extension
-				) AS imagen,
-				tra.fecha_nacimiento,
-				tra.calificacion_general,
-				tra.sitio_web,
-				tra.facebook,
-				tra.twitter,
-				tra.instagram,
-				tra.snapchat,
-				tra.id_pais,
-				tra.correo_electronico,
-				tra.telefono,
-				tra.telefono_alternativo
-			FROM
-				trabajadores AS tra
-			LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-			WHERE tra.id = $id
-		");
+        SELECT
+                tra.nombres,
+                tra.apellidos,
+                CONCAT(
+                    img.directorio,
+                    '/',
+                    img.nombre,
+                    '.',
+                    img.extension
+                ) AS imagen,
+                tra.fecha_nacimiento,
+                tra.calificacion_general,
+                tra.sitio_web,
+                tra.facebook,
+                tra.twitter,
+                tra.instagram,
+                tra.snapchat,
+                tra.id_pais,
+                tra.correo_electronico,
+                tra.telefono,
+                tra.telefono_alternativo
+            FROM
+                trabajadores AS tra
+            LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+            WHERE tra.id = $id
+        ");
     $edad = "Sin registrar";
     if ($trabajador["fecha_nacimiento"] != "") {
         $edad = intval(date('Y')) - intval(date('Y', strtotime($trabajador["fecha_nacimiento"])));
@@ -61,12 +61,12 @@ if ($id) {
     }
 
     $empleos = $db->getAll("
-			SELECT empresas_contrataciones.*, empresas.nombre AS nombre_empresa, actividades_empresa.nombre AS actividad
-			FROM empresas_contrataciones
-			INNER JOIN empresas ON empresas.id=empresas_contrataciones.id_empresa
-			INNER JOIN actividades_empresa ON actividades_empresa.id=empresas.id_actividad
-			WHERE empresas_contrataciones.id_trabajador = $id
-		");
+            SELECT empresas_contrataciones.*, empresas.nombre AS nombre_empresa, actividades_empresa.nombre AS actividad
+            FROM empresas_contrataciones
+            INNER JOIN empresas ON empresas.id=empresas_contrataciones.id_empresa
+            INNER JOIN actividades_empresa ON actividades_empresa.id=empresas.id_actividad
+            WHERE empresas_contrataciones.id_trabajador = $id
+        ");
 
     $publicaciones = $db->getAll("SELECT * FROM trabajadores_publicaciones WHERE id_trabajador = $id");
 
@@ -134,7 +134,7 @@ if ($id) {
     $pdf->setJPEGQuality(75);
 
     $html = '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold;"> CURRICULUM ' . strtoupper("$trabajador[nombres] $trabajador[apellidos]") . '</p><br><br>
-		';
+        ';
 
     /*$html .= '<table cellpadding="4" style="background-color: white; border: 1px solid #e5e5e5; font-size: 9px; line-height: 1.2; font-family: "Open Sans", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 400; width: 400px; line-height: 1.5; color: #666666; background-color: transparent; border-collapse: collapse; border-spacing: 0;">
     <tr style="background-color: #d9f1d5; color: #3f9532;">
@@ -148,26 +148,26 @@ if ($id) {
     $tlf_alternativo = $trabajador["telefono_alternativo"] = !"" ? ' / ' . $trabajador["telefono_alternativo"] : '';
 
     $html .= '<p></p><p></p>
-			<table border="0">
-				<tr>
-					<td colspan="2">
-						<b>Nombres: </b> <span id="labelName">' . $trabajador["nombres"] . '</span><br>
-						<b>Apellidos: </b> <span id="labelLastName">' . $trabajador["apellidos"] . '</span><br>
-						<b>Edad: </b> <span id="labelE">' . $edad . '</span><br>
-						<b>Lugar de nacimiento: </b> <span id="labelCountry">' . ($trabajador["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$trabajador[id_pais]") : "Sin especificar") . '</span><br>
-						<b>Correo electrónico: </b> <span id="labelEmail">' . $trabajador["correo_electronico"] . '</span><br>
-						<b>Telefonos: </b> <span id="labelTlf">' . $trabajador["telefono"] . $tlf_alternativo . '</span><br>
-						<a href="http://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '">Visitar perfil</a><br>
-						O copia y pega esto en tu navegador para visitar el perfil
-						<strong>http://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '</strong>
-					</td>
-					<td></td>
-					<td>
-						<img src="../../../img/' . $trabajador["imagen"] . '" alt="" class="img-circle m-r-1" width="100" height="100">
-					</td>
-				</tr>
-			</table>
-		';
+            <table border="0">
+                <tr>
+                    <td colspan="2">
+                        <b>Nombres: </b> <span id="labelName">' . $trabajador["nombres"] . '</span><br>
+                        <b>Apellidos: </b> <span id="labelLastName">' . $trabajador["apellidos"] . '</span><br>
+                        <b>Edad: </b> <span id="labelE">' . $edad . '</span><br>
+                        <b>Lugar de nacimiento: </b> <span id="labelCountry">' . ($trabajador["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$trabajador[id_pais]") : "Sin especificar") . '</span><br>
+                        <b>Correo electrónico: </b> <span id="labelEmail">' . $trabajador["correo_electronico"] . '</span><br>
+                        <b>Telefonos: </b> <span id="labelTlf">' . $trabajador["telefono"] . $tlf_alternativo . '</span><br>
+                        <a href="http://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '">Visitar perfil</a><br>
+                        O copia y pega esto en tu navegador para visitar el perfil
+                        <strong>http://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '</strong>
+                    </td>
+                    <td></td>
+                    <td>
+                        <img src="../../../img/' . $trabajador["imagen"] . '" alt="" class="img-circle m-r-1" width="100" height="100">
+                    </td>
+                </tr>
+            </table>
+        ';
 
     if ($educacion) {
 
@@ -175,13 +175,13 @@ if ($id) {
 
         foreach ($educacion as $e) {
             $html .= '
-					<p style="margin-left: 50px;">
-						<strong>Nivel estudio: </strong> ' . $e["nivel"] . '<br>
-						<strong>País: </strong> ' . $e["nombre_pais"] . '<br>
-						<strong>Estado estudio: </strong> ' . $e["estado_estudio"] . '<br>
-						<strong>Área estudio: </strong> ' . $e["nombre_estudio"] . '<br>
-					</p>
-				';
+                    <p style="margin-left: 50px;">
+                        <strong>Nivel estudio: </strong> ' . $e["nivel"] . '<br>
+                        <strong>País: </strong> ' . $e["nombre_pais"] . '<br>
+                        <strong>Estado estudio: </strong> ' . $e["estado_estudio"] . '<br>
+                        <strong>Área estudio: </strong> ' . $e["nombre_estudio"] . '<br>
+                    </p>
+                ';
         }
     }
 
@@ -192,10 +192,10 @@ if ($id) {
         $html .= '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; "> DENTRO DE LA PLATAFORMA </p><p></p>';
         foreach ($empleos as $e) {
             $html .= '
-					<br>
-					<b>Empresa: </b> ' . $e["nombre_empresa"] . '<br>
-					<b>Actividad:</b> ' . $e["actividad"] . '<br>
-				';
+                    <br>
+                    <b>Empresa: </b> ' . $e["nombre_empresa"] . '<br>
+                    <b>Actividad:</b> ' . $e["actividad"] . '<br>
+                ';
         }
 
         if ($experiencias) {
@@ -211,15 +211,15 @@ if ($id) {
         }
         foreach ($experiencias as $e) {
             $html .= '
-					<br>
-					<b>Empresa: </b> ' . $e["nombre_empresa"] . '<br>
-					<b>País: </b> ' . $e["nombre_pais"] . '<br>
-					<b>Actividad:</b> ' . $e["actividad_empresa"] . '<br>
-					<b>Tipo puesto: </b> ' . $e["tipo_puesto"] . '<br>
-					<b>Tiempo: </b> ' . $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] . '<br>
-					<b>Nombre del Encargado: </b> ' . $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] . '<br>
-					<b>Telefono del Encargado: </b> ' . $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] . '<br>
-				';
+                    <br>
+                    <b>Empresa: </b> ' . $e["nombre_empresa"] . '<br>
+                    <b>País: </b> ' . $e["nombre_pais"] . '<br>
+                    <b>Actividad:</b> ' . $e["actividad_empresa"] . '<br>
+                    <b>Tipo puesto: </b> ' . $e["tipo_puesto"] . '<br>
+                    <b>Tiempo: </b> ' . $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] . '<br>
+                    <b>Encargado de Referencias: </b> ' . $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] . '<br>
+                    <b>Telefono del Encargado: </b> ' . $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] . '<br>
+                ';
         }
     }
 
@@ -231,12 +231,12 @@ if ($id) {
             $nivel_oral    = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]");
             $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]");
             $html .= '
-					<br>
-					<strong>Idioma: </strong> ' . $i["nombre_idioma"] . '<br>
-					<strong>Nivel Oral: </strong> ' . $nivel_oral . '<br>
-					<strong>Nivel escrito: </strong> ' . $nivel_escrito . '
-					<br>
-				';
+                    <br>
+                    <strong>Idioma: </strong> ' . $i["nombre_idioma"] . '<br>
+                    <strong>Nivel Oral: </strong> ' . $nivel_oral . '<br>
+                    <strong>Nivel escrito: </strong> ' . $nivel_escrito . '
+                    <br>
+                ';
         }
     }
 
@@ -246,11 +246,11 @@ if ($id) {
 
         foreach ($otros_conocimientos as $o) {
             $html .= '
-					<br>
-					<strong>Título: </strong> ' . $o["nombre"] . '<br>
-					<strong>Descripción: </strong> ' . $o["descripcion"] . '
-					<br>
-				';
+                    <br>
+                    <strong>Título: </strong> ' . $o["nombre"] . '<br>
+                    <strong>Descripción: </strong> ' . $o["descripcion"] . '
+                    <br>
+                ';
         }
     }
 
@@ -259,11 +259,11 @@ if ($id) {
         $html .= '<p></p><p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; border-bottom: 1px solid #3e70c9; "> SERVICIOS FREELANCE </p><p></p>';
         foreach ($publicaciones as $p) {
             $html .= '
-					<br>
-					<strong>Título: </strong> ' . $p["titulo"] . '<br>
-					<strong>Descripción: </strong> ' . $p["descripcion"] . '
-					<br>
-				';
+                    <br>
+                    <strong>Título: </strong> ' . $p["titulo"] . '<br>
+                    <strong>Descripción: </strong> ' . $p["descripcion"] . '
+                    <br>
+                ';
         }
     }
 
@@ -274,11 +274,11 @@ if ($id) {
         $html .= '<p></p><p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; border-bottom: 1px solid #3e70c9; "> INFORMACIÓN EXTRA </p><p></p>';
 
         $html .= '
-					<br>
-					<strong>Remuneración Pretendida: </strong> $' . $infoExtra["remuneracion_pret"] . '<br>
-					<strong>Sobre mí: </strong> ' . $infoExtra["sobre_mi"] . '
-					<br>
-				';
+                    <br>
+                    <strong>Remuneración Pretendida: </strong> $' . $infoExtra["remuneracion_pret"] . '<br>
+                    <strong>Sobre mí: </strong> ' . $infoExtra["sobre_mi"] . '
+                    <br>
+                ';
 
     }
 
