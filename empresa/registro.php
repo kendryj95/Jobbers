@@ -464,55 +464,67 @@
 			$("#next").click(function() {
 				switch(parseInt($(this).attr("data-value"))) {
 					case 1:
-						if($("#email").val() != "" && $("#passw").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#empresa").val() != "" && $("#razon").val() != "" && $("#phone").val() != "") {
-							if($("#term:checked").length > 0) {
-								$.ajax({
-									type: 'POST',
-									url: 'ajax/empresas.php',
-									data: 'op=2&email=' + $("#email").val(),
-									dataType: 'json',
-									success: function(data) {
-										if(data.status == 1) {
-											$("#step1").css("display", "none");
-											$("#step2").css("display", "block");
-											$("#stp1").removeClass("active").addClass("complete").addClass("text-xs-center");
-											$("#st1").html('<i class="ti-check"></i>');
-											$("#stp2").addClass("active");
-											$("#next").attr("data-value", 2);
-											$("#back").attr("data-value", 2);
-											$("#back").css("display", "block");
+
+						if (isEmail($("#email").val())) {
+							if($("#email").val() != "" && $("#passw").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#empresa").val() != "" && $("#razon").val() != "" && $("#phone").val() != "") {
+								if($("#term:checked").length > 0) {
+									$.ajax({
+										type: 'POST',
+										url: 'ajax/empresas.php',
+										data: 'op=2&email=' + $("#email").val(),
+										dataType: 'json',
+										success: function(data) {
+											if(data.status == 1) {
+												$("#step1").css("display", "none");
+												$("#step2").css("display", "block");
+												$("#stp1").removeClass("active").addClass("complete").addClass("text-xs-center");
+												$("#st1").html('<i class="ti-check"></i>');
+												$("#stp2").addClass("active");
+												$("#next").attr("data-value", 2);
+												$("#back").attr("data-value", 2);
+												$("#back").css("display", "block");
+											}
+											else {
+												swal({
+													title: 'Información!',
+													text: 'El correo electrónico ingresado ya se encuentra en uso.',
+													timer: 3000,
+													confirmButtonClass: 'btn btn-primary btn-lg',
+													buttonsStyling: false
+												});
+											}
 										}
-										else {
-											swal({
-												title: 'Información!',
-												text: 'El correo electrónico ingresado ya se encuentra en uso.',
-												timer: 3000,
-												confirmButtonClass: 'btn btn-primary btn-lg',
-												buttonsStyling: false
-											});
-										}
-									}
-								});
+									});
+								}
+								else {
+									swal({
+										title: 'Información!',
+										text: 'Para continuar debe estar de acuerdo y aceptar los terminos, condiciones y políticas de privacidad.',
+										timer: 3000,
+										confirmButtonClass: 'btn btn-primary btn-lg',
+										buttonsStyling: false
+									});
+								}
 							}
 							else {
 								swal({
 									title: 'Información!',
-									text: 'Para continuar debe estar de acuerdo y aceptar los terminos, condiciones y políticas de privacidad.',
-									timer: 3000,
+									text: 'Los campos con (*) son obligatorios.',
+									timer: 2000,
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
 								});
 							}
-						}
-						else {
+						} else {
 							swal({
 								title: 'Información!',
-								text: 'Los campos con (*) son obligatorios.',
+								text: 'Correo electrónico inválido',
 								timer: 2000,
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
 						}
+						
 						break;
 					case 2:
 						var band = false;
@@ -623,6 +635,11 @@
 						break;
 				}
 			});
+
+	function isEmail(email) {
+	  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	  return regex.test(email);
+	}
 		</script>
 	</body>
 </html>

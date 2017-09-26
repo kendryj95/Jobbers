@@ -526,7 +526,7 @@ else {*/
     	<div class="wrapper">
 
     		<!-- Preloader -->
-    		<!--			<div class="preloader"></div>-->
+    		<div class="preloader"></div>
 
     		<!-- Sidebar -->
     		<?php require_once 'includes/sidebar.php';?>
