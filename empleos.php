@@ -256,11 +256,11 @@
 				plan.logo_home
 			FROM
 				publicaciones AS p
-			LEFT JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
-			LEFT JOIN areas_sectores AS ase ON ps.id_sector = ase.id
-			LEFT JOIN areas AS a ON ase.id_area = a.id
-			LEFT JOIN empresas AS e ON p.id_empresa = e.id
-			LEFT JOIN empresas_planes AS plan ON plan.id_empresa = e.id
+			INNER JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
+			INNER JOIN areas_sectores AS ase ON ps.id_sector = ase.id
+			INNER JOIN areas AS a ON ase.id_area = a.id
+			INNER JOIN empresas AS e ON p.id_empresa = e.id
+			INNER JOIN empresas_planes AS plan ON plan.id_empresa = e.id
 			LEFT JOIN imagenes AS img ON e.id_imagen = img.id
 		";
 		

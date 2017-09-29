@@ -39,6 +39,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 				pointer-events: none;
 			}
 		</style>
+
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+		  (adsbygoogle = window.adsbygoogle || []).push({
+		    google_ad_client: "ca-pub-1968505410020323",
+		    enable_page_level_ads: true
+		  });
+		</script>
 	</head>
 
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
@@ -1555,6 +1563,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											confirmButtonClass: 'btn btn-primary btn-lg',
 											buttonsStyling: false
 										});
+										return false;
+
 									}
 								}
 
@@ -1570,7 +1580,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								break;
 							case 3:
 								if(parseInt($("#sNivel").val()) > 0 && $("#titleS").val() != "" && parseInt($("#stateS").val()) > 0 && parseInt($("#areaS").val()) > 0 && $("#institute").val() != "" && parseInt($("#countryS").val()) > 0) {
-									if(parseInt($("#yearFi").val()) > parseInt($("#yearIn").val())) {
+									if(parseInt($("#yearFi").val()) >= parseInt($("#yearIn").val())) {
 										str = '&sNivel='+$("#sNivel").val() + '&titleS='+$("#titleS").val() + '&stateS='+$("#stateS").val() + '&areaS='+$("#areaS").val() + '&institute='+$("#institute").val() + '&countryS='+$("#countryS").val() + '&mat='+$("#mat").val() + '&aprob='+$("#aprob").val() + '&monthIn='+$("#monthIn").val() + '&yearIn='+$("#yearIn").val() + '&monthFi='+$("#monthFi").val() + '&yearFi='+$("#yearFi").val();
 										band = true;
 									}
@@ -1582,6 +1592,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											confirmButtonClass: 'btn btn-primary btn-lg',
 											buttonsStyling: false
 										});
+										return false;
 									}
 									if(parseInt($("#sNivel").val()) != 1) {
 										if($("#mat").val() != "" && $("#aprob").val() != "") {
