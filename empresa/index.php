@@ -267,6 +267,9 @@
 
 			<!-- Footer -->
 			<?php require_once('../includes/footer.php'); ?>
+			<pre>
+				<?php print_r($_SESSION) ?>
+			</pre>
 		</div>
 	</div>
 

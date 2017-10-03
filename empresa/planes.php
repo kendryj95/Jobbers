@@ -283,7 +283,11 @@
 
 	<?php require_once('../includes/libs-js.php'); ?>
 	
-	<script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script>
+	<!-- <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script> -->
+
+	<script type="text/javascript">
+	(function(){function $MPC_load(){window.$MPC_loaded !== true && (function(){var s = document.createElement("script");s.type = "text/javascript";s.async = true;s.src = document.location.protocol+"//secure.mlstatic.com/mptools/render.js";var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);window.$MPC_loaded = true;})();}window.$MPC_loaded !== true ? (window.attachEvent ?window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;})();
+	</script>
 	
 	<script>
 		var info_plan = JSON.parse('<?php echo json_encode($_SESSION["ctc"]["plan"]); ?>');
@@ -379,7 +383,8 @@
 						dataType: 'json',
 						success: function(data) {
 							console.log(data);
-							$("#payMP").attr("data-v", data.data.response.init_point);
+							// $("#payMP").attr("data-v", data.data.response.init_point);
+							$("#payMP").attr("data-v", data.data.response.sandbox_init_point);
 							var html = '';
 							var total = 0;
 							html += '<li class="list-group-item b-l-0 b-r-0 text-muted">Tipo: <strong>'+data.servicios.nombre+'</strong></li><li class="list-group-item b-l-0 b-r-0 text-muted">Precio: <strong>'+data.servicios.precio+'</strong></li>';

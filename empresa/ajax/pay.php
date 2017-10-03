@@ -33,7 +33,7 @@
 						"items" => array(
 							array(
 								"title" => "Pago servicios",
-								"currency_id" => "USD",
+								"currency_id" => "ARS",
 								"quantity" => 1,
 								"unit_price" => ($total + $suttotal)
 							)
