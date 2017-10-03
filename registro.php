@@ -189,7 +189,7 @@
 		<script type="text/javascript" src="vendor/sweetalert2/sweetalert2.min.js"></script>
 		<script>
 			function isEmail(email) {
-			  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			  var regex = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
 			  return regex.test(email);
 			}
 			
