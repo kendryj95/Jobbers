@@ -257,8 +257,7 @@ else {*/
 		SELECT empresas_publicaciones_especiales.*, CONCAT(imagenes.directorio,'/', imagenes.nombre,'.', imagenes.extension) AS imagen, empresas.nombre AS nombre_empresa FROM empresas_publicaciones_especiales INNER JOIN empresas ON empresas.id=empresas_publicaciones_especiales.id_empresa INNER JOIN empresas_planes ON empresas_planes.id_empresa=empresas.id LEFT JOIN imagenes ON imagenes.id=empresas_publicaciones_especiales.id_imagen WHERE empresas_planes.logo_home=3 ORDER BY RAND()
 		");
 
-	$publicidadPrincipal = $db->getAll("SELECT publicidad.*, CONCAT(imagenes.directorio,'/', imagenes.nombre,'.', imagenes.extension) AS imagen FROM publicidad LEFT JOIN imagenes ON imagenes.id=publicidad.id_imagen WHERE publicidad.mi_publicidad=1 ORDER BY RAND() LIMIT 4");
-	$publicidadSection   = $db->getAll("SELECT publicidad.titulo, publicidad.url, CONCAT(imagenes.directorio,'/', imagenes.nombre,'.', imagenes.extension) AS imagen FROM publicidad INNER JOIN imagenes ON imagenes.id=publicidad.id_imagen WHERE publicidad.mi_publicidad=0 ORDER BY RAND() LIMIT 4");
+	$publicidadPrincipal = $db->getAll("SELECT publicidad.*, CONCAT(imagenes.directorio,'/', imagenes.nombre,'.', imagenes.extension) AS imagen FROM publicidad LEFT JOIN imagenes ON imagenes.id=publicidad.id_imagen ORDER BY RAND() LIMIT 4");
 	?>
 	<!DOCTYPE html>
 	<html lang="es">
@@ -520,6 +519,14 @@ else {*/
         	});
         </script>
 
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-1968505410020323",
+            enable_page_level_ads: true
+          });
+        </script>
+
     </head>
 
     <body class="large-sidebar fixed-sidebar fixed-header skin-5">
@@ -684,8 +691,8 @@ $link = str_replace('watch?v=', 'embed/', $link);
 				</div> -->
 
 				<?php/* else: */?>
-
 				<div class="row">
+					
 					<div class="col-md-3">
 						<div class="row">
 							<div class="col-md-12">
@@ -709,35 +716,9 @@ $link = str_replace('watch?v=', 'embed/', $link);
 									</table>
 								</div>
 							</div>
-							<div class="col-md-12">
-								<?php if ($publicidadSection): ?>
-									<div class="row" id="ad2" style="margin-left: 30px;">
-										<?php foreach ($publicidadSection as $p): ?>
-											<?php
-											$link = "";
-											if (strstr($p["url"], 'http')) {
-												$link = $p["url"];
-											} else {
-												$link = "http://$p[url]";
-											}
-											?>
-											<div class="col-md-12">
-												<div class="box bg-white product product-1">
-													<div class="p-img img-cover" style="background-image: url(img/<?php echo $p["imagen"]; ?>);">
-														<div class="p-status bg-warning"><?php echo $p["titulo"]; ?></div>
-														<div class="p-links">
-															<a href="<?php echo $link; ?>"><i class="ti-link"></i></a>
-															<!--<a href="#"><i class="fa fa-star"></i></a>-->
-														</div>
-													</div>
-												</div>
-											</div>
-										<?php endforeach?>
-									</div>
-								<?php endif?>
-							</div>
 						</div>
-					</div>
+					</div> <!-- Pegar aqui el codigo cuando esté listo -->
+
 					<div class="col-md-9">
 						<h3 style="margin-left: 30px;">Principales ofertas de trabajo</h3>
 
@@ -1095,7 +1076,8 @@ $link = str_replace('watch?v=', 'embed/', $link);
 			</div>
 			<?php endif; ?>
 		</div>
-	</div>
+					
+				</div>
 
 	<br>
 	<br>
