@@ -49,8 +49,8 @@
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 		<div class="wrapper">
 
-			<!-- Preloader 
-			<div class="preloader"></div>-->
+			 <!-- Preloader  -->
+			<div class="preloader"></div>
 
 			<!-- Sidebar -->
 			<?php require_once('../includes/sidebar.php'); ?>
@@ -67,13 +67,14 @@
 					<div class="card card-block">
 						<div class="box box-block bg-white">
 							<h5 class="m-b-1">Empresas</h5>
-							<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
+							<table class="table table-striped table-bordered dt-responsive nowrap dataTable" id="tablaPublicaciones" cellspacing="0" width="100%">
 								<thead>
 									<tr>
 										<th>#</th>
 										<th>Nombre</th>
 										<th>Plan</th>
 										<th>Plan</th>
+										<th>Email</th>
 										<th>Fecha de creación</th>
 										<th>Acciones</th>
 									</tr>
@@ -152,11 +153,13 @@
 
 		<script>
 			var idNoticia = 0;
+			var $tablaPublicaciones='';
+			var tablaPublicaciones='';
 			$(document).ready(function(){
 				var idPub = 0;
 				
-				var $tablaPublicaciones = jQuery("#tablaPublicaciones");
-				var tablaPublicaciones = $tablaPublicaciones.DataTable( {
+				$tablaPublicaciones = jQuery("#tablaPublicaciones");
+				tablaPublicaciones = $tablaPublicaciones.DataTable( {
 					"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 					"buttons": [
 						'copyHtml5',
@@ -226,7 +229,7 @@
 				});
 			});
 			
-			function modificarPublicacion(btn) {
+			function modificarEmpresa(btn) {
 				var $btn = $(btn);
 				var $parent = $btn.closest('.acciones-publicacion');
 				idPub = $parent.attr('data-target');
@@ -315,7 +318,48 @@
 				$("#modal-modificar-publicacion").modal('show');
 			}*/
 			
-			function eliminarPublicacion(btn) {
+			function suspenderEmpresa(btn) {
+				var $btn = $(btn);
+				var $parent = $btn.closest('.acciones-publicacion');
+				idPub = $parent.attr('data-target');
+				var valSusp = parseInt($btn.attr('data-susp'));
+				var suspTexto = valSusp == 0 ? 'suspender' : 'desbloquear';
+				
+				swal({
+				  title: "Advertencia",
+				  text: "Está seguro que desea "+suspTexto+" esta empresa?",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "Aceptar",
+				  cancelButtonText: "Cancelar",
+				  closeOnConfirm: false
+				});
+				$(".show-swal2.visible .swal2-confirm").attr('data-action', 'remove');
+				$(".show-swal2.visible .swal2-confirm").click(function() {
+					if($(this).attr('data-action') == 'remove') {
+						$(this).attr('data-action', '');
+						$.ajax({
+							url: 'ajax/empresas.php',
+							type: 'GET',
+							dataType: 'json',
+							data: 'op=4&i=' + idPub + '&susp=' + valSusp
+						}).done(function(data, textStatus, jqXHR) {
+							switch(jqXHR.status) {
+								case 200:
+									var json = JSON.parse(jqXHR.responseText);
+									if(json.msg == 'OK') {
+										swal("Operación exitosa!", "Se han aplicado los cambios satisfactoriamente.", "success");
+										tablaPublicaciones.ajax.reload();
+									}
+									break;
+							}
+						});
+					}
+				});
+			}
+
+			function eliminarEmpresa(btn) {
 				var $btn = $(btn);
 				var $parent = $btn.closest('.acciones-publicacion');
 				idPub = $parent.attr('data-target');
@@ -338,13 +382,13 @@
 							url: 'ajax/empresas.php',
 							type: 'GET',
 							dataType: 'json',
-							data: 'op=4&i=' + idPub
+							data: 'op=6&i=' + idPub 
 						}).done(function(data, textStatus, jqXHR) {
 							switch(jqXHR.status) {
 								case 200:
 									var json = JSON.parse(jqXHR.responseText);
 									if(json.msg == 'OK') {
-										swal("Operación exitosa!", "Se eliminó la publicación y sus datos.", "success");
+										swal("Operación exitosa!", "Se eliminó la empresa y sus datos.", "success");
 										tablaPublicaciones.ajax.reload();
 									}
 									break;
