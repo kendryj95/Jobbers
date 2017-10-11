@@ -333,6 +333,8 @@
 											});*/
 											swal("INFORMACIÓN!", "Para confirmar tu registro, revisa la bandeja de tu correo electronico.", "info");
 											$('.form-material')[0].reset();
+										} else if(data.status == 0){
+											console.log("Error al enviar correo electronico");
 										}
 										else {
 											swal({

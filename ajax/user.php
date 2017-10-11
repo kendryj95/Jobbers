@@ -96,9 +96,33 @@
 
 				$mensaje .= "Si no funciona el enlace anterior puedes acceder a la siguiente URL: $enlace";
 
-				$exito = mail($destinatario,$asunto,$mensaje,$headers);
+				$mensaje .= "<br>
+				<br>
+				<br> Gracias, <br><br> <b>Team JobbersArgentina.</b>";
 
-				echo json_encode(array("status" => 1));
+				# CONDICIONAL PARA VALIDAR SI EL CORREO PERTENECE A "HOTMAIL" U "OUTLOOK"
+				if (strstr($destinatario, "hotmail") || strstr($destinatario, "outlook")) {
+					$mensaje= "Saludos $_REQUEST[name],<br><br>";
+
+					$nombre_link = str_replace(array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú"),array("%20","a","e","i","o","u","A","E","I","O","U"),$_REQUEST['name']);
+
+					$mensaje .= "Por favor confirma el registro de su empresa en la plataforma de Jobbers Argentina copiando la siguiente URL: <b>www.jobbersargentina.com/bienvenida.php?id=$idU&n=$nombre_link&a=$apellido_link </b> y pegandola en su navegador. <br><br><br>";
+
+					$mensaje .= "<br>
+					<br>
+					<br> Gracias, <br><br> <b>Team JobbersArgentina.</b>";
+				}
+
+
+				if (mail($destinatario,$asunto,$mensaje,$headers)) {
+					echo json_encode(array(
+						"status" => 1,
+					));
+				} else {
+					echo json_encode(array(
+						"status" => 0,
+					));
+				}
               }
          break;
          case LOGOUT:

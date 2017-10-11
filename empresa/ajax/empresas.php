@@ -100,6 +100,7 @@
 				}
 				break;
 			case ADD:
+				
 				$exist = $db->getOne("SELECT id FROM empresas WHERE correo_electronico='$_REQUEST[email]'");
 				if($exist) {
 					echo json_encode(array("msg" => 'NO'));
@@ -153,8 +154,33 @@
 						$_SESSION["ctc"]["pic"] = 'avatars/user.png';
 					}*/
 
+
+					/*$mail = new PHPMailer();
+				    $mail->isSMTP();
+				    $mail->SMTPDebug = 0;
+				    $mail->Debugoutput = 'html';
+					$mail->SMTPAuth = 'login';
+				    $mail->Host = 'smtp.1and1.com';  // Specify main and backup SMTP servers
+				    $mail->Port = 587;  
+					$mail->IsSMTP();
+					$mail->SMTPAuth   = true;
+					$mail->SMTPSecure = "ssl";
+					$mail->Host       = "www.jobbersargentina.com";
+					$mail->Port       = 465;*/
+
+					/*//Agregamos el remitente
+					$mail->setFrom("notificaciones@jobbersargentina.com", "Jobbers Argentina");
+					//Nuestra cuenta
+					$mail->Username = 'notificaciones@jobbersargentina.com';
+					$mail->Password = 'jobbersargentina2017'; //Su password*/
+
 					$destinatario = $_REQUEST['email'];
-					$asunto = "Confirmación de correo electronico - JOBBERS ARGENTINA";
+					$asunto = "Confirmacion de correo electronico - JOBBERS ARGENTINA";
+
+					/*//Agregar destinatario
+					$mail->AddAddress($destinatario);
+					$mail->Subject = $asunto;
+*/
 					$headers = "MIME-Version: 1.0\r\n";
 					$headers .= "Content-type: text/html; charset= iso-8859-1\r\n";
 					$headers .= "From: Jobbers Argentina < administracion@jobbers.com >\r\n";
@@ -169,12 +195,43 @@
 
 					$mensaje .= "Si no funciona el enlace anterior puedes acceder a la siguiente URL: $enlace";
 
-					mail($destinatario,$asunto,$mensaje,$headers);
+					$mensaje .= "<br>
+					<br>
+					<br> Gracias, <br><br> <b>Team JobbersArgentina.</b>";
 
-					echo json_encode(array(
-						"msg" => "OK",
-						"data" => $info
-					));
+					//Para adjuntar archivo
+
+					/*$mail->Body = $mensaje;
+
+					$mail->MsgHTML(utf8_decode($mail->Body));
+					$mail->charSet = "UTF-8";*/
+					//$mail->Send()
+
+					# CONDICIONAL PARA VALIDAR SI EL CORREO PERTENECE A "HOTMAIL" U "OUTLOOK"
+					if (strstr($destinatario, "hotmail") || strstr($destinatario, "outlook")) {
+						$mensaje= "Saludos $_REQUEST[name],<br><br>";
+
+						$nombre_link = str_replace(array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú"),array("%20","a","e","i","o","u","A","E","I","O","U"),$_REQUEST['name']);
+
+						$mensaje .= "Por favor confirma el registro de su empresa en la plataforma de Jobbers Argentina copiando la siguiente URL: <b>www.jobbersargentina.com/empresa/bienvenida.php?id=$idE&c=$nombre_link </b> y pegandola en su navegador. <br><br><br>";
+
+						$mensaje .= "<br>
+						<br>
+						<br> Gracias, <br><br> <b>Team JobbersArgentina.</b>";
+					}
+
+
+					if (mail($destinatario,$asunto,$mensaje,$headers)) {
+						echo json_encode(array(
+							"msg" => "OK",
+							"data" => $info
+						));
+					} else {
+						echo json_encode(array(
+							"msg" => "FAIL",
+							"data" => $info
+						));
+					}
 
 				}
 				break;
