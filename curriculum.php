@@ -277,7 +277,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<span style="color: grey; font-size: 10px">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
 
 											<hr>
-											<div class="alert alert-danger">
+											<div class="alert alert-danger" style="display: none;">
 												<p><b>Error!</b> <span id="errorRS"></span></p>
 											</div>
 											<div class="form-group row">
@@ -1130,8 +1130,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 					<?php endif;?>
 
-					$(".alert.alert-danger").hide();
-
 					<?php if ($data['fecha_nacimiento'] != ""): ?>
 
 					var f = "<?=$data['fecha_nacimiento']?>";
@@ -1465,8 +1463,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						var edit = parseInt($(this).attr("data-edit"));
 						var elemento = $(this);
 
-						$('.alert.alert-danger').hide();
-
 						switch(op) {
 							case 1:
 								if($("#name").val() != "" && $("#lastName").val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
@@ -1634,6 +1630,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								dataType: 'json',
 								success: function(data) {
 									$(elemento).removeClass('disabled').text('Guardar');
+									$('.alert.alert-danger').hide();
 									ele.attr("data-i");
 									if (ele.attr("data-target") != 6) {
 										ele.attr("data-edit", 1);
