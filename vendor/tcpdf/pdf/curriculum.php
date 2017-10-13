@@ -19,6 +19,9 @@ if ($id) {
         SELECT
                 tra.nombres,
                 tra.apellidos,
+                tra.numero_documento_identificacion,
+                tra.cuil,
+                tra.calle,
                 CONCAT(
                     img.directorio,
                     '/',
@@ -36,10 +39,14 @@ if ($id) {
                 tra.id_pais,
                 tra.correo_electronico,
                 tra.telefono,
-                tra.telefono_alternativo
+                tra.telefono_alternativo,
+                localidades.localidad,
+                provincias.provincia,
+                paises.nombre AS pais
             FROM
                 trabajadores AS tra
             LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+            INNER JOIN paises ON paises.id = tra.id_pais INNER JOIN localidades ON localidades.id = tra.localidad INNER JOIN provincias ON provincias.id = tra.provincia
             WHERE tra.id = $id
         ");
     $edad = "Sin registrar";
@@ -145,6 +152,11 @@ if ($id) {
     </tr>
     ';*/
 
+    $idTrab = ''; 
+    if (isset($_REQUEST['i'])) {
+        $idTrab = $_REQUEST['i'];
+    }
+
     $tlf_alternativo = $trabajador["telefono_alternativo"] = !"" ? ' / ' . $trabajador["telefono_alternativo"] : '';
 
     $html .= '<p></p><p></p>
@@ -152,14 +164,32 @@ if ($id) {
                 <tr>
                     <td colspan="2">
                         <b>Nombres: </b> <span id="labelName">' . $trabajador["nombres"] . '</span><br>
-                        <b>Apellidos: </b> <span id="labelLastName">' . $trabajador["apellidos"] . '</span><br>
-                        <b>Edad: </b> <span id="labelE">' . $edad . '</span><br>
-                        <b>Lugar de nacimiento: </b> <span id="labelCountry">' . ($trabajador["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$trabajador[id_pais]") : "Sin especificar") . '</span><br>
-                        <b>Correo electrónico: </b> <span id="labelEmail">' . $trabajador["correo_electronico"] . '</span><br>
-                        <b>Telefonos: </b> <span id="labelTlf">' . $trabajador["telefono"] . $tlf_alternativo . '</span><br>
-                        <a href="http://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '">Visitar perfil</a><br>
+                        <b>Apellidos: </b> <span id="labelLastName">' . $trabajador["apellidos"] . '</span><br>';
+
+    if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['id'] == $idTrab){
+
+       if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['id'] == $idTrab){
+            $html .= ' <b> DNI: </b> <span id="labelDNI">' . $trabajador["numero_documento_identificacion"] . '</span><br>
+                      <b>Numero de CUIL: </b> <span id="labelCuil">' . $trabajador["cuil"] . '</span><br>';
+       } 
+    }
+
+
+    $html .= ' <b> Edad: </b> <span id="labelE">' . $edad . '</span><br>
+              <b>Lugar de nacimiento: </b> <span id="labelCountry">' . ($trabajador["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$trabajador[id_pais]") : "Sin especificar") . '</span><br>';
+
+    if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['type'] == 2){
+
+       if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['type'] == 2){
+            $html .= ' <b> Dirección: </b> <span id="labelCalle">' . $trabajador["calle"] . '</span><br>';
+       } 
+    }
+
+    $html .= ' <b> Correo electrónico: </b> <span id="labelEmail">' . $trabajador["correo_electronico"] . '</span><br>
+              <b>Telefonos: </b> <span id="labelTlf">' . $trabajador["telefono"] . $tlf_alternativo . '</span><br>
+                        <a href="https://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '">Visitar perfil</a><br>
                         O copia y pega esto en tu navegador para visitar el perfil
-                        <strong>http://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '</strong>
+                        <strong>https://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '</strong>
                     </td>
                     <td></td>
                     <td>

@@ -211,7 +211,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											</div>
 											<div class="row" style="margin-top: 10px;">
 												<div class="col-md-4" style="text-align: right;"><label for="dni" style="margin-top: 6px;">DNI <span style="color: red;">*</span></label></div>
-												<div class="col-md-4">
+												<div class="col-md-3">
 													<select class="custom-select" style="width: 100%;" id="dni">
 														<option value="0">Seleccione</option>
 														<?php $tipos_documento_identificacion = $db->getAll("SELECT * FROM tipos_documento_identificacion");?>
@@ -221,8 +221,16 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 												<div class="col-md-2" style="text-align: right;"><label for="numberdni" style="margin-top: 6px;">Número <span style="color: red;">*</span></label></div>
-												<div class="col-md-2">
+												<div class="col-md-3">
 													<input class="form-control" value="<?php echo $data["numero_documento_identificacion"]; ?>" id="numberdni" type="text">
+												</div>
+											</div>
+											<div class="row" style="margin-top: 10px;">
+												<div class="col-md-4" style="text-align: right;">
+													<label for="cuil" style="margin-top: 6px;">Numero de CUIL <span style="color: red;">*</span></label>
+												</div>
+												<div class="col-md-8">
+                                                    <input type="text" class="form-control" id="cuil" value="<?= $data["cuil"] ?>">
 												</div>
 											</div>
 											<?php $provincias = $db->getAll("SELECT * FROM provincias")?>
@@ -997,7 +1005,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<p>
 														<strong>Nombres: </strong> <span id="labelName"><?php echo $data["nombres"]; ?></span><br>
 														<strong>Apellidos: </strong> <span id="labelLastName"><?php echo $data["apellidos"]; ?></span><br>
+														<strong>DNI: </strong> <span id="labelDNI"><?php echo $data["numero_documento_identificacion"]; ?></span><br>
+														<strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $data["cuil"]; ?></span><br>
 														<strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $data["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$data[id_pais]") : "Sin especificar"; ?></span><br>
+														<strong>Dirección: </strong> <span id="labelCalle"><?php echo $data["calle"]; ?></span><br>
 														<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo date('d/m/y', strtotime($data["fecha_nacimiento"])); ?></span><br>
 														<strong>Edad: </strong> <span id="edad"><?php echo intval(date('Y')) - intval(date('Y', strtotime($data["fecha_nacimiento"]))) . "años"; ?></span><br>
 														<strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $data["correo_electronico"]; ?></span><br>
@@ -1188,7 +1199,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								success: function(data) {
 									$("#labelName").html(data.usuario.nombres);
 									$("#labelLastName").html(data.usuario.apellidos);
-									$("#labelCountry").html(data.usuario.pais);
+									$("#labelDNI").html(data.usuario.dni);
+									$("#labelCuil").html(data.usuario.cuil);
+									$("#labelCountry").html(data.usuario.localidad+", "+data.usuario.provincia+", "+data.usuario.pais);
 									$("#labelEmail").html(data.usuario.correo_electronico);
 									$("#labelTlf").html(data.usuario.telefono + " / " + data.usuario.telefono_alternativo);
                                     var fecha = formato(data.usuario.fecha_nacimiento);
@@ -1465,8 +1478,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 						switch(op) {
 							case 1:
-								if($("#name").val() != "" && $("#lastName").val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
-									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&province='+$("#province").val() + '&city='+$("#city").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
+								if($("#name").val() != "" && $("#lastName").val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && $("#cuil").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
+									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&cuil='+$("#cuil").val() + '&province='+$("#province").val() + '&city='+$("#city").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
 									band = true;
 
 									if ($('#web').val() != "" || $('#fb').val() != "" || $('#tw').val() != "" || $('#ig').val() != "" || $('#snap').val() != "" || $('#lkd').val() != "") {

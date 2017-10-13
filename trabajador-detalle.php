@@ -22,6 +22,9 @@ $trabajador = $db->getRow("
             tra.uid,
             tra.nombres,
             tra.apellidos,
+            tra.numero_documento_identificacion,
+            tra.cuil,
+            tra.calle,
             CONCAT(
                 img.directorio,
                 '/',
@@ -41,10 +44,14 @@ $trabajador = $db->getRow("
             tra.linkedin,
             tra.id_pais,
             tra.correo_electronico,
-            tra.publico
+            tra.publico,
+            localidades.localidad,
+            provincias.provincia,
+            paises.nombre AS pais
         FROM
             trabajadores AS tra
         LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+        INNER JOIN paises ON paises.id = tra.id_pais INNER JOIN localidades ON localidades.id = tra.localidad INNER JOIN provincias ON provincias.id = tra.provincia
         WHERE tra.id = $t
     ");
 
@@ -300,6 +307,13 @@ $publicaciones = $db->getAll("
                                                 </div>
                                             <?php endforeach?>
                                         </div>
+                                        <?php
+                                            $idTrab = '';
+                                            if (isset($_REQUEST['t'])) {
+                                                $detTrab = explode("-", $_REQUEST["t"]);
+                                                $idTrab = array_pop($detTrab);
+                                            }
+                                        ?>
                                         <div class="tab-pane card-block " id="curriculum" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-md-8">
@@ -312,7 +326,18 @@ $publicaciones = $db->getAll("
                                                             <p>
                                                                 <strong>Nombres: </strong> <span id="labelName"><?php echo $trabajador["nombres"]; ?></span><br>
                                                                 <strong>Apellidos: </strong> <span id="labelLastName"><?php echo $trabajador["apellidos"]; ?></span><br>
-                                                                <strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $trabajador["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$trabajador[id_pais]") : "Sin especificar"; ?></span><br>
+                                                                <?php if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['id'] == $idTrab): ?>
+                                                                    <?php if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['id'] == $idTrab): ?>
+                                                                <strong>DNI: </strong> <span id="labelDNI"><?php echo $trabajador["numero_documento_identificacion"]; ?></span><br>
+                                                                <strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $trabajador["cuil"]; ?></span><br>
+                                                                    <?php endif; ?>
+                                                                <?php endif; ?>
+                                                                <strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $trabajador["localidad"] . ", " . $trabajador["provincia"] . ", " . $trabajador["pais"] ?></span><br>
+                                                                <?php if(isset($_SESSION['ctc']['empresa'])): ?>
+                                                                    <?php if($_SESSION['ctc']['plan']['id_plan'] > 1): ?>
+                                                                <strong>Dirección: </strong> <span id="labelCalle"><?php echo $trabajador["calle"]; ?></span><br>
+                                                                   <?php endif; ?>
+                                                                <?php endif; ?>
                                                                 <strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $trabajador["fecha_nacimiento"] !== null ? date('Y-m-d', strtotime($trabajador["fecha_nacimiento"])) : ""; ?></span><br>
                                                                 <strong>Edad: </strong> <span id="edad"><?php echo $trabajador["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($trabajador["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
                                                                 <strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $trabajador["correo_electronico"]; ?></span><br>
