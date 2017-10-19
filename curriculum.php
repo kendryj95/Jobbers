@@ -30,6 +30,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<?php require_once 'includes/libs-css.php';?>
 		<link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-daterangepicker/daterangepicker.css">
+		<link rel="stylesheet" href="vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css">
 
 		<style>
 			.modal.in.modal-agregar-rubro .modal-dialog {
@@ -37,6 +38,17 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 			}
 			.disabled {
 				pointer-events: none;
+			}
+			#ex1Slider .slider-selection {
+				background: #BABABA;
+			}
+			#mobileText {
+				display: none;
+			}
+			@media screen and (max-width:769px) {
+				.show {
+					opacity: .9;
+				}
 			}
 		</style>
 
@@ -188,7 +200,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-md-8">
 													<select class="custom-select" id="country" style="width: 100%;">
 														<option value="0">Seleccione</option>
-														<?php $countries = $db->getAll("SELECT * FROM paises ORDER BY nombre ASC");?>
+														<?php $countries = $db->getAll("SELECT * FROM paises ORDER BY mas_frecuentes DESC, nombre");?>
 														<?php foreach ($countries as $c): ?>
 															<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
 														<?php endforeach?>
@@ -369,7 +381,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="tCompany">
 														<option value="0">Seleccione</option>
-														<?php $actividades = $db->getAll("SELECT * FROM actividades_empresa");?>
+														<?php $actividades = $db->getAll("SELECT * FROM actividades_empresa ORDER BY nombre");?>
 														<?php foreach ($actividades as $a): ?>
 															<option value="<?php echo $a["id"]; ?>"><?php echo $a["nombre"]; ?></option>
 														<?php endforeach?>
@@ -578,7 +590,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="areaS">
 														<option value="0">Seleccione</option>
-														<?php $areas_estudio = $db->getAll("SELECT * FROM areas_estudio");?>
+														<?php $areas_estudio = $db->getAll("SELECT * FROM areas_estudio ORDER BY nombre");?>
 														<?php foreach ($areas_estudio as $a): ?>
 															<option value="<?php echo $a["id"]; ?>"><?php echo $a["nombre"]; ?></option>
 														<?php endforeach?>
@@ -968,7 +980,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row" style="margin-top: 10px;">
 												<label for="remuneracion" class="col-xs-4 col-form-label" style="text-align: right;">Remuneración Pretendida <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
-													<input class="form-control" value="" id="remuneracion" type="number" min="2000" step="2000" max="100000">
+													<input type="hidden" id="remuneracion">
+													<b id="mobileText"><?=$infoExtra['remuneracion_pret']?> ARS</b><input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="2000" data-slider-max="100000" data-slider-step="2000" data-slider-value="<?=$infoExtra['remuneracion_pret']?>"/> 
 												</div>
 											</div>
 											<div class="form-group row" style="margin-top: 10px;">
@@ -1118,9 +1131,26 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<script type="text/javascript" src="vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="vendor/moment/moment.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
 
 			<script>
 				$(document).ready(function(){
+
+					$('#ex1').slider({
+						formatter: function(value) {
+							return value + ' ARS';
+						}
+					}); // Cargando plugin del slider!
+
+					// Remuneración pretendida.!
+					$('#ex1').on('change', function(){
+						var valRange = $(this).val();
+
+						$('#remuneracion').val(valRange);
+						$('#mobileText').text(valRange + ' ARS');
+					});
+
+					$('.tooltip-main').addClass('show');
 
 					var view = <?php echo isset($_GET["o"]) ? 1 : 0; ?>;
 					var postulate = <?php echo isset($_SESSION["ctc"]["postulate"]) ? $_SESSION["ctc"]["postulate"] : 0; ?>;
@@ -1135,6 +1165,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 					remuneracion = parseInt(remuneracion);
 
 					$('#remuneracion').val(remuneracion);
+
 					$('#sobre_mi').val(sobre_mi);
 
 					$(".save[data-target=6]").attr('data-edit',2).attr('data-i',<?=$_SESSION['ctc']['id']?>);

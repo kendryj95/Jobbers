@@ -22,6 +22,10 @@
 				case 1:
 
 					$db->query("UPDATE trabajadores SET id_sexo='$_REQUEST[sex]', id_estado_civil='$_REQUEST[estadoCivil]', id_tipo_documento_identificacion='$_REQUEST[dni]', id_pais='$_REQUEST[country]', provincia='$_REQUEST[province]', localidad='$_REQUEST[city]', calle='$_REQUEST[street]', nombres='$_REQUEST[name]',  apellidos='$_REQUEST[lastName]', numero_documento_identificacion='$_REQUEST[numberdni]', cuil='$_REQUEST[cuil]', fecha_nacimiento='".date('Y-m-d', strtotime($_REQUEST['birthday']))."', telefono='$_REQUEST[phone]', telefono_alternativo='$_REQUEST[phoneAlt]', sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=".$_SESSION["ctc"]["id"]);
+
+					//Actualizar nombre y apellido en la variable de session.
+					$_SESSION["ctc"]["name"] = $_REQUEST["name"];
+					$_SESSION["ctc"]["lastName"] = $_REQUEST["lastName"];
 					$data = array();
 					$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION["ctc"]["id"]);
 					if($info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_imagen"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != ""  && $info["id_pais"] != ""  && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "") {
