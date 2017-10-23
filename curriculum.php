@@ -30,6 +30,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<?php require_once 'includes/libs-css.php';?>
 		<link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-daterangepicker/daterangepicker.css">
+		<link rel="stylesheet" href="vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css">
 
 		<style>
 			.modal.in.modal-agregar-rubro .modal-dialog {
@@ -37,6 +38,17 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 			}
 			.disabled {
 				pointer-events: none;
+			}
+			#ex1Slider .slider-selection {
+				background: #BABABA;
+			}
+			#mobileText {
+				display: none;
+			}
+			@media screen and (max-width:769px) {
+				.show {
+					opacity: .9;
+				}
 			}
 		</style>
 
@@ -188,7 +200,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-md-8">
 													<select class="custom-select" id="country" style="width: 100%;">
 														<option value="0">Seleccione</option>
-														<?php $countries = $db->getAll("SELECT * FROM paises ORDER BY nombre ASC");?>
+														<?php $countries = $db->getAll("SELECT * FROM paises ORDER BY mas_frecuentes DESC, nombre");?>
 														<?php foreach ($countries as $c): ?>
 															<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
 														<?php endforeach?>
@@ -369,7 +381,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="tCompany">
 														<option value="0">Seleccione</option>
-														<?php $actividades = $db->getAll("SELECT * FROM actividades_empresa");?>
+														<?php $actividades = $db->getAll("SELECT * FROM actividades_empresa ORDER BY nombre");?>
 														<?php foreach ($actividades as $a): ?>
 															<option value="<?php echo $a["id"]; ?>"><?php echo $a["nombre"]; ?></option>
 														<?php endforeach?>
@@ -578,7 +590,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-md-8">
 													<select class="custom-select" style="width: 100%;" id="areaS">
 														<option value="0">Seleccione</option>
-														<?php $areas_estudio = $db->getAll("SELECT * FROM areas_estudio");?>
+														<?php $areas_estudio = $db->getAll("SELECT * FROM areas_estudio ORDER BY nombre");?>
 														<?php foreach ($areas_estudio as $a): ?>
 															<option value="<?php echo $a["id"]; ?>"><?php echo $a["nombre"]; ?></option>
 														<?php endforeach?>
@@ -968,7 +980,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row" style="margin-top: 10px;">
 												<label for="remuneracion" class="col-xs-4 col-form-label" style="text-align: right;">Remuneración Pretendida <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
-													<input class="form-control" value="" id="remuneracion" type="number" min="2000" step="2000" max="100000">
+													<input type="hidden" id="remuneracion">
+													<b id="mobileText"><?=$infoExtra['remuneracion_pret']?> ARS</b><input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="2000" data-slider-max="100000" data-slider-step="2000" data-slider-value="<?=$infoExtra['remuneracion_pret']?>"/> 
 												</div>
 											</div>
 											<div class="form-group row" style="margin-top: 10px;">
@@ -1030,6 +1043,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<strong>Actividad: </strong> <?php echo $e["actividad_empresa"]; ?><br>
 													<strong>Tipo puesto: </strong> <?php echo $e["tipo_puesto"]; ?><br>
 													<strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?><br>
+													<strong>Descripción de tareas: </strong> <?php echo $e["descripcion_tareas"] ?> <br>
 												</p>
 											<?php endforeach?>
 										<?php else: ?>
@@ -1118,9 +1132,26 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<script type="text/javascript" src="vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="vendor/moment/moment.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
 
 			<script>
 				$(document).ready(function(){
+
+					$('#ex1').slider({
+						formatter: function(value) {
+							return value + ' ARS';
+						}
+					}); // Cargando plugin del slider!
+
+					// Remuneración pretendida.!
+					$('#ex1').on('change', function(){
+						var valRange = $(this).val();
+
+						$('#remuneracion').val(valRange);
+						$('#mobileText').text(valRange + ' ARS');
+					});
+
+					$('.tooltip-main').addClass('show');
 
 					var view = <?php echo isset($_GET["o"]) ? 1 : 0; ?>;
 					var postulate = <?php echo isset($_SESSION["ctc"]["postulate"]) ? $_SESSION["ctc"]["postulate"] : 0; ?>;
@@ -1135,6 +1166,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 					remuneracion = parseInt(remuneracion);
 
 					$('#remuneracion').val(remuneracion);
+
 					$('#sobre_mi').val(sobre_mi);
 
 					$(".save[data-target=6]").attr('data-edit',2).attr('data-i',<?=$_SESSION['ctc']['id']?>);
@@ -1214,7 +1246,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									var mes = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 									if(data.educacion.length > 0) {
 										data.educacion.forEach(function(e) {
-											html += '<p style="margin-left: 50px;"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
+											html += '<p style="margin-left: 50px;"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>Título o Certificación: </strong> '+e.titulo+' <br /> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
 										});
 										$("#educacion").html(html);
 									}
@@ -1225,7 +1257,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											let nom_encargado = ex.nombre_encargado == null ? 'No Aplica' : ex.nombre_encargado;
 											let tlf_encargado = ex.tlf_encargado == null ? 'No Aplica' : ex.tlf_encargado;
 
-											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' a ' + mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '</p>';
+											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' a ' + mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong>'+
+												ex.descripcion_tareas + '</p>';
 										});
 										$('#experiencias').html(html);
 									}

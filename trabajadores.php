@@ -283,7 +283,7 @@ foreach($momentos as $m) {
 $contTipos = 0;
 $tipos = array(
     array(
-        "nombre" => "Nuevos Jobbers",
+        "nombre" => "Base de Jobbers",
         "amigable" => "nuevos",
         "cantidad" => 0
         ),
