@@ -55,7 +55,7 @@ if ($id) {
         $edad = $edad . "años";
     }
 
-    $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $id . " ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC");
+    $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador=" . $id . " ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC");
 
     $educacion = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=$id");
 
@@ -207,6 +207,7 @@ if ($id) {
             $html .= '
                     <p style="margin-left: 50px;">
                         <strong>Nivel estudio: </strong> ' . $e["nivel"] . '<br>
+                        <strong>Título o Certificación: </strong> ' . $e["titulo"] . '<br>
                         <strong>País: </strong> ' . $e["nombre_pais"] . '<br>
                         <strong>Estado estudio: </strong> ' . $e["estado_estudio"] . '<br>
                         <strong>Área estudio: </strong> ' . $e["nombre_estudio"] . '<br>
@@ -240,6 +241,8 @@ if ($id) {
             $html .= '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; border-bottom: 1px solid #3e70c9; "> EXPERIENCIA LABORAL </p><p></p>';
         }
         foreach ($experiencias as $e) {
+            $encargado_ref = $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"];
+            $tlf_encargado = $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"];
             $html .= '
                     <br>
                     <b>Empresa: </b> ' . $e["nombre_empresa"] . '<br>
@@ -247,8 +250,9 @@ if ($id) {
                     <b>Actividad:</b> ' . $e["actividad_empresa"] . '<br>
                     <b>Tipo puesto: </b> ' . $e["tipo_puesto"] . '<br>
                     <b>Tiempo: </b> ' . $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] . '<br>
-                    <b>Encargado de Referencias: </b> ' . $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] . '<br>
-                    <b>Telefono del Encargado: </b> ' . $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] . '<br>
+                    <b>Encargado de Referencias: </b> ' . $encargado_ref . '<br>
+                    <b>Telefono del Encargado: </b> ' . $tlf_encargado . '<br>
+                    <b>Descripción de tareas: </b> ' . $e["descripcion_tareas"] . '<br>
                 ';
         }
     }
