@@ -360,7 +360,8 @@ $publicaciones = $db->getAll("
                                                             <strong>Tipo puesto: </strong> <?php echo $e["tipo_puesto"]; ?><br>
                                                             <strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?><br>
                                                             <strong>Encargado de Referencias: </strong> <?php echo $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] ?><br>
-                                                            <strong>Telefono del Encargado: </strong><?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?>
+                                                            <strong>Telefono del Encargado: </strong><?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
+                                                            <strong>Descripción de tareas: </strong> <?php echo $e["descripcion_tareas"] ?>
                                                         </p>
                                                     <?php endforeach?>
                                                 <?php else: ?>
@@ -374,6 +375,7 @@ $publicaciones = $db->getAll("
                                                     <?php foreach ($educacion as $e): ?>
                                                         <p style="margin-left: 50px;">
                                                             <strong>Nivel estudio: </strong> <?php echo $e["nivel"]; ?><br>
+                                                            <strong>Título o Certificación: </strong> <?php echo $e["titulo"] ?> <br>
                                                             <strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
                                                             <strong>Estado estudio: </strong> <?php echo $e["estado_estudio"]; ?><br>
                                                             <strong>Área estudio: </strong> <?php echo $e["nombre_estudio"]; ?><br>
