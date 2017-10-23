@@ -188,6 +188,33 @@
 										</form>
 										<br>
 										<hr>
+										<h5 style="margin-left: 10px;">Cambiar Contraseña</h5>
+										<br>
+										<div class="row" style="margin-left: 10px">
+											<div class="col-md-8">
+												<div class="form-group">
+													<label for="currentPass"><b>Contraseña Actual <span style="color: red">*</span></b> </label>
+													<input type="password" class="form-control" id="currentPass" placeholder="Contraseña Actual" value="">
+												</div>
+											</div>
+											<div class="col-md-8">
+												<div class="form-group">
+													<label for="newPass"><b>Contraseña Nueva <span style="color: red">*</span></b> </label>
+													<input type="password" class="form-control" id="newPass" placeholder="Contraseña Nueva" value="">
+												</div>
+											</div>
+											<div class="col-md-8">
+												<div class="form-group">
+													<label for="repeatPass"><b>Repetir Contraseña <span style="color: red">*</span></b> </label>
+													<input type="password" class="form-control" id="repeatPass" placeholder="Repetir Contraseña" value="">
+												</div>
+											</div>
+											<div class="clearfix"></div>
+											<div class="col-md-4">
+												<button id="updatePass" class="btn btn-primary">Actualizar</button>
+											</div>
+										</div>
+										<hr>
 										<?php } ?>				
 											<?php if($empresa == 1): ?>
 											<?php if($infoEmpresa["actividad"]): ?>
@@ -425,11 +452,75 @@
 								timer: 3000,
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
-							});
+						});
 
 					}
 
 					return false;
+				});
+
+				$('#updatePass').on('click', function(){
+					var currentPass = $('#currentPass').val();
+					var newPass = $('#newPass').val();
+					var repeatPass = $('#repeatPass').val();
+
+					if (currentPass != "" && newPass != "" && repeatPass != "") {
+						if (newPass == repeatPass) {
+							$.ajax({
+								url: 'ajax/empresas.php',
+								type: 'POST',
+								dataType: 'json',
+								data: {op: 12, currentPass: currentPass, newPass: newPass},
+								success: function(data){
+									if (data.status == 2) {
+										swal({
+											title: 'Información!',
+											text: 'La contraseña actual es incorrecta, por favor intente de nuevo.',
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
+									} else {
+										$("#currentPass").val("");
+										$("#newPass").val("");
+										$("#repeatPass").val("");
+										swal({
+											title: 'Información!',
+											text: 'Contraseña modificada exitosamente.',
+											timer: 2000,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
+									}
+								},
+								error: function(error){
+									swal({
+										title: 'Información!',
+										text: 'Ha ocurrido un error de conexion. Intentelo de nuevo:',
+										confirmButtonClass: 'btn btn-primary btn-lg',
+										buttonsStyling: false
+									});
+								}
+							});
+							
+						} else {
+							swal({
+									title: 'Información!',
+									text: 'Las contraseñas no coinciden. Intentelo de nuevo.',
+									timer: 3000,
+									confirmButtonClass: 'btn btn-primary btn-lg',
+									buttonsStyling: false
+							});
+						}
+
+					} else {
+						swal({
+								title: 'Información!',
+								text: 'No puede quedar en blanco los campos obligatorios, intentelo de nuevo.',
+								timer: 3000,
+								confirmButtonClass: 'btn btn-primary btn-lg',
+								buttonsStyling: false
+						});
+					}
 				});
 				
 				$('#inline-activity').editable({

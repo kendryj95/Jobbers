@@ -12,6 +12,7 @@
 	define('SOCIAL', 9);
 	define('ADD_CONTRACT', 10);
 	define('UPDATE_PROFILE', 11);
+	define('EDIT_PASS', 12);
 
 	require_once('../../classes/DatabasePDOInstance.function.php');
 
@@ -471,6 +472,15 @@
 					echo "Ha ocurrido un error de conexión, por favor, vuelve a intentarlo.";
 				}
 
+				break;
+			case EDIT_PASS:
+				$id = $db->getOne("SELECT id FROM empresas WHERE clave='".$_REQUEST["currentPass"]."' AND id=".$_SESSION["ctc"]["id"]);
+				if ($id) {
+					$db->query("UPDATE empresas SET clave='".$_REQUEST["newPass"]."' WHERE id=".$_SESSION["ctc"]["id"]);
+					echo json_encode(array("status" => 1));
+				} else {
+					echo json_encode(array("status" => 2));
+				}
 				break;	
 		}
 	}
