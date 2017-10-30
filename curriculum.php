@@ -1161,8 +1161,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 					<?php if (count($infoExtra) > 1): ?>
 
+					<?php 
+						$buscar=array(chr(13).chr(10), "\r\n", "\n", "\r");
+						$reemplazar=array("", "", "", "");
+						$cadena=str_ireplace($buscar,$reemplazar,$infoExtra['sobre_mi']);
+					?>
+
 					var remuneracion = "<?=$infoExtra['remuneracion_pret']?>";
-					var sobre_mi = "<?=$infoExtra['sobre_mi']?>";
+					var sobre_mi = "<?=$cadena?>";
 					remuneracion = parseInt(remuneracion);
 
 					$('#remuneracion').val(remuneracion);
