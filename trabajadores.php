@@ -1,5 +1,16 @@
 <?php
 session_start();
+if(!isset($_SESSION["ctc"])) {
+    header("Location: ./");
+} else {
+    if (isset($_SESSION["ctc"]["empresa"])) {
+        if ($_SESSION["ctc"]["plan"]["id_plan"] == 1) {
+            header("Location: ./");
+        }
+    } else {
+        header("Location: ./");
+    }
+}
 require_once('classes/DatabasePDOInstance.function.php');
 require_once('slug.function.php');
 
