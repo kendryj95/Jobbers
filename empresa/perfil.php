@@ -1,9 +1,15 @@
 <?php
 	session_start();
-
-	if(!isset($_SESSION["ctc"]["empresa"]) && !isset($_REQUEST["e"])) {
-		header('Location: acceder.php');
+	if (isset($_SESSION["ctc"])) {
+		if (!isset($_SESSION["ctc"]["empresa"])) {
+			header("Location: ../");
+		}
+	} else {
+		header("Location: acceder.php");
 	}
+	/*if(!isset($_SESSION["ctc"]["empresa"]) && !isset($_REQUEST["e"])) {
+		header('Location: acceder.php');
+	}*/
 
 	require_once('../classes/DatabasePDOInstance.function.php');
 
