@@ -1,4 +1,8 @@
 <?php
+	session_start();
+	if (isset($_SESSION["ctc"])) {
+		header("Location: ./");
+	}
 	require_once('classes/DatabasePDOInstance.function.php');
 	$db = DatabasePDOInstance();
 	$info = $db->getRow("SELECT politicas, terminos FROM plataforma WHERE id=1");
