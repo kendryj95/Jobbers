@@ -243,13 +243,14 @@ if ($id) {
         foreach ($experiencias as $e) {
             $encargado_ref = $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"];
             $tlf_encargado = $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"];
+            $egreso = $e['trab_actualmt'] == 1 ? "Actualmente" : $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"];
             $html .= '
                     <br>
                     <b>Empresa: </b> ' . $e["nombre_empresa"] . '<br>
                     <b>País: </b> ' . $e["nombre_pais"] . '<br>
                     <b>Actividad:</b> ' . $e["actividad_empresa"] . '<br>
                     <b>Tipo puesto: </b> ' . $e["tipo_puesto"] . '<br>
-                    <b>Tiempo: </b> ' . $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] . '<br>
+                    <b>Tiempo: </b> ' . $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso . '<br>
                     <b>Encargado de Referencias: </b> ' . $encargado_ref . '<br>
                     <b>Telefono del Encargado: </b> ' . $tlf_encargado . '<br>
                     <b>Descripción de tareas: </b> ' . $e["descripcion_tareas"] . '<br>

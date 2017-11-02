@@ -25,7 +25,7 @@
 									<span class="s-text">Home</span>
 								</a>
 							</li>
-							<li class="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "active" : ""; ?>">
+							<li class="<?php echo $scriptActual == 'index' ? "active" : ""; ?>">
 								<a href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "./" : "empresa/./"; ?>" class="waves-effect  waves-light">
 									<span class="s-icon"><i class="ti-folder"></i></span>
 									<span class="s-text">Panel</span>
@@ -37,12 +37,21 @@
 									<span class="s-text">Mis publicaciones</span>
 								</a>
 							</li>
+							<?php if($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
 							<li class="<?php echo $scriptActual == 'trabajadores' ? 'active' : ''; ?>">
 								<a href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""; ?>trabajadores.php" class="waves-effect  waves-light">
 									<span class="s-icon"><i class="ti-folder"></i></span>
 									<span class="s-text">Ver jobbers</span>
 								</a>
 							</li>
+							<?php else: ?>
+								<li>
+									<a href="javascript:void(0)" title="Actualiza tu plan para disfrutar de este servicio" style="cursor: default;">
+										<span class="s-icon" style="color: gray;"><i class="ti-folder"></i></span>
+										<span class="s-text" style="color: gray;">Ver jobbers</span>
+									</a>
+								</li>
+							<?php endif; ?>
 							<li class="<?php echo $scriptActual == 'serviciosfree' ? 'active' : ''; ?>">
 								<a href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""; ?>serviciosfree.php" class="waves-effect  waves-light">
 									<span class="s-icon"><i class="ti-folder"></i></span>

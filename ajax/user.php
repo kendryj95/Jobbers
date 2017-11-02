@@ -275,6 +275,13 @@
 				$_SESSION["ctc"]["lastName"] = $info["apellidos"];
 				$_SESSION["ctc"]["email"] = $info["correo_electronico"];
 				$_SESSION["ctc"]["type"] = 2;
+
+				if ($info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_imagen"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "") {
+					$_SESSION["ctc"]["postulate"] = 1;
+				} else {
+					$_SESSION["ctc"]["postulate"] = 0;
+				}
+				
 				if($info["id_imagen"] != 0) {
 					/*$isfb = $db->getOne("SELECT id FROM imagenes WHERE id=".$info["id_imagen"]." AND nombre='$_REQUEST[p]'");
 					if($isfb) {

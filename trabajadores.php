@@ -755,10 +755,13 @@ WHERE 1
 ";
 $query2 = "
 SELECT
-COUNT(*)
+COUNT(DISTINCT(tra.id))
 FROM
 trabajadores AS tra
 LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+LEFT JOIN paises pais ON tra.id_pais = pais.id
+LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
 WHERE 1
 ";
 
@@ -925,7 +928,7 @@ LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
 ";
 $query2 = "
 SELECT
-COUNT(*)
+COUNT(DISTINCT(tra.id))
 FROM
 trabajadores AS tra
 LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
@@ -1157,6 +1160,7 @@ else {
     }
 }
 
+
 $cantidadRegistros = $db->getOne($query2);
 
 $cantidadPaginas = ceil($cantidadRegistros / $final);
@@ -1217,10 +1221,13 @@ else if($busqueda) {
 
     $cantidadRegistros = $db->getOne("
         SELECT
-        COUNT(*)
+        COUNT(DISTINCT(tra.id))
         FROM
         trabajadores AS tra
         LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+        LEFT JOIN paises pais ON tra.id_pais = pais.id
+        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
         WHERE tra.nombres LIKE '%$busqueda%' OR tra.apellidos LIKE '%$busqueda%'
         ");
 

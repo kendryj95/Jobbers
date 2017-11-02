@@ -353,12 +353,14 @@ $publicaciones = $db->getAll("
                                             <?php $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");?>
                                                 <?php if ($experiencias): ?>
                                                     <?php foreach ($experiencias as $e): ?>
+
+                                                        <?php $egreso = $e['trab_actualmt'] == 1 ? 'Actualmente' : $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?>
                                                         <p style="margin-left: 50px;">
                                                             <strong>Empresa: </strong> <?php echo $e["nombre_empresa"]; ?><br>
                                                             <strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
                                                             <strong>Actividad: </strong> <?php echo $e["actividad_empresa"]; ?><br>
                                                             <strong>Tipo puesto: </strong> <?php echo $e["tipo_puesto"]; ?><br>
-                                                            <strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?><br>
+                                                            <strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso ?><br>
                                                             <strong>Encargado de Referencias: </strong> <?php echo $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] ?><br>
                                                             <strong>Telefono del Encargado: </strong><?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
                                                             <strong>Descripción de tareas: </strong> <?php echo $e["descripcion_tareas"] ?>

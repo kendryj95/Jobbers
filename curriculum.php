@@ -423,6 +423,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
+											
 											<div class="row" style="margin-top: 10px;">
 												<div class="col-md-4" style="text-align: right;"><label for="monthE" style="margin-top: 6px;">Mes de egreso <span style="color: red;">*</span></label></div>
 												<div class="col-md-3">
@@ -448,6 +449,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
 													</select>
+												</div>
+											</div>
+
+											<div class="row" style="margin-top: 10px;">
+												<div class="col-md-4"></div>
+												<div class="col-md-8">
+													<input type="checkbox" id="trab_actual"> Trabajando actualmente
 												</div>
 											</div>
 
@@ -1151,6 +1159,17 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						$('#mobileText').text(valRange + ' ARS');
 					});
 
+					$('#trab_actual').on('click', function() {
+						var $this = $(this);
+						if ($this.is(':checked')) {
+							$('#monthE').prop('disabled', true);
+							$('#yearE').prop('disabled', true);
+						} else {
+							$('#monthE').prop('disabled', false);
+							$('#yearE').prop('disabled', false);
+						}
+					});
+
 					$('.tooltip-main').addClass('show');
 
 					var view = <?php echo isset($_GET["o"]) ? 1 : 0; ?>;
@@ -1254,10 +1273,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										html = "";
 										data.experiencias.forEach(function(ex){
 
-											let nom_encargado = ex.nombre_encargado == null ? 'No Aplica' : ex.nombre_encargado;
-											let tlf_encargado = ex.tlf_encargado == null ? 'No Aplica' : ex.tlf_encargado;
+											let nom_encargado = ex.nombre_encargado == null || ex.nombre_encargado == '' ? 'No Aplica' : ex.nombre_encargado;
+											let tlf_encargado = ex.tlf_encargado == null || ex.tlf_encargado == '' ? 'No Aplica' : ex.tlf_encargado;
+											let egreso = ex.trab_actualmt == 1 ? 'Actualmente' : mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso;
 
-											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' a ' + mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong>'+
+											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' - ' + egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong>'+
 												ex.descripcion_tareas + '</p>';
 										});
 										$('#experiencias').html(html);
@@ -1330,8 +1350,19 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								$("#tEmployeer").val(data.tipo_puesto);
 								$("#monthI").val(data.mes_ingreso);
 								$("#yearI").val(data.ano_ingreso);
-								$("#monthE").val(data.mes_egreso);
-								$("#yearE").val(data.ano_egreso);
+								
+								if (data.trab_actualmt == 1) {
+									$('#trab_actual').prop('checked',true);
+									$("#monthE").val('1');
+									$("#yearE").val('1950');
+									$("#monthE").prop('disabled', true);
+									$("#yearE").prop('disabled', true);
+								} else {
+									$("#monthE").val(data.mes_egreso);
+									$("#yearE").val(data.ano_egreso);
+								}
+								$("#nom_enc").val(data.nombre_encargado);
+								$("#tlf_enc").val(data.tlf_encargado);
 								$("#descriptionArea").val(data.descripcion_tareas);
 							}
 						});
@@ -1465,6 +1496,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								$("#yearI").val(2016);
 								$("#monthE").val(1);
 								$("#yearE").val(2016);
+								$("#nom_enc").val("");
+								$("#tlf_enc").val("");
 								$("#descriptionArea").val("");
 								break;
 							case 3:
@@ -1594,20 +1627,29 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								break;
 							case 2:
 								if($("#company").val() != "" && parseInt($("#rCompany").val()) > 0 && parseInt($("#tCompany").val()) > 0 && $("#tEmployeer").val() != "" && $("#descriptionArea").val() != "") {
-									if(parseInt($("#yearE").val()) >= parseInt($("#yearI").val())) {
-										str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val()+'&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
+
+									if ($('#trab_actual').is(':checked')) {
+										str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE=0&yearE=9999&trab_actual=1&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
 										band = true;
 									} else {
-										swal({
-											title: 'Información!',
-											text: 'El año de egreso debe ser mayor que el año de ingreso',
-											timer: 2000,
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-										return false;
+
+										if(parseInt($("#yearE").val()) >= parseInt($("#yearI").val())) {
+											str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val()+'&trab_actual=0&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
+											band = true;
+										} else {
+											swal({
+												title: 'Información!',
+												text: 'El año de egreso debe ser mayor que el año de ingreso',
+												timer: 2000,
+												confirmButtonClass: 'btn btn-primary btn-lg',
+												buttonsStyling: false
+											});
+											return false;
+
+										}
 
 									}
+									
 								}
 
 								if ($('#nom_enc').val() != "" && $('#tlf_enc').val() == ""){
