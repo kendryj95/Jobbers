@@ -93,3 +93,27 @@
 		});
 	</script>
 <?php endif ?>
+<script>
+	$(document).ready(function() {
+		console.log("selector:", $(".actualiza_plan"));
+		$('.actualiza_plan').on('click', function(){
+			swal({
+				title: 'Actualiza tu plan a ORO',
+				text: "Y disfruta de todos los beneficios de estar en la pantalla principal con todas las opciones además de la funcionalidad de promocionar un producto de venta o video. Qué desea hacer?",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ir a mis planes',
+				cancelButtonText: 'Decidir después',
+				confirmButtonClass: 'btn btn-primary btn-lg m-r-1',
+				cancelButtonClass: 'btn btn-danger btn-lg',
+				buttonsStyling: false
+				}).then(function(isConfirm) {
+				if (isConfirm === true) {
+					window.location.assign("planes.php?pay=true");
+				}
+			});
+		});
+	});
+</script>

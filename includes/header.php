@@ -56,9 +56,15 @@
 						</a>
 					</li>
 					<li class="nav-item dropdown menuPCEmpresa">
+						<?php if($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
 						<a class="nav-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
 							Ver jobbers
 						</a>
+						<?php else: ?>
+						<a class="nav-link actualiza_plan" href="javascript:void(0)" style="cursor: no-drop;">
+							Ver jobbers
+						</a>
+						<?php endif; ?>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
