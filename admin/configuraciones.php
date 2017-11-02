@@ -1,7 +1,11 @@
 0<?php
 	session_start();
-	if(!isset($_SESSION["ctc"]["id"])) {
-		hearder("Location: ./");
+	if(!isset($_SESSION["ctc"])) {
+		header("Location: index.php");
+	} else {
+		if ($_SESSION["ctc"]["type"] != 3 || isset($_SESSION["ctc"]["empresa"])) {
+			header("Location: ../");
+		} 
 	}
 	require_once('../classes/DatabasePDOInstance.function.php');
 	$db = DatabasePDOInstance();

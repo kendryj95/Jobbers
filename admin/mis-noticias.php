@@ -1,9 +1,11 @@
 <?php
 	session_start();
-	if(!isset($_SESSION)) {
-		if($_SESSION["type"] != 3) {
-			header('Location: ./');
-		}
+	if(!isset($_SESSION["ctc"])) {
+		header("Location: index.php");
+	} else {
+		if ($_SESSION["ctc"]["type"] != 3 || isset($_SESSION["ctc"]["empresa"])) {
+			header("Location: ../");
+		} 
 	}
 	require_once('../classes/DatabasePDOInstance.function.php');
 	$db = DatabasePDOInstance();
@@ -124,6 +126,9 @@
 							</div>
 						</div>
 					</div>
+					<pre>
+						<?php print_r($_SESSION) ?>
+					</pre>
 				</div>
 				<!-- Footer -->
 				<?php require_once('../includes/footer.php'); ?>

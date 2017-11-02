@@ -1,8 +1,10 @@
 <?php
 	session_start();
 
-	if(isset($_SESSION["ctc"]["empresa"])) {
-		header('Location: ./');
+	if(isset($_SESSION["ctc"])) {
+		if ($_SESSION["ctc"]["type"] == 3) {
+			header("Location: mis-noticias.php");
+		}
 	}
 ?>
 

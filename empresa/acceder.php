@@ -1,8 +1,12 @@
 <?php
 	session_start();
 
-	if(isset($_SESSION["ctc"]["empresa"])) {
-		header('Location: ./');
+	if(isset($_SESSION["ctc"])) {
+		if (isset($_SESSION["ctc"]["empresa"])) {
+			header('Location: ./');
+		} else {
+			header('Location: ../');
+		}
 	}
 ?>
 
