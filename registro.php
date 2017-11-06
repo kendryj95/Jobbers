@@ -206,105 +206,65 @@
 			
 			var info = {};
 
-
-			/*window.fbAsyncInit = function() {
-				FB.init({
-				  //appId      : '335054620211948', // Set YOUR APP ID
-				  appId      : '1350607375027200', // Set YOUR APP ID
-				  status     : true, // check login status
-				  cookie     : true, // enable cookies to allow the server to access the session
-				  xfbml      : true  // parse XFBML
-				});*/
-
-				/*FB.Event.subscribe('auth.authResponseChange', function(response) {
-					if (response.status === 'connected') {
-						//document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
-						//console.log("Connected to Facebook");
-						getUserInfo();
-					}    
-					else if (response.status === 'not_authorized') {
-						//console.log("Failed to Connect");
-					} else {
-						//console.log("Logged Out");
-					}
-				});
-
-			};*/
-
 			function Login() {
-				//getUserInfo();
 
-				/*FB.login(function(response) {
-				   if (response.authResponse) {
-						getUserInfo();
-					}
-					else {
-					 	//console.log('User cancelled login or did not fully authorize.');
-					}
-				},{scope: 'id,name,email,picture'});*/
-				//ba43585db1d4876eb51df12e4a0eeb56a7b6a5c8
 				FB.login(function(response) {
 					if (response.authResponse) {
-						//console.log('Welcome!  Fetching your information.... ');
-						//console.log(response); // dump complete info
 						access_token = response.authResponse.accessToken; //get access token
-						//user_id = response.authResponse.userID; //get FB UID
 						getUserInfo();
-						/*FB.api('/me', function(response) {
-							user_email = response.email; //get user email
-							// you can store this data into your database
-						});*/
 
-					} else {
-						//user hit cancel button
-						//console.log('User cancelled login or did not fully authorize.');
-
-					}
+					} else {}
 				}, {
 					scope: 'public_profile,email,user_about_me,user_birthday,user_location',
 					return_scopes: true
 				});
 
 			}
-
 		  	function getUserInfo() {
 				FB.api('/me',{fields:'id,first_name,last_name,email,picture,gender,location,birthday'}, function(response) {
-					
-					//console.log(response);
 					gender = (response.gender === 'male')?'1':'2';
-
-					$.ajax({
-						type: 'POST',
-						url: 'ajax/user.php',
-						data: 'op=10&e=' + response.email + '&n=' + response.first_name +'&a=' + response.last_name + '&p=' + response.picture.data.url+ '&g=' + gender,
-						dataType: 'json',
-						success: function(data) {
-							if(data.status == 1) {
-								//console.log('Muestra algo');
-								swal({
-									title: 'Excelente!',
-									text: 'Registrado Satisfactoriamente.',
-									timer: 3000,
-									confirmButtonClass: 'btn btn-primary btn-lg',
-									buttonsStyling: false
-								});
-								setTimeout(function(){
-									window.location.href = "./";
-								},2000);
-								//window.location.assign("./");
+					if(response.email == undefined){
+						swal({
+							title: 'Información!',
+							text: 'Su Usuario de Facebook, no tiene un correo electronico asociado, se invita a registrar su usuario mediante nuestro formulario.',
+							timer: 6000,
+							confirmButtonClass: 'btn btn-danger btn-lg',
+							buttonsStyling: false
+						});
+					}else{
+						$.ajax({
+							type: 'POST',
+							url: 'ajax/user.php',
+							data: 'op=10&e=' + response.email + '&n=' + response.first_name +'&a=' + response.last_name + '&p=' + response.picture.data.url+ '&g=' + gender,
+							dataType: 'json',
+							success: function(data) {
+								if(data.status == 1) {
+									//console.log('Muestra algo');
+									swal({
+										title: 'Excelente!',
+										text: 'Registrado Satisfactoriamente.',
+										timer: 3000,
+										confirmButtonClass: 'btn btn-primary btn-lg',
+										buttonsStyling: false
+									});
+									setTimeout(function(){
+										window.location.href = "./";
+									},2000);
+									//window.location.assign("./");
+								}
+								else {
+									//console.log('Muestra algo 2');
+									swal({
+										title: 'Información!',
+										text: 'Usuario existente.',
+										timer: 3000,
+										confirmButtonClass: 'btn btn-primary btn-lg',
+										buttonsStyling: false
+									});
+								}
 							}
-							else {
-								//console.log('Muestra algo 2');
-								swal({
-									title: 'Información!',
-									text: 'Usuario existente.',
-									timer: 3000,
-									confirmButtonClass: 'btn btn-primary btn-lg',
-									buttonsStyling: false
-								});
-							}
-						}
-					});
+						});
+					}
 				});
 			}
 			function getPhoto() {
