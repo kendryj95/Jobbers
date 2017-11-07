@@ -37,6 +37,12 @@
 		<![endif]-->
 	</head>
 
+	<style>
+		.has-error{
+			box-shadow: -1px 1px 10px 0px rgba(255,51,51,.7);
+		}
+	</style>
+
 	<body class="img-cover" style="background-image: url(img/OB82100.jpg);">
 
 
@@ -109,10 +115,10 @@
 									<span class="custom-control-description">Acepto recibir newsletters con novedades, promociones y actualizaciones.</span>
 								</label>
 								<br>
-								<div class="p-x-2 form-group m-b-0" style="margin-top: 10px;">
+								<div class="p-x-2 m-b-0" style="margin-top: 10px;">
 									<a href="javascript:void(0)" class="btn btn-primary btn-block text-uppercase" id="register" style="color: white;">Registrarse</a>
 								</div><br>
-								<div class="p-x-2">
+								<!-- <div class="p-x-2">
 									<div class="row">
 										<div class="col-xs-12">
 											<a href="javascript:void(0)" onClick="Login()" class="btn bg-facebook btn-block label-left m-b-0-25">
@@ -120,24 +126,15 @@
 												Regístrate con Facebook
 											</a>
 										</div>
-
-									<!--<div class="col-xs-12">
-										<fb:login-button
-											class="btn bg-facebook btn-block label-left m-b-0-25"
-											scope="public_profile,email"
-											onlogin="Login();">
-											<span>Facebook</span>
-										</fb:login-button>
-									</div>-->
-
-										<!--<div class="col-xs-6">
+								
+										<div class="col-xs-6">
 											<button type="button" class="btn bg-googleplus btn-block label-left m-b-0-25">
 												<span class="btn-label"><i class="ti-google"></i></span>
 												Google+
 											</button>
-										</div>-->
+										</div>
 									</div>
-								</div>
+								</div> -->
 							</form>
 							<div class="p-a-2 text-xs-center text-muted">
 								Ya tienes cuenta? <a class="text-black" href="ingresar.php"><span class="underline">Iniciar sesión</span></a>
@@ -193,7 +190,7 @@
 		<script type="text/javascript" src="vendor/sweetalert2/sweetalert2.min.js"></script>
 		<script>
 			function isEmail(email) {
-			  var regex = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
+			  var regex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
 			  return regex.test(email);
 			}
 			
@@ -337,6 +334,11 @@
 											});*/
 											swal("INFORMACIÓN!", "Para confirmar tu registro, revisa la bandeja de tu correo electronico.", "info");
 											$('.form-material')[0].reset();
+
+											$('.form-group').each(function(index, el) {
+													$(el).removeClass('has-error');
+											});
+
 										} else if(data.status == 0){
 											console.log("Error al enviar correo electronico");
 										}
@@ -348,7 +350,9 @@
 												confirmButtonClass: 'btn btn-primary btn-lg',
 												buttonsStyling: false
 											});
+											
 										}
+
 									}
 								});
 							}
@@ -370,6 +374,9 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
+							
+							$('#email').parent().addClass('has-error');
+
 						}
 					}
 					else {
@@ -388,6 +395,14 @@
 						timer: 2000,
 						confirmButtonClass: 'btn btn-primary btn-lg',
 						buttonsStyling: false
+					});
+
+					$('.form-group').each(function(index, el) {
+						if ($(el).children('input').val() == "") {
+							$(el).addClass('has-error');
+						} else {
+							$(el).removeClass('has-error');
+						}
 					});
 				}
 			});

@@ -18,10 +18,10 @@
 	define('SENT_MAIL', 12);
 	switch($op) {
 		case LOGIN:
-			$info = $db->getRow("SELECT * FROM trabajadores WHERE (correo_electronico='$_REQUEST[email]' OR usuario='$_REQUEST[email]') AND clave='".md5($_REQUEST["password"])."'");
+			$info = $db->getRow("SELECT * FROM trabajadores WHERE (correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."') AND clave='".md5($_REQUEST["password"])."'");
 			if($info) {
 
-				$confirmar = $db->getRow("SELECT confirmar FROM trabajadores WHERE correo_electronico='$_REQUEST[email]' OR usuario='$_REQUEST[email]'");
+				$confirmar = $db->getRow("SELECT confirmar FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."'");
 
 
 				if ($confirmar['confirmar'] == 1) {
@@ -55,14 +55,14 @@
             }
 		break;
          case ADD:
-			$id = $db->getOne("SELECT id FROM trabajadores WHERE correo_electronico='$_REQUEST[email]' OR usuario='$_REQUEST[email]'");
+			$id = $db->getOne("SELECT id FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."'");
 			if($id) {
 				echo json_encode(array("status" => 2));
 			}
 			else {
 				$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores'");
 				$uid = $db->getOne("SELECT valor FROM uid");
-				$db->query("INSERT INTO trabajadores (id, uid, id_imagen, id_sexo, id_estado_civil, id_tipo_documento_identificacion, id_pais, provincia, localidad, calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion, fecha_nacimiento, telefono, telefono_alternativo, usuario, clave, correo_electronico, fecha_creacion, fecha_actualizacion, publicidad, newsletter) VALUES ('$id', '$uid', '0', '', '', '', '', '', '', '', '', '$_REQUEST[name]', '$_REQUEST[lastName]', '', NULL, '', '',  '$_REQUEST[userName]', '".md5($_REQUEST["password"])."', '$_REQUEST[email]', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[publicidad]', '$_REQUEST[newsletter]')");
+				$db->query("INSERT INTO trabajadores (id, uid, id_imagen, id_sexo, id_estado_civil, id_tipo_documento_identificacion, id_pais, provincia, localidad, calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion, fecha_nacimiento, telefono, telefono_alternativo, usuario, clave, correo_electronico, fecha_creacion, fecha_actualizacion, publicidad, newsletter) VALUES ('$id', '$uid', '0', '', '', '', '', '', '', '', '', '$_REQUEST[name]', '$_REQUEST[lastName]', '', NULL, '', '',  '$_REQUEST[userName]', '".md5($_REQUEST["password"])."', '".strtolower($_REQUEST['email'])."', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[publicidad]', '$_REQUEST[newsletter]')");
 
 				$idU = $db->getInsertID();
 
