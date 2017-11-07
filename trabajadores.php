@@ -57,7 +57,7 @@ function filtroTipo($cond) {
     switch($filtroTipo) {
         case "nuevos":
         $res = $cond ? " AND " : " WHERE ";
-        $res .= " (TIMESTAMPDIFF(MONTH, tra.fecha_creacion, CURDATE()) <= 3 AND ec.id_trabajador IS NULL)";
+        $res .= " (TIMESTAMPDIFF(MONTH, tra.fecha_creacion, CURDATE()) <= 3 AND ec.id_trabajador IS NULL) ";
         break;
         case "contratados":
         $res = $cond ? " AND " : " WHERE ";
@@ -116,7 +116,7 @@ function crearBreadcrumb() {
         $arr[] = array(
             "href" => crearURL(array( array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))),
             "text" => $GLOBALS["infoArea"]["nombre"]
-            );          
+            );
     }
 
     if($filtroActivado) {
@@ -342,7 +342,7 @@ if($filtroIdioma) {
         }
     }
 }
-else {   
+else {
     if($filtroActivado) {
         $arr = array();
         if($filtroArea) {
@@ -359,7 +359,7 @@ else {
         foreach($idiomas as $i => $idioma) {
             $query = "
             SELECT
-            tra.id
+            count( distinct tra.id)
             FROM
             trabajadores AS tra
             LEFT JOIN trabajadores_idiomas AS ti ON ti.id_trabajador = tra.id
@@ -368,7 +368,7 @@ else {
             LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
             LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
             LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+            INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
             WHERE
             ti.id_idioma = $idioma[id]
             ";
@@ -382,7 +382,7 @@ else {
             }
 
             if($filtroTipo) {
-                $query .= " AND " . filtroTipo(true);
+                $query .= "  " . filtroTipo(true);
             }
 
             if($filtroGenero) {
@@ -402,15 +402,8 @@ else {
                 @$query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
             }
 
-            if(!$filtroArea) {
-                $query .= " GROUP BY tra.id";
-            }
-
-            $query = "SELECT COUNT(*) FROM ($query) AS T";
-
             $c = $db->getOne($query);
 
-                //echo "<br><br><br>$query;<br><br><br>";
 
             $contIdiomas += $c;
             $idiomas[$i]["cantidad"] = $c;
@@ -420,12 +413,14 @@ else {
         foreach($idiomas as $i => $idioma) {
             $idiomas[$i]["cantidad"] = $db->getOne("
                 SELECT
-                COUNT(*)
+                COUNT(distinct tra_i.id_trabajador)
                 FROM
-                trabajadores_idiomas AS tra_i
+                trabajadores as tra
+                left join trabajadores_idiomas AS tra_i on tra.id=tra_i.id_trabajador
+                inner join trabajadores_infextra as ie  on tra.id=ie.id_trabajador
                 WHERE
-                tra_i.id_idioma = $idioma[id]
-                ");
+                tra_i.id_idioma= $idioma[id]
+            ");
             $contIdiomas += $idiomas[$i]["cantidad"];
         }
     }
@@ -458,7 +453,7 @@ if ($filtroProvincia) {
         foreach($provincias as $i => $prov) {
             $query = "
             SELECT
-            tra.id
+            distinct tra.id
             FROM
             trabajadores AS tra
             LEFT JOIN trabajadores_idiomas AS ti ON ti.id_trabajador = tra.id
@@ -467,7 +462,7 @@ if ($filtroProvincia) {
             LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
             LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
             LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+            INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
             WHERE
             tra.provincia = $prov[id]
             ";
@@ -508,8 +503,6 @@ if ($filtroProvincia) {
 
             $c = $db->getOne($query);
 
-                //echo "<br><br><br>$query;<br><br><br>";
-
             $contProvincias += $c;
             $provincias[$i]["cantidad"] = $c;
         }
@@ -517,9 +510,10 @@ if ($filtroProvincia) {
         foreach($provincias as $i => $prov) {
             $provincias[$i]["cantidad"] = $db->getOne("
                 SELECT
-                COUNT(*)
+                COUNT(distinct tra.id)
                 FROM
                 trabajadores AS tra
+                inner join trabajadores_infextra as ti on tra.id = ti.id_trabajador
                 WHERE
                 tra.provincia = $prov[id]
                 ");
@@ -564,7 +558,7 @@ if ($filtroLocalidades) {
             LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
             LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
             LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+            INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
             WHERE
             tra.localidad = $loc[id]
             ";
@@ -606,8 +600,6 @@ if ($filtroLocalidades) {
 
             $c = $db->getOne($query);
 
-                //echo "<br><br><br>$query;<br><br><br>";
-
             $contLocalidades += $c;
             $localidades[$i]["cantidad"] = $c;
         }
@@ -615,9 +607,10 @@ if ($filtroLocalidades) {
         foreach($localidades as $i => $loc) {
             $localidades[$i]["cantidad"] = $db->getOne("
                 SELECT
-                COUNT(*)
+                COUNT(distinct tra.id)
                 FROM
                 trabajadores AS tra
+                INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                 WHERE
                 tra.localidad = $loc[id]
                 ");
@@ -629,17 +622,7 @@ if ($filtroLocalidades) {
 $contAreas = 0;
 
 if(!$filtroArea) {
-    $areas = $db->getAll("
-        SELECT
-        id,
-        nombre,
-        amigable
-        FROM
-        areas_estudio
-        ORDER BY
-        nombre
-        ");
-
+    $areas = $db->getAll("SELECT id, nombre, amigable FROM areas_estudio ORDER BY nombre ");
     if($filtroMomento) {
         foreach($areas as $i => $area) {
             $query = "
@@ -651,7 +634,7 @@ if(!$filtroArea) {
             LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
             LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
             LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+            INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
             WHERE
             te.id_area_estudio = $area[id]
             AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
@@ -683,21 +666,20 @@ if(!$filtroArea) {
             $areas[$i]["cantidad"] = $c;
             $contAreas += $c;
         }
-    }
-    else {
+    }else {
         foreach($areas as $i => $area) {
             $query = "
-            SELECT
-            COUNT(te.id_area_estudio)
-            FROM
-            trabajadores AS tra
-            LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-            LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
-            LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-            LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-            WHERE
-            te.id_area_estudio = $area[id]
+                SELECT
+                COUNT(DISTINCT tra.id)
+                FROM
+                trabajadores AS tra
+                LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+                LEFT JOIN areas_estudio AS ae ON te.id_area_estudio = ae.id
+                LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                LEFT JOIN paises pais ON tra.id_pais = pais.id
+                INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                WHERE
+                te.id_area_estudio = $area[id]
             ";
             if($filtroTipo) {
                 $query .= filtroTipo(true);
@@ -746,100 +728,98 @@ if($busquedaAvanzada) {
         '.',
         img.extension
         ) AS imagen,
-tra.calificacion_general,
-tra.sitio_web,
-tra.facebook,
-tra.twitter,
-tra.instagram,
-tra.snapchat,
-tra.linkedin,
-pais.nombre AS pais,
-ie.sobre_mi,
-ie.remuneracion_pret
-FROM
-trabajadores AS tra
-LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-LEFT JOIN paises pais ON tra.id_pais = pais.id
-LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-WHERE 1
-";
-$query2 = "
-SELECT
-COUNT(DISTINCT(tra.id))
-FROM
-trabajadores AS tra
-LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-LEFT JOIN paises pais ON tra.id_pais = pais.id
-LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-WHERE 1
-";
+        tra.calificacion_general,
+        tra.sitio_web,
+        tra.facebook,
+        tra.twitter,
+        tra.instagram,
+        tra.snapchat,
+        tra.linkedin,
+        pais.nombre AS pais,
+        ie.sobre_mi,
+        ie.remuneracion_pret
+        FROM
+        trabajadores AS tra
+        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+        LEFT JOIN paises pais ON tra.id_pais = pais.id
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        WHERE 1
+    ";
+    $query2 = "
+        SELECT
+        COUNT(DISTINCT(tra.id))
+        FROM
+        trabajadores AS tra
+        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+        LEFT JOIN paises pais ON tra.id_pais = pais.id
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        WHERE 1
+    ";
 
-if($palabrasClave != "") {
-    $tokens = explode(",", $palabrasClave);
-    $l = count($tokens);
-    if($l > 1) {
-        $query .= " AND ((tra.nombres LIKE '%$tokens[0]%' OR tra.apellidos LIKE '%$tokens[0]%')";
-            $query2 .= " AND ((tra.nombres LIKE '%$tokens[0]%' OR tra.apellidos LIKE '%$tokens[0]%')";
-                for($i = 1; $i < $l; $i++) {
-                    $query .= " OR (tra.nombres LIKE '%$tokens[$i]%' OR tra.apellidos LIKE '%$tokens[$i]%')";
-                    $query2 .= " OR (tra.nombres LIKE '%$tokens[$i]%' OR tra.apellidos LIKE '%$tokens[$i]%')";
-                }
-                $query .= ")";
-$query2 .= ")";
-}
-else {
+    if($palabrasClave != "") {
+        $tokens = explode(",", $palabrasClave);
+        $l = count($tokens);
+        if($l > 1) {
+            $query .= " AND ((tra.nombres LIKE '%$tokens[0]%' OR tra.apellidos LIKE '%$tokens[0]%')";
+                $query2 .= " AND ((tra.nombres LIKE '%$tokens[0]%' OR tra.apellidos LIKE '%$tokens[0]%')";
+                    for($i = 1; $i < $l; $i++) {
+                        $query .= " OR (tra.nombres LIKE '%$tokens[$i]%' OR tra.apellidos LIKE '%$tokens[$i]%')";
+                        $query2 .= " OR (tra.nombres LIKE '%$tokens[$i]%' OR tra.apellidos LIKE '%$tokens[$i]%')";
+                    }
+                    $query .= ")";
+    $query2 .= ")";
+} else {
     $query .= " AND (tra.nombres LIKE '%$tokens[0]%' OR tra.apellidos LIKE '%$tokens[0]%')";
     $query2 .= " AND (tra.nombres LIKE '%$tokens[0]%' OR tra.apellidos LIKE '%$tokens[0]%')";
 }
 }
 
-if($filtroArea) {           
-    if($filtroMomento) {    
-        $query .= "
-        AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
-        ";          
-        $query2 .= "
-        AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
-        ";
-        if($filtroTipo) {
-            $tmp = filtroTipo(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
-        if($filtroGenero) {
-            $tmp = filtroGenero(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
-        if($filtroIdioma) {
-            $tmp = filtroIdioma(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
-    }
-    if($filtroTipo) {
-        $tmp = filtroTipo(true);
-        $query .= $tmp;
-        $query2 .= $tmp;
-    }
-    if($filtroGenero) {
-        $tmp = filtroGenero(true);
-        $query .= $tmp;
-        $query2 .= $tmp;
-    }
-    if($filtroIdioma) {
-        $tmp = filtroIdioma(true);
-        $query .= $tmp;
-        $query2 .= $tmp;
-    }
-}
-else {
+if($filtroArea) {
     if($filtroMomento) {
         $query .= "
         AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
-        ";          
+        ";
+        $query2 .= "
+        AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
+        ";
+        if($filtroTipo) {
+            $tmp = filtroTipo(true);
+            $query .= $tmp;
+            $query2 .= $tmp;
+        }
+        if($filtroGenero) {
+            $tmp = filtroGenero(true);
+            $query .= $tmp;
+            $query2 .= $tmp;
+        }
+        if($filtroIdioma) {
+            $tmp = filtroIdioma(true);
+            $query .= $tmp;
+            $query2 .= $tmp;
+        }
+    }
+    if($filtroTipo) {
+        $tmp = filtroTipo(true);
+        $query .= $tmp;
+        $query2 .= $tmp;
+    }
+    if($filtroGenero) {
+        $tmp = filtroGenero(true);
+        $query .= $tmp;
+        $query2 .= $tmp;
+    }
+    if($filtroIdioma) {
+        $tmp = filtroIdioma(true);
+        $query .= $tmp;
+        $query2 .= $tmp;
+    }
+} else {
+    if($filtroMomento) {
+        $query .= "
+        AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
+        ";
         $query2 .= "
         AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
         ";
@@ -882,195 +862,86 @@ else {
     }
 }
 
-$cantidadRegistros = $db->getOne($query2);
+    $cantidadRegistros = $db->getOne($query2);
 
-$cantidadPaginas = ceil($cantidadRegistros / $final);       
+    $cantidadPaginas = ceil($cantidadRegistros / $final);
 
-        #$query .= "GROUP BY tra.id LIMIT $inicial, $final";
-$query .= "GROUP BY tra.id";
+            #$query .= "GROUP BY tra.id LIMIT $inicial, $final";
+    $query .= "GROUP BY tra.id";
 
-$trabajadores = $db->getAll($query);
+    $trabajadores = $db->getAll($query);
 
-if($trabajadores) {
-    foreach($trabajadores as $k => $t) {
-        if(!$t["imagen"]) {
-            $trabajadores[$k]["imagen"] = "avatars/user.png";
+    if($trabajadores) {
+        foreach($trabajadores as $k => $t) {
+            if(!$t["imagen"]) {
+                $trabajadores[$k]["imagen"] = "avatars/user.png";
+            }
         }
     }
-}
-}
-elseif($filtroActivado) {        
+}elseif($filtroActivado) {
     $query = "
     SELECT
-    tra.id,
-    tra.fecha_nacimiento,
-    TIMESTAMPDIFF(
-        YEAR,
+        tra.id,
         tra.fecha_nacimiento,
-        CURDATE()
-        ) AS edad,
-tra.nombres,
-tra.apellidos,
-CONCAT(
-    img.directorio,
-    '/',
-    img.nombre,
-    '.',
-    img.extension
-    ) AS imagen,
-tra.calificacion_general,
-tra.sitio_web,
-tra.facebook,
-tra.twitter,
-tra.instagram,
-tra.snapchat,
-tra.linkedin,
-pais.nombre AS pais,
-ie.sobre_mi,
-ie.remuneracion_pret
-FROM
-trabajadores AS tra
-LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-LEFT JOIN paises pais ON tra.id_pais = pais.id
-LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
-";
-$query2 = "
-SELECT
-COUNT(DISTINCT(tra.id))
-FROM
-trabajadores AS tra
-LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-LEFT JOIN paises pais ON tra.id_pais = pais.id
-LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
-";
-
-if($filtroArea) {            
-    $query .= "
-    WHERE
-    te.id_area_estudio = $infoArea[id]
-    ";            
-    $query2 .= "
-    WHERE
-    te.id_area_estudio = $infoArea[id]
+        TIMESTAMPDIFF(YEAR,tra.fecha_nacimiento,CURDATE()) AS edad,
+        tra.nombres,
+        tra.apellidos,
+        CONCAT(img.directorio,'/',img.nombre,'.',img.extension) AS imagen,
+        tra.calificacion_general,
+        tra.sitio_web,
+        tra.facebook,
+        tra.twitter,
+        tra.instagram,
+        tra.snapchat,
+        tra.linkedin,
+        pais.nombre AS pais,
+        ie.sobre_mi,
+        ie.remuneracion_pret
+        FROM
+        trabajadores AS tra
+        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+        LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+        LEFT JOIN paises pais ON tra.id_pais = pais.id
+        LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
     ";
 
-    if($filtroMomento) {
+    $query2 = "
+    SELECT COUNT(DISTINCT(tra.id)) FROM
+    trabajadores AS tra
+    LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+    LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+    LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+    LEFT JOIN paises pais ON tra.id_pais = pais.id
+    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+    LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
+    ";
+
+    if($filtroArea) {
         $query .= "
-        AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
-        ";          
+        WHERE
+        te.id_area_estudio = $infoArea[id]
+        ";
         $query2 .= "
-        AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
+        WHERE
+        te.id_area_estudio = $infoArea[id]
         ";
 
-        if($filtroTipo) {
-            $tmp = filtroTipo(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
+        if($filtroMomento) {
+            $query .= "
+            AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
+            ";
+            $query2 .= "
+            AND (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
+            ";
 
-        if($filtroGenero) {
-            $tmp = filtroGenero(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
-        if($filtroIdioma) {
-            $tmp = filtroIdioma(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
-        if ($filtroLocalidades) {
-            $query .= " AND tra.localidad = $infoLocalidad[id]";
-            $query2 .= " AND tra.localidad = $infoLocalidad[id]";
-        }
-        if ($filtroProvincia) {
-            $query .= " AND tra.provincia = $infoProvincia[id]";
-            $query2 .= " AND tra.provincia = $infoProvincia[id]";
-        }
-        if ($filtroRemuneracion) {
-            $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-            $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-        }
-    }
+            if($filtroTipo) {
+                $tmp = filtroTipo(true);
+                $query .= $tmp;
+                $query2 .= $tmp;
+            }
 
-    if($filtroTipo) {
-        $tmp = filtroTipo(true);
-        $query .= $tmp;
-        $query2 .= $tmp;
-    }
-
-    if($filtroGenero) {
-        $tmp = filtroGenero(true);
-        $query .= $tmp;
-        $query2 .= $tmp;
-    }
-
-    if($filtroIdioma) {
-        $tmp = filtroIdioma(true);
-        $query .= $tmp;
-        $query2 .= $tmp;
-    }
-    if ($filtroLocalidades) {
-        $query .= " AND tra.localidad = $infoLocalidad[id]";
-        $query2 .= " AND tra.localidad = $infoLocalidad[id]";
-    }
-    if ($filtroProvincia) {
-        $query .= " AND tra.provincia = $infoProvincia[id]";
-        $query2 .= " AND tra.provincia = $infoProvincia[id]";
-    }
-    if ($filtroRemuneracion) {
-        $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-        $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-    }
-}
-else {           
-    if($filtroMomento) {
-        $query .= "
-        WHERE (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
-        ";          
-        $query2 .= "
-        WHERE (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
-        ";
-
-        if($filtroTipo) {
-            $tmp = filtroTipo(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
-
-        if($filtroGenero) {
-            $tmp = filtroGenero(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
-        if($filtroIdioma) {
-            $tmp = filtroIdioma(true);
-            $query .= $tmp;
-            $query2 .= $tmp;
-        }
-        if ($filtroLocalidades) {
-            $query .= " AND tra.localidad = $infoLocalidad[id]";
-            $query2 .= " AND tra.localidad = $infoLocalidad[id]";
-        }
-        if ($filtroProvincia) {
-            $query .= " AND tra.provincia = $infoProvincia[id]";
-            $query2 .= " AND tra.provincia = $infoProvincia[id]";
-        }
-        if ($filtroRemuneracion) {
-            $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-            $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-        }
-    }
-    else {
-        if($filtroTipo) {
-            $tmp = filtroTipo(false);
-            $query .= $tmp;
-            $query2 .= $tmp;
             if($filtroGenero) {
                 $tmp = filtroGenero(true);
                 $query .= $tmp;
@@ -1094,11 +965,83 @@ else {
                 $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
             }
         }
-        else {
-            if($filtroGenero) {
-                $tmp = filtroGenero(false);
+
+        if($filtroTipo) {
+            $tmp = filtroTipo(true);
+            $query .= $tmp;
+            $query2 .= $tmp;
+        }
+
+        if($filtroGenero) {
+            $tmp = filtroGenero(true);
+            $query .= $tmp;
+            $query2 .= $tmp;
+        }
+
+        if($filtroIdioma) {
+            $tmp = filtroIdioma(true);
+            $query .= $tmp;
+            $query2 .= $tmp;
+        }
+        if ($filtroLocalidades) {
+            $query .= " AND tra.localidad = $infoLocalidad[id]";
+            $query2 .= " AND tra.localidad = $infoLocalidad[id]";
+        }
+        if ($filtroProvincia) {
+            $query .= " AND tra.provincia = $infoProvincia[id]";
+            $query2 .= " AND tra.provincia = $infoProvincia[id]";
+        }
+        if ($filtroRemuneracion) {
+            $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+            $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+        }
+    }else{
+        if($filtroMomento) {
+            $query .= "
+            WHERE (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
+            ";
+            $query2 .= "
+            WHERE (TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) >= $infoMomento[rango_a] AND TIMESTAMPDIFF(YEAR, tra.fecha_nacimiento, CURDATE()) <= $infoMomento[rango_b])
+            ";
+
+            if($filtroTipo) {
+                $tmp = filtroTipo(true);
                 $query .= $tmp;
                 $query2 .= $tmp;
+            }
+
+            if($filtroGenero) {
+                $tmp = filtroGenero(true);
+                $query .= $tmp;
+                $query2 .= $tmp;
+            }
+            if($filtroIdioma) {
+                $tmp = filtroIdioma(true);
+                $query .= $tmp;
+                $query2 .= $tmp;
+            }
+            if ($filtroLocalidades) {
+                $query .= " AND tra.localidad = $infoLocalidad[id]";
+                $query2 .= " AND tra.localidad = $infoLocalidad[id]";
+            }
+            if ($filtroProvincia) {
+                $query .= " AND tra.provincia = $infoProvincia[id]";
+                $query2 .= " AND tra.provincia = $infoProvincia[id]";
+            }
+            if ($filtroRemuneracion) {
+                $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+            }
+        }else{
+            if($filtroTipo) {
+                $tmp = filtroTipo(false);
+                $query .= $tmp;
+                $query2 .= $tmp;
+                if($filtroGenero) {
+                    $tmp = filtroGenero(true);
+                    $query .= $tmp;
+                    $query2 .= $tmp;
+                }
                 if($filtroIdioma) {
                     $tmp = filtroIdioma(true);
                     $query .= $tmp;
@@ -1116,30 +1059,38 @@ else {
                     $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
                     $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
                 }
-            }
-            else {
-                if($filtroIdioma) {
-                    $tmp = filtroIdioma(false);
+            }else{
+                if($filtroGenero) {
+                    $tmp = filtroGenero(false);
                     $query .= $tmp;
                     $query2 .= $tmp;
-
+                    if($filtroIdioma) {
+                        $tmp = filtroIdioma(true);
+                        $query .= $tmp;
+                        $query2 .= $tmp;
+                    }
                     if ($filtroLocalidades) {
                         $query .= " AND tra.localidad = $infoLocalidad[id]";
                         $query2 .= " AND tra.localidad = $infoLocalidad[id]";
                     }
-
                     if ($filtroProvincia) {
-                        $query .= "AND tra.provincia = $infoProvincia[id]";
-                        $query2 .= "AND tra.provincia = $infoProvincia[id]";
+                        $query .= " AND tra.provincia = $infoProvincia[id]";
+                        $query2 .= " AND tra.provincia = $infoProvincia[id]";
                     }
                     if ($filtroRemuneracion) {
                         $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
                         $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
                     }
-                } else {
-                    if ($filtroLocalidades) {
-                        $query .= "WHERE tra.localidad = $infoLocalidad[id]";
-                        $query2 .= "WHERE tra.localidad = $infoLocalidad[id]";
+                }else{
+                    if($filtroIdioma) {
+                        $tmp = filtroIdioma(false);
+                        $query .= $tmp;
+                        $query2 .= $tmp;
+
+                        if ($filtroLocalidades) {
+                            $query .= " AND tra.localidad = $infoLocalidad[id]";
+                            $query2 .= " AND tra.localidad = $infoLocalidad[id]";
+                        }
 
                         if ($filtroProvincia) {
                             $query .= "AND tra.provincia = $infoProvincia[id]";
@@ -1149,19 +1100,33 @@ else {
                             $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
                             $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
                         }
-                    } else {
-                        if ($filtroProvincia) {
-                            $query .= "WHERE tra.provincia = $infoProvincia[id]";
-                            $query2 .= "WHERE tra.provincia = $infoProvincia[id]";
+                    }else{
+                        if ($filtroLocalidades) {
+                            $query .= "WHERE tra.localidad = $infoLocalidad[id]";
+                            $query2 .= "WHERE tra.localidad = $infoLocalidad[id]";
 
+                            if ($filtroProvincia) {
+                                $query .= "AND tra.provincia = $infoProvincia[id]";
+                                $query2 .= "AND tra.provincia = $infoProvincia[id]";
+                            }
                             if ($filtroRemuneracion) {
                                 $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
                                 $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
                             }
                         } else {
-                            if ($filtroRemuneracion) {
-                                $query .= " WHERE " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-                                $query2 .= " WHERE " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                            if ($filtroProvincia) {
+                                $query .= "WHERE tra.provincia = $infoProvincia[id]";
+                                $query2 .= "WHERE tra.provincia = $infoProvincia[id]";
+
+                                if ($filtroRemuneracion) {
+                                    $query .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                                    $query2 .= " AND " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                                }
+                            } else {
+                                if ($filtroRemuneracion) {
+                                    $query .= " WHERE " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                                    $query2 .= " WHERE " . "ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                                }
                             }
                         }
                     }
@@ -1169,27 +1134,31 @@ else {
             }
         }
     }
-}
 
 
-$cantidadRegistros = $db->getOne($query2);
+    $cantidadRegistros = $db->getOne($query2);
 
-$cantidadPaginas = ceil($cantidadRegistros / $final);
+    $cantidadPaginas = ceil($cantidadRegistros / $final);
 
-        #$query .= " GROUP BY tra.id LIMIT $inicial, $final";
-$query .= " GROUP BY tra.id";
+            #$query .= " GROUP BY tra.id LIMIT $inicial, $final";
+    $query .= " GROUP BY tra.id";
+    //$query .= " GROUP BY tra.id limit 1";
 
-$trabajadores = $db->getAll($query);    
+    /**
+     * [la consulta que ocurre cuando seleccionas filtro base]
+     * JDLUGO
+     */
 
-if($trabajadores) {
-    foreach($trabajadores as $k => $t) {
-        if(!$t["imagen"]) {
-            $trabajadores[$k]["imagen"] = "avatars/user.png";
+    $trabajadores = $db->getAll($query);
+
+    if($trabajadores) {
+        foreach($trabajadores as $k => $t) {
+            if(!$t["imagen"]) {
+                $trabajadores[$k]["imagen"] = "avatars/user.png";
+            }
         }
     }
-}
-}
-else if($busqueda) {
+} else if($busqueda) {
     $trabajadores = $db->getAll("
         SELECT
         tra.id,
@@ -1220,7 +1189,7 @@ else if($busqueda) {
     trabajadores AS tra
     LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
     LEFT JOIN paises pais ON tra.id_pais = pais.id
-    LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
     WHERE tra.nombres LIKE '%$busqueda%' OR tra.apellidos LIKE '%$busqueda%'
     ");
 
@@ -1238,7 +1207,7 @@ else if($busqueda) {
         LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
         LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
         LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
         WHERE tra.nombres LIKE '%$busqueda%' OR tra.apellidos LIKE '%$busqueda%'
         ");
 
@@ -1272,7 +1241,7 @@ else {
     trabajadores AS tra
     LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
     LEFT JOIN paises pais ON tra.id_pais = pais.id
-    LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
     GROUP BY tra.id
     ORDER BY ie.sobre_mi DESC, tra.id DESC
     LIMIT 0,15
@@ -1303,7 +1272,7 @@ if (!$filtroRemuneracion) {
                     LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
                     LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
                     LEFT JOIN paises pais ON tra.id_pais = pais.id
-                    LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                     WHERE
                     (
                         ie.remuneracion_pret
@@ -1328,7 +1297,7 @@ $query .= "
 GROUP BY
 tra.id
 ) AS t
-";  
+";
 } else {
     $query = "
     SELECT
@@ -1343,7 +1312,7 @@ tra.id
         LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
         LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
         LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
         WHERE
         (
             ie.remuneracion_pret
@@ -1384,7 +1353,7 @@ $query .= "";
     LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
     LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
     LEFT JOIN paises pais ON tra.id_pais = pais.id
-    LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
     WHERE
     (
         ie.remuneracion_pret
@@ -1435,7 +1404,7 @@ if(!$filtroMomento) {
                     LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
                     LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
                     LEFT JOIN paises pais ON tra.id_pais = pais.id
-                    LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                     WHERE
                     (
                         TIMESTAMPDIFF(
@@ -1487,7 +1456,7 @@ else {
         LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
         LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
         LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
         WHERE
         (
             TIMESTAMPDIFF(
@@ -1536,7 +1505,7 @@ else {
     LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
     LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
     LEFT JOIN paises pais ON tra.id_pais = pais.id
-    LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
     WHERE TIMESTAMPDIFF(YEAR,  tra.fecha_nacimiento, CURDATE()) >= $momento[rango_a] AND TIMESTAMPDIFF(YEAR,  tra.fecha_nacimiento, CURDATE()) <= $momento[rango_b]
     ";
 
@@ -1572,15 +1541,40 @@ if(!$filtroTipo) {
         $condt = "";
         switch($tipo["amigable"]) {
             case "nuevos":
-            $condt = "(TIMESTAMPDIFF(MONTH, tra.fecha_creacion, CURDATE()) <= 3 AND ec.id_trabajador IS NULL)";
+            $condt = "(TIMESTAMPDIFF(MONTH, tra.fecha_creacion, CURDATE()) <= 3 AND ec.id_trabajador IS NULL )";
             break;
             case "contratados":
             $condt = "(ec.id_trabajador IS NOT NULL AND TIMESTAMPDIFF(MONTH, tra.fecha_creacion, CURDATE()) >= 3)";
             break;
         }
-        if($filtroActivado) {
+        
+        if($filtroActivado){
             if($filtroArea) {
                 if($filtroMomento) {
+                    $query = " SELECT COUNT(*) FROM (
+                        SELECT tra.id  FROM
+                        trabajadores AS tra
+                        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+                        LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+                        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                        LEFT JOIN paises pais ON tra.id_pais = pais.id
+                        WHERE $condt AND te.id_area_estudio = $infoArea[id]
+                        ";
+                        $query .= filtroMomento(true);
+                        $query .= filtroGenero(true);
+                        $query .= filtroIdioma(true);
+                        if ($filtroLocalidades) {
+                            $query .= " AND tra.localidad = $infoLocalidad[id]";
+                        }
+                        if ($filtroProvincia) {
+                            $query .= " AND tra.provincia = $infoProvincia[id]";
+                        }
+                        if ($filtroRemuneracion) {
+                            $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                        }
+                        $query .= " GROUP BY tra.id ) AS t";
+                }else {
                     $query = "
                     SELECT
                     COUNT(*)
@@ -1590,228 +1584,165 @@ if(!$filtroTipo) {
                         tra.id
                         FROM
                         trabajadores AS tra
+                        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                         LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
                         LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
                         LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
                         LEFT JOIN paises pais ON tra.id_pais = pais.id
-                        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                         WHERE $condt AND te.id_area_estudio = $infoArea[id]
-                        ";
-                        $query .= filtroMomento(true);
-                        $query .= filtroGenero(true);
-                        $query .= filtroIdioma(true);
-                        if ($filtroLocalidades) {
-                            $query .= " AND tra.localidad = $infoLocalidad[id]";
+                    ";
 
-                        }
-                        if ($filtroProvincia) {
-                            $query .= " AND tra.provincia = $infoProvincia[id]";
-                            
-                        }
+                    $query .= filtroGenero(true);
+                    $query .= filtroIdioma(true);
+                    if ($filtroLocalidades) {
+                        $query .= " AND tra.localidad = $infoLocalidad[id]";
 
-                        if ($filtroRemuneracion) {
-                            $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-                        }
+                    }
+                    if ($filtroProvincia) {
+                        $query .= " AND tra.provincia = $infoProvincia[id]";
 
-                        $query .= "
-                        GROUP BY
+                    }
+
+                    if ($filtroRemuneracion) {
+                        $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                    }
+
+                    $query .= "
+                    GROUP BY
+                    tra.id
+                    ) AS t";
+                }
+            }else {
+                if($filtroMomento){
+                    $query = " SELECT COUNT(*) FROM (
+                        SELECT
                         tra.id
-                        ) AS t";
-}
-else {
-    $query = "
-    SELECT
-    COUNT(*)
-    FROM
-    (
-        SELECT
-        tra.id
-        FROM
-        trabajadores AS tra
-        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-        LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-        LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-        WHERE $condt AND te.id_area_estudio = $infoArea[id]
-        ";
+                        FROM
+                        trabajadores AS tra
+                        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+                        LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+                        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                        LEFT JOIN paises pais ON tra.id_pais = pais.id
+                        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                        WHERE $condt
+                    ";
 
-        $query .= filtroGenero(true);
-        $query .= filtroIdioma(true);
-        if ($filtroLocalidades) {
-            $query .= " AND tra.localidad = $infoLocalidad[id]";
+                    $query .= filtroMomento(true);
+                    $query .= filtroGenero(true);
+                    $query .= filtroIdioma(true);
+                    if ($filtroLocalidades) {
+                        $query .= " AND tra.localidad = $infoLocalidad[id]";
 
-        }
-        if ($filtroProvincia) {
-            $query .= " AND tra.provincia = $infoProvincia[id]";
+                    }
+                    if ($filtroProvincia) {
+                        $query .= " AND tra.provincia = $infoProvincia[id]";
 
-        }
+                    }
 
-        if ($filtroRemuneracion) {
-            $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-        }
+                    if ($filtroRemuneracion) {
+                        $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                    }
 
-        $query .= "
-        GROUP BY
-        tra.id
-        ) AS t";
-}
-}
-else {
-    if($filtroMomento) {
-        $query = "
-        SELECT
-        COUNT(*)
-        FROM
-        (
-            SELECT
-            tra.id
-            FROM
-            trabajadores AS tra
-            LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-            LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-            LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-            LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-            WHERE $condt
-            ";
+                    $query .= "
+                    GROUP BY
+                    tra.id
+                    ) AS t";
+                }else {
+                    $query = " SELECT COUNT(*) FROM (
+                        SELECT
+                        tra.id
+                        FROM
+                        trabajadores AS tra
+                        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+                        LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+                        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                        LEFT JOIN paises pais ON tra.id_pais = pais.id
+                        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                        WHERE $condt
+                    ";
+                    $query .= filtroGenero(true);
+                    $query .= filtroIdioma(true);
+                    if ($filtroLocalidades) {
+                        $query .= " AND tra.localidad = $infoLocalidad[id]";
 
-            $query .= filtroMomento(true);
-            $query .= filtroGenero(true);
-            $query .= filtroIdioma(true);
-            if ($filtroLocalidades) {
-                $query .= " AND tra.localidad = $infoLocalidad[id]";
+                    }
+                    if ($filtroProvincia) {
+                        $query .= " AND tra.provincia = $infoProvincia[id]";
 
+                    }
+
+                    if ($filtroRemuneracion) {
+                        $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                    }
+                    $query .= " GROUP BY tra.id ) AS t";
+                }
             }
-            if ($filtroProvincia) {
-                $query .= " AND tra.provincia = $infoProvincia[id]";
+        }else {
+            if($filtroMomento) {
+                $query = "
+                SELECT
+                COUNT(*)
+                FROM
+                trabajadores AS tra
+                LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+                LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                LEFT JOIN paises pais ON tra.id_pais = pais.id
+                INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                WHERE $condt
+                ";
 
+                $query .= filtroMomento(true);
+                $query .= filtroGenero(true);
+                $query .= filtroIdioma(true);
+                if ($filtroLocalidades) {
+                    $query .= " AND tra.localidad = $infoLocalidad[id]";
+
+                }
+                if ($filtroProvincia) {
+                    $query .= " AND tra.provincia = $infoProvincia[id]";
+
+                }
+
+                if ($filtroRemuneracion) {
+                    $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                }
+            } else {
+                $query = " SELECT COUNT(*) FROM (
+                    SELECT
+                    tra.id
+                    FROM
+                    trabajadores AS tra
+                    LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+                    LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+                    LEFT JOIN paises pais ON tra.id_pais = pais.id
+                    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                    WHERE $condt
+                ";
+
+                $query .= filtroGenero(true);
+                $query .= filtroIdioma(true);
+                if ($filtroLocalidades) {
+                    $query .= " AND tra.localidad = $infoLocalidad[id]";
+
+                }
+                if ($filtroProvincia) {
+                    $query .= " AND tra.provincia = $infoProvincia[id]";
+
+                }
+
+                if ($filtroRemuneracion) {
+                    $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
+                }
+
+                $query .= " GROUP BY tra.id ) AS T";
             }
-
-            if ($filtroRemuneracion) {
-                $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-            }
-
-            $query .= "
-            GROUP BY
-            tra.id
-            ) AS t";
-
-}
-else {
-    $query = "
-    SELECT
-    COUNT(*)
-    FROM
-    (
-        SELECT
-        tra.id
-        FROM
-        trabajadores AS tra
-        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-        LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-        LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-        WHERE $condt
-        ";
-
-        $query .= filtroGenero(true);
-        $query .= filtroIdioma(true);
-        if ($filtroLocalidades) {
-            $query .= " AND tra.localidad = $infoLocalidad[id]";
-
-        }
-        if ($filtroProvincia) {
-            $query .= " AND tra.provincia = $infoProvincia[id]";
-
         }
 
-        if ($filtroRemuneracion) {
-            $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-        }
+        $c = $db->getOne($query);
 
-        $query .= "
-        GROUP BY
-        tra.id
-        ) AS t";
-}
-}
-}
-else {
-    if($filtroMomento) {
-        $query = "
-        SELECT
-        COUNT(*)
-        FROM
-        trabajadores AS tra
-        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-        LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-        WHERE $condt
-        ";
-
-        $query .= filtroMomento(true);
-        $query .= filtroGenero(true);
-        $query .= filtroIdioma(true);
-        if ($filtroLocalidades) {
-            $query .= " AND tra.localidad = $infoLocalidad[id]";
-
-        }
-        if ($filtroProvincia) {
-            $query .= " AND tra.provincia = $infoProvincia[id]";
-
-        }
-
-        if ($filtroRemuneracion) {
-            $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-        }
+        $tipos[$i]["cantidad"] = $c;
+        $contTipos += $c;
     }
-    else {
-        $query = "
-        SELECT
-        COUNT(*)
-        FROM
-        (
-            SELECT
-            tra.id
-            FROM
-            trabajadores AS tra
-            LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-            LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-            LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-            WHERE $condt
-            ";
-
-            $query .= filtroGenero(true);
-            $query .= filtroIdioma(true);
-            if ($filtroLocalidades) {
-                $query .= " AND tra.localidad = $infoLocalidad[id]";
-
-            }
-            if ($filtroProvincia) {
-                $query .= " AND tra.provincia = $infoProvincia[id]";
-
-            }
-
-            if ($filtroRemuneracion) {
-                $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
-            }
-
-            $query .= "
-            GROUP BY
-            tra.id
-            ) AS T";
-}
-}
-
-$c = $db->getOne($query);
-
-$tipos[$i]["cantidad"] = $c;
-$contTipos += $c;
-}
 }
 
 if(!$filtroGenero) {
@@ -1842,7 +1773,7 @@ if(!$filtroGenero) {
                         LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
                         LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
                         LEFT JOIN paises pais ON tra.id_pais = pais.id
-                        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+                        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                         WHERE
                         $condt AND te.id_area_estudio = $infoArea[id]
                         ";
@@ -1851,11 +1782,11 @@ if(!$filtroGenero) {
                         $query .= filtroIdioma(true);
                         if ($filtroLocalidades) {
                             $query .= " AND tra.localidad = $infoLocalidad[id]";
-                            
+
                         }
                         if ($filtroProvincia) {
                             $query .= " AND tra.provincia = $infoProvincia[id]";
-                            
+
                         }
                         if ($filtroRemuneracion) {
                             $query .= " AND ie.remuneracion_pret BETWEEN $infoRemuneracion[rango_a] AND $infoRemuneracion[rango_b]";
@@ -1879,7 +1810,7 @@ else {
         LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
         LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
         LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
         WHERE $condt AND te.id_area_estudio = $infoArea[id]
         ";
 
@@ -1919,7 +1850,7 @@ else {
             LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
             LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
             LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+            INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
             WHERE $condt
             ";
 
@@ -1959,7 +1890,7 @@ else {
         LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
         LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
         LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
         WHERE $condt
         ";
 
@@ -1993,9 +1924,9 @@ else {
         FROM
         trabajadores AS tra
         LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador                    
+        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
         LEFT JOIN paises pais ON tra.id_pais = pais.id
-        LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
         WHERE $condt
         ";
 
@@ -2028,9 +1959,9 @@ else {
             LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
             LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
             LEFT JOIN paises pais ON tra.id_pais = pais.id
-            LEFT JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+            INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
             WHERE $condt
-            ";                    
+            ";
 
             $query .= filtroTipo(true);
             $query .= filtroIdioma(true);
@@ -2092,7 +2023,7 @@ $contGeneros += $c;
             -webkit-transition: all 0.2s ease-in-out;
             transition: all 0.2s ease-in-out;
             cursor: pointer;
-        }           
+        }
         .tra:hover, .tra-f:hover {
             background-color: #DADADA !important;
         }
@@ -2116,15 +2047,15 @@ $contGeneros += $c;
             <div class="content-area p-y-1">
 
                 <div class="container-fluid">
-                    <div class="col-md-6">              
+                    <div class="col-md-6">
                         <?php if($filtroActivado): ?>
                             <h4>Trabajadores</h4>
 
                             <?php echo crearBreadcrumb(); ?>
-                            
+
                         <?php else: ?>
                             <br>
-                        <?php endif ?>                  
+                        <?php endif ?>
                     </div>
                     <?php if($cantidadRegistros > 0): ?>
                         <?php if($filtroActivado): ?>
@@ -2187,7 +2118,7 @@ $contGeneros += $c;
                                     <h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Edad</h5>
                                 </div>
                                 <table class="table m-md-b-0">
-                                    <tbody>                     
+                                    <tbody>
                                         <?php if($filtroMomento): ?>
                                             <tr>
                                                 <td>
@@ -2211,8 +2142,8 @@ $contGeneros += $c;
                                                         </td>
                                                     </tr>
                                                 <?php endif ?>
-                                            <?php endforeach ?>                                 
-                                        <?php endif ?>                          
+                                            <?php endforeach ?>
+                                        <?php endif ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -2248,8 +2179,8 @@ $contGeneros += $c;
                                                         </td>
                                                     </tr>
                                                 <?php endif ?>
-                                            <?php endforeach ?>                                 
-                                        <?php endif ?>                          
+                                            <?php endforeach ?>
+                                        <?php endif ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -2286,8 +2217,8 @@ $contGeneros += $c;
                                                     </td>
                                                 </tr>
                                             <?php endif ?>
-                                        <?php endforeach ?>                                 
-                                    <?php endif ?>                          
+                                        <?php endforeach ?>
+                                    <?php endif ?>
                                 </tbody>
                             </table>
                         </div>
@@ -2324,8 +2255,8 @@ $contGeneros += $c;
                                                 </td>
                                             </tr>
                                         <?php endif ?>
-                                    <?php endforeach ?>                                 
-                                <?php endif ?>                          
+                                    <?php endforeach ?>
+                                <?php endif ?>
                             </tbody>
                         </table>
                     </div>
@@ -2363,8 +2294,8 @@ $contGeneros += $c;
                                             </td>
                                         </tr>
                                     <?php endif ?>
-                                <?php endforeach ?>                                 
-                            <?php endif ?>                          
+                                <?php endforeach ?>
+                            <?php endif ?>
                         </tbody>
                     </table>
                 </div>
@@ -2402,8 +2333,8 @@ $contGeneros += $c;
                                         </td>
                                     </tr>
                                 <?php endif ?>
-                            <?php endforeach ?>                                 
-                        <?php endif ?>                          
+                            <?php endforeach ?>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
@@ -2441,8 +2372,8 @@ $contGeneros += $c;
                                     </td>
                                 </tr>
                             <?php endif ?>
-                        <?php endforeach ?>                                 
-                    <?php endif ?>                          
+                        <?php endforeach ?>
+                    <?php endif ?>
                 </tbody>
             </table>
         </div>
@@ -2455,7 +2386,7 @@ $contGeneros += $c;
     <?php if($filtroActivado || $busqueda || $busquedaAvanzada): ?>
         <?php if($cantidadRegistros > 0): ?>
             <div class="row row-sm">
-                <?php foreach($trabajadores as $trabajador): ?> 
+                <?php foreach($trabajadores as $trabajador): ?>
                     <?php
                     $sitio_web = $trabajador["sitio_web"] != "" || $trabajador["sitio_web"] != NULL ? "<a target='_blank' href='".$trabajador["sitio_web"]."' style='margin-right: 5px'><i class='fa fa-internet-explorer fa-2x' aria-hidden='true'></i></a>" : "";
                     $facebook = $trabajador["facebook"] != "" || $trabajador["facebook"] != NULL ? "<a target='_blank' href='".$trabajador["facebook"]."' style='margin-right: 5px'><i class='fa fa-facebook fa-2x' aria-hidden='true'></i></a>" : "";
@@ -2463,7 +2394,7 @@ $contGeneros += $c;
                     $snapchat = $trabajador["snapchat"] != "" || $trabajador["snapchat"] != NULL ? "<a target='_blank' href='".$trabajador["snapchat"]."' style='margin-right: 5px'><i class='fa fa-snapchat-square fa-2x' aria-hidden='true'></i></a>" : "";
                     $instagram = $trabajador["instagram"] != "" || $trabajador["instagram"] != NULL ? "<a target='_blank' href='".$trabajador["instagram"]."' style='margin-right: 5px'><i class='fa fa-instagram fa-2x' aria-hidden='true'></i></a>" : "";
                     $linkedin = $trabajador["linkedin"] != "" || $trabajador["linkedin"] != NULL ? "<a target='_blank' href='".$trabajador["linkedin"]."' style='margin-right: 5px'><i class='fa fa-linkedin fa-2x' aria-hidden='true'></i></a>" : "";
-                    ?>                                  
+                    ?>
                     <div class="col-md-12">
                         <a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
                             <div class="tra box box-block bg-white user-5">
@@ -2531,9 +2462,9 @@ $contGeneros += $c;
                             </div>
                         </a>
                     </div>
-                <?php endforeach ?> 
+                <?php endforeach ?>
             </div>
-        <?php else: ?>  
+        <?php else: ?>
             <div class="alert alert-danger fade in" role="alert">
                 <i class="ion-android-alert"></i> No hemos obtenido ningún resultado que se ajuste a tus criterios de búsqueda.
             </div>
@@ -2616,7 +2547,7 @@ $contGeneros += $c;
                         </div>
                     </a>
                 </div>
-            <?php endforeach ?> 
+            <?php endforeach ?>
         </div>
         <?php if (count($trabajadores) > 0): ?>
             <div style="text-align: center">
