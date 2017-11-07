@@ -378,15 +378,15 @@ else {
             }
 
             if($filtroMomento) {
-                $query .= " AND " . filtroMomento(true);
+                $query .= filtroMomento(true);
             }
 
             if($filtroTipo) {
-                $query .= "  " . filtroTipo(true);
+                $query .= filtroTipo(true);
             }
 
             if($filtroGenero) {
-                $query .= " AND " . filtroGenero(true);
+                $query .= filtroGenero(true);
             }
 
             if($filtroLocalidades) {
@@ -472,19 +472,19 @@ if ($filtroProvincia) {
             }
 
             if($filtroMomento) {
-                $query .= " AND " . filtroMomento(true);
+                $query .=  filtroMomento(true);
             }
 
             if($filtroTipo) {
-                $query .= " AND " . filtroTipo(true);
+                $query .=  filtroTipo(true);
             }
 
             if($filtroGenero) {
-                $query .= " AND " . filtroGenero(true);
+                $query .=  filtroGenero(true);
             }
 
             if($filtroIdioma) {
-                $query .= " AND " . filtroIdioma(true);
+                $query .= filtroIdioma(true);
             }
 
             if($filtroLocalidades) {
@@ -568,19 +568,19 @@ if ($filtroLocalidades) {
             }
 
             if($filtroMomento) {
-                $query .= " AND " . filtroMomento(true);
+                $query .= filtroMomento(true);
             }
 
             if($filtroTipo) {
-                $query .= " AND " . filtroTipo(true);
+                $query .= filtroTipo(true);
             }
 
             if($filtroGenero) {
-                $query .= " AND " . filtroGenero(true);
+                $query .= filtroGenero(true);
             }
 
             if($filtroIdioma) {
-                $query .= " AND " . filtroIdioma(true);
+                $query .= filtroIdioma(true);
             }
 
             if ($filtroProvincia) {
