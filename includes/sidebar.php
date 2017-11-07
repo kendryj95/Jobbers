@@ -46,7 +46,7 @@
 							</li>
 							<?php else: ?>
 								<li>
-									<a href="javascript:void(0)" title="Actualiza tu plan para disfrutar de este servicio" style="cursor: default;">
+									<a href="javascript:void(0)" class="actualiza_plan" title="Actualiza tu plan para disfrutar de este servicio" style="cursor: no-drop;">
 										<span class="s-icon" style="color: gray;"><i class="ti-folder"></i></span>
 										<span class="s-text" style="color: gray;">Ver jobbers</span>
 									</a>
@@ -158,6 +158,3 @@
 	<?php endif ?>
 
 <?php endif; ?>
-
-
-
