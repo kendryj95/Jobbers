@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io/api/osx,node,windows,polymer,sublimetext
 
+# Clase de la base de datos :
+classes/DatabasePDOInstance.function.php
+
 ### Node ###
 # Logs
 logs
