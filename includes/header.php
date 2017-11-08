@@ -229,7 +229,7 @@
 			<ul class="nav navbar-nav pull-xs-right movil">
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>empleos.php">
-						Empleos
+						Bolsa de Empleos
 					</a>
 				</li>
 				<li class="nav-item dropdown">
@@ -244,7 +244,7 @@
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
-						Empresas
+						Empresas - Acceso
 					</a>
 				</li>
 				<li class="nav-item hidden-md-up">

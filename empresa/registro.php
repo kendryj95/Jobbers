@@ -406,7 +406,7 @@
 					$.ajax({
 						type: 'POST',
 						url: 'ajax/empresas.php',
-						data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + '&term=1&plan=' + plan + '&serv=' + serv + '&transaction=' + JSON.stringify(json) + '&cuit=' + $("#cuit").val(),
+						data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + $('#phone').val() + '&term=1&plan=' + plan + '&serv=' + serv + '&transaction=' + JSON.stringify(json) + '&cuit=' + $("#cuit").val(),
 						dataType: 'json',
 						success: function(data) {
 							if(data.msg == "OK") {
@@ -624,7 +624,7 @@
 						$.ajax({
 							type: 'POST',
 							url: 'ajax/empresas.php',
-							data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + '&term=1&plan=' + plan + '&serv=' + serv,
+							data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + $('#phone').val() + '&term=1&plan=' + plan + '&serv=' + serv,
 							dataType: 'json',
 							success: function(data) {
 								if(data.msg == "OK") {
