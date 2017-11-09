@@ -78,6 +78,30 @@
 			});
 		</script>
 	<?php endif ?>
+	<script type="text/javascript">
+		 $('#busqueda_form').on('submit', function(evt){
+	    	evt.preventDefault();
+			<?php if($_SESSION["ctc"]["type"] == 2): ?>
+				var s = $("#search-input").val();
+				if(s.trim() == "") {
+					swal("Error!", "El campo de búsqueda esta vacío.", "error");
+				}else {
+					window.location.assign("empleos.php?busqueda=" + s + "&pagina=1");
+				}
+			<?php elseif($_SESSION["ctc"]["type"] == 1): ?>
+				var s = $("#search-input-w").val();
+				if(s.trim() == "") {
+					swal("Error!", "El campo de búsqueda esta vacía.", "error");
+				}else {
+					var ruta = "trabajadores.php?busqueda=" + s + "&pagina=1";
+					<?php if(strstr($_SERVER["REQUEST_URI"], "empresa/")) :?>
+					var ruta = "../trabajadores.php?busqueda=" + s + "&pagina=1";
+					<?php endif?>
+					window.location.assign(ruta);
+				}
+			<?php endif ?>
+		 });	
+	</script>
 <?php else: ?>
 	<script type="text/javascript">
 		$(function() {
