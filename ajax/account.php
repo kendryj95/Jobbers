@@ -49,11 +49,14 @@
 					break;
 				case 3:
 					if($id != "" && $id != "undefined") {
-						$db->query("UPDATE trabajadores_educacion SET id_nivel_estudio='$_REQUEST[sNivel]', titulo='$_REQUEST[titleS]', id_estado_estudio='$_REQUEST[stateS]', id_area_estudio='$_REQUEST[areaS]', nombre_institucion=$_REQUEST[institute]'', id_pais='$_REQUEST[countryS]', mes_inicio='$_REQUEST[monthIn]', ano_inicio='$_REQUEST[yearIn]', mes_finalizacion='$_REQUEST[monthFi]', ano_finalizacion='$_REQUEST[yearFi]', materias_carrera='$_REQUEST[mat]', materias_aprobadas='$_REQUEST[aprob]' WHERE id=$_REQUEST[i]");
-					}
-					else {
+						$db->query("UPDATE trabajadores_educacion SET id_nivel_estudio=$_REQUEST[sNivel], titulo='$_REQUEST[titleS]', id_estado_estudio=$_REQUEST[stateS], id_area_estudio=$_REQUEST[areaS], nombre_institucion='$_REQUEST[institute]', id_pais=$_REQUEST[countryS], mes_inicio=$_REQUEST[monthIn], ano_inicio=$_REQUEST[yearIn], mes_finalizacion=$_REQUEST[monthFi], ano_finalizacion=$_REQUEST[yearFi], materias_carrera=$_REQUEST[mat], materias_aprobadas=$_REQUEST[aprob] WHERE id=$_REQUEST[i]");
+					}else {
 						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores_educacion'");
-						$db->query("INSERT INTO trabajadores_educacion (id_trabajador, id_nivel_estudio, titulo, id_estado_estudio, id_area_estudio, nombre_institucion, id_pais, mes_inicio, ano_inicio, mes_finalizacion, ano_finalizacion, materias_carrera, materias_aprobadas) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[sNivel]', '$_REQUEST[titleS]', '$_REQUEST[stateS]', '$_REQUEST[areaS]', '$_REQUEST[institute]', '$_REQUEST[countryS]', '$_REQUEST[monthIn]', '$_REQUEST[yearIn]', '$_REQUEST[monthFi]', '$_REQUEST[yearFi]', '$_REQUEST[mat]', '$_REQUEST[aprob]')");
+						if ((isset($_REQUEST[monthFi]) || ($_REQUEST[monthFi] != ''))  && (isset($_REQUEST[yearFi]) || ($_REQUEST[yearFi] != ''))){
+							$db->query("INSERT INTO trabajadores_educacion (id_trabajador, id_nivel_estudio, titulo, id_estado_estudio, id_area_estudio, nombre_institucion, id_pais, mes_inicio, ano_inicio, mes_finalizacion, ano_finalizacion, materias_carrera, materias_aprobadas) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[sNivel]', '$_REQUEST[titleS]', '$_REQUEST[stateS]', '$_REQUEST[areaS]', '$_REQUEST[institute]', '$_REQUEST[countryS]', '$_REQUEST[monthIn]', '$_REQUEST[yearIn]', '$_REQUEST[monthFi]', '$_REQUEST[yearFi]', '$_REQUEST[mat]', '$_REQUEST[aprob]')");
+						}else{
+							$db->query("INSERT INTO trabajadores_educacion (id_trabajador, id_nivel_estudio, titulo, id_estado_estudio, id_area_estudio, nombre_institucion, id_pais, mes_inicio, ano_inicio, materias_carrera, materias_aprobadas) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[sNivel]', '$_REQUEST[titleS]', '$_REQUEST[stateS]', '$_REQUEST[areaS]', '$_REQUEST[institute]', '$_REQUEST[countryS]', '$_REQUEST[monthIn]', '$_REQUEST[yearIn]', '$_REQUEST[mat]', '$_REQUEST[aprob]')");
+						}
 					}
 					$data = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id=$id");
 					break;

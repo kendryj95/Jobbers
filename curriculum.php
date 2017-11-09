@@ -653,7 +653,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
+											<div class="row" style="margin-top: 10px;" id='fechaFin'>
 												<div class="col-md-4" style="text-align: right;"><label for="monthFi" style="margin-top: 6px;">Mes de finalización <span style="color: red;">*</span></label></div>
 												<div class="col-md-3">
 													<select class="custom-select" style="width: 100%;" id="monthFi">
@@ -759,7 +759,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar</a></div>
+										<div class="col-md-4" style="text-align: center;">
+											<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar</a>
+											<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar</a></div>
 										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 								</div>
@@ -1144,6 +1146,15 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 			<script>
 				$(document).ready(function(){
+
+					$('#stateS').change(function(){
+						if (parseInt($(this).val()) == 1){
+							//alert('ocultando fecha fin');
+							$('#fechaFin').css('display','none');
+						}else{
+							$('#fechaFin').css('display','block');
+						}
+					});
 
 					$('#ex1').slider({
 						formatter: function(value) {
@@ -1670,26 +1681,57 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								break;
 							case 3:
 								if(parseInt($("#sNivel").val()) > 0 && $("#titleS").val() != "" && parseInt($("#stateS").val()) > 0 && parseInt($("#areaS").val()) > 0 && $("#institute").val() != "" && parseInt($("#countryS").val()) > 0) {
-									if(parseInt($("#yearFi").val()) >= parseInt($("#yearIn").val())) {
+									if(parseInt($('#stateS').val()) != 1){
+										if(parseInt($("#yearFi").val()) >= parseInt($("#yearIn").val())) {
+											str = '&sNivel='+$("#sNivel").val() + '&titleS='+$("#titleS").val() + '&stateS='+$("#stateS").val() + '&areaS='+$("#areaS").val() + '&institute='+$("#institute").val() + '&countryS='+$("#countryS").val() + '&mat='+$("#mat").val() + '&aprob='+$("#aprob").val() + '&monthIn='+$("#monthIn").val() + '&yearIn='+$("#yearIn").val() + '&monthFi='+$("#monthFi").val() + '&yearFi='+$("#yearFi").val();
+											band = true;
+										}else {
+											swal({
+												title: 'Información!',
+												text: 'El año de finalización debe ser mayor que el año de inicio',
+												timer: 2000,
+												confirmButtonClass: 'btn btn-primary btn-lg',
+												buttonsStyling: false
+											});
+											return false;
+										}			
+									}else{
+										
+										if(edit!=2){
+											$("#monthFi").val('')
+											$("#yearFi").val('');
+										}else{
+											if(parseInt($("#yearFi").val()) < parseInt($("#yearIn").val())) {
+												swal({
+													title: 'Información!',
+													text: 'El año de finalización debe ser mayor que el año de inicio',
+													timer: 2000,
+													confirmButtonClass: 'btn btn-primary btn-lg',
+													buttonsStyling: false
+												});
+												return false;
+											}
+										}
 										str = '&sNivel='+$("#sNivel").val() + '&titleS='+$("#titleS").val() + '&stateS='+$("#stateS").val() + '&areaS='+$("#areaS").val() + '&institute='+$("#institute").val() + '&countryS='+$("#countryS").val() + '&mat='+$("#mat").val() + '&aprob='+$("#aprob").val() + '&monthIn='+$("#monthIn").val() + '&yearIn='+$("#yearIn").val() + '&monthFi='+$("#monthFi").val() + '&yearFi='+$("#yearFi").val();
 										band = true;
 									}
-									else {
-										swal({
-											title: 'Información!',
-											text: 'El año de finalización debe ser mayor que el año de inicio',
-											timer: 2000,
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-										return false;
-									}
+									
+
 									if(parseInt($("#sNivel").val()) != 1) {
 										if($("#mat").val() != "" && $("#aprob").val() != "") {
 											band = true;
 										}
 									}
-								}
+								}/*else{
+									swal({
+										title: 'Información!',
+										text: 'Por favor, Llenar todos los campos',
+										timer: 5000,
+										confirmButtonClass: 'btn btn-primary btn-lg',
+										buttonsStyling: false
+									});
+									return false;
+								}*/
 								break;
 							case 4:
 								if(parseInt($("#idioma").val()) > 0 && $("input[type=radio][name=nivelO]").length > 0 && $("input[type=radio][name=nivelE]").length > 0 ) {
@@ -1869,8 +1911,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_pais+'<br> <strong>Nivel Oral: </strong> '+d.nivel+'<br> <strong>Nivel escrito: </strong> '+d.estado_estudio+'<br> </p>';
 												});
 												$("#idiomas").append(text);
-											}
-											else {
+											}else {
 												data.data.forEach(function(d) {
 													$("#t3").append('<tr><td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3"><i class="ti-close"></i></a></div></td></tr>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_pais+'<br> <strong>Nivel Oral: </strong> '+d.nivel+'<br> <strong>Nivel escrito: </strong> '+d.estado_estudio+'<br> </p>';
@@ -1911,16 +1952,16 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												});
 											});
 
-												swal({
-												  title: "Exito",
-												  text: "Información almacenada exitosamente! Desea agregar más estudios o pasar a la siguiente fase?",
-												  type: "success",
-												  showCancelButton: true,
-												  confirmButtonColor: "#DD6B55",
-												  confirmButtonText: "Siguiente fase",
-												  cancelButtonText: "Agregar más",
-												  closeOnConfirm: false
-												});
+											swal({
+												title: "Exito",
+												text: "Información almacenada exitosamente! Desea agregar más estudios o pasar a la siguiente fase?",
+												type: "success",
+												showCancelButton: true,
+												confirmButtonColor: "#DD6B55",
+												confirmButtonText: "Siguiente fase",
+												cancelButtonText: "Agregar más",
+												closeOnConfirm: false
+											});
 											$(".show-swal2.visible .swal2-confirm").attr('data-action', 'sig4');
 
 											$(".show-swal2.visible .swal2-confirm").click(function() {
