@@ -242,7 +242,7 @@
 											<?php endif ?>
 											<br><br>
 											<?php if($infoEmpresa["sitio_web"]): ?>
-												<a class="list-group-item" style="display: inline;" href="#" id="inline-site" data-type="text" data-pk="1" data-title="Sitio web" class="editable editable-click"><i class="ti-world m-r-0-5"></i> <?php echo $infoEmpresa["sitio_web"]; ?></a>
+												<a class="list-group-item editable editable-click" style="display: inline;" href="#" id="inline-site" data-type="text" data-pk="1" data-title="Sitio web"><i class="ti-world m-r-0-5"></i> <?php echo $infoEmpresa["sitio_web"]; ?></a>
 											<?php else: ?>
 												<div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px;" id="containerWeb">
 													<div class="col-md-8">
@@ -255,7 +255,7 @@
 											<?php endif ?>
 											<br><br>
 											<?php if($infoEmpresa["facebook"]): ?>
-												<a class="list-group-item" style="display: inline;" href="#" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook" class="editable editable-click"><i class="ti-facebook m-r-0-5"></i> <?php echo $infoEmpresa["facebook"]; ?></a>
+												<a class="list-group-item editable editable-click" style="display: inline;" href="#" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook"><i class="ti-facebook m-r-0-5"></i> <?php echo $infoEmpresa["facebook"]; ?></a>
 											<?php else: ?>
 												<div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px;" id="containerFB">
 													<div class="col-md-8">
@@ -576,8 +576,7 @@
 					mode: 'inline',
 					url: 'ajax/empresas.php?op=9&opt=fields&option=web',
 					success: function(response, newValue) {
-						var data = JSON.parse(response);
-						if(parseInt(data.info) == 1) {
+							var data = JSON.parse(response);
 							swal({
 								title: 'Información!',
 								text: 'Cambios realizados correctamente',
@@ -585,16 +584,12 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-								timer: 3000,
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
+
+							if (data.value == "") {
+								$('#containerWeb').html('<div class="col-md-8"><input class="form-control" id="web" placeholder="Sitio Web" type="text"></div><div class="col-md-4"><a class="btn btn-primary action" href="javascript:void(0)" data-target="web">+</a></div>');
+							}
+
+						
 						//if(response.status == 'error') return response.msg; //msg will be shown in editable form
 					}
 				});
@@ -606,8 +601,7 @@
 					mode: 'inline',
 					url: 'ajax/empresas.php?op=9&opt=fields&option=fb',
 					success: function(response, newValue) {
-						var data = JSON.parse(response);
-						if(parseInt(data.info) == 1) {
+							var data = JSON.parse(response);
 							swal({
 								title: 'Información!',
 								text: 'Cambios realizados correctamente',
@@ -615,16 +609,11 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-								timer: 3000,
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
+
+							if (data.value == "") {
+								$('#containerFB').html('<div class="col-md-8"><input class="form-control" id="fb" placeholder="Facebook" type="text"></div><div class="col-md-4"><a class="btn btn-primary action" href="javascript:void(0)" data-target="fb">+</a></div>');
+							}
+						
 						//if(response.status == 'error') return response.msg; //msg will be shown in editable form
 					}
 				});
@@ -636,8 +625,7 @@
 					mode: 'inline',
 					url: 'ajax/empresas.php?op=9&opt=fields&option=tw',
 					success: function(response, newValue) {
-						var data = JSON.parse(response);
-						if(parseInt(data.info) == 1) {
+							var data = JSON.parse(response);
 							swal({
 								title: 'Información!',
 								text: 'Cambios realizados correctamente',
@@ -645,16 +633,11 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-								timer: 3000,
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
+
+							if (data.value == "") {
+								$('#containerTW').html('<div class="col-md-8"><input class="form-control" id="ins" placeholder="Instagram" type="text"></div><div class="col-md-4"><a class="btn btn-primary action" href="javascript:void(0)" data-target="ins">+</a></div>');
+							}
+						
 						//if(response.status == 'error') return response.msg; //msg will be shown in editable form
 					}
 				});
@@ -666,8 +649,7 @@
 					mode: 'inline',
 					url: 'ajax/empresas.php?op=9&opt=fields&option=ins',
 					success: function(response, newValue) {
-						var data = JSON.parse(response);
-						if(parseInt(data.info) == 1) {
+							var data = JSON.parse(response);
 							swal({
 								title: 'Información!',
 								text: 'Cambios realizados correctamente',
@@ -675,16 +657,11 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-								timer: 3000,
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
+
+							if (data.value == "") {
+								$('#containerINS').html('<div class="col-md-8"><input class="form-control" id="ins" placeholder="Instagram" type="text"></div><div class="col-md-4"><a class="btn btn-primary action" href="javascript:void(0)" data-target="ins">+</a></div>');
+							}
+						
 						//if(response.status == 'error') return response.msg; //msg will be shown in editable form
 					}
 				});
@@ -696,8 +673,8 @@
 					mode: 'inline',
 					url: 'ajax/empresas.php?op=9&opt=fields&option=lin',
 					success: function(response, newValue) {
-						var data = JSON.parse(response);
-						if(parseInt(data.info) == 1) {
+							console.log(response);
+							var data = JSON.parse(response);
 							swal({
 								title: 'Información!',
 								text: 'Cambios realizados correctamente',
@@ -705,16 +682,12 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-								timer: 3000,
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
+
+							
+							if (data.value == "") {
+								$('#containerLIN').html('<div class="col-md-8"><input class="form-control" id="lin" placeholder="Linkedin" type="text"></div><div class="col-md-4"><a class="btn btn-primary action" href="javascript:void(0)" data-target="lin">+</a></div>');
+							}
+						
 						//if(response.status == 'error') return response.msg; //msg will be shown in editable form
 					}
 				});
@@ -812,6 +785,8 @@
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
 								});
+
+								return false;
 							}
 							break;
 					}
@@ -829,6 +804,13 @@
 										break;
 									case 'web':
 										$("#containerWeb").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-site" data-type="text" data-pk="1" data-title="Sitio web" class="editable editable-click"><i class="ti-world m-r-0-5"></i>'+text+'</a>');
+										swal({
+											title: 'Información!',
+											text: 'Cambios realizados correctamente',
+											timer: 3000,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
 										$('#inline-site').editable({
 											type: 'text',
 											pk: 1,
@@ -837,31 +819,19 @@
 											mode: 'inline',
 											url: 'ajax/empresas.php?op=9&opt=fields&option=web',
 											success: function(response, newValue) {
-												var data = JSON.parse(response);
-												if(parseInt(data.info) == 1) {
-													swal({
-														title: 'Información!',
-														text: 'Cambios realizados correctamente',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												else {
-													swal({
-														title: 'Información!',
-														text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												//if(response.status == 'error') return response.msg; //msg will be shown in editable form
+												
 											}
 										});
 										break;
 									case 'fb':
 										$("#containerFB").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook" class="editable editable-click"><i class="ti-facebook m-r-0-5"></i>'+text+'</a>');
+										swal({
+											title: 'Información!',
+											text: 'Cambios realizados correctamente',
+											timer: 3000,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
 										$('#inline-facebook').editable({
 											type: 'text',
 											pk: 1,
@@ -870,31 +840,19 @@
 											mode: 'inline',
 											url: 'ajax/empresas.php?op=9&opt=fields&option=fb',
 											success: function(response, newValue) {
-												var data = JSON.parse(response);
-												if(parseInt(data.info) == 1) {
-													swal({
-														title: 'Información!',
-														text: 'Cambios realizados correctamente',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												else {
-													swal({
-														title: 'Información!',
-														text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												//if(response.status == 'error') return response.msg; //msg will be shown in editable form
+												
 											}
 										});
 										break;
 									case 'tw':
 										$("#containerTW").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-twitter" data-type="text" data-pk="1" data-title="Twitter" class="editable editable-click"><i class="ti-twitter m-r-0-5"></i>'+text+'</a>');
+										swal({
+											title: 'Información!',
+											text: 'Cambios realizados correctamente',
+											timer: 3000,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
 										$('#inline-twitter').editable({
 											type: 'text',
 											pk: 1,
@@ -903,31 +861,19 @@
 											mode: 'inline',
 											url: 'ajax/empresas.php?op=9&opt=fields&option=tw',
 											success: function(response, newValue) {
-												var data = JSON.parse(response);
-												if(parseInt(data.info) == 1) {
-													swal({
-														title: 'Información!',
-														text: 'Cambios realizados correctamente',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												else {
-													swal({
-														title: 'Información!',
-														text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												//if(response.status == 'error') return response.msg; //msg will be shown in editable form
+												
 											}
 										});
 										break;
 									case 'ins':
 										$("#containerINS").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-instagram" data-type="text" data-pk="1" data-title="Instagram" class="editable editable-click"><i class="ti-instagram m-r-0-5"></i>'+text+'</a>');
+										swal({
+											title: 'Información!',
+											text: 'Cambios realizados correctamente',
+											timer: 3000,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
 										$('#inline-instagram').editable({
 											type: 'text',
 											pk: 1,
@@ -936,31 +882,21 @@
 											mode: 'inline',
 											url: 'ajax/empresas.php?op=9&opt=fields&option=ins',
 											success: function(response, newValue) {
-												var data = JSON.parse(response);
-												if(parseInt(data.info) == 1) {
-													swal({
-														title: 'Información!',
-														text: 'Cambios realizados correctamente',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												else {
-													swal({
-														title: 'Información!',
-														text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												//if(response.status == 'error') return response.msg; //msg will be shown in editable form
+												
 											}
 										});
 										break;
 									case 'lin':
-										$("#containerLIN").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-linkedin" data-type="text" data-pk="1" data-title="Linkedin" class="editable editable-click"><i class="ti-linkedin m-r-0-5"></i>'+text+'</a>');
+										$("#containerLIN").html('<a class="list-group-item editable editable-click" style="display: inline;" href="#" id="inline-linkedin" data-type="text" data-pk="1" data-title="Linkedin"><i class="ti-linkedin m-r-0-5"></i>'+text+'</a>');
+
+										swal({
+											title: 'Información!',
+											text: 'Cambios realizados correctamente',
+											timer: 3000,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
+
 										$('#inline-linkedin').editable({
 											type: 'text',
 											pk: 1,
@@ -969,25 +905,9 @@
 											mode: 'inline',
 											url: 'ajax/empresas.php?op=9&opt=fields&option=lin',
 											success: function(response, newValue) {
-												var data = JSON.parse(response);
-												if(parseInt(data.info) == 1) {
-													swal({
-														title: 'Información!',
-														text: 'Cambios realizados correctamente',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
-												else {
-													swal({
-														title: 'Información!',
-														text: 'No puede quedar en blanco este campo, la información no se ha almacenado',
-														timer: 3000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});
-												}
+												
+													
+												
 												//if(response.status == 'error') return response.msg; //msg will be shown in editable form
 											}
 										});

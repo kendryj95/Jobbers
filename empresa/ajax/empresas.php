@@ -397,7 +397,6 @@
 				echo json_encode(array("status" => $t));
 				break;
 			case SOCIAL:
-				$aux = 1;
 				switch($_REQUEST["opt"]) {
 					case 'activity':
 						$db->query("UPDATE empresas SET id_actividad='$_REQUEST[text]' WHERE id=".$_SESSION["ctc"]["id"]);
@@ -419,7 +418,6 @@
 						break;
 					case 'fields':
 						$value = str_replace("+", "", $_REQUEST["value"]);
-						if($value != "") {
 							switch($_REQUEST["option"]) {
 								case 'activity':
 									$db->query("UPDATE empresas SET id_actividad='$value' WHERE id=".$_SESSION["ctc"]["id"]);
@@ -440,13 +438,9 @@
 									$db->query("UPDATE empresas SET linkedin='$value' WHERE id=".$_SESSION["ctc"]["id"]);
 									break;
 							}
-						}
-						else {
-							$aux = 0;
-						}
 						break;
 				}
-				echo json_encode(array("status" => 1, "info" => $aux)); 
+				echo json_encode(array("status" => 1)); 
 				break;
 			case ADD_CONTRACT:
 				$f = isset($_REQUEST["f"]) ? date('Y-m-d', strtotime($_REQUEST["f"])) : '';
