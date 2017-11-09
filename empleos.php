@@ -72,6 +72,12 @@
 			"amigable" => "hace-un-mes-o-menos",
 			"cantidad" => 0,
 			"diff_s" => 2592000
+		),
+		array(
+			"nombre" => "Hace dos meses",
+			"amigable" => "hace-un-mes-o-menos",
+			"cantidad" => 0,
+			"diff_s" => 5184000
 		)
 	);
 
@@ -478,23 +484,12 @@
 					WHERE
 						r.s <= $momento[diff_s]
 				";
-			}
-			else {
+			}else {
 				$query = "
 					SELECT
 						COUNT(*)
 					FROM
-						(
-							SELECT
-								TIMESTAMPDIFF(
-									SECOND,
-									fecha_creacion,
-									NOW()
-								) AS s
-							FROM
-								publicaciones AS p
-
-						) AS r
+						(SELECT TIMESTAMPDIFF(SECOND,fecha_creacion,NOW()) AS s FROM publicaciones AS p ) AS r
 					WHERE
 						r.s <= $momento[diff_s]
 				";
