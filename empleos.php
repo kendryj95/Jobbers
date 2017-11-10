@@ -72,6 +72,12 @@
 			"amigable" => "hace-un-mes-o-menos",
 			"cantidad" => 0,
 			"diff_s" => 2592000
+		),
+		array(
+			"nombre" => "Hace dos meses",
+			"amigable" => "hace-un-mes-o-menos",
+			"cantidad" => 0,
+			"diff_s" => 5184000
 		)
 	);
 
@@ -235,8 +241,7 @@
 		$query .= " ORDER BY plan.logo_home DESC LIMIT $inicial, $final";
 		
 		$publicaciones = $db->getAll($query);
-	}
-	elseif($filtroActivado) {
+	}elseif($filtroActivado) {
 		$query = "
 			SELECT
 				p.titulo,
@@ -310,8 +315,7 @@
 		$query .= " ORDER BY plan.logo_home DESC LIMIT $inicial, $final";
 		
 		$publicaciones = $db->getAll($query);		
-	}
-	else if($busqueda) {
+	}else if($busqueda) {
 		$publicaciones = $db->getAll("
 			SELECT
 				p.titulo,
@@ -338,7 +342,8 @@
 			LEFT JOIN imagenes AS img ON e.id_imagen = img.id
 			INNER JOIN empresas_planes AS plan ON plan.id_empresa = e.id
 			WHERE p.titulo LIKE '%$busqueda%'
-			ORDER plan.logo_home DESC
+			-- or p.descripcion LIKE '%$busqueda%' 
+			ORDER by plan.logo_home DESC
 			LIMIT $inicial, $final
 		");
 		$cantidadRegistros = $db->getOne("
@@ -354,8 +359,7 @@
 		");
 		
 		$cantidadPaginas = ceil($cantidadRegistros / $final);
-	}
-	else {
+	}else {
 		$publicaciones = $db->getAll("
 			SELECT
 				p.titulo,
@@ -480,23 +484,12 @@
 					WHERE
 						r.s <= $momento[diff_s]
 				";
-			}
-			else {
+			}else {
 				$query = "
 					SELECT
 						COUNT(*)
 					FROM
-						(
-							SELECT
-								TIMESTAMPDIFF(
-									SECOND,
-									fecha_creacion,
-									NOW()
-								) AS s
-							FROM
-								publicaciones AS p
-
-						) AS r
+						(SELECT TIMESTAMPDIFF(SECOND,fecha_creacion,NOW()) AS s FROM publicaciones AS p ) AS r
 					WHERE
 						r.s <= $momento[diff_s]
 				";
@@ -739,6 +732,7 @@
 							<?php if($filtroActivado || $busqueda): ?>
 								<?php if($cantidadRegistros > 0): ?>
 									<?php foreach($publicaciones as $publicacion): ?>
+										
 										<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
 											<?php if($publicacion["logo_home"] == 3): ?>
 												<div class="pub-f box box-block bg-white tile tile-1" title="Ver detalles del empleo">
