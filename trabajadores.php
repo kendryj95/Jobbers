@@ -1161,36 +1161,31 @@ if($filtroArea) {
 } else if($busqueda) {
     $trabajadores = $db->getAll("
         SELECT
-        tra.id,
+        DISTINCT tra.id,
         tra.fecha_nacimiento,
         tra.fecha_creacion,
         TIMESTAMPDIFF(YEAR,  tra.fecha_nacimiento, CURDATE()) AS edad,
         TIMESTAMPDIFF(MONTH, tra.fecha_creacion, CURDATE()) AS antiguedad,
         tra.nombres,
         tra.apellidos,
-        CONCAT(
-            img.directorio,
-            '/',
-            img.nombre,
-            '.',
-            img.extension
-            ) AS imagen,
-    tra.calificacion_general,
-    tra.sitio_web,
-    tra.facebook,
-    tra.twitter,
-    tra.instagram,
-    tra.snapchat,
-    tra.linkedin,
-    pais.nombre AS pais,
-    ie.sobre_mi,
-    ie.remuneracion_pret
-    FROM
-    trabajadores AS tra
-    LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-    LEFT JOIN paises pais ON tra.id_pais = pais.id
-    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-    WHERE tra.nombres LIKE '%$busqueda%' OR tra.apellidos LIKE '%$busqueda%'
+        CONCAT(img.directorio, '/',img.nombre,'.',img.extension) AS imagen,
+        tra.calificacion_general,
+        tra.sitio_web,
+        tra.facebook,
+        tra.twitter,
+        tra.instagram,
+        tra.snapchat,
+        tra.linkedin,
+        pais.nombre AS pais,
+        ie.sobre_mi,
+        ie.remuneracion_pret
+        FROM
+        trabajadores AS tra
+        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+        LEFT JOIN paises pais ON tra.id_pais = pais.id
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        INNER JOIN trabajadores_educacion te ON tra.id=te.id_trabajador
+        WHERE te.titulo LIKE '%$busqueda%'
     ");
 
     foreach($trabajadores as $k => $t) {
@@ -1201,15 +1196,15 @@ if($filtroArea) {
 
     $cantidadRegistros = $db->getOne("
         SELECT
-        COUNT(DISTINCT(tra.id))
+        COUNT(DISTINCT tra.id )
         FROM
         trabajadores AS tra
         LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
         LEFT JOIN paises pais ON tra.id_pais = pais.id
         INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-        WHERE tra.nombres LIKE '%$busqueda%' OR tra.apellidos LIKE '%$busqueda%'
-        ");
+        INNER JOIN trabajadores_educacion te ON tra.id=te.id_trabajador
+        WHERE te.titulo LIKE '%$busqueda%'
+    ");
 
     $cantidadPaginas = ceil($cantidadRegistros / $final);
 }

@@ -26,6 +26,8 @@
 		FB.logout(function(){});
 	}
 </script>
+
+
 <style>
 	@media only screen and (max-width: 1050px) {
 		.menuMovilTrabajador {
@@ -59,7 +61,9 @@
 			</li>
 		</ul>
 		<?php if(isset($_SESSION["ctc"]["id"])): ?>
-			<?php if($_SESSION["ctc"]["type"] == 1):
+			<!-- $_SESSION["ctc"]["type"]==1 es empresa -->
+			<?php if($_SESSION["ctc"]["type"] == 1): ?>
+				<?php
 					$color = "";
 					switch($_SESSION["ctc"]["plan"]["id_plan"]) {
 						case 2:
@@ -129,6 +133,7 @@
 					</li>
 				</ul>
 			<?php else: ?>
+				<!-- $_SESSION["ctc"]["type"] ==  2 es usuario -->
 				<?php if($_SESSION["ctc"]["type"] == 2): ?>
 					<ul class="nav navbar-nav pull-xs-right">
 						<li class="nav-item dropdown menuPCTrabajador">
@@ -254,13 +259,17 @@
 				</li>
 			</ul>
 		<?php endif ?>
-
+		<!--
+			---- area de busqueda ---- 
+		 -->
 		<?php if(isset($_SESSION["ctc"])): ?>
+			<!-- $_SESSION["ctc"]["type"] != 3 no es administrador -->
 			<?php if($_SESSION["ctc"]["type"] != 3): ?>
+			<!-- $_SESSION["ctc"]["type"] =2 es usuario -->
 				<?php if($_SESSION["ctc"]["type"] == 2): ?>
 					<div class="navbar-toggleable-sm collapse" id="collapse-1">
 						<div class="header-form pull-md-left m-md-r-1">
-							<form>
+							<form id='busqueda_form'>
 								<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
 								<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
 									<i class="ti-search"></i>
@@ -287,11 +296,11 @@
 						</ul>
 
 					</div>
-				<?php else: ?>
+				<?php elseif($_SESSION["ctc"]["type"] == 1): ?>
 					<div class="navbar-toggleable-sm collapse" id="collapse-1">
 						<div class="header-form pull-md-left m-md-r-1">
-							<form>
-								<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
+							<form id='busqueda_form'>
+								<input type="text" id="search-input-w" class="form-control b-a" placeholder="Búsqueda">
 								<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
 									<i class="ti-search"></i>
 								</a>
@@ -339,7 +348,7 @@
 		<?php else: ?>
 			<div class="navbar-toggleable-sm collapse" id="collapse-1">
 					<div class="header-form pull-md-left m-md-r-1">
-						<form>
+						<form id='busqueda_form'>
 							<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
 							<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
 								<i class="ti-search"></i>
