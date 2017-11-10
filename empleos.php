@@ -202,6 +202,8 @@
 					) <= $infoMomento[diff_s]"
 				;
 			}
+
+			$query .= " AND (e.suspendido IS NULL OR e.suspendido = 0)";
 		}
 		else if($filtroMomento) {
 			$query .= "
@@ -209,7 +211,7 @@
 					SECOND,
 					p.fecha_creacion,
 					NOW()
-				) <= $infoMomento[diff_s]"
+				) <= $infoMomento[diff_s] AND (e.suspendido IS NULL OR e.suspendido = 0)"
 			;
 		}
 		
@@ -232,7 +234,7 @@
 		
 		$cantidadPaginas = ceil($cantidadRegistros / $final);
 		
-		$query .= " ORDER BY plan.logo_home DESC LIMIT $inicial, $final";
+		$query .= " AND (e.suspendido IS NULL OR e.suspendido = 0) ORDER BY plan.logo_home DESC LIMIT $inicial, $final";
 		
 		$publicaciones = $db->getAll($query);
 	}
@@ -282,6 +284,8 @@
 					) <= $infoMomento[diff_s]"
 				;
 			}
+
+			$query .= " AND (e.suspendido IS NULL OR e.suspendido = 0)";
 		}
 		else if($filtroMomento) {
 			$query .= "
@@ -289,7 +293,7 @@
 					SECOND,
 					p.fecha_creacion,
 					NOW()
-				) <= $infoMomento[diff_s]"
+				) <= $infoMomento[diff_s] AND (e.suspendido IS NULL OR e.suspendido = 0)"
 			;
 		}		
 		
@@ -302,12 +306,12 @@
 			INNER JOIN areas_sectores AS ase ON ps.id_sector = ase.id
 			INNER JOIN areas AS a ON ase.id_area = a.id
 			INNER JOIN empresas AS e ON p.id_empresa = e.id
-			" . ($filtroArea ? "WHERE a.id = $infoArea[id]" : "") . ($filtroSector ? " AND ase.id = $infoSector[id] " : "") . ($filtroMomento ? " AND TIMESTAMPDIFF( SECOND, p.fecha_creacion, NOW() ) <= $infoMomento[diff_s] " : "") . "
+			" . ($filtroArea ? "WHERE a.id = $infoArea[id]" : "") . ($filtroSector ? " AND ase.id = $infoSector[id] " : "") . ($filtroMomento ? " AND TIMESTAMPDIFF( SECOND, p.fecha_creacion, NOW() ) <= $infoMomento[diff_s] " : "") . " AND (e.suspendido IS NULL OR e.suspendido = 0)
 		");
 		
 		$cantidadPaginas = ceil($cantidadRegistros / $final);
 		
-		$query .= " ORDER BY plan.logo_home DESC LIMIT $inicial, $final";
+		$query .= " AND (e.suspendido IS NULL OR e.suspendido = 0) ORDER BY plan.logo_home DESC LIMIT $inicial, $final";
 		
 		$publicaciones = $db->getAll($query);		
 	}
@@ -337,7 +341,7 @@
 			INNER JOIN empresas AS e ON p.id_empresa = e.id
 			LEFT JOIN imagenes AS img ON e.id_imagen = img.id
 			INNER JOIN empresas_planes AS plan ON plan.id_empresa = e.id
-			WHERE p.titulo LIKE '%$busqueda%'
+			WHERE p.titulo LIKE '%$busqueda%' AND (e.suspendido IS NULL OR e.suspendido = 0)
 			ORDER plan.logo_home DESC
 			LIMIT $inicial, $final
 		");
@@ -350,7 +354,7 @@
 			INNER JOIN areas_sectores AS ase ON ps.id_sector = ase.id
 			INNER JOIN areas AS a ON ase.id_area = a.id
 			INNER JOIN empresas AS e ON p.id_empresa = e.id
-			WHERE p.titulo LIKE '%$busqueda%'
+			WHERE p.titulo LIKE '%$busqueda%' AND (e.suspendido IS NULL OR e.suspendido = 0)
 		");
 		
 		$cantidadPaginas = ceil($cantidadRegistros / $final);
@@ -478,7 +482,7 @@
 								a.id = $infoArea[id] " . ($filtroSector ? "AND ase.id = $infoSector[id]" : "") . "
 						) AS r
 					WHERE
-						r.s <= $momento[diff_s]
+						r.s <= $momento[diff_s] AND (e.suspendido IS NULL OR e.suspendido = 0)
 				";
 			}
 			else {
