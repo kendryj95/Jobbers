@@ -345,14 +345,8 @@
 			INNER JOIN empresas AS e ON p.id_empresa = e.id
 			LEFT JOIN imagenes AS img ON e.id_imagen = img.id
 			INNER JOIN empresas_planes AS plan ON plan.id_empresa = e.id
-<<<<<<< HEAD
 			WHERE p.titulo LIKE '%$busqueda%' AND (e.suspendido IS NULL OR e.suspendido = 0)
 			ORDER plan.logo_home DESC
-=======
-			WHERE p.titulo LIKE '%$busqueda%'
-			-- or p.descripcion LIKE '%$busqueda%' 
-			ORDER by plan.logo_home DESC
->>>>>>> test_daniel
 			LIMIT $inicial, $final
 		");
 		$cantidadRegistros = $db->getOne("
