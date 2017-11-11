@@ -62,23 +62,23 @@
 			else {
 				$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores'");
 				$uid = $db->getOne("SELECT valor FROM uid");
-				$db->query("INSERT INTO trabajadores (id, uid, id_imagen, id_sexo, id_estado_civil, id_tipo_documento_identificacion, id_pais, provincia, localidad, calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion, fecha_nacimiento, telefono, telefono_alternativo, usuario, clave, correo_electronico, fecha_creacion, fecha_actualizacion, publicidad, newsletter) VALUES ('$id', '$uid', '0', '', '', '', '', '', '', '', '', '$_REQUEST[name]', '$_REQUEST[lastName]', '', NULL, '', '',  '$_REQUEST[userName]', '".md5($_REQUEST["password"])."', '".strtolower($_REQUEST['email'])."', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[publicidad]', '$_REQUEST[newsletter]')");
+				$db->query("INSERT INTO trabajadores (id, uid, id_imagen, id_sexo, id_estado_civil, id_tipo_documento_identificacion, id_pais, provincia, localidad, calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion, fecha_nacimiento, telefono, telefono_alternativo, clave, correo_electronico, fecha_creacion, fecha_actualizacion, publicidad, newsletter) VALUES ('$id', '$uid', '0', '', '', '', '', '', '', '', '', '$_REQUEST[name]', '$_REQUEST[lastName]', '', NULL, '', '', '".md5($_REQUEST["password"])."', '".strtolower($_REQUEST['email'])."', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[publicidad]', '$_REQUEST[newsletter]')");
 
-				$idU = $db->getInsertID();
+				//$idU = $db->getInsertID();
 
 				$db->query("UPDATE uid SET valor = (valor + 1) WHERE id = 1");
-				/*$_SESSION["ctc"]["id"] = $id;
+				$_SESSION["ctc"]["id"] = $id;
 				$_SESSION["ctc"]["uid"] = $uid;
 				$_SESSION["ctc"]["name"] = $_REQUEST["name"];
 				$_SESSION["ctc"]["lastName"] = $_REQUEST["lastName"];
 				$_SESSION["ctc"]["email"] = $_REQUEST["email"];
 				$_SESSION["ctc"]["type"] = 2;
 				$_SESSION["ctc"]["pic"] = 'avatars/user.png';
-				$_SESSION["ctc"]["postulate"] = 0;*/
+				$_SESSION["ctc"]["postulate"] = 0;
 
 				//$idU = $db->getOne("SELECT id FROM trabajadores ORDER BY id DESC LIMIT 1");
 
-				$destinatario = $_REQUEST['email'];
+				/*$destinatario = $_REQUEST['email'];
 				$asunto = "Confirmación de correo electronico - JOBBERS ARGENTINA";
 				$headers = "MIME-Version: 1.0\r\n";
 				$headers .= "Content-type: text/html; charset= iso-8859-1\r\n";
@@ -122,7 +122,11 @@
 					echo json_encode(array(
 						"status" => 0,
 					));
-				}
+				}*/ # COMENTADO PORQUE DANIEL MAIDANA LE PARECE MUY DIFICIL PARA LOS USUARIOS CONFIRMAR SU CORREO
+
+				echo json_encode(array(
+						"status" => 1,
+					));
               }
          break;
          case LOGOUT:

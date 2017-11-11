@@ -111,7 +111,7 @@
 					$uid = $db->getOne("SELECT valor FROM uid");
 					$db->query("INSERT INTO empresas (id, uid, id_imagen, nombre_responsable, apellido_responsable, nombre, razon_social, clave, correo_electronico, telefono, sitio_web, facebook, twitter, instagram, snapchat, fecha_creacion, fecha_actualizacion, cuit) VALUES ('$id', '$uid', '0', '$_REQUEST[name]', '$_REQUEST[lastName]', '$_REQUEST[company]', '$_REQUEST[razon]', '$_REQUEST[password]', '$_REQUEST[email]', '$_REQUEST[phone]', '', '', '', '', '', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$_REQUEST[cuit]')");
 
-					$idE = $db->getInsertID();
+					//$idE = $db->getInsertID();
 
 					$db->query("UPDATE uid SET valor = (valor + 1) WHERE id = 1");
 					$info_plan = $db->getRow("SELECT * FROM planes WHERE id=$_REQUEST[plan]");
@@ -139,7 +139,7 @@
 							id = $id
 					");
 					
-					/*$_SESSION["ctc"]["empresa"] = $info;
+					$_SESSION["ctc"]["empresa"] = $info;
 					$_SESSION["ctc"]["id"] = $info["id"];
 					$_SESSION["ctc"]["uid"] = $info["uid"];
 					$_SESSION["ctc"]["name"] = $info["nombre"];
@@ -153,35 +153,11 @@
 					}
 					else {
 						$_SESSION["ctc"]["pic"] = 'avatars/user.png';
-					}*/
+					}
 
-
-					/*$mail = new PHPMailer();
-				    $mail->isSMTP();
-				    $mail->SMTPDebug = 0;
-				    $mail->Debugoutput = 'html';
-					$mail->SMTPAuth = 'login';
-				    $mail->Host = 'smtp.1and1.com';  // Specify main and backup SMTP servers
-				    $mail->Port = 587;  
-					$mail->IsSMTP();
-					$mail->SMTPAuth   = true;
-					$mail->SMTPSecure = "ssl";
-					$mail->Host       = "www.jobbersargentina.com";
-					$mail->Port       = 465;*/
-
-					/*//Agregamos el remitente
-					$mail->setFrom("notificaciones@jobbersargentina.com", "Jobbers Argentina");
-					//Nuestra cuenta
-					$mail->Username = 'notificaciones@jobbersargentina.com';
-					$mail->Password = 'jobbersargentina2017'; //Su password*/
-
-					$destinatario = $_REQUEST['email'];
+					/*$destinatario = $_REQUEST['email'];
 					$asunto = "Confirmacion de correo electronico - JOBBERS ARGENTINA";
 
-					/*//Agregar destinatario
-					$mail->AddAddress($destinatario);
-					$mail->Subject = $asunto;
-*/
 					$headers = "MIME-Version: 1.0\r\n";
 					$headers .= "Content-type: text/html; charset= iso-8859-1\r\n";
 					$headers .= "From: Jobbers Argentina < administracion@jobbers.com >\r\n";
@@ -199,14 +175,6 @@
 					$mensaje .= "<br>
 					<br>
 					<br> Gracias, <br><br> <b>Team JobbersArgentina.</b>";
-
-					//Para adjuntar archivo
-
-					/*$mail->Body = $mensaje;
-
-					$mail->MsgHTML(utf8_decode($mail->Body));
-					$mail->charSet = "UTF-8";*/
-					//$mail->Send()
 
 					# CONDICIONAL PARA VALIDAR SI EL CORREO PERTENECE A "HOTMAIL" U "OUTLOOK"
 					if (strstr($destinatario, "hotmail") || strstr($destinatario, "outlook")) {
@@ -232,7 +200,12 @@
 							"msg" => "FAIL",
 							"data" => $info
 						));
-					}
+					}*/ # SE COMENTO ESTO PORQUE A DANIEL MAIDANA LE PARECIÓ QUE MUY DIFICIL PARA LAS EMPRESAS CONFIRMAR SU CORREO
+
+					echo json_encode(array(
+						"msg" => "OK",
+						"data" => $info
+					));
 
 				}
 				break;

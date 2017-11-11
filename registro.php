@@ -4,12 +4,7 @@
 		header("Location: ./");
 	}
 	require_once('classes/DatabasePDOInstance.function.php');
-	session_start();
-	if (isset($_SESSION['ctc']['type'])) {
-		header('Location: ./');
-	}
-	session_destroy();
-
+	
 	$db = DatabasePDOInstance();
 	$info = $db->getRow("SELECT politicas, terminos FROM plataforma WHERE id=1");
 
@@ -93,10 +88,10 @@
 									<input type="text" class="form-control" id="lastName" placeholder="Apellidos (*)">
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" id="userName" placeholder="Usuario (*)">
+									<input type="email" class="form-control" id="email" placeholder="Correo electronico (*)">
 								</div>
 								<div class="form-group">
-									<input type="email" class="form-control" id="email" placeholder="Correo electrónico (*)">
+									<input type="email" class="form-control" id="confirmEmail" placeholder="Confimar correo electrónico (*)">
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control" id="passw1" placeholder="Contraseña (*)">
@@ -287,54 +282,69 @@
 			$("#register").click(function() {
 				if($("#email").val() != "" && $("#passw1").val() != "" && $("#passw2").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#userName").val() != "") {
 					if($("#aceptaCondiciones:checked").length > 0) {
-						if(isEmail($("#email").val())) {
-							if($("#passw1").val() == $("#passw2").val()) {
-								$.ajax({
-									type: 'POST',
-									url: 'ajax/user.php',
-									data: 'op=2&email=' + $("#email").val() + '&password=' + $("#passw1").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&userName=' + $("#userName").val() + '&publicidad=' + $("#aceptaPublicidad:checked").length + '&newsletter=' + $("#aceptaNewsletter:checked").length,
-									dataType: 'json',
-									success: function(data) {
-										if(data.status == 1) {
-											/*swal({
-												title: 'Información!',
-												text: 'Para confirmar tu registro, revisa la bandeja de tu correo electronico.',
-												timer: 240000,
-												confirmButtonClass: 'btn btn-primary btn-lg',
-												buttonsStyling: false
-											});*/
-											swal("INFORMACIÓN!", "Para confirmar tu registro, revisa la bandeja de tu correo electronico.", "info");
-											$('.form-material')[0].reset();
+						if(isEmail($("#email").val())) { // Confirma si es un email valido
+							if ($('#email').val() == $('#confirmEmail').val()) { // Confirma si los emails coinciden
+								if($("#passw1").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
+									$.ajax({
+										type: 'POST',
+										url: 'ajax/user.php',
+										data: 'op=2&email=' + $("#email").val() + '&password=' + $("#passw1").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&publicidad=' + $("#aceptaPublicidad:checked").length + '&newsletter=' + $("#aceptaNewsletter:checked").length,
+										dataType: 'json',
+										success: function(data) {
+											if(data.status == 1) {
+												/*swal({
+													title: 'Información!',
+													text: 'Para confirmar tu registro, revisa la bandeja de tu correo electronico.',
+													timer: 240000,
+													confirmButtonClass: 'btn btn-primary btn-lg',
+													buttonsStyling: false
+												});*/
+												swal("EXITO!", "Registrado Satisfactoriamente", "success");
+												$('.form-material')[0].reset();
+												setTimeout(function(){
+													window.location.assign("./");
+												},3000);
 
-											$('.form-group').each(function(index, el) {
-													$(el).removeClass('has-error');
-											});
+												$('.form-group').each(function(index, el) {
+														$(el).removeClass('has-error');
+												});
 
-										} else if(data.status == 0){
-											//console.log("Error al enviar correo electronico");
+											} else if(data.status == 0){
+												//console.log("Error al enviar correo electronico");
+											}
+											else {
+												swal({
+													title: 'Información!',
+													text: 'Correo electrónico en uso intente de nuevo',
+													timer: 2500,
+													confirmButtonClass: 'btn btn-primary btn-lg',
+													buttonsStyling: false
+												});
+												
+											}
+
 										}
-										else {
-											swal({
-												title: 'Información!',
-												text: 'Correo electrónico en uso intente de nuevo',
-												timer: 2500,
-												confirmButtonClass: 'btn btn-primary btn-lg',
-												buttonsStyling: false
-											});
-											
-										}
-
-									}
-								});
-							}
-							else {
+									});
+								}
+								else {
+									swal({
+										title: 'Información!',
+										text: 'Las contraseñas no coinciden',
+										timer: 2000,
+										confirmButtonClass: 'btn btn-primary btn-lg',
+										buttonsStyling: false
+									});
+								}
+							} else {
 								swal({
 									title: 'Información!',
-									text: 'Las contraseñas no coinciden',
+									text: 'Los correos electrónicos no coinciden',
 									timer: 2000,
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
 								});
+								
+								$('#email, #confirmEmail').parent().addClass('has-error');
 							}
 						}
 						else {

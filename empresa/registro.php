@@ -624,11 +624,14 @@
 						$.ajax({
 							type: 'POST',
 							url: 'ajax/empresas.php',
-							data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + $('#phone').val() + '&term=1&plan=' + plan + '&serv=' + serv,
+							data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + $('#phone').val() + '&term=1&plan=' + plan + '&serv=' + serv + '&cuit=' + $('#cuit').val(),
 							dataType: 'json',
 							success: function(data) {
 								if(data.msg == "OK") {
-									swal("INFORMACIÓN!", "Para confirmar tu registro, revisa la bandeja de tu correo electronico.", "info");
+									swal("EXITO!", "Registrado Satisfactoriamente...", "success");
+									setTimeout(function(){
+										window.location.assign("./");
+									},3000);
 								} else {
 									swal({
 												title: 'Información!',
