@@ -908,14 +908,14 @@ if($filtroArea) {
     ";
 
     $query2 = "
-    SELECT COUNT(DISTINCT(tra.id)) FROM
-    trabajadores AS tra
-    LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
-    LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
-    LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
-    LEFT JOIN paises pais ON tra.id_pais = pais.id
-    INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-    LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
+        SELECT COUNT(DISTINCT(tra.id)) FROM
+        trabajadores AS tra
+        LEFT JOIN imagenes AS img ON tra.id_imagen = img.id
+        LEFT JOIN trabajadores_educacion AS te ON tra.id = te.id_trabajador
+        LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
+        LEFT JOIN paises pais ON tra.id_pais = pais.id
+        INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
+        LEFT JOIN trabajadores_idiomas ti ON tra.id = ti.id_trabajador
     ";
 
     if($filtroArea) {
@@ -1145,7 +1145,7 @@ if($filtroArea) {
     //$query .= " GROUP BY tra.id limit 1";
 
     /**
-     * [la consulta que ocurre cuando seleccionas filtro base]
+     * [la consulta que ocurre cuando seleccionas filtro base de]
      * JDLUGO
      */
 
@@ -1207,8 +1207,7 @@ if($filtroArea) {
     ");
 
     $cantidadPaginas = ceil($cantidadRegistros / $final);
-}
-else {
+}else {
     $trabajadores = $db->getAll("
         SELECT
         tra.id,
@@ -1401,18 +1400,9 @@ if(!$filtroMomento) {
                     LEFT JOIN paises pais ON tra.id_pais = pais.id
                     INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
                     WHERE
-                    (
-                        TIMESTAMPDIFF(
-                            YEAR,
-                            tra.fecha_nacimiento,
-                            CURDATE()
-                            ) >= $momento[rango_a]
-AND TIMESTAMPDIFF(
-    YEAR,
-    tra.fecha_nacimiento,
-    CURDATE()
-    ) <= $momento[rango_b]
-) AND te.id_area_estudio = $infoArea[id] ";
+                    (TIMESTAMPDIFF(YEAR,tra.fecha_nacimiento,CURDATE()) >= $momento[rango_a]
+                    AND TIMESTAMPDIFF(YEAR,tra.fecha_nacimiento,CURDATE()) <= $momento[rango_b]) 
+                    AND te.id_area_estudio = $infoArea[id] ";
 
 $query .= filtroTipo(true);
 $query .= filtroGenero(true);
@@ -1711,7 +1701,10 @@ if(!$filtroTipo) {
                     LEFT JOIN empresas_contrataciones AS ec ON tra.id = ec.id_trabajador
                     LEFT JOIN paises pais ON tra.id_pais = pais.id
                     INNER JOIN trabajadores_infextra ie ON tra.id = ie.id_trabajador
-                    WHERE $condt
+                    WHERE $condt 
+                    AND tra.provincia IS NOT NULL 
+                    AND tra.id_sexo != 0
+                    AND tra.fecha_nacimiento IS NOT NULL
                 ";
 
                 $query .= filtroGenero(true);
