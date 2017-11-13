@@ -395,6 +395,7 @@
 				<?php if(!$postulado && $infoT && isset($_SESSION["ctc"])): ?>
 					$("#postulate").click(function() {
 						if(postulate == 1) {
+							$(this).addClass('disabled');
 							$.ajax({
 								url: 'ajax/misc.php',
 								type: 'GET',
@@ -417,6 +418,7 @@
 							});
 						}
 						else {
+							$(this).removeClass('disabled')
 							swal("Información", 'Su perfil no esta completo para poder postularse a un empleo, los requisitos minimos son:<br> (1) Tener foto de perfil.<br> (2) Completar todos los datos del paso 1 en el Currículum. <br> para ir a completar mis datos haga click <a href="cuenta.php">aquí</a>', "info");
 						}
 					});
