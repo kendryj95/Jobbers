@@ -21,7 +21,7 @@
 			switch($_REQUEST["opt"]) {
 				case 1:
 
-					$db->query("UPDATE trabajadores SET id_sexo='$_REQUEST[sex]', id_estado_civil='$_REQUEST[estadoCivil]', id_tipo_documento_identificacion='$_REQUEST[dni]', id_pais='$_REQUEST[country]', provincia='$_REQUEST[province]', localidad='$_REQUEST[city]', calle='$_REQUEST[street]', nombres='$_REQUEST[name]',  apellidos='$_REQUEST[lastName]', numero_documento_identificacion='$_REQUEST[numberdni]', cuil='$_REQUEST[cuil]', fecha_nacimiento='".date('Y-m-d', strtotime($_REQUEST['birthday']))."', telefono='$_REQUEST[phone]', telefono_alternativo='$_REQUEST[phoneAlt]', sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=".$_SESSION["ctc"]["id"]);
+					$db->query("UPDATE trabajadores SET id_sexo='$_REQUEST[sex]', id_estado_civil='$_REQUEST[estadoCivil]', id_tipo_documento_identificacion='$_REQUEST[dni]', id_pais='$_REQUEST[country]', provincia='$_REQUEST[province]', localidad='$_REQUEST[city]', calle='$_REQUEST[street]', nombres='$_REQUEST[name]',  apellidos='$_REQUEST[lastName]', numero_documento_identificacion='$_REQUEST[numberdni]', cuil='$_REQUEST[cuil]', fecha_nacimiento='".date('Y-m-d', strtotime($_REQUEST['birthday']))."', telefono='$_REQUEST[phone]', telefono_alternativo='$_REQUEST[phoneAlt]', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=".$_SESSION["ctc"]["id"]);
 
 					//Actualizar nombre y apellido en la variable de session.
 					$_SESSION["ctc"]["name"] = $_REQUEST["name"];
@@ -90,12 +90,19 @@
 				case 6:
 					if($id != "" && $id != "undefined") {
 						$db->query("UPDATE trabajadores_infextra SET remuneracion_pret=$_REQUEST[remuneracion], sobre_mi='$_REQUEST[sobre_mi]' WHERE id_trabajador=$_REQUEST[i]");
+
+						// Información adicional de las redes sociales
+						$db->query("UPDATE trabajadores SET sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]' WHERE id=".$_REQUEST['i']);
+
 						$data = $db->getAll("SELECT * FROM trabajadores_infextra WHERE id=$id");
 					} else {
 
 						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores_infextra'");
 
 						$db->query("INSERT INTO trabajadores_infextra (id_trabajador, remuneracion_pret, sobre_mi) VALUES ('".$_SESSION["ctc"]["id"]."', $_REQUEST[remuneracion], '$_REQUEST[sobre_mi]')");
+
+						// Información adicional de las redes sociales
+						$db->query("UPDATE trabajadores SET sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]' WHERE id=".$_REQUEST['i']);
 
 						$data = $db->getAll("SELECT * FROM trabajadores_infextra WHERE id=$id");
 					}

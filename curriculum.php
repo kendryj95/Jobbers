@@ -293,48 +293,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<input class="form-control" value="<?php echo $data["telefono_alternativo"]; ?>" id="phoneAlt" type="text">
 												</div>
 											</div>
-											<h5>Mis redes Sociales</h5>
-												<span style="color: grey; font-size: 10px">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
-
-											<hr>
-											<div class="alert alert-danger" style="display: none;">
-												<p><b>Error!</b> <span id="errorRS"></span></p>
-											</div>
-											<div class="form-group row">
-												<label for="web" class="col-xs-4 col-form-label" style="text-align: right;">Sitio Web</label>
-												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["sitio_web"] ?>" id="web" type="text" placeholder="Url de tu pagina web">
-												</div>
-											</div><div class="form-group row">
-												<label for="fb" class="col-xs-4 col-form-label" style="text-align: right;">Facebook</label>
-												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["facebook"] ?>" id="fb" type="text" placeholder="Link de tu perfil de Facebook">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="tw" class="col-xs-4 col-form-label" style="text-align: right;">Twitter</label>
-												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["twitter"] ?>" id="tw" type="text" placeholder="Link de tu perfil de Twitter">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="ig" class="col-xs-4 col-form-label" style="text-align: right;">Instagram</label>
-												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["instagram"] ?>" id="ig" type="text" placeholder="Link de tu perfil de Instagram">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="snap" class="col-xs-4 col-form-label" style="text-align: right;">Snapchat</label>
-												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["snapchat"] ?>" id="snap" type="text" placeholder="nombre de perfil de Snapchat">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="lkd" class="col-xs-4 col-form-label" style="text-align: right;">Linkedin</label>
-												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["linkedin"] ?>" id="lkd" type="text" placeholder="Link de tu perfil de Linkedin">
-												</div>
-											</div>
+											
 										</div>
 										<div class="col-md-2"></div>
 									</div>
@@ -544,7 +503,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a></div>
-										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
+										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Sin Experiencia laboral <i class="ti-angle-right"></i></a></div>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab3" role="tabpanel">
@@ -998,6 +957,48 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<label for="sobre_mi" class="col-xs-4 col-form-label" style="text-align: right;">Sobre mí <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
 													<textarea name="" id="sobre_mi" class="form-control" style="max-height: 300px"></textarea>
+												</div>
+											</div>
+											<h5>Mis redes Sociales</h5>
+												<span style="color: grey; font-size: 10px">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
+
+											<hr>
+											<div class="alert alert-danger" style="display: none;">
+												<p><b>Error!</b> <span id="errorRS"></span></p>
+											</div>
+											<div class="form-group row">
+												<label for="web" class="col-xs-4 col-form-label" style="text-align: right;">Sitio Web</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["sitio_web"] ?>" id="web" type="text" placeholder="Url de tu pagina web">
+												</div>
+											</div><div class="form-group row">
+												<label for="fb" class="col-xs-4 col-form-label" style="text-align: right;">Facebook</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["facebook"] ?>" id="fb" type="text" placeholder="Link de tu perfil de Facebook">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="tw" class="col-xs-4 col-form-label" style="text-align: right;">Twitter</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["twitter"] ?>" id="tw" type="text" placeholder="Link de tu perfil de Twitter">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="ig" class="col-xs-4 col-form-label" style="text-align: right;">Instagram</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["instagram"] ?>" id="ig" type="text" placeholder="Link de tu perfil de Instagram">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="snap" class="col-xs-4 col-form-label" style="text-align: right;">Snapchat</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["snapchat"] ?>" id="snap" type="text" placeholder="nombre de perfil de Snapchat">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="lkd" class="col-xs-4 col-form-label" style="text-align: right;">Linkedin</label>
+												<div class="col-xs-8">
+													<input class="form-control" value="<?php echo $data["linkedin"] ?>" id="lkd" type="text" placeholder="Link de tu perfil de Linkedin">
 												</div>
 											</div>
 											<div class="col-md-12" style="text-align: center;margin-top: 25px;">
@@ -1562,84 +1563,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						switch(op) {
 							case 1:
 								if($("#name").val() != "" && $("#lastName").val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && $("#cuil").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
-									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&cuil='+$("#cuil").val() + '&province='+$("#province").val() + '&city='+$("#city").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
+									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&cuil='+$("#cuil").val() + '&province='+$("#province").val() + '&city='+$("#city").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val();
 									band = true;
-
-									if ($('#web').val() != "" || $('#fb').val() != "" || $('#tw').val() != "" || $('#ig').val() != "" || $('#snap').val() != "" || $('#lkd').val() != "") {
-
-										// Validar link de facebook
-										var fb = /^(https:\/\/((www.facebook)|(facebook)).com\/)[A-Za-z0-9.\-\_]+(\/)?$/;
-										
-										if ($('#fb').val()) {
-											if (!fb.test($('#fb').val())) {
-
-												$('.alert.alert-danger').show();
-
-												$('.alert.alert-danger span#errorRS').text("El formato del link es invalido. Si no posees Facebook deja el campo en blanco.");
-												band = false;
-											}
-										}
-
-										//Validar link de twitter
-										var tw = /^(https:\/\/((www.twitter)|(twitter)).com\/)[A-Za-z0-9.\-\_]+(\/)?$/;
-										
-										if ($('#tw').val()) {
-											if (!tw.test($('#tw').val())) {
-												$('.alert.alert-danger').show();
-
-												$('.alert.alert-danger span#errorRS').text("El formato del link es invalido. Si no posees Twitter deja el campo en blanco.");
-												band = false;
-											}
-										}
-
-										//Validar link de Instagram
-										var ig = /^(https:\/\/((www.instagram)|(instagram)).com\/)[A-Za-z0-9.\-\_]+(\/)?$/;
-										
-										if ($('#ig').val()) {
-											if (!ig.test($('#ig').val())) {
-												$('.alert.alert-danger').show();
-
-												$('.alert.alert-danger span#errorRS').text("El formato del link es invalido. Si no posees Instagram deja el campo en blanco.");
-												band = false;
-											}
-										}
-
-										//Validar nombre de usuario de Snapchat
-										var snap = /^[A-Za-z0-9.\-\_]+$/;
-										
-										if ($('#snap').val() != "") {
-											if (!snap.test($('#snap').val())) {
-												$('.alert.alert-danger').show();
-
-												$('.alert.alert-danger span#errorRS').text("El formato del nombre de usuario es invalido. Si no posees Snapchat deja el campo en blanco.");
-												band = false;
-											}
-										}
-
-										//Validar URL de sitio web
-										var web = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$/;
-										
-										if ($('#web').val() != "") {
-											if (!web.test($('#web').val())) {
-												$('.alert.alert-danger').show();
-
-												$('.alert.alert-danger span#errorRS').text("La Url del sitio web es invalido. Si no posees pagina web deja el campo en blanco.");
-												band = false;
-											}
-										}
-
-										//Validar link de perfil de Linkedin
-										var lkd = /^(https:\/\/((www.linkedin)|(linkedin)).com\/in\/)[A-Za-z0-9.\-\_\/]+(\/)?$/;
-										
-										if ($('#lkd').val() != "") {
-											if (!lkd.test($('#lkd').val())) {
-												$('.alert.alert-danger').show();
-
-												$('.alert.alert-danger span#errorRS').text("El formato del link es invalido. Si no posees Linkedin deja el campo en blanco.");
-												band = false;
-											}
-										}
-									}
 								}
 								break;
 							case 2:
@@ -1747,8 +1672,84 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								break;
 							case 6:
 								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != ''){
-									str = '&remuneracion=' + $('#remuneracion').val() + '&sobre_mi=' + $('#sobre_mi').val();
+									str = '&remuneracion=' + $('#remuneracion').val() + '&sobre_mi=' + $('#sobre_mi').val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
 									band = true;
+
+									if ($('#web').val() != "" || $('#fb').val() != "" || $('#tw').val() != "" || $('#ig').val() != "" || $('#snap').val() != "" || $('#lkd').val() != "") {
+
+										// Validar link de facebook
+										var fb = /^(https:\/\/((www.facebook)|(facebook)).com\/)[A-Za-z0-9.\-\_]+(\/)?$/;
+										
+										if ($('#fb').val()) {
+											if (!fb.test($('#fb').val())) {
+
+												$('.alert.alert-danger').show();
+
+												$('.alert.alert-danger span#errorRS').text("El formato del link es invalido. Si no posees Facebook deja el campo en blanco.");
+												band = false;
+											}
+										}
+
+										//Validar link de twitter
+										var tw = /^(https:\/\/((www.twitter)|(twitter)).com\/)[A-Za-z0-9.\-\_]+(\/)?$/;
+										
+										if ($('#tw').val()) {
+											if (!tw.test($('#tw').val())) {
+												$('.alert.alert-danger').show();
+
+												$('.alert.alert-danger span#errorRS').text("El formato del link es invalido. Si no posees Twitter deja el campo en blanco.");
+												band = false;
+											}
+										}
+
+										//Validar link de Instagram
+										var ig = /^(https:\/\/((www.instagram)|(instagram)).com\/)[A-Za-z0-9.\-\_]+(\/)?$/;
+										
+										if ($('#ig').val()) {
+											if (!ig.test($('#ig').val())) {
+												$('.alert.alert-danger').show();
+
+												$('.alert.alert-danger span#errorRS').text("El formato del link es invalido. Si no posees Instagram deja el campo en blanco.");
+												band = false;
+											}
+										}
+
+										//Validar nombre de usuario de Snapchat
+										var snap = /^[A-Za-z0-9.\-\_]+$/;
+										
+										if ($('#snap').val() != "") {
+											if (!snap.test($('#snap').val())) {
+												$('.alert.alert-danger').show();
+
+												$('.alert.alert-danger span#errorRS').text("El formato del nombre de usuario es invalido. Si no posees Snapchat deja el campo en blanco.");
+												band = false;
+											}
+										}
+
+										//Validar URL de sitio web
+										var web = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \?=.-]*)*\/?$/;
+										
+										if ($('#web').val() != "") {
+											if (!web.test($('#web').val())) {
+												$('.alert.alert-danger').show();
+
+												$('.alert.alert-danger span#errorRS').text("La Url del sitio web es invalido. Si no posees pagina web deja el campo en blanco.");
+												band = false;
+											}
+										}
+
+										//Validar link de perfil de Linkedin
+										var lkd = /^(https:\/\/((www.linkedin)|(linkedin)).com\/in\/)[A-Za-z0-9.\-\_\/]+(\/)?$/;
+										
+										if ($('#lkd').val() != "") {
+											if (!lkd.test($('#lkd').val())) {
+												$('.alert.alert-danger').show();
+
+												$('.alert.alert-danger span#errorRS').text("El formato del link es invalido. Si no posees Linkedin deja el campo en blanco.");
+												band = false;
+											}
+										}
+									}
 								}
 								break;
 						}
