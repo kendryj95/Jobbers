@@ -1146,6 +1146,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<script type="text/javascript" src="vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
 
 			<script>
+
 				$(document).ready(function(){
 
 					$('#stateS').change(function(){
@@ -1258,65 +1259,153 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						}
 					});
 
-					$(".nav-link").click(function() {
-						if($(this).attr("href") == "#tab7") {
+					$(".nav-link").click(function(e) {
+						var band = false;
+
+						if ($(this).attr("href") == "#tab4") { // Pestaña de Idiomas
+
+							$.ajax({
+								url: 'ajax/account.php',
+								type: 'POST',
+								dataType: 'json',
+								data: {op: 7},
+								success: function(response){
+
+									var educacion = Object.keys(response.educacion).length;
+
+									if (educacion == 0) {
+
+                                		swal("Error!", "Primero debes completar la carga de Estudios para seguir a la siguiente fase.", "warning");
+
+                                		$('.nav-link[href="#tab3"]').click(); // Fase de Estudios
+									}
+								},
+								error: function(error){
+									console.log('Error: ',error);
+								}
+							});
+							
+						}
+
+						if ($(this).attr("href") == "#tab5") { // Pestaña de Otros Conocimientos
+
+							$.ajax({
+								url: 'ajax/account.php',
+								type: 'POST',
+								dataType: 'json',
+								data: {op: 7},
+								success: function(response){
+
+									var idiomas = Object.keys(response.idiomas).length;
+
+									if (idiomas == 0) {
+
+                                		swal("Error!", "Primero debes completar la carga de Idiomas para seguir a la siguiente fase.", "warning");
+
+                                		$('.nav-link[href="#tab4"]').click(); // Fase de Idiomas
+									}
+								},
+								error: function(error){
+									console.log('Error: ',error);
+								}
+							});
+							
+						}
+
+						if ($(this).attr("href") == "#tab6") { // Pestaña de Información Extra
+
+							$.ajax({
+								url: 'ajax/account.php',
+								type: 'POST',
+								dataType: 'json',
+								data: {op: 7},
+								success: function(response){
+
+									var otros_conocimientos = Object.keys(response.otros_conocimientos).length;
+
+									if (otros_conocimientos == 0) {
+
+                                		swal("Error!", "Primero debes completar la carga de Otros Conocimientos para seguir a la siguiente fase.", "warning");
+
+                                		$('.nav-link[href="#tab5"]').click(); // Fase de Otros conocimientos
+									}
+								},
+								error: function(error){
+									console.log('Error: ',error);
+								}
+							});
+							
+						}
+
+						if($(this).attr("href") == "#tab7") { // Pestaña de vista previa
+
 							$.ajax({
 								type: 'POST',
 								url: 'ajax/account.php',
 								data: 'op=7',
 								dataType: 'json',
 								success: function(data) {
-									$("#labelName").html(data.usuario.nombres);
-									$("#labelLastName").html(data.usuario.apellidos);
-									$("#labelDNI").html(data.usuario.dni);
-									$("#labelCuil").html(data.usuario.cuil);
-									$("#labelCountry").html(data.usuario.localidad+", "+data.usuario.provincia+", "+data.usuario.pais);
-									$("#labelEmail").html(data.usuario.correo_electronico);
-									$("#labelTlf").html(data.usuario.telefono + " / " + data.usuario.telefono_alternativo);
-                                    var fecha = formato(data.usuario.fecha_nacimiento);
-									$("#fecha_nac").html(fecha);
-                                    var edad = calcularEdad(data.usuario.fecha_nacimiento);
-                                    $("#edad").html((edad)+"años");
-                                    $("#labelRem").html(data.info_extra.remuneracion_pret);
-                                    $("#labelSobreMi").html(data.info_extra.sobre_mi);
-									var html = "";
-									var mes = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-									if(data.educacion.length > 0) {
-										data.educacion.forEach(function(e) {
-											html += '<p style="margin-left: 50px;"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>Título o Certificación: </strong> '+e.titulo+' <br /> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
-										});
-										$("#educacion").html(html);
-									}
-									if (data.experiencias.length > 0) {
-										html = "";
-										data.experiencias.forEach(function(ex){
 
-											let nom_encargado = ex.nombre_encargado == null || ex.nombre_encargado == '' ? 'No Aplica' : ex.nombre_encargado;
-											let tlf_encargado = ex.tlf_encargado == null || ex.tlf_encargado == '' ? 'No Aplica' : ex.tlf_encargado;
-											let egreso = ex.trab_actualmt == 1 ? 'Actualmente' : mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso;
+									if (data.info_extra.remuneracion_pret == "") {
 
-											html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' - ' + egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong>'+
-												ex.descripcion_tareas + '</p>';
-										});
-										$('#experiencias').html(html);
-									}
-									if(data.idiomas.length > 0) {
-										html = "";
-										data.idiomas.forEach(function(i) {
-											html += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+i.nombre_idioma+'<br> <strong>Nivel Oral: </strong> '+i.nivel_oral+'<br> <strong>Nivel escrito: </strong> '+i.nivel_escrito+'<br> </p>';
-										});
-										$("#idiomas").html(html);
-									}
-									if(data.otros_conocimientos.length > 0) {
-										html = "";
-										data.otros_conocimientos.forEach(function(oc) {
-											html += '<p style="margin-left: 50px;"> <strong>Título: </strong> '+oc.nombre+'<br> <strong>Descripción: </strong> '+oc.descripcion+'<br> </p>';
-										});
-										$("#otros_conocimientos").html(html);
+										swal("Error!", "Primero debes completar la carga de Información Extra para seguir a la vista previa de tu CV.", "warning");
+
+										$('.nav-link[href="#tab6"]').click(); // Fase de Información Extra
+									} else { 
+
+										$("#labelName").html(data.usuario.nombres);
+										$("#labelLastName").html(data.usuario.apellidos);
+										$("#labelDNI").html(data.usuario.dni);
+										$("#labelCuil").html(data.usuario.cuil);
+										$("#labelCountry").html(data.usuario.localidad+", "+data.usuario.provincia+", "+data.usuario.pais);
+										$("#labelEmail").html(data.usuario.correo_electronico);
+										$("#labelTlf").html(data.usuario.telefono + " / " + data.usuario.telefono_alternativo);
+	                                    var fecha = formato(data.usuario.fecha_nacimiento);
+										$("#fecha_nac").html(fecha);
+	                                    var edad = calcularEdad(data.usuario.fecha_nacimiento);
+	                                    $("#edad").html((edad)+"años");
+	                                    $("#labelRem").html(data.info_extra.remuneracion_pret);
+	                                    $("#labelSobreMi").html(data.info_extra.sobre_mi);
+										var html = "";
+										var mes = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+										if(data.educacion.length > 0) {
+											data.educacion.forEach(function(e) {
+												html += '<p style="margin-left: 50px;"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>Título o Certificación: </strong> '+e.titulo+' <br /> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
+											});
+											$("#educacion").html(html);
+										}
+										if (data.experiencias.length > 0) {
+											html = "";
+											data.experiencias.forEach(function(ex){
+
+												let nom_encargado = ex.nombre_encargado == null || ex.nombre_encargado == '' ? 'No Aplica' : ex.nombre_encargado;
+												let tlf_encargado = ex.tlf_encargado == null || ex.tlf_encargado == '' ? 'No Aplica' : ex.tlf_encargado;
+												let egreso = ex.trab_actualmt == 1 ? 'Actualmente' : mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso;
+
+												html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' - ' + egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong>'+
+													ex.descripcion_tareas + '</p>';
+											});
+											$('#experiencias').html(html);
+										}
+										if(data.idiomas.length > 0) {
+											html = "";
+											data.idiomas.forEach(function(i) {
+												html += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+i.nombre_idioma+'<br> <strong>Nivel Oral: </strong> '+i.nivel_oral+'<br> <strong>Nivel escrito: </strong> '+i.nivel_escrito+'<br> </p>';
+											});
+											$("#idiomas").html(html);
+										}
+										if(data.otros_conocimientos.length > 0) {
+											html = "";
+											data.otros_conocimientos.forEach(function(oc) {
+												html += '<p style="margin-left: 50px;"> <strong>Título: </strong> '+oc.nombre+'<br> <strong>Descripción: </strong> '+oc.descripcion+'<br> </p>';
+											});
+											$("#otros_conocimientos").html(html);
+										}
 									}
 								}
 							});
 						}
+
 					});
 
 					var currentParent = null;
