@@ -35,6 +35,11 @@
 	if($sectores === false) {
 		$sectores = array();
 	}
+		$disps = $db->getAll("SELECT id, nombre, nombre FROM disponibilidad");
+
+	if($disps === false) {
+		$disps = array();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -214,6 +219,14 @@
 									</select>
 								</div>
 								<div class="form-group">
+									<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
+									<select id="select2-demo-3" class="form-control" data-plugin="select2">
+										<?php foreach($disps as $disp): ?>
+											<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+										<?php endforeach ?>
+									</select>
+								</div>
+								<div class="form-group">
 									<label for="modal-agregar-publicacion-titulo">Título</label>
 									<input type="text" class="form-control" id="modal-agregar-publicacion-titulo" placeholder="">
 								</div>
@@ -223,7 +236,7 @@
 								</div>
 								<h6>Agregar ubicación del empleo</h6>
 								<div class="form-group">
-									<label for="modal-agregar-publicacion-ubicacion">Ecribe la ubicación</label>
+									<label for="modal-agregar-publicacion-ubicacion">Escribe la ubicación</label>
 									<input type="text" class="form-control controls" id="modal-agregar-publicacion-ubicacion" placeholder="">
 								</div>
 								<div id="map" style="height: 250px;width: 100%;"></div>
@@ -347,6 +360,14 @@
 									</select>
 								</div>
 								<div class="form-group">
+									<label for="select2-demo-23" class="form-control-label">Disponibilidad</label>
+									<select id="select2-demo-23" class="form-control" data-plugin="select2">
+										<?php foreach($disps as $disp): ?>
+											<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+										<?php endforeach ?>
+									</select>
+								</div>
+								<div class="form-group">
 									<label for="modal-modificar-publicacion-titulo">Título</label>
 									<input type="text" class="form-control" id="modal-modificar-publicacion-titulo" placeholder="">
 								</div>
@@ -356,7 +377,7 @@
 								</div>
 								<h6>Agregar ubicación del empleo</h6>
 								<div class="form-group">
-									<label for="modal-modificar-publicacion-ubicacion">Ecribe la ubicación</label>
+									<label for="modal-modificar-publicacion-ubicacion">Escribe la ubicación</label>
 									<input type="text" class="form-control" id="modal-modificar-publicacion-ubicacion" placeholder="">
 								</div>
 								<div id="map2" style="height: 250px;width: 100%;"></div>
@@ -947,6 +968,7 @@
 								});
 								$('#select2-demo-22').html(html).trigger('change');
 								$('#select2-demo-22').val(publicacion.sector_id).trigger('change');
+								$('#select2-demo-23').val(publicacion.disponibilidad).trigger('change');
 								$("#modal-modificar-publicacion-titulo").val(publicacion.titulo);
 								$("#modal-modificar-publicacion-ubicacion").val(publicacion.ubicacion);
 								tinyMCE.get('modal-modificar-publicacion-descripcion').setContent(publicacion.descripcion);
@@ -1195,6 +1217,10 @@
 				width: '100%'
 			});
 			
+			$('#select2-demo-3').select2({
+				width: '100%'
+			});
+
 			$('#select2-demo-12').select2({
 				width: '100%'
 			}).on("select2:select", function (e) {
@@ -1211,6 +1237,10 @@
 				width: '100%'
 			});
 			
+			$('#select2-demo-23').select2({
+				width: '100%'
+			});
+			
 			window.onload = function() {
 				//$("#modal-agregar-publicacion").modal('show');
 				//$("#modal-modificar-publicacion").modal('show');
@@ -1219,6 +1249,7 @@
 			$("#modal-agregar-publicacion-enviar-form").click(function() {
 				var idArea = $("#select2-demo-1").val();
 				var idSector = $("#select2-demo-2").val();
+				var idDisp = $("#select2-demo-3").val();
 				var titulo = $("#modal-agregar-publicacion-titulo").val();
 				var ubicacion = $("#modal-agregar-publicacion-ubicacion").val();
 				var descripcion = tinyMCE.get('modal-agregar-publicacion-descripcion').getContent();
@@ -1244,6 +1275,7 @@
 											info: JSON.stringify({
 												area: idArea,
 												sector: idSector,
+												disponibilidad:idDisp,
 												titulo: titulo,
 												descripcion: descripcion,
 												latitud: latSelected,
@@ -1285,6 +1317,7 @@
 			$("#modal-modificar-publicacion-enviar-form").click(function() {
 				var idArea = $("#select2-demo-12").val();
 				var idSector = $("#select2-demo-22").val();
+				var idDisp = $("#select2-demo-23").val();
 				var titulo = $("#modal-modificar-publicacion-titulo").val();
 				var ubicacion = $("#modal-modificar-publicacion-ubicacion").val();
 				var descripcion = tinyMCE.get('modal-modificar-publicacion-descripcion').getContent();
@@ -1303,6 +1336,7 @@
 							info: JSON.stringify({
 								area: idArea,
 								sector: idSector,
+								disponibilidad: idDisp,
 								titulo: titulo,
 								descripcion: descripcion,
 								latitud: latSelected,

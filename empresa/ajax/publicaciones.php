@@ -49,7 +49,8 @@
 							fecha_creacion,
 							fecha_actualizacion,
 							coordenadas,
-							ubicacion
+							ubicacion,
+							disponibilidad
 						)
 						VALUES
 						(
@@ -61,7 +62,8 @@
 							'" . date('Y-m-d H:i:s') . "',
 							'" . date('Y-m-d H:i:s') . "',
 							'$coordenadas',
-							'$_REQUEST[ubicacion]'
+							'$info[ubicacion]',
+							'$info[disponibilidad]'
 						)
 					");
 					
@@ -111,7 +113,8 @@
 						amigable = '" . slug($info["titulo"]) . "',
 						 fecha_actualizacion = '" . date('Y-m-d H:i:s') . "',
 						 coordenadas='$coordenadas',
-						 ubicacion='$_REQUEST[ubicacion]'
+						 ubicacion='$info[ubicacion]',
+						 disponibilidad=$info[disponibilidad]
 						WHERE
 							id = $id
 					");
