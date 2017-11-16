@@ -31,6 +31,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-daterangepicker/daterangepicker.css">
 		<link rel="stylesheet" href="vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css">
+		<link rel="stylesheet" href="vendor/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.min.css">
 
 		<style>
 			.modal.in.modal-agregar-rubro .modal-dialog {
@@ -314,6 +315,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row">
 										<div class="col-md-2"></div>
 										<div class="col-md-8">
+											<div class="form-group row">
+												<label for="sinExpLab" class="col-xs-4 col-form-label" style="text-align: right;">Sin Experiencia Laboral </label>
+												<div class="col-xs-8">
+													<input value="" id="sinExpLab" type="checkbox" checked>
+												</div>
+											</div>
 											<div class="form-group row">
 												<label for="company" class="col-xs-4 col-form-label" style="text-align: right;">Empresa <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
@@ -1144,6 +1151,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<script type="text/javascript" src="vendor/moment/moment.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap-switch-master/dist/js/bootstrap-switch.min.js"></script>
 
 			<script>
 
@@ -1156,6 +1164,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						}else{
 							$('#fechaFin').css('display','block');
 						}
+					});
+
+					$('#sinExpLab').bootstrapSwitch({ // Switch de Experiencia Laboral
+						onColor: 'primary',
+						offColor: 'danger'
 					});
 
 					$('#ex1').slider({
@@ -1181,6 +1194,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							$('#monthE').prop('disabled', false);
 							$('#yearE').prop('disabled', false);
 						}
+					});
+
+					$('#sinExpLab').on('switchChange.bootstrapSwitch', function(event, state){
+						console.log('Elemento: ',this); // DOM element
+						console.log('Evento: ',event); // jQuery event
+						console.log('State: ',state); // true | false
 					});
 
 					$('.tooltip-main').addClass('show');
