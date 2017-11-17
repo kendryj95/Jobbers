@@ -89,7 +89,7 @@
 					break;
 				case 6:
 					if($id != "" && $id != "undefined") {
-						$db->query("UPDATE trabajadores_infextra SET remuneracion_pret=$_REQUEST[remuneracion], sobre_mi='$_REQUEST[sobre_mi]' WHERE id_trabajador=$_REQUEST[i]");
+						$db->query("UPDATE trabajadores_infextra SET remuneracion_pret=$_REQUEST[remuneracion], sobre_mi='$_REQUEST[sobre_mi]', disponibilidad='$_REQUEST[disp]' WHERE id_trabajador=$_REQUEST[i]");
 
 						// Información adicional de las redes sociales
 						$db->query("UPDATE trabajadores SET sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]' WHERE id=".$_REQUEST['i']);
@@ -99,7 +99,7 @@
 
 						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores_infextra'");
 
-						$db->query("INSERT INTO trabajadores_infextra (id_trabajador, remuneracion_pret, sobre_mi) VALUES ('".$_SESSION["ctc"]["id"]."', $_REQUEST[remuneracion], '$_REQUEST[sobre_mi]')");
+						$db->query("INSERT INTO trabajadores_infextra (id_trabajador, remuneracion_pret, sobre_mi,disponibilidad) VALUES ('".$_SESSION["ctc"]["id"]."', $_REQUEST[remuneracion], $_REQUEST[sobre_mi], $_REQUEST[disp] )");
 
 						// Información adicional de las redes sociales
 						$db->query("UPDATE trabajadores SET sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]' WHERE id=".$_REQUEST['i']);
