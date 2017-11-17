@@ -148,7 +148,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4"></div>
-										<?php if($experiencias): ?>
+										<?php if($data['numero_documento_identificacion'] != "" || $experiencias): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
@@ -332,7 +332,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row" style="margin-top: 10px">
 										<div class="col-md-4"></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
-										<?php if($experiencias): ?>
+										<?php if($data['numero_documento_identificacion'] != "" || $experiencias): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
@@ -1120,7 +1120,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</p>
 											<?php endforeach?>
 										<?php else: ?>
-											<p style="margin-left: 50px;">Sin Experiencia Laboral</p>
+											<p style="margin-left: 50px;"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
 										<?php endif?>
 									</div>
 
@@ -1225,7 +1225,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						$('#sinExpLab').bootstrapSwitch({ // Switch de Experiencia Laboral
 							onColor: 'primary',
 							offColor: 'danger',
-							state: true
+							state: true,
+							onText: 'SÍ',
+							offText: 'NO'
 						});
 
 						var txtEmpresa = $('#company'); // Todos los campos de Experiencia laboral
@@ -1258,7 +1260,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						$('#sinExpLab').bootstrapSwitch({ // Switch de Experiencia Laboral
 							onColor: 'primary',
 							offColor: 'danger',
-							state: false
+							state: false,
+							onText: 'SÍ',
+							offText: 'NO'
 						});
 					<?php endif; ?>
 
@@ -1419,84 +1423,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 					});
 
 					$(".nav-link").click(function(e) {
-						var band = false;
 
-						/*if ($(this).attr("href") == "#tab4") { // Pestaña de Idiomas
-
-							$.ajax({
-								url: 'ajax/account.php',
-								type: 'POST',
-								dataType: 'json',
-								data: {op: 7},
-								success: function(response){
-
-									var educacion = Object.keys(response.educacion).length;
-
-									if (educacion == 0) {
-
-                                		swal("Error!", "Primero debes completar la carga de Estudios para seguir a la siguiente fase.", "warning");
-
-                                		$('.nav-link[href="#tab3"]').click(); // Fase de Estudios
-									}
-								},
-								error: function(error){
-									console.log('Error: ',error);
-								}
-							});
-							
-						}
-
-						if ($(this).attr("href") == "#tab5") { // Pestaña de Otros Conocimientos
-
-							$.ajax({
-								url: 'ajax/account.php',
-								type: 'POST',
-								dataType: 'json',
-								data: {op: 7},
-								success: function(response){
-
-									var idiomas = Object.keys(response.idiomas).length;
-
-									if (idiomas == 0) {
-
-                                		swal("Error!", "Primero debes completar la carga de Idiomas para seguir a la siguiente fase.", "warning");
-
-                                		$('.nav-link[href="#tab4"]').click(); // Fase de Idiomas
-									}
-								},
-								error: function(error){
-									console.log('Error: ',error);
-								}
-							});
-							
-						}
-
-						if ($(this).attr("href") == "#tab6") { // Pestaña de Información Extra
-
-							$.ajax({
-								url: 'ajax/account.php',
-								type: 'POST',
-								dataType: 'json',
-								data: {op: 7},
-								success: function(response){
-
-									var otros_conocimientos = Object.keys(response.otros_conocimientos).length;
-
-									if (otros_conocimientos == 0) {
-
-                                		swal("Error!", "Primero debes completar la carga de Otros Conocimientos para seguir a la siguiente fase.", "warning");
-
-                                		$('.nav-link[href="#tab5"]').click(); // Fase de Otros conocimientos
-									}
-								},
-								error: function(error){
-									console.log('Error: ',error);
-								}
-							});
-							
-						}*/
-
-						if($(this).attr("href") == "#tab7") { // Pestaña de vista previa
+							if($(this).attr("href") == "#tab7") { // Pestaña de vista previa
 
 							$.ajax({
 								type: 'POST',
@@ -1504,13 +1432,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								data: 'op=7',
 								dataType: 'json',
 								success: function(data) {
-
-									/*if (data.info_extra.remuneracion_pret == "") {
-
-										swal("Error!", "Primero debes completar la carga de Información Extra para seguir a la vista previa de tu CV.", "warning");
-
-										$('.nav-link[href="#tab6"]').click(); // Fase de Información Extra
-									} else { */
 
 										$("#labelName").html(data.usuario.nombres);
 										$("#labelLastName").html(data.usuario.apellidos);
@@ -1560,7 +1481,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											});
 											$("#otros_conocimientos").html(html);
 										}
-									//}
 								}
 							});
 						}
