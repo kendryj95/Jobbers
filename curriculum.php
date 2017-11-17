@@ -31,6 +31,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-daterangepicker/daterangepicker.css">
 		<link rel="stylesheet" href="vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css">
+		<link rel="stylesheet" href="vendor/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.min.css">
 
 		<style>
 			.modal.in.modal-agregar-rubro .modal-dialog {
@@ -311,9 +312,18 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="col-md-4" style="text-align: right;"><!-- <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> --></div>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 2: Experiencia laboral</h4>
+									<?php $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id'] . " ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC")?>
 									<div class="row">
 										<div class="col-md-2"></div>
 										<div class="col-md-8">
+											<?php if(!$experiencias): ?>
+												<div class="form-group row" id="containerSinExpLab">
+													<label for="sinExpLab" class="col-xs-4 col-form-label" style="text-align: right;">Sin Experiencia Laboral </label>
+													<div class="col-xs-8">
+														<input value="" id="sinExpLab" type="checkbox" checked>
+													</div>
+												</div>
+											<?php endif; ?>
 											<div class="form-group row">
 												<label for="company" class="col-xs-4 col-form-label" style="text-align: right;">Empresa <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
@@ -438,7 +448,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="col-md-2"></div>
 									</div>
 
-									<?php $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id'] . " ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC")?>
 									<?php if ($experiencias): ?>
 										<div class="" id="contentEL">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis empleos anteriores</h4>
@@ -503,7 +512,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a></div>
-										<div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Sin Experiencia laboral <i class="ti-angle-right"></i></a></div>
+										<!-- <div class="col-md-4" style="text-align: right;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Sin Experiencia laboral <i class="ti-angle-right"></i></a></div> -->
 									</div>
 								</div>
 								<div class="tab-pane" id="tab3" role="tabpanel">
@@ -1058,7 +1067,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</p>
 											<?php endforeach?>
 										<?php else: ?>
-											<p style="margin-left: 50px;">Sin registros</p>
+											<p style="margin-left: 50px;">Sin Experiencia Laboral</p>
 										<?php endif?>
 									</div>
 
@@ -1144,6 +1153,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<script type="text/javascript" src="vendor/moment/moment.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap-switch-master/dist/js/bootstrap-switch.min.js"></script>
 
 			<script>
 
@@ -1157,6 +1167,47 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							$('#fechaFin').css('display','block');
 						}
 					});
+
+					<?php if(!$experiencias): ?>
+						$('#sinExpLab').bootstrapSwitch({ // Switch de Experiencia Laboral
+							onColor: 'primary',
+							offColor: 'danger',
+							state: true
+						});
+
+						var txtEmpresa = $('#company'); // Todos los campos de Experiencia laboral
+						var selectUbic = $('#rCompany');
+						var selectActiv = $('#tCompany');
+						var txtJerarquia = $('#tEmployeer');
+						var selectMesIng = $('#monthI');
+						var selectAnioIng = $('#yearI');
+						var selectMesEgr = $('#monthE');
+						var selectAnioEgr = $('#yearE');
+						var checkTrabAct = $('#trab_actual');
+						var txtNomEnc = $('#nom_enc');
+						var txtTlfEnc = $('#tlf_enc');
+						var txtDescription = $('#descriptionArea');
+
+							txtEmpresa.prop('disabled', true);
+							selectUbic.prop('disabled', true);
+							selectActiv.prop('disabled', true);
+							txtJerarquia.prop('disabled', true);
+							selectMesIng.prop('disabled', true);
+							selectAnioIng.prop('disabled', true);
+							selectMesEgr.prop('disabled', true);
+							selectAnioEgr.prop('disabled', true);
+							checkTrabAct.prop({'disabled': true, 'checked': false});
+							txtNomEnc.prop('disabled', true);
+							txtTlfEnc.prop('disabled', true);
+							txtDescription.prop('disabled', true);
+
+					<?php else: ?>
+						$('#sinExpLab').bootstrapSwitch({ // Switch de Experiencia Laboral
+							onColor: 'primary',
+							offColor: 'danger',
+							state: false
+						});
+					<?php endif; ?>
 
 					$('#ex1').slider({
 						formatter: function(value) {
@@ -1180,6 +1231,61 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						} else {
 							$('#monthE').prop('disabled', false);
 							$('#yearE').prop('disabled', false);
+						}
+					});
+
+					$('#sinExpLab').on('switchChange.bootstrapSwitch', function(event, state){
+						var txtEmpresa = $('#company'); // Todos los campos de Experiencia laboral
+						var selectUbic = $('#rCompany');
+						var selectActiv = $('#tCompany');
+						var txtJerarquia = $('#tEmployeer');
+						var selectMesIng = $('#monthI');
+						var selectAnioIng = $('#yearI');
+						var selectMesEgr = $('#monthE');
+						var selectAnioEgr = $('#yearE');
+						var checkTrabAct = $('#trab_actual');
+						var txtNomEnc = $('#nom_enc');
+						var txtTlfEnc = $('#tlf_enc');
+						var txtDescription = $('#descriptionArea');
+
+						if (state) { // if is :checked
+							txtEmpresa.prop('disabled', true);
+							selectUbic.prop('disabled', true);
+							selectActiv.prop('disabled', true);
+							txtJerarquia.prop('disabled', true);
+							selectMesIng.prop('disabled', true);
+							selectAnioIng.prop('disabled', true);
+							selectMesEgr.prop('disabled', true);
+							selectAnioEgr.prop('disabled', true);
+							checkTrabAct.prop({'disabled': true, 'checked': false});
+							txtNomEnc.prop('disabled', true);
+							txtTlfEnc.prop('disabled', true);
+							txtDescription.prop('disabled', true);
+							//Resetearlos
+							txtEmpresa.val("");
+							selectUbic.val("");
+							selectActiv.val("");
+							txtJerarquia.val("");
+							selectMesIng.val("");
+							selectAnioIng.val("");
+							selectMesEgr.val("");
+							selectAnioEgr.val("");
+							txtNomEnc.val("");
+							txtTlfEnc.val("");
+							txtDescription.val("");
+						} else {
+							txtEmpresa.prop('disabled', false);
+							selectUbic.prop('disabled', false);
+							selectActiv.prop('disabled', false);
+							txtJerarquia.prop('disabled', false);
+							selectMesIng.prop('disabled', false);
+							selectAnioIng.prop('disabled', false);
+							selectMesEgr.prop('disabled', false);
+							selectAnioEgr.prop('disabled', false);
+							checkTrabAct.prop('disabled', false);
+							txtNomEnc.prop('disabled', false);
+							txtTlfEnc.prop('disabled', false);
+							txtDescription.prop('disabled', false);
 						}
 					});
 
@@ -1657,40 +1763,45 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								}
 								break;
 							case 2:
-								if($("#company").val() != "" && parseInt($("#rCompany").val()) > 0 && parseInt($("#tCompany").val()) > 0 && $("#tEmployeer").val() != "" && $("#descriptionArea").val() != "") {
+								if ($('#sinExpLab').is(':checked')) {
+									str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val()+'&trab_actual=0&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
+									band = true;
+								} else {
+									if($("#company").val() != "" && parseInt($("#rCompany").val()) > 0 && parseInt($("#tCompany").val()) > 0 && $("#tEmployeer").val() != "" && $("#descriptionArea").val() != "") {
 
-									if ($('#trab_actual').is(':checked')) {
-										str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE=0&yearE=9999&trab_actual=1&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
-										band = true;
-									} else {
-
-										if(parseInt($("#yearE").val()) >= parseInt($("#yearI").val())) {
-											str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val()+'&trab_actual=0&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
+										if ($('#trab_actual').is(':checked')) {
+											str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE=0&yearE=9999&trab_actual=1&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
 											band = true;
 										} else {
-											swal({
-												title: 'Información!',
-												text: 'El año de egreso debe ser mayor que el año de ingreso',
-												timer: 2000,
-												confirmButtonClass: 'btn btn-primary btn-lg',
-												buttonsStyling: false
-											});
-											return false;
+
+											if(parseInt($("#yearE").val()) >= parseInt($("#yearI").val())) {
+												str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val()+'&trab_actual=0&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
+												band = true;
+											} else {
+												swal({
+													title: 'Información!',
+													text: 'El año de egreso debe ser mayor que el año de ingreso',
+													timer: 2000,
+													confirmButtonClass: 'btn btn-primary btn-lg',
+													buttonsStyling: false
+												});
+												return false;
+
+											}
 
 										}
+										
+									}
+
+									if ($('#nom_enc').val() != "" && $('#tlf_enc').val() == ""){
+
+											band = false;
+
+									} else if ($('#nom_enc').val() == "" && $('#tlf_enc').val() != ""){
+
+											band = false;
 
 									}
-									
-								}
-
-								if ($('#nom_enc').val() != "" && $('#tlf_enc').val() == ""){
-
-										band = false;
-
-								} else if ($('#nom_enc').val() == "" && $('#tlf_enc').val() != ""){
-
-										band = false;
-
 								}
 								break;
 							case 3:
@@ -1910,7 +2021,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											$("#yearE").val(2016);
 											$("#descriptionArea").val("");
 
-											$("#contentEL").css("display", "block");
+											if (Object.keys(data.data).length > 0) {
+												$("#contentEL").css("display", "block");
+												$("#containerSinExpLab").remove();
+											}
+
 											var text = '';
 											if(edit == 2) {
 												data.data.forEach(function(d) {
