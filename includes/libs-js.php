@@ -141,3 +141,39 @@
 		});
 	});
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".vmMomento").click(function() {
+			if($('.vmMomento span.underline').text() == 'ver menos'){
+				$('html, body').animate({scrollTop:$('.tMomento').offset().top-150}, 300);
+			}
+
+			$('.tMomento .hideit').toggle(function(){
+				if ($(this).is(':visible')) {
+					$(".vmMomento span.underline").text('ver menos');
+					$(".vmMomento span.text-muted").text('-');
+				} else {
+					$(".vmMomento span.underline").text('ver mas');
+					$(".vmMomento span.text-muted").text('+');
+				}
+			});
+		});
+
+		$(".vmArea").click(function() {
+			if($('.vmArea span.underline').text() == 'ver menos'){
+				$('html, body').animate({scrollTop:$('.tArea').offset().top-150}, 300);
+			}
+
+			$('.tArea .hideit').toggle(function(){
+				if ($(this).is(':visible')) {
+					$(".vmArea span.underline").text('ver menos');
+					$(".vmArea span.text-muted").text('-');
+				} else {
+					$(".vmArea span.underline").text('ver mas');
+					$(".vmArea span.text-muted").text('+');
+				}
+			});
+		});
+	});
+</script>

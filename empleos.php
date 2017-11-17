@@ -11,10 +11,11 @@
 	$filtroArea = isset($_REQUEST["area"]) ? $_REQUEST["area"] : false;
 	$filtroSector = isset($_REQUEST["sector"]) ? $_REQUEST["sector"] : false;
 	$filtroMomento = isset($_REQUEST["momento"]) ? $_REQUEST["momento"] : false;
+	$filtroDisp = isset($_REQUEST["disp"]) ? $_REQUEST["disp"] : false;
 
 	$busqueda = isset($_REQUEST["busqueda"]) ? $_REQUEST["busqueda"] : false;
 
-	$filtroActivado = $filtroArea || $filtroMomento;
+	$filtroActivado = $filtroArea || $filtroMomento || $filtroDisp;
 
 	$cantidadRegistros = 0;
 
@@ -92,6 +93,42 @@
 		$filtroMomento = false;
 	}
 
+	if($filtroDisp) {
+		$disps = $db->getRow("
+			SELECT
+				id,
+				nombre
+			FROM
+				disponibilidad
+			WHERE
+				nombre = '$filtroDisp'
+		");
+	}else {		
+		$disps = $db->getAll("
+			SELECT
+				id,
+				nombre
+			FROM
+				disponibilidad
+			ORDER BY
+				nombre
+		");
+
+		foreach($disps as $i => $disp) {
+			$disps[$i]["cantidad"] = $db->getOne("
+				SELECT
+					COUNT(*)
+				FROM
+					publicaciones AS p
+				WHERE
+					p.disponibilidad = $disp[id]
+			");
+		}
+	}
+
+
+
+
 	if($filtroArea) {
 		$infoArea = $db->getRow("
 			SELECT
@@ -145,6 +182,7 @@
 				amigable
 			FROM
 				areas
+
 			ORDER BY
 				nombre
 		");
@@ -155,10 +193,11 @@
 					COUNT(*)
 				FROM
 					publicaciones_sectores AS psec
+				INNER JOIN publicaciones AS p ON psec.id_publicacion = p.id
 				INNER JOIN areas_sectores AS asec ON psec.id_sector = asec.id
 				WHERE
 					asec.id_area = $area[id]
-			");
+					".($filtroDisp ? " AND p.disponibilidad= $disps[id] " : " 1=1") );
 		}
 	}
 
@@ -291,17 +330,19 @@
 			}
 
 			$query .= " AND (e.suspendido IS NULL OR e.suspendido = 0)";
-		}
-		else if($filtroMomento) {
+		}else if($filtroMomento) {
 			$query .= "
-				AND TIMESTAMPDIFF(
-					SECOND,
-					p.fecha_creacion,
-					NOW()
-				) <= $infoMomento[diff_s] AND (e.suspendido IS NULL OR e.suspendido = 0)"
+				WHERE 
+				TIMESTAMPDIFF(SECOND,p.fecha_creacion,NOW()) <= $infoMomento[diff_s] 
+				AND (e.suspendido IS NULL OR e.suspendido = 0)"
 			;
+		}else if($filtroDisp) {
+			$query .= "
+				WHERE 
+				p.disponibilidad =  $disps[id]
+			";
 		}		
-		
+		//file_put_contents('sql', $query);
 		$cantidadRegistros = $db->getOne("
 			SELECT
 				COUNT(*)
@@ -311,7 +352,7 @@
 			INNER JOIN areas_sectores AS ase ON ps.id_sector = ase.id
 			INNER JOIN areas AS a ON ase.id_area = a.id
 			INNER JOIN empresas AS e ON p.id_empresa = e.id
-			" . ($filtroArea ? "WHERE a.id = $infoArea[id]" : "") . ($filtroSector ? " AND ase.id = $infoSector[id] " : "") . ($filtroMomento ? " AND TIMESTAMPDIFF( SECOND, p.fecha_creacion, NOW() ) <= $infoMomento[diff_s] " : "") . " AND (e.suspendido IS NULL OR e.suspendido = 0)
+			where 1=1 " . ($filtroArea ? "and a.id = $infoArea[id]" : "") . ($filtroSector ? " AND ase.id = $infoSector[id] " : ""). ($filtroDisp ? " AND p.disponibilidad= $disps[id] " : "") . ($filtroMomento ? " AND TIMESTAMPDIFF( SECOND, p.fecha_creacion, NOW() ) <= $infoMomento[diff_s] " : "") . " AND (e.suspendido IS NULL OR e.suspendido = 0)
 		");
 		
 		$cantidadPaginas = ceil($cantidadRegistros / $final);
@@ -683,51 +724,51 @@
 									<?php endif ?>
 								</div>
 							<?php endif ?>
-							
-							<div class="box bg-white">
-								<div class="box-block clearfix">
-									<h5 class="pull-xs-left"><i class="ion-calendar m-sm-r-1"></i> Fecha de publicación</h5>
-								</div>
-								<table class="table m-md-b-0">
-									<tbody>
-										<?php
-											$url = "empleos.php";
-											if($filtroArea) {
-												$url .= "?area=$filtroArea";
-												if($filtroSector) {
-													$url .= "&sector=$filtroSector";
+							<?php if(!$filtroMomento): ?>
+								<div class="box bg-white">
+									<div class="box-block clearfix">
+										<h5 class="pull-xs-left"><i class="ion-calendar m-sm-r-1"></i> Fecha de publicación</h5>
+									</div>
+									<table class="table m-md-b-0">
+										<tbody>
+											<?php
+												$url = "empleos.php";
+												if($filtroArea) {
+													$url .= "?area=$filtroArea";
+													if($filtroSector) {
+														$url .= "&sector=$filtroSector";
+													}
 												}
-											}
-										?>							
-										<?php if($filtroMomento): ?>
-											<tr>
-												<td>
-													<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?momento=$filtroMomento" : "$url&momento=$filtroMomento&pagina=1"); ?>"><?php echo $infoMomento["nombre"]; ?><span class="underline"></span></a>
-												</td>
-												<td>
-													<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
-														<span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo $url; ?>"><i class="ion-close text-danger"></i></a></span>
+											?>							
+											<?php if($filtroMomento): ?>
+												<tr>
+													<td>
+														<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?momento=$filtroMomento" : "$url&momento=$filtroMomento&pagina=1"); ?>"><?php echo $infoMomento["nombre"]; ?><span class="underline"></span></a>
+													</td>
+													<td>
+														<?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+															<span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo $url; ?>"><i class="ion-close text-danger"></i></a></span>
+														<?php endif ?>
+													</td>
+												</tr>
+											<?php else: ?>
+												<?php foreach($momentos as $momento): ?>
+													<?php if($momento["cantidad"] > 0): ?>
+														<tr>
+															<td>
+																<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?momento=$momento[amigable]" : "$url&momento=$momento[amigable]"); ?>&pagina=1"><?php echo $momento["nombre"]; ?></a>
+															</td>
+															<td>
+																<span class="text-muted pull-xs-right"><?php echo $momento["cantidad"]; ?></span>
+															</td>
+														</tr>
 													<?php endif ?>
-												</td>
-											</tr>
-										<?php else: ?>
-											<?php foreach($momentos as $momento): ?>
-												<?php if($momento["cantidad"] > 0): ?>
-													<tr>
-														<td>
-															<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?momento=$momento[amigable]" : "$url&momento=$momento[amigable]"); ?>&pagina=1"><?php echo $momento["nombre"]; ?></a>
-														</td>
-														<td>
-															<span class="text-muted pull-xs-right"><?php echo $momento["cantidad"]; ?></span>
-														</td>
-													</tr>
-												<?php endif ?>
-											<?php endforeach ?>									
-										<?php endif ?>							
-									</tbody>
-								</table>
-							</div>
-
+												<?php endforeach ?>									
+											<?php endif ?>							
+										</tbody>
+									</table>
+								</div>
+							<?php endif ?>
 						</div>
 
 						<div class="col-md-8">
