@@ -1,19 +1,19 @@
 <?php
-session_start();
-require_once 'classes/DatabasePDOInstance.function.php';
-require_once 'slug.function.php';
+	session_start();
+	require_once 'classes/DatabasePDOInstance.function.php';
+	require_once 'slug.function.php';
 
-$db = DatabasePDOInstance();
+	$db = DatabasePDOInstance();
 
-$areas = $db->getAll("
-	SELECT
-	id,
-	nombre,
-	amigable
-	FROM
-	areas
-	ORDER BY
-	nombre
+	$areas = $db->getAll("
+		SELECT
+		id,
+		nombre,
+		amigable
+		FROM
+		areas
+		ORDER BY
+		nombre
 	");
 
 /*if(isset($_SESSION["ctc"]["empresa"]) && !isset($_REQUEST["empresas"])) {
@@ -56,28 +56,45 @@ else {*/
 			");
 	}
 
+/**
+ *    filtro de disponibilidad para empleos
+ */
+
+	$disps = $db->getAll("
+		SELECT
+		id,
+		nombre
+		FROM
+		disponibilidad
+	");
+
+	foreach ($disps as $key => $disp) {
+		$disps[$key]["cantidad"] = $db->getOne("
+			SELECT
+			COUNT(*)
+			FROM
+			publicaciones AS p
+			WHERE
+			p.disponibilidad = $disp[id]
+		");
+	}
+
 	$publicaciones = $db->getAll("
 		SELECT
-		p.titulo,
-		p.descripcion,
-		e.nombre AS empresa_nombre,
-		e.facebook,
-		e.twitter,
-		e.instagram,
-		e.linkedin,
-		e.verificado,
-		a.amigable AS area_amigable,
-		a.nombre AS area_nombre,
-		ase.amigable AS sector_amigable,
-		ase.nombre AS sector_nombre,
-		p.amigable,
-		CONCAT(
-		img.directorio,
-		'/',
-		img.nombre,
-		'.',
-		img.extension
-		) AS imagen
+			p.titulo,
+			p.descripcion,
+			e.nombre AS empresa_nombre,
+			e.facebook,
+			e.twitter,
+			e.instagram,
+			e.linkedin,
+			e.verificado,
+			a.amigable AS area_amigable,
+			a.nombre AS area_nombre,
+			ase.amigable AS sector_amigable,
+			ase.nombre AS sector_nombre,
+			p.amigable,
+			CONCAT(img.directorio,'/',img.nombre,'.',img.extension) AS imagen
 		FROM
 		publicaciones AS p
 		INNER JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
@@ -89,7 +106,7 @@ else {*/
 		WHERE ep.logo_home=1 AND (e.suspendido IS NULL OR e.suspendido = 0)
 		ORDER BY RAND()
 		#LIMIT 3
-		");
+	");
 
 	$publicacionesGratis = $db->getAll("
 		SELECT
@@ -124,7 +141,7 @@ else {*/
 		WHERE ep.logo_home=0 AND (e.suspendido IS NULL OR e.suspendido = 0)
 		ORDER BY RAND()
 		#LIMIT 2
-		");
+	");
 
 	$publicacionesOro = $db->getAll("
 		SELECT
@@ -196,7 +213,7 @@ else {*/
 		WHERE ep.logo_home=2 AND (e.suspendido IS NULL OR e.suspendido = 0)
 		ORDER BY RAND()
 		#LIMIT 5
-		");
+	");
 
 	$momentos = array(
 		array(
@@ -235,21 +252,12 @@ else {*/
 		$momentos[$i]["cantidad"] = $db->getOne("
 			SELECT
 			COUNT(*)
-			FROM
-			(
-			SELECT
-			TIMESTAMPDIFF(
-			SECOND,
-			fecha_creacion,
-			NOW()
-			) AS s
-			FROM
-			publicaciones AS p
-
-			) AS r
+			FROM (
+			SELECT  TIMESTAMPDIFF(SECOND,fecha_creacion,NOW()) AS s
+			FROM publicaciones AS p ) AS r 
 			WHERE
 			r.s <= $momento[diff_s]
-			");
+		");
 	}
 //}
 
@@ -444,6 +452,9 @@ else {*/
 				transition-delay: 0.2s;
 			}
 
+			.hideit{
+				display:none;
+			}
 			/*
 
             .logo div {
@@ -698,11 +709,11 @@ $link = str_replace('watch?v=', 'embed/', $link);
 							<div class="col-md-12">
 								<h3 style="margin-left: 45px;">Ofertas de empleo por área</h3>
 								<div class="box bg-white" style="margin: 11px 45px;margin-right: 0;">
-									<table class="table m-md-b-0">
+									<table class="table m-md-b-0 tArea">
 										<tbody>
-											<?php foreach ($areas as $area): ?>
-												<?php if ($area["cantidad"] > 0): ?>
-													<tr>
+											<?php foreach ($areas as $registro => $area): ?>
+												<?php if ($area["cantidad"]> 0): ?>
+													<tr class="<?php if ($registro > 5) echo 'hideit'; ?>" >
 														<td>
 															<a class="text-primary" href="empleos.php?area=<?php echo $area["amigable"]; ?>&pagina=1"><span class="underline"><?php echo $area["nombre"]; ?></span></a>
 														</td>
@@ -712,12 +723,79 @@ $link = str_replace('watch?v=', 'embed/', $link);
 													</tr>
 												<?php endif?>
 											<?php endforeach?>
+											<?php if ($registro > 5):?>
+												<tr class="vmArea" >
+													<td>
+														<span class="underline">Ver más</span>
+													</td>
+													<td>
+														<span class="text-muted pull-xs-right">+</span></a>
+													</td>
+												</tr>
+											<?php endif?>
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<h3 style="margin-left: 45px;">por Fecha de Publicación</h3>
+								<div class="box bg-white" style="margin: 11px 45px;margin-right: 0;">
+									<table class="table m-md-b-0 tMomento">
+										<tbody>
+											<?php foreach ($momentos as $registroM => $momento): ?>
+												<?php if ($momento["cantidad"] > 0): ?>
+													<tr class="<?php if ($registroM > 3) echo 'hideit'; ?>">
+														<td>
+															<a class="text-primary" href="empleos.php?momento=<?php echo $momento["amigable"]; ?>&pagina=1"><span class="underline"><?php echo $momento["nombre"]; ?></span></a>
+														</td>
+														<td>
+															<span class="text-muted pull-xs-right"><?php echo $momento["cantidad"]; ?></span>
+														</td>
+													</tr>
+												<?php endif?>
+											<?php endforeach?>
+											<?php if ($registroM > 3):?>
+												<tr class="vmMomento" >
+													<td>
+														<span class="underline">Ver más</span>
+													</td>
+													<td>
+														<span class="text-muted pull-xs-right">+</span></a>
+													</td>
+												</tr>
+											<?php endif?>											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<h3 style="margin-left: 45px;">por Disponibilidad</h3>
+								<div class="box bg-white" style="margin: 11px 45px;margin-right: 0;">
+									<table class="table m-md-b-0 tMomento">
+										<tbody>
+											<?php foreach ($disps as $key => $disp): ?>
+												<?php if ($disp["cantidad"] > 0): ?>
+													<tr >
+														<td>
+															<a class="text-primary" href="empleos.php?disp=<?php echo $disp["nombre"]; ?>&pagina=1"><span class="underline"><?php echo $disp["nombre"]; ?></span></a>
+														</td>
+														<td>
+															<span class="text-muted pull-xs-right"><?php echo $disp["cantidad"]; ?></span>
+														</td>
+													</tr>
+												<?php endif?>
+											<?php endforeach?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>						
 					</div> <!-- Pegar aqui el codigo cuando esté listo -->
+
 
 					<div class="col-md-9">
 						<h3 style="margin-left: 30px;">Principales ofertas de trabajo</h3>
