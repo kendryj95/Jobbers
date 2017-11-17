@@ -1014,6 +1014,18 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 											</div>
 											<div class="form-group row" style="margin-top: 10px;">
+												<label for="sobre_mi" class="col-xs-4 col-form-label" style="text-align: right;">Disponibilidad <span style="color: red;">*</span></label>
+												<div class="col-xs-8">
+													<select name="" id="disp" class="custom-select" style="width:100%">
+														<option value="0">Seleccione</option>
+														<?php $disps = $db->getAll("SELECT * FROM disponibilidad ORDER BY 1 ASC");?>
+														<?php foreach ($disps as $d): ?>
+															<option value="<?php echo $d["id"]; ?>"><?php echo $d["nombre"]; ?></option>
+														<?php endforeach?>
+													</select>
+												</div>
+											</div>
+											<div class="form-group row" style="margin-top: 10px;">
 												<label for="sobre_mi" class="col-xs-4 col-form-label" style="text-align: right;">Sobre mí <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
 													<textarea name="" id="sobre_mi" class="form-control" style="max-height: 300px"></textarea>
@@ -1177,10 +1189,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Información Extra</h4>
 									<div id="infoExtra">
 												<p style="margin-left: 50px;">
-													<strong>Remuneración pretendida: </strong> $<span
-														id="labelRem"><?=$infoExtra['remuneracion_pret']?></span> <br>
-													<strong>Sobre mí: </strong> <span
-														id="labelSobreMi"><?=$infoExtra['sobre_mi']?></span> <br>
+													<strong>Remuneración pretendida: </strong> $<span id="labelRem"><?=$infoExtra['remuneracion_pret']?></span> <br>
+													<strong>Sobre mí: </strong> <span id="labelSobreMi"><?=$infoExtra['sobre_mi']?></span> <br>
+													<strong>Disponibilidad: </strong> 
+													<span id="labelDisp"><?=$db->getOne("SELECT nombre FROM disponibilidad WHERE id=$infoExtra[disponibilidad]");?></span> <br>
 												</p>
 									</div>
 									<?php endif?>
@@ -1364,11 +1376,15 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 					var remuneracion = "<?=$infoExtra['remuneracion_pret']?>";
 					var sobre_mi = "<?=$cadena?>";
+					var disponibilidad = "<?=$infoExtra['disponibilidad']?>";
 					remuneracion = parseInt(remuneracion);
+					disponibilidad = parseInt(disponibilidad);
 
 					$('#remuneracion').val(remuneracion);
 
 					$('#sobre_mi').val(sobre_mi);
+
+					$('#disp').val(disponibilidad)
 
 					$(".save[data-target=6]").attr('data-edit',2).attr('data-i',<?=$_SESSION['ctc']['id']?>);
 
@@ -1845,7 +1861,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								break;
 							case 6:
 								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != ''){
-									str = '&remuneracion=' + $('#remuneracion').val() + '&sobre_mi=' + $('#sobre_mi').val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
+									str = '&remuneracion=' + $('#remuneracion').val() + '&disp=' + $('#disp').val() + '&sobre_mi=' + $('#sobre_mi').val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
 									band = true;
 
 									if ($('#web').val() != "" || $('#fb').val() != "" || $('#tw').val() != "" || $('#ig').val() != "" || $('#snap').val() != "" || $('#lkd').val() != "") {
