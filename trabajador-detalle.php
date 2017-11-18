@@ -367,7 +367,7 @@ $publicaciones = $db->getAll("
                                                         </p>
                                                     <?php endforeach?>
                                                 <?php else: ?>
-                                                    <p style="margin-left: 50px;">Sin registros</p>
+                                                    <p style="margin-left: 50px;"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
                                                 <?php endif?>
                                             </div>
 

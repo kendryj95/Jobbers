@@ -256,6 +256,10 @@ if ($id) {
                     <b>Descripción de tareas: </b> ' . $e["descripcion_tareas"] . '<br>
                 ';
         }
+    } else {
+        $html .= '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; border-bottom: 1px solid #3e70c9; "> EXPERIENCIA LABORAL </p><p></p><br>';
+
+        $html.= '<p><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>';
     }
 
     if ($idiomas) {
