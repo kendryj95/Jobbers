@@ -120,7 +120,7 @@
 								<div class="p-x-2 m-b-0" style="margin-top: 10px;">
 									<a href="javascript:void(0)" class="btn btn-primary btn-block text-uppercase" id="register" style="color: white;">Registrarse</a>
 								</div><br>
-								<!-- <div class="p-x-2">
+								<div class="p-x-2">
 									<div class="row">
 										<div class="col-xs-12">
 											<a href="javascript:void(0)" onClick="Login()" class="btn bg-facebook btn-block label-left m-b-0-25">
@@ -129,14 +129,14 @@
 											</a>
 										</div>
 								
-										<div class="col-xs-6">
+										<!-- <div class="col-xs-6">
 											<button type="button" class="btn bg-googleplus btn-block label-left m-b-0-25">
 												<span class="btn-label"><i class="ti-google"></i></span>
 												Google+
 											</button>
-										</div>
+										</div> -->
 									</div>
-								</div> -->
+								</div>
 							</form>
 							<div class="p-a-2 text-xs-center text-muted">
 								Ya tienes cuenta? <a class="text-black" href="ingresar.php"><span class="underline">Iniciar sesión</span></a>
@@ -215,48 +215,38 @@
 		  	function getUserInfo() {
 				FB.api('/me',{fields:'id,first_name,last_name,email,picture,gender,location,birthday'}, function(response) {
 					gender = (response.gender === 'male')?'1':'2';
-					if(response.email == undefined){
-						swal({
-							title: 'Información!',
-							text: 'Su Usuario de Facebook, no tiene un correo electronico asociado, se invita a registrar su usuario mediante nuestro formulario.',
-							timer: 6000,
-							confirmButtonClass: 'btn btn-danger btn-lg',
-							buttonsStyling: false
-						});
-					}else{
-						$.ajax({
-							type: 'POST',
-							url: 'ajax/user.php',
-							data: 'op=10&e=' + response.email + '&n=' + response.first_name +'&a=' + response.last_name + '&p=' + response.picture.data.url+ '&g=' + gender,
-							dataType: 'json',
-							success: function(data) {
-								if(data.status == 1) {
-									//console.log('Muestra algo');
-									swal({
-										title: 'Excelente!',
-										text: 'Registrado Satisfactoriamente.',
-										timer: 3000,
-										confirmButtonClass: 'btn btn-primary btn-lg',
-										buttonsStyling: false
-									});
-									setTimeout(function(){
-										window.location.href = "./";
-									},2000);
-									//window.location.assign("./");
-								}
-								else {
-									//console.log('Muestra algo 2');
-									swal({
-										title: 'Información!',
-										text: 'Usuario existente.',
-										timer: 3000,
-										confirmButtonClass: 'btn btn-primary btn-lg',
-										buttonsStyling: false
-									});
-								}
+					$.ajax({
+						type: 'POST',
+						url: 'ajax/user.php',
+						data: 'op=10&e=' + response.email + '&n=' + response.first_name +'&a=' + response.last_name + '&p=' + response.picture.data.url+ '&g=' + gender+ '&i=' + response.id,
+						dataType: 'json',
+						success: function(data) {
+							if(data.status == 1) {
+								//console.log('Muestra algo');
+								swal({
+									title: 'Excelente!',
+									text: 'Registrado Satisfactoriamente.',
+									timer: 3000,
+									confirmButtonClass: 'btn btn-primary btn-lg',
+									buttonsStyling: false
+								});
+								setTimeout(function(){
+									window.location.href = "./";
+								},2000);
+								//window.location.assign("./");
 							}
-						});
-					}
+							else {
+								//console.log('Muestra algo 2');
+								swal({
+									title: 'Información!',
+									text: 'Usuario existente.',
+									timer: 3000,
+									confirmButtonClass: 'btn btn-primary btn-lg',
+									buttonsStyling: false
+								});
+							}
+						}
+					});
 				});
 			}
 			function getPhoto() {

@@ -272,7 +272,21 @@
 			
 			break;
 		case LOGIN_FB:
-			$info = $db->getRow("SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]' limit 1");
+			$info = $db->getRow("SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]' and correo_electronico != 'undefined' limit 1");
+			
+			if($info){
+				if($info["fb_id"] == ''){
+					$db->query("UPDATE trabajadores SET fb_id = '$_REQUEST[i]'  WHERE id=$info[id] ");
+				}
+			}
+
+			if(isset($_REQUEST[e]) && $_REQUEST[e] != '' && $_REQUEST[e] != 'undefined'){
+				$info = $db->getRow("SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]' and fb_id='$_REQUEST[i]' limit 1");
+			}elseif(isset($_REQUEST[i]) && $_REQUEST[i] != ''){
+				$info = $db->getRow("SELECT * FROM trabajadores WHERE fb_id='$_REQUEST[i]' limit 1");
+			}
+
+
 			if($info) {
 
                 $_SESSION["ctc"]["id"] = $info["id"];
@@ -287,22 +301,6 @@
 				} else {
 					$_SESSION["ctc"]["postulate"] = 0;
 				}
-				
-				// POR JD 01-11-2017
-				/*$file_name = 'login_users.txt';
-				$datos_ = '';
-				$datos_ = 'Fecha =>'.date('Y-m-d H:i:s'). ' -- ';
-				$datos_ .= 'CorreoFB E=>'.$_REQUEST[e]. ' -- ';
-				$datos_ .= 'CorreoBD =>'.$info["correo_electronico"]. ' -- ';
-				$datos_ .= "Consulta => SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]' limit 1 -- ";
-				$datos_ .= 'Sesion => Correo'.$_SESSION["ctc"]["email"].PHP_EOL;
-				
-				if (file_exists($file_name)) {
-	    			file_put_contents($file_name, $datos_, FILE_APPEND);
-				} else { 
-	    			file_put_contents($file_name, $datos_);
-				}
-				*/
 
 				if($info["id_imagen"] != 0) {
 					/*$isfb = $db->getOne("SELECT id FROM imagenes WHERE id=".$info["id_imagen"]." AND nombre='$_REQUEST[p]'");
@@ -325,25 +323,34 @@
             }
 			break;
 		case ADD_FB:
-			$info = $db->getRow("SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]'");
+			$info = $db->getRow("SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]' and correo_electronico!='undefined' ");
+
+			if($info) {
+				if($info["fb_id"] == ''){
+					$db->query("UPDATE trabajadores SET fb_id = '$_REQUEST[i]'  WHERE id=$info[id] ");
+				}
+			}
+
+			$info = $db->getRow("SELECT * FROM trabajadores WHERE fb_id='$_REQUEST[i]'");
+
 			if($info) {
 				echo json_encode(array("status" => 2));
-			}
-			else {
+			}else {
 				$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores'");
 				$uid = $db->getOne("SELECT valor FROM uid");
 				//$idi = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
 				$nombres = $_REQUEST['n'];
 				$apellidos = $_REQUEST['a'];
-				$correo = $_REQUEST['e'];
+				$correo = $_REQUEST['e'] == 'undefined'?'':$_REQUEST['e'];
 				$pictureURL = $_REQUEST['p'];
 				$genero = $_REQUEST['g'];
-				$db->query("INSERT INTO trabajadores (id,uid, id_imagen, id_sexo, id_estado_civil, 
+				$fb_id = $_REQUEST['i'];
+				$db->query("INSERT INTO trabajadores (id,uid,fb_id, id_imagen, id_sexo, id_estado_civil, 
 				id_tipo_documento_identificacion, id_pais, provincia, localidad, 
 				calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion,
 				fecha_nacimiento, telefono, telefono_alternativo, usuario, clave, correo_electronico,
 				fecha_creacion, fecha_actualizacion) 
-				VALUES ('$id','$uid' ,'0', '$genero', '', '', '', '', '', '', '', '$nombres', '$apellidos', '', NULL, '', '',  '', '', '$correo', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."')");
+				VALUES ('$id','$uid','$fb_id' ,'0', '$genero', '', '', '', '', '', '', '', '$nombres', '$apellidos', '', NULL, '', '',  '', '', '$correo', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."')");
 				//$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ($idi, '', '', '', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[p]')");
 				$_SESSION["ctc"]["id"] = $id;
 				$_SESSION["ctc"]["name"] = $_REQUEST["n"];

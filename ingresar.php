@@ -248,20 +248,12 @@
 			}
 
 		  	function getUserInfo() {
-				FB.api('/me?fields=id,name,email,picture', function(response) {
-					if(response.email == undefined){
-						swal({
-							title: 'Información!',
-							text: 'Su Usuario de Facebook, no tiene un correo electronico asociado, Registrar su usuario mediante nuestro formulario.',
-							timer: 6000,
-							confirmButtonClass: 'btn btn-danger btn-lg',
-							buttonsStyling: false
-						});
-					}else{
-						$.ajax({
+				FB.api('/me',{fields:'id,first_name,last_name,email,picture,gender,location,birthday'}, function(response) {
+					console.log(response);
+					$.ajax({
 							type: 'POST',
 							url: 'ajax/user.php',
-							data: 'op=9&e=' + response.email + '&n=' + response.name + '&p=' + response.picture.data.url,
+							data: 'op=9&e=' + response.email + '&n=' + response.name + '&i=' + response.id+ '&p=' + response.picture.data.url,
 							dataType: 'json',
 							success: function(data) {
 								if(data.status == 1) {
@@ -278,7 +270,6 @@
 								}
 							}
 						});
-					}
 				});
 			}
 	
