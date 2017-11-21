@@ -99,10 +99,10 @@
 
 						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores_infextra'");
 
-						$db->query("INSERT INTO trabajadores_infextra (id_trabajador, remuneracion_pret, sobre_mi,disponibilidad) VALUES ('".$_SESSION["ctc"]["id"]."', $_REQUEST[remuneracion], $_REQUEST[sobre_mi], $_REQUEST[disp] )");
+						$db->query("INSERT INTO trabajadores_infextra (id_trabajador, remuneracion_pret, sobre_mi,disponibilidad) VALUES ('".$_SESSION["ctc"]["id"]."', $_REQUEST[remuneracion], '$_REQUEST[sobre_mi]', $_REQUEST[disp] )");
 
 						// Información adicional de las redes sociales
-						$db->query("UPDATE trabajadores SET sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]' WHERE id=".$_REQUEST['i']);
+						$db->query("UPDATE trabajadores SET sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]' WHERE id=".$_SESSION["ctc"]["id"]);
 
 						$data = $db->getAll("SELECT * FROM trabajadores_infextra WHERE id=$id");
 					}
