@@ -1860,7 +1860,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								}
 								break;
 							case 6:
-								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != ''){
+								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != '' && $('#disp').val() > 1){
 									str = '&remuneracion=' + $('#remuneracion').val() + '&disp=' + $('#disp').val() + '&sobre_mi=' + $('#sobre_mi').val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
 									band = true;
 
