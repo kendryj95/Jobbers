@@ -237,7 +237,7 @@
 												<?php endif ?>	
 											<?php endif ?>
 										</div>
-										Disponibilidad: <?php echo $publicacion["disponibilidad"]; ?>
+										<b>Disponibilidad: <?php echo $publicacion["disponibilidad"]; ?></b>
 										<?php echo $publicacion["descripcion"]; ?>
 										
 										<?php if($publicacion["coordenadas"] != ""): ?>
