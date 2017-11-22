@@ -419,12 +419,13 @@ $publicaciones = $db->getAll("
                                                 <?php endif?>
                                             </div>
 
-                                            <?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador=" . $t);?>
+                                            <?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra inner join disponibilidad on disponibilidad.id = trabajadores_infextra.disponibilidad WHERE id_trabajador=" . $t);?>
 
                                             <h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Información Extra</h4>
                                             <div id="infoExtra">
                                                 <p style="margin-left: 50px;">
                                                     <strong>Remuneración pretendida: </strong> $<?=$infoExtra['remuneracion_pret']?> <br>
+                                                    <strong>Disponibilidad: </strong> <?=$infoExtra['nombre']?> <br>
                                                     <strong>Sobre mí: </strong> <?=$infoExtra['sobre_mi']?> <br>
                                                 </p>
                                             </div>
