@@ -31,7 +31,8 @@
 			pl.link_empresa,
 			pl.logo_home,
 			ase.amigable AS sector_amigable,
-			ase.nombre AS sector_nombre
+			ase.nombre AS sector_nombre,
+			d.nombre as disponibilidad
 		FROM
 			publicaciones AS p
 		INNER JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
@@ -39,6 +40,7 @@
 		INNER JOIN areas AS a ON ase.id_area = a.id
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
 		INNER JOIN empresas_planes AS pl ON p.id_empresa = pl.id_empresa
+		INNER JOIN disponibilidad AS d ON d.id = p.disponibilidad
 		WHERE p.amigable = '$p' AND a.amigable = '$a' AND ase.amigable = '$s'
 	");
 
@@ -55,13 +57,16 @@
 			a.amigable AS area_amigable,
 			ase.id AS sector_id,
 			ase.amigable AS sector_amigable,
-			ase.nombre AS sector_nombre
+			ase.nombre AS sector_nombre,
+			d.nombre as disponibilidad
+
 		FROM
 			publicaciones AS p
 		INNER JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
 		INNER JOIN areas_sectores AS ase ON ps.id_sector = ase.id
 		INNER JOIN areas AS a ON ase.id_area = a.id
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
+		INNER JOIN disponibilidad AS d ON d.id = p.disponibilidad
 		LEFT JOIN imagenes AS img ON e.id_imagen = img.id
 		WHERE (a.id = $publicacion[area_id] AND ase.id = $publicacion[sector_id]) AND p.id != $publicacion[id]
 		ORDER BY RAND()
@@ -183,14 +188,22 @@
 												  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=335054620211948";
 												  fjs.parentNode.insertBefore(js, fjs);
 												}(document, 'script', 'facebook-jssdk'));</script>
-												<div class="fb-share-button" data-href="http://www.jobbersargentina.com/empleos-detalle.php?<?php echo $_SERVER["QUERY_STRING"]; ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartir</a></div>
+												<div class="fb-share-button" data-href="http://www.jobbersargentina.com/empleos-detalle.php?<?php echo $_SERVER["QUERY_STRING"]; ?>" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a></div>
 												
 												<style>
+													.fb_iframe_widget span {
+														position: absolute;
+														top: -37px;
+														margin-bottom: 10px;
+													}
+
+
 													.IN-widget {
-														margin-left: 100px;
+														margin-left: 120px;
 														position: absolute;
 														z-index: 999;
 														margin-top: -8px;
+														margin-bottom: 20px;
 														width: 90px;
 														line-height: 1;
 														vertical-align: baseline;
@@ -211,6 +224,7 @@
 														width: 26px !important;
 														background-position: 3px -591px !important;
 													}
+
 												</style>
 												<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: es_ES</script>
 												<script type="IN/Share" data-url="http://www.jobbersargentina.com/empleos-detalle.php?<?php echo $_SERVER["QUERY_STRING"]; ?>"></script>
@@ -223,6 +237,7 @@
 												<?php endif ?>	
 											<?php endif ?>
 										</div>
+										Disponibilidad: <?php echo $publicacion["disponibilidad"]; ?>
 										<?php echo $publicacion["descripcion"]; ?>
 										
 										<?php if($publicacion["coordenadas"] != ""): ?>
