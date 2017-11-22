@@ -624,6 +624,9 @@
 										<?php endif ?>
 									<?php elseif(!$filtroArea && $filtroMomento): ?>
 										<li class="breadcrumb-item active"><?php echo $infoMomento["nombre"]; ?></li>
+									
+									<?php elseif($filtroDisp ): ?>
+										<li class="breadcrumb-item active"><?php echo $disps["nombre"]; ?></li>
 									<?php endif ?>
 								</ol>
 							<?php else: ?>
