@@ -253,7 +253,7 @@
 					$.ajax({
 							type: 'POST',
 							url: 'ajax/user.php',
-							data: 'op=9&e=' + response.email + '&n=' + response.name + '&i=' + response.id+ '&p=' + response.picture.data.url,
+							data: 'op=9&e=' + response.email +'&i=' + response.id+ '&p=' + response.picture.data.url,
 							dataType: 'json',
 							success: function(data) {
 								if(data.status == 1) {
