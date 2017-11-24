@@ -817,7 +817,7 @@
 												<?php if($disp["cantidad"] > 0): ?>
 													<tr>
 														<td>
-															<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?disp=$disp[nombre]" : "$url&disp=$disp[nombre]"); ?>&pagina=1"><?php echo $disp["nombre"]; ?></a>
+															<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?disp=$disp[amigable]" : "$url&disp=$disp[amigable]"); ?>&pagina=1"><?php echo $disp["nombre"]; ?></a>
 														</td>
 														<td>
 															<span class="text-muted pull-xs-right"><?php echo $disp["cantidad"]; ?></span>
@@ -1426,9 +1426,7 @@
 												}
 												elseif($filtroMomento) {
 													$urlParams .= "?momento=$filtroMomento";
-												}elseif($filtroDisp){
- 													$urlParams .= "?disp=$filtroDisp";
-  												}
+												}
 											}
 
 										?>

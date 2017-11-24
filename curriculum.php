@@ -353,7 +353,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="col-md-8">
 											<?php if(!$experiencias): ?>
 												<div class="form-group row" id="containerSinExpLab">
-													<label for="sinExpLab" class="col-xs-4 col-form-label" style="text-align: right;">Sin Experiencia Laboral </label>
+													<label for="sinExpLab" class="col-xs-4 col-form-label" style="text-align: right;">¿Tienes experiencia laboral? </label>
 													<div class="col-xs-8">
 														<input value="" id="sinExpLab" type="checkbox" checked>
 													</div>
@@ -1237,7 +1237,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						$('#sinExpLab').bootstrapSwitch({ // Switch de Experiencia Laboral
 							onColor: 'primary',
 							offColor: 'danger',
-							state: true,
+							state: false,
 							onText: 'SÍ',
 							offText: 'NO'
 						});
@@ -1318,6 +1318,19 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						var txtDescription = $('#descriptionArea');
 
 						if (state) { // if is :checked
+							txtEmpresa.prop('disabled', false);
+							selectUbic.prop('disabled', false);
+							selectActiv.prop('disabled', false);
+							txtJerarquia.prop('disabled', false);
+							selectMesIng.prop('disabled', false);
+							selectAnioIng.prop('disabled', false);
+							selectMesEgr.prop('disabled', false);
+							selectAnioEgr.prop('disabled', false);
+							checkTrabAct.prop('disabled', false);
+							txtNomEnc.prop('disabled', false);
+							txtTlfEnc.prop('disabled', false);
+							txtDescription.prop('disabled', false);
+						} else {
 							txtEmpresa.prop('disabled', true);
 							selectUbic.prop('disabled', true);
 							selectActiv.prop('disabled', true);
@@ -1342,19 +1355,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							txtNomEnc.val("");
 							txtTlfEnc.val("");
 							txtDescription.val("");
-						} else {
-							txtEmpresa.prop('disabled', false);
-							selectUbic.prop('disabled', false);
-							selectActiv.prop('disabled', false);
-							txtJerarquia.prop('disabled', false);
-							selectMesIng.prop('disabled', false);
-							selectAnioIng.prop('disabled', false);
-							selectMesEgr.prop('disabled', false);
-							selectAnioEgr.prop('disabled', false);
-							checkTrabAct.prop('disabled', false);
-							txtNomEnc.prop('disabled', false);
-							txtTlfEnc.prop('disabled', false);
-							txtDescription.prop('disabled', false);
 						}
 					});
 
@@ -1860,7 +1860,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								}
 								break;
 							case 6:
-								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != ''){
+								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != '' && $('#disp').val() > 1){
+
 									str = '&remuneracion=' + $('#remuneracion').val() + '&disp=' + $('#disp').val() + '&sobre_mi=' + $('#sobre_mi').val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
 									band = true;
 
