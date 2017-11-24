@@ -43,6 +43,16 @@
 		return $url;
 	}
 
+	$infoArea = $db->getRow("
+		SELECT
+			id,
+			nombre
+		FROM
+			areas
+		WHERE
+			amigable = '$filtroArea'
+	");
+
 	$momentos = array(
 		array(
 			"nombre" => "Últimas 24 horas",
@@ -76,7 +86,7 @@
 		),
 		array(
 			"nombre" => "Hace dos meses o menos",
-			"amigable" => "hace-un-mes-o-menos",
+			"amigable" => "hace-dos-meses-o-menos",
 			"cantidad" => 0,
 			"diff_s" => 5184000
 		)
@@ -89,9 +99,12 @@
 			$band = true;
 		}
 	}
+
 	if($band === false) {
 		$filtroMomento = false;
 	}
+
+
 
 	if($filtroDisp) {
 		$disps = $db->getRow("
@@ -103,7 +116,7 @@
 			WHERE
 				nombre = '$filtroDisp'
 		");
-	}else {		
+	}else {
 		$disps = $db->getAll("
 			SELECT
 				id,
@@ -120,8 +133,17 @@
 					COUNT(*)
 				FROM
 					publicaciones AS p
+					INNER JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
+					INNER JOIN areas_sectores AS ase ON ps.id_sector = ase.id
+					INNER JOIN areas AS a ON ase.id_area = a.id
+					INNER JOIN empresas AS e ON p.id_empresa = e.id
+					INNER JOIN empresas_planes AS plan ON plan.id_empresa = e.id
 				WHERE
 					p.disponibilidad = $disp[id]
+					AND ".($filtroArea ? "a.id = $infoArea[id]" : " 1=1 ")
+					.($filtroSector ? " AND ase.id = $infoSector[id]" : " "). 
+					" AND ".($filtroMomento ? "  TIMESTAMPDIFF(SECOND,p.fecha_creacion,NOW()) <= $infoMomento[diff_s] " : " 1=1")."
+					AND (e.suspendido IS NULL OR e.suspendido = 0)
 			");
 		}
 	}
@@ -150,8 +172,7 @@
 				WHERE
 					amigable = '$filtroSector'
 			");
-		}
-		else {
+		}else {
 			$sectores = $db->getAll("
 				SELECT
 					id,
@@ -173,8 +194,7 @@
 				");
 			}
 		}
-	}
-	else {		
+	}else {		
 		$areas = $db->getAll("
 			SELECT
 				id,
@@ -197,7 +217,8 @@
 				INNER JOIN areas_sectores AS asec ON psec.id_sector = asec.id
 				WHERE
 					asec.id_area = $area[id]
-					".($filtroDisp ? " AND p.disponibilidad= $disps[id] " : " 1=1") );
+					AND ".($filtroMomento ? "  TIMESTAMPDIFF(SECOND,p.fecha_creacion,NOW()) <= $infoMomento[diff_s] " : " 1=1")."
+					AND ".($filtroDisp ? "  p.disponibilidad= $disps[id] " : " 1=1") );
 		}
 	}
 
@@ -308,18 +329,18 @@
 			INNER JOIN empresas AS e ON p.id_empresa = e.id
 			INNER JOIN empresas_planes AS plan ON plan.id_empresa = e.id
 			LEFT JOIN imagenes AS img ON e.id_imagen = img.id
+			where (e.suspendido IS NULL OR e.suspendido = 0)
 		";
 		
 		if($filtroArea) {
-			$query .= "
-				WHERE
-					a.id = $infoArea[id]
+			$query .= " 
+				AND a.id = $infoArea[id]
 			";
 			if($filtroSector) {
 				$query .= "AND ase.id = $infoSector[id]";
 			}
 
-			if($filtroMomento) {
+			/*if($filtroMomento) {
 				$query .= "
 					AND TIMESTAMPDIFF(
 						SECOND,
@@ -327,18 +348,22 @@
 						NOW()
 					) <= $infoMomento[diff_s]"
 				;
-			}
+			}*/
 
-			$query .= " AND (e.suspendido IS NULL OR e.suspendido = 0)";
-		}else if($filtroMomento) {
+			//$query .= " AND (e.suspendido IS NULL OR e.suspendido = 0) ";
+		}
+
+		if($filtroMomento) {
 			$query .= "
-				WHERE 
+				AND
 				TIMESTAMPDIFF(SECOND,p.fecha_creacion,NOW()) <= $infoMomento[diff_s] 
-				AND (e.suspendido IS NULL OR e.suspendido = 0)"
+				"
 			;
-		}else if($filtroDisp) {
+		}
+
+		if($filtroDisp) {
 			$query .= "
-				WHERE 
+				AND 
 				p.disponibilidad =  $disps[id]
 			";
 		}		
@@ -511,11 +536,7 @@
 					FROM
 						(
 							SELECT
-								TIMESTAMPDIFF(
-									SECOND,
-									p.fecha_creacion,
-									NOW()
-								) AS s
+								TIMESTAMPDIFF(SECOND,p.fecha_creacion,NOW()) AS s
 							FROM
 								publicaciones AS p
 							INNER JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
@@ -523,10 +544,13 @@
 							INNER JOIN areas AS a ON ase.id_area = a.id
 							INNER JOIN empresas AS e ON p.id_empresa = e.id
 							WHERE
-								a.id = $infoArea[id] " . ($filtroSector ? "AND ase.id = $infoSector[id]" : "") . "
+								".($filtroArea ? "a.id = $infoArea[id]" : " 1=1 ")
+								 .($filtroSector ? " AND ase.id = $infoSector[id]" : " "). 
+								" AND ".($filtroDisp ? "  p.disponibilidad= $disps[id] " : " 1=1")."
+								AND (e.suspendido IS NULL OR e.suspendido = 0)
 						) AS r
 					WHERE
-						r.s <= $momento[diff_s] AND (e.suspendido IS NULL OR e.suspendido = 0)
+						r.s <= $momento[diff_s] 
 				";
 			}else {
 				$query = "
@@ -541,6 +565,7 @@
 			$momentos[$i]["cantidad"] = $db->getOne($query);
 		}
 	}
+
 ?>
 
 <!DOCTYPE html>
@@ -625,7 +650,7 @@
 									<?php elseif(!$filtroArea && $filtroMomento): ?>
 										<li class="breadcrumb-item active"><?php echo $infoMomento["nombre"]; ?></li>
 									
-									<?php elseif($filtroDisp ): ?>
+									<?php elseif(!$filtroArea && !$filtroMomento && $filtroDisp  ): ?>
 										<li class="breadcrumb-item active"><?php echo $disps["nombre"]; ?></li>
 									<?php endif ?>
 								</ol>
@@ -772,6 +797,38 @@
 									</table>
 								</div>
 							<?php endif ?>
+							<?php if(!$filtroDisp): ?>
+								<div class="box bg-white">
+									<div class="box-block clearfix">
+										<h5 class="pull-xs-left"><i class="ion-calendar m-sm-r-1"></i> Disponibilidad</h5>
+									</div>
+									<table class="table m-md-b-0">
+										<tbody>
+											<?php
+												$url = "empleos.php";
+												if($filtroArea) {
+													$url .= "?area=$filtroArea";
+													if($filtroSector) {
+														$url .= "&sector=$filtroSector";
+													}
+												}
+											?>							
+											<?php foreach($disps as $disp): ?>
+												<?php if($disp["cantidad"] > 0): ?>
+													<tr>
+														<td>
+															<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?disp=$disp[nombre]" : "$url&disp=$disp[nombre]"); ?>&pagina=1"><?php echo $disp["nombre"]; ?></a>
+														</td>
+														<td>
+															<span class="text-muted pull-xs-right"><?php echo $disp["cantidad"]; ?></span>
+														</td>
+													</tr>
+												<?php endif ?>
+											<?php endforeach ?>									
+										</tbody>
+									</table>
+								</div>
+							<?php endif ?>							
 						</div>
 
 						<div class="col-md-8">
@@ -1369,7 +1426,9 @@
 												}
 												elseif($filtroMomento) {
 													$urlParams .= "?momento=$filtroMomento";
-												}
+												}elseif($filtroDisp){
+ 													$urlParams .= "?disp=$filtroDisp";
+  												}
 											}
 
 										?>
