@@ -740,11 +740,9 @@ $link = str_replace('watch?v=', 'embed/', $link);
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-<<<<<<< HEAD
-								<h3 style="margin-left: 45px;">por Fecha de Publicación</h3>
-=======
+
 								<h3 style="margin-left: 45px;">Por Fecha de Publicación</h3>
->>>>>>> 49796bdbe41e3993958353f3ebeaef652c305088
+
 								<div class="box bg-white" style="margin: 11px 45px;margin-right: 0;">
 									<table class="table m-md-b-0 tMomento">
 										<tbody>
