@@ -172,7 +172,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row">
 												<label for="email" class="col-xs-4 col-form-label"  style="text-align: right;">Email <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $_SESSION["ctc"]["email"]; ?>" id="email" type="email">
+													<input class="form-control" value="<?php echo $data['correo_electronico'] ?>" id="email" type="email">
 												</div>
 											</div>
 											<label class="custom-control custom-radio col-md-4" style=" text-align: right;">

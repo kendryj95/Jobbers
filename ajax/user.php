@@ -280,9 +280,9 @@
 				}
 			}
 
-			if(isset($_REQUEST[e]) && $_REQUEST[e] != '' && $_REQUEST[e] != 'undefined'){
+			if(isset($_REQUEST['e']) && $_REQUEST['e'] != '' && $_REQUEST['e'] != 'undefined'){
 				$info = $db->getRow("SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]' and fb_id='$_REQUEST[i]' limit 1");
-			}elseif(isset($_REQUEST[i]) && $_REQUEST[i] != ''){
+			}elseif(isset($_REQUEST['i']) && $_REQUEST['i'] != ''){
 				$info = $db->getRow("SELECT * FROM trabajadores WHERE fb_id='$_REQUEST[i]' limit 1");
 			}
 
@@ -353,11 +353,11 @@
 				VALUES ('$id','$uid','$fb_id' ,'0', '$genero', '', '', '', '', '', '', '', '$nombres', '$apellidos', '', NULL, '', '',  '', '', '$correo', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."')");
 				//$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ($idi, '', '', '', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[p]')");
 				$_SESSION["ctc"]["id"] = $id;
-				$_SESSION["ctc"]["name"] = $_REQUEST["n"];
-				$_SESSION["ctc"]["lastName"] = $_REQUEST["a"];
-				$_SESSION["ctc"]["email"] = $_REQUEST["e"];
+				$_SESSION["ctc"]["name"] = $nombres;
+				$_SESSION["ctc"]["lastName"] = $apellidos;
+				$_SESSION["ctc"]["email"] = $correo;
 				$_SESSION["ctc"]["type"] = 2;
-				$_SESSION["ctc"]["pic"] = $_REQUEST["p"];
+				$_SESSION["ctc"]["pic"] = $pictureURL;
 				echo json_encode(array("status" => 1));
 			}
 			break;
