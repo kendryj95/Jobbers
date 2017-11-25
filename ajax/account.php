@@ -109,9 +109,10 @@
 
 						// Información adicional de las redes sociales
 						$db->query("UPDATE trabajadores SET sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]' WHERE id=".$_SESSION["ctc"]["id"]);
-
-						$data = $db->getAll("SELECT * FROM trabajadores_infextra WHERE id=$id");
+						
 					}
+
+					$data = $db->getAll("SELECT ti.*, d.nombre AS disponibilidad FROM trabajadores_infextra ti INNER JOIN disponibilidad d ON d.id = ti.disponibilidad WHERE id=$id");
 					break;
 			}
 			$v = 0;
@@ -195,7 +196,7 @@
 			}
 			$data["idiomas"] = $idiomas;
 			$data["otros_conocimientos"] = $db->getAll("SELECT * FROM trabajadores_otros_conocimientos WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$data["info_extra"] = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador =". $_SESSION['ctc']['id']);
+			$data["info_extra"] = $db->getRow("SELECT ti.remuneracion_pret, ti.sobre_mi, d.nombre AS disponibilidad FROM trabajadores_infextra ti INNER JOIN disponibilidad d ON d.id = ti.disponibilidad WHERE id_trabajador =". $_SESSION['ctc']['id']);
 			echo json_encode($data);
 			break;
 		case REMOVE_ACCOUNT:

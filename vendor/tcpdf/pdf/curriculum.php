@@ -306,7 +306,7 @@ if ($id) {
         }
     }
 
-    $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador=" . $_SESSION['ctc']['id']);
+    $infoExtra = $db->getRow("SELECT ti.*, d.nombre AS disponibilidad FROM trabajadores_infextra ti INNER JOIN disponibilidad d ON d.id = ti.disponibilidad WHERE id_trabajador=" . $_SESSION['ctc']['id']);
 
     if ($infoExtra) {
 
@@ -317,6 +317,7 @@ if ($id) {
                     <strong>Remuneración Pretendida: </strong> $' . $infoExtra["remuneracion_pret"] . '<br>
                     <strong>Sobre mí: </strong> ' . $infoExtra["sobre_mi"] . '
                     <br>
+                    <strong>Disponibilidad: </strong> '. $infoExtra["disponibilidad"] . '<br>
                 ';
 
     }

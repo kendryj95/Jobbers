@@ -334,9 +334,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<?php if($educacion): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
-										<?php endif; ?>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 2: Experiencia laboral</h4>
 									<?php $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id'] . " ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC")?>
@@ -539,9 +537,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a></div>
-										<?php if($educacion): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
-										<?php endif; ?>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab3" role="tabpanel">
@@ -896,9 +892,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<?php if($infoExtra): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
-										<?php endif; ?>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 5: Otros conocimientos</h4>
 									<div class="row">
@@ -986,9 +980,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar</a></div>
-										<?php if($infoExtra): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
-										<?php endif; ?>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab6" role="tabpanel">
@@ -1182,18 +1174,22 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									</div>
 
 									<?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador=" . $_SESSION['ctc']['id']);?>
-									<?php if ($infoExtra): ?>
+									
 
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Información Extra</h4>
 									<div id="infoExtra">
+										<?php if ($infoExtra): ?>
 												<p style="margin-left: 50px;">
 													<strong>Remuneración pretendida: </strong> $<span id="labelRem"><?=$infoExtra['remuneracion_pret']?></span> <br>
 													<strong>Sobre mí: </strong> <span id="labelSobreMi"><?=$infoExtra['sobre_mi']?></span> <br>
 													<strong>Disponibilidad: </strong> 
 													<span id="labelDisp"><?=$db->getOne("SELECT nombre FROM disponibilidad WHERE id=$infoExtra[disponibilidad]");?></span> <br>
 												</p>
+										<?php else: ?>
+											<p style="margin-left: 50px;">Sin registros</p>
+										<?php endif?>
 									</div>
-									<?php endif?>
+									
 
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
@@ -1265,6 +1261,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							txtNomEnc.prop('disabled', true);
 							txtTlfEnc.prop('disabled', true);
 							txtDescription.prop('disabled', true);
+							$('.save[data-target="2"], .reset[data-target="2"]').hide();
 
 					<?php else: ?>
 						$('#sinExpLab').bootstrapSwitch({ // Switch de Experiencia Laboral
@@ -1288,6 +1285,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 						$('#nameC').prop('disabled', true);
 						$('#descriptionC').prop('disabled', true);
+						$('.save[data-target="5"], .reset[data-target="5"]').hide();
 
 					<?php else: ?>
 						$('#sinOtrCon').bootstrapSwitch({ // Switch de Experiencia Laboral
@@ -1351,6 +1349,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							txtNomEnc.prop('disabled', false);
 							txtTlfEnc.prop('disabled', false);
 							txtDescription.prop('disabled', false);
+							$('.save[data-target="2"], .reset[data-target="2"]').show();
 						} else {
 							txtEmpresa.prop('disabled', true);
 							selectUbic.prop('disabled', true);
@@ -1364,6 +1363,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							txtNomEnc.prop('disabled', true);
 							txtTlfEnc.prop('disabled', true);
 							txtDescription.prop('disabled', true);
+							$('.save[data-target="2"], .reset[data-target="2"]').hide();
 							//Resetearlos
 							txtEmpresa.val("");
 							selectUbic.val("");
@@ -1384,9 +1384,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						if (state) {
 							$('#nameC').prop('disabled', false);
 							$('#descriptionC').prop('disabled', false);
+							$('.save[data-target="5"], .reset[data-target="5"]').show();
 						} else {
 							$('#nameC').prop('disabled', true).val("");
 							$('#descriptionC').prop('disabled', true).val("");
+							$('.save[data-target="5"], .reset[data-target="5"]').hide();
 						}
 					});
 
@@ -1416,7 +1418,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 					$('#sobre_mi').val(sobre_mi);
 
-					$('#disp').val(disponibilidad)
+					$('#disp').val(disponibilidad);
 
 					$(".save[data-target=6]").attr('data-edit',2).attr('data-i',<?=$_SESSION['ctc']['id']?>);
 
@@ -1492,8 +1494,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										$("#fecha_nac").html(fecha);
 	                                    var edad = calcularEdad(data.usuario.fecha_nacimiento);
 	                                    $("#edad").html((edad)+"años");
-	                                    $("#labelRem").html(data.info_extra.remuneracion_pret);
-	                                    $("#labelSobreMi").html(data.info_extra.sobre_mi);
+
+	                                    if (Object.keys(data.info_extra).length > 0) {
+	                                    	var html = "<p style='margin-left: 50px'><strong>Remuneración pretendida: </strong> $<span id='labelRem'>"+data.info_extra.remuneracion_pret+"</span> <br><strong>Sobre mí: </strong> <span id='labelSobreMi'>"+data.info_extra.sobre_mi+"</span> <br><strong>Disponibilidad: </strong> <span id='labelDisp'>"+data.info_extra.disponibilidad+"</span></p>";
+	                                    	$('#infoExtra').html(html);
+
+	                                    }
+
 										var html = "";
 										var mes = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 										if(data.educacion.length > 0) {
@@ -1784,7 +1791,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								}
 								break;
 							case 2:
-								if ($('#sinExpLab').is(':checked')) {
+								if ($('#sinExpLab').not(':checked')) {
 									str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val()+'&trab_actual=0&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
 									band = true;
 								} else {
@@ -1892,7 +1899,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 								break;
 							case 6:
-								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != '' && $('#disp').val() > 1){
+								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != '' && $('#disp').val() > 0){
 									
 									str = '&remuneracion=' + $('#remuneracion').val() + '&disp=' + $('#disp').val() + '&sobre_mi=' + $('#sobre_mi').val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
 									band = true;
