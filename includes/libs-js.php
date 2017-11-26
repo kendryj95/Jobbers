@@ -6,7 +6,8 @@
 	<?php endif ?>
 	var audioNotif = new Audio('notification.mp3');
 </script>
-	
+
+
 <?php if(strstr($_SERVER["REQUEST_URI"], "empresa/") || strstr($_SERVER["REQUEST_URI"], "admin/")): ?>
 	<!-- Vendor JS -->
 	<script type="text/javascript" src="../vendor/jquery/jquery-1.12.3.min.js"></script>
@@ -21,6 +22,8 @@
 	<script type="text/javascript" src="../vendor/TinyColor/tinycolor.js"></script>
 	<script type="text/javascript" src="../vendor/sparkline/jquery.sparkline.min.js"></script>
 	<script type="text/javascript" src="../vendor/sweetalert2/sweetalert2.min.js"></script>
+	<script type="text/javascript" src="../js/validar.js"></script>
+	
 	<?php if (!strstr($_SERVER["REQUEST_URI"], "admin/")) { ?>
 	
 	<script type="text/javascript" src="../js/chat.js"></script>
@@ -47,7 +50,10 @@
 	<script type="text/javascript" src="js/chat.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/demo.js"></script>
+	<script type="text/javascript" src="js/validar.js"></script>
 <?php endif ?>
+
+
 <?php if(isset($_SESSION["ctc"])): ?>
 	<?php if($_SESSION["ctc"]["type"] == 1): ?>
 		<script type="text/javascript">
