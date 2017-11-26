@@ -526,7 +526,7 @@
 		");
 	}
 
-	if(!$filtroMomento) {
+	if(!$filtroMomento && !$filtroDisp) {
 		$band = false;
 		foreach($momentos as $i => $momento) {
 			if($filtroActivado) {
@@ -650,7 +650,8 @@
 									<?php elseif(!$filtroArea && $filtroMomento): ?>
 										<li class="breadcrumb-item active"><?php echo $infoMomento["nombre"]; ?></li>
 									
-									<?php elseif(!$filtroArea && !$filtroMomento && $filtroDisp  ): ?>
+									<?php elseif(!$filtroArea && !$filtroMomento && $filtroDisp): ?>
+
 										<li class="breadcrumb-item active"><?php echo $disps["nombre"]; ?></li>
 									<?php endif ?>
 								</ol>
@@ -661,7 +662,20 @@
 						<?php if($cantidadRegistros > 0): ?>
 							<?php if($filtroActivado): ?>
 								<div class="col-md-6 text-xs-right">
-									<h6 class="m-t-1"><?php echo $filtroArea ? ($infoArea["nombre"] . ($filtroSector ? " ($infoSector[nombre])" : "")) : "$infoMomento[nombre]"; ?></h6>
+									<h6 class="m-t-1">
+										<?php 
+											if ($filtroArea) {
+												echo $infoArea["nombre"]; 
+												if ($filtroSector) {
+													echo " - " . $infoSector['nombre'];
+												}
+											}elseif ($filtroMomento) {
+												echo $infoMomento["nombre"];
+											} else {
+												echo $disps["nombre"];
+											}
+										?>
+									</h6>
 									<h6>Ofertas: <?php echo ($inicial + 1); ?> - <?php echo ($final * $pagina) > $cantidadRegistros ? $cantidadRegistros : ($final * $pagina); ?> de <?php echo $cantidadRegistros; ?></h6>
 								</div>
 							<?php elseif($busqueda): ?>
@@ -817,7 +831,7 @@
 												<?php if($disp["cantidad"] > 0): ?>
 													<tr>
 														<td>
-															<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?disp=$disp[amigable]" : "$url&disp=$disp[amigable]"); ?>&pagina=1"><?php echo $disp["nombre"]; ?></a>
+															<a class="text-primary" href="<?php echo ($url == 'empleos.php' ? "?disp=$disp[nombre]" : "$url&disp=$disp[nombre]"); ?>&pagina=1"><?php echo $disp["nombre"]; ?></a>
 														</td>
 														<td>
 															<span class="text-muted pull-xs-right"><?php echo $disp["cantidad"]; ?></span>
@@ -1426,6 +1440,8 @@
 												}
 												elseif($filtroMomento) {
 													$urlParams .= "?momento=$filtroMomento";
+												}elseif($filtroDisp){
+													$urlParams .= "?disp=$filtroDisp";
 												}
 											}
 

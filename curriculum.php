@@ -10,7 +10,6 @@ $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajado
 $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id']);
 $educacion = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=".$_SESSION["ctc"]["id"]);
 $idiomasT = $db->getAll("SELECT trabajadores_idiomas.*, idiomas.nombre as nombre_idioma FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=".$_SESSION["ctc"]["id"]);
-$otros_conocimientos = $db->getAll("SELECT * FROM trabajadores_otros_conocimientos WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
 
 $attr      = '';
 $attr2      = '';
@@ -22,19 +21,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
     $attr = 'disabled';
 } else {
 	
-	if (!$experiencias) {
-		$attr2 = 'disabled';
-	}
-	
 	if (!$educacion) {
 		$attr3 = 'disabled';
 	}
 	
 	if (!$idiomasT) {
 		$attr4 = 'disabled';
-	}
-	if (!$otros_conocimientos) {
-		$attr5 = 'disabled';
 	}
 	if (!$infoExtra) {
 		$attr6 = 'disabled';
@@ -133,7 +125,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<a class="nav-link <?php echo $attr." ".$attr4; ?>" data-toggle="tab" href="#tab4" role="tab">Idiomas</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link <?php echo $attr." ".$attr5; ?>" data-toggle="tab" href="#tab5" role="tab">Otros conocimientos</a>
+									<a class="nav-link <?php echo $attr; ?>" data-toggle="tab" href="#tab5" role="tab">Otros conocimientos</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link <?php echo $attr." ".$attr6; ?>" data-toggle="tab" href="#tab6" role="tab">Información Extra</a>
@@ -148,7 +140,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row">
 										<div class="col-md-4"></div>
 										<div class="col-md-4"></div>
-										<?php if($data['numero_documento_identificacion'] != "" || $experiencias): ?>
+										<?php if($data['numero_documento_identificacion'] != ""): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
@@ -172,7 +164,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row">
 												<label for="email" class="col-xs-4 col-form-label"  style="text-align: right;">Email <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
-													<input class="form-control"  value="<?php echo $_SESSION["ctc"]["email"]; ?>" id="email" type="email" onchange="validar(this.id,'email')">
+													<input class="form-control" value="<?php echo $data['correo_electronico'] ?>" id="email" type="email" onchange="validar(this.id,'email')">
 												</div>
 											</div>
 											<label class="custom-control custom-radio col-md-4" style=" text-align: right;">
@@ -332,7 +324,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row" style="margin-top: 10px">
 										<div class="col-md-4"></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
-										<?php if($data['numero_documento_identificacion'] != "" || $experiencias): ?>
+										<?php if($data['numero_documento_identificacion'] != ""): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
@@ -342,7 +334,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<?php if($experiencias || $educacion): ?>
+										<?php if($educacion): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
@@ -547,7 +539,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a></div>
-										<?php if($experiencias || $educacion): ?>
+										<?php if($educacion): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
@@ -904,7 +896,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row" style="margin-bottom: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4"></div>
-										<?php if($otros_conocimientos || $infoExtra): ?>
+										<?php if($infoExtra): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
@@ -912,6 +904,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row">
 										<div class="col-md-2"></div>
 										<div class="col-md-8">
+											<div class="form-group row" id="containerSinOtrCon">
+												<label for="sinOtrCon" class="col-xs-4 col-form-label" style="text-align: right;">¿Tienes otros conocimientos? </label>
+												<div class="col-xs-8">
+													<input value="" id="sinOtrCon" type="checkbox" checked>
+												</div>
+											</div>
 											<div class="form-group row" style="margin-top: 10px;">
 												<label for="nameC" class="col-xs-4 col-form-label" style="text-align: right;">Nombre <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
@@ -988,7 +986,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar</a></div>
-										<?php if($otros_conocimientos || $infoExtra): ?>
+										<?php if($infoExtra): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
@@ -1272,7 +1270,30 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						$('#sinExpLab').bootstrapSwitch({ // Switch de Experiencia Laboral
 							onColor: 'primary',
 							offColor: 'danger',
+							state: true,
+							onText: 'SÍ',
+							offText: 'NO'
+						});
+					<?php endif; ?>
+
+					<?php if(!$otros_conocimientos): ?>
+
+						$('#sinOtrCon').bootstrapSwitch({ // Switch de Experiencia Laboral
+							onColor: 'primary',
+							offColor: 'danger',
 							state: false,
+							onText: 'SÍ',
+							offText: 'NO'
+						});
+
+						$('#nameC').prop('disabled', true);
+						$('#descriptionC').prop('disabled', true);
+
+					<?php else: ?>
+						$('#sinOtrCon').bootstrapSwitch({ // Switch de Experiencia Laboral
+							onColor: 'primary',
+							offColor: 'danger',
+							state: true,
 							onText: 'SÍ',
 							offText: 'NO'
 						});
@@ -1355,6 +1376,17 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							txtNomEnc.val("");
 							txtTlfEnc.val("");
 							txtDescription.val("");
+						}
+					});
+
+					$('#sinOtrCon').on('switchChange.bootstrapSwitch', function(event, state){
+
+						if (state) {
+							$('#nameC').prop('disabled', false);
+							$('#descriptionC').prop('disabled', false);
+						} else {
+							$('#nameC').prop('disabled', true).val("");
+							$('#descriptionC').prop('disabled', true).val("");
 						}
 					});
 
@@ -1854,14 +1886,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								}
 								break;
 							case 5:
-								if($("#nameC").val() != "" && $("#descriptionC").val() != "") {
-									str = '&nameC=' + $("#nameC").val() + '&descriptionC=' + $("#descriptionC").val();
-									band = true;
-								}
+
+								str = '&nameC=' + $("#nameC").val() + '&descriptionC=' + $("#descriptionC").val();
+								band = true;
+
 								break;
 							case 6:
 								if($('#remuneracion').val() != '' && $('#sobre_mi').val() != '' && $('#disp').val() > 1){
-
+									
 									str = '&remuneracion=' + $('#remuneracion').val() + '&disp=' + $('#disp').val() + '&sobre_mi=' + $('#sobre_mi').val() + '&sitio_web='+$('#web').val()+'&fb='+$('#fb').val()+'&tw='+$('#tw').val()+'&ig='+$('#ig').val()+'&snap='+$('#snap').val()+'&lkd='+$('#lkd').val();
 									band = true;
 
@@ -2250,7 +2282,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										case 5:
 											$("#nameC").val("");
 											$("#descriptionC").val("");
-											$("#contentOC").css("display", "block");
+											
+											console.log('Resultados ======>', Object.keys(data.data).length, 'JSON =====>', data.data);
+											if (Object.keys(data.data).length > 0) {
+												$("#contentOC").css("display", "block");
+												$("#containerSinOtrCon").remove();
+											}
+
 											if(edit == 2) {
 												data.data.forEach(function(d) {
 													currentParent.html('<td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5"><i class="ti-close"></i></a></div></td>');
