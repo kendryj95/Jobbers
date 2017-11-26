@@ -1791,10 +1791,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								}
 								break;
 							case 2:
-								if ($('#sinExpLab').not(':checked')) {
-									str = '&company='+$("#company").val() + '&rCompany='+$("#rCompany").val() + '&tCompany='+$("#tCompany").val() + '&tEmployeer='+$("#tEmployeer").val() + '&descriptionArea='+$("#descriptionArea").val() + '&monthI='+$("#monthI").val() + '&yearI='+$("#yearI").val() + '&monthE='+$("#monthE").val() + '&yearE='+$("#yearE").val()+'&trab_actual=0&nom_enc='+$('#nom_enc').val()+'&tlf_enc='+$('#tlf_enc').val();
-									band = true;
-								} else {
+								
 									if($("#company").val() != "" && parseInt($("#rCompany").val()) > 0 && parseInt($("#tCompany").val()) > 0 && $("#tEmployeer").val() != "" && $("#descriptionArea").val() != "") {
 
 										if ($('#trab_actual').is(':checked')) {
@@ -1830,7 +1827,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											band = false;
 
 									}
-								}
 								break;
 							case 3:
 								if(parseInt($("#sNivel").val()) > 0 && $("#titleS").val() != "" && parseInt($("#stateS").val()) > 0 && parseInt($("#areaS").val()) > 0 && $("#institute").val() != "" && parseInt($("#countryS").val()) > 0) {
@@ -1894,8 +1890,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								break;
 							case 5:
 
-								str = '&nameC=' + $("#nameC").val() + '&descriptionC=' + $("#descriptionC").val();
-								band = true;
+								if($("#nameC").val() != "" && $("#descriptionC").val() != "") {
+									str = '&nameC=' + $("#nameC").val() + '&descriptionC=' + $("#descriptionC").val();
+									band = true;
+								}
 
 								break;
 							case 6:
