@@ -279,7 +279,7 @@
 							$sql = "
 								SELECT
 									com.uid,
-									com.`nombres`,
+									com.`nombres` AS nombre,
 									com.`apellidos`,
 									CONCAT(
 										img.directorio,
