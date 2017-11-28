@@ -1,21 +1,23 @@
 function validar(idCampo,type,campo=''){
+	
 	if(type=='email'){
 		//var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
-		var regex = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		campo = 'Email';
 	}
+
 	if(type=='tel'){
-		var regex = new RegExp(/[0-9\-\(\)\+]/);
-		campo= campo == ''? 'Telefono':campo;
+		var regex = /^[[0-9\-\+]+$/g;
+		campo='Telefono';
 	}
 
 	if(type=='num'){
-		var regex = new RegExp(/[0-9]/);
-		campo= campo == ''? 'Numero':campo;
+		var regex = /^\d+$/g;
+		campo='Numero';
 
 	}
-
-	if (regex.test($('#'+idCampo).val().trim())) {
+	//alert($('#'+idCampo).val());
+	if (regex.test($('#'+idCampo).val())) {
 	    return true;
 	}else{
 		$('#'+idCampo).val('');
