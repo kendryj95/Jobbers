@@ -169,7 +169,7 @@
 												<div class="col-md-8">
 													<div class="form-group">
 														<label for="cuit"><b>CUIT:</b> </label>
-														<input type="text" class="form-control" id="cuit" placeholder="CUIT (Opcional)" value="<?= $infoEmpresa['cuit'] ?>">
+														<input type="text" class="form-control" id="cuit" placeholder="CUIT (Opcional)" value="<?= $infoEmpresa['cuit'] ?>" onchange="validar(this.id,'num')">
 													</div>
 												</div>
 
