@@ -63,6 +63,8 @@ if ($id) {
 
     $otros_conocimientos = $db->getAll("SELECT * FROM trabajadores_otros_conocimientos WHERE id_trabajador=$id");
 
+    $infoExtra = $db->getRow("SELECT ti.*, d.nombre AS disponibilidad FROM trabajadores_infextra ti INNER JOIN disponibilidad d ON d.id = ti.disponibilidad WHERE id_trabajador=" . $id);
+
     if (!$trabajador["imagen"]) {
         $trabajador["imagen"] = "avatars/user.png";
     }
@@ -305,8 +307,6 @@ if ($id) {
                 ';
         }
     }
-
-    $infoExtra = $db->getRow("SELECT ti.*, d.nombre AS disponibilidad FROM trabajadores_infextra ti INNER JOIN disponibilidad d ON d.id = ti.disponibilidad WHERE id_trabajador=" . $_SESSION['ctc']['id']);
 
     if ($infoExtra) {
 
