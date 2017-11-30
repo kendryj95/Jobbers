@@ -164,7 +164,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row">
 												<label for="email" class="col-xs-4 col-form-label"  style="text-align: right;">Email <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data['correo_electronico'] ?>" id="email" type="email">
+													<input class="form-control" value="<?php echo $data['correo_electronico'] ?>" id="email" type="email" onchange="validar(this.id,'email')">
 												</div>
 											</div>
 											<label class="custom-control custom-radio col-md-4" style=" text-align: right;">
@@ -258,7 +258,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 												<div class="col-md-2" style="text-align: right;"><label for="numberdni" style="margin-top: 6px;">Número <span style="color: red;">*</span></label></div>
 												<div class="col-md-3">
-													<input class="form-control" value="<?php echo $data["numero_documento_identificacion"]; ?>" id="numberdni" type="text">
+													<input class="form-control" value="<?php echo $data["numero_documento_identificacion"]; ?>" id="numberdni" type="number" onchange="validar(this.id,'num')">
 												</div>
 											</div>
 											<div class="row" style="margin-top: 10px;">
@@ -266,7 +266,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<label for="cuil" style="margin-top: 6px;">Numero de CUIL <span style="color: red;">*</span></label>
 												</div>
 												<div class="col-md-8">
-                                                    <input type="text" class="form-control" id="cuil" value="<?= $data["cuil"] ?>">
+                                                    <input type="text" class="form-control" id="cuil" value="<?= $data["cuil"] ?>" onchange="validar(this.id,'num')">
 												</div>
 											</div>
 											<?php $provincias = $db->getAll("SELECT * FROM provincias")?>
@@ -308,13 +308,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row">
 												<label for="phone" class="col-xs-4 col-form-label" style="text-align: right;">Teléfono o móvil <span style="color: red;">*</span></label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["telefono"]; ?>" id="phone" type="text">
+													<input class="form-control" value="<?php echo $data["telefono"]; ?>" id="phone" type="text" onchange='validar(this.id,"tel")'>
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="phoneAlt" class="col-xs-4 col-form-label" style="text-align: right;">Teléfono alternativo</label>
 												<div class="col-xs-8">
-													<input class="form-control" value="<?php echo $data["telefono_alternativo"]; ?>" id="phoneAlt" type="text">
+													<input class="form-control" value="<?php echo $data["telefono_alternativo"]; ?>" id="phoneAlt" type="text" onchange='validar(this.id,"tel")'>
 												</div>
 											</div>
 											
@@ -678,11 +678,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="row" style="margin-top: 10px;" id="materias_aprobadas">
 												<div class="col-md-4" style="text-align: right;"><label for="mat">Materias de la carrera <span style="color: red;">*</span></label></div>
 												<div class="col-md-2">
-													<input class="form-control" value="" id="mat" type="text">
+													<input class="form-control" value="" id="mat" type="text"  onchange="validar(this.id,'num')">
 												</div>
 												<div class="col-md-4" style="text-align: right;"><label for="aprob">Materias aprobadas <span style="color: red;">*</span></label></div>
 												<div class="col-md-2">
-													<input class="form-control" value="" id="aprob" type="text">
+													<input class="form-control" value="" id="aprob" type="text"  onchange="validar(this.id,'num')">
 												</div>
 											</div>
 
