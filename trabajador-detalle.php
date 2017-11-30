@@ -171,19 +171,23 @@ $publicaciones = $db->getAll("
                                         <div style="font-size: 28px;margin-bottom: 5px;">
 
                                         </div>
-                                        <?php if ($trabajador["telefono"] != ""): ?>
-                                            <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Contactar
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#contactPhone"><span class="ti-mobile" style="margin-right: 3px;"></span> Whatsapp</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)"  id="contact" data-toggle="modal" data-target="#contactM"><span class="ti-comments" style="margin-right: 3px;"></span> Chat / Correo</a>
-                                                </div>
-                                            </div>
-                                        <?php else: ?>
-                                            <button type="button" class="btn btn-primary btn-rounded waves-effect" id="contact" data-toggle="modal" data-target="#contactM">Contactar</button>
-                                        <?php endif?>
+                                        <?php if(isset($_SESSION["ctc"])): ?>
+                                            <?php if($_SESSION["ctc"]["type"] != 2): ?>
+                                                <?php if ($trabajador["telefono"] != ""): ?>
+                                                    <div class="btn-group" role="group">
+                                                        <button type="button" class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Contactar
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#contactPhone"><span class="ti-mobile" style="margin-right: 3px;"></span> Whatsapp</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)"  id="contact" data-toggle="modal" data-target="#contactM"><span class="ti-comments" style="margin-right: 3px;"></span> Chat / Correo</a>
+                                                        </div>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <button type="button" class="btn btn-primary btn-rounded waves-effect" id="contact" data-toggle="modal" data-target="#contactM">Contactar</button>
+                                                <?php endif ?>
+                                            <?php endif ?>
+                                        <?php endif ?>
                                         <?php if (($_SESSION['ctc']['type'] == 1 && $trabajador['publico'] == 1) || ($_SESSION['ctc']['type'] == 2) || count($postulado) > 0): ?>
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -283,17 +287,17 @@ $publicaciones = $db->getAll("
 
                                 <div class="card m-b-0">
                                     <ul class="nav nav-tabs nav-tabs-2 profile-tabs" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#publicaciones" role="tab">Servicios free lance</a>
-                                        </li>
                                         <?php if (($_SESSION['ctc']['type'] == 1 && $trabajador['publico'] == 1) || ($_SESSION['ctc']['type'] == 2) || count($postulado) > 0): ?>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#curriculum" role="tab">Curriculum</a>
+                                            <a class="nav-link active" data-toggle="tab" href="#curriculum" role="tab">Curriculum</a>
                                         </li>
                                         <?php endif;?>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#publicaciones" role="tab">Servicios free lance</a>
+                                        </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div class="tab-pane card-block active" id="publicaciones" role="tabpanel">
+                                        <div class="tab-pane card-block" id="publicaciones" role="tabpanel">
                                             <?php foreach ($publicaciones as $p): ?>
                                                 <div class="pl-item">
                                                     <div class="media">
@@ -314,7 +318,7 @@ $publicaciones = $db->getAll("
                                                 $idTrab = array_pop($detTrab);
                                             }
                                         ?>
-                                        <div class="tab-pane card-block " id="curriculum" role="tabpanel">
+                                        <div class="tab-pane card-block active" id="curriculum" role="tabpanel">
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <div class="row">

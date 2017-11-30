@@ -249,7 +249,7 @@
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
-						Empresas - Acceso
+						Acceso Empresas
 					</a>
 				</li>
 				<li class="nav-item hidden-md-up">
