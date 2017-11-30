@@ -141,18 +141,21 @@ function refreshCurrentChat() {
 					} else {
 						html += '<div class="scw-item"> <span>' + info.mensaje + '</span> </div>';
 						arr.push(info.mensaje);
-						
-						if(lastMessagesReceived.indexOf(info.mensaje) == -1) {
-							//if(document.hidden) {
-								let nombre = null;
-								if (typeof conversations.info.nombre != 'undefined') {
-									nombre = conversations.info.nombre;
-								} else {
-									nombre = conversations.info.nombres + " " + conversations.info.apellidos;
-								}
-								spawnNotification(info.mensaje, "", "Nuevo mensaje recibido de " + nombre);
-							//}
+
+						if (lastMessagesReceived !== null) {
+							if(lastMessagesReceived.indexOf(info.mensaje) == -1) {
+								//if(document.hidden) {
+									let nombre = null;
+									if (typeof conversations.info.nombre != 'undefined') {
+										nombre = conversations.info.nombre;
+									} else {
+										nombre = conversations.info.nombres + " " + conversations.info.apellidos;
+									}
+									spawnNotification(info.mensaje, "", "Nuevo mensaje recibido de " + nombre);
+								//}
+							}
 						}
+						
 					}
 				});
 				$("#sidebar-chat-window-messages").html(html);

@@ -22,9 +22,9 @@
 	<script type="text/javascript" src="../vendor/sparkline/jquery.sparkline.min.js"></script>
 	<script type="text/javascript" src="../vendor/sweetalert2/sweetalert2.min.js"></script>
 	<?php if (!strstr($_SERVER["REQUEST_URI"], "admin/")) { ?>
-	
-	<script type="text/javascript" src="../js/chat.js"></script>
-		
+		<?php if(isset($_SESSION["ctc"])): ?>
+		<script type="text/javascript" src="../js/chat.js"></script>
+		<?php endif; ?>
 	<?php } ?>
 
 	<!-- Neptune JS -->
@@ -44,7 +44,9 @@
 	<script type="text/javascript" src="vendor/TinyColor/tinycolor.js"></script>
 	<script type="text/javascript" src="vendor/sparkline/jquery.sparkline.min.js"></script>
 	<script type="text/javascript" src="vendor/sweetalert2/sweetalert2.min.js"></script>
+	<?php if(isset($_SESSION["ctc"])): ?>
 	<script type="text/javascript" src="js/chat.js"></script>
+	<?php endif ?>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/demo.js"></script>
 <?php endif ?>
@@ -119,7 +121,6 @@
 <?php endif ?>
 <script>
 	$(document).ready(function() {
-		console.log("selector:", $(".actualiza_plan"));
 		$('.actualiza_plan').on('click', function(){
 			swal({
 				title: 'Actualiza tu plan a ORO',
