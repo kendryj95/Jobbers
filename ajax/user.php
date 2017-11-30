@@ -380,11 +380,9 @@
 		case SENT_MAIL:
 			$email = $db->getOne("SELECT correo_contacto FROM plataforma WHERE id=1");
 			$para = empty($_REQUEST["to"]) ? $email : $_REQUEST["to"];
-			$asunto = $_REQUEST["subject"];
+			$asunto = "Contacto Jobbers Argentina - " . $_REQUEST["subject"];
 			$cuerpo = $_REQUEST['message'];
-				$headers_mensaje = 	"From: jobbers <administracion@jobbers.com>\r\n" . 
-					 "Reply-To: administracion@jobbers.com\r\n" . 
-					 "Return-path: administracion@jobbers.com\r\n" . 
+				$headers_mensaje = 	"From: ".$_REQUEST['name']." <".$_REQUEST['email'].">\r\n" . 
 					 "MIME-Version: 1.0\n" . 
 					 "Content-type: text/html; charset=utf-8";
 				if(@mail($para,$asunto,$cuerpo,$headers_mensaje)) {
