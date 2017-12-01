@@ -59,7 +59,7 @@
 		
 		<div class="auth">
 			<div class="auth-header">
-				<a href=".././"><img src="img/logo_d.png" alt="" style="margin-left: 50px;width: 300px;"></a>
+				<a href=".././"><img src="img/logo_d.png" alt="" style="width: 300px;"></a>
 				<h6>Bienvenido! Registra tu empresa</h6>
 			</div>
 			<div class="container-fluid">

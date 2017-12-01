@@ -586,7 +586,7 @@
 			.pub {
 				min-height: 150px;
 				margin-bottom: 30px;
-				max-height: 490px;
+				height: 225px;
 			}
 			.pub-f {
 				min-height: 110px;
@@ -613,16 +613,16 @@
 		</style>
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
-		<div class="wrapper">
+		<!-- <div class="wrapper"> -->
 		<!-- Sidebar -->
-		<?php require_once('includes/sidebar.php'); ?>
+		<!-- <?php require_once('includes/sidebar.php'); ?> -->
 
 		<!-- Sidebar second -->
 		<?php require_once('includes/sidebar-second.php'); ?>
 
 		<!-- Header -->
 		<?php require_once('includes/header.php'); ?>
-			<div class="site-content bg-white">
+			<div class="site-content bg-white" style="margin-left: 0px;">
 				<!-- Content -->
 				<div class="content-area p-y-1">
 					<div class="container-fluid">
@@ -689,7 +689,7 @@
 
 					<div class="container-fluid">
 
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="box bg-white">
 								<div class="box-block clearfix">
 									<h5 class="pull-xs-left">Ofertas de empleo por área</h5>
@@ -845,7 +845,7 @@
 							<?php endif ?>							
 						</div>
 
-						<div class="col-md-8">
+						<div class="col-md-9">
 
 							<?php if($filtroActivado || $busqueda): ?>
 								<?php if($cantidadRegistros > 0): ?>
@@ -901,46 +901,52 @@
 																			$linkedin = "http://$publicacion[linkedin]";
 																		}
 																	?>
-																	<div class="share share-2" style="background-color: transparent; margin-top: -5px;">
+																	<div style="background-color: transparent;">
 																		<div class="row no-gutter">
-																			<?php if($publicacion["sitio_web"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
-																						<i class="ti-unlink text-primary"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
-																			<?php if($publicacion["facebook"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
-																						<i class="ti-facebook text-facebook"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
-																			<?php if($publicacion["twitter"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
-																						<i class="ti-twitter text-twitter"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
-																			<?php if($publicacion["instagram"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
-																						<i class="ti-instagram text-instagram"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
-																			<?php if($publicacion["linkedin"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
-																						<i class="ti-linkedin text-linkedin"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
+																			<!-- <div class="col-xs-3 s-item">
+																				<a class="bg-white" href="" style="background-color:  transparent !important;"></a>
+																			</div> -->
+																			<div class="btn-group btn-group-lg" role="group" aria-label="Large b utton group">
+																				<?php if($publicacion["facebook"] != ""): ?>
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-primary btn btn-default" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
+																							<i class="fa fa-globe text-white" aria-hidden="true"></i>
+																						</a>
+																					<!-- </div> -->
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-facebook btn btn-default" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
+																							<i class="ti-facebook"></i>
+																						</a>
+																					<!-- </div> -->
+																				<?php endif ?>
+																				<?php if($publicacion["twitter"] != ""): ?>
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-twitter btn btn-default" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
+																							<i class="ti-twitter"></i>
+																						</a>
+																					<!-- </div> -->
+																				<?php endif ?>
+																				<?php if($publicacion["instagram"] != ""): ?>
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-instagram btn btn-default" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
+																							<i class="ti-instagram"></i>
+																						</a>
+																					<!-- </div> -->
+																				<?php endif ?>
+																				<?php if($publicacion["linkedin"] != ""): ?>
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-linkedin btn btn-default" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
+																							<i class="ti-linkedin"></i>
+																						</a>
+																					<!-- </div> -->
+																				<?php endif ?>
+																			</div>
 																		</div>
 																	</div>
 																<?php endif ?>
+																<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
+																	<button class="btn btn-postular btn-block">POSTULARME</button>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -995,46 +1001,52 @@
 																				$linkedin = "http://$publicacion[linkedin]";
 																			}
 																		?>
-																		<div class="share share-2" style="background-color: transparent; margin-top: -5px;">
+																		<div style="background-color: transparent;">
 																			<div class="row no-gutter">
-																				<?php if($publicacion["sitio_web"] != ""): ?>
-																					<div class="col-xs-3 s-item">
-																						<a class="" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
-																							<i class="ti-unlink text-primary"></i>
-																						</a>
-																					</div>
-																				<?php endif ?>
-																				<?php if($publicacion["facebook"] != ""): ?>
-																					<div class="col-xs-3 s-item">
-																						<a class="" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
-																							<i class="ti-facebook text-facebook"></i>
-																						</a>
-																					</div>
-																				<?php endif ?>
-																				<?php if($publicacion["twitter"] != ""): ?>
-																					<div class="col-xs-3 s-item">
-																						<a class="" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
-																							<i class="ti-twitter text-twitter"></i>
-																						</a>
-																					</div>
-																				<?php endif ?>
-																				<?php if($publicacion["instagram"] != ""): ?>
-																					<div class="col-xs-3 s-item">
-																						<a class="" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
-																							<i class="ti-instagram text-instagram"></i>
-																						</a>
-																					</div>
-																				<?php endif ?>
-																				<?php if($publicacion["linkedin"] != ""): ?>
-																					<div class="col-xs-3 s-item">
-																						<a class="" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
-																							<i class="ti-linkedin text-linkedin"></i>
-																						</a>
-																					</div>
-																				<?php endif ?>
+																				<!-- <div class="col-xs-3 s-item">
+																					<a class="bg-white" href="" style="background-color:  transparent !important;"></a>
+																				</div> -->
+																				<div class="btn-group btn-group-lg" role="group" aria-label="Large b utton group">
+																					<?php if($publicacion["facebook"] != ""): ?>
+																						<!-- <div class="col-xs-3 s-item"> -->
+																							<a class="bg-primary btn btn-default" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
+																								<i class="fa fa-globe text-white" aria-hidden="true"></i>
+																							</a>
+																						<!-- </div> -->
+																						<!-- <div class="col-xs-3 s-item"> -->
+																							<a class="bg-facebook btn btn-default" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
+																								<i class="ti-facebook"></i>
+																							</a>
+																						<!-- </div> -->
+																					<?php endif ?>
+																					<?php if($publicacion["twitter"] != ""): ?>
+																						<!-- <div class="col-xs-3 s-item"> -->
+																							<a class="bg-twitter btn btn-default" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
+																								<i class="ti-twitter"></i>
+																							</a>
+																						<!-- </div> -->
+																					<?php endif ?>
+																					<?php if($publicacion["instagram"] != ""): ?>
+																						<!-- <div class="col-xs-3 s-item"> -->
+																							<a class="bg-instagram btn btn-default" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
+																								<i class="ti-instagram"></i>
+																							</a>
+																						<!-- </div> -->
+																					<?php endif ?>
+																					<?php if($publicacion["linkedin"] != ""): ?>
+																						<!-- <div class="col-xs-3 s-item"> -->
+																							<a class="bg-linkedin btn btn-default" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
+																								<i class="ti-linkedin"></i>
+																							</a>
+																						<!-- </div> -->
+																					<?php endif ?>
+																				</div>
 																			</div>
 																		</div>
 																	<?php endif ?>
+																	<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
+																		<button class="btn btn-postular btn-block">POSTULARME</button>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -1079,42 +1091,52 @@
 																			$linkedin = "http://$publicacion[linkedin]";
 																		}
 																	?>
-																	<div class="share share-2" style="background-color: transparent;">
+																	<div style="background-color: transparent;">
 																		<div class="row no-gutter">
-																			<div class="col-xs-3 s-item">
+																			<!-- <div class="col-xs-3 s-item">
 																				<a class="bg-white" href="" style="background-color:  transparent !important;"></a>
+																			</div> -->
+																			<div class="btn-group btn-group-lg" role="group" aria-label="Large b utton group">
+																				<?php if($publicacion["facebook"] != ""): ?>
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-primary btn btn-default" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
+																							<i class="fa fa-globe text-white" aria-hidden="true"></i>
+																						</a>
+																					<!-- </div> -->
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-facebook btn btn-default" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
+																							<i class="ti-facebook"></i>
+																						</a>
+																					<!-- </div> -->
+																				<?php endif ?>
+																				<?php if($publicacion["twitter"] != ""): ?>
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-twitter btn btn-default" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
+																							<i class="ti-twitter"></i>
+																						</a>
+																					<!-- </div> -->
+																				<?php endif ?>
+																				<?php if($publicacion["instagram"] != ""): ?>
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-instagram btn btn-default" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
+																							<i class="ti-instagram"></i>
+																						</a>
+																					<!-- </div> -->
+																				<?php endif ?>
+																				<?php if($publicacion["linkedin"] != ""): ?>
+																					<!-- <div class="col-xs-3 s-item"> -->
+																						<a class="bg-linkedin btn btn-default" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
+																							<i class="ti-linkedin"></i>
+																						</a>
+																					<!-- </div> -->
+																				<?php endif ?>
 																			</div>
-																			<?php if($publicacion["facebook"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
-																						<i class="ti-facebook text-facebook"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
-																			<?php if($publicacion["twitter"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
-																						<i class="ti-twitter text-twitter"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
-																			<?php if($publicacion["instagram"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $instagram; ?>" title="Visitar Instagram de la empresa">
-																						<i class="ti-instagram text-instagram"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
-																			<?php if($publicacion["linkedin"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="" href="<?php echo $linkedin; ?>" title="Visitar Linkedin de la empresa">
-																						<i class="ti-linkedin text-linkedin"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
 																		</div>
 																	</div>
 																<?php endif ?>
+																<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
+																	<button class="btn btn-postular btn-block">POSTULARME</button>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -1129,7 +1151,9 @@
 								</div>
 								<?php endif ?>
 							<?php else: ?>
-								<div class="row row-sm">
+
+							<!-- FIXME: SECCION DE TODOS LOS CUADRITOS, VER QUE HACER CON ESTO ! -->
+								<!-- <div class="row row-sm"> -->
 									
 									<?php foreach($publicacionesOro as $publicacion): ?>
 										<div class="col-md-6">
@@ -1184,46 +1208,52 @@
 																			$linkedin = "http://$publicacion[linkedin]";
 																		}
 																	?>
-																	<div class="share share-1" style="background-color: transparent; margin-top: -5px;">
-																		<div class="row no-gutter">
-																			<?php if($publicacion["sitio_web"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-primary" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
-																						<i class="ti-unlink"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
+																	<div style="background-color: transparent;">
+																	<div class="row no-gutter">
+																		<!-- <div class="col-xs-3 s-item">
+																			<a class="bg-white" href="" style="background-color:  transparent !important;"></a>
+																		</div> -->
+																		<div class="btn-group btn-group-lg" role="group" aria-label="Large b utton group">
 																			<?php if($publicacion["facebook"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-facebook" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-primary btn btn-default" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
+																						<i class="fa fa-globe text-white" aria-hidden="true"></i>
+																					</a>
+																				<!-- </div> -->
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-facebook btn btn-default" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
 																						<i class="ti-facebook"></i>
 																					</a>
-																				</div>
+																				<!-- </div> -->
 																			<?php endif ?>
 																			<?php if($publicacion["twitter"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-twitter" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-twitter btn btn-default" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
 																						<i class="ti-twitter"></i>
 																					</a>
-																				</div>
+																				<!-- </div> -->
 																			<?php endif ?>
 																			<?php if($publicacion["instagram"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-instagram" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-instagram btn btn-default" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
 																						<i class="ti-instagram"></i>
 																					</a>
-																				</div>
+																				<!-- </div> -->
 																			<?php endif ?>
 																			<?php if($publicacion["linkedin"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-linkedin" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-linkedin btn btn-default" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
 																						<i class="ti-linkedin"></i>
 																					</a>
-																				</div>
+																				<!-- </div> -->
 																			<?php endif ?>
 																		</div>
 																	</div>
+																</div>
 																<?php endif ?>
+																<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
+																	<button class="btn btn-postular btn-block">POSTULARME</button>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -1284,46 +1314,52 @@
 																			$linkedin = "http://$publicacion[linkedin]";
 																		}
 																	?>
-																	<div class="share share-1" style="background-color: transparent; margin-top: -5px;">
-																		<div class="row no-gutter">
-																			<?php if($publicacion["sitio_web"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-primary" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
-																						<i class="ti-unlink"></i>
-																					</a>
-																				</div>
-																			<?php endif ?>
+																<div style="background-color: transparent;">
+																	<div class="row no-gutter">
+																		<!-- <div class="col-xs-3 s-item">
+																			<a class="bg-white" href="" style="background-color:  transparent !important;"></a>
+																		</div> -->
+																		<div class="btn-group btn-group-lg" role="group" aria-label="Large b utton group">
 																			<?php if($publicacion["facebook"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-facebook" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-primary btn btn-default" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
+																						<i class="fa fa-globe text-white" aria-hidden="true"></i>
+																					</a>
+																				<!-- </div> -->
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-facebook btn btn-default" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
 																						<i class="ti-facebook"></i>
 																					</a>
-																				</div>
+																				<!-- </div> -->
 																			<?php endif ?>
 																			<?php if($publicacion["twitter"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-twitter" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-twitter btn btn-default" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
 																						<i class="ti-twitter"></i>
 																					</a>
-																				</div>
+																				<!-- </div> -->
 																			<?php endif ?>
 																			<?php if($publicacion["instagram"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-instagram" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-instagram btn btn-default" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
 																						<i class="ti-instagram"></i>
 																					</a>
-																				</div>
+																				<!-- </div> -->
 																			<?php endif ?>
 																			<?php if($publicacion["linkedin"] != ""): ?>
-																				<div class="col-xs-3 s-item">
-																					<a class="bg-linkedin" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-linkedin btn btn-default" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
 																						<i class="ti-linkedin"></i>
 																					</a>
-																				</div>
+																				<!-- </div> -->
 																			<?php endif ?>
 																		</div>
 																	</div>
+																</div>
 																<?php endif ?>
+																<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
+																	<button class="btn btn-postular btn-block">POSTULARME</button>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -1375,39 +1411,47 @@
 																		$linkedin = "http://$publicacion[linkedin]";
 																	}
 																?>
-																<div class="share share-1" style="background-color: transparent;">
+																<div style="background-color: transparent;">
 																	<div class="row no-gutter">
-																		<div class="col-xs-3 s-item">
+																		<!-- <div class="col-xs-3 s-item">
 																			<a class="bg-white" href="" style="background-color:  transparent !important;"></a>
+																		</div> -->
+																		<div class="btn-group btn-group-lg" role="group" aria-label="Large b utton group">
+																			<?php if($publicacion["facebook"] != ""): ?>
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-primary btn btn-default" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
+																						<i class="fa fa-globe text-white" aria-hidden="true"></i>
+																					</a>
+																				<!-- </div> -->
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-facebook btn btn-default" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
+																						<i class="ti-facebook"></i>
+																					</a>
+																				<!-- </div> -->
+																			<?php endif ?>
+																			<?php if($publicacion["twitter"] != ""): ?>
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-twitter btn btn-default" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
+																						<i class="ti-twitter"></i>
+																					</a>
+																				<!-- </div> -->
+																			<?php endif ?>
+																			<?php if($publicacion["instagram"] != ""): ?>
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-instagram btn btn-default" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
+																						<i class="ti-instagram"></i>
+																					</a>
+																				<!-- </div> -->
+																			<?php endif ?>
+																			<?php if($publicacion["linkedin"] != ""): ?>
+																				<!-- <div class="col-xs-3 s-item"> -->
+																					<a class="bg-linkedin btn btn-default" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
+																						<i class="ti-linkedin"></i>
+																					</a>
+																				<!-- </div> -->
+																			<?php endif ?>
+																			<button class="btn btn-success">POSTULARME</button>
 																		</div>
-																		<?php if($publicacion["facebook"] != ""): ?>
-																			<div class="col-xs-3 s-item">
-																				<a class="bg-facebook" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
-																					<i class="ti-facebook"></i>
-																				</a>
-																			</div>
-																		<?php endif ?>
-																		<?php if($publicacion["twitter"] != ""): ?>
-																			<div class="col-xs-3 s-item">
-																				<a class="bg-twitter" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
-																					<i class="ti-twitter"></i>
-																				</a>
-																			</div>
-																		<?php endif ?>
-																		<?php if($publicacion["instagram"] != ""): ?>
-																			<div class="col-xs-3 s-item">
-																				<a class="bg-instagram" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
-																					<i class="ti-instagram"></i>
-																				</a>
-																			</div>
-																		<?php endif ?>
-																		<?php if($publicacion["linkedin"] != ""): ?>
-																			<div class="col-xs-3 s-item">
-																				<a class="bg-linkedin" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
-																					<i class="ti-linkedin"></i>
-																				</a>
-																			</div>
-																		<?php endif ?>
 																	</div>
 																</div>
 															<?php endif ?>
@@ -1417,7 +1461,7 @@
 											</a>
 										</div>
 									<?php endforeach ?>
-								</div>
+								<!-- </div> -->
 							<?php endif ?>
 
 							<?php if($cantidadRegistros > 0 && ($filtroActivado || $busqueda)): ?>
@@ -1461,7 +1505,7 @@
 				</div>
 				<?php require_once('includes/footer.php'); ?>
 			</div>
-		</div>
+		<!-- </div> -->
 
 		<?php require_once('includes/libs-js.php'); ?>
 	</body>

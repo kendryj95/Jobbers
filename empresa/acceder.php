@@ -44,7 +44,7 @@
 		
 		<div class="auth">
 			<div class="auth-header">
-				<a href=".././"><img src="img/logo_d.png" alt="" style="margin-left: 50px;width: 300px;"></a>
+				<a href=".././"><img src="img/logo_d.png" alt="" style="width: 300px;"></a>
 				<h6>Bienvenido! Inicie sesión para acceder a su panel</h6>
 			</div>
 			<div class="container-fluid">
@@ -53,13 +53,14 @@
 						<div style="max-width: 350px;margin: 0 auto;">
 							<div class="form-group">
 								<div class="input-group">
-									<input type="text" class="form-control" id="exampleInputEmail" placeholder="Email" onkeypress="return runScript(event)">
+									<input type="text" class="form-control" id="exampleInputEmail" placeholder="Email" onkeypress="return runScript(event)" style="border-left-width: 0px;">
 									<div class="input-group-addon"><i class="ti-email"></i></div>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group">
-								<input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" onkeypress="return runScript(event)">
+								<input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" onkeypress="return runScript(event)" style="border-bottom-width
+								:0px; border-left-width: 0px;">
 									<div class="input-group-addon"><i class="ti-key"></i></div>
 								</div>
 							</div>							

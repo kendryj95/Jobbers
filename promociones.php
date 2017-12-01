@@ -55,18 +55,18 @@
 		</style>
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
-		<div class="wrapper">
+		<!-- <div class="wrapper"> -->
 		<!-- Sidebar -->
-		<?php require_once('includes/sidebar.php'); ?>
+		<!-- <?php require_once('includes/sidebar.php'); ?> -->
 
 		<!-- Sidebar second -->
 		<?php require_once('includes/sidebar-second.php'); ?>
 
 		<!-- Header -->
 		<?php require_once('includes/header.php'); ?>
-			<div class="site-content bg-white">
+			<div class="site-content bg-white" style="margin-left: 0px;">
 				<!-- Content -->
-				<div class="content-area p-y-1">
+				<div class="container content-p30">
 					<div class="container-fluid">
 						<?php if($publicaciones_especiales): ?>
 							<div class="row">
@@ -113,7 +113,7 @@
 												}
 												$link = str_replace('watch?v=', 'embed/', $link);
 											?>
-											<div class="box bg-white post post-3">
+											<div class="box post post-3 box-m30">
 												<div class="p-img img-cover youtube-video">
 													<iframe class="youtube-player" type="text/html" width="100%" height="100%" src="<?php echo $link; ?>" frameborder="0"> </iframe>
 												</div>
@@ -133,7 +133,7 @@
 				</div>
 				<?php require_once('includes/footer.php'); ?>
 			</div>
-		</div>
+		<!-- </div> -->
 
 		<?php require_once('includes/libs-js.php'); ?>
 	</body>

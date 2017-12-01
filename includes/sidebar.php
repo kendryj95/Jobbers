@@ -2,17 +2,17 @@
 	$scriptActual = basename($_SERVER['PHP_SELF'], '.php');
 ?>
 <?php if(strstr($_SERVER["REQUEST_URI"], "index") || (strstr($_SERVER["PHP_SELF"], "index") && !strstr($_SERVER["REQUEST_URI"], "empresa"))): ?>
-	<a style="width: 220px; height: 78px;position: fixed;z-index: 99;" class="logo" href="./">
+	<!-- <a style="width: 220px; height: 78px;position: fixed;z-index: 99;" class="logo" href="./">
 		<div style="background-color: white;height: 71px;">
 			<img style="width: 220px; height: 110px; padding: 22px;padding-top: 2px;" src="img/logo_d.png" alt="">
 		</div>
-	</a>
+	</a> -->
 <?php else: ?>
 	<div class="site-sidebar-overlay"></div>
 	<div class="site-sidebar">
-		<a class="logo" href="<?php echo ( strstr($_SERVER["REQUEST_URI"], "admin/") || strstr($_SERVER["REQUEST_URI"], "empresa/") ) ? ".././" : "./"; ?>">
+		<!-- <a class="logo" href="<?php echo ( strstr($_SERVER["REQUEST_URI"], "admin/") || strstr($_SERVER["REQUEST_URI"], "empresa/") ) ? ".././" : "./"; ?>">
 			<img src="<?php echo ( strstr($_SERVER["REQUEST_URI"], "admin/") || strstr($_SERVER["REQUEST_URI"], "empresa/") ) ? ".././" : "./"; ?>img/logo_d.png" alt="" style="width: 100%;">
-		</a>
+		</a> -->
 
 			<div class="custom-scroll custom-scroll-dark">
 				<ul class="sidebar-menu">

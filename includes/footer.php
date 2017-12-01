@@ -1,4 +1,4 @@
-<footer class="p-t-3">
+<footer class="container">
 	<div class="box-block">
 		<div class="row">
 			<div class="col-sm-8">

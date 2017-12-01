@@ -191,7 +191,7 @@
 
 		<div class="site-content">
 			<!-- Content -->
-			<div class="content-area p-y-1">
+			<div class="content-area" style="padding-top: 30px;">
 				<div class="container-fluid">
 					<div class="row row-md">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
