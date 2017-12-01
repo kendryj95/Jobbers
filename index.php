@@ -702,13 +702,13 @@ $link = str_replace('watch?v=', 'embed/', $link);
 				</div> -->
 
 				<?php/* else: */?>
-				<div class="row">
+				<div class="row" style="padding: 25px;">
 					
-					<div class="col-md-3">
+					<div class="col-xs-12 col-md-3">
 						<div class="row">
 							<div class="col-md-12">
-								<h3 style="margin-left: 45px;">Ofertas de empleo por área</h3>
-								<div class="box bg-white" style="margin: 11px 45px;margin-right: 0;">
+								<h3>Ofertas de empleo por área</h3>
+								<div class="box bg-white">
 									<table class="table m-md-b-0 tArea">
 										<tbody>
 											<?php foreach ($areas as $registro => $area): ?>
@@ -741,9 +741,9 @@ $link = str_replace('watch?v=', 'embed/', $link);
 						<div class="row">
 							<div class="col-md-12">
 
-								<h3 style="margin-left: 45px;">Por Fecha de Publicación</h3>
+								<h3>Por Fecha de Publicación</h3>
 
-								<div class="box bg-white" style="margin: 11px 45px;margin-right: 0;">
+								<div class="box bg-white">
 									<table class="table m-md-b-0 tMomento">
 										<tbody>
 											<?php foreach ($momentos as $registroM => $momento): ?>
@@ -776,9 +776,9 @@ $link = str_replace('watch?v=', 'embed/', $link);
 						<div class="row">
 							<div class="col-md-12">
 
-								<h3 style="margin-left: 45px;">Por Disponibilidad</h3>
+								<h3>Por Disponibilidad</h3>
 
-								<div class="box bg-white" style="margin: 11px 45px;margin-right: 0;">
+								<div class="box bg-white">
 									<table class="table m-md-b-0 tMomento">
 										<tbody>
 											<?php foreach ($disps as $key => $disp): ?>
@@ -802,10 +802,10 @@ $link = str_replace('watch?v=', 'embed/', $link);
 
 
 					<div class="col-md-9">
-						<h3 style="margin-left: 30px;">Principales ofertas de trabajo</h3>
+						<h3>Principales ofertas de trabajo</h3>
 
 					<?php if($publicacionesOro): ?>
-						<div class="row" style="padding: 25px;">
+						<div class="row" style="padding-right: 10px;">
 							<?php $i = 0;?>
 							<?php foreach ($publicacionesOro as $publicacion):
 							if (strlen($publicacion["titulo"]) > 30) {
@@ -814,7 +814,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 								$publicacion["titulo_corto"] = substr($publicacion["titulo"], 0, 30);
 							}
 							?>
-							<div class="col-lg-3 col-md-4 col-xs-12">
+							<div class="col-lg-3 col-md-4 col-xs-12" style="padding-left: 10px;">
 								<div class="snip1583" style="padding-left: 20px;padding-bottom: 20px;border-top: 7px solid #e4af17;">
 									<div class="content">
 										<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">

@@ -74,23 +74,23 @@
 		<link rel="stylesheet" href="vendor/ionicons/css/ionicons.min.css">
 	</head>
 	<body class="skin-5">
-		<div class="frontend-wrapper frontend-max-width bg-white">
+		<div class=" bg-white">
 			<div class="block-5 img-cover img-fixed" style="/*background-image: url(img/photos-1/<?php echo rand(1, 3); ?>.jpg);*/ margin-top: -30px;padding-bottom: 0;">
 				<div class="row" style="background-color: white;position: inherit;margin-right: 0px;margin-left: 0;">
-					<div class="col-md-2" style="text-align: center;">
+					<!-- <div class="col-md-2" style="text-align: center;">
 						<a class="text-white" href="./" style=""><img src="img/logo_d.png" style="height: 50px;margin-top: 10px;"></a>
-					</div>
-					<div class="col-md-10" style="padding: 0;">
+					</div> -->
+					<div class="col-md-12" style="padding: 0;">
 						<?php require_once('includes/header.php'); ?>
 					</div>
 				</div>
 				
 			</div>
 			
-			<div class="row" style="padding: 0px 25px; margin-top: 25px;">
+			<div class="container">
 				<div class="col-md-12">
 					<?php if($tipo == "empleos"): ?>
-						<div class="card" style="margin-left: 204px;">
+						<div class="card">
 							<h4 class="card-header">Encuentra el empleo que estás buscando!</h4>
 							<div class="card-block">
 								<h5>Utilizá el buscador para tener resultados mas precisos</h5>
@@ -197,8 +197,8 @@
 							</div>
 						</div>
 					<?php endif ?>
+					</div>
 				</div>
-			</div>
 
 			<br>
 		

@@ -52,146 +52,203 @@
 </style>
 
 <div class="site-header">
-	<nav class="navbar navbar-light">
-		<ul class="nav navbar-nav">
-			<li class="nav-item m-r-1 hidden-lg-up">
-				<a class="nav-link collapse-button" href="#">
-					<i class="ti-menu" style="display: none;"></i>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+	  </button>
+	  
+      <a style="width: 220px; height: 78px" class="logo" href="./">
+		<img style="width: 160px; height: 70px;" src="img/logo_d.png" alt="">
+	  </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	<ul class="nav navbar-nav pull-left">
+		<li>
+				<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""; ?>buscador.php?tipo=empleos">
+					Búsqueda avanzada
 				</a>
 			</li>
+			<li>
+				<div class="header-form m-md-r-1 padding-mobile">
+					<form id='busqueda_form'>
+						<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
+						<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
+							<i class="ti-search"></i>
+						</a>
+					</form>
+				</div>
+			</li>
 		</ul>
-		<?php if(isset($_SESSION["ctc"]["id"])): ?>
-			<!-- $_SESSION["ctc"]["type"]==1 es empresa -->
-			<?php if($_SESSION["ctc"]["type"] == 1): ?>
-				<?php
-					$color = "";
-					switch($_SESSION["ctc"]["plan"]["id_plan"]) {
-						case 2:
-							$color = "background-color: #cd7f32;";
-							break;
-						case 3:
-							$color = "background-color: #8a9597;";
-							break;
-						case 4:
-							$color = "background-color: #FFD700;";
-							break;
-					}
-				?>
-				<ul class="nav navbar-nav pull-xs-right">
-					<li class="nav-item dropdown menuPCEmpresa">
-						<a class="nav-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>promociones.php">
-							Promociones
-						</a>
-					</li>
-					<li class="nav-item dropdown menuPCEmpresa">
-						<?php if($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
-						<a class="nav-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
-							Ver jobbers
-						</a>
-						<?php else: ?>
-						<a class="nav-link actualiza_plan" href="javascript:void(0)" style="cursor: no-drop;">
-							Ver jobbers
-						</a>
-						<?php endif; ?>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
-							<span>Plan:</span>
-							<span class="tag tag-success top" style="top: 0; <?php echo $color; ?>"><?php echo $_SESSION["ctc"]["plan"]["nombre"]; ?></span>
-						</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link" href="#" data-toggle="dropdown" aria-expanded="false">
-							<div class="avatar box-32">
-								<img src="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "" : "empresa/")."img/".$_SESSION["ctc"]["pic"]; ?>" alt="">
-							</div>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right animated flipInY">
-							<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "./" : "empresa/"; ?>">
-								<i class="ti-folder m-r-0-5"></i> Panel
-							</a>
-							<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "perfil" : "empresa/perfil"; ?>.php">
-								<i class="ti-user m-r-0-5"></i> Perfil
-							</a>
-							<!--
-							<a class="dropdown-item" href="#">
-								<i class="ti-settings m-r-0-5"></i> Ajustes
-							</a>-->
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "salir" : "empresa/salir"; ?>.php"><i class="ti-power-off m-r-0-5"></i> Cerrar sesión</a>
-						</div>
-					</li>
-					<li class="nav-item hidden-md-up">
-						<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse-1">
-							<i class="ti-more"></i>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link site-sidebar-second-toggle" href="#" data-toggle="collapse">
-							<i class="ti-arrow-left" style="color: #b7b2b2;"></i>
-						</a>
-					</li>
-				</ul>
-			<?php else: ?>
-				<!-- $_SESSION["ctc"]["type"] ==  2 es usuario -->
-				<?php if($_SESSION["ctc"]["type"] == 2): ?>
-					<ul class="nav navbar-nav pull-xs-right">
-						<li class="nav-item dropdown menuPCTrabajador">
-							<a class="nav-link" href="promociones.php">
+		<ul class="nav navbar-nav pull-right">
+			
+				<!-- Seccion de empresas -->
+				<?php if(isset($_SESSION["ctc"]["id"])): ?>
+				<!-- $_SESSION["ctc"]["type"]==1 es empresa -->
+				<?php if($_SESSION["ctc"]["type"] == 1): ?>
+					<?php
+						$color = "";
+						switch($_SESSION["ctc"]["plan"]["id_plan"]) {
+							case 2:
+								$color = "background-color: #cd7f32;";
+								break;
+							case 3:
+								$color = "background-color: #8a9597;";
+								break;
+							case 4:
+								$color = "background-color: #FFD700;";
+								break;
+						}
+					?>
+
+						<li class="menuPCEmpresa">
+							<a class="nav-link color-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>promociones.php">
 								Promociones
 							</a>
 						</li>
-						<li class="nav-item dropdown menuPCTrabajador">
-							<a class="nav-link" href="empleos.php">
+						<li class="menuPCEmpresa">
+							<?php if($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
+							<a class="nav-link color-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
+								Ver jobbers
+							</a>
+							<?php else: ?>
+							<a class="nav-link color-link actualiza_plan" href="javascript:void(0)" style="cursor: no-drop;">
+								Ver jobbers
+							</a>
+							<?php endif; ?>
+						</li>
+						<li>
+							<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
+								<span>Plan:</span>
+								<span class="tag tag-success top" style="top: 0; <?php echo $color; ?>"><?php echo $_SESSION["ctc"]["plan"]["nombre"]; ?></span>
+							</a>
+						</li>
+						<li>
+							<a class="nav-link color-link" href="#" data-toggle="dropdown" aria-expanded="false">
+								<div class="avatar box-32">
+									<img src="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "" : "empresa/")."img/".$_SESSION["ctc"]["pic"]; ?>" alt="">
+								</div>
+							</a>
+							<!-- Menu Desplegable -->
+							<div class="dropdown-menu dropdown-menu-right animated flipInY" style="background-color:#E8EBF0;">
+								<ul class="no-padding menu-desplegable">
+									<li class="dropdown-item">
+										<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "./" : "empresa/"; ?>">
+											<i class="ti-folder m-r-0-5"></i> Panel
+										</a>
+									</li>
+									<li class="dropdown-item">
+										<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "perfil" : "empresa/perfil"; ?>.php">
+											<i class="ti-user m-r-0-5"></i> Perfil
+										</a>
+									</li>
+									<li class="divider" role="separator"></li>
+									<li class="dropdown-item text-center">
+										<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "salir" : "empresa/salir"; ?>.php"><i class="ti-power-off m-r-0-5"></i> Cerrar sesión</a>
+									</li>
+																	
+									<!--
+									<a class="dropdown-item" href="#">
+										<i class="ti-settings m-r-0-5"></i> Ajustes
+									</a>-->
+									
+								</ul>	
+							</div>
+						</li>
+
+						<li>
+							<a class="nav-link color-link site-sidebar-second-toggle" href="#" data-toggle="collapse">
+								<i class="ti-arrow-left"></i>
+							</a>
+						</li>
+					
+
+			<?php else: ?>
+				<!-- SECCION DE USUARIO -->
+				<!-- $_SESSION["ctc"]["type"] ==  2 es usuario -->
+				<?php if($_SESSION["ctc"]["type"] == 2): ?>
+
+						<li class="menuPCTrabajador">
+							<a class="nav-link color-link" href="promociones.php">
+								Promociones
+							</a>
+						</li>
+						<li class="menuPCTrabajador">
+							<a class="nav-link color-link" href="empleos.php">
 								Ver ofertas de empleo
 							</a>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link" href="#" data-toggle="dropdown" aria-expanded="false">
+						
+						<li>
+							<a class="nav-link color-link" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="row" style="margin-left: 0;margin-right: 0;">
-									<div class="col-md-9 col-xs-9"><?php echo $_SESSION["ctc"]["name"]." ".$_SESSION["ctc"]["lastName"]; ?></div>
+									<div class="col-md-9 col-xs-9 no-padding-left name-margin"><?php echo $_SESSION["ctc"]["name"]." ".$_SESSION["ctc"]["lastName"]; ?></div>
 									<div style="" class="col-md-3 col-xs-3">
-										<div class="avatar box-32">
+										<div class="avatar box-32 avatar-float">
 											<img src="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa") ? '../': ''; ?>img/<?php echo $_SESSION["ctc"]["pic"]; ?>" alt="" style="height: 30px;">
 										</div>
 									</div>
 								</div>
 							</a>
-							<div class="dropdown-menu dropdown-menu-right animated flipInY">
-								<a class="dropdown-item" href="trabajador-detalle.php?t=<?php echo $_SESSION["ctc"]["name"]."-".$_SESSION["ctc"]["lastName"]."-".$_SESSION["ctc"]["id"]; ?>">
-									<i class="ti-user m-r-0-5"></i> Perfil
-								</a>
-								<a class="dropdown-item" href="cuenta.php">
-									<i class="ti-pencil-alt m-r-0-5"></i> Mi cuenta
-								</a>
-								<a class="dropdown-item" href="curriculum.php">
-									<i class="ti-book m-r-0-5"></i> Modificar currículum
-								</a>
-								<a class="dropdown-item" href="postulaciones.php">
-									<i class="ti-check-box m-r-0-5"></i> Ver postulaciones realizadas
-								</a>
-								<a class="dropdown-item" href="publicaciones.php">
-									<i class="ti-clipboard  m-r-0-5"></i> Mis servicios free lance
-								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item 1logout" href="salir.php" onclick="Logout();"><i class="ti-power-off m-r-0-5"></i> Cerrar sesión</a>
+
+							<!-- Menu Desplegable -->
+							<div class="dropdown-menu dropdown-menu-right animated flipInY" style="background-color: #E8EBF0">
+								<ul class="no-padding menu-desplegable">
+									<li class="dropdown-item">
+										<a href="trabajador-detalle.php?t=<?php echo $_SESSION["ctc"]["name"]."-".$_SESSION["ctc"]["lastName"]."-".$_SESSION["ctc"]["id"]; ?>">
+											<i class="ti-user m-r-0-5"></i> Perfil
+										</a>
+									</li>
+
+									<li class="dropdown-item">
+										<a href="cuenta.php">
+											<i class="ti-pencil-alt m-r-0-5"></i> Mi cuenta
+										</a>
+									</li>
+
+									<li class="dropdown-item">
+										<a href="curriculum.php">
+											<i class="ti-book m-r-0-5"></i> Modificar currículum
+										</a>
+									</li>
+
+									<li class="dropdown-item">
+										<a href="postulaciones.php">
+											<i class="ti-check-box m-r-0-5"></i> Ver postulaciones realizadas
+										</a>
+									</li>
+
+									<li class="dropdown-item">
+										<a href="publicaciones.php">
+											<i class="ti-clipboard  m-r-0-5"></i> Mis servicios free lance
+										</a>
+									</li>
+									
+									<li class="divider" role="separator"></li>
+
+									<li class="dropdown-item text-center">
+										<a class="1logout" href="salir.php" onclick="Logout();"><i class="ti-power-off m-r-0-5"></i> Cerrar sesión</a>
+									</li>
+								</ul>
 							</div>
 						</li>
-						<li class="nav-item hidden-md-up">
-							<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse-1">
-								<i class="ti-more"></i>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link site-sidebar-second-toggle" href="#" data-toggle="collapse">
+
+						<li>
+							<a class="nav-link site-sidebar-second-toggle color-link" href="#" data-toggle="collapse">
 								<i class="ti-arrow-left" style="color: #b7b2b2;"></i>
 							</a>
 						</li>
-					</ul>
 				<?php else: ?>
-					<ul class="nav navbar-nav pull-xs-right">
-						<li class="nav-item dropdown">
-							<a class="nav-link" href="#" data-toggle="dropdown" aria-expanded="false">
+
+						<li>
+							<a class="nav-link color-link" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="row" style="margin-left: 0;margin-right: 0;">
 									<div class="col-md-9 col-xs-9"><?php echo $_SESSION["ctc"]["name"]." ".$_SESSION["ctc"]["lastName"]; ?></div>
 									<div style="" class="col-md-3 col-xs-3">
@@ -226,95 +283,30 @@
 								<a class="dropdown-item 1logout" href="<?php echo strstr($_SERVER["REQUEST_URI"], "admin") ? '../': ''; ?>salir.php"><i class="ti-power-off m-r-0-5"></i> Cerrar sesión</a>
 							</div>
 						</li>
-					</ul>
+
 				<?php endif ?>
 			<?php endif ?>
 		<?php else: ?>
+		<!-- Seccion de Busqueda -->
+		<li>
+			<?php if(isset($_SESSION["ctc"])): ?>
+					<!-- $_SESSION["ctc"]["type"] != 3 no es administrador -->
+					<?php if($_SESSION["ctc"]["type"] != 3): ?>
+					<!-- $_SESSION["ctc"]["type"] =2 es usuario -->
+						<?php if($_SESSION["ctc"]["type"] == 2): ?>
+							<div id="collapse-1">
+							<!-- FIXME: Dejar un solo input que funcione en todas las pantallas -->
 
-			<ul class="nav navbar-nav pull-xs-right movil">
-				<li class="nav-item dropdown">
-					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>empleos.php">
-						Bolsa de Empleos
-					</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>ingresar.php" style="color: white;">
-						Ingresar
-					</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>registro.php">
-						Registrarse
-					</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
-						Empresas - Acceso
-					</a>
-				</li>
-				<li class="nav-item hidden-md-up">
-					<a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse-1">
-						<i class="ti-more"></i>
-					</a>
-				</li>
-			</ul>
-		<?php endif ?>
-		<!--
-			---- area de busqueda ---- 
-		 -->
-		<?php if(isset($_SESSION["ctc"])): ?>
-			<!-- $_SESSION["ctc"]["type"] != 3 no es administrador -->
-			<?php if($_SESSION["ctc"]["type"] != 3): ?>
-			<!-- $_SESSION["ctc"]["type"] =2 es usuario -->
-				<?php if($_SESSION["ctc"]["type"] == 2): ?>
-					<div class="navbar-toggleable-sm collapse" id="collapse-1">
-						<div class="header-form pull-md-left m-md-r-1">
-							<form id='busqueda_form'>
-								<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
-								<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
-									<i class="ti-search"></i>
-								</a>
-							</form>
-						</div>
-						<ul class="nav navbar-nav">
-							<li class="nav-item dropdown">
-								<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""; ?>buscador.php?tipo=empleos">
-									Búsqueda avanzada
-								</a>
-							</li>
-							<li class="nav-item dropdown menuMovilTrabajador" style="display:none;">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-									Menu
-								</a>
-								<div class="dropdown-menu animated flipInY">
-									<a class="dropdown-item" href="promociones.php">
-										Promociones
-									</a>
-									<a class="dropdown-item" href="empleos.php">Ver ofertas de empleo</a>
-								</div>
-							</li>
-						</ul>
-
-					</div>
-				<?php elseif($_SESSION["ctc"]["type"] == 1): ?>
-					<div class="navbar-toggleable-sm collapse" id="collapse-1">
-						<div class="header-form pull-md-left m-md-r-1">
-							<form id='busqueda_form'>
-								<input type="text" id="search-input-w" class="form-control b-a" placeholder="Búsqueda">
-								<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
-									<i class="ti-search"></i>
-								</a>
-							</form>
-						</div>
-						<?php if(isset($_SESSION["ctc"]["plan"])): ?>
-							<?php if($_SESSION["ctc"]["servicio"]["filtros_personalizados"] == 1): ?>
-								<ul class="nav navbar-nav">
-									<li class="nav-item dropdown">
-										<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""; ?>buscador.php?tipo=trabajadores" >
-											Búsqueda avanzada
+								<!-- <div class="header-form pull-md-left m-md-r-1">
+									<form id='busqueda_form'>
+										<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
+										<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
+											<i class="ti-search"></i>
 										</a>
-									</li>
-									<li class="nav-item dropdown menuMovilEmpresa" style="display:none;">
+									</form>
+								</div> -->
+								<ul class="nav navbar-nav">
+									<li class="nav-item dropdown menuMovilTrabajador" style="display:none;">
 										<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
 											Menu
 										</a>
@@ -322,47 +314,93 @@
 											<a class="dropdown-item" href="promociones.php">
 												Promociones
 											</a>
-											<a class="dropdown-item" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>trabajadores.php">Ver jobbers</a>
+											<a class="dropdown-item" href="empleos.php">Ver ofertas de empleo</a>
 										</div>
 									</li>
 								</ul>
-							<?php else: ?>
-								<ul class="nav navbar-nav">
-									<li class="nav-item dropdown menuMovilEmpresa" style="display:none;">
-										<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-											Menu
+
+							</div>
+						<?php elseif($_SESSION["ctc"]["type"] == 1): ?>
+							<div id="collapse-1">
+							<!-- FIXME: Dejar un solo input que funcione en todas las pantallas -->
+
+								<!-- <div class="header-form pull-md-left m-md-r-1">
+									<form id='busqueda_form'>
+										<input type="text" id="search-input-w" class="form-control b-a" placeholder="Búsqueda">
+										<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
+											<i class="ti-search"></i>
 										</a>
-										<div class="dropdown-menu animated flipInY">
-											<a class="dropdown-item" href="promociones.php">
-												Promociones
-											</a>
-											<a class="dropdown-item" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>trabajadores.php">Ver jobbers</a>
-										</div>
-									</li>
-								</ul>
-							<?php endif ?>
+									</form>
+								</div> -->
+								<?php if(isset($_SESSION["ctc"]["plan"])): ?>
+									<?php if($_SESSION["ctc"]["servicio"]["filtros_personalizados"] == 1): ?>
+										<ul class="nav navbar-nav">
+											<li class="nav-item dropdown menuMovilEmpresa" style="display:none;">
+												<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+													Menu
+												</a>
+												<div class="dropdown-menu animated flipInY">
+													<a class="dropdown-item" href="promociones.php">
+														Promociones
+													</a>
+													<a class="dropdown-item" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>trabajadores.php">Ver jobbers</a>
+												</div>
+											</li>
+										</ul>
+									<?php else: ?>
+										
+									<?php endif ?>
+								<?php endif ?>
+							</div>
 						<?php endif ?>
+					<?php endif ?>
+				<?php else: ?>
+					<div id="collapse-1">
+					<!-- FIXME: Dejar un solo input que funcione en todas las pantallas -->
+
+							<!-- <div class="header-form pull-md-left m-md-r-1">
+								<form id='busqueda_form'>
+									<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
+									<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
+										<i class="ti-search"></i>
+									</a>
+								</form>
+							</div> -->
 					</div>
-				<?php endif ?>
-			<?php endif ?>
-		<?php else: ?>
-			<div class="navbar-toggleable-sm collapse" id="collapse-1">
-					<div class="header-form pull-md-left m-md-r-1">
-						<form id='busqueda_form'>
-							<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
-							<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
-								<i class="ti-search"></i>
-							</a>
-						</form>
-					</div>
-					<ul class="nav navbar-nav">
-						<li class="nav-item dropdown">
-							<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""; ?>buscador.php?tipo=empleos">
-								Búsqueda avanzada
-							</a>
-						</li>
-					</ul>
-			</div>
+			
+		</li>
+
+		</ul>
+
+      <ul class="nav navbar-nav pull-right">
+
+		<li>
+			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>empleos.php">
+				Bolsa de Empleos
+			</a>
+		</li>
+
+        <li>
+			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>ingresar.php">
+				Ingresar
+			</a>
+		</li>
+
+		<li>
+			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>registro.php">
+				Registrarse
+			</a>
+		</li>
+
+		<li>
+			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
+				Empresas - Acceso
+			</a>
+		</li>
 		<?php endif ?>
-	</nav>
+		<?php endif ?>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 </div>
