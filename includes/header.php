@@ -176,8 +176,8 @@
 				<?php if($_SESSION["ctc"]["type"] == 2): ?>
 
 						<li class="menuPCTrabajador">
-							<a class="nav-link color-link" href="promociones.php">
-								Promociones
+							<a class="nav-link color-link" href="curriculum.php">
+								Modificar Curriculum
 							</a>
 						</li>
 						<li class="menuPCTrabajador">
@@ -214,8 +214,8 @@
 									</li>
 
 									<li class="dropdown-item">
-										<a href="curriculum.php">
-											<i class="ti-book m-r-0-5"></i> Modificar currículum
+										<a href="promociones.php">
+											<i class="ti-medall m-r-0-5"></i> Promociones
 										</a>
 									</li>
 
