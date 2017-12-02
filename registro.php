@@ -82,16 +82,16 @@
 							</div>
 							<form class="form-material">
 								<div class="form-group">
-									<input type="text" class="form-control" id="name" placeholder="Nombres (*)">
+									<input type="text" class="form-control" id="name" placeholder="Nombres (*)" onchange="validar(this.id,'texto',this.title)" title='Nombre'>
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" id="lastName" placeholder="Apellidos (*)">
+									<input type="text" class="form-control" id="lastName" placeholder="Apellidos (*)"  onchange="validar(this.id,'texto',this.title)" title='Apellido'>
 								</div>
 								<div class="form-group">
-									<input type="email" class="form-control" id="email" placeholder="Correo electronico (*)">
+									<input type="email" class="form-control" id="email" placeholder="Correo electronico (*)"  onchange="validar(this.id,'email')">
 								</div>
 								<div class="form-group">
-									<input type="email" class="form-control" id="confirmEmail" placeholder="Confimar correo electrónico (*)">
+									<input type="email" class="form-control" id="confirmEmail" placeholder="Confimar correo electrónico (*)" onchange="validar(this.id,'email')">
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control" id="passw1" placeholder="Contraseña (*)">
@@ -190,6 +190,7 @@
 		<script type="text/javascript" src="vendor/tether/js/tether.min.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="vendor/sweetalert2/sweetalert2.min.js"></script>
+		<script type="text/javascript" src="js/validar.js"></script>
 		<script>
 			function isEmail(email) {
 			  var regex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
@@ -234,12 +235,19 @@
 									window.location.href = "./";
 								},2000);
 								//window.location.assign("./");
-							}
-							else {
+							}else if(data.status == 2){
 								//console.log('Muestra algo 2');
 								swal({
 									title: 'Información!',
 									text: 'Usuario existente.',
+									timer: 3000,
+									confirmButtonClass: 'btn btn-primary btn-lg',
+									buttonsStyling: false
+								});
+							}else if(data.status == 3){
+								swal({
+									title: 'Información!',
+									text: 'Sin reespuesta de Facebook, REgistrese manualmente.',
 									timer: 3000,
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
@@ -275,30 +283,44 @@
 						if(isEmail($("#email").val())) { // Confirma si es un email valido
 							if ($('#email').val() == $('#confirmEmail').val()) { // Confirma si los emails coinciden
 								if($("#passw1").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
-									$.ajax({
-										type: 'POST',
-										url: 'ajax/user.php',
-										data: 'op=2&email=' + $("#email").val() + '&password=' + $("#passw1").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&publicidad=' + $("#aceptaPublicidad:checked").length + '&newsletter=' + $("#aceptaNewsletter:checked").length,
-										dataType: 'json',
-										success: function(data) {
-											if(data.status == 1) {
-												/*swal({
-													title: 'Información!',
-													text: 'Para confirmar tu registro, revisa la bandeja de tu correo electronico.',
-													timer: 240000,
-													confirmButtonClass: 'btn btn-primary btn-lg',
-													buttonsStyling: false
-												});*/
-												swal("EXITO!", "Registrado Satisfactoriamente", "success");
-												$('.form-material')[0].reset();
-												setTimeout(function(){
-													window.location.assign("./");
-												},3000);
+									if(($("#passw1").val().length >= 8 && $("#passw1").val().length <= 12)&&($("#passw2").val().length >= 8 && $("#passw2").val().length <= 12  )) { // Confirma si las contraseñas tienen la lomgitud
+										$.ajax({
+											type: 'POST',
+											url: 'ajax/user.php',
+											data: 'op=2&email=' + $("#email").val() + '&password=' + $("#passw1").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&publicidad=' + $("#aceptaPublicidad:checked").length + '&newsletter=' + $("#aceptaNewsletter:checked").length,
+											dataType: 'json',
+											success: function(data) {
+												if(data.status == 1) {
+													/*swal({
+														title: 'Información!',
+														text: 'Para confirmar tu registro, revisa la bandeja de tu correo electronico.',
+														timer: 240000,
+														confirmButtonClass: 'btn btn-primary btn-lg',
+														buttonsStyling: false
+													});*/
+													swal("EXITO!", "Registrado Satisfactoriamente", "success");
+													$('.form-material')[0].reset();
+													setTimeout(function(){
+														window.location.assign("./");
+													},3000);
 
-												$('.form-group').each(function(index, el) {
-														$(el).removeClass('has-error');
-												});
+													$('.form-group').each(function(index, el) {
+															$(el).removeClass('has-error');
+													});
 
+												} else if(data.status == 0){
+													//console.log("Error al enviar correo electronico");
+												}
+												else {
+													swal({
+														title: 'Información!',
+														text: 'Correo electrónico en uso intente de nuevo',
+														timer: 2500,
+														confirmButtonClass: 'btn btn-primary btn-lg',
+														buttonsStyling: false
+													});
+													
+												}
 											} else if(data.status == 0){
 												//console.log("Error al enviar correo electronico");
 											}
@@ -336,8 +358,7 @@
 								
 								$('#email, #confirmEmail').parent().addClass('has-error');
 							}
-						}
-						else {
+						}else {
 							swal({
 								title: 'Información!',
 								text: 'Correo electrónico inválido',

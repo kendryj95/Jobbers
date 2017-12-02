@@ -323,42 +323,44 @@
             }
 			break;
 		case ADD_FB:
-			$info = $db->getRow("SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]' and correo_electronico!='undefined' ");
 
-			if($info) {
-				if($info["fb_id"] == ''){
-					$db->query("UPDATE trabajadores SET fb_id = '$_REQUEST[i]'  WHERE id=$info[id] ");
+			if($_REQUEST[i] != '' && isset($_REQUEST[i])){
+				$info = $db->getRow("SELECT * FROM trabajadores WHERE correo_electronico='$_REQUEST[e]' and correo_electronico!='undefined' ");
+
+				if($info) {
+					if($info["fb_id"] == ''){
+						$db->query("UPDATE trabajadores SET fb_id = '$_REQUEST[i]'  WHERE id=$info[id] ");
+					}
 				}
-			}
+				$info = $db->getRow("SELECT * FROM trabajadores WHERE fb_id='$_REQUEST[i]'");
 
-			$info = $db->getRow("SELECT * FROM trabajadores WHERE fb_id='$_REQUEST[i]'");
-
-			if($info) {
-				echo json_encode(array("status" => 2));
-			}else {
-				$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores'");
-				$uid = $db->getOne("SELECT valor FROM uid");
-				//$idi = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
-				$nombres = $_REQUEST['n'];
-				$apellidos = $_REQUEST['a'];
-				$correo = $_REQUEST['e'] == 'undefined'?'':$_REQUEST['e'];
-				$pictureURL = $_REQUEST['p'];
-				$genero = $_REQUEST['g'];
-				$fb_id = $_REQUEST['i'];
-				$db->query("INSERT INTO trabajadores (id,uid,fb_id, id_imagen, id_sexo, id_estado_civil, 
-				id_tipo_documento_identificacion, id_pais, provincia, localidad, 
-				calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion,
-				fecha_nacimiento, telefono, telefono_alternativo, usuario, clave, correo_electronico,
-				fecha_creacion, fecha_actualizacion) 
-				VALUES ('$id','$uid','$fb_id' ,'0', '$genero', '', '', '', '', '', '', '', '$nombres', '$apellidos', '', NULL, '', '',  '', '', '$correo', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."')");
-				//$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ($idi, '', '', '', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[p]')");
-				$_SESSION["ctc"]["id"] = $id;
-				$_SESSION["ctc"]["name"] = $nombres;
-				$_SESSION["ctc"]["lastName"] = $apellidos;
-				$_SESSION["ctc"]["email"] = $correo;
-				$_SESSION["ctc"]["type"] = 2;
-				$_SESSION["ctc"]["pic"] = $pictureURL;
-				echo json_encode(array("status" => 1));
+				if($info) {
+					echo json_encode(array("status" => 2));
+				}else {
+					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores'");
+					$uid = $db->getOne("SELECT valor FROM uid");
+					//$idi = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
+					$nombres = $_REQUEST['n'];
+					$apellidos = $_REQUEST['a'];
+					$correo = $_REQUEST['e'] == 'undefined'?'':$_REQUEST['e'];
+					$pictureURL = $_REQUEST['p'];
+					$genero = $_REQUEST['g'];
+					$fb_id = $_REQUEST['i'];
+					$db->query("INSERT INTO trabajadores (id,uid,fb_id, id_imagen, id_sexo, id_estado_civil, 
+					id_tipo_documento_identificacion, id_pais, provincia, localidad, 
+					calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion,
+					fecha_nacimiento, telefono, telefono_alternativo, usuario, clave, correo_electronico,
+					fecha_creacion, fecha_actualizacion) 
+					VALUES ('$id','$uid','$fb_id' ,'0', '$genero', '', '', '', '', '', '', '', '$nombres', '$apellidos', '', NULL, '', '',  '', '', '$correo', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."')");
+					//$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ($idi, '', '', '', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[p]')");
+					$_SESSION["ctc"]["id"] = $id;
+					$_SESSION["ctc"]["name"] = $nombres;
+					$_SESSION["ctc"]["lastName"] = $apellidos;
+					$_SESSION["ctc"]["email"] = $correo;
+					$_SESSION["ctc"]["type"] = 2;
+					$_SESSION["ctc"]["pic"] = $pictureURL;
+					echo json_encode(array("status" => 1));
+				}
 			}
 			break;
 		case LOGIN_ADMIN:

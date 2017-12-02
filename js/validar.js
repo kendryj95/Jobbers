@@ -1,9 +1,13 @@
 function validar(idCampo,type,campo=''){
 	
 	if(type=='email'){
-		//var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		campo = 'Email';
+	}
+	
+	if(type=='texto'){
+		var regex = /^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+$/;
+		campo == ''? 'Nombre':campo;
 	}
 
 	if(type=='tel'){
@@ -13,14 +17,15 @@ function validar(idCampo,type,campo=''){
 
 	if(type=='num'){
 		var regex = /^\d+$/g;
-		campo='Numero';
-
+		campo == ''? 'Numero':campo;
 	}
-	//alert($('#'+idCampo).val());
+
 	if (regex.test($('#'+idCampo).val())) {
-	    return true;
+		$('#'+idCampo).parent().removeClass('has-error');
+		return true;
 	}else{
 		$('#'+idCampo).val('');
+		$('#'+idCampo).parent().addClass('has-error');
 		swal({
 			title: 'Error',
 			text: "Escriba un "+campo+" válido ",
