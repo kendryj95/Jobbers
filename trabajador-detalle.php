@@ -142,16 +142,16 @@ $publicaciones = $db->getAll("
         <link rel="stylesheet" href="vendor/ionicons/css/ionicons.min.css">
     </head>
     <body class="large-sidebar fixed-sidebar fixed-header skin-5">
-        <div class="wrapper" style="background-color: white;">
+        <!-- <div class="wrapper" style="background-color: white;"> -->
             <!-- Sidebar -->
-            <?php require_once 'includes/sidebar.php';?>
+            <!-- <?php require_once 'includes/sidebar.php';?> -->
 
             <!-- Sidebar second -->
             <?php //require_once('includes/sidebar-second.php'); ?>
 
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
-            <div class="site-content bg-white">
+            <div class="container bg-white">
                 <!-- Content -->
                 <div class="content-area p-b-1">
                     <div class="container-fluid">
@@ -283,16 +283,16 @@ $publicaciones = $db->getAll("
 
                                 </div>
                             </div>
-                            <div class="col-sm-8 col-md-9">
+                            <div class="col-sm-7 col-md-8 col-sm-offset-1">
 
                                 <div class="card m-b-0">
-                                    <ul class="nav nav-tabs nav-tabs-2 profile-tabs" role="tablist">
+                                    <ul class="nav nav-tabs border-nav" role="tablist" style="color: white !important">
                                         <?php if (($_SESSION['ctc']['type'] == 1 && $trabajador['publico'] == 1) || ($_SESSION['ctc']['type'] == 2) || count($postulado) > 0): ?>
                                         <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#curriculum" role="tab">Curriculum</a>
+                                            <a class="nav-link active" data-toggle="tab" href="#curriculum" role="tab" style="margin-right: 0px;">Curriculum</a>
                                         </li>
                                         <?php endif;?>
-                                        <li class="nav-item">
+                                        <li class="nav-item" style="margin-left: 0px;">
                                             <a class="nav-link" data-toggle="tab" href="#publicaciones" role="tab">Servicios free lance</a>
                                         </li>
                                     </ul>
@@ -322,10 +322,11 @@ $publicaciones = $db->getAll("
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <div class="row">
-                                                        <div class="col-md-1"></div>
-                                                        <div class="col-md-3">
+                                                    <!-- Eliminada la imagen circular del curriculum  -->
+                                                        <!-- <div class="col-md-1"></div> -->
+                                                        <!-- <div class="col-md-3">
                                                             <img src="img/<?php echo $trabajador["imagen"]; ?>" alt="" class="img-circle m-r-1" width="100" height="100">
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-md-6">
                                                             <p>
                                                                 <strong>Nombres: </strong> <span id="labelName"><?php echo $trabajador["nombres"]; ?></span><br>
@@ -442,7 +443,7 @@ $publicaciones = $db->getAll("
                 </div>
                 <?php require_once 'includes/footer.php';?>
             </div>
-        </div>
+        <!-- </div> -->
 
         <?php require_once 'includes/libs-js.php';?>
 

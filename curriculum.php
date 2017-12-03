@@ -85,13 +85,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 
-		<div class="wrapper">
+		<!-- <div class="wrapper"> -->
 
 			<!-- Preloader -->
 			<div class="preloader"></div>
 
 			<!-- Sidebar -->
-			<?php require_once 'includes/sidebar.php';?>
+			<!-- <?php require_once 'includes/sidebar.php';?> -->
 
 			<!-- Sidebar second -->
 			<?php require_once 'includes/sidebar-second.php';?>
@@ -99,7 +99,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 			<!-- Header -->
 			<?php require_once 'includes/header.php';?>
 
-			<div class="site-content">
+			<div class="container bg-white">
 				<!-- Content -->
 				<div class="content-area p-y-1">
 					<div class="container-fluid">
@@ -147,82 +147,88 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 1: Datos de contacto</h4>
 									<p class="text-muted" style="margin-left: 25px;margin-right: 25px; text-align: justify;">Completa los pasos para llenar tu curriculum y podrás aparecer como candidato para la empresas. Recuerda que los campos marcados con (*) son obligatorios</p>
 									<div class="row">
-										<div class="col-md-2"></div>
-										<div class="col-md-8">
+										<!-- <div class="col-md-2"></div> -->
+										<div class="container">
 											<div class="form-group row">
-												<label for="name" class="col-xs-4 col-form-label" style="text-align: right;">Nombre <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+												<label for="name" class="col-xs-12 col-md-2 text-center">Nombre <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["nombres"]; ?>" id="name" type="text">
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="lastName" class="col-xs-4 col-form-label"  style="text-align: right;">Apellido <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+												<label for="lastName" class="col-xs-12 col-md-2 text-center">Apellido <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["apellidos"]; ?>" id="lastName" type="text">
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="email" class="col-xs-4 col-form-label"  style="text-align: right;">Email <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+												<label for="email" class="col-xs-12 col-md-2 text-center">Email <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data['correo_electronico'] ?>" id="email" type="email" onchange="validar(this.id,'email')">
 												</div>
 											</div>
-											<label class="custom-control custom-radio col-md-4" style=" text-align: right;">
-												<span class="custom-control-description">Sexo <span style="color: red;">*</span></span>
-											</label>
-											<label class="custom-control custom-radio col-md-3">
-												<input id="radio1" name="sex" class="custom-control-input" type="radio" value="2">
-												<span class="custom-control-indicator"></span>
-												<span class="custom-control-description">Femenino</span>
-											</label>
-											<label class="custom-control custom-radio col-md-3">
-												<input id="radio2" name="sex" class="custom-control-input" type="radio" value="1">
-												<span class="custom-control-indicator"></span>
-												<span class="custom-control-description">Masculino</span>
-											</label>
-											<div class="row">
-												<div class="col-xs-4" style="text-align: right;">
+		  									<div class="form-group row">
+												<label class="custom-control custom-radio col-md-2 col-xs-12 text-center">
+													<span class="custom-control-description">Sexo <span style="color: red;">*</span></span>
+												</label>
+												<label class="custom-control custom-radio col-md-5 col-xs-6">
+													<input id="radio1" name="sex" class="custom-control-input" type="radio" value="2">
+													<span class="custom-control-indicator"></span>
+													<span class="custom-control-description">Femenino</span>
+												</label>
+												<label class="custom-control custom-radio col-md-5 col-xs-6">
+													<input id="radio2" name="sex" class="custom-control-input" type="radio" value="1">
+													<span class="custom-control-indicator"></span>
+													<span class="custom-control-description">Masculino</span>
+												</label>
+											</div>
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="" class="col-form-label">Fecha de nacimiento <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-xs-6">
-													<select name="" id="dia" class="custom-select">
-														<option value="0">Sel</option>
-														<?php for ($i = 1; $i <= 31; $i++): ?>
-															<option value="<?=$i < 10 ? '0' . $i : $i?>"><?=$i?></option>
-														<?php endfor;?>
-													</select>
+												<div class="col-xs-12 col-md-10 no-padding">
+													<div class="col-xs-4">
+														<select name="" id="dia" class="custom-select form-control">
+															<option value="0">Sel</option>
+															<?php for ($i = 1; $i <= 31; $i++): ?>
+																<option value="<?=$i < 10 ? '0' . $i : $i?>"><?=$i?></option>
+															<?php endfor;?>
+														</select>
+													</div>
 
-
-													<select name="" id="mes" class="custom-select">
-														<option value="0">Sel</option>
-														<option value="01">Ene</option>
-														<option value="02">Feb</option>
-														<option value="03">Mar</option>
-														<option value="04">Abr</option>
-														<option value="05">May</option>
-														<option value="06">Jun</option>
-														<option value="07">Jul</option>
-														<option value="08">Ago</option>
-														<option value="09">Sep</option>
-														<option value="10">Oct</option>
-														<option value="11">Nov</option>
-														<option value="12">Dic</option>
-													</select>
-
-													<select name="" id="anio" class="custom-select">
-														<option value="0">Sel</option>
-														<?php for ($i = 1950; $i <= intval(date('Y')); $i++): ?>
-														<option value="<?=$i?>"><?=$i?></option>
-														<?php endfor;?>
-													</select>
+		  											<div class="col-xs-4">
+														<select name="" id="mes" class="custom-select form-control">
+															<option value="0">Sel</option>
+															<option value="01">Ene</option>
+															<option value="02">Feb</option>
+															<option value="03">Mar</option>
+															<option value="04">Abr</option>
+															<option value="05">May</option>
+															<option value="06">Jun</option>
+															<option value="07">Jul</option>
+															<option value="08">Ago</option>
+															<option value="09">Sep</option>
+															<option value="10">Oct</option>
+															<option value="11">Nov</option>
+															<option value="12">Dic</option>
+														</select>
+													</div>
+		  											<div class="col-xs-4">
+														<select name="" id="anio" class="custom-select form-control">
+															<option value="0">Sel</option>
+															<?php for ($i = 1950; $i <= intval(date('Y')); $i++): ?>
+															<option value="<?=$i?>"><?=$i?></option>
+															<?php endfor;?>
+														</select>
+													</div>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-md-2 col-xs-12 text-center">
 													<label for="country" style="margin-top: 6px;">Lugar de nacimiento <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
-													<select class="custom-select" id="country" style="width: 100%;">
+												<div class="col-xs-12 col-md-10">
+													<select class="custom-select form-control" id="country" style="width: 100%;">
 														<option value="0">Seleccione</option>
 														<?php $countries = $db->getAll("SELECT * FROM paises ORDER BY mas_frecuentes DESC, nombre");?>
 														<?php foreach ($countries as $c): ?>
@@ -231,12 +237,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="stateCivil" style="margin-top: 6px;">Estado civil</label>
 												</div>
-												<div class="col-md-8">
-													<select class="custom-select" id="estadoCivil" style="width: 100%;">
+												<div class="col-xs-12 col-md-10">
+													<select class="custom-select form-control" id="estadoCivil" style="width: 100%;">
 														<option value="0">Seleccione</option>
 														<?php $estado_civil = $db->getAll("SELECT * FROM estados_civiles");?>
 														<?php foreach ($estado_civil as $e): ?>
@@ -245,10 +251,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;"><label for="dni" style="margin-top: 6px;">DNI <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="dni">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
+													<label for="dni" style="margin-top: 6px;">DNI <span style="color: red;">*</span></label>
+												</div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="dni">
 														<option value="0">Seleccione</option>
 														<?php $tipos_documento_identificacion = $db->getAll("SELECT * FROM tipos_documento_identificacion");?>
 														<?php foreach ($tipos_documento_identificacion as $t): ?>
@@ -256,27 +264,27 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<?php endforeach?>
 													</select>
 												</div>
-												<div class="col-md-2" style="text-align: right;"><label for="numberdni" style="margin-top: 6px;">Número <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
+												<div class="col-xs-12 col-md-2 text-center"><label for="numberdni" style="margin-top: 6px;">Número <span style="color: red;">*</span></label></div>
+												<div class="col-xs-12 col-md-4">
 													<input class="form-control" value="<?php echo $data["numero_documento_identificacion"]; ?>" id="numberdni" type="number" onchange="validar(this.id,'num')">
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="cuil" style="margin-top: 6px;">Numero de CUIL <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
+												<div class="col-xs-12 col-md-10">
                                                     <input type="text" class="form-control" id="cuil" value="<?= $data["cuil"] ?>" onchange="validar(this.id,'num')">
 												</div>
 											</div>
 											<?php $provincias = $db->getAll("SELECT * FROM provincias")?>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="province" style="margin-top: 6px;">Provincia <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
+												<div class="col-xs-12 col-md-10">
                                                     <select name="province" id="province"
-                                                            class="custom-select">
+                                                            class="custom-select form-control">
                                                         <option value="0">Seleccione</option>
                                                         <?php foreach ($provincias as $val): ?>
                                                             <option
@@ -286,12 +294,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 											</div>
                                             <?php $localidades = $db->getAll("SELECT * FROM localidades WHERE id_provincia=" . $data['provincia'])?>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="city" style="margin-top: 6px;">Localidad / Ciudad <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
-                                                    <select name="city" id="city" class="custom-select">
+												<div class="col-xs-12 col-md-10">
+                                                    <select name="city" id="city" class="custom-select form-control">
                                                         <option value="0">Seleccione</option>
                                                         <?php foreach ($localidades as $val): ?>
                                                             <option value="<?=$val['id']?>"><?=$val['localidad']?></option>
@@ -299,31 +307,31 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
                                                     </select>
 												</div>
 											</div>
-											<div class="form-group row" style="margin-top: 10px">
-												<label for="street" class="col-xs-4 col-form-label" style="text-align: right;">Calle <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+											<div class="form-group row">
+												<label for="street" class="col-xs-12 col-md-2 text-center">Calle <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["calle"]; ?>" id="street" type="text">
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="phone" class="col-xs-4 col-form-label" style="text-align: right;">Teléfono o móvil <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+												<label for="phone" class="col-xs-12 col-md-2 text-center">Teléfono o móvil <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["telefono"]; ?>" id="phone" type="text" onchange='validar(this.id,"tel")'>
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="phoneAlt" class="col-xs-4 col-form-label" style="text-align: right;">Teléfono alternativo</label>
-												<div class="col-xs-8">
+												<label for="phoneAlt" class="col-xs-12 col-md-2 text-center">Teléfono alternativo</label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["telefono_alternativo"]; ?>" id="phoneAlt" type="text" onchange='validar(this.id,"tel")'>
 												</div>
 											</div>
 											
 										</div>
-										<div class="col-md-2"></div>
+										<!-- <div class="col-md-2"></div> -->
 									</div>
 									<div class="row" style="margin-top: 10px">
-										<div class="col-md-4"></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
+										<!-- <div class="col-md-4"></div> -->
+										<div class="col-md-4 col-md-offset-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary btn-lg w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
 										<?php if($data['numero_documento_identificacion'] != ""): ?>
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
@@ -1204,7 +1212,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 				<!-- Footer -->
 				<?php require_once 'includes/footer.php';?>
 			</div>
-		</div>
+		<!-- </div> -->
 
 		<?php require_once 'includes/libs-js.php';?>
 
