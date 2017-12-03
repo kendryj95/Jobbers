@@ -7,7 +7,7 @@ function validar(idCampo,type,campo=''){
 	}
 
 	if(type=='tel'){
-		var regex = /^([0-9\-\+]{11,15})+$/g;
+		var regex = /^([0-9\-\+]{7,15})+$/g;
 		campo='Telefono';
 	}
 
