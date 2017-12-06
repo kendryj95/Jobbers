@@ -6302,6 +6302,9 @@ table.focus-on tbody tr.focused td {
 
 .card {
     border-radius: 0;
+    border: 1px solid #d6d6d6;
+    padding-bottom: 25px;
+    padding-top: 10px;
 }
 
 .card-img {
@@ -9609,6 +9612,11 @@ a.text-grey:hover .underline {
     padding-left: 0px;
 }
 
+.no-padding-lat {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .border-trans {
     border-color: transparent;
 }
@@ -9674,6 +9682,28 @@ a.text-grey:hover .underline {
     background-color: #00aeef !important;
     border-color: #00aeef !important;
     color: #fff;
+}
+
+
+/* =================================================================
+  Seccion Trabajador Detalle
+================================================================= */
+
+.border-nav>li:not(:last-child) {
+    border-right: 1px solid #d6d6d6;
+}
+
+.panel-m30 {
+    margin-top: 30px;
+}
+
+
+/* =================================================================
+  Seccion Curriculum
+================================================================= */
+
+.select-date {
+    width: 96px;
 }
 
 

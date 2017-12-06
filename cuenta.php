@@ -35,13 +35,13 @@
 	</head>
 
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
-		<div class="wrapper">
+		<!-- <div class="wrapper"> -->
 
 			<!-- Preloader -->
 			<div class="preloader"></div>
 
 			<!-- Sidebar -->
-			<?php require_once('includes/sidebar.php'); ?>
+			<!-- <?php require_once('includes/sidebar.php'); ?> -->
 
 			<!-- Sidebar second -->
 			<?php require_once('includes/sidebar-second.php'); ?>
@@ -49,7 +49,7 @@
 			<!-- Header -->
 			<?php require_once('includes/header.php'); ?>
 
-			<div class="site-content">
+			<div class="container bg-white">
 				<!-- Content -->
 				<div class="content-area p-y-1">
 					<div class="container-fluid">
@@ -173,11 +173,14 @@
 						</div>
 					</div>
 				</div>
+				<!-- Footer -->
+				<?php require_once('includes/footer.php'); ?>
 			</div>
-			<!-- Footer -->
-			<?php require_once('includes/footer.php'); ?>
-		</div>
+			
+			
+		<!-- </div> -->
 	</div>
+	
 
 		<?php require_once('includes/libs-js.php'); ?>
 		<script type="text/javascript" src="vendor/dropify/dist/js/dropify.min.js"></script>
