@@ -51,7 +51,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<?php require_once 'includes/libs-css.php';?>
 		<link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-daterangepicker/daterangepicker.css">
-		<link rel="stylesheet" href="vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css">
+		<!-- FIXME: Resolver lo del bootstra-slider que no esta entre los archivos. Lo puse como cdn -->
+		<!-- <link rel="stylesheet" href="vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css"> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.min.css">
 
 		<style>
@@ -144,11 +146,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
+
+									<!-- Paso 1 - Datos de contacto -->
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 1: Datos de contacto</h4>
-									<p class="text-muted" style="margin-left: 25px;margin-right: 25px; text-align: justify;">Completa los pasos para llenar tu curriculum y podrás aparecer como candidato para la empresas. Recuerda que los campos marcados con (*) son obligatorios</p>
+									<p class="text-muted text-center" style="margin-left: 25px;margin-right: 25px; text-align: justify;">Completa los pasos para llenar tu curriculum y podrás aparecer como candidato para la empresas. Recuerda que los campos marcados con (*) son obligatorios</p>
 									<div class="row">
-										<!-- <div class="col-md-2"></div> -->
-										<div class="container">
+										<div class="col-md-8 col-md-offset-2">
 											<div class="form-group row">
 												<label for="name" class="col-xs-12 col-md-2 text-center">Nombre <span style="color: red;">*</span></label>
 												<div class="col-xs-12 col-md-10">
@@ -329,46 +332,46 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										</div>
 										<!-- <div class="col-md-2"></div> -->
 									</div>
-									<div class="row" style="margin-top: 10px">
+									<div class="row container" style="margin-top: 10px">
 										<!-- <div class="col-md-4"></div> -->
-										<div class="col-md-4 col-md-offset-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary btn-lg w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
+										<div class="col-xs-12 col-sm-4 col-sm-offset-5"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
 										<?php if($data['numero_documento_identificacion'] != ""): ?>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-xs-12 col-sm-3"> <a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab2" role="tabpanel">
 									<br><br>
 									<div class="row" style="margin-bottom: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4"></div>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+										<div class="col-md-4 col-xs-6"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
+										<div class="col-md-4 col-md-offset-4 col-xs-6 text-right"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 									</div>
+
+									<!-- Paso 2 - Experiencia laboral -->
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 2: Experiencia laboral</h4>
 									<?php $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id'] . " ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC")?>
 									<div class="row">
-										<div class="col-md-2"></div>
-										<div class="col-md-8">
+										<div class="col-md-8 col-md-offset-2">
 											<?php if(!$experiencias): ?>
 												<div class="form-group row" id="containerSinExpLab">
-													<label for="sinExpLab" class="col-xs-4 col-form-label" style="text-align: right;">¿Tienes experiencia laboral? </label>
-													<div class="col-xs-8">
+													<label for="sinExpLab" class="col-xs-12 col-md-2 text-center">¿Tienes experiencia laboral? </label>
+													<div class="col-xs-12 col-md-10">
 														<input value="" id="sinExpLab" type="checkbox" checked>
 													</div>
 												</div>
 											<?php endif; ?>
 											<div class="form-group row">
-												<label for="company" class="col-xs-4 col-form-label" style="text-align: right;">Empresa <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+												<label for="company" class="col-xs-12 col-md-2 text-center">Empresa <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="" id="company" type="text">
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="rCompany" style="margin-top: 6px;">Ubicación de la empresa <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
-													<select class="custom-select" style="width: 100%;" id="rCompany">
+												<div class="col-xs-12 col-md-10">
+													<select class="custom-select form-control" style="width: 100%;" id="rCompany">
 														<option value="0">Seleccione</option>
 														<?php foreach ($countries as $c): ?>
 															<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
@@ -376,12 +379,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="tCompany" style="margin-top: 6px;">Ramo o actividad <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
-													<select class="custom-select" style="width: 100%;" id="tCompany">
+												<div class="col-xs-12 col-md-10">
+													<select class="custom-select form-control" style="width: 100%;" id="tCompany">
 														<option value="0">Seleccione</option>
 														<?php $actividades = $db->getAll("SELECT * FROM actividades_empresa ORDER BY nombre");?>
 														<?php foreach ($actividades as $a): ?>
@@ -390,18 +393,18 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row" >
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="tEmployeer">Tipo de puesto o jerarquía <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="" id="tEmployeer" type="text">
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;"><label for="monthI" style="margin-top: 6px;">Mes de ingreso <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="monthI">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 col-xs-12 text-center"><label for="monthI" style="margin-top: 6px;">Mes de ingreso <span style="color: red;">*</span></label></div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="monthI">
 														<option selected value="1">Enero</option>
 														<option value="2">Febrero</option>
 														<option value="3">Marzo</option>
@@ -416,9 +419,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<option value="12">Diciembre</option>
 													</select>
 												</div>
-												<div class="col-md-2" style="text-align: right;"><label for="yearI" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="yearI">
+												<div class="col-xs-12 col-md-2 text-center"><label for="yearI" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="yearI">
 														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
@@ -426,10 +429,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 											</div>
 											
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;"><label for="monthE" style="margin-top: 6px;">Mes de egreso <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="monthE">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center"><label for="monthE" style="margin-top: 6px;">Mes de egreso <span style="color: red;">*</span></label></div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="monthE">
 														<option selected value="1">Enero</option>
 														<option value="2">Febrero</option>
 														<option value="3">Marzo</option>
@@ -444,9 +447,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<option value="12">Diciembre</option>
 													</select>
 												</div>
-												<div class="col-md-2" style="text-align: right;"><label for="yearE" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="yearE">
+												<div class="col-xs-12 col-md-2 text-center"><label for="yearE" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="yearE">
 														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
@@ -454,40 +457,39 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 											</div>
 
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4"></div>
-												<div class="col-md-8">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2"></div>
+												<div class="col-xs-12 col-md-10">
 													<input type="checkbox" id="trab_actual"> Trabajando actualmente
 												</div>
 											</div>
 
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;"><label for="" style="margin-top: 6px;">Solicitar Referencias </label></div>
-												<div class="col-md-4">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center"><label for="" style="margin-top: 6px;">Solicitar Referencias </label></div>
+												<div class="col-xs-6 col-md-5">
 													<input type="text" class="form-control" id="nom_enc" placeholder="Nombre del encargado">
 												</div>
-												<div class="col-md-4">
+												<div class="col-xs-6 col-md-5">
 													<input type="tel" class="form-control" id="tlf_enc" placeholder="Telefono del encargado" title="Incluya el codigo de area" pattern="[0-9]">
 												</div>
 											</div>
-											<div class="form-group row" style="margin-top: 10px;">
-												<label for="descriptionArea" class="col-xs-4 col-form-label" style="text-align: right;">Descripcion de las tareas <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+											<div class="form-group row">
+												<label for="descriptionArea" class="col-xs-12 col-md-2 text-center">Descripcion de las tareas <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<textarea id="descriptionArea" class="form-control"></textarea>
 												</div>
 											</div>
 
 										</div>
-										<div class="col-md-2"></div>
 									</div>
 
 									<?php if ($experiencias): ?>
 										<div class="" id="contentEL">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis empleos anteriores</h4>
 											<div class="row" style="margin-bottom: 25px;">
-												<div class="col-md-1"></div>
-												<div class="col-md-10">
-													<table class="table m-md-b-0">
+
+												<div class="col-md-10 col-md-offset-1 table-responsive">
+													<table class="table">
 														<thead>
 															<tr>
 																<th>Nombre</th>
@@ -515,7 +517,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														</tbody>
 													</table>
 												</div>
-												<div class="col-md-1"></div>
 											</div>
 										</div>
 									<?php else: ?>
@@ -542,51 +543,61 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										</div>
 									<?php endif?>
 
-									<div class="row">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a></div>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+									<div class="row container col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-1">
+										<div class="col-xs-12 col-sm-3">
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1"><i class="ti-angle-left"></i> Anterior</a>
+										</div>
+										<div class="col-xs-12 col-sm-3">
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar</a> 
+										</div>
+										<div class="col-xs-12 col-sm-3">
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar</a>
+										</div>
+										<div class="col-xs-12 col-sm-3">
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3">Siguiente <i class="ti-angle-right"></i></a>
+										</div>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab3" role="tabpanel">
 									<br><br>
 									<div class="row" style="margin-bottom: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4"></div>
+										<div class="col-md-4 col-xs-6" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
+										
 										<?php if($educacion || $idiomasT): ?>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-md-4 col-md-offset-4 col-xs-6 text-right"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
+
+									<!-- Paso 3 - Estudios -->
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 3: Estudios</h4>
 									<div class="row">
-										<div class="col-md-2"></div>
-										<div class="col-md-8">
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
-													<label for="sNivel" style="margin-top: 6px;">Nivel de estudio <span style="color: red;">*</span></label>
-												</div>
-												<div class="col-md-8">
-													<select class="custom-select" style="width: 100%;" id="sNivel">
-														<option value="0">Seleccione</option>
-														<?php $nivel_estudio = $db->getAll("SELECT * FROM nivel_estudio");?>
-														<?php foreach ($nivel_estudio as $n): ?>
-															<option value="<?php echo $n["id"]; ?>"><?php echo $n["nombre"]; ?></option>
-														<?php endforeach?>
-													</select>
+										<div class="col-md-8 col-md-offset-2">
+											<div class="form-group">
+												<div class="row" style="margin-top: 10px;">
+													<label for="sNivel" class="col-xs-12 col-md-2 text-center">Nivel de estudio <span style="color: red;">*</span></label>
+													<div class="col-xs-12 col-md-10">
+														<select class="custom-select form-control" style="width: 100%;" id="sNivel">
+															<option value="0">Seleccione</option>
+															<?php $nivel_estudio = $db->getAll("SELECT * FROM nivel_estudio");?>
+															<?php foreach ($nivel_estudio as $n): ?>
+																<option value="<?php echo $n["id"]; ?>"><?php echo $n["nombre"]; ?></option>
+															<?php endforeach?>
+														</select>
+													</div>
 												</div>
 											</div>
-											<div class="form-group row" style="margin-top: 10px;">
-												<label for="titleS" class="col-xs-4 col-form-label" style="text-align: right;">Título o certificación <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+											<div class="form-group row">
+												<label for="titleS" class="col-xs-12 col-md-2 text-center">Título o certificación <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="" id="titleS" type="text">
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="stateS" style="margin-top: 6px;">Estado <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
-													<select class="custom-select" style="width: 100%;" id="stateS">
+												<div class="col-xs-12 col-md-10">
+													<select class="custom-select form-control" style="width: 100%;" id="stateS">
 														<option value="0">Seleccione</option>
 														<option value="1">En Curso</option>
 														<option value="2">Graduado</option>
@@ -594,12 +605,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
-													<label for="areaS" style="margin-top: 6px;">Área de estudio <span style="color: red;">*</span></label>
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
+													<label for="areaS">Área de estudio <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
-													<select class="custom-select" style="width: 100%;" id="areaS">
+												<div class="col-xs-12 col-md-10">
+													<select class="custom-select form-control" style="width: 100%;" id="areaS">
 														<option value="0">Seleccione</option>
 														<?php $areas_estudio = $db->getAll("SELECT * FROM areas_estudio ORDER BY nombre");?>
 														<?php foreach ($areas_estudio as $a): ?>
@@ -608,20 +619,20 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
-													<label for="institute" style="margin-top: 6px;">Institución <span style="color: red;">*</span></label>
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
+													<label for="institute">Institución <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="" id="institute" type="text">
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;">
+											<div class="form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
 													<label for="countryS" style="margin-top: 6px;">País <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-md-8">
-													<select class="custom-select" style="width: 100%;" id="countryS">
+												<div class="col-xs-12 col-md-10">
+													<select class="custom-select form-control" style="width: 100%;" id="countryS">
 														<option value="0">Seleccione</option>
 														<?php foreach ($countries as $c): ?>
 															<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
@@ -629,10 +640,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;">
-												<div class="col-md-4" style="text-align: right;"><label for="monthIn" style="margin-top: 6px;">Mes de inicio <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="monthIn">
+											<div class=" form-group row">
+												<div class="col-xs-12 col-md-2 text-center">
+													<label for="monthIn" style="margin-top: 6px;">Mes de inicio <span style="color: red;">*</span></label>
+												</div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="monthIn">
 														<option selected value="1">Enero</option>
 														<option value="2">Febrero</option>
 														<option value="3">Marzo</option>
@@ -647,19 +660,23 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<option value="12">Diciembre</option>
 													</select>
 												</div>
-												<div class="col-md-2" style="text-align: right;"><label for="yearIn" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="yearIn">
+												<div class="col-xs-12 col-md-2 text-center">
+													<label for="yearIn" style="margin-top: 6px;">Año <span style="color: red;">*</span></label>
+												</div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="yearIn">
 														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;" id='fechaFin'>
-												<div class="col-md-4" style="text-align: right;"><label for="monthFi" style="margin-top: 6px;">Mes de finalización <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="monthFi">
+											<div class="form-group row" id='fechaFin'>
+												<div class="col-xs-12 col-md-2 text-center">
+													<label for="monthFi" style="margin-top: 6px;">Mes de finalización <span style="color: red;">*</span></label>
+												</div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="monthFi">
 														<option selected value="1">Enero</option>
 														<option value="2">Febrero</option>
 														<option value="3">Marzo</option>
@@ -674,28 +691,33 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<option value="12">Diciembre</option>
 													</select>
 												</div>
-												<div class="col-md-2" style="text-align: right;"><label for="yearFi" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
-												<div class="col-md-3">
-													<select class="custom-select" style="width: 100%;" id="yearFi">
+												<div class="col-xs-12 col-md-2 text-center">
+													<label for="yearFi" >Año <span style="color: red;">*</span></label>
+												</div>
+												<div class="col-xs-12 col-md-4">
+													<select class="custom-select form-control" style="width: 100%;" id="yearFi">
 														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
 													</select>
 												</div>
 											</div>
-											<div class="row" style="margin-top: 10px;" id="materias_aprobadas">
-												<div class="col-md-4" style="text-align: right;"><label for="mat">Materias de la carrera <span style="color: red;">*</span></label></div>
-												<div class="col-md-2">
+											<div class="form-group row" id="materias_aprobadas">
+												<div class="col-xs-12 col-md-3 text-center">
+													<label for="mat">Materias de la carrera <span style="color: red;">*</span></label>
+												</div>
+												<div class="col-xs-12 col-md-3">
 													<input class="form-control" value="" id="mat" type="text"  onchange="validar(this.id,'num')">
 												</div>
-												<div class="col-md-4" style="text-align: right;"><label for="aprob">Materias aprobadas <span style="color: red;">*</span></label></div>
-												<div class="col-md-2">
+												<div class="col-xs-12 col-md-3 text-center">
+													<label for="aprob">Materias aprobadas <span style="color: red;">*</span></label>
+												</div>
+												<div class="col-xs-12 col-md-3">
 													<input class="form-control" value="" id="aprob" type="text"  onchange="validar(this.id,'num')">
 												</div>
 											</div>
 
 										</div>
-										<div class="col-md-2"></div>
 									</div>
 
 									<?php $educacion = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=" . $_SESSION["ctc"]["id"]);?>
@@ -703,9 +725,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="" id="contentED">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis estudios</h4>
 											<div class="row" style="margin-bottom: 25px;">
-												<div class="col-md-1"></div>
-												<div class="col-md-10">
-													<table class="table m-md-b-0">
+												<div class="col-md-10 col-md-offset-1 table-responsive">
+													<table class="table">
 														<thead>
 															<tr>
 																<th>Nivel estudio</th>
@@ -740,9 +761,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="" id="contentED" style="display: none;">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis estudios</h4>
 											<div class="row" style="margin-bottom: 25px;">
-												<div class="col-md-1"></div>
-												<div class="col-md-10">
-													<table class="table m-md-b-0">
+												<div class="col-md-10 col-md-offset-1 table-responsive">
+													<table class="table">
 														<thead>
 															<tr>
 																<th>Nivel estudio</th>
@@ -755,85 +775,95 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<tbody id="t3"></tbody>
 													</table>
 												</div>
-												<div class="col-md-1"></div>
 											</div>
 										</div>
 									<?php endif?>
 
-									<div class="row" style="margin-top: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;">
-											<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar</a>
-											<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar</a></div>
+									<div class="row container col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-1" style="margin-top: 20px;">
+										<div class="col-xs-12 col-sm-3">
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2"><i class="ti-angle-left"></i> Anterior</a>
+										</div>
+										<div class="col-xs-12 col-sm-3">
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar</a>
+										</div>
+										<div class="col-xs-12 col-sm-3">
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar</a>
+										</div>
 										<?php if($educacion || $idiomasT): ?>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-xs-12 col-sm-3"> 
+												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4">Siguiente <i class="ti-angle-right"></i></a> 
+											</div>
 										<?php endif; ?>
 									</div>
 								</div>
+
 								<div class="tab-pane" id="tab4" role="tabpanel">
 									<br><br>
 									<div class="row" style="margin-bottom: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4"></div>
+										<div class="col-md-4 col-xs-6 pull-left"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<?php if($idiomasT || $otros_conocimientos): ?>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-md-4 col-md-offset-4" style="text-align: right"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
+									<!-- Paso 4 - Idiomas -->
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 4: Idiomas</h4>
-									<div class="row" style="margin-top: 10px;">
-										<div class="col-md-4" style="text-align: right;"><label for="idioma" style="margin-top: 6px;">Idioma <span style="color: red;">*</span></label></div>
-										<div class="col-md-6">
-											<select class="custom-select" style="width: 100%;" id="idioma">
-												<option selected value="0">Seleccione</option>
-												<?php $idiomas = $db->getAll("SELECT * FROM idiomas");?>
-												<?php foreach ($idiomas as $i): ?>
-													<option value="<?php echo $i["id"]; ?>"><?php echo $i["nombre"]; ?></option>
-												<?php endforeach?>
-											</select>
-										</div>
-									</div>
-
-									<div class="row" style="margin-top: 10px;">
-										<div class="col-md-4" style="text-align: right;"><label>Nivel oral <span style="color: red;">*</span></label></div>
-										<div class="col-md-8">
-											<div class="row">
-												<div class="col-md-1"></div>
-												<?php $nivel_idioma = $db->getAll("SELECT * FROM nivel_idioma");?>
-												<?php foreach ($nivel_idioma as $i => $n): ?>
-													<label class="custom-control custom-radio col-md-2">
-														<input id="rad<?php echo $i; ?>" name="nivelO" class="custom-control-input" type="radio" value="<?php echo $n["id"]; ?>">
-														<span class="custom-control-indicator"></span>
-														<span class="custom-control-description"><?php echo $n["nombre"]; ?></span>
-													</label>
-												<?php endforeach?>
+									<div class="col-md-8 col-md-offset-2">
+										<div class="form-group row" style="margin-top: 10px;">
+											<div class="col-xs-12 col-md-2 text-center">
+												<label for="idioma">Idioma <span style="color: red;">*</span></label>
 											</div>
-										</div>
-									</div>
-									<div class="row" style="margin-top: 10px;">
-										<div class="col-md-4" style="text-align: right;"><label>Nivel escrito <span style="color: red;">*</span></label></div>
-										<div class="col-md-8">
-											<div class="row">
-												<div class="col-md-1"></div>
-												<?php foreach ($nivel_idioma as $i => $n): ?>
-													<label class="custom-control custom-radio col-md-2">
-														<input id="rad<?php echo $i; ?>" name="nivelE" class="custom-control-input" type="radio" value="<?php echo $n["id"]; ?>">
-														<span class="custom-control-indicator"></span>
-														<span class="custom-control-description"><?php echo $n["nombre"]; ?></span>
-													</label>
-												<?php endforeach?>
+											<div class="col-xs-12 col-md-10">
+												<select class="custom-select form-control" style="width: 100%;" id="idioma">
+													<option selected value="0">Seleccione</option>
+													<?php $idiomas = $db->getAll("SELECT * FROM idiomas");?>
+													<?php foreach ($idiomas as $i): ?>
+														<option value="<?php echo $i["id"]; ?>"><?php echo $i["nombre"]; ?></option>
+													<?php endforeach?>
+												</select>
 											</div>
 										</div>
 
+										<div class="form-group row">
+											<div class="col-xs-12 col-md-2 text-center">
+												<label>Nivel oral <span style="color: red;">*</span></label>
+											</div>
+											<div class="col-xs-12 col-md-10 text-center">
+
+													<?php $nivel_idioma = $db->getAll("SELECT * FROM nivel_idioma");?>
+													<?php foreach ($nivel_idioma as $i => $n): ?>
+														<label class="custom-control custom-radio col-md-3">
+															<input id="rad<?php echo $i; ?>" name="nivelO" class="custom-control-input" type="radio" value="<?php echo $n["id"]; ?>">
+															<span class="custom-control-indicator"></span>
+															<span class="custom-control-description"><?php echo $n["nombre"]; ?></span>
+														</label>
+													<?php endforeach?>
+
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<div class="col-xs-12 col-md-2 text-center"><label>Nivel escrito <span style="color: red;">*</span></label></div>
+											<div class="col-xs-12 col-md-10 text-center">
+
+													<?php foreach ($nivel_idioma as $i => $n): ?>
+														<label class="custom-control custom-radio col-md-3">
+															<input id="rad<?php echo $i; ?>" name="nivelE" class="custom-control-input" type="radio" value="<?php echo $n["id"]; ?>">
+															<span class="custom-control-indicator"></span>
+															<span class="custom-control-description"><?php echo $n["nombre"]; ?></span>
+														</label>
+													<?php endforeach?>
+
+											</div>
+										</div>
 									</div>
 
 									<?php $idiomasT = $db->getAll("SELECT trabajadores_idiomas.*, idiomas.nombre as nombre_idioma FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=" . $_SESSION["ctc"]["id"]);?>
 									<?php if ($idiomasT): ?>
-										<div class="" id="contentID">
+										<div class="col-md-8 col-md-offset-2" id="contentID">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis idiomas</h4>
 											<div class="row" style="margin-bottom: 25px;">
-												<div class="col-md-1"></div>
-												<div class="col-md-10">
-													<table class="table m-md-b-0">
+												<div class="col-md-10 col-md-offset-1 table-responsive">
+													<table class="table">
 														<thead>
 															<tr>
 																<th>Idioma</th>
@@ -861,16 +891,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														</tbody>
 													</table>
 												</div>
-												<div class="col-md-1"></div>
 											</div>
 										</div>
 									<?php else: ?>
-										<div class="" id="contentID" style="display: none;">
+										<div class="col-md-8 col-md-offset-2" id="contentID" style="display: none;">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis idiomas</h4>
 											<div class="row" style="margin-bottom: 25px;">
-												<div class="col-md-1"></div>
-												<div class="col-md-10">
-													<table class="table m-md-b-0">
+												<div class="col-md-10 col-md-offset-1 table-responsive">
+													<table class="table">
 														<thead>
 															<tr>
 																<th>Idioma</th>
@@ -882,51 +910,50 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<tbody id="t4"></tbody>
 													</table>
 												</div>
-												<div class="col-md-1"></div>
 											</div>
 										</div>
 									<?php endif?>
 
-									<div class="row" style="margin-top: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="4">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="4">Borrar</a></div>
+									<div class="row container col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-1" style="margin-top: 20px;">
+										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3"><i class="ti-angle-left"></i> Anterior</a></div>
+										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="4">Guardar</a></div>
+										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="4">Borrar</a></div>				
 										<?php if($idiomasT || $otros_conocimientos): ?>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-xs-12 col-sm-3"> <a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
 								</div>
+
+								<!-- Paso 5 - Otros conocimientos -->
 								<div class="tab-pane" id="tab5" role="tabpanel">
 									<br><br>
 									<div class="row" style="margin-bottom: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4"></div>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+										<div class="col-md-4 col-xs-6" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
+										<div class="col-md-4 col-md-offset-4 col-xs-6 text-right"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 5: Otros conocimientos</h4>
 									<div class="row">
-										<div class="col-md-2"></div>
-										<div class="col-md-8">
+										<div class="col-md-8 col-md-offset-2">
 											<div class="form-group row" id="containerSinOtrCon">
-												<label for="sinOtrCon" class="col-xs-4 col-form-label" style="text-align: right;">¿Tienes otros conocimientos? </label>
-												<div class="col-xs-8">
+												<label for="sinOtrCon" class="col-xs-12 col-md-2 text-center">¿Tienes otros conocimientos? </label>
+												<div class="col-xs-12 col-md-10">
 													<input value="" id="sinOtrCon" type="checkbox" checked>
 												</div>
 											</div>
-											<div class="form-group row" style="margin-top: 10px;">
-												<label for="nameC" class="col-xs-4 col-form-label" style="text-align: right;">Nombre <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+											<div class="form-group row">
+												<label for="nameC" class="col-xs-12 col-md-2 text-center">Nombre <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="" id="nameC" type="text">
 												</div>
 											</div>
-											<div class="form-group row" style="margin-top: 10px;">
-												<label for="descriptionC" class="col-xs-4 col-form-label" style="text-align: right;">Descripción <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+											<div class="form-group row">
+												<label for="descriptionC" class="col-xs-12 col-md-2 text-center">Descripción <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
 													<textarea class="form-control" id="descriptionC"></textarea>
 												</div>
 											</div>
 
 										</div>
-										<div class="col-md-2"></div>
 									</div>
 
 									<?php $otros_conocimientos = $db->getAll("SELECT * FROM trabajadores_otros_conocimientos WHERE id_trabajador=" . $_SESSION["ctc"]["id"]);?>
@@ -934,9 +961,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="" id="contentOC">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis otros conocimientos</h4>
 											<div class="row" style="margin-bottom: 25px;">
-												<div class="col-md-1"></div>
-												<div class="col-md-10">
-													<table class="table m-md-b-0">
+												<div class="col-md-10 col-sm-offset-1 table-responsive">
+													<table class="table">
 														<thead>
 															<tr>
 																<th>Título</th>
@@ -960,16 +986,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														</tbody>
 													</table>
 												</div>
-												<div class="col-md-1"></div>
 											</div>
 										</div>
 									<?php else: ?>
 										<div class="" id="contentOC" style="display: none;">
 											<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;margin-top: 15px;">Mis otros conocimientos</h4>
 											<div class="row" style="margin-bottom: 25px;">
-												<div class="col-md-1"></div>
-												<div class="col-md-10">
-													<table class="table m-md-b-0">
+												<div class="col-md-10 col-md-offset-1 table-responsive">
+													<table class="table">
 														<thead>
 															<tr>
 																<th>Título</th>
@@ -985,36 +1009,37 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										</div>
 									<?php endif?>
 
-									<div class="row" style="margin-top: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar</a></div>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+									<div class="row container col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-1" style="margin-top: 20px;">
+										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4"><i class="ti-angle-left"></i> Anterior</a></div>
+										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar</a></div>
+										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar</a></div>
+										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6">Siguiente <i class="ti-angle-right"></i></a> </div>
 									</div>
 								</div>
+
+								<!-- Paso 6 - Informacion extra -->
 								<div class="tab-pane" id="tab6" role="tabpanel">
 									<br><br>
 									<div class="row" style="margin-bottom: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4"></div>
+										<div class="col-md-4 col-xs-6" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<?php if($infoExtra): ?>
-											<div class="col-md-4" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="7" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-md-4 col-md-offset-4 col-xs-6 text-right" style="text-align: right;"> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="7" style="margin-right: 25px;">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 6: Información Extra</h4>
 									<div class="row">
-										<div class="col-md-2"></div>
-										<div class="col-md-8">
-											<div class="form-group row" style="margin-top: 10px;">
-												<label for="remuneracion" class="col-xs-4 col-form-label" style="text-align: right;">Remuneración Pretendida <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+										<div class="col-md-8 col-md-offset-2">
+											<div class="form-group row">
+												<label for="remuneracion" class="col-xs-12 col-md-2 ctext-center">Remuneración Pretendida <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10" style="padding-left:40px;">
 													<input type="hidden" id="remuneracion">
 													<b id="mobileText"><?=$infoExtra['remuneracion_pret']?> ARS</b><input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="2000" data-slider-max="100000" data-slider-step="2000" data-slider-value="<?=$infoExtra['remuneracion_pret']?>"/> 
 												</div>
 											</div>
 											<div class="form-group row" style="margin-top: 10px;">
-												<label for="sobre_mi" class="col-xs-4 col-form-label" style="text-align: right;">Disponibilidad <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
-													<select name="" id="disp" class="custom-select" style="width:100%">
+												<label for="sobre_mi" class="col-xs-12 col-md-2 text-center">Disponibilidad <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10">
+													<select name="" id="disp" class="custom-select form-control" style="width:100%">
 														<option value="0">Seleccione</option>
 														<?php $disps = $db->getAll("SELECT * FROM disponibilidad ORDER BY 1 ASC");?>
 														<?php foreach ($disps as $d): ?>
@@ -1024,8 +1049,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 											</div>
 											<div class="form-group row" style="margin-top: 10px;">
-												<label for="sobre_mi" class="col-xs-4 col-form-label" style="text-align: right;">Sobre mí <span style="color: red;">*</span></label>
-												<div class="col-xs-8">
+												<label for="sobre_mi" class="col-xs-12 col-md-2 text-center">Sobre mí <span style="color: red;">*</span></label>
+												<div class="col-xs-12 col-md-10 ">
 													<textarea name="" id="sobre_mi" class="form-control" style="max-height: 300px"></textarea>
 												</div>
 											</div>
@@ -1037,45 +1062,45 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<p><b>Error!</b> <span id="errorRS"></span></p>
 											</div>
 											<div class="form-group row">
-												<label for="web" class="col-xs-4 col-form-label" style="text-align: right;">Sitio Web</label>
-												<div class="col-xs-8">
+												<label for="web" class="col-xs-12 col-md-2 text-center">Sitio Web</label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["sitio_web"] ?>" id="web" type="text" placeholder="Url de tu pagina web">
 												</div>
 											</div><div class="form-group row">
-												<label for="fb" class="col-xs-4 col-form-label" style="text-align: right;">Facebook</label>
-												<div class="col-xs-8">
+												<label for="fb" class="col-xs-12 col-md-2 text-center">Facebook</label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["facebook"] ?>" id="fb" type="text" placeholder="Link de tu perfil de Facebook">
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="tw" class="col-xs-4 col-form-label" style="text-align: right;">Twitter</label>
-												<div class="col-xs-8">
+												<label for="tw" class="col-xs-12 col-md-2 text-center">Twitter</label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["twitter"] ?>" id="tw" type="text" placeholder="Link de tu perfil de Twitter">
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="ig" class="col-xs-4 col-form-label" style="text-align: right;">Instagram</label>
-												<div class="col-xs-8">
+												<label for="ig" class="col-xs-12 col-md-2 text-center">Instagram</label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["instagram"] ?>" id="ig" type="text" placeholder="Link de tu perfil de Instagram">
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="snap" class="col-xs-4 col-form-label" style="text-align: right;">Snapchat</label>
-												<div class="col-xs-8">
+												<label for="snap" class="col-xs-12 col-md-2 text-center">Snapchat</label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["snapchat"] ?>" id="snap" type="text" placeholder="nombre de perfil de Snapchat">
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="lkd" class="col-xs-4 col-form-label" style="text-align: right;">Linkedin</label>
-												<div class="col-xs-8">
+												<label for="lkd" class="col-xs-12 col-md-2 text-center">Linkedin</label>
+												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["linkedin"] ?>" id="lkd" type="text" placeholder="Link de tu perfil de Linkedin">
 												</div>
 											</div>
 											<div class="col-md-12" style="text-align: center;margin-top: 25px;">
-												<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="6">Guardar</a> <a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="6">Borrar</a>
+												<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="6">Guardar</a> 
+												<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="6">Borrar</a>
 											</div>
 										</div>
-										<div class="col-md-2"></div>
 									</div>
 								</div>
 								<div class="tab-pane" id="tab7" role="tabpanel">
@@ -1219,7 +1244,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<script type="text/javascript" src="vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="vendor/moment/moment.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
-		<script type="text/javascript" src="vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+		<!-- FIXME: Resolver lo del bootstra-slider que no esta entre los archivos. Lo puse como cdn -->
+		<!-- <script type="text/javascript" src="vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script> -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap-switch-master/dist/js/bootstrap-switch.min.js"></script>
 
 			<script>
