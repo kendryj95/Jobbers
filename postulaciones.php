@@ -76,48 +76,45 @@
 		<link rel="stylesheet" href="vendor/waves/waves.min.css">
 		<link rel="stylesheet" href="vendor/ionicons/css/ionicons.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 		
-		<link rel="stylesheet" href="vendor/DataTables/css/dataTables.bootstrap4.min.css">
+		<!-- <link rel="stylesheet" href="vendor/DataTables/css/dataTables.bootstrap4.min.css">
 		<link rel="stylesheet" href="vendor/DataTables/Responsive/css/responsive.bootstrap4.min.css">
 		<link rel="stylesheet" href="vendor/DataTables/Buttons/css/buttons.dataTables.min.css">
-		<link rel="stylesheet" href="vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css">
+		<link rel="stylesheet" href="vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css"> -->
 
 		<style>
 			th.dt-center, td.dt-center { text-align: center; }
 		</style>
 	</head>
-	<body class="skin-5">
-		<div class="frontend-wrapper frontend-max-width bg-white">
-			<div class="block-5 img-cover img-fixed" style="/*background-image: url(img/photos-1/<?php echo rand(1, 3); ?>.jpg);*/ margin-top: -30px;padding-bottom: 0;">
-				<div class="row" style="background-color: white;position: inherit;margin-right: 0px;margin-left: 0;">
-					<div class="col-md-2" style="text-align: center;">
-						<a class="text-white" href="./" style=""><img src="img/logo_d.png" style="height: 50px;margin-top: 10px;"></a>
-					</div>
-					<div class="col-md-10" style="padding: 0;">
-						<?php require_once('includes/header.php'); ?>
-					</div>
-				</div>
-			</div>
+	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
+		<div class="wrapper bg-white">
 			
-			<div class="row" style="padding: 0px 25px; margin-top: 25px;">
-				<div class="col-md-12">
-					<div class="card" style="margin-left: 204px;">
-						<h4 class="card-header">Postulaciones realizadas</h4>
-						<div class="card-block">
-							<table id="tablaPostulaciones" class="table table-striped table-bordered dataTable">
+						<?php require_once('includes/header.php'); ?>
+					
+			
+			<div style="padding: 0px 25px; margin-top: 25px;">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="card" style="margin-top: 80px;">
+						<h4 class="card-header" style="padding-bottom: 30px;">Postulaciones realizadas</h4>
+
+						<div class="card-block table-responsive">
+							<table id="tablaPostulaciones" class="table table-striped table-bordered" cellspacing="0" width="100%">
 								<thead>
 									<tr>
 										<th>#</th>
 										<th>Estado</th>
 										<th>Empresa</th>
 										<th>Anuncio</th>
-										<th>Fecha y hora</th>
+										<th>Fecha-Hora</th>
 									</tr>
 								</thead>
 								<tbody>
 								</tbody>
 							</table>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -139,10 +136,11 @@
 		<script type="text/javascript" src="vendor/waypoints/lib/jquery.waypoints.min.js"></script>
 		<script type="text/javascript" src="vendor/owl.carousel/owl.carousel.min.js"></script>
 		
-		<script type="text/javascript" src="vendor/DataTables/js/jquery.dataTables.min.js"></script>
+		<!-- <script type="text/javascript" src="vendor/DataTables/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/js/dataTables.bootstrap4.min.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/Responsive/js/dataTables.responsive.min.js"></script>
-		<script type="text/javascript" src="vendor/DataTables/Responsive/js/responsive.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="vendor/DataTables/Responsive/js/responsive.bootstrap4.min.js"></script> -->
+		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		
 		<!-- Neptune JS -->
 		<script type="text/javascript" src="js/frontend2.js"></script>
@@ -153,11 +151,11 @@
 				var tablaPostulaciones = $tablaPostulaciones.DataTable( {
 					"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 					"aoColumnDefs": [
-						{ "width": "30px", "targets": 0 },
-						{ "width": "50px", "targets": 1 },
+						{ "width": "80px", "targets": 0 },
+						{ "width": "120px", "targets": 1 },
 						{ "width": "200px", "targets": 2 },
 						{ "width": "150px", "targets": 4 },
-						{"className": "dt-center", "targets": [0, 1, 2, 4]}
+						{"className": "dt-center", "targets": [0, 1, 2, 3, 4]}
 					  ],
 					"language": {
 						"decimal":        "",

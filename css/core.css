@@ -3793,7 +3793,7 @@ table.dataTable thead th.sorting:after,
 table.dataTable thead th.sorting_asc:after,
 table.dataTable thead th.sorting_desc:after {
     position: absolute;
-    top: 12px;
+    /* top: 6px; */
     right: 8px;
     display: block;
     font-family: 'FontAwesome';
@@ -6302,9 +6302,6 @@ table.focus-on tbody tr.focused td {
 
 .card {
     border-radius: 0;
-    border: 1px solid #d6d6d6;
-    padding-bottom: 25px;
-    padding-top: 10px;
 }
 
 .card-img {
@@ -9706,6 +9703,42 @@ a.text-grey:hover .underline {
     width: 96px;
 }
 
+.content-perfil {
+    border-radius: 0;
+    border: 1px solid #d6d6d6;
+    padding-bottom: 25px;
+    padding-top: 10px;
+}
+
+
+/* =================================================================
+  Seccion Postulaciones
+================================================================= */
+
+@media (min-width: 991px) {
+    table.dataTable thead th.sorting:after,
+    table.dataTable thead th.sorting_asc:after,
+    table.dataTable thead th.sorting_desc:after {
+        position: absolute;
+        top: 28px;
+        right: 8px;
+        display: block;
+        font-family: 'FontAwesome';
+    }
+}
+
+@media (min-width: 768px) {
+    table.dataTable thead th.sorting:after,
+    table.dataTable thead th.sorting_asc:after,
+    table.dataTable thead th.sorting_desc:after {
+        position: absolute;
+        top: 6px;
+        right: 8px;
+        display: block;
+        font-family: 'FontAwesome';
+    }
+}
+
 
 /* =================================================================
   Clases modificadas de Bootstrap
@@ -9787,4 +9820,14 @@ a.text-grey:hover .underline {
     .pub {
         height: inherit !important;
     }
+    /* DataTables */
+    /* table.dataTable thead th.sorting:after,
+    table.dataTable thead th.sorting_asc:after,
+    table.dataTable thead th.sorting_desc:after {
+        position: absolute;
+        top: 28px;
+        right: 8px;
+        display: block;
+        font-family: 'FontAwesome';
+    } */
 }
