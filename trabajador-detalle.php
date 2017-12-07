@@ -162,7 +162,7 @@ $publicaciones = $db->getAll("
                         </ol>
                         <div class="row" style="margin-top: 15px;">
                             <div class="col-sm-4 col-md-5">
-                                <div class="card profile-card" style="margin-top: 0px;">
+                                <div class="content-perfil profile-card" style="margin-top: 0px;">
                                     <div class="profile-avatar" style="text-align: center;margin-top: 15px;">
                                         <img src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="width: 130px;">
                                     </div>
@@ -318,7 +318,7 @@ $publicaciones = $db->getAll("
                                                 $idTrab = array_pop($detTrab);
                                             }
                                         ?>
-                                        <div class="tab-pane card-block active card" id="curriculum" role="tabpanel" style="border-top: none">
+                                        <div class="tab-pane card-block active content-perfil" id="curriculum" role="tabpanel" style="border-top: none">
                                             <!-- <div class="row"> -->
                                                 <div class="col-md-12">
                                                     
