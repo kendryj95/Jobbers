@@ -53,6 +53,9 @@
 			.card {
 				border-radius: 6px;
 			}
+			.has-error {
+ 				box-shadow: -1px 1px 10px 0px rgba(255,51,51,.7);
+			}
 		</style>
 	</head>
 	<body class="auth-bg">
@@ -96,22 +99,28 @@
 										<div class="col-md-8">
 											<div class="form-group">
 												<div class="input-group">
-													<input type="text" class="form-control" id="email" placeholder="Correo electrónico (*)">
+													<input type="text" class="form-control" id="email" placeholder="Correo electrónico (*)" onchange="validar(this.id,'email')">
 												</div>
 											</div>
 											<div class="form-group">
 												<div class="input-group">
-												<input type="password" class="form-control" id="passw" placeholder="Contraseña (*)">
+													<input type="password" class="form-control" id="passw" placeholder="Contraseña (*)">
 												</div>
 											</div>
 											<div class="form-group">
 												<div class="input-group">
-												<input type="text" class="form-control" id="name" placeholder="Nombre responsable (*)">
+													
+													<input type="password" class="form-control" id="passw2" placeholder="Confirmar contraseña (*)">
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="input-group">
+												<input type="text" class="form-control" id="name" placeholder="Nombre responsable (*)"  onchange="validar(this.id,'texto',this.title)" title='Nombre'>
 												</div>
 											</div>	
 											<div class="form-group">
 												<div class="input-group">
-												<input type="text" class="form-control" id="lastName" placeholder="Apellido responsable (*)">
+												<input type="text" class="form-control" id="lastName" placeholder="Apellido responsable (*)"  onchange="validar(this.id,'texto',this.title)" title='Apellido'>
 												</div>
 											</div>	
 											<div class="form-group">
@@ -126,12 +135,12 @@
 											</div>	
 											<div class="form-group">
 												<div class="input-group">
-												<input type="text" class="form-control" id="cuit" placeholder="CUIT (opcional)">
+												<input type="text" class="form-control" id="cuit" placeholder="CUIT (opcional)"   onchange="validar(this.id,'num',this.title)" title='CUIT'>
 												</div>
 											</div>		
 											<div class="form-group">
 												<div class="input-group">
-												<input type="text" class="form-control" id="phone" placeholder="Teléfono (*)">
+												<input type="text" class="form-control" id="phone" placeholder="Teléfono (*)"   onchange="validar(this.id,'tel',this.title)" title='Numero Telefónico'>
 												</div>
 											</div>
 											<label class="custom-control custom-checkbox text-muted">
@@ -387,6 +396,8 @@
 		<script type="text/javascript" src="../vendor/tether/js/tether.min.js"></script>
 		<script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../vendor/sweetalert2/sweetalert2.min.js"></script>
+		<script type="text/javascript" src="../js/validar.js"></script>
+		
 		
 		<!-- <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script> -->
 
@@ -472,49 +483,67 @@
 			$("#next").click(function() {
 				switch(parseInt($(this).attr("data-value"))) {
 					case 1:
-
 						if (isEmail($("#email").val())) {
 							if($("#email").val() != "" && $("#passw").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#empresa").val() != "" && $("#razon").val() != "" && $("#phone").val() != "") {
-								if($("#term:checked").length > 0) {
-									$.ajax({
-										type: 'POST',
-										url: 'ajax/empresas.php',
-										data: 'op=2&email=' + $("#email").val(),
-										dataType: 'json',
-										success: function(data) {
-											if(data.status == 1) {
-												$("#step1").css("display", "none");
-												$("#step2").css("display", "block");
-												$("#stp1").removeClass("active").addClass("complete").addClass("text-xs-center");
-												$("#st1").html('<i class="ti-check"></i>');
-												$("#stp2").addClass("active");
-												$("#next").attr("data-value", 2);
-												$("#back").attr("data-value", 2);
-												$("#back").css("display", "block");
-											}
-											else {
-												swal({
-													title: 'Información!',
-													text: 'El correo electrónico ingresado ya se encuentra en uso.',
-													timer: 3000,
-													confirmButtonClass: 'btn btn-primary btn-lg',
-													buttonsStyling: false
-												});
-											}
+								if($("#passw").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
+									if(($("#passw").val().length >= 8 && $("#passw").val().length <= 12)&&($("#passw2").val().length >= 8 && $("#passw2").val().length <= 12  )) { // Confirma si las contraseñas tienen la lomgitud
+										if($("#term:checked").length > 0) {
+											$.ajax({
+												type: 'POST',
+												url: 'ajax/empresas.php',
+												data: 'op=2&email=' + $("#email").val(),
+												dataType: 'json',
+												success: function(data) {
+													if(data.status == 1) {
+														$("#step1").css("display", "none");
+														$("#step2").css("display", "block");
+														$("#stp1").removeClass("active").addClass("complete").addClass("text-xs-center");
+														$("#st1").html('<i class="ti-check"></i>');
+														$("#stp2").addClass("active");
+														$("#next").attr("data-value", 2);
+														$("#back").attr("data-value", 2);
+														$("#back").css("display", "block");
+													}else {
+														swal({
+															title: 'Información!',
+															text: 'El correo electrónico ingresado ya se encuentra en uso.',
+															timer: 3000,
+															confirmButtonClass: 'btn btn-primary btn-lg',
+															buttonsStyling: false
+														});
+													}
+												}
+											});
+										}else {
+											swal({
+												title: 'Información!',
+												text: 'Para continuar debe estar de acuerdo y aceptar los terminos, condiciones y políticas de privacidad.',
+												timer: 3000,
+												confirmButtonClass: 'btn btn-primary btn-lg',
+												buttonsStyling: false
+											});
 										}
-									});
-								}
-								else {
+									}else{
+										swal({
+											title: 'Información!',
+											text: 'La contraseña debe tener una logintud de 8 a 12 caracteres',
+											timer: 4000,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
+										$('#passw, #passw2').parent().addClass('has-error');
+									}
+								}else{
 									swal({
-										title: 'Información!',
-										text: 'Para continuar debe estar de acuerdo y aceptar los terminos, condiciones y políticas de privacidad.',
-										timer: 3000,
-										confirmButtonClass: 'btn btn-primary btn-lg',
-										buttonsStyling: false
-									});
+											title: 'Información!',
+											text: 'Las contraseñas no coinciden',
+											timer: 2000,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
+										$('#passw, #passw2').parent().addClass('has-error');	
 								}
-							}
-							else {
+							}else {
 								swal({
 									title: 'Información!',
 									text: 'Los campos con (*) son obligatorios.',
