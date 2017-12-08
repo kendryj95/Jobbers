@@ -201,7 +201,7 @@
 													</a>
 
 													<!-- LinkedIn -->
-													<a href="http://www.linkedin.com/shareArticle?url=<URL>&title=<TITLE>&summary=<SUMMARY>&source=<SOURCE_URL>" target="_blank" class="share-btn linkedin">
+													<a href="http://www.linkedin.com/shareArticle?url=<?php echo $permalink;?>" target="_blank" class="share-btn linkedin">
 														<i class="fa fa-linkedin"></i>&nbsp Compartir
 													</a>
 
