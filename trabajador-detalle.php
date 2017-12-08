@@ -144,13 +144,16 @@ $publicaciones = $db->getAll("
     <body class="large-sidebar fixed-sidebar fixed-header skin-5">
         <!-- <div class="wrapper" style="background-color: white;"> -->
             <!-- Sidebar -->
-            <!-- <?php require_once 'includes/sidebar.php';?> -->
+            <?php 
+            if ($_SESSION['ctc']['type'] == 1)
+            require_once 'includes/sidebar.php';?>
 
             <!-- Sidebar second -->
             <?php //require_once('includes/sidebar-second.php'); ?>
 
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
+            
             <div class="container bg-white">
                 <!-- Content -->
                 <div class="content-area p-b-1">
@@ -362,7 +365,7 @@ $publicaciones = $db->getAll("
                                                                 <strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso ?><br>
                                                                 <strong>Encargado de Referencias: </strong> <?php echo $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] ?><br>
                                                                 <strong>Telefono del Encargado: </strong><?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
-                                                                <strong>Descripción de tareas: </strong> <?php echo $e["descripcion_tareas"] ?>
+                                                                <strong>Descripción de tareas: </strong> <p style="width: 500px;"><?php echo $e["descripcion_tareas"] ?></p>
                                                             </p>
                                                         <?php endforeach?>
                                                     <?php else: ?>
@@ -411,7 +414,7 @@ $publicaciones = $db->getAll("
                                                         <?php foreach ($otros_conocimientos as $o): ?>
                                                             <p style="margin-bottom: 20px;">
                                                                 <strong>Título: </strong> <?php echo $o["nombre"]; ?><br>
-                                                                <strong>Descripción: </strong> <?php echo $o["descripcion"]; ?><br>
+                                                                <strong>Descripción: </strong><p style="width: 500px;"> <?php echo $o["descripcion"]; ?></p><br>
                                                             </p>
                                                         <?php endforeach?>
                                                     <?php else: ?>
@@ -426,7 +429,7 @@ $publicaciones = $db->getAll("
                                                     <p style="margin-bottom: 20px;">
                                                         <strong>Remuneración pretendida: </strong> $<?=$infoExtra['remuneracion_pret']?> <br>
                                                         <strong>Disponibilidad: </strong> <?=$infoExtra['nombre']?> <br>
-                                                        <strong>Sobre mí: </strong> <?=$infoExtra['sobre_mi']?> <br>
+                                                        <strong>Sobre mí: </strong><p style="width: 500px"> <?=$infoExtra['sobre_mi']?></p> <br>
                                                     </p>
                                                 </div>
                                             </div>

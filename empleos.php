@@ -859,7 +859,7 @@
 														<div class="t-content"  title="Ver detalles del empleo">
 															<div class="row">
 																<div class="col-md-4 col-sm-4 text-center">
-																	<img class="img-fluid b-a-radius-circle" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
+																	<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
 																</div>
 																<div class="col-md-8 col-sm-8">
 																	<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
@@ -952,16 +952,20 @@
 															</div>
 														</div>
 													</div>
+												</a>
+											</div>
 												<?php else: ?>
+												<div class="col-md-6">
+												<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
 													<?php if($publicacion["logo_home"] == 2): ?>
 														<div class="pub pub-f box box-block bg-white tile tile-2" title="Ver detalles del empleo">
 															<div class="t-icon right"><i class="ti-receipt"></i></div>
 																<div class="t-content">
 																<div class="row">
-																	<div class="col-md-1 col-sm-1 text-center">
-																		<img class="img-fluid b-a-radius-circle" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
+																	<div class="col-md-4 col-sm-4 text-center">
+																		<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
 																	</div>
-																	<div class="col-md-11 col-sm-11">
+																	<div class="col-md-8 col-sm-8">
 																		<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
 																		<h6 style="color: #373a3c; font-weight: 600;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 																		<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
@@ -1052,13 +1056,16 @@
 																</div>
 															</div>
 														</div>
+
 													<?php else: ?>
+													<div class="col-md-6">
+													<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
 														<div class="pub pub-f box box-block bg-white" title="Ver detalles del empleo">
 															<div class="row">
-																<div class="col-md-1 col-sm-1 text-center">
-																	<img class="img-fluid b-a-radius-circle" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
+																<div class="col-md-4 col-sm-4 text-center">
+																	<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
 																</div>
-																<div class="col-md-11 col-sm-11">
+																<div class="col-md-8 col-sm-8">
 																	<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
 																	<h6 style="color: #373a3c;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 																	<?php if($publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
@@ -1141,11 +1148,11 @@
 																</div>
 															</div>
 														</div>
+													</a>
+													</div>	
 													<?php endif ?>
 												<?php endif ?>
-												
-											</a>
-										</div>
+
 									<?php endforeach ?>
 								<?php else: ?>	
 								<div class="alert alert-danger fade in" role="alert">

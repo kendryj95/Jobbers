@@ -37,10 +37,13 @@
 		<title>JOBBERS - Publicaciones</title>
 		<?php require_once('includes/libs-css.php'); ?>
 
-		<link rel="stylesheet" href="vendor/DataTables/css/dataTables.bootstrap4.min.css">
+		<!-- <link rel="stylesheet" href="vendor/DataTables/css/dataTables.bootstrap4.min.css">
 		<link rel="stylesheet" href="vendor/DataTables/Responsive/css/responsive.bootstrap4.min.css">
 		<link rel="stylesheet" href="vendor/DataTables/Buttons/css/buttons.dataTables.min.css">
-		<link rel="stylesheet" href="vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css">
+		<link rel="stylesheet" href="vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css"> -->
+		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"> -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/datatables.min.css"/>
 		
 		<link rel="stylesheet" href="vendor/select2/dist/css/select2.min.css">
 		<style>
@@ -56,14 +59,14 @@
 		</style>
 	</head>
 
-	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
-		<div class="wrapper">
+	<body class="large-sidebar fixed-sidebar fixed-header skin-5 bg-white">
+		<!-- <div class="wrapper"> -->
 
 			<!-- Preloader 
 			<div class="preloader"></div>-->
 
 			<!-- Sidebar -->
-			<?php require_once('includes/sidebar.php'); ?>
+			<!-- <?php require_once('includes/sidebar.php'); ?> -->
 
 			<!-- Sidebar second -->
 			<?php require_once('includes/sidebar-second.php'); ?>
@@ -71,15 +74,16 @@
 			<!-- Header -->
 			<?php require_once('includes/header.php'); ?>
 
-			<div class="site-content">
+			<div class="site-content bg-white" style="margin-left: 0px;">
 				<!-- Content -->
-				<div class="content-area p-y-1">
+				<div class="content-area p-y-1 col-md-10 col-md-offset-1">
 					<div class="container-fluid">
-						<div class="box box-block bg-white">
-							<h5 class="m-b-1">Mis servicios free lance</h5>
-							<div class="m-b-1">
+						<div class="box box-block">
+							<h5 style="margin-bottom: 20px;">Mis servicios free lance</h5>
+							<div style="margin-bottom: 20px;">
 								<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
 							</div>
+							<div class="table-responsive">
 							<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
 								<thead>
 									<tr>
@@ -93,13 +97,14 @@
 								<tbody>
 								</tbody>
 							</table>
+							</div>
 						</div>
 					</div>
 				</div>
 				<!-- Footer -->
 				<?php require_once('includes/footer.php'); ?>
 			</div>
-		</div>
+		<!-- </div> -->
 		
 		<div id="modal-agregar-publicacion" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -279,7 +284,7 @@
 
 		<?php require_once('includes/libs-js.php'); ?>
 
-		<script type="text/javascript" src="vendor/DataTables/js/jquery.dataTables.min.js"></script>
+		<!-- <script type="text/javascript" src="vendor/DataTables/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/js/dataTables.bootstrap4.min.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/Responsive/js/dataTables.responsive.min.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/Responsive/js/responsive.bootstrap4.min.js"></script>
@@ -290,7 +295,12 @@
 		<script type="text/javascript" src="vendor/DataTables/pdfmake/build/vfs_fonts.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/Buttons/js/buttons.html5.min.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/Buttons/js/buttons.print.min.js"></script>
-		<script type="text/javascript" src="vendor/DataTables/Buttons/js/buttons.colVis.min.js"></script>
+		<script type="text/javascript" src="vendor/DataTables/Buttons/js/buttons.colVis.min.js"></script> -->
+		<!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/datatables.min.js"></script>
 		
 		<script type="text/javascript" src="vendor/select2/dist/js/select2.min.js"></script>
 		
