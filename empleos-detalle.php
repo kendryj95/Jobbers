@@ -102,18 +102,18 @@
 		<link rel="stylesheet" href="vendor/ionicons/css/ionicons.min.css">
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
-		<div class="wrapper" style="background-color: white;">
+		<!-- <div class="wrapper" style="background-color: white;"> -->
 			<!-- Sidebar -->
-			<?php require_once('includes/sidebar.php'); ?>
+			<!-- <?php require_once('includes/sidebar.php'); ?> -->
 
 			<!-- Sidebar second -->
 			<?php require_once('includes/sidebar-second.php'); ?>
 
 			<!-- Header -->
 			<?php require_once('includes/header.php'); ?>
-			<div class="site-content bg-white">
+			<div class="site-content bg-white" style="margin-left: 0px;">
 				<!-- Content -->
-				<div class="content-area p-y-1">
+				<div class="container container-resp">
 					<div class="container-fluid">
 						<div class="col-md-9">
 							<?php if($publicidadSection): ?>
@@ -164,71 +164,62 @@
 								</div>
 							<?php endif ?>
 
-							<div class="box bg-white product-view m-b-2">
+							<div class="box bg-white product-view col-md-12 no-padding">
 								<div class="box-block">
-									<div class="pv-content" style="margin-bottom: 0px;">
-										<a href="empresa/perfil.php?e=<?php echo strtolower(str_replace(" ", "-", $publicacion["empresa_nombre"]))."-$publicacion[empresa_id]"; ?>"><?php echo $publicacion["empresa_nombre"]; ?></a>
-										<div class="pv-title" style="padding-right: 130px;">
+									<div style="margin-bottom: 0px;">
+										<!-- <a href="empresa/perfil.php?e=<?php echo strtolower(str_replace(" ", "-", $publicacion["empresa_nombre"]))."-$publicacion[empresa_id]"; ?>"><?php echo $publicacion["empresa_nombre"]; ?></a> -->
+										
+										<div class="pv-title col-md-12">
+											<a style="font-size: 20px;" href="empresa/perfil.php?e=<?php echo strtolower(str_replace(" ", "-", $publicacion["empresa_nombre"]))."-$publicacion[empresa_id]"; ?>"><?php echo $publicacion["empresa_nombre"]; ?></a>
 											<?php echo $publicacion["titulo"]; ?>	
 											<div style="font-size: 13px;color: #999;text-transform: none;"><?php echo $publicacion["area_nombre"]; ?> / <?php echo $publicacion["sector_nombre"]; ?></div>
 											<?php if($publicacion["logo_home"] == 3): ?>
-												<div class="t-icon right" style="float: right;"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
+												<div class="icon-medal"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
 											<?php else: ?>
 												<?php if($publicacion["logo_home"] == 2): ?>
 												
 												<?php endif ?>
 											<?php endif ?>
-											<div id="socialLinks">
-												<h5>Compartir publicación</h5>
-												<div id="fb-root"></div>
-												<script>(function(d, s, id) {
-												  var js, fjs = d.getElementsByTagName(s)[0];
-												  if (d.getElementById(id)) return;
-												  js = d.createElement(s); js.id = id;
-												  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=335054620211948";
-												  fjs.parentNode.insertBefore(js, fjs);
-												}(document, 'script', 'facebook-jssdk'));</script>
-												<div class="fb-share-button" data-href="http://www.jobbersargentina.com/empleos-detalle.php?<?php echo $_SERVER["QUERY_STRING"]; ?>" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a></div>
-												
-												<style>
-													.fb_iframe_widget span {
-														position: absolute;
-														top: -37px;
-														margin-bottom: 10px;
-													}
 
+											<?php 
+												$permalink = urlencode("http://www.jobbersargentina.com/empleos-detalle.php?".$_SERVER["QUERY_STRING"]);
+											?>
+											<div class="socialLinks"> 
+												<!-- Twitter -->
+													<a href="http://twitter.com/share?url=<?php echo $permalink;?>" target="_blank" class="share-btn twitter">
+														<i class="fa fa-twitter"></i>&nbsp Tweet
+													</a>
 
-													.IN-widget {
-														margin-left: 120px;
-														position: absolute;
-														z-index: 999;
-														margin-top: -8px;
-														margin-bottom: 20px;
-														width: 90px;
-														line-height: 1;
-														vertical-align: baseline;
-														display: inline-block;
-														text-align: center;
-													}
-													
-													.IN-widget span {
-														height: 26px !important;
-													}
-													
-													.IN-widget [id$=link] {
-														height: 26px !important;
-													}
-													
-													.IN-widget [id$=logo] {
-														height: 28px !important;
-														width: 26px !important;
-														background-position: 3px -591px !important;
-													}
+													<!-- Google Plus -->
+													<a href="https://plus.google.com/share?url=<?php echo $permalink;?>" target="_blank" class="share-btn google-plus">
+														<i class="fa fa-google-plus"></i>&nbsp Compartir
+													</a>
 
-												</style>
-												<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: es_ES</script>
-												<script type="IN/Share" data-url="http://www.jobbersargentina.com/empleos-detalle.php?<?php echo $_SERVER["QUERY_STRING"]; ?>"></script>
+													<!-- Facebook -->
+													<a href="http://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink;?>" target="_blank" class="share-btn facebook">
+														<i class="fa fa-facebook"></i>&nbsp Compartir
+													</a>
+
+													<!-- LinkedIn -->
+													<a href="http://www.linkedin.com/shareArticle?url=<?php echo $permalink;?>" target="_blank" class="share-btn linkedin">
+														<i class="fa fa-linkedin"></i>&nbsp Compartir
+													</a>
+
+													<!-- Instagram -->
+													<!-- <a href="http://www.facebook.com/sharer/sharer.php?u=<URL>" target="_blank" class="share-btn instagram">
+														<i class="fa fa-instagram"></i>
+													</a> -->
+
+													<!-- Email -->
+													<!-- <a href="mailto:?subject=<SUBJECT&body=<BODY>" target="_blank" class="share-btn email">
+														<i class="fa fa-envelope"></i>
+													</a> -->
+												<!-- <a target="_blank" href="http://facebook.com/sharer.php?u=<?php echo $permalink;?>" class="btn btn-primary btn-social-fb">Compartir <i class="fa fa-facebook"></i></a>
+												<a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink;?>" class="btn btn-primary btn-social-link">Compartir <i class="fa fa-linkedin"></i></a>
+												<a href="#" class="btn btn-primary btn-social-tw">Compartir <i class="fa fa-twitter"></i></a>
+												<a href="#" class="btn btn-primary btn-social-ig">Compartir <i class="fa fa-instagram"></i></a> -->
 											</div>
+											
 											<?php if($contratado): ?>
 												<?php echo $contratado["finalizado"] == 0 &&  $contratado["cancelado"] != 1 ? '<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-success"><i class="ti ti-reload"></i> Trabajando</span>': '<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-success"><i class="ti ti-check"></i> Finalizado</span>';?>
 											<?php else: ?>
@@ -237,23 +228,25 @@
 												<?php endif ?>	
 											<?php endif ?>
 										</div>
+										<div class="col-md-12">
+											<b>Disponibilidad: <?php echo $publicacion["disponibilidad"]; ?></b>
 
-										<b>Disponibilidad: <?php echo $publicacion["disponibilidad"]; ?></b>
-
-										<?php echo $publicacion["descripcion"]; ?>
-										
-										<?php if($publicacion["coordenadas"] != ""): ?>
-											<h6>Ubicación del empleo</h6>
-											<div id="map" style="height: 450px;width: 100%;"></div>
-										<?php endif ?>
-										
-										<?php if(!$postulado && $esTrabajador): ?>
-											<?php if(!$contratado): ?>
-												<div style="padding: 11px;">
-													<button id="postulate" type="button" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Postularme</button>
-												</div>
+											<?php echo $publicacion["descripcion"]; ?>
+											
+											<?php if($publicacion["coordenadas"] != ""): ?>
+												<h6>Ubicación del empleo</h6>
+												<div id="map" style="height: 450px;width: 100%; margin-bottom: 30px;"></div>
 											<?php endif ?>
-										<?php endif ?>
+											
+											<?php if(!$postulado && $esTrabajador): ?>
+												<?php if(!$contratado): ?>
+													<div class="col-md-12 content-btn-postulate text-center">
+														<button id="postulate" type="button" class="col-md-6 col-md-offset-3 btn btn-primary btn-postular waves-effect waves-light" style="font-size:20px">Postularme</button>
+													</div>
+												<?php endif ?>
+											<?php endif ?>
+										</div>
+
 									</div>
 								</div>
 							</div>
@@ -292,7 +285,7 @@
 				</div>
 				<?php require_once('includes/footer.php'); ?>
 			</div>
-		</div>
+		<!-- </div> -->
 
 		<?php require_once('includes/libs-js.php'); ?>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCRpfonUZFqzxwKgXqDHuYCVZJloPBGfg"></script>

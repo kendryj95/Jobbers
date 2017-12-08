@@ -175,21 +175,21 @@
 </head>
 
 <body class="large-sidebar fixed-sidebar fixed-header skin-5">
-	<div class="wrapper">
+	<div class="container bg-white">
 
 		<!-- Preloader -->
 		<div class="preloader"></div>
 
 		<!-- Sidebar -->
-		<?php require_once('../includes/sidebar.php'); ?>
+		<?php //require_once('../includes/sidebar.php'); ?>
 
 		<!-- Sidebar second -->
-		<?php require_once('../includes/sidebar-second.php'); ?>
+		<!-- <?php require_once('../includes/sidebar-second.php'); ?> -->
 
 		<!-- Header -->
 		<?php require_once('../includes/header.php'); ?>
 
-		<div class="site-content">
+		<div class="site-content" style="margin-left: 0px;">
 			<!-- Content -->
 			<div class="content-area" style="padding-top: 30px;">
 				<div class="container-fluid">

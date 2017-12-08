@@ -76,8 +76,13 @@
 		<link rel="stylesheet" href="vendor/waves/waves.min.css">
 		<link rel="stylesheet" href="vendor/ionicons/css/ionicons.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+
+		<!-- DataTables modificadas -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/datatables.min.css"/>
+		
+		<!-- DataTables Sencillas -->
+		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"> -->
 		
 		<!-- <link rel="stylesheet" href="vendor/DataTables/css/dataTables.bootstrap4.min.css">
 		<link rel="stylesheet" href="vendor/DataTables/Responsive/css/responsive.bootstrap4.min.css">
@@ -140,7 +145,13 @@
 		<script type="text/javascript" src="vendor/DataTables/js/dataTables.bootstrap4.min.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/Responsive/js/dataTables.responsive.min.js"></script>
 		<script type="text/javascript" src="vendor/DataTables/Responsive/js/responsive.bootstrap4.min.js"></script> -->
-		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		
+		<!-- DataTable modificada con botones -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/datatables.min.js"></script>
+		<!-- DataTable sencilla -->
+		<!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
 		
 		<!-- Neptune JS -->
 		<script type="text/javascript" src="js/frontend2.js"></script>
