@@ -6,7 +6,7 @@ function validar(idCampo,type,campo=''){
 	}
 	
 	if(type=='texto'){
-		var regex = /^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+$/;
+		var regex = /^([a-zA-ZñÑáéíóúÁÉÍÓÚ\s])+$/;
 		campo == ''? 'Nombre':campo;
 	}
 
