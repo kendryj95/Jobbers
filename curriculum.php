@@ -219,7 +219,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		  											<div class="col-xs-4">
 														<select name="" id="anio" class="custom-select form-control">
 															<option value="0">Sel</option>
-															<?php for ($i = 1950; $i <= intval(date('Y')); $i++): ?>
+															<?php for ($i = intval(date('Y')); $i >= 1950; $i--): ?>
 															<option value="<?=$i?>"><?=$i?></option>
 															<?php endfor;?>
 														</select>
@@ -422,7 +422,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-xs-12 col-md-2 text-center"><label for="yearI" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
 												<div class="col-xs-12 col-md-4">
 													<select class="custom-select form-control" style="width: 100%;" id="yearI">
-														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
+														<?php for ($i = intval(date('Y')); $i >= 1950; $i--): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
 													</select>
@@ -450,7 +450,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-xs-12 col-md-2 text-center"><label for="yearE" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
 												<div class="col-xs-12 col-md-4">
 													<select class="custom-select form-control" style="width: 100%;" id="yearE">
-														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
+														<?php for ($i = intval(date('Y')); $i >= 1950; $i--): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
 													</select>
@@ -665,7 +665,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 												<div class="col-xs-12 col-md-4">
 													<select class="custom-select form-control" style="width: 100%;" id="yearIn">
-														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
+														<?php for ($i = intval(date('Y')); $i >= 1950; $i--): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
 													</select>
@@ -696,7 +696,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 												<div class="col-xs-12 col-md-4">
 													<select class="custom-select form-control" style="width: 100%;" id="yearFi">
-														<?php for ($i = 1950; $i < intval(date('Y')) + 1; $i++): ?>
+														<?php for ($i = intval(date('Y')); $i >= 1950; $i--): ?>
 															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 														<?php endfor?>
 													</select>
