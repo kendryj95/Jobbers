@@ -63,7 +63,7 @@
         <span class="icon-bar"></span>
 	  </button>
 	  
-      <a style="width: 220px; height: 78px" class="logo" href="./">
+      <a style="width: 220px; height: 78px" class="logo" href="<?= strstr($_SERVER["REQUEST_URI"], "empresa") ? "../?empresas=true" : "./" ?>">
 		<img style="width: 160px; height: 70px;" src="img/logo_d.png" alt="">
 	  </a>
     </div>
@@ -394,7 +394,7 @@
 
 		<li>
 			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
-				Empresas - Acceso
+				Acceso Empresas
 			</a>
 		</li>
 		<?php endif ?>
