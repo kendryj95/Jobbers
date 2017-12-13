@@ -137,7 +137,10 @@ a:active {
     box-shadow: -5px 1px 40px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width:991px) {
+
+/* Cambio de 991 a 1024 */
+
+@media (max-width:1024px) {
     .site-sidebar {
         left: -220px;
         -webkit-transition: all 0.2s ease-in-out;
@@ -9614,6 +9617,10 @@ a.text-grey:hover .underline {
     padding-right: 0px;
 }
 
+.mb-10 {
+    margin-bottom: 10px;
+}
+
 .border-trans {
     border-color: transparent;
 }
@@ -9655,6 +9662,30 @@ a.text-grey:hover .underline {
 .menu-desplegable {
     background-color: #E8EBF0;
     padding: 10px 0px;
+}
+
+
+/* =================================================================
+  INDEX
+================================================================= */
+
+.free {
+    border: 2px solid #00AEEF;
+}
+
+.bronze {
+    background-color: rgba(205, 127, 50, 0.5) !important;
+    border: 2px solid #9e5e22;
+}
+
+.silver {
+    background-color: rgba(138, 149, 151, 0.5) !important;
+    border: 2px solid #676e70;
+}
+
+.gold {
+    background-color: rgba(153, 114, 0, 0.4) !important;
+    border: 2px solid #997200;
 }
 
 

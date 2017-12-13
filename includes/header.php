@@ -63,7 +63,7 @@
         <span class="icon-bar"></span>
 	  </button>
 	  
-      <a style="width: 220px; height: 78px" class="logo" href="./">
+      <a style="width: 220px; height: 78px" class="logo" href="<?= isset($_SESSION["ctc"]) ? $_SESSION["ctc"]["type"] == 1 ? "./?empresas=true" : "./" : "./" ?>">
 		<img style="width: 160px; height: 70px;" src="img/logo_d.png" alt="">
 	  </a>
     </div>

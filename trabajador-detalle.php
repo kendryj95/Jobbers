@@ -144,9 +144,20 @@ $publicaciones = $db->getAll("
     <body class="large-sidebar fixed-sidebar fixed-header skin-5">
         <!-- <div class="wrapper" style="background-color: white;"> -->
             <!-- Sidebar -->
-            <?php 
-            if ($_SESSION['ctc']['type'] == 1)
-            require_once 'includes/sidebar.php';?>
+            <?php if ($_SESSION['ctc']['type'] == 1):
+			require_once ('includes/sidebar.php');
+			?>
+			<style>
+				.site-content{
+					margin-left:220px !important;
+				}
+				@media(max-width: 1024px){
+					.site-content{
+						margin-left: 0px !important;
+					}
+				}
+			</style>
+			<?php endif ?>
 
             <!-- Sidebar second -->
             <?php //require_once('includes/sidebar-second.php'); ?>
@@ -158,12 +169,12 @@ $publicaciones = $db->getAll("
                 <!-- Content -->
                 <div class="content-area p-b-1">
                     <div class="container-fluid">
-                        <ol class="breadcrumb no-bg m-b-1 m-t-1">
+                        <ol class="breadcrumb no-bg m-b-1 m-t-1" style="margin-top: 50px;">
                             <li class="breadcrumb-item"><a href="./">JOBBERS</a></li>
                             <li class="breadcrumb-item"><a href="trabajadores.php">Trabajadores</a></li>
                             <li class="breadcrumb-item active"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></li>
                         </ol>
-                        <div class="row" style="margin-top: 15px;">
+                        <div class="row" style="margin-top: 20px;">
                             <div class="col-sm-4 col-md-5">
                                 <div class="content-perfil profile-card" style="margin-top: 0px;">
                                     <div class="profile-avatar" style="text-align: center;margin-top: 15px;">
