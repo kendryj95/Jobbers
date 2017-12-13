@@ -298,7 +298,7 @@ else {*/
 				min-height: 110px;
 			}
 			.pub, .pub-f {
-				background-color: #f8f8f8 !important;
+				/* background-color: #f8f8f8 !important; */
 				-webkit-transition: all 0.2s ease-in-out;
 				transition: all 0.2s ease-in-out;
 				cursor: pointer;
@@ -548,13 +548,27 @@ else {*/
     		<div class="preloader"></div>
 
     		<!-- Sidebar -->
-    		<?php require_once 'includes/sidebar.php';?>
+    		<?php if ($_SESSION['ctc']['type'] == 1):
+			require_once ('includes/sidebar.php');
+			?>
+			<style>
+				.site-content{
+					margin-left:220px !important;
+				}
+				@media(max-width: 1024px){
+					.site-content{
+						margin-left: 0px !important;
+					}
+				}
+			</style>
+			<?php endif ?>
 
     		<!-- Sidebar second -->
-    		<?php // require_once('includes/sidebar-second.php'); ?>
+    		<?php require_once('includes/sidebar-second.php'); ?>
 
     		<!-- Header -->
     		<?php require_once 'includes/header.php';?>
+			<div class="site-content bg-white" style="margin-left: 0px; padding-top: 5px;">
 
     		<?php if ($publicidadPrincipal): ?>
     			<div class="row" style="padding: 25px; margin-top: 75px;" id="ad">
@@ -817,7 +831,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 							?>
 							<div class="col-md-6 col-xs-12" style="padding-left: 10px;">
 							<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-							<div class="pub pub-f box box-block bg-white tile tile-1" title="Ver detalles del empleo">
+							<div class="pub pub-f box box-block bg-white tile tile-1 gold" title="Ver detalles del empleo">
 							<div class="t-icon right"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
 							<div class="t-content"  title="Ver detalles del empleo">
 								<div class="row">
@@ -911,7 +925,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 											</div>
 										<?php endif ?>
 										<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-											<button class="btn btn-postular btn-block">POSTULARME</button>
+											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn btn-postular btn-block">MÁS INFO</a>
 										</div>
 									</div>
 								</div>
@@ -940,19 +954,25 @@ $link = str_replace('watch?v=', 'embed/', $link);
 							$publicacion["titulo_corto"] = substr($publicacion["titulo"], 0, 30);
 						}
 						?>
-						<div class="col-lg-3 col-md-4 col-xs-12">
-							<div class="snip1583" style="padding-left: 20px;padding-bottom: 20px;border-top: 7px solid #8f8f8f;">
-								<div class="content">
-									<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-										<img src="empresa/img/<?php echo !$publicacion["imagen"] ? 'avatars/user.png' : $publicacion["imagen"]; ?>" alt="" style="padding: 40px;"/>
-									</a>
+						<div class="col-md-6 col-xs-12" style="padding-left: 10px;">
+						<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
+						<div class="pub pub-f box box-block bg-white tile tile-1 gold" title="Ver detalles del empleo">
+						<div class="t-icon right"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
+						<div class="t-content"  title="Ver detalles del empleo">
+							<div class="row">
+								<div class="col-md-4 col-sm-4 text-center">
+									<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo !$publicacion["imagen"] ? 'avatars/user.png' : $publicacion["imagen"]; ?>" alt=""/>
+								</div>
+								<div class="col-md-8 col-sm-8">
+									<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+									<h6 style="color: #373a3c; font-weight: 600;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 									<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
-											<?php
+										<?php
 											$sitio_web = "";
-											$facebook  = "";
-											$twitter   = "";
+											$facebook = "";
+											$twitter = "";
 											$instagram = "";
-											$linkedin  = "";
+											$linkedin = "";
 											if (strstr($publicacion["sitio_web"], 'http')) {
 												$sitio_web = $publicacion["sitio_web"];
 											}
@@ -961,80 +981,83 @@ $link = str_replace('watch?v=', 'embed/', $link);
 											}
 											if (strstr($publicacion["facebook"], 'http')) {
 												$facebook = $publicacion["facebook"];
-											} else {
+											}
+											else {
 												$facebook = "http://$publicacion[facebook]";
 											}
 											if (strstr($publicacion["twitter"], 'http')) {
 												$twitter = $publicacion["twitter"];
-											} else {
+											}
+											else {
 												$twitter = "http://$publicacion[twitter]";
 											}
 											if (strstr($publicacion["instagram"], 'http')) {
 												$instagram = $publicacion["instagram"];
-											} else {
+											}
+											else {
 												$instagram = "http://$publicacion[instagram]";
 											}
 											if (strstr($publicacion["linkedin"], 'http')) {
 												$linkedin = $publicacion["linkedin"];
-											} else {
+											}
+											else {
 												$linkedin = "http://$publicacion[linkedin]";
 											}
-											?>
-
-											<div class="btn-group btn-group-lg" role="group" aria-label="Large b utton group">
-											<?php if($publicacion["sitio_web"] != ""): ?>
-												<!-- <div class="col-xs-3 s-item"> -->
-													<a class="bg-primary btn btn-default" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
-														<i class="fa fa-globe text-white" aria-hidden="true"></i>
-													</a>
-												<!-- </div> -->
-											<?php endif ?>
-											<?php if($publicacion["facebook"] != ""): ?>
-												<!-- <div class="col-xs-3 s-item"> -->
-													<a class="bg-facebook btn btn-default" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
-														<i class="ti-facebook"></i>
-													</a>
-												<!-- </div> -->
-											<?php endif ?>
-											<?php if($publicacion["twitter"] != ""): ?>
-												<!-- <div class="col-xs-3 s-item"> -->
-													<a class="bg-twitter btn btn-default" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
-														<i class="ti-twitter"></i>
-													</a>
-												<!-- </div> -->
-											<?php endif ?>
-											<?php if($publicacion["instagram"] != ""): ?>
-												<!-- <div class="col-xs-3 s-item"> -->
-													<a class="bg-instagram btn btn-default" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
-														<i class="ti-instagram"></i>
-													</a>
-												<!-- </div> -->
-											<?php endif ?>
-											<?php if($publicacion["linkedin"] != ""): ?>
-												<!-- <div class="col-xs-3 s-item"> -->
-													<a class="bg-linkedin btn btn-default" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
-														<i class="ti-linkedin"></i>
-													</a>
-												<!-- </div> -->
-											<?php endif ?>
+										?>
+										<div style="background-color: transparent;">
+											<div class="row no-gutter">
+												<!-- <div class="col-xs-3 s-item">
+													<a class="bg-white" href="" style="background-color:  transparent !important;"></a>
+												</div> -->
+												<div class="btn-group btn-group-lg" role="group" aria-label="Large b utton group">
+													<?php if($publicacion["sitio_web"] != ""): ?>
+														<!-- <div class="col-xs-3 s-item"> -->
+															<a class="bg-primary btn btn-default" href="<?php echo $sitio_web; ?>" title="Ir a la web de la empresa">
+																<i class="fa fa-globe text-white" aria-hidden="true"></i>
+															</a>
+														<!-- </div> -->
+													<?php endif ?>
+													<?php if($publicacion["facebook"] != ""): ?>
+														<!-- <div class="col-xs-3 s-item"> -->
+															<a class="bg-facebook btn btn-default" href="<?php echo $facebook; ?>"  title="Visitar Facebook de la empresa">
+																<i class="ti-facebook"></i>
+															</a>
+														<!-- </div> -->
+													<?php endif ?>
+													<?php if($publicacion["twitter"] != ""): ?>
+														<!-- <div class="col-xs-3 s-item"> -->
+															<a class="bg-twitter btn btn-default" href="<?php echo $twitter; ?>"  title="Visitar Twitter de la empresa">
+																<i class="ti-twitter"></i>
+															</a>
+														<!-- </div> -->
+													<?php endif ?>
+													<?php if($publicacion["instagram"] != ""): ?>
+														<!-- <div class="col-xs-3 s-item"> -->
+															<a class="bg-instagram btn btn-default" href="<?php echo $instagram; ?>"  title="Visitar Instagram de la empresa">
+																<i class="ti-instagram"></i>
+															</a>
+														<!-- </div> -->
+													<?php endif ?>
+													<?php if($publicacion["linkedin"] != ""): ?>
+														<!-- <div class="col-xs-3 s-item"> -->
+															<a class="bg-linkedin btn btn-default" href="<?php echo $linkedin; ?>"  title="Visitar Linkedin de la empresa">
+																<i class="ti-linkedin"></i>
+															</a>
+														<!-- </div> -->
+													<?php endif ?>
+												</div>
 											</div>
-
-									<?php endif?>
-
-									<?php if ($publicacion["verificado"] == 1): ?>
-										<div class="icons2">
-											<i title="Empresa verificada" style="font-size: 30px;color: #dd8037;" class="ti-medall-alt"></i>
 										</div>
-									<?php endif?>
-
-									<div style="padding-right: 15px;">
-										<div class="price"><a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>"><?php echo $publicacion["empresa_nombre"]; ?></a></div>
-										<h3><?php echo $publicacion["titulo_corto"]; ?></h3>
-										<div class="price2"><?php echo $publicacion["area_nombre"]; ?></div>
+									<?php endif ?>
+									<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
+										<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn btn-postular btn-block">MÁS INFO</button>
 									</div>
 								</div>
 							</div>
 						</div>
+						</a>
+					</div>
+					</div>
 						<?php
 						$i++;
 						if ($i == 4) {
@@ -1059,7 +1082,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 					?>
 					<div class="col-md-6 col-xs-12" style="padding-left: 10px;">
 					<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-					<div class="pub pub-f box box-block bg-white tile tile-1" title="Ver detalles del empleo">
+					<div class="pub pub-f box box-block bg-white tile tile-1 bronze" title="Ver detalles del empleo">
 					<div class="t-icon right"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
 					<div class="t-content"  title="Ver detalles del empleo">
 						<div class="row">
@@ -1153,7 +1176,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 									</div>
 								<?php endif ?>
 								<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-									<button class="btn btn-postular btn-block">POSTULARME</button>
+									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn btn-postular btn-block">MÁS INFO</button>
 								</div>
 							</div>
 						</div>
@@ -1185,7 +1208,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 					?>
 					<div class="col-md-6 col-xs-12" style="padding-left: 10px;">
 					<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-					<div class="pub pub-f box box-block bg-white tile tile-1" title="Ver detalles del empleo">
+					<div class="pub pub-f box box-block bg-white tile tile-1 free" title="Ver detalles del empleo">
 					<div class="t-icon right"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
 					<div class="t-content"  title="Ver detalles del empleo">
 						<div class="row">
@@ -1277,7 +1300,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 								</div>
 							<?php endif ?>
 								<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-									<button class="btn btn-postular btn-block">POSTULARME</button>
+									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn btn-postular btn-block">MÁS INFO</button>
 								</div>
 							</div>
 						</div>
@@ -1704,6 +1727,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 <?php require_once 'includes/footer.php';?>
 
 </div>
+</div>
 
 <?php require_once 'includes/libs-js.php';?>
 
@@ -1793,6 +1817,56 @@ $link = str_replace('watch?v=', 'embed/', $link);
 						}
 					});
 				});
+
+				$(function() {
+				
+				<?php if($publicacion["coordenadas"] != ""): ?>
+					initMap();
+				<?php endif ?>
+				
+				$("#socialLinks .btn").click(function(){
+					window.location.assign($(this).attr("data-url"));
+				});
+				var postulate = parseInt('<?php echo isset($_SESSION["ctc"]) ? (isset($_SESSION["ctc"]["postulate"]) ? $_SESSION["ctc"]["postulate"] : 0) : 2; ?>');
+				
+				<?php if(!$postulado && $infoT && isset($_SESSION["ctc"])): ?>
+					$("#postulate").click(function() {
+						
+						$(this).addClass('disabled'); // Desactivar el botón al presionarlo.
+
+						if(postulate == 1) {
+							$.ajax({
+								url: 'ajax/misc.php',
+								type: 'GET',
+								data: {
+									op: 2,
+									idp: <?php echo $publicacion["id"]; ?>,
+									idt: <?php echo $infoT["id"]; ?>
+								}
+							}).done(function(data, textStatus, jqXHR) {						
+								switch(jqXHR.status) {
+									case 200:
+										var json = JSON.parse(jqXHR.responseText);
+										if(json.msg == "OK") {
+											$(".pv-title").prepend('<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-primary">Postulado</span>');
+											$("#postulate").closest('div').remove();
+											swal("Operación exitosa!", "Se ha enviado la solicitud para el empleo seleccionado.<br>La empresa se pondrá en contacto contigo si está interesada.", "success");
+										}
+									break;
+								}
+							});
+						}
+						else {
+							$(this).removeClass('disabled');
+							swal("Información", 'Su perfil no esta completo para poder postularse a un empleo, los requisitos minimos son:<br> (1) Tener foto de perfil.<br> (2) Completar todos los datos del paso 1 en el Currículum. <br> para ir a completar mis datos haga click <a href="cuenta.php">aquí</a>', "info");
+						}
+					});
+				<?php else: ?>
+					$("#postulate").click(function() {
+						window.location.assign('registro.php?redirect=' + '<?php echo urlencode("empleos-detalle.php?$_SERVER[QUERY_STRING]"); ?>');
+					});
+				<?php endif ?>
+			});
 			</script>
 		</body>
 		</html>

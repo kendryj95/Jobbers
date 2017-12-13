@@ -57,10 +57,12 @@
 		<title>JOBBERS - Publicaciones</title>
 		<?php require_once('../includes/libs-css.php'); ?>
 
-		<link rel="stylesheet" href="../vendor/DataTables/css/dataTables.bootstrap4.min.css">
+		<!-- <link rel="stylesheet" href="../vendor/DataTables/css/dataTables.bootstrap4.min.css">
 		<link rel="stylesheet" href="../vendor/DataTables/Responsive/css/responsive.bootstrap4.min.css">
 		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.dataTables.min.css">
-		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css">
+		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css"> -->
+
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/datatables.min.css"/>
 		
 		<link rel="stylesheet" href="../vendor/select2/dist/css/select2.min.css">
 		<link rel="stylesheet" href="../vendor/dropify/dist/css/dropify.min.css">
@@ -98,28 +100,30 @@
 					<div class="container-fluid">
 						<div class="box box-block bg-white">
 							<h5 class="m-b-1">Mis publicaciones</h5>
-							<div class="m-b-1">
+							<div class="mb-10">
 								<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
 								
 								<?php if($_SESSION["ctc"]["plan"]["id_plan"] == 4): ?>
 									<a href="#" class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion-especial"> Agregar/modificar publicación especial</a>
 								<?php endif ?>
 							</div>
-							<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Título</th>
-										<th>Descripción</th>
-										<th>Postulados</th>
-										<th>Creación Pub.</th>
-										<th>Final Pub.</th>
-										<th>Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Título</th>
+											<th>Descripción</th>
+											<th>Postulados</th>
+											<th>Creación Pub.</th>
+											<th>Final Pub.</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
