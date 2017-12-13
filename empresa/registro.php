@@ -104,6 +104,11 @@
 											</div>
 											<div class="form-group">
 												<div class="input-group">
+													<input type="text" class="form-control" id="email2" placeholder="Confirmar correo electrónico (*)" onchange="validar(this.id,'email')">
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="input-group">
 													<input type="password" class="form-control" id="passw" placeholder="Contraseña (*)">
 												</div>
 											</div>
@@ -483,65 +488,77 @@
 			$("#next").click(function() {
 				switch(parseInt($(this).attr("data-value"))) {
 					case 1:
+						$('*').removeClass('has-error'); // Si hay elementos con la clase has-error, se los quita inicialmente.
 						if (isEmail($("#email").val())) {
 							if($("#email").val() != "" && $("#passw").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#empresa").val() != "" && $("#razon").val() != "" && $("#phone").val() != "") {
-								if($("#passw").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
-									if(($("#passw").val().length >= 8 && $("#passw").val().length <= 12)&&($("#passw2").val().length >= 8 && $("#passw2").val().length <= 12  )) { // Confirma si las contraseñas tienen la lomgitud
-										if($("#term:checked").length > 0) {
-											$.ajax({
-												type: 'POST',
-												url: 'ajax/empresas.php',
-												data: 'op=2&email=' + $("#email").val(),
-												dataType: 'json',
-												success: function(data) {
-													if(data.status == 1) {
-														$("#step1").css("display", "none");
-														$("#step2").css("display", "block");
-														$("#stp1").removeClass("active").addClass("complete").addClass("text-xs-center");
-														$("#st1").html('<i class="ti-check"></i>');
-														$("#stp2").addClass("active");
-														$("#next").attr("data-value", 2);
-														$("#back").attr("data-value", 2);
-														$("#back").css("display", "block");
-													}else {
-														swal({
-															title: 'Información!',
-															text: 'El correo electrónico ingresado ya se encuentra en uso.',
-															timer: 3000,
-															confirmButtonClass: 'btn btn-primary btn-lg',
-															buttonsStyling: false
-														});
+								if ($('#email').val() == $('#email2').val()) { // confimar si los correos electronicos coinciden
+									if($("#passw").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
+										if(($("#passw").val().length >= 8 && $("#passw").val().length <= 12)&&($("#passw2").val().length >= 8 && $("#passw2").val().length <= 12  )) { // Confirma si las contraseñas tienen la lomgitud
+											if($("#term:checked").length > 0) {
+												$.ajax({
+													type: 'POST',
+													url: 'ajax/empresas.php',
+													data: 'op=2&email=' + $("#email").val(),
+													dataType: 'json',
+													success: function(data) {
+														if(data.status == 1) {
+															$("#step1").css("display", "none");
+															$("#step2").css("display", "block");
+															$("#stp1").removeClass("active").addClass("complete").addClass("text-xs-center");
+															$("#st1").html('<i class="ti-check"></i>');
+															$("#stp2").addClass("active");
+															$("#next").attr("data-value", 2);
+															$("#back").attr("data-value", 2);
+															$("#back").css("display", "block");
+														}else {
+															swal({
+																title: 'Información!',
+																text: 'El correo electrónico ingresado ya se encuentra en uso.',
+																timer: 3000,
+																confirmButtonClass: 'btn btn-primary btn-lg',
+																buttonsStyling: false
+															});
+														}
 													}
-												}
-											});
-										}else {
+												});
+											}else {
+												swal({
+													title: 'Información!',
+													text: 'Para continuar debe estar de acuerdo y aceptar los terminos, condiciones y políticas de privacidad.',
+													timer: 3000,
+													confirmButtonClass: 'btn btn-primary btn-lg',
+													buttonsStyling: false
+												});
+											}
+										}else{
 											swal({
 												title: 'Información!',
-												text: 'Para continuar debe estar de acuerdo y aceptar los terminos, condiciones y políticas de privacidad.',
-												timer: 3000,
+												text: 'La contraseña debe tener una logintud de 8 a 12 caracteres',
+												timer: 4000,
 												confirmButtonClass: 'btn btn-primary btn-lg',
 												buttonsStyling: false
 											});
+											$('#passw, #passw2').parent().addClass('has-error');
 										}
 									}else{
 										swal({
-											title: 'Información!',
-											text: 'La contraseña debe tener una logintud de 8 a 12 caracteres',
-											timer: 4000,
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
+												title: 'Información!',
+												text: 'Las contraseñas no coinciden',
+												timer: 2000,
+												confirmButtonClass: 'btn btn-primary btn-lg',
+												buttonsStyling: false
 										});
-										$('#passw, #passw2').parent().addClass('has-error');
+										$('#passw, #passw2').parent().addClass('has-error');	
 									}
-								}else{
+								} else {
 									swal({
 											title: 'Información!',
-											text: 'Las contraseñas no coinciden',
+											text: 'Los correos electronicos no coinciden',
 											timer: 2000,
 											confirmButtonClass: 'btn btn-primary btn-lg',
 											buttonsStyling: false
-										});
-										$('#passw, #passw2').parent().addClass('has-error');	
+									});
+									$('#email, #email2').parent().addClass('has-error');
 								}
 							}else {
 								swal({
