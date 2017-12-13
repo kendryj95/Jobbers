@@ -437,6 +437,9 @@
 											$(".pv-title").prepend('<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-primary">Postulado</span>');
 											$("#postulate").closest('div').remove();
 											swal("Operación exitosa!", "Se ha enviado la solicitud para el empleo seleccionado.<br>La empresa se pondrá en contacto contigo si está interesada.", "success");
+										} else {
+											console.log("Error:", json.console);
+											swal("Error", json.msg, "error");
 										}
 									break;
 								}

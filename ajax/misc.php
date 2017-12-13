@@ -30,25 +30,41 @@
 		case ADD_POSTULATE:
 			$idp = isset($_REQUEST["idp"]) ? $_REQUEST["idp"] : false;
 			$idt = isset($_REQUEST["idt"]) ? $_REQUEST["idt"] : false;
-			if($idp && $idt) {
-				$db->query("
-					INSERT INTO postulaciones (
-						id_publicacion,
-						id_trabajador,
-						fecha_hora
-					)
-					VALUES (
-						'$idp',
-						'$idt',
-						'" . date('Y-m-d H:i:s') . "'
-					)
-				");
+
+			$db->beginTransaction();
+
+			try{
+				if($idp && $idt) {
+					$db->query("
+						INSERT INTO postulaciones (
+							id_publicacion,
+							id_trabajador,
+							fecha_hora
+						)
+						VALUES (
+							'$idp',
+							'$idt',
+							'" . date('Y-m-d H:i:s') . "'
+						)
+					");
+
+					$db->commitTransaction();
+					echo json_encode(
+						array(
+							"msg" => "OK"
+						)
+					);
+				}
+			} catch(Exception $e){
+				$db->rollBackTransaction();
 				echo json_encode(
 					array(
-						"msg" => "OK"
+						"msg" => "Ah ocurrido un error, intentelo más tarde.",
+						"console" => $e->getMessage()
 					)
 				);
 			}
+
 			break;
 		case GET_POSTULATES:
 			$arr = array(
