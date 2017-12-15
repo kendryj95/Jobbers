@@ -57,6 +57,14 @@
  				box-shadow: -1px 1px 10px 0px rgba(255,51,51,.7);
 			}
 		</style>
+
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+		  (adsbygoogle = window.adsbygoogle || []).push({
+		    google_ad_client: "ca-pub-1968505410020323",
+		    enable_page_level_ads: true
+		  });
+		</script>
 	</head>
 	<body class="auth-bg">
 		
