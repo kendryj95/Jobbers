@@ -192,7 +192,7 @@
 		<?php //require_once('../includes/sidebar.php'); ?>
 
 		<!-- Sidebar second -->
-		<!-- <?php require_once('../includes/sidebar-second.php'); ?> -->
+		<?php require_once('../includes/sidebar-second.php'); ?>
 
 		<!-- Header -->
 		<?php require_once('../includes/header.php'); ?>
