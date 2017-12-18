@@ -140,6 +140,14 @@ $publicaciones = $db->getAll("
         <title>JOBBERS - <?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></title>
         <?php require_once 'includes/libs-css.php';?>
         <link rel="stylesheet" href="vendor/ionicons/css/ionicons.min.css">
+
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-1968505410020323",
+            enable_page_level_ads: true
+          });
+        </script>
     </head>
     <body class="large-sidebar fixed-sidebar fixed-header skin-5">
         <!-- <div class="wrapper" style="background-color: white;"> -->
