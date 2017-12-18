@@ -99,7 +99,7 @@
 						<div class="profile-header-cover img-cover" style="background-image: url(img/photos-1/1.jpg);"></div>
 						<div class="profile-header-counters clearfix">
 							<div class="container-fluid">
-								<div class="pull-xs-right">
+								<div class="pull-right">
 									<a href="<?php echo $empresa == 1 ? 'publicaciones.php' : 'javascript:void(0)'; ?>" class="text-black">
 										<h5 class="font-weight-bold"><?php echo $cantidadPublicaciones; ?></h5>
 										<span class="text-muted">Publicaciones</span>
@@ -110,7 +110,7 @@
 					</div>
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-sm-4 col-md-4">
+							<div class="col-sm-5 col-md-5">
 								<div class="card profile-card">
 									<div class="profile-avatar" style="text-align: center;">
 										<img src="img/<?php echo $foto; ?>" alt="" style="max-width: 150px;margin-top: 20px;">
@@ -130,7 +130,7 @@
 										<hr>
 										<form action="">
 											<div class="row" style="margin-left: 10px">
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<div class="form-group">
 														<label for="empresa"><b>Nombre de la empresa <span style="color: red">*</span></b> </label>
 														<input type="text" class="form-control" id="emp" placeholder="Nombre de la empresa" value="<?= $infoEmpresa["nombre"] ?>">
@@ -138,42 +138,42 @@
 													</div>
 												</div>
 												
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<div class="form-group">
 														<label for="responsable"><b>Nombre del responsable <span style="color: red">*</span></b> </label>
 														<input type="text" class="form-control" id="nom_responsable" placeholder="Nombre del responsable" value="<?= $infoEmpresa['nombre_responsable'] ?>">
 													</div>
 												</div> 
 
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<div class="form-group">
 														<label for="responsable"><b>Apellido del responsable <span style="color: red">*</span></b> </label>
 														<input type="text" class="form-control" id="ape_responsable" placeholder="Nombre del responsable" value="<?= $infoEmpresa['apellido_responsable'] ?>">
 													</div>
 												</div> 
 
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<div class="form-group">
 														<label for="email"><b>Correo Electronico <span style="color: red">*</span></b> </label>
 														<input type="email" class="form-control" id="email" placeholder="Correo Electronico" value="<?= $infoEmpresa['correo_electronico'] ?>">
 													</div>
 												</div>
 
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<div class="form-group">
 														<label for="razon_soc"><b>Razon Social <span style="color: red">*</span></b> </label>
 														<input type="text" class="form-control" id="razon_soc" placeholder="Razon Social" value="<?= $infoEmpresa['razon_social'] ?>">
 													</div>
 												</div>
 
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<div class="form-group">
 														<label for="cuit"><b>CUIT:</b> </label>
 														<input type="text" class="form-control" id="cuit" placeholder="CUIT (Opcional)" value="<?= $infoEmpresa['cuit'] ?>" onchange="validar(this.id,'num')">
 													</div>
 												</div>
 
-												<div class="col-md-8">
+												<div class="col-md-12">
 													<div class="form-group">
 														<label for="tlf"><b>Telefono <span style="color: red">*</span></b> </label>
 														<input type="number" class="form-control" id="tlf" placeholder="Telefono" value="<?= $infoEmpresa['telefono'] ?>">
@@ -190,19 +190,19 @@
 										<h5 style="margin-left: 10px;">Cambiar Contraseña</h5>
 										<br>
 										<div class="row" style="margin-left: 10px">
-											<div class="col-md-8">
+											<div class="col-md-12">
 												<div class="form-group">
 													<label for="currentPass"><b>Contraseña Actual <span style="color: red">*</span></b> </label>
 													<input type="password" class="form-control" id="currentPass" placeholder="Contraseña Actual" value="">
 												</div>
 											</div>
-											<div class="col-md-8">
+											<div class="col-md-12">
 												<div class="form-group">
 													<label for="newPass"><b>Contraseña Nueva <span style="color: red">*</span></b> </label>
 													<input type="password" class="form-control" id="newPass" placeholder="Contraseña Nueva" value="">
 												</div>
 											</div>
-											<div class="col-md-8">
+											<div class="col-md-12">
 												<div class="form-group">
 													<label for="repeatPass"><b>Repetir Contraseña <span style="color: red">*</span></b> </label>
 													<input type="password" class="form-control" id="repeatPass" placeholder="Repetir Contraseña" value="">
@@ -214,13 +214,16 @@
 											</div>
 										</div>
 										<hr>
-										<?php } ?>				
+										<?php } ?>	
+										<div class="row" style="margin-left: 10px;">			
 											<?php if($empresa == 1): ?>
 											<?php if($infoEmpresa["actividad"]): ?>
-												<a href="#" id="inline-activity" data-type="select" data-pk="1" data-value="" data-title="Actividad empresa" class="list-group-item editable editable-click" style="color: rgb(152, 166, 173);"><?php echo $infoEmpresa["actividad"]; ?></a>
+												<div class="col-md-12">
+													<a href="#" id="inline-activity" data-type="select" data-pk="1" data-value="" data-title="Actividad empresa" class="list-group-item editable editable-click" style="color: rgb(152, 166, 173);"><?php echo $infoEmpresa["actividad"]; ?></a>
+												</div>
 											<?php else: ?>
-												<div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px;" id="containerActivity">
-													<div class="col-md-8">
+												<div class="col-md-12" style="margin-top: 20px;" id="containerActivity">
+													<div class="col-md-12">
 														<select class="custom-select" id="activity">
 															<option value="0">Actividad de la empresa</option>
 															<?php foreach($activities as $a): ?>
@@ -235,22 +238,26 @@
 											<?php endif ?>
 											<br><br>
 											<?php if($infoEmpresa["sitio_web"]): ?>
-												<a class="list-group-item editable editable-click" style="display: inline;" href="#" id="inline-site" data-type="text" data-pk="1" data-title="Sitio web"><i class="ti-world m-r-0-5"></i> <?php echo $infoEmpresa["sitio_web"]; ?></a>
+												<div class="col-md-12" style="margin-top: 20px;">
+													<a class="list-group-item editable editable-click" href="#" id="inline-site" data-type="text" data-pk="1" data-title="Sitio web"><i class="ti-world m-r-0-5"></i> <?php echo $infoEmpresa["sitio_web"]; ?></a>
+												</div>
 											<?php else: ?>
-												<div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px;" id="containerWeb">
-													<div class="col-md-8">
+												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerWeb">
+													<div class="col-md-10">
 														<input class="form-control" id="web" placeholder="Sitio Web" type="text">
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<a class="btn btn-primary action" href="javascript:void(0)" data-target="web">+</a>
 													</div>
 												</div>
 											<?php endif ?>
 											<br><br>
 											<?php if($infoEmpresa["facebook"]): ?>
-												<a class="list-group-item editable editable-click" style="display: inline;" href="#" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook"><i class="ti-facebook m-r-0-5"></i> <?php echo $infoEmpresa["facebook"]; ?></a>
+												<div class="col-md-12" style="margin-top: 20px;">
+													<a class="list-group-item editable editable-click" href="#" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook"><i class="ti-facebook m-r-0-5"></i> <?php echo $infoEmpresa["facebook"]; ?></a>
+												</div>
 											<?php else: ?>
-												<div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px;" id="containerFB">
+												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerFB">
 													<div class="col-md-8">
 														<input class="form-control" id="fb" placeholder="Facebook" type="text">
 													</div>
@@ -261,39 +268,45 @@
 											<?php endif ?>										
 											<br><br>
 											<?php if($infoEmpresa["twitter"]): ?>
-												<a class="list-group-item" style="display: inline;" href="#" id="inline-twitter" data-type="text" data-pk="1" data-title="Twitter" class="editable editable-click"><i class="ti-twitter m-r-0-5"></i> <?php echo $infoEmpresa["twitter"]; ?></a>
+												<div class="col-md-12" style="margin-top: 20px;">
+													<a class="list-group-item" href="#" id="inline-twitter" data-type="text" data-pk="1" data-title="Twitter" class="editable editable-click"><i class="ti-twitter m-r-0-5"></i> <?php echo $infoEmpresa["twitter"]; ?></a>
+												</div>
 											<?php else: ?>
-												<div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px;" id="containerTW">
-													<div class="col-md-8">
+												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerTW">
+													<div class="col-md-10">
 														<input class="form-control" id="tw" placeholder="Twitter" type="text">
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<a class="btn btn-primary action" href="javascript:void(0)" data-target="tw">+</a>
 													</div>
 												</div>
 											<?php endif ?>									
 											<br><br>
 											<?php if($infoEmpresa["instagram"]): ?>
-												<a class="list-group-item" style="display: inline;" href="#" id="inline-instagram" data-type="text" data-pk="1" data-title="Instagram" class="editable editable-click"><i class="ti-instagram m-r-0-5"></i> <?php echo $infoEmpresa["instagram"]; ?></a>
+												<div class="col-md-12" style="margin-top: 20px;">
+													<a class="list-group-item"  href="#" id="inline-instagram" data-type="text" data-pk="1" data-title="Instagram" class="editable editable-click"><i class="ti-instagram m-r-0-5"></i> <?php echo $infoEmpresa["instagram"]; ?></a>
+												</div>
 											<?php else: ?>
-												<div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px;" id="containerINS">
-													<div class="col-md-8">
+												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerINS">
+													<div class="col-md-10">
 														<input class="form-control" id="ins" placeholder="Instagram" type="text">
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<a class="btn btn-primary action" href="javascript:void(0)" data-target="ins">+</a>
 													</div>
 												</div>
 											<?php endif ?>									
 											<br><br>
 											<?php if($infoEmpresa["linkedin"]): ?>
-												<a class="list-group-item" style="display: inline;" href="#" id="inline-linkedin" data-type="text" data-pk="1" data-title="Linkedin" class="editable editable-click"><i class="ti-linkedin m-r-0-5"></i> <?php echo $infoEmpresa["linkedin"]; ?></a>
+												<div class="col-md-12" style="margin-top: 20px;">
+													<a class="list-group-item"  href="#" id="inline-linkedin" data-type="text" data-pk="1" data-title="Linkedin" class="editable editable-click"><i class="ti-linkedin m-r-0-5"></i> <?php echo $infoEmpresa["linkedin"]; ?></a>
+												</div>
 											<?php else: ?>
-												<div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px;" id="containerLIN">
-													<div class="col-md-8">
+												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerLIN">
+													<div class="col-md-10">
 														<input class="form-control" id="lin" placeholder="Linkedin" type="text">
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<a class="btn btn-primary action" href="javascript:void(0)" data-target="lin">+</a>
 													</div>
 												</div>
@@ -320,9 +333,11 @@
 												</a>
 											<?php endif ?>
 											<?php if($infoEmpresa["instagram"]): ?>
-												<a class="list-group-item" href="<?php echo $infoEmpresa["instagram"]; ?>">
-													<i class="ti-instagram m-r-0-5"></i> <?php echo $infoEmpresa["instagram"]; ?>
-												</a>
+												<div class="col-md-12" style="margin-top: 20px;">
+													<a class="list-group-item" href="<?php echo $infoEmpresa["instagram"]; ?>">
+														<i class="ti-instagram m-r-0-5"></i> <?php echo $infoEmpresa["instagram"]; ?>
+													</a>
+												</div>
 											<?php endif ?>
 											<?php if($infoEmpresa["linkedin"]): ?>
 												<a class="list-group-item" href="<?php echo $infoEmpresa["linkedin"]; ?>">
@@ -330,6 +345,7 @@
 												</a>
 											<?php endif ?>
 										<?php endif ?>
+										</div>
 									</ul>
 								</div>
 								
@@ -355,7 +371,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-8 col-md-8">
+							<div class="col-sm-7 col-md-7">
 								<div class="card m-b-0">
 									<ul class="nav nav-tabs nav-tabs-2 profile-tabs" role="tablist">
 										<li class="nav-item">

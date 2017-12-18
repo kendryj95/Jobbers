@@ -3357,7 +3357,7 @@ footer .f-title {
 /* Profile */
 
 .profile-header .profile-header-cover {
-    height: 250px;
+    /* height: 250px; */
     background-color: #f3f7fc;
 }
 
@@ -3391,7 +3391,7 @@ footer .f-title {
 }
 
 .profile-card .list-group {
-    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    /* border-top: 1px solid rgba(0, 0, 0, 0.125); */
 }
 
 .profile-card .list-group-item {
@@ -8075,10 +8075,10 @@ a.text-grey:hover .underline {
 }
 
 .img-cover {
-    /* -webkit-background-size: cover;
-    background-size: cover; */
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    height: 50vh;
 }
 
 .img-fixed {
