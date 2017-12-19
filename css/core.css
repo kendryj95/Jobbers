@@ -3268,13 +3268,13 @@ footer .f-title {
 
 .auth {
     color: #fff;
+    padding: 25vh 0px;
 }
 
 .auth .auth-header {
-    margin-bottom: 6rem;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-    background-color: rgba(255, 255, 255, 0.05);
+    margin-bottom: 30px;
+    /*padding-top: 240px; */
+    /* background-color: rgba(255, 255, 255, 0.05); */
     text-align: center;
 }
 
@@ -9629,6 +9629,10 @@ a.text-grey:hover .underline {
 
 .text-white {
     color: #fff;
+}
+
+.p-30 {
+    padding: 30px;
 }
 
 

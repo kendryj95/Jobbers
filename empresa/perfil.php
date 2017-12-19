@@ -266,7 +266,7 @@
 												</div>
 											<?php else: ?>
 												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerFB">
-													<div class="col-md-8">
+													<div class="col-md-8 col-xs-9">
 														<input class="form-control" id="fb" placeholder="Facebook" type="text">
 													</div>
 													<div class="col-md-4">
@@ -281,7 +281,7 @@
 												</div>
 											<?php else: ?>
 												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerTW">
-													<div class="col-md-10">
+													<div class="col-md-10 col-xs-9">
 														<input class="form-control" id="tw" placeholder="Twitter" type="text">
 													</div>
 													<div class="col-md-2">
@@ -296,7 +296,7 @@
 												</div>
 											<?php else: ?>
 												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerINS">
-													<div class="col-md-10">
+													<div class="col-md-10 col-xs-9">
 														<input class="form-control" id="ins" placeholder="Instagram" type="text">
 													</div>
 													<div class="col-md-2">
@@ -311,7 +311,7 @@
 												</div>
 											<?php else: ?>
 												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerLIN">
-													<div class="col-md-10">
+													<div class="col-md-10 col-xs-9">
 														<input class="form-control" id="lin" placeholder="Linkedin" type="text">
 													</div>
 													<div class="col-md-2">
@@ -382,11 +382,11 @@
 							<div class="col-sm-7 col-md-7">
 								<div class="card m-b-0">
 									<ul class="nav nav-tabs nav-tabs-2 profile-tabs" role="tablist">
-										<li class="nav-item">
+										<li class="nav-item" style="background-color: #fff">
 											<a class="nav-link active" data-toggle="tab" href="#stream" role="tab">Publicaciones</a>
 										</li>
 									</ul>
-									<div class="tab-content">
+									<div class="tab-content" style="background-color: #fff">
 										<div class="tab-pane active" id="stream" role="tabpanel">
 											<?php foreach($publicaciones as $p): ?>
 												<div class="media stream-item">
