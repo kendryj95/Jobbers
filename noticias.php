@@ -145,7 +145,6 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 				<div class="container-fluid">
 					<div class="row m-b-0 m-md-b-1">
 						<div class="col-md-9">
-							<div class="container">
 								<div class="col-md-12">
 									<h4>Noticias</h4>
 									<ol class="breadcrumb no-bg m-b-1">
@@ -277,12 +276,8 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										<?php endforeach ?>
 									<?php endif ?>
 								<?php endif ?>
-							</div>
 						</div>
-						<!-- <div class="container-fluid">
-							<div class="clearfix"></div>
-							<div class="row"> -->
-								<div class="col-md-3">
+						<div class="col-md-3">
 									<div class="card">
 										<div class="card-header text-uppercase"><b>NOTICIAS POPULARES</b></div>
 										<div class="items-list">
@@ -335,8 +330,6 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 									</div>
 								</div>
-							<!-- </div>
-													</div> -->
 					</div>
 				</div>
 			</div>

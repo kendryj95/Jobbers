@@ -140,7 +140,6 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-md-9">
-								<div class="container">
 									<h4>Noticias</h4>
 									<ol class="breadcrumb no-bg m-b-1">
 										<li class="breadcrumb-item"><a href="./">inicio</a></li>
@@ -182,7 +181,6 @@
 											<?php endif ?>
 										</div>
 									</div>
-								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="card">
