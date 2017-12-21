@@ -21,7 +21,7 @@
 			switch($_REQUEST["opt"]) {
 				case 1:
 
-					$db->query("UPDATE trabajadores SET id_sexo='$_REQUEST[sex]', id_estado_civil='$_REQUEST[estadoCivil]', id_tipo_documento_identificacion='$_REQUEST[dni]', id_pais='$_REQUEST[country]', provincia='$_REQUEST[province]', localidad='$_REQUEST[city]', calle='$_REQUEST[street]', nombres='$_REQUEST[name]',  apellidos='$_REQUEST[lastName]', numero_documento_identificacion='$_REQUEST[numberdni]', cuil='$_REQUEST[cuil]', fecha_nacimiento='".date('Y-m-d', strtotime($_REQUEST['birthday']))."', telefono='$_REQUEST[phone]', telefono_alternativo='$_REQUEST[phoneAlt]', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=".$_SESSION["ctc"]["id"]);
+					$db->query("UPDATE trabajadores SET id_sexo='$_REQUEST[sex]', id_estado_civil='$_REQUEST[estadoCivil]', id_tipo_documento_identificacion='$_REQUEST[dni]', id_pais='$_REQUEST[country]', provincia='$_REQUEST[province]', localidad='$_REQUEST[city]', calle='$_REQUEST[street]', nombres='$_REQUEST[name]',  apellidos='$_REQUEST[lastName]', correo_electronico='$_REQUEST[email]', numero_documento_identificacion='$_REQUEST[numberdni]', cuil='$_REQUEST[cuil]', fecha_nacimiento='".date('Y-m-d', strtotime($_REQUEST['birthday']))."', telefono='$_REQUEST[phone]', telefono_alternativo='$_REQUEST[phoneAlt]', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=".$_SESSION["ctc"]["id"]);
 
 					//Actualizar nombre y apellido en la variable de session.
 					$_SESSION["ctc"]["name"] = $_REQUEST["name"];
