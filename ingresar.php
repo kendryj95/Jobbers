@@ -133,11 +133,11 @@
 							</div>
 							<div class="form-group">
 								<label for="p1" class="form-control-label">Nueva contraseña:</label>
-								<input type="text" class="form-control" id="p1">
+								<input type="password" class="form-control" id="p1">
 							</div>
 							<div class="form-group">
 								<label for="p2" class="form-control-label">Repita su nueva contraseña:</label>
-								<input type="text" class="form-control" id="p2">
+								<input type="password" class="form-control" id="p2">
 							</div>
 						</div>
 					</div>
