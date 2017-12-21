@@ -47,12 +47,12 @@
 		  });
 		</script>
 	</head>
-	<body class="auth-bg">
+	<body style="background-image: url('img/145.jpg'); background-size: cover;background-position: center; height: 100vh">
 		
 		<div class="auth">
 			<div class="auth-header">
-				<a href=".././"><img src="img/logo_d.png" alt="" style="width: 300px;"></a>
-				<h6>Bienvenido! Inicie sesión para acceder a su panel</h6>
+				<a href=".././"><img src="img/logo.png" alt="" style="width: 300px;"></a>
+				<h6 style="color: #000; font-weight:bolder;">Bienvenido! Inicie sesión para acceder a su panel</h6>
 			</div>
 			<div class="container-fluid">
 				<div class="row">
@@ -76,10 +76,10 @@
 							</div>
 							<div class="form-group clearfix">
 								<div class="pull-xs-left">
-									<a class="text-white font-90" href="javascript:void(0)" id="resetPass" data-toggle="modal" data-target="#forgotPass">Olvidó su contraseña?</a>
+									<a class="font-90" style="color: #000" href="javascript:void(0)" id="resetPass" data-toggle="modal" data-target="#forgotPass">Olvidó su contraseña?</a>
 								</div>
 								<div class="pull-xs-right">
-									<a class="text-white font-90" href="registro.php">Registrar empresa</a>
+									<a class="font-90" style="color: #000" href="registro.php">Registrar empresa</a>
 								</div>
 							</div>
 						</div>

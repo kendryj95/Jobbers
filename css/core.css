@@ -3268,13 +3268,13 @@ footer .f-title {
 
 .auth {
     color: #fff;
+    padding: 25vh 0px;
 }
 
 .auth .auth-header {
-    margin-bottom: 6rem;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-    background-color: rgba(255, 255, 255, 0.05);
+    margin-bottom: 30px;
+    /*padding-top: 240px; */
+    /* background-color: rgba(255, 255, 255, 0.05); */
     text-align: center;
 }
 
@@ -3357,7 +3357,7 @@ footer .f-title {
 /* Profile */
 
 .profile-header .profile-header-cover {
-    height: 250px;
+    /* height: 250px; */
     background-color: #f3f7fc;
 }
 
@@ -3391,7 +3391,7 @@ footer .f-title {
 }
 
 .profile-card .list-group {
-    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    /* border-top: 1px solid rgba(0, 0, 0, 0.125); */
 }
 
 .profile-card .list-group-item {
@@ -8075,10 +8075,10 @@ a.text-grey:hover .underline {
 }
 
 .img-cover {
-    /* -webkit-background-size: cover;
-    background-size: cover; */
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    height: 50vh;
 }
 
 .img-fixed {
@@ -9629,6 +9629,10 @@ a.text-grey:hover .underline {
 
 .text-white {
     color: #fff;
+}
+
+.p-30 {
+    padding: 30px;
 }
 
 

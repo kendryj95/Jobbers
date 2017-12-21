@@ -28,19 +28,32 @@
 		</script>
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
-		<div class="wrapper">
+		<!-- <div class="wrapper"> -->
 		<!-- Sidebar -->
-		<?php require_once('includes/sidebar.php'); ?>
+		<?php if ($_SESSION['ctc']['type'] == 1):
+			require_once ('includes/sidebar.php');
+			?>
+			<style>
+				.site-content{
+					margin-left:220px !important;
+				}
+				@media(max-width: 1024px){
+					.site-content{
+						margin-left: 0px !important;
+					}
+				}
+			</style>
+			<?php endif ?>
 
 		<!-- Sidebar second -->
 		<?php require_once('includes/sidebar-second.php'); ?>
 
 		<!-- Header -->
 		<?php require_once('includes/header.php'); ?>
-			<div class="site-content">
+			<div class="site-content bg-white" style="margin-left: 0px;">
 				<!-- Content -->
 				<div class="content-area p-y-1">
-					<div class="container-fluid">
+					<div class="container">
 						<h4>Políticas de privacidad</h4>
 						<ol class="breadcrumb no-bg m-b-1">
 							<li class="breadcrumb-item"><a href="./">Inicio</a></li>
@@ -48,7 +61,7 @@
 						</ol>
 						<div class="box bg-white">
 							<div class="row m-b-0 m-md-b-1">
-								<div class="col-md-9">
+								<div class="col-md-12">
 									<div class="box-block">
 										<h5 class="m-b-1">Términos y condiciones</h5>
 										<?php echo $contenido; ?>
@@ -59,7 +72,7 @@
 				</div>
 				<?php require_once('includes/footer.php'); ?>
 			</div>
-		</div>
+		<!-- </div> -->
 		<?php require_once('includes/libs-js.php'); ?>
 	</body>
 </html>

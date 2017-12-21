@@ -117,38 +117,52 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 	</script>
 </head>
 <body class="large-sidebar fixed-sidebar fixed-header skin-5">
-	<div class="wrapper">
+	<!-- <div class="wrapper"> -->
 		<!-- Sidebar -->
-		<?php require_once('includes/sidebar.php'); ?>
+		<?php if ($_SESSION['ctc']['type'] == 1):
+			require_once ('includes/sidebar.php');
+			?>
+			<style>
+				.site-content{
+					margin-left:220px !important;
+				}
+				@media(max-width: 1024px){
+					.site-content{
+						margin-left: 0px !important;
+					}
+				}
+			</style>
+			<?php endif ?>
 
 		<!-- Sidebar second -->
 		<?php require_once('includes/sidebar-second.php'); ?>
 
 		<!-- Header -->
 		<?php require_once('includes/header.php'); ?>
-		<div class="site-content bg-white">
+		<div class="site-content bg-white" style="margin-left: 0px;">
 			<!-- Content -->
 			<div class="content-area p-y-1">
 				<div class="container-fluid">
-					<h4>Noticias</h4>
-					<ol class="breadcrumb no-bg m-b-1">
-						<li class="breadcrumb-item"><a href="./">inicio</a></li>
-						<?php if(isset($_REQUEST["n"])): ?>
-							<?php if($_REQUEST["n"] == "populares"): ?>
-								<li class="breadcrumb-item"><a href="noticias.php">Noticias</a></li>
-								<li class="breadcrumb-item active">Populares</li>
-							<?php else: ?>
-								<li class="breadcrumb-item"><a href="noticias.php">Noticias</a></li>
-								<li class="breadcrumb-item"><a href="categorias.php?c=<?php echo $noticia["nombre"] == "" ? "Sin-categoria-0" : "$noticia[nombre]-$noticia[id_cat]"; ?>"><?php echo ($noticia["nombre"] == "" ? "Sin categoría" : $noticia["nombre"]); ?></a></li>
-								<li class="breadcrumb-item active"><?php echo $noticia["titulo"]; ?></li>
-							<?php endif ?>
-						<?php else: ?>
-							<li class="breadcrumb-item active">Noticias</li>
-						<?php endif ?>
-					</ol>
 					<div class="row m-b-0 m-md-b-1">
 						<div class="col-md-9">
-							<div class="row m-b-0 m-md-b-1">
+								<div class="col-md-12">
+									<h4>Noticias</h4>
+									<ol class="breadcrumb no-bg m-b-1">
+										<li class="breadcrumb-item"><a href="./">inicio</a></li>
+										<?php if(isset($_REQUEST["n"])): ?>
+											<?php if($_REQUEST["n"] == "populares"): ?>
+												<li class="breadcrumb-item"><a href="noticias.php">Noticias</a></li>
+												<li class="breadcrumb-item active">Populares</li>
+											<?php else: ?>
+												<li class="breadcrumb-item"><a href="noticias.php">Noticias</a></li>
+												<li class="breadcrumb-item"><a href="categorias.php?c=<?php echo $noticia["nombre"] == "" ? "Sin-categoria-0" : "$noticia[nombre]-$noticia[id_cat]"; ?>"><?php echo ($noticia["nombre"] == "" ? "Sin categoría" : $noticia["nombre"]); ?></a></li>
+												<li class="breadcrumb-item active"><?php echo $noticia["titulo"]; ?></li>
+											<?php endif ?>
+										<?php else: ?>
+											<li class="breadcrumb-item active">Noticias</li>
+										<?php endif ?>
+									</ol>
+								</div>
 								<?php if(isset($_REQUEST["n"])): ?>
 									<?php if($_REQUEST["n"] == "populares"): ?>
 										<div class="card">
@@ -185,64 +199,50 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 											</div>
 										</div>
 									<?php else: ?>
-										
-										<div id="socialLinks">
-											<h5>Compartir publicación</h5>
-											<div id="fb-root"></div>
-											<script>(function(d, s, id) {
-												var js, fjs = d.getElementsByTagName(s)[0];
-												if (d.getElementById(id)) return;
-												js = d.createElement(s); js.id = id;
-												js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=335054620211948";
-												fjs.parentNode.insertBefore(js, fjs);
-											}(document, 'script', 'facebook-jssdk'));</script>
-											<div class="fb-share-button" data-href="http://www.jobbersargentina.com/noticias.php?<?php echo $_SERVER["QUERY_STRING"]; ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Compartir</a></div>
+										<div class="container">
+										<?php 
+											$permalink = urlencode("http://www.jobbersargentina.com/noticias.php?".$_SERVER["QUERY_STRING"]);
+										?>
+											<h4>Compartir Publicación</h4>
+											<div id="socialLinks">
+												<!-- Twitter -->
+												<a href="http://twitter.com/share?url=<?php echo $permalink;?>" target="_blank" class="share-btn twitter">
+													<i class="fa fa-twitter"></i>&nbsp Tweet
+												</a>
 
-											<style>
-												.IN-widget {
-													margin-left: 100px;
-													position: absolute;
-													z-index: 999;
-													margin-top: -8px;
-													width: 90px;
-													line-height: 1;
-													vertical-align: baseline;
-													display: inline-block;
-													text-align: center;
-												}
+												<!-- Google Plus -->
+												<a href="https://plus.google.com/share?url=<?php echo $permalink;?>" target="_blank" class="share-btn google-plus">
+													<i class="fa fa-google-plus"></i>&nbsp Compartir
+												</a>
 
-												.IN-widget span {
-													height: 26px !important;
-												}
+												<!-- Facebook -->
+												<a href="http://www.facebook.com/sharer/sharer.php?u=<?php echo $permalink;?>" target="_blank" class="share-btn facebook">
+													<i class="fa fa-facebook"></i>&nbsp Compartir
+												</a>
 
-												.IN-widget [id$=link] {
-													height: 26px !important;
-												}
-
-												.IN-widget [id$=logo] {
-													height: 28px !important;
-													width: 26px !important;
-													background-position: 3px -591px !important;
-												}
-											</style>
-											<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: es_ES</script>
-											<script type="IN/Share" data-url="http://www.jobbersargentina.com/noticias.php?<?php echo $_SERVER["QUERY_STRING"]; ?>"></script>
+												<!-- LinkedIn -->
+												<a href="http://www.linkedin.com/shareArticle?url=<?php echo $permalink;?>" target="_blank" class="share-btn linkedin">
+													<i class="fa fa-linkedin"></i>&nbsp Compartir
+												</a>
+											</div>
 										</div>
-										<div class="box bg-white post post-1">
-											<div class="p-img img-cover" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
-												<!--<span class="tag tag-danger">Lifestyle</span>-->
-												<div class="p-info clearfix">
-													<div class="pull-xs-left">
-														<span class="small text-uppercase"><?php echo date('d/m/Y', strtotime($noticia["fecha_actualizacion"])); ?></span>
-													</div>
-													<div class="pull-xs-right">
-														<span><i class="ti-book"></i><?php echo $noticia["veces_leido"]; ?></span>
+										<div class="container">
+											<div class="box bg-white post post-1">
+												<div class="p-img img-cover" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
+													<!--<span class="tag tag-danger">Lifestyle</span>-->
+													<div class="p-info clearfix">
+														<div class="pull-xs-left">
+															<span class="small text-uppercase"><?php echo date('d/m/Y', strtotime($noticia["fecha_actualizacion"])); ?></span>
+														</div>
+														<div class="pull-xs-right">
+															<span><i class="ti-book"></i><?php echo $noticia["veces_leido"]; ?></span>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="p-content">
-												<h5><a class="text-black" href="#"><?php echo $noticia["titulo"]; ?></a></h5>
-												<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
+												<div class="p-content">
+													<h5><a class="text-black" href="#"><?php echo $noticia["titulo"]; ?></a></h5>
+													<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
+												</div>
 											</div>
 										</div>
 									<?php endif ?>
@@ -253,11 +253,11 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 											<div class="col-md-4">
 												<div class="box bg-white post post-3">
 													<div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);"></div>
-													<div class="p-content">
+													<div class="p-content" style="min-height: 190px;">
 														<h5><a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><?php echo $n["titulo"]; ?></a></h5>
 														<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr($n["descripcion"], 0, 100)."...") : $n["descripcion"]; ?></p>
 														<p class="small text-uppercase text-muted"><?php echo date('d/m/Y', strtotime($n["fecha_actualizacion"])); ?></p>
-														<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>" class="btn btn-success label-right">leer más <span class="btn-label"><i class="ti-angle-right"></i></span></a>
+														<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>" class="btn btn-success label-right">Leer más <span class="btn-label"><i class="ti-angle-right"></i></span></a>
 													</div>
 													<div class="p-info clearfix">
 														<div class="pull-xs-right">
@@ -276,12 +276,8 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										<?php endforeach ?>
 									<?php endif ?>
 								<?php endif ?>
-							</div>
 						</div>
-						<!-- <div class="container-fluid">
-							<div class="clearfix"></div>
-							<div class="row"> -->
-								<div class="col-md-3">
+						<div class="col-md-3">
 									<div class="card">
 										<div class="card-header text-uppercase"><b>NOTICIAS POPULARES</b></div>
 										<div class="items-list">
@@ -311,7 +307,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 									</div>
 									<div class="card">
-										<div class="card-header text-uppercase"><b>CATEGORÍAS</b></div>
+										<div class="card-header text-uppercase" style="margin-top: 35px;"><b>CATEGORÍAS</b></div>
 										<div class="items-list">
 											<?php if($categorias): ?>
 												<?php foreach($categorias as $c): ?>
@@ -334,14 +330,12 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 									</div>
 								</div>
-							<!-- </div>
-													</div> -->
 					</div>
 				</div>
 			</div>
 			<?php require_once('includes/footer.php'); ?>
 		</div>
-	</div>
+	<!-- </div> -->
 
 	<?php require_once('includes/libs-js.php'); ?>
 </body>
