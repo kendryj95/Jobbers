@@ -199,7 +199,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 											</div>
 										</div>
 									<?php else: ?>
-										<div class="container">
+										<div>
 										<?php 
 											$permalink = urlencode("http://www.jobbersargentina.com/noticias.php?".$_SERVER["QUERY_STRING"]);
 										?>
@@ -226,7 +226,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 												</a>
 											</div>
 										</div>
-										<div class="container">
+										<div>
 											<div class="box bg-white post post-1">
 												<div class="p-img img-cover" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
 													<!--<span class="tag tag-danger">Lifestyle</span>-->
@@ -253,7 +253,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 											<div class="col-md-4">
 												<div class="box bg-white post post-3">
 													<div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);"></div>
-													<div class="p-content" style="min-height: 190px;">
+													<div class="p-content" style="min-height: 220px;">
 														<h5><a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><?php echo $n["titulo"]; ?></a></h5>
 														<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr($n["descripcion"], 0, 100)."...") : $n["descripcion"]; ?></p>
 														<p class="small text-uppercase text-muted"><?php echo date('d/m/Y', strtotime($n["fecha_actualizacion"])); ?></p>

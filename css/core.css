@@ -2377,10 +2377,11 @@ footer .f-title {
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.posts-list .pl-item .pli-img {
+
+/* .posts-list .pl-item .pli-img {
     position: relative;
     width: 150px;
-}
+} */
 
 .posts-list .pl-item a .pli-img {
     -webkit-transition: all 0.2s ease-in-out;
@@ -9817,8 +9818,8 @@ a.text-grey:hover .underline {
     background: linear-gradient(to right, rgba(18, 161, 230, 1) 0%, rgba(18, 161, 230, 1) 6%, rgba(46, 49, 146, 1) 94%, rgba(46, 49, 146, 1) 100%);
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#12a1e6', endColorstr='#2e3192', GradientType=1);
     text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
-    border-top-right-radius: 16px;
-    border-top-left-radius: 16px;
+    border-top-right-radius: 16px !important;
+    border-top-left-radius: 16px !important;
     text-align: center;
     border: 2px solid #245AB1;
     border-bottom: none;
@@ -9830,8 +9831,8 @@ a.text-grey:hover .underline {
     background: linear-gradient(135deg, rgba(140, 51, 16, 1) 8%, rgba(240, 183, 161, 1) 51%, rgba(117, 34, 1, 1) 93%) !important;
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#8c3310', endColorstr='#752201', GradientType=1);
     text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
-    border-top-right-radius: 16px;
-    border-top-left-radius: 16px;
+    border-top-right-radius: 16px !important;
+    border-top-left-radius: 16px !important;
     text-align: center;
     border: 2px solid #9e5e22;
     border-bottom: none;
@@ -9841,8 +9842,8 @@ a.text-grey:hover .underline {
     /* background-color: rgba(205, 127, 50, 1) !important; */
     background: linear-gradient(135deg, rgba(130, 140, 149, 1) 0%, rgba(40, 52, 59, 1) 0%, rgba(181, 189, 200, 1) 50%, rgba(40, 52, 59, 1) 99%);
     text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
-    border-top-right-radius: 16px;
-    border-top-left-radius: 16px;
+    border-top-right-radius: 16px !important;
+    border-top-left-radius: 16px !important;
     text-align: center;
     border: 2px solid #3A464D;
     border-bottom: none;
@@ -9852,8 +9853,8 @@ a.text-grey:hover .underline {
     /* background-color: rgba(205, 127, 50, 1) !important; */
     background: -webkit-linear-gradient(-45deg, rgba(182, 141, 76, 1) 0%, rgba(182, 141, 76, 1) 12%, rgba(242, 205, 150, 1) 53%, rgba(182, 141, 76, 1) 92%, rgba(182, 141, 76, 1) 100%);
     text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
-    border-top-right-radius: 16px;
-    border-top-left-radius: 16px;
+    border-top-right-radius: 16px !important;
+    border-top-left-radius: 16px !important;
     text-align: center;
     border: 2px solid #9e5e22;
     border-bottom: none;
@@ -9927,7 +9928,7 @@ a.text-grey:hover .underline {
     background: linear-gradient(to right, rgba(18, 161, 230, 1) 0%, rgba(18, 161, 230, 1) 6%, rgba(46, 49, 146, 1) 94%, rgba(46, 49, 146, 1) 100%);
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#12a1e6', endColorstr='#2e3192', GradientType=1);
     text-shadow: 1px 1px 0 #2E3192, -1px 1px 0 #2E3192, 1px -1px 0 #2E3192, -1px -1px 0 #2E3192, 0px 1px 0 #2E3192, 0px -1px 0 #2E3192, -1px 0px 0 #2E3192, 1px 0px 0 #2E3192, 1px 1px 0 #2E3192, -1px 1px 0 #2E3192, 1px -1px 0 #2E3192, -1px -1px 0 #2E3192, 0px 1px 0 #2E3192, 0px -1px 0 #2E3192, -1px 0px 0 #2E3192, 1px 0px 0 #2E3192, 1px 1px 0 #2E3192, -1px 1px 0 #2E3192, 1px -1px 0 #2E3192, -1px -1px 0 #2E3192, 1px 1px 0 #2E3192, -1px 1px 0 #2E3192, 1px -1px 0 #2E3192, -1px -1px 0 #2E3192;
-    border-radius: 15px;
+    border-radius: 15px !important;
     border: 2px solid #245AB1;
     height: 70px;
 }
@@ -9937,7 +9938,7 @@ a.text-grey:hover .underline {
     background: linear-gradient(135deg, rgba(140, 51, 16, 1) 8%, rgba(240, 183, 161, 1) 51%, rgba(117, 34, 1, 1) 93%) !important;
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#8c3310', endColorstr='#752201', GradientType=1);
     text-shadow: 1px 1px 0 #752201, -1px 1px 0 #752201, 1px -1px 0 #752201, -1px -1px 0 #752201, 0px 1px 0 #752201, 0px -1px 0 #752201, -1px 0px 0 #752201, 1px 0px 0 #752201, 1px 1px 0 #752201, -1px 1px 0 #752201, 1px -1px 0 #752201, -1px -1px 0 #752201, 0px 1px 0 #752201, 0px -1px 0 #752201, -1px 0px 0 #752201, 1px 0px 0 #752201, 1px 1px 0 #752201, -1px 1px 0 #752201, 1px -1px 0 #752201, -1px -1px 0 #752201, 1px 1px 0 #752201, -1px 1px 0 #752201, 1px -1px 0 #752201, -1px -1px 0 #752201;
-    border-radius: 15px;
+    border-radius: 15px !important;
     border: 2px solid #9e5e22;
     height: 70px;
 }
@@ -9945,7 +9946,7 @@ a.text-grey:hover .underline {
 .footer-silver {
     background: linear-gradient(135deg, rgba(130, 140, 149, 1) 0%, rgba(40, 52, 59, 1) 0%, rgba(181, 189, 200, 1) 50%, rgba(40, 52, 59, 1) 99%);
     text-shadow: 1px 1px 0 #404B53, -1px 1px 0 #404B53, 1px -1px 0 #404B53, -1px -1px 0 #404B53, 0px 1px 0 #404B53, 0px -1px 0 #404B53, -1px 0px 0 #404B53, 1px 0px 0 #404B53, 1px 1px 0 #404B53, -1px 1px 0 #404B53, 1px -1px 0 #404B53, -1px -1px 0 #404B53, 0px 1px 0 #404B53, 0px -1px 0 #404B53, -1px 0px 0 #404B53, 1px 0px 0 #404B53, 1px 1px 0 #404B53, -1px 1px 0 #404B53, 1px -1px 0 #404B53, -1px -1px 0 #404B53, 1px 1px 0 #404B53, -1px 1px 0 #404B53, 1px -1px 0 #404B53, -1px -1px 0 #404B53;
-    border-radius: 15px;
+    border-radius: 15px !important;
     border: 2px solid #3A464D;
     height: 70px;
 }
@@ -9953,7 +9954,7 @@ a.text-grey:hover .underline {
 .footer-gold {
     background: -webkit-linear-gradient(-45deg, rgba(182, 141, 76, 1) 0%, rgba(182, 141, 76, 1) 12%, rgba(242, 205, 150, 1) 53%, rgba(182, 141, 76, 1) 92%, rgba(182, 141, 76, 1) 100%);
     text-shadow: 1px 1px 0 #B68D4C, -1px 1px 0 #B68D4C, 1px -1px 0 #B68D4C, -1px -1px 0 #B68D4C, 0px 1px 0 #B68D4C, 0px -1px 0 #B68D4C, -1px 0px 0 #B68D4C, 1px 0px 0 #B68D4C, 1px 1px 0 #B68D4C, -1px 1px 0 #B68D4C, 1px -1px 0 #B68D4C, -1px -1px 0 #B68D4C, 0px 1px 0 #B68D4C, 0px -1px 0 #B68D4C, -1px 0px 0 #B68D4C, 1px 0px 0 #B68D4C, 1px 1px 0 #B68D4C, -1px 1px 0 #B68D4C, 1px -1px 0 #B68D4C, -1px -1px 0 #B68D4C, 1px 1px 0 #B68D4C, -1px 1px 0 #B68D4C, 1px -1px 0 #B68D4C, -1px -1px 0 #B68D4C;
-    border-radius: 15px;
+    border-radius: 15px !important;
     border: 2px solid #9e5e22;
     height: 70px;
 }
@@ -9972,6 +9973,19 @@ a.text-grey:hover .underline {
     border-radius: 15px;
     border: 2px solid #2359B1;
     height: 65px;
+}
+
+.btn-label-left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 0.5rem 0;
+    width: 33px;
+    text-align: center;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: inherit;
+    left: 0px;
 }
 
 

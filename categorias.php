@@ -153,15 +153,15 @@
 												<?php foreach($noticias as $n): ?>
 													<div class="pl-item">
 														<div class="media">
-															<div class="media-left">
+															<div class="media-left col-md-5">
 																<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>">
 																	<div class="pli-img">
-																		<img class="img-fluid" src="img/<?php echo $n["imagen"]; ?>">
+																		<img class="img-fluid" style="height: 100%; width: 100%" src="img/<?php echo $n["imagen"]; ?>">
 																		<!--<div class="tag tag-warning">Lifestyle</div>-->
 																	</div>
 																</a>
 															</div>
-															<div class="media-body">
+															<div class="col-md-7">
 																<div class="pli-content">
 																	<h5><a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><?php echo $n["titulo"]; ?></a></h5>
 																	<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr(0, 100, $n["descripcion"])."...") : $n["descripcion"]; ?></p>

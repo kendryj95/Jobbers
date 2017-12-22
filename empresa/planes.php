@@ -100,7 +100,7 @@
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">  Ideal para búsquedas de perfiles habituales.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Ideal para búsquedas de perfiles habituales.</span>
 										</li>
 										<li>
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Filtros Personalizados.</span>
@@ -110,7 +110,7 @@
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="tepriceice"> CHAT INTERNO CON CANDIDATOS.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">CHAT INTERNO CON CANDIDATOS.</span>
 										</li>
 									</ul>
 									<div class="card-footer footer-free">
@@ -133,7 +133,7 @@
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">30 días de publicación.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">   40 CVs disponibles para descargar en un mes.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">40 CVs disponibles para descargar en un mes.</span>
 										</li>
 										<li>
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Cubrí las vacantes de forma más economica.</span>
@@ -146,19 +146,19 @@
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Visibilidad en la home</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Link de acceso a pagina de la empresa.</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">  Ideal para búsquedas de perfiles habituales.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Ideal para búsquedas de perfiles habituales.</span>
 										</li>
 										<li>
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Filtros Personalizados.</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Opcion de publicar un producto de venta o video institucional.</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">CHAT INTERNO CON CANDIDATOS.</span>
 										</li>
 									</ul>
 									<div class="card-footer footer-bronce">
@@ -179,35 +179,35 @@
 									<ul class="price-card-list p-l-0 m-b-0 price-list-silver">
 										
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> 30 días de publicación.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">30 días de publicación.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> 100 CVs disponibles para descargar en un mes.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">100 CVs disponibles para descargar en un mes.</span>
 										</li>
 										<li>
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Opta por  mayor visibilidad en los avisos.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Incluye logo corporativo tamaño mediano en lugar privilegiado.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño mediano en lugar privilegiado.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Buena Visibilidad en la home.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Buena Visibilidad en la home.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Link de acceso a pagina de la empresa.</span>
 										</li>
 										<li>
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Ideal para busqueda de perfiles habituales y específicos.</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Filtros Personalizados.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Filtros Personalizados.</span>
 										</li>
 				
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Opcion de publicar un producto de venta o video institucional.</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">CHAT INTERNO CON CANDIDATOS.</span>
 										</li>
 									</ul>
 									<div class="card-footer footer-silver">
@@ -227,23 +227,23 @@
 									</div>
 									<ul class="price-card-list p-l-0 m-b-0 price-list-gold">
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> 35 días de publicación.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">35 días de publicación.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> No tendras limites de descarga para CVs</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">No tendras limites de descarga para CVs</span>
 										</li>
 										<li>
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Máxima visibilidad , volumen e imagen en todos tus avisos</span>
 										</li>
 										
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Incluye logo corporativo tamaño grande en lugar preferencial.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño grande en lugar preferencial.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Exposición en principal home.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Exposición en principal home.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Link de acceso a pagina de la empresa.</span>
 										</li>
 										
 										<li>
@@ -253,7 +253,7 @@
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Filtros Personalizados.</span>
 										</li>
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Opcion de publicar un producto de venta o video institucional.</span>
 										</li>
 										
 										<li>

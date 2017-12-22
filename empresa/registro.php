@@ -50,9 +50,9 @@
 			.form-control {
 				border: 1px solid rgba(0,0,0,.15) !important;
 			}
-			.card {
-				border-radius: 6px;
-			}
+			/* .card {
+				border-radius: 0px;
+			} */
 			.has-error {
  				box-shadow: -1px 1px 10px 0px rgba(255,51,51,.7);
 			}
@@ -169,149 +169,155 @@
 								<div id="step2" style="display: none;">
 									<h4 class="text-muted">Planes</h4>
 									<div class="row">
-										<div class="col-md-6">
-											<div class="card price-card">
-												<div class="card-header price-card-header  bg-primary text-xs-center">
-													<h6 class="text-uppercase">Gratis</h6>
-													<h3 class="m-b-0">
+										<div class="col-md-6" style="margin-bottom: 20px;">
+											<div class="card price-card" style="border-radius: 0px; border: none;">
+												<div class="card-header price-card-header  bg-primary text-xs-center header-free" style="width: 100%;height: 99px;">
+													<h4 class="text-uppercase">Gratis</h4>
+													<h3 class="m-b-0 h3-price">
 														<sup>$</sup>
 														<span class="text-big">0</span>
 														<span class="text-small">/ 1 mes</span>
 													</h3>
 												</div>
-												<ul class="price-card-list p-l-0 m-b-0">
+												<ul class="price-card-list p-l-0 price-list-free">
 													<li>
-														<i class="fa fa-remove text-muted m-r-0-25"></i> <span class="text-muted">Cubrí las vacantes de forma más economica.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">15 días de publicacion</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">15 días de publicacion</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">10 CVs disponibles para descargar en un mes.</span>
 													</li>
 													<li>
-														<i class="fa fa-remove text-muted m-r-0-25"></i> <span class="text-muted">Incluye logo corporativo en home tamaño chico</span>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Visibilidad en la home</span>
 													</li>
 													<li>
-														<i class="fa fa-remove text-muted m-r-0-25"></i> <span class="text-muted">Visibilidad en la home</span>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Incluye logo corporativo en home tamaño chico en la pantalla principal</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">10 CVs disponibles para descargar en un mes.</span>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
+													</li>													
+													<li>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
 													</li>
 													<li>
-														<i class="fa fa-remove text-muted m-r-0-25"></i> <span class="text-muted">Filtros Personalizados.</span>
-													</li>
-												</ul>
-												<div class="card-footer">
-													<a href="javascript:void(0)" class="btn btn-primary btn-block btn-lg addPlan" data-target="1">Seleccionar</a>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-6" style="margin-bottom:20px;">
-											<div class="card price-card">
-												<div class="card-header price-card-header bg-primary text-xs-center" style="width: 100%;height: 99px;">
-													<h6 class="text-uppercase">Bronce</h6>
-													<h3 class="m-b-0">
-														<sup>$</sup>
-														<span class="text-big" style="font-size: 28px;"><?php echo $planes[0]["precio"]; ?></span>
-														<span class="text-small">/ mes</span>
-													</h3>
-												</div>
-												<ul class="price-card-list p-l-0 m-b-0">
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">Cubrí las vacantes de forma más economica.</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">30 días de publicación.</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">Incluye logo corporativo en home tamaño chico.</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">Visibilidad en la home</span>
-													</li>
-													<li>
-														<i class="fa fa-remove text-muted m-r-0-25"></i> <span class="text-muted">Ideal para perfiles específicos.</span>
-													</li>
-													<li>
-														<i class="fa fa-remove text-muted m-r-0-25"></i> <span class="text-muted"> Link de acceso a pagina de la empresa.</span>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
 													</li>
 												</ul>
-												<div class="card-footer">
-													<a href="javascript:void(0)" class="btn btn-outline-primary btn-block btn-lg addPlan" data-target="2">Seleccionar</a>
+												<div class="footer-free">
+													<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="1">Seleccionar</a>
 												</div>
 											</div>
 										</div>
 										<div class="col-md-6" style="margin-bottom: 20px;">
-											<div class="card price-card">
-												<div class="card-header price-card-header bg-primary text-xs-center" style="width: 100%;height: 99px;">
-													<h6 class="text-uppercase">Plata</h6>
-													<h3 class="m-b-0">
+											<div class="card price-card" style="border-radius: 0px; border: none;">
+												<div class="card-header price-card-header bg-primary text-xs-center header-bronce" style="width: 100%;height: 99px;">
+													<h4 class="text-uppercase">Bronce</h4>
+													<h3 class="m-b-0 h3-price">
 														<sup>$</sup>
-														<span class="text-big" style="font-size: 28px;"><?php echo $planes[1]["precio"]; ?></span>
-														<span class="text-small">/ mes</span>
+														<span class="text-big">180</span>
+														<span class="text-small">/ 1 mes</span>
 													</h3>
 												</div>
-												<ul class="price-card-list p-l-0 m-b-0">
+												<ul class="price-card-list p-l-0 price-list-bronce">
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">Opta por  mayor visibilidad en los avisos.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">30 días de publicacion</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">Link de acceso a tu empresa.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">40 CVs disponibles para descargar en un mes.</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> 30 días de publicación.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Visibilidad en la home</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> Buena Visibilidad.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño chico en la pantalla principal</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">Ideal para perfiles específicos.</span>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
+													</li>													
+													<li>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> Incluye logo corporativo tamaño mediano en lugar privilegiado.</span>
-													</li>
-													<li>
-														<i class="fa fa-remove text-muted m-r-0-25"></i> <span class="text-muted"> Opcion de publicar un producto de venta o video institucional.</span>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
 													</li>
 												</ul>
-												<div class="card-footer">
-													<a href="javascript:void(0)" class="btn btn-outline-primary btn-block btn-lg addPlan" data-target="3">Seleccionar</a>
+												<div class="footer-bronce">
+													<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="2">Seleccionar</a>
 												</div>
 											</div>
 										</div>
 										<div class="col-md-6" style="margin-bottom: 20px;">
-											<div class="card price-card">
-												<div class="card-header price-card-header bg-primary text-xs-center" style="width: 100%;height: 99px;">
-													<h6 class="text-uppercase">Oro</h6>
-													<h3 class="m-b-0">
+											<div class="card price-card" style="border-radius: 0px; border: none;">
+												<div class="card-header price-card-header bg-primary text-xs-center header-silver" style="width: 100%;height: 99px;">
+													<h4 class="text-uppercase">Plata</h4>
+													<h3 class="m-b-0 h3-price">
 														<sup>$</sup>
-														<span class="text-big" style="font-size: 28px;"><?php echo $planes[2]["precio"]; ?></span>
-														<span class="text-small">/ mes</span>
+														<span class="text-big">350</span>
+														<span class="text-small">/ 1 mes</span>
 													</h3>
 												</div>
-												<ul class="price-card-list p-l-0 m-b-0">
+												<ul class="price-card-list p-l-0 price-list-silver">
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted">Máxima visibilidad , volumen e imagen</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">30 días de publicacion</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> 35 días de publicación.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">100 CVs disponibles para descargar en un mes.</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> Exposición en principal home.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Buena visibilidad en la home</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> Máximo destaque.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño mediano en lugar privilegiado</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> Incluye logo corporativo tamaño grande en lugar preferencial.</span>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
+													</li>													
+													<li>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
 													</li>
 													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> Link de acceso a pagina de la empresa.</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-muted"> Opcion de publicar un producto de venta o video institucional.</span>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
 													</li>
 												</ul>
-												<div class="card-footer">
-													<a href="javascript:void(0)" class="btn btn-outline-primary btn-block btn-lg addPlan" data-target="4">Seleccionar</a>
+												<div class="footer-silver">
+													<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="3">Seleccionar</a>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6" style="margin-bottom: 20px;">
+											<div class="card price-card" style="border-radius: 0px; border: none;">
+												<div class="card-header price-card-header bg-primary text-xs-center header-gold" style="width: 100%;height: 99px;">
+													<h4 class="text-uppercase">Oro</h4>
+													<h3 class="m-b-0 h3-price">
+														<sup>$</sup>
+														<span class="text-big">500</span>
+														<span class="text-small">/ 1 mes</span>
+													</h3>
+												</div>
+												<ul class="price-card-list p-l-0 price-list-gold">
+													<li>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">35 días de publicacion</span>
+													</li>
+													<li>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">No tendrás limites de descarga para CVs.</span>
+													</li>
+													<li>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Exposicion en principal home</span>
+													</li>
+													<li>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño grande en lugar preferencial</span>
+													</li>
+													<li>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
+													</li>													
+													<li>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
+													</li>
+													<li>
+														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
+													</li>
+												</ul>
+												<div class="footer-gold">
+													<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="4">Seleccionar</a>
 												</div>
 											</div>
 										</div>
@@ -327,7 +333,7 @@
 											
 											<div id="containerFree">
 												<h4 class="text-muted">Datos del plan</h4>
-												<ul class="list-group list-group-flush">
+												<ul class="list-group list-group-flush" style="border-left: 1px solid lightgrey; border-right: 1px solid lightgrey">
 													<li class="list-group-item b-l-0 b-r-0 text-muted">Tipo: <strong>Gratis</strong></li>
 													<li class="list-group-item b-l-0 b-r-0 text-muted">Precio: 0$</li>
 													<li class="list-group-item b-l-0 b-r-0 text-muted">Valido por: 1 mes</li>
@@ -355,7 +361,7 @@
 								</div>
 
 								<div class="clearfix">
-									<button type="button" class="btn btn-outline-primary label-right pull-xs-left" id="back" data-value="1" style="display: none;"> <i class="ti-angle-left" style="padding-right: 15px;"></i> <span class="btn-label" style="min-width: 50px;">Atrás</span></button>
+									<button type="button" class="btn btn-outline-primary label-left pull-xs-left" id="back" data-value="1"><span class="btn-label-left"><i class="ti-angle-left"></i></span>Anterior</button>
 									<button type="button" class="btn btn-outline-primary label-right pull-xs-right" id="next" data-value="1">Siguiente <span class="btn-label"><i class="ti-angle-right"></i></span></button>
 								</div>
 							</div>
