@@ -1,6 +1,8 @@
 <?php
-	require_once("$_SERVER[DOCUMENT_ROOT]/classes/DatabasePDOInstance.function.php");
-	require_once("$_SERVER[DOCUMENT_ROOT]/classes/Chat.class.php");
+	require_once("../../classes/DatabasePDOInstance.function.php");
+	// require_once("$_SERVER[DOCUMENT_ROOT]/classes/DatabasePDOInstance.function.php");
+	require_once("../../classes/Chat.class.php");
+	// require_once("$_SERVER[DOCUMENT_ROOT]/classes/Chat.class.php");
 
 	define('GET_MESSAGES', 1);
 	define('ADD_MESSAGE', 2);
