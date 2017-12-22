@@ -1,7 +1,7 @@
 <?php
 
-require_once("../vendor/phpmailer/class.phpmailer.php");
-require_once("../vendor/phpmailer/class.smtp.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/vendor/phpmailer/class.phpmailer.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/vendor/phpmailer/class.smtp.php");
 
 Class Email {
 
