@@ -173,7 +173,7 @@ $publicaciones = $db->getAll("
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
             
-            <div class="container bg-white">
+            <div class="site-content bg-white" style="padding-top: 0px;">
                 <!-- Content -->
                 <div class="content-area p-b-1">
                     <div class="container-fluid">

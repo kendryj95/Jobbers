@@ -51,8 +51,8 @@
 	}
 </style>
 
-<div class="site-header">
-<nav class="navbar navbar-default">
+<div class="site-header" style="border-bottom:1px solid #DFDFDF;">
+<nav class="navbar navbar-default" style=" margin-bottom: 0px;">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -79,7 +79,7 @@
 			<li>
 				<div class="header-form m-md-r-1 padding-mobile">
 					<form id='busqueda_form'>
-						<input type="text" id="search-input" class="form-control b-a" placeholder="Búsqueda">
+						<input type="text" id="search-input" class="form-control b-a" style="box-shadow: none" placeholder="Búsqueda">
 						<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
 							<i class="ti-search"></i>
 						</a>
@@ -97,13 +97,13 @@
 						$color = "";
 						switch($_SESSION["ctc"]["plan"]["id_plan"]) {
 							case 2:
-								$color = "background-color: #cd7f32;";
+								$color = "color: #cd7f32;";
 								break;
 							case 3:
-								$color = "background-color: #8a9597;";
+								$color = "color: #8a9597;";
 								break;
 							case 4:
-								$color = "background-color: #FFD700;";
+								$color = "color: #FFD700;";
 								break;
 						}
 					?>
@@ -127,7 +127,7 @@
 						<li>
 							<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
 								<span>Plan:</span>
-								<span class="tag tag-success top" style="top: 0; <?php echo $color; ?>"><?php echo $_SESSION["ctc"]["plan"]["nombre"]; ?></span>
+								<span class="tag top" style="top: 0;"><i class="fa fa-trophy icon-free" style="<?php echo $color; ?>; font-size: 26px" aria-hidden="true"></i></span>
 							</a>
 						</li>
 						<li>

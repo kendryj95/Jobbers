@@ -190,7 +190,7 @@
 														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Visibilidad en la home</span>
 													</li>
 													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Incluye logo corporativo en home tamaño chico en la pantalla principal</span>
+														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño chico en la pantalla principal</span>
 													</li>
 													<li>
 														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
@@ -360,7 +360,7 @@
 									</div>
 								</div>
 
-								<div class="clearfix">
+								<div class="clearfix" style="margin-top: 40px;">
 									<button type="button" class="btn btn-outline-primary label-left pull-xs-left" id="back" data-value="1"><span class="btn-label-left"><i class="ti-angle-left"></i></span>Anterior</button>
 									<button type="button" class="btn btn-outline-primary label-right pull-xs-right" id="next" data-value="1">Siguiente <span class="btn-label"><i class="ti-angle-right"></i></span></button>
 								</div>

@@ -51,8 +51,8 @@
 		
 		<div class="auth">
 			<div class="auth-header">
-				<a href=".././"><img src="img/logo.png" alt="" style="width: 300px;"></a>
-				<h6 style="color: #000; font-weight:bolder;">Bienvenido! Inicie sesión para acceder a su panel</h6>
+				<a href=".././"><img src="img/logo.png" alt="Logo" style="width: 300px; background-color: rgba(255, 255, 255, 0.4)"></a>
+				<h6 class="h6-login-empresas">Bienvenido! Inicie sesión para acceder a su panel</h6>
 			</div>
 			<div class="container-fluid">
 				<div class="row">
