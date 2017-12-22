@@ -439,18 +439,20 @@
                                 </div>
                         <?php break; ?>
                         <?php endswitch; ?>
-						<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Trabajador</th>
-									<th>Fecha y hora</th>
-									<th>Acciones</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
+						<div class="table-responsive">
+							<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Trabajador</th>
+										<th>Fecha y hora</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
