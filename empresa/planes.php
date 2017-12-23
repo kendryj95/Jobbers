@@ -91,7 +91,7 @@
 										</li>
 										
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Incluye logo corporativo en home tamaño chico</span>
+											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño pequeño en pantalla principal.</span>
 										</li>
 										<li>
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Visibilidad en la home</span>
@@ -140,7 +140,7 @@
 										</li>
 										
 										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo en la pantalla principal y en tamaño chico.</span>
+											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño pequeño en pantalla principal.</span>
 										</li>
 										<li>
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Visibilidad en la home</span>
