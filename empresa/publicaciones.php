@@ -40,6 +40,9 @@
 	if($disps === false) {
 		$disps = array();
 	}
+
+	//victor queries
+	require('queries/queries.php');
 ?>
 
 <!DOCTYPE html>
@@ -55,12 +58,7 @@
 
 		<!-- Title -->
 		<title>JOBBERS - Publicaciones</title>
-		<?php require_once('../includes/libs-css.php'); ?>
-
-		<!-- <link rel="stylesheet" href="../vendor/DataTables/css/dataTables.bootstrap4.min.css">
-		<link rel="stylesheet" href="../vendor/DataTables/Responsive/css/responsive.bootstrap4.min.css">
-		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.dataTables.min.css">
-		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css"> -->
+		<?php require_once('../includes/libs-css.php'); ?> 
 
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/datatables.min.css"/>
 		
@@ -75,6 +73,11 @@
 			
 			#tablaPostulados {
 				width: 100% !important;
+			} 
+
+			.select_filtros
+			{
+				margin-bottom: 7px;padding-top: 0px;padding-bottom: 0px;
 			}
 		</style>
 
@@ -88,6 +91,7 @@
 	</head>
 
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
+
 		<div class="wrapper">
 
 			<!-- Preloader 
@@ -196,13 +200,7 @@
 						<ul class="nav nav-tabs nav-tabs-2">
 							<li class="nav-item">
 								<a class="nav-link active" href="#modal-agregar-publicacion-info" data-toggle="tab"><i class="ti-info text-muted m-r-0-25"></i> Información</a>
-							</li>
-							<!--<li class="nav-item">
-								<a class="nav-link" href="#modal-agregar-publicacion-imagenes" data-toggle="tab"><i class="ti-gallery text-muted m-r-0-25"></i> Imágenes</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#modal-agregar-publicacion-videos" data-toggle="tab"><i class="ti-video-clapper text-muted m-r-0-25"></i> Videos</a>
-							</li>-->
+							</li> 
 						</ul>
 						<div class="tab-content" style="padding: 25px;">
 						  <div id="modal-agregar-publicacion-info" class="tab-pane fade in active">
@@ -253,13 +251,7 @@
 								</div>
 								<div id="map" style="height: 250px;width: 100%;"></div>
 							</form>
-						  </div>
-						  <!--<div id="modal-agregar-publicacion-imagenes" class="tab-pane fade">
-							<h3>Imágenes</h3>
-						  </div>
-						  <div id="modal-agregar-publicacion-videos" class="tab-pane fade">
-							<h3>Videos</h3>
-						  </div>-->
+						  </div> 
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -337,13 +329,7 @@
 						<ul class="nav nav-tabs nav-tabs-2">
 							<li class="nav-item">
 								<a class="nav-link active" href="#modal-modificar-publicacion-info" data-toggle="tab"><i class="ti-info text-muted m-r-0-25"></i> Información</a>
-							</li>
-							<!--<li class="nav-item">
-								<a class="nav-link" href="#modal-modificar-publicacion-imagenes" data-toggle="tab"><i class="ti-gallery text-muted m-r-0-25"></i> Imágenes</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#modal-modificar-publicacion-videos" data-toggle="tab"><i class="ti-video-clapper text-muted m-r-0-25"></i> Videos</a>
-							</li>-->
+							</li> 
 						</ul>
 						<div class="tab-content" style="padding: 25px;">
 						  <div id="modal-modificar-publicacion-info" class="tab-pane fade in active">
@@ -412,7 +398,7 @@
 		</div>
 		
 		<div id="modal-postulados" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg" style="width: 80%;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -439,20 +425,133 @@
                                 </div>
                         <?php break; ?>
                         <?php endswitch; ?>
-						<div class="table-responsive">
+ 
+						 
+                       <div class="row" >
+                       <div class="col-sm-12"><p style="background-color: #3e70c9;padding: 4px;text-align: center;color: #fff;"><strong>Busqueda avanzada</strong></p></div>
+                       	 <div class="col-sm-12" style="padding: 0px;margin-bottom: 20px;">
+                       	 	<div class="col-sm-2">
+                       	 		<label>Sexo</label><br/>
+                        	<select  onChange="filtrar(this.value,5)" class="_filtro form-control select_filtros" >
+                        		<option value="">Ambos</option>
+                        		<option value="1">Masculino</option>
+                        		<option value="2">Femenino</option>
+                        	</select>
+                       	 	<!--                       	
+                        	<label>Calificación</label><br/>
+                        	<select  onChange="filtrar(this.value,7)" class="_filtro form-control select_filtros" style="">
+                        		<option value="">Todas</option>
+								<option value="1" style="color: #ffde00;">★</option>
+								<option value="2" style="color: #ffde00;">★★</option>
+								<option value="3" style="color: #ffde00;">★★★</option>
+								<option value="4" style="color: #ffde00;">★★★★</option>
+								<option value="5" style="color: #ffde00;">★★★★★</option>
+
+
+                        	</select>
+								--> 
+                        	
+                        	
+                        	</div> 
+
+                        	<div class="col-sm-2">
+                        	<label>Idioma</label><br/>
+                        	<select onChange="filtrar(this.value,8)" name="select_idiomas" class="_filtro form-control select_filtros" >
+                        	<option value="">Todos</option>
+                        		<?php
+                        			foreach ($datos_idiomas as $datos) {
+                        				echo "<option value='".$datos["id"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>
+                        	</select> 
+
+                        	</div>
+                        	<div class="col-sm-2">
+                        	<label>Edad</label><br/>
+                        	<select onChange="test(this.value)" id="edad" name="edad" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<option value="1823">De 18 a 23 años</option>
+                        		<option value="2430">De 24 a 30 años</option>
+                        		<option value="3136">De 31 a 36 años</option>
+                        		<option value="3745">De 37 a 45 años</option>
+                        	</select> 
+                        </div>
+                        <div class="col-sm-2">
+                        		
+                        	<label>Area de estudio</label><br/>
+                        	<select onChange="filtrar(this.value,3)" id="area_estudio" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<?php
+                        			foreach ($areas_estudio as $datos) {
+                        				echo "<option value='".$datos["id_area"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>
+                        	</select>
+                        	
+                        	
+                        	</div>
+                        	 
+                        	<div class="col-sm-2">
+                        	<label>Provincia</label><br/>
+                        	<select onChange="filtrar(this.value,4)" id="select_provincias" name="provincias" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<?php
+                        			foreach ($datos_provincias as $datos) {
+                        				echo "<option value='".$datos["id"]."'>".$datos["provincia"]."</option>";
+                        			}
+                        		?>
+                        	</select>
+	
+                         
+                        	</div>
+
+                        	<div class="col-sm-2">
+                        		<label>Remuneracion</label><br/>
+                        	<select id="remuneracion" name="remuneracion" id="remuneracion" class="_filtro form-control select_filtros" >
+                        		<option value="0">Todas</option>
+                        		<option value="02000">$0 - $2000 </option>
+                        		<option value="20015000">$2001 - $5000 </option>                           		
+                        		<option value="500110000">$5001 - $10000 </option>   
+                        		<option value="1000115000">$10001 - $15000 </option>   
+                        		<option value="1500120000">$15001 - $20000 </option>   
+                        		<option value="20001">$20000 o más</option>  
+                        	</select>                         		
+                        	</div>
+
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-2" style="padding-top: 25px;">
+                        	 
+                        	 <button onClick="limpiarFiltros()" class="form-control btn-info">Limpiar filtros</button>                      		
+                        	</div>
+
+                       	 </div>
+						<div class="col-sm-12">
 							<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Trabajador</th>
-										<th>Fecha y hora</th>
-										<th>Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+							<thead>
+								<tr>
+									<th>#</th>
+									<th style="padding: 0px;">Trabajador</th>
+									 <th>Edad</th>
+									  <th>aestudio</th>
+									   <th>provincia</th>
+									    <th>sexo</th>
+									 <th>remuneracion</th>
+									<th>calificacion</th>
+									<th>idioma</th>
+									<th>Estado</th>
+									<th>Fecha y hora</th>
+									<th>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
 						</div>
+                       </div> 
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -474,16 +573,13 @@
 		<script type="text/javascript" src="../vendor/DataTables/pdfmake/build/vfs_fonts.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.html5.min.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.print.min.js"></script>
-		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.colVis.min.js"></script>
-		
+		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.colVis.min.js"></script>		
 		<script type="text/javascript" src="../vendor/select2/dist/js/select2.min.js"></script>
 		<script type="text/javascript" src="../vendor/dropify/dist/js/dropify.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.form.js"></script>
-		
+		<script type="text/javascript" src="../js/jquery.form.js"></script>		
 		<!-- TinyMCE -->
 		<script type="text/javascript" src="../vendor/tinymce/tinymce.min.js"></script>
-		<script type="text/javascript" src="../vendor/tinymce/skins/custom/jquery.tinymce.min.js"></script>
-		
+		<script type="text/javascript" src="../vendor/tinymce/skins/custom/jquery.tinymce.min.js"></script>		
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw69wIi6XSBIldqmZdoMnihzi-9pWvjeo&libraries=places"></script>
 
 		<script>
@@ -1088,13 +1184,20 @@
 			var $tablaPostulados = jQuery("#tablaPostulados");
 
 			var tablaPostulados = $tablaPostulados.DataTable( {
-				"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-				"aoColumnDefs": [
-					{ "width": "50px", "targets": 0 },
-					{ "width": "150px", "targets": 2 },
-					{ "width": "80px", "targets": 3 },
-					{"className": "dt-center", "targets": [0, 2, 3]}
+				 
+				 "aoColumnDefs": [ 
+					{ "visible": false, "targets": 2 },
+					{ "visible": false, "targets": 3 }, 	
+					{ "visible": false, "targets": 4 }, 	
+					{ "visible": false, "targets": 5 }, 	
+					{ "visible": false, "targets": 6 }, 	
+					{ "visible": false, "targets": 7 }, 	
+					{ "visible": false, "targets": 8 },
+					{ "visible": false, "targets": 9 }, 	
+ 	
+
 				  ],
+
 				"language": {
 					"decimal":        "",
 					"emptyTable":     "Sin registros",
@@ -1166,13 +1269,7 @@
 			});
 			$('#modal-postulados').on('show.bs.modal', function (e) {
 				tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + $(e.relatedTarget).attr('data-id'));
-				tablaPostulados.ajax.reload();
-				/*setTimeout(function() {
-					$(".contactJobber").off().click(function() {
-						$("#modal-postulados").modal("hide");
-						$("#sendMesage").attr("data-id", $(this).attr("data-id"));
-					});
-				}, 2000);*/
+				tablaPostulados.ajax.reload(); 
 			});
 			
 			function callEvent(element) {
@@ -1391,7 +1488,136 @@
 				$("#modal-agregar-publicacion-titulo").val('');
 				tinyMCE.get('modal-agregar-publicacion-descripcion').setContent('');
 			});
+
+ 	
+ 		function filtrar(valor,columna)
+ 		{
+ 			   var table = $('#tablaPostulados').DataTable();
+			   table.columns(columna).search(valor).draw(); 			 
+ 		}
+
+ 	
+ 		 
+ 		$(document).ready(function() {
+ 			//Filtrar salario
+ 			$('#remuneracion').change( function() {        		 
+
+ 				$.fn.dataTable.ext.search.push(
+		    	function( settings, data, dataIndex ) {
+		    	var min = 0;
+		        var max = 0;
+		        var valor=$("#remuneracion").val();
+		        var age = parseFloat( data[6] ) || 0; // use data for the age column
+		    	if(valor=="02000")
+		    	{
+		    		var min = 0;
+		       		var max =2000;
+		    	}
+		    	else if(valor=="20015000")
+		    	{
+					var min = 2001;
+		       		var max =5000;
+		    	}
+		    	else if(valor=="500110000")
+		    	{
+					var min = 5001;
+		       		var max =10000;
+		    	}
+		    	else if(valor=="1000115000")
+		    	{
+					var min = 10001;
+		       		var max =15000;
+		    	}
+		    	else if(valor=="1500120000")
+		    	{
+					var min = 15001;
+		       		var max =20000;
+		    	}
+		    	else if(valor=="20001")
+		    	{
+					var min = 20001;
+		       		var max =100000;
+		    	}
+		    	else if(valor=="0")
+		    	{
+					return true;
+		    	}		 
+		        if ( ( isNaN( min ) && isNaN( max ) ) ||
+		             ( isNaN( min ) && age <= max ) ||
+		             ( min <= age   && isNaN( max ) ) ||
+		             ( min <= age   && age <= max ) )
+		        {
+		            return true;
+		        }
+		        return false;
+		    }
+		);
+ 			var table = $('#tablaPostulados').DataTable();
+		    table.draw();
+		} );
+
+ 			//Filtrar la edad
+ 			$('#edad').change( function() { 				
+ 				$.fn.dataTable.ext.search.push(
+		    	function( settings, data, dataIndex ) {
+		    	var min = 0;
+		        var max = 0;
+		        var valor=$("#edad").val();
+		        var age = parseFloat( data[2] ) || 0; // use data for the age column
+		    	if(valor=="1823")
+		    	{
+		    		var min = 18;
+		       		var max =23;
+		    	}
+		    	else if(valor=="2430")
+		    	{
+					var min = 24;
+		       		var max =30;
+		    	}
+		    	else if(valor=="3136")
+		    	{
+					var min = 31;
+		       		var max =36;
+		    	}
+		    	else if(valor=="3745")
+		    	{
+					var min = 37;
+		       		var max =45;
+		    	}
+		    	else if(valor=="")
+		    	{
+					var min = 0;
+		       		var max =999;
+		    	}		 
+		        if ( ( isNaN( min ) && isNaN( max ) ) ||
+		             ( isNaN( min ) && age <= max ) ||
+		             ( min <= age   && isNaN( max ) ) ||
+		             ( min <= age   && age <= max ) )
+		        {
+		            return true;
+		        }
+		        return false;
+		    }
+		);
+ 			var table = $('#tablaPostulados').DataTable();
+		    table.draw();
+		} );
+		} ); 
+		 		
+
+ 		function limpiarFiltros()
+ 		{  
+ 			$("._filtro").prop('selectedIndex', 0);
+ 			 
+ 			 var table = $('#tablaPostulados').DataTable();
+					table
+					 .search( '' )
+					 .columns().search( '' )
+					 .draw();	
+ 		}
 		</script>
+
+
 
 	</body>
 

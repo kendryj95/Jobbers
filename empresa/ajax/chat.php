@@ -1,4 +1,5 @@
 <?php
+ 
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/DatabasePDOInstance.function.php");
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/Chat.class.php");
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/Email.class.php");
