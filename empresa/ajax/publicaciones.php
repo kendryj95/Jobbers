@@ -387,7 +387,7 @@
 				LEFT JOIN trabajadores_infextra t5 ON t5.id_trabajador = t2.id_trabajador
 				LEFT JOIN trabajadores_calificacion t6 ON t6.id_trabajador = t2.id_trabajador
 				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
-				WHERE t1.id_empresa=3 and t1.id=130
+				WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']." and t1.id=".$id."
 				GROUP BY t3.id
 				ORDER BY t3.fecha_creacion DESC");
 
