@@ -345,7 +345,7 @@
 						break;
 				}
 					
-				$datos = $db->getAll("
+				/*$datos = $db->getAll("
 					SELECT
 						tra.id AS trabajador_id,
 						tra.uid,
@@ -362,28 +362,57 @@
 					INNER JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
 					INNER JOIN areas_sectores AS ase ON ps.id_sector = ase.id
 					INNER JOIN areas AS a ON ase.id_area = a.id
-					WHERE p.id = $id $limit
+					WHERE p.id = $id $limit ORDER BY  pos.fecha_hora DESC
 				");
+ */
 
-				/*if($datos) {
+				$datos = $db->getAll("
+				SELECT 
+				t1.id,
+				t3.id AS id_trabajador,
+				t3.uid AS uid_trabajador,  
+				t3.id_sexo,
+				UPPER(CONCAT(t3.nombres,' ',t3.apellidos)) as nombre,
+				TIMESTAMPDIFF(YEAR,t3.fecha_nacimiento,CURDATE()) AS edad,
+				t3.fecha_creacion,
+				t3.provincia,
+				t4.id_area_estudio,
+				t5.remuneracion_pret,
+				t6.calificacion,
+                group_concat(t7.id_idioma) as idiomas
+				FROM publicaciones t1 
+				INNER JOIN postulaciones t2 ON t1.id = t2.id_publicacion 
+				INNER JOIN trabajadores t3 ON t3.id = t2.id_trabajador
+				INNER JOIN trabajadores_educacion t4 ON t4.id_trabajador = t2.id_trabajador 
+				LEFT JOIN trabajadores_infextra t5 ON t5.id_trabajador = t2.id_trabajador
+				LEFT JOIN trabajadores_calificacion t6 ON t6.id_trabajador = t2.id_trabajador
+				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
+				WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']." and t1.id=".$id."
+				GROUP BY t3.id
+				ORDER BY t3.fecha_creacion DESC");
+
+				if($datos) {					 
 					foreach($datos as $k => $fila) {
-						$fila["fecha_hora_formateada"] = date('d/m/Y h:i:s A', strtotime($fila["fecha_hora"]));
+						//$fila["fecha_hora_formateada"] = date('d/m/Y h:i:s A', strtotime($fila["fecha_hora"]));
+						$sexos = array(1 => "M", 2 => "F");
 						$postulados[] = array(
+
 							$k + 1,
-							'<a href="../trabajador-detalle.php?t=' . $fila["trabajador_id"] . '" target="_blank">' . "$fila[trabajador_nombres] $fila[trabajador_apellidos]" . '</a>',
-							"$fila[fecha_hora_formateada]",
-							'<div class="acciones-publicacion" data-target="' . $fila["trabajador_id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" href="contratar-trabajador.php?a=' . $fila["area_amigable"] . '&s=' . $fila["sector_amigable"] . '&p=' . $fila["publicacion_amigable"] . '&t=' . slug("$fila[trabajador_nombres] $fila[trabajador_apellidos]-$fila[trabajador_id]") . '" title="Contratar trabajador"><span class="ti-check"></span> Contratar</a> </div>',
-						);
-					}
-				}*/
-				if($datos) {
-					foreach($datos as $k => $fila) {
-						$fila["fecha_hora_formateada"] = date('d/m/Y h:i:s A', strtotime($fila["fecha_hora"]));
-						$postulados[] = array(
+							'<a style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '" target="_blank"><strong>' . "$fila[nombre]" . '</strong></a>
+							<div style="font-size:11px;"><strong>Edad: </strong>' . $fila["edad"] . '<strong> Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '</div> 
+							',						 
+							$fila['edad'],
+							$fila['id_area_estudio'],
+							$fila['provincia'],
+							$fila['id_sexo'],
+							$fila['remuneracion_pret'],
+							$fila['calificacion'],
+							$fila['idiomas'],
 							$k + 1,
-							'<a href="../trabajador-detalle.php?t=' . $fila["trabajador_id"] . '" target="_blank">' . "$fila[trabajador_nombres] $fila[trabajador_apellidos]" . '</a>',
-							"$fila[fecha_hora_formateada]",
-							'<div class="acciones-publicacion" data-target="' . $fila["trabajador_id"] . '"> <a class="accion-publicacion contactJobber btn btn-success waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><span class="ti-comment-alt"></span> Contactar</a> </div>',
+							$fila['fecha_creacion'],
+							'<div class="acciones-publicacion" data-target="' . $fila["id_trabajador"] . '"> <a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><span class="ti-comment-alt"></span></a> 
+
+							</div>',					
 						);
 					}
 				}
