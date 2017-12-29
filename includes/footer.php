@@ -1,4 +1,8 @@
-<footer class="container">
+<?php if (@$_SESSION['ctc']['type'] == 1): ?>
+<footer class="container-fluid text-center">
+<?php else: ?>
+<footer class="container text-center">
+<?php endif?>
 	<div class="box-block">
 		<div class="row">
 			<div class="col-sm-8">
@@ -94,7 +98,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="box-block text-xs-center">
+	<div class="box-block text-center">
 		&copy; 2017 JOBBERS, Todos los derechos reservados
 	</div>
 </footer>
