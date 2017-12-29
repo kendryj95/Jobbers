@@ -24,13 +24,14 @@
 							$chat = new Chat();
 							$conversations = $chat->getMessages($_SESSION["ctc"]["uid"], null, $_SESSION["ctc"]["type"], 0);
 						}
+
 					?>
 
 
 					<div id="sidebar-chats">
 						<?php foreach($conversations as $conv): ?>
 							<a class="open-chat text-black" href="#" data-uniqueid="<?php echo $conv["info"]["uid"]; ?>">
-								<span class="sc-name"><?php echo $conv["info"]["nombre"]; ?></span>
+								<span class="sc-name"><?php echo $conv["info"]["nombres"]; ?></span>
 								<?php if($conv["messages_unreaded_count"] > 0): ?>
 									<span class="tag tag-primary"><?php echo $conv["messages_unreaded_count"]; ?></span>
 								<?php else: ?>
@@ -76,7 +77,7 @@
 				<i class="fa fa-envelope"></i> 
 				CHAT
 				<div style="bottom: -36px; right: -15px; position: absolute;"><i class="flaticon-mouse" style="color: #f9c890; font-size: 42px"></i></div>
-				<span class="badge" style="background-color: #d61717; position: absolute; top: -16px; font-size: 16px">22</span>
+				<!-- <span class="badge" style="background-color: #d61717; position: absolute; top: -16px; font-size: 16px">22</span> -->
 			</div>
 			
 		</div>
