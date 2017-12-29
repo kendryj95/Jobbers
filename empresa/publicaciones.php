@@ -404,7 +404,10 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
-						<h4 class="modal-title">Trabajadores postulados a este empleo</h4>
+						<h4 class="modal-title">Trabajadores postulados a este empleo
+						
+						</h4>
+
 					</div>
 					<div class="modal-body">
                         <?php switch($plan['id_plan']):
@@ -427,8 +430,13 @@
                         <?php endswitch; ?>
  
 						 
-                       <div class="row" >
-                       <div class="col-sm-12"><p style="background-color: #3e70c9;padding: 4px;text-align: center;color: #fff;"><strong>Busqueda avanzada</strong></p></div>
+                       <div class="row" style="padding: 10px;padding-top: 0px;">
+                       	<!--contenedor filtros-->
+                       		<span style=" padding-bottom: 3px; float: right;font-size: 12px;padding-right: 10px;cursor: pointer;"  onClick="limpiarFiltros()"><strong><img src="img/eraser.png"> Limpiar filtros</strong></span>
+                       	<div class="col-xs-12" style="border: 1px dashed #dbdbdb;padding: 0px;margin-bottom: 15px;">
+
+                       		<div class="col-sm-12" style="padding: 0px;"><p style="background-color: #3e70c9;padding: 4px;text-align: center;color: #fff;"><strong>Busqueda avanzada</strong>                       
+                       </p></div>
                        	 <div class="col-sm-12" style="padding: 0px;margin-bottom: 20px;">
                        	 	<div class="col-sm-2">
                        	 		<label>Sexo</label><br/>
@@ -507,7 +515,7 @@
 
                         	<div class="col-sm-2">
                         		<label>Remuneracion</label><br/>
-                        	<select id="remuneracion" name="remuneracion" id="remuneracion" class="_filtro form-control select_filtros" >
+                        	<select id="remuneracion" name="remuneracion" class="_filtro form-control select_filtros" >
                         		<option value="0">Todas</option>
                         		<option value="02000">$0 - $2000 </option>
                         		<option value="20015000">$2001 - $5000 </option>                           		
@@ -517,18 +525,41 @@
                         		<option value="20001">$20000 o más</option>  
                         	</select>                         		
                         	</div>
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-4" style="padding-left: 0px;padding-right: 0px; background-color: #f2f2f2;padding-bottom: 5px;">
+                        		<p class="text-center"><strong>Experiencia laboral</strong></p>
+                        		<div class="col-sm-12">
+                        			<select onChange="filtrar(this.value,9)" id="actividad_empresa" name="actividad_empresa" class="_filtro form-control select_filtros" >
+	                        		<option value="0">Actividad</option> 
+                        		<?php
+                        			foreach ($actividad_empresa as $datos) {
+                        				echo "<option value='".$datos["nombre"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>	                        		 
+	                        	</select>  
+                        		</div>
+                        		<!--<div class="col-sm-6">
+	                        		<select id="anos_exp" name="anos_exp"  class="_filtro form-control select_filtros" >
+	                        		<option value="0">Años</option>
+	                        		<option value="02">0 - 2 </option>
+	                        		<option value="35">3 - 5</option>                           		
+	                        		<option value="410">4 - 10 </option>   
+	                        		<option value="1120">11 - 20</option>   
+	                        		<option value="2140">21 - 40</option>    
+	                        	</select> 	
+                        		</div>--> 
 
+                        	</div> 
+                        	
                         	<div class="col-sm-2"></div>
-                        	<div class="col-sm-2"></div>
-                        	<div class="col-sm-2"></div>
-                        	<div class="col-sm-2"></div>
-                        	<div class="col-sm-2"></div>
-                        	<div class="col-sm-2" style="padding-top: 25px;">
-                        	 
-                        	 <button onClick="limpiarFiltros()" class="form-control btn-info">Limpiar filtros</button>                      		
+                        	<div class="col-sm-2" style="padding-top: 25px;">                       	 
+                        	                       		
                         	</div>
 
                        	 </div>
+                       	</div>
+                       	<!-- fin contenedor filtros-->
 						<div class="col-sm-12">
 							<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
 							<thead>
@@ -542,6 +573,7 @@
 									 <th>remuneracion</th>
 									<th>calificacion</th>
 									<th>idioma</th>
+									<th>actividad</th>
 									<th>Estado</th>
 									<th>Fecha y hora</th>
 									<th>Acciones</th>
@@ -1193,7 +1225,8 @@
 					{ "visible": false, "targets": 6 }, 	
 					{ "visible": false, "targets": 7 }, 	
 					{ "visible": false, "targets": 8 },
-					{ "visible": false, "targets": 9 }, 	
+					{ "visible": false, "targets": 9 },
+					{ "visible": false, "targets": 10 }, 	 	
  	
 
 				  ],
