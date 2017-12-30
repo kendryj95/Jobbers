@@ -86,6 +86,7 @@
 		</script>
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
+
 		<div class="wrapper">
 
 			<!-- Preloader -->
@@ -116,7 +117,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="container-fluid">
+					<div class="container-fluid"> 
 						<div class="row">
 							<div class="col-sm-5 col-md-5">
 								<div class="card profile-card">
@@ -944,8 +945,11 @@
 						$("#upload").attr("action", "ajax/empresas.php?op=8");
 						var options={
 							url     : $("#upload").attr("action"),
-							success : function(response,status) {
+							success : function(response,status) { 
 								var data = JSON.parse(response);
+								if(parseInt(data.status) == 2) {
+									alert("si");
+								}
 								if(parseInt(data.status) == 1) {
 									window.location.assign("perfil.php");
 								}

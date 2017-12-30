@@ -380,7 +380,7 @@
 						$postulados[] = array(
 
 							$k + 1,
-							'<a style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '" target="_blank"><strong>' . "$fila[nombre]" . '</strong></a>
+							'<a style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
 							<div style="font-size:11px;"><strong>Edad: </strong>' . $fila["edad"] . '<strong> Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '</div> 
 							',						 
 							$fila['edad'],
