@@ -128,6 +128,19 @@
 				nombre
 		");
 
+		if($filtroSector) {
+			$infoSector = $db->getRow("
+				SELECT
+					id,
+					nombre,
+					amigable
+				FROM
+					areas_sectores
+				WHERE
+					amigable = '$filtroSector'
+			");
+		}
+
 		foreach($disps as $i => $disp) {
 			$disps[$i]["cantidad"] = $db->getOne("
 				SELECT
