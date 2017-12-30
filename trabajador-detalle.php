@@ -173,7 +173,7 @@ $publicaciones = $db->getAll("
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
             
-            <div class="site-content bg-white" style="padding-top: 0px;">
+            <div class="site-content bg-white" style="padding-top: 0px; margin-left: 0px;">
                 <!-- Content -->
                 <div class="content-area p-b-1">
                     <div class="container-fluid">
@@ -340,104 +340,120 @@ $publicaciones = $db->getAll("
                                                 $idTrab = array_pop($detTrab);
                                             }
                                         ?>
-                                        <div class="tab-pane card-block active content-perfil" id="curriculum" role="tabpanel" style="border-top: none">
+                                        <div class="col-md-12 tab-pane card-block active content-perfil" id="curriculum" role="tabpanel" style="border-top: none; padding-right: 0px; padding-left:0px;">
                                             <!-- <div class="row"> -->
-                                                <div class="col-md-12">
-                                                    
-                                                            <p>
-                                                                <strong>Nombres: </strong> <span id="labelName"><?php echo $trabajador["nombres"]; ?></span><br>
-                                                                <strong>Apellidos: </strong> <span id="labelLastName"><?php echo $trabajador["apellidos"]; ?></span><br>
-                                                                <?php if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['id'] == $idTrab): ?>
-                                                                    <?php if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['id'] == $idTrab): ?>
-                                                                <strong>DNI: </strong> <span id="labelDNI"><?php echo $trabajador["numero_documento_identificacion"]; ?></span><br>
-                                                                <strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $trabajador["cuil"]; ?></span><br>
-                                                                    <?php endif; ?>
-                                                                <?php endif; ?>
-                                                                <strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $trabajador["localidad"] . ", " . $trabajador["provincia"] . ", " . $trabajador["pais"] ?></span><br>
-                                                                <?php if(isset($_SESSION['ctc']['empresa'])): ?>
-                                                                    <?php if($_SESSION['ctc']['plan']['id_plan'] > 1): ?>
-                                                                <strong>Dirección: </strong> <span id="labelCalle"><?php echo $trabajador["calle"]; ?></span><br>
-                                                                   <?php endif; ?>
-                                                                <?php endif; ?>
-                                                                <strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $trabajador["fecha_nacimiento"] !== null ? date('Y-m-d', strtotime($trabajador["fecha_nacimiento"])) : ""; ?></span><br>
-                                                                <strong>Edad: </strong> <span id="edad"><?php echo $trabajador["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($trabajador["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
-                                                                <strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $trabajador["correo_electronico"]; ?></span><br>
-                                                                <strong>Telefonos: </strong> <span id="labelTlf"><?php echo $trabajador["telefono"] . $trabajador["telefono_alternativo"] = !"" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
-                                                            </p>
-                                                       
-                                                   
-                                                </div>
-                                            <!-- </div> -->
-                                            <div class="container">
+                                            <div class="col-md-12">
+                                                <p>
+                                                    <strong>Nombres: </strong> <span id="labelName"><?php echo $trabajador["nombres"]; ?></span><br>
+                                                    <strong>Apellidos: </strong> <span id="labelLastName"><?php echo $trabajador["apellidos"]; ?></span><br>
+                                                    <?php if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['id'] == $idTrab): ?>
+                                                    <?php if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['id'] == $idTrab): ?>
+                                                    <strong>DNI: </strong> <span id="labelDNI"><?php echo $trabajador["numero_documento_identificacion"]; ?></span><br>
+                                                    <strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $trabajador["cuil"]; ?></span><br>
+                                                    <?php endif; ?>
+                                                    <?php endif; ?>
+                                                    <strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $trabajador["localidad"] . ", " . $trabajador["provincia"] . ", " . $trabajador["pais"] ?></span><br>
+                                                    <?php if(isset($_SESSION['ctc']['empresa'])): ?>
+                                                    <?php if($_SESSION['ctc']['plan']['id_plan'] > 1): ?>
+                                                    <strong>Dirección: </strong> <span id="labelCalle"><?php echo $trabajador["calle"]; ?></span><br>
+                                                    <?php endif; ?>
+                                                    <?php endif; ?>
+                                                    <strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $trabajador["fecha_nacimiento"] !== null ? date('Y-m-d', strtotime($trabajador["fecha_nacimiento"])) : ""; ?></span><br>
+                                                    <strong>Edad: </strong> <span id="edad"><?php echo $trabajador["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($trabajador["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
+                                                    <strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $trabajador["correo_electronico"]; ?></span><br>
+                                                    <strong>Telefonos: </strong> <span id="labelTlf"><?php echo $trabajador["telefono"] . $trabajador["telefono_alternativo"] = !"" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
+                                                </p>
                                                 <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Experiencia laboral</h4>
                                                 <div id="experiencias">
-                                                <?php $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");?>
+                                                    <?php $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");?>
                                                     <?php if ($experiencias): ?>
-                                                        <?php foreach ($experiencias as $e): ?>
+                                                    <?php foreach ($experiencias as $e): ?>
 
-                                                            <?php $egreso = $e['trab_actualmt'] == 1 ? 'Actualmente' : $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?>
-                                                            <p style="margin-bottom: 20px;">
-                                                                <strong>Empresa: </strong> <?php echo $e["nombre_empresa"]; ?><br>
-                                                                <strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
-                                                                <strong>Actividad: </strong> <?php echo $e["actividad_empresa"]; ?><br>
-                                                                <strong>Tipo puesto: </strong> <?php echo $e["tipo_puesto"]; ?><br>
-                                                                <strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso ?><br>
-                                                                <strong>Encargado de Referencias: </strong> <?php echo $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] ?><br>
-                                                                <strong>Telefono del Encargado: </strong><?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
-                                                                <strong>Descripción de tareas: </strong> <p style="width: 500px;"><?php echo $e["descripcion_tareas"] ?></p>
-                                                            </p>
-                                                        <?php endforeach?>
+                                                    <?php $egreso = $e['trab_actualmt'] == 1 ? 'Actualmente' : $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?>
+                                                    <p style="margin-bottom: 20px;">
+                                                        <strong>Empresa: </strong>
+                                                        <?php echo $e["nombre_empresa"]; ?><br>
+                                                        <strong>País: </strong>
+                                                        <?php echo $e["nombre_pais"]; ?><br>
+                                                        <strong>Actividad: </strong>
+                                                        <?php echo $e["actividad_empresa"]; ?><br>
+                                                        <strong>Tipo puesto: </strong>
+                                                        <?php echo $e["tipo_puesto"]; ?><br>
+                                                        <strong>Tiempo: </strong>
+                                                        <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso ?><br>
+                                                        <strong>Encargado de Referencias: </strong>
+                                                        <?php echo $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] ?><br>
+                                                        <strong>Telefono del Encargado: </strong>
+                                                        <?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
+                                                        <strong>Descripción de tareas: </strong>
+                                                        <p>
+                                                            <?php echo $e["descripcion_tareas"] ?>
+                                                        </p>
+                                                    </p>
+                                                    <?php endforeach?>
                                                     <?php else: ?>
-                                                        <p style="margin-bottom: 20px;"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
+                                                    <p style="margin-bottom: 20px;"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
                                                     <?php endif?>
                                                 </div>
-                                                
+
 
                                                 <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Estudios</h4>
                                                 <div id="educacion">
                                                     <?php if ($educacion): ?>
-                                                        <?php foreach ($educacion as $e): ?>
-                                                            <p style="margin-bottom: 20px;">
-                                                                <strong>Nivel estudio: </strong> <?php echo $e["nivel"]; ?><br>
-                                                                <strong>Título o Certificación: </strong> <?php echo $e["titulo"] ?> <br>
-                                                                <strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
-                                                                <strong>Estado estudio: </strong> <?php echo $e["estado_estudio"]; ?><br>
-                                                                <strong>Área estudio: </strong> <?php echo $e["nombre_estudio"]; ?><br>
-                                                            </p>
-                                                        <?php endforeach?>
+                                                    <?php foreach ($educacion as $e): ?>
+                                                    <p style="margin-bottom: 20px;">
+                                                        <strong>Nivel estudio: </strong>
+                                                        <?php echo $e["nivel"]; ?><br>
+                                                        <strong>Título o Certificación: </strong>
+                                                        <?php echo $e["titulo"] ?> <br>
+                                                        <strong>País: </strong>
+                                                        <?php echo $e["nombre_pais"]; ?><br>
+                                                        <strong>Estado estudio: </strong>
+                                                        <?php echo $e["estado_estudio"]; ?><br>
+                                                        <strong>Área estudio: </strong>
+                                                        <?php echo $e["nombre_estudio"]; ?><br>
+                                                    </p>
+                                                    <?php endforeach?>
                                                     <?php else: ?>
-                                                        <p style="margin-bottom: 20px;">Sin registros</p>
+                                                    <p style="margin-bottom: 20px;">Sin registros</p>
                                                     <?php endif?>
                                                 </div>
 
                                                 <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Idiomas</h4>
                                                 <div id="idiomas">
                                                     <?php if ($idiomas): ?>
-                                                        <?php foreach ($idiomas as $i): ?>
-                                                            <?php $nivel_oral    = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]");?>
-                                                            <?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]");?>
-                                                            <p style="margin-bottom: 20px;">
-                                                                <strong>Idioma: </strong> <?php echo $i["nombre_idioma"]; ?><br>
-                                                                <strong>Nivel Oral: </strong> <?php echo $nivel_oral; ?><br>
-                                                                <strong>Nivel escrito: </strong> <?php echo $nivel_escrito; ?><br>
-                                                            </p>
-                                                        <?php endforeach?>
+                                                    <?php foreach ($idiomas as $i): ?>
+                                                    <?php $nivel_oral    = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]");?>
+                                                    <?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]");?>
+                                                    <p style="margin-bottom: 20px;">
+                                                        <strong>Idioma: </strong>
+                                                        <?php echo $i["nombre_idioma"]; ?><br>
+                                                        <strong>Nivel Oral: </strong>
+                                                        <?php echo $nivel_oral; ?><br>
+                                                        <strong>Nivel escrito: </strong>
+                                                        <?php echo $nivel_escrito; ?><br>
+                                                    </p>
+                                                    <?php endforeach?>
                                                     <?php else: ?>
-                                                        <p style="margin-bottom: 20px;">Sin registros</p>
+                                                    <p style="margin-bottom: 20px;">Sin registros</p>
                                                     <?php endif?>
                                                 </div>
 
                                                 <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Otros conocimientos</h4>
                                                 <div id="otros_conocimientos">
                                                     <?php if ($otros_conocimientos): ?>
-                                                        <?php foreach ($otros_conocimientos as $o): ?>
-                                                            <p style="margin-bottom: 20px;">
-                                                                <strong>Título: </strong> <?php echo $o["nombre"]; ?><br>
-                                                                <strong>Descripción: </strong><p style="width: 500px;"> <?php echo $o["descripcion"]; ?></p><br>
-                                                            </p>
-                                                        <?php endforeach?>
+                                                    <?php foreach ($otros_conocimientos as $o): ?>
+                                                    <p style="margin-bottom: 20px;">
+                                                        <strong>Título: </strong>
+                                                        <?php echo $o["nombre"]; ?><br>
+                                                        <strong>Descripción: </strong>
+                                                        <p>
+                                                            <?php echo $o["descripcion"]; ?>
+                                                        </p><br>
+                                                    </p>
+                                                    <?php endforeach?>
                                                     <?php else: ?>
-                                                        <p style="margin-bottom: 20px;">Sin registros</p>
+                                                    <p style="margin-bottom: 20px;">Sin registros</p>
                                                     <?php endif?>
                                                 </div>
 
@@ -446,15 +462,20 @@ $publicaciones = $db->getAll("
                                                 <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Información Extra</h4>
                                                 <div id="infoExtra">
                                                     <p style="margin-bottom: 20px;">
-                                                        <strong>Remuneración pretendida: </strong> $<?=$infoExtra['remuneracion_pret']?> <br>
-                                                        <strong>Disponibilidad: </strong> <?=$infoExtra['nombre']?> <br>
-                                                        <strong>Sobre mí: </strong><p style="width: 500px"> <?=$infoExtra['sobre_mi']?></p> <br>
+                                                        <strong>Remuneración pretendida: </strong> $
+                                                        <?=$infoExtra['remuneracion_pret']?> <br>
+                                                            <strong>Disponibilidad: </strong>
+                                                            <?=$infoExtra['nombre']?> <br>
+                                                                <strong>Sobre mí: </strong>
+                                                                <p>
+                                                                    <?=$infoExtra['sobre_mi']?>
+                                                                </p> <br>
                                                     </p>
                                                 </div>
                                             </div>
+                                            <!-- </div> -->
                                         </div>
                                     </div>
-                                
                             </div>
                         </div>
                     </div>
