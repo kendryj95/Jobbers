@@ -956,7 +956,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 						?>
 						<div class="col-md-6 col-xs-12" style="padding-left: 10px;">
 						<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-						<div class="pub pub-f box box-block bg-white tile tile-1 gold" title="Ver detalles del empleo">
+						<div class="pub pub-f box box-block bg-white tile tile-1 silver" title="Ver detalles del empleo">
 						<div class="t-icon right"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
 						<div class="t-content"  title="Ver detalles del empleo">
 							<div class="row">

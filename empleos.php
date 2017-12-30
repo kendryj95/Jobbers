@@ -128,6 +128,19 @@
 				nombre
 		");
 
+		if($filtroSector) {
+			$infoSector = $db->getRow("
+				SELECT
+					id,
+					nombre,
+					amigable
+				FROM
+					areas_sectores
+				WHERE
+					amigable = '$filtroSector'
+			");
+		}
+
 		foreach($disps as $i => $disp) {
 			$disps[$i]["cantidad"] = $db->getOne("
 				SELECT
@@ -593,7 +606,7 @@
 				min-height: 110px;
 			}
 			.pub, .pub-f {
-				background-color: #f8f8f8 !important;
+				/* background-color: #f8f8f8 !important; */
 				-webkit-transition: all 0.2s ease-in-out;
 				transition: all 0.2s ease-in-out;
 				cursor: pointer;
@@ -624,7 +637,20 @@
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 		<!-- <div class="wrapper"> -->
 		<!-- Sidebar -->
-		<!-- <?php require_once('includes/sidebar.php'); ?> -->
+    		<?php if ($_SESSION['ctc']['type'] == 1):
+			require_once ('includes/sidebar.php');
+			?>
+			<style>
+				.site-content{
+					margin-left:220px !important;
+				}
+				@media(max-width: 1024px){
+					.site-content{
+						margin-left: 0px !important;
+					}
+				}
+			</style>
+			<?php endif ?>
 
 		<!-- Sidebar second -->
 		<?php require_once('includes/sidebar-second.php'); ?>
@@ -859,10 +885,10 @@
 							<?php if($filtroActivado || $busqueda): ?>
 								<?php if($cantidadRegistros > 0): ?>
 									<?php foreach($publicaciones as $publicacion): ?>
-										<div class="col-md-6">
-											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-												<?php if($publicacion["logo_home"] == 3): ?>
-													<div class="pub pub-f box box-block bg-white tile tile-1" title="Ver detalles del empleo">
+										<?php if($publicacion["logo_home"] == 3): ?>
+											<div class="col-md-6">
+												<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
+													<div class="pub pub-f box box-block tile tile-1 gold" title="Ver detalles del empleo">
 														<div class="t-icon right"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
 														<div class="t-content"  title="Ver detalles del empleo">
 															<div class="row">
@@ -963,10 +989,10 @@
 												</a>
 											</div>
 												<?php else: ?>
+												<?php if($publicacion["logo_home"] == 2): ?>
 												<div class="col-md-6">
 												<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-													<?php if($publicacion["logo_home"] == 2): ?>
-														<div class="pub pub-f box box-block bg-white tile tile-2" title="Ver detalles del empleo">
+														<div class="pub pub-f box box-block tile tile-2 silver" title="Ver detalles del empleo">
 															<div class="t-icon right"><i class="ti-receipt"></i></div>
 																<div class="t-content">
 																<div class="row">
@@ -1064,11 +1090,12 @@
 																</div>
 															</div>
 														</div>
-
+													</a>
+													</div>
 													<?php else: ?>
 													<div class="col-md-6">
 													<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-														<div class="pub pub-f box box-block bg-white" title="Ver detalles del empleo">
+														<div class="pub pub-f box box-block bronze" title="Ver detalles del empleo">
 															<div class="row">
 																<div class="col-md-4 col-sm-4 text-center">
 																	<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
@@ -1175,7 +1202,7 @@
 									<?php foreach($publicacionesOro as $publicacion): ?>
 										<div class="col-md-6">
 											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-												<div class="pub box box-block bg-white tile tile-1 m-b-2">
+												<div class="pub box box-block tile tile-1 m-b-2 gold">
 													<div class="t-icon right"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
 													<div class="t-content"  title="Ver detalles del empleo">
 														<div class="row">
@@ -1282,7 +1309,7 @@
 									<?php foreach($publicacionesPlata as $publicacion): ?>
 										<div class="col-md-6">
 											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-												<div class="pub box box-block bg-white tile tile-2 m-b-2" style="border: 1px solid rgba(0, 0, 0, 0.125) !important;">
+												<div class="pub box box-block tile tile-2 m-b-2 silver" style="border: 1px solid rgba(0, 0, 0, 0.125) !important;">
 													<div class="t-icon right"><i class="ti-receipt"></i></div>
 													<div class="t-content">
 														<div class="row">
@@ -1388,7 +1415,7 @@
 									<?php foreach($publicaciones as $publicacion): ?>
 										<div class="col-md-6">
 											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
-												<div class="pub box box-block bg-white" title="Ver detalles del empleo">
+												<div class="pub box box-block bronze" title="Ver detalles del empleo">
 													<div class="row">
 														<div class="col-md-4 col-sm-4 text-center">
 															<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : "avatars/user.png"; ?>" alt="">
