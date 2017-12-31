@@ -44,9 +44,9 @@
 			<div class="sidebar-chat-window animated fadeIn">
 				<div id="sidebar-chat-window-content">
 					<div class="scw-header clearfix">
-						<a class="text-grey pull-xs-left" href="#"><i class="ti-angle-left"></i> Atrás</a>
-						<div class="pull-xs-right">
-							<strong><span id="sidebar-chat-window-user-name"></span></strong>
+						<a class="text-grey pull-left" href="#" style="margin-right: 10px;"><i class="ti-angle-left"></i></a>
+						<div class="pull-left">
+							<strong><span id="sidebar-chat-window-user-name" style="text-transform: uppercase"></span></strong>
 							<div class="avatar box-32">
 								<img id="sidebar-chat-window-user-picture" src="" alt="">
 							</div>
@@ -56,8 +56,16 @@
 					</div>
 					<div class="scw-form">
 						<!--<form>-->
-							<input id="sidebar-chat-window-message" class="form-control" type="text" placeholder="Escribe tu mensaje">
-							<button class="btn btn-secondary" type="button" id="sidebar-chat-window-send-message"><i class="ti-angle-right"></i></button>
+
+							<div class="input-group" style="width: 100%">
+							<input id="sidebar-chat-window-message" type="text" class="form-control" placeholder="Escriba su mensaje...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" id="sidebar-chat-window-send-message"><i class="fa fa-send"></i></button>
+							</span>
+							</div>
+
+							<!-- <input id="sidebar-chat-window-message" class="form-control" type="text" placeholder="Escribe tu mensaje">
+							<button class="btn btn-secondary" type="button" id="sidebar-chat-window-send-message"><i class="ti-angle-right"></i></button> -->
 						<!--</form>-->
 					</div>
 				</div>
