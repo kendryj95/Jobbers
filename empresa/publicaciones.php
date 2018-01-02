@@ -445,7 +445,7 @@
                         		<option value="1">Masculino</option>
                         		<option value="2">Femenino</option>
                         	</select>
-                       	 	<!--                       	
+                       	 	                      	
                         	<label>Calificación</label><br/>
                         	<select  onChange="filtrar(this.value,7)" class="_filtro form-control select_filtros" style="">
                         		<option value="">Todas</option>
@@ -457,7 +457,7 @@
 
 
                         	</select>
-								--> 
+								 
                         	
                         	
                         	</div> 
@@ -524,8 +524,7 @@
                         		<option value="1500120000">$15001 - $20000 </option>   
                         		<option value="20001">$20000 o más</option>  
                         	</select>                         		
-                        	</div>
-                        	<div class="col-sm-2"></div>
+                        	</div> 
                         	<div class="col-sm-2"></div>
                         	<div class="col-sm-4" style="padding-left: 0px;padding-right: 0px; background-color: #f2f2f2;padding-bottom: 5px;">
                         		<p class="text-center"><strong>Experiencia laboral</strong></p>
