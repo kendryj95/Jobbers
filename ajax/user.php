@@ -148,7 +148,7 @@
             break;
 		case RESET_PASS:
 			//require_once("../vendor/phpmailer/PHPMailerAutoload.php");
-			$exist = $db->getOne("SELECT id, CONCAT(nombres,' ',apellidos) AS name FROM trabajadores WHERE correo_electronico='$_REQUEST[email]'");
+			$exist = $db->getRow("SELECT id, CONCAT(nombres,' ',apellidos) AS name FROM trabajadores WHERE correo_electronico='$_REQUEST[email]'");
 			if($exist) {
 				$controlador = strtotime(date('Hms'));
 				$para = $_REQUEST["email"];
