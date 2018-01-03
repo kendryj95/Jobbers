@@ -228,7 +228,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 										<div>
 											<div class="box bg-white post post-1">
-												<div class="p-img img-cover" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
+												<div class="p-img img-cover col-xs-12 col-md-5 news-img" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
 													<!--<span class="tag tag-danger">Lifestyle</span>-->
 													<div class="p-info clearfix">
 														<div class="pull-xs-left">
@@ -240,7 +240,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 													</div>
 												</div>
 												<div class="p-content">
-													<h5><a class="text-black" href="#"><?php echo $noticia["titulo"]; ?></a></h5>
+													<h5 style="margin-top: 0px;"><a class="text-black" href="#"><?php echo $noticia["titulo"]; ?></a></h5>
 													<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
 												</div>
 											</div>

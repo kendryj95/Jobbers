@@ -344,46 +344,58 @@
 						$limit = " LIMIT 100";
 						break;
 				}
-					
-				$datos = $db->getAll("
-					SELECT
-						tra.id AS trabajador_id,
-						tra.uid,
-						tra.nombres AS trabajador_nombres,
-						tra.apellidos AS trabajador_apellidos,
-						a.amigable AS area_amigable,
-						ase.amigable AS sector_amigable,
-						p.amigable AS publicacion_amigable,
-						pos.fecha_hora
-					FROM
-						postulaciones AS pos
-					INNER JOIN trabajadores AS tra ON pos.id_trabajador = tra.id
-					INNER JOIN publicaciones AS p ON pos.id_publicacion = p.id
-					INNER JOIN publicaciones_sectores AS ps ON p.id = ps.id_publicacion
-					INNER JOIN areas_sectores AS ase ON ps.id_sector = ase.id
-					INNER JOIN areas AS a ON ase.id_area = a.id
-					WHERE p.id = $id $limit
-				");
+					 
+				$datos = $db->getAll("SELECT 
+				t1.id,
+				t3.id AS id_trabajador,
+				t3.uid AS uid_trabajador,  
+				t3.id_sexo,
+				UPPER(CONCAT(t3.nombres,' ',t3.apellidos)) as nombre,
+				TIMESTAMPDIFF(YEAR,t3.fecha_nacimiento,CURDATE()) AS edad,
+				t3.fecha_creacion,
+				t3.provincia,
+				t4.id_area_estudio,
+				t5.remuneracion_pret,
+				t6.calificacion,
+                group_concat(t9.nombre) as actividad_empresa,
+                group_concat(t7.id_idioma) as idiomas
+				FROM publicaciones t1 
+				INNER JOIN postulaciones t2 ON t1.id = t2.id_publicacion 
+				INNER JOIN trabajadores t3 ON t3.id = t2.id_trabajador
+				INNER JOIN trabajadores_educacion t4 ON t4.id_trabajador = t2.id_trabajador 
+				LEFT JOIN trabajadores_infextra t5 ON t5.id_trabajador = t2.id_trabajador
+				LEFT JOIN trabajadores_calificacion t6 ON t6.id_trabajador = t2.id_trabajador
+				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
+                LEFT JOIN trabajadores_experiencia_laboral t8 ON t8.id_trabajador = t2.id_trabajador
+                LEFT JOIN actividades_empresa t9 ON t9.id = t8.id_actividad_empresa
+				WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']." and t1.id=".$id."
+				GROUP BY t3.id
+				ORDER BY t3.fecha_creacion DESC");
+ 
 
-				/*if($datos) {
+				if($datos) {					 
 					foreach($datos as $k => $fila) {
-						$fila["fecha_hora_formateada"] = date('d/m/Y h:i:s A', strtotime($fila["fecha_hora"]));
+						//$fila["fecha_hora_formateada"] = date('d/m/Y h:i:s A', strtotime($fila["fecha_hora"]));
+						$sexos = array(1 => "M", 2 => "F");
 						$postulados[] = array(
+
 							$k + 1,
-							'<a href="../trabajador-detalle.php?t=' . $fila["trabajador_id"] . '" target="_blank">' . "$fila[trabajador_nombres] $fila[trabajador_apellidos]" . '</a>',
-							"$fila[fecha_hora_formateada]",
-							'<div class="acciones-publicacion" data-target="' . $fila["trabajador_id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" href="contratar-trabajador.php?a=' . $fila["area_amigable"] . '&s=' . $fila["sector_amigable"] . '&p=' . $fila["publicacion_amigable"] . '&t=' . slug("$fila[trabajador_nombres] $fila[trabajador_apellidos]-$fila[trabajador_id]") . '" title="Contratar trabajador"><span class="ti-check"></span> Contratar</a> </div>',
-						);
-					}
-				}*/
-				if($datos) {
-					foreach($datos as $k => $fila) {
-						$fila["fecha_hora_formateada"] = date('d/m/Y h:i:s A', strtotime($fila["fecha_hora"]));
-						$postulados[] = array(
+							'<a style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
+							<div style="font-size:11px;"><strong>Edad: </strong>' . $fila["edad"] . '<strong> Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '</div> 
+							',						 
+							$fila['edad'],
+							$fila['id_area_estudio'],
+							$fila['provincia'],
+							$fila['id_sexo'],
+							$fila['remuneracion_pret'],
+							$fila['calificacion'],
+							$fila['idiomas'],
+							$fila['actividad_empresa'],
 							$k + 1,
-							'<a href="../trabajador-detalle.php?t=' . $fila["trabajador_id"] . '" target="_blank">' . "$fila[trabajador_nombres] $fila[trabajador_apellidos]" . '</a>',
-							"$fila[fecha_hora_formateada]",
-							'<div class="acciones-publicacion" data-target="' . $fila["trabajador_id"] . '"> <a class="accion-publicacion contactJobber btn btn-success waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><span class="ti-comment-alt"></span> Contactar</a> </div>',
+							$fila['fecha_creacion'],
+							'<div class="acciones-publicacion" data-target="' . $fila["id_trabajador"] . '"> <a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><span class="ti-comment-alt"></span></a> 
+
+							</div>',					
 						);
 					}
 				}
