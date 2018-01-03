@@ -126,9 +126,6 @@
 							</div>
 						</div>
 					</div>
-					<pre>
-						<?php print_r($_SESSION) ?>
-					</pre>
 				</div>
 				<!-- Footer -->
 				<?php require_once('../includes/footer.php'); ?>
@@ -210,7 +207,7 @@
 							</div>
 							<div class="form-group">
 								<label for="modal-agregar-publicacion-descripcion">Descripción</label>
-								<texarea id="modal-agregar-publicacion-descripcion"></texarea>
+								<textarea id="modal-agregar-publicacion-descripcion"></textarea>
 								<input type="hidden" id="textoDescripcionNoticiaAgregar" name="descripcion">
 							</div>
 							<input class="dropify" name="file" id="file" type="file">
@@ -295,10 +292,12 @@
 
 		<script>
 			var idNoticia = 0;
+			var tablaPublicaciones = '';
+			var tablaCategorias = '';
 			$(document).ready(function(){
 				var idPub = 0;
 				var $tablaCategorias = jQuery("#tablaCategorias");
-				var tablaCategorias = $tablaCategorias.DataTable( {
+					 tablaCategorias = $tablaCategorias.DataTable( {
 					"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 					"buttons": [
 						'copyHtml5',
@@ -344,7 +343,7 @@
 				$('.dropify').dropify();
 				
 				var $tablaPublicaciones = jQuery("#tablaPublicaciones");
-				var tablaPublicaciones = $tablaPublicaciones.DataTable( {
+					 tablaPublicaciones = $tablaPublicaciones.DataTable( {
 					"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 					"buttons": [
 						'copyHtml5',
@@ -409,6 +408,12 @@
 					],
 					toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
 					language: 'es'
+				});
+
+				$(document).on('focusin', function(e) { /* Para que funcione los modales de tinymce dentro de otro modal, en este caso, dentro de los modales de bootstrap*/
+				    if ($(event.target).closest(".mce-window").length) {
+				        e.stopImmediatePropagation();
+				    }
 				});
 
 				$('#select2-demo-1').select2({

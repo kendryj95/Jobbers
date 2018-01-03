@@ -1,7 +1,9 @@
 <?php
 	session_start();
 	require_once('../classes/DatabasePDOInstance.function.php');
+	require_once("../classes/Email.class.php");
 	$db = DatabasePDOInstance();
+	$email = new Email();
 	
 	$op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : false;
 	define('LOGIN', 1);
@@ -146,89 +148,14 @@
             break;
 		case RESET_PASS:
 			//require_once("../vendor/phpmailer/PHPMailerAutoload.php");
-			$exist = $db->getOne("SELECT id FROM trabajadores WHERE correo_electronico='$_REQUEST[email]'");
+			$exist = $db->getRow("SELECT id, CONCAT(nombres,' ',apellidos) AS name FROM trabajadores WHERE correo_electronico='$_REQUEST[email]'");
 			if($exist) {
 				$controlador = strtotime(date('Hms'));
 				$para = $_REQUEST["email"];
-				$asunto = "JOBBERS - Recuperar contraseña";
-				$cuerpo= "		
-					 <table width=\"620\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\"><tr><td bgcolor=\"#f5f5f5\" style=\"border-style:solid; border-width:1px; border-color:#e1e1e1;\">
-					   <table width=\"578\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\">
-						 <tr>
-						   <td height=\"16\"></td>
-						 </tr>
-						 <tr>
-						   <td>
-							 JOBBERS
-						   </td>
-						 </tr>
-						 <tr>
-						   <td height=\"16\"></td>
-						 </tr>
 
-						 <tr>
-						   <td align=\"left\" bgcolor=\"#FFFFFF\">
-							 <div style=\"border-style:solid; border-width:1px; border-color:#e1e1e1;\">
-							   <table width=\"578\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\">
-								 <tr>
-								   <td height=\"22\" colspan=\"3\"></td>
-								 </tr>
-
-								 <tr>
-								   <td width=\"40\"></td>
-								   <td width=\"498\">
-									 <div style=\"font-family:arial,Arial,sans-serif; line-height:24px\">
-									   <strong>¡HOLA!</strong><br>
-									 <p>No hay de qué preocuparse, puedes restablecer tu contraseña de JOBBERS introduciendo el siguiente código:<p>
-
-									 <p>{$controlador}</p>
-
-									 <p>Si no solicitaste el restablecimiento de tu contraseña, puedes borrar este correo y continuar disfrutando de JOBBERS.</p>
-
-									 <p>El equipo JOBBERS</p>
-
-									 </div>
-								   </td>
-								   <td width=\"40\"></td>
-								 </tr>
-
-								 <tr>
-								   <td height=\"22\" colspan=\"3\"></td>
-								 </tr>
-							   </table>
-							 </div>
-						   </td>
-						 </tr>
-
-						 <tr>
-						   <td height=\"16\"></td>
-						 </tr>
-					   </table>
-					 </td></tr>
-						 <tr>
-						   <td align=\"center\">
-							 <table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" align=\"center\">
-							   <tr>
-								 <td height=\"5\"></td>
-							   </tr>
-							   <tr>
-								 <td>
-								   <div style=\"font-family:arial,Arial,sans-serif; font-size:11px; color:#999999; line-height:13px;\">
-									COPYRIGHT ® JOBBERS 2017. TODOS LOS DERECHOS RESERVADOS.
-								   </div>
-								 </td>
-							   </tr>
-							 </table>
-						   </td>
-						 </tr>    
-				   </table>
-								 ";
-				$headers_mensaje = 	"From: jobbers <administracion@jobbers.com>\r\n" . 
-					 "Reply-To: administracion@jobbers.com\r\n" . 
-					 "Return-path: administracion@jobbers.com\r\n" . 
-					 "MIME-Version: 1.0\n" . 
-					 "Content-type: text/html; charset=utf-8";
-				if(@mail($para,$asunto,$cuerpo,$headers_mensaje)) {
+				$mail = $email->userForgotPass($para, $exist['name'], $controlador);
+				
+				if($mail) {
 					$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
 					echo json_encode(array("status" => 1));
 				}

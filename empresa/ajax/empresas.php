@@ -345,18 +345,22 @@
 				$_SESSION["ctc"]["servicio"] = $servicio;
 				echo json_encode(array("status" => 1));
 				break;
+
 			case ADD_PHOTO:
-				$ext = getExtension($_FILES["file"]["name"]);
+
+				 $ext = getExtension($_FILES["file"]["name"]);
 				$id = $db->getOne("SELECT id_imagen FROM empresas WHERE id=".$_SESSION["ctc"]["id"]);
 				if($id > 0) {
 					$file = $db->getRow("SELECT directorio, extension FROM imagenes WHERE id=$id");
 					if(file_exists("../img/$file[directorio]/$id.$file[extension]")) {
 						unlink("../img/$file[directorio]/$id.$file[extension]");
 					}
-					$db->query("UPDATE extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' FROM imagenes WHERE id=$id");
+					$db->query("UPDATE imagenes SET extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=$id");
 				}
 				else {
+
 					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
+
 					$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id', '$id', 'profile', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id')");
 					$db->query("UPDATE empresas SET id_imagen='$id' WHERE id=".$_SESSION["ctc"]["id"]);
 				}
@@ -367,8 +371,10 @@
 				else{
 					$t = 0;
 				}
-				echo json_encode(array("status" => $t));
+				echo json_encode(array("status" => $t)); 
 				break;
+
+
 			case SOCIAL:
 				switch($_REQUEST["opt"]) {
 					case 'activity':
