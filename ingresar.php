@@ -44,7 +44,7 @@
 		  });
 		</script>
 	</head>
-	<body class="img-cover" style="background-image: url(img/OB82100.jpg);">
+	<body class="img-cover" style="background-image: url(img/OB82100.jpg); height: 100% !important;">
 		
 		<div class="container-fluid">
 			<div class="sign-form">

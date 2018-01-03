@@ -42,7 +42,7 @@
 html,
 body {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 }
 
 html {
@@ -747,14 +747,14 @@ a:active {
 
 .site-sidebar-second .sidebar-chat-window {
     display: none;
-    padding: 0 2rem;
+    /* padding: 0 2rem; */
 }
 
 .site-sidebar-second .sidebar-chat-window .scw-header {
-    background-color: #F5F5F5;
+    background-color: #EEEEEE;
     padding-bottom: 0px;
     margin-bottom: 21px;
-    padding-top: 10px;
+    padding-top: 47px;
     padding-bottom: 10px;
 }
 
@@ -8101,7 +8101,7 @@ a.text-grey:hover .underline {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    height: 50vh;
+    /* height: 50vh; */
 }
 
 .img-fixed {
@@ -10034,6 +10034,23 @@ a.text-grey:hover .underline {
     .news-img {
         margin-left: 0px;
     }
+}
+
+
+/* =================================================================
+  CHAT
+================================================================= */
+
+.container-chat {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.container-user-chat {
+    position: fixed;
+    width: 100%;
+    top: 73px;
 }
 
 

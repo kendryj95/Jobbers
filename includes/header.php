@@ -163,11 +163,11 @@
 							</div>
 						</li>
 
-						<li>
+						<!-- <li>
 							<a class="nav-link color-link site-sidebar-second-toggle" href="#" data-toggle="collapse">
 								<i class="ti-arrow-left"></i>
 							</a>
-						</li>
+						</li> -->
 					
 
 			<?php else: ?>
@@ -240,11 +240,11 @@
 							</div>
 						</li>
 
-						<li>
+						<!-- <li>
 							<a class="nav-link site-sidebar-second-toggle color-link" href="#" data-toggle="collapse">
 								<i class="ti-arrow-left" style="color: #b7b2b2;"></i>
 							</a>
-						</li>
+						</li> -->
 				<?php else: ?>
 
 						<li>

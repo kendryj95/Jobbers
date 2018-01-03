@@ -168,7 +168,7 @@ $publicaciones = $db->getAll("
 			<?php endif ?>
 
             <!-- Sidebar second -->
-            <?php //require_once('includes/sidebar-second.php'); ?>
+            <?php require_once('includes/sidebar-second.php'); ?>
 
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
@@ -182,7 +182,7 @@ $publicaciones = $db->getAll("
                             <li class="breadcrumb-item"><a href="trabajadores.php">Trabajadores</a></li>
                             <li class="breadcrumb-item active"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></li>
                         </ol>
-                        <div class="row" style="margin-top: 20px;">
+                        <div class="container" style="margin-top: 20px;">
                             <div class="col-sm-4 col-md-5">
                                 <div class="content-perfil profile-card" style="margin-top: 0px;">
                                     <div class="profile-avatar" style="text-align: center;margin-top: 15px;">
