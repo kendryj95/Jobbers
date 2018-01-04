@@ -1,10 +1,11 @@
 <?php if ((!strstr($_SERVER["REQUEST_URI"], "admin/")) && (@$_SESSION['ctc']['plan']['nombre'] != 'Gratis')): ?>
 
 
-<div class="site-sidebar-second custom-scroll custom-scroll-dark">
+<div class="site-sidebar-second custom-scroll custom-scroll-dark" id="scrollable">
 	<ul class="nav nav-tabs" role="tablist">
-		<li class="nav-item">
-			<a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab">Chat</a>
+		<li class="nav-item" style="z-index: 99">
+			<a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" style="display: inline-block; padding-right: 0px;">Chat</a>
+			<a class="site-sidebar-second-toggle" href="#" style="display: inline-block; float: right; padding-left: 0px;"><i class="ti-arrow-right"></i></a>
 		</li>
 	</ul>
 	<div class="tab-content">
@@ -42,23 +43,23 @@
 					</div>
 				</div>
 			</div>
-			<div class="sidebar-chat-window animated fadeIn">
+			<div class="sidebar-chat-window animated fadeIn container-chat">
 				<div id="sidebar-chat-window-content">
-					<div class="scw-header clearfix">
+					<div class="scw-header clearfix container-user-chat">
 						<a class="text-grey pull-left" href="#" style="margin-right: 10px;"><i class="ti-angle-left"></i></a>
-						<div class="pull-left">
+						<div>
 							<strong><span id="sidebar-chat-window-user-name" style="text-transform: uppercase"></span></strong>
 							<div class="avatar box-32">
 								<img id="sidebar-chat-window-user-picture" src="" alt="">
 							</div>
 						</div>
 					</div>
-					<div id="sidebar-chat-window-messages">					
+					<div id="sidebar-chat-window-messages" style="padding: 0px 28px; padding-top: 50px;">					
 					</div>
 					<div class="scw-form">
 						<!--<form>-->
 
-							<div class="input-group" style="width: 100%">
+							<div class="input-group" style="width: 100%; padding: 0px 28px;">
 							<input id="sidebar-chat-window-message" type="text" class="form-control" placeholder="Escriba su mensaje...">
 							<span class="input-group-btn">
 								<button class="btn btn-default" type="button" id="sidebar-chat-window-send-message"><i class="fa fa-send"></i></button>
@@ -76,7 +77,6 @@
 		</div>
 	</div>
 </div>
-
 
 	<?php if(isset($_SESSION["ctc"])): ?>
 		<!-- Template options -->
