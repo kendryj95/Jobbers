@@ -101,10 +101,30 @@
 		  });
 		</script>
 	</head>
-	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
-		<div class="wrapper bg-white">
+	<body class="large-sidebar fixed-sidebar fixed-header skin-5 bg-white">
+		<!-- <div class="wrapper bg-white"> -->
+
+		<!-- Sidebar -->
+		<?php if ($_SESSION['ctc']['type'] == 1):
+			require_once ('includes/sidebar.php');
+			?>
+			<style>
+				.site-content{
+					margin-left:220px !important;
+				}
+				@media(max-width: 1024px){
+					.site-content{
+						margin-left: 0px !important;
+					}
+				}
+			</style>
+			<?php endif ?>
+
+			<!-- Sidebar second -->
+			<?php require_once('includes/sidebar-second.php'); ?>
 			
-						<?php require_once('includes/header.php'); ?>
+			<!-- Header -->
+			<?php require_once 'includes/header.php'; ?>
 					
 			
 			<div style="padding: 0px 25px; margin-top: 25px;">
@@ -136,7 +156,7 @@
 		
 			<?php require_once('includes/footer.php'); ?>
 
-		</div>
+		<!-- </div> -->
 
 		<!-- Vendor JS -->
 		<script type="text/javascript" src="vendor/jquery/jquery-1.12.3.min.js"></script>

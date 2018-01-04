@@ -1343,6 +1343,12 @@
 				toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
 				language: 'es'
 			});
+
+			$(document).on('focusin', function(e) { /* Para que funcione los modales de tinymce dentro de otro modal, en este caso, dentro de los modales de bootstrap*/
+			    if ($(event.target).closest(".mce-window").length) {
+			        e.stopImmediatePropagation();
+			    }
+			});
 			
 			$('#select2-demo-1').select2({
 				width: '100%'

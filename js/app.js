@@ -13,21 +13,24 @@ $(document).ready(function(){
 		$('.preloader').fadeOut();
 	}, 500);
 
-	/* Scroll */
-	if(jQuery.browser.mobile == false) {
-		function initScroll(){
-			$('.custom-scroll').jScrollPane({
-				autoReinitialise: true,
-				autoReinitialiseDelay: 100
-			});
-		}
-
-		initScroll();
-
-		$(window).resize(function() {
-			initScroll();
-		});
-	}
+		/* Scroll */
+		
+		var shouldStickToBottom = true,
+	        api = $('.custom-scroll').jScrollPane({
+	                  stickToBottom: true,
+	                  maintainPosition: true
+	                }).data('jsp');
+	    
+	    function addDummyContentToChatBox() { /* Mantiene el scroll al final */
+	        api.reinitialise();
+	        if (api.getIsScrollableV() && shouldStickToBottom) {
+	            api.scrollToBottom();
+	            api.reinitialise();
+	            shouldStickToBottom = false;
+	        }
+	    }
+	    
+	    setInterval(addDummyContentToChatBox, 233);
 
 	/* Sidebar - if mobile */
 	if(jQuery.browser.mobile == true) {

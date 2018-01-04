@@ -168,7 +168,7 @@ $publicaciones = $db->getAll("
 			<?php endif ?>
 
             <!-- Sidebar second -->
-            <?php //require_once('includes/sidebar-second.php'); ?>
+            <?php require_once('includes/sidebar-second.php'); ?>
 
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
@@ -182,7 +182,7 @@ $publicaciones = $db->getAll("
                             <li class="breadcrumb-item"><a href="trabajadores.php">Trabajadores</a></li>
                             <li class="breadcrumb-item active"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></li>
                         </ol>
-                        <div class="row" style="margin-top: 20px;">
+                        <div class="container" style="margin-top: 20px;">
                             <div class="col-sm-4 col-md-5">
                                 <div class="content-perfil profile-card" style="margin-top: 0px;">
                                     <div class="profile-avatar" style="text-align: center;margin-top: 15px;">
@@ -304,10 +304,13 @@ $publicaciones = $db->getAll("
                                         .rating > label:hover:before,  .rating > label:hover ~ label:before,  .rating:not(:hover) > :checked ~ label:before { opacity: 1; }                                        
  
                                 </style>
+                                <?php if($_SESSION["ctc"]["type"]==1){?>
+
                                 <div class="panel panel-default panel-m30">
                                     <div class="panel-heading"><b>Gestionar Jobber</b></div>
                                     <div class="panel-body items-list text-center"> 
                                     <div class="col-sm-6" style="padding-top: 15px;">
+
                                          <label><strong>Calificar</strong></label><br/>
                                             <span class="rating" style="margin-left: -80px;">
                                              
@@ -343,6 +346,8 @@ $publicaciones = $db->getAll("
                                         </div>                                          
                                     </div>
                                 </div>
+
+                                 <?php }?>
                                 <div class="panel panel-default panel-m30">
                                     <div class="panel-heading"><b>Empresas que lo han contactado</b></div>
                                     <div class="panel-body items-list">
