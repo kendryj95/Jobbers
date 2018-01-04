@@ -373,14 +373,24 @@
 				ORDER BY t3.fecha_creacion DESC");
  
 
-				if($datos) {					 
+				if($datos) {
+				
+					 $calificar = array(
+					 	'' => '',
+					 	'1' => '★', 
+					 	'2' => '★★', 
+					 	'3' => '★★★', 
+					 	'4' => '★★★★', 
+					 	'5' => '★★★★★',  
+					 	);					 
 					foreach($datos as $k => $fila) {
-						//$fila["fecha_hora_formateada"] = date('d/m/Y h:i:s A', strtotime($fila["fecha_hora"]));
+						 
 						$sexos = array(1 => "M", 2 => "F");
 						$postulados[] = array(
 
 							$k + 1,
 							'<a style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
+							<div style="color: #ffde00;font-size:14px;">'.$calificar[$fila['calificacion']].'</div>
 							<div style="font-size:11px;"><strong>Edad: </strong>' . $fila["edad"] . '<strong> Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '</div> 
 							',						 
 							$fila['edad'],
