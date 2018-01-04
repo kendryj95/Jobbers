@@ -328,6 +328,7 @@ $publicaciones = $db->getAll("
 
                                        
                                         <div class="col-sm-6" style="padding-top: 15px;">
+                                        <!--
                                             <label><strong>Marcador</strong></label><br/>
                                             <select class="form-control">
                                                 <option value="">Marcador</option>
@@ -338,6 +339,7 @@ $publicaciones = $db->getAll("
                                                 <option value="4">Finalista</option>
                                                 <option value="5">Contratado</option>
                                             </select>
+                                            -->
                                         </div>                                          
                                     </div>
                                 </div>
