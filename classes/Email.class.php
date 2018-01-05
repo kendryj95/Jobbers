@@ -1,14 +1,14 @@
 <?php
 
-require_once("../vendor/phpmailer/class.phpmailer.php");
-require_once("../vendor/phpmailer/class.smtp.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/vendor/phpmailer/class.phpmailer.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/vendor/phpmailer/class.smtp.php");
 
 Class Email {
 
 	private $host = "smtp.1and1.com";
 	private $smtpAuth = true;
 	private $userName = "empleos@jobbersargentina.com";
-	private $password = "Paviliong8+";
+	private $password = "Paviliong11+";
 	private $smtpSecure = "tls";
 	private $port = 25;
 	private $from = "administracion@jobbers.com";
