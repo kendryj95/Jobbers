@@ -412,8 +412,8 @@
 						dataType: 'json',
 						success: function(data) {
 							console.log(data);
-							// $("#payMP").attr("data-v", data.data.response.init_point);
-							$("#payMP").attr("data-v", data.data.response.sandbox_init_point);
+							$("#payMP").attr("data-v", data.data.response.init_point);
+							//$("#payMP").attr("data-v", data.data.response.sandbox_init_point);
 							var html = '';
 							var total = 0;
 							html += '<li class="list-group-item b-l-0 b-r-0 text-muted">Tipo: <strong>'+data.servicios.nombre+'</strong></li><li class="list-group-item b-l-0 b-r-0 text-muted">Precio: <strong>'+data.servicios.precio+'</strong></li>';
