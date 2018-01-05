@@ -85,7 +85,8 @@
 				<i class="fa fa-envelope"></i> 
 				CHAT
 				<div style="bottom: -36px; right: -15px; position: absolute;"><i class="flaticon-mouse" style="color: #f9c890; font-size: 42px"></i></div>
-				<!-- <span class="badge" style="background-color: #d61717; position: absolute; top: -16px; font-size: 16px">22</span> -->
+				<span id="noReadNotifications" class="badge" style="background-color: #d61717; position: absolute; top: -16px; font-size: 16px; display: none"></span>
+				
 			</div>
 			
 		</div>
