@@ -73,7 +73,7 @@
 
 								$timestamp_today = strtotime(date('Y-m-d'));
 
-								if ($timestamp_today <= $timestamp_final) {
+								// if ($timestamp_today <= $timestamp_final) {
 									$publicaciones["data"][] = array(
 										$k + 1,
 										$pub["titulo"],
@@ -83,7 +83,7 @@
 										$fecha_final_pub,
 										'<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>',
 									);
-								}
+								// }
 								break;
 							case 2: // Plan Bronce
 								$timestamp_final = strtotime("+30 day", strtotime($pub["fecha_creacion"]));
@@ -91,7 +91,7 @@
 
 								$timestamp_today = strtotime(date('Y-m-d'));
 
-								if ($timestamp_today <= $timestamp_final) {
+								// if ($timestamp_today <= $timestamp_final) {
 									$publicaciones["data"][] = array(
 										$k + 1,
 										$pub["titulo"],
@@ -101,7 +101,7 @@
 										$fecha_final_pub,
 										'<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>',
 									);
-								}
+								// }
 								break;
 							case 3:
 								$timestamp_final = strtotime("+30 day", strtotime($pub["fecha_creacion"]));
@@ -109,7 +109,7 @@
 
 								$timestamp_today = strtotime(date('Y-m-d'));
 
-								if ($timestamp_today <= $timestamp_final) {
+								// if ($timestamp_today <= $timestamp_final) {
 									$publicaciones["data"][] = array(
 										$k + 1,
 										$pub["titulo"],
@@ -119,7 +119,7 @@
 										$fecha_final_pub,
 										'<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>',
 									);
-								}
+								// }
 								break;	
 							default: // Plan Oro
 								$publicaciones["data"][] = array(

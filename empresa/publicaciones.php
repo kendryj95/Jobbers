@@ -129,7 +129,7 @@
 											<th>Postulados</th>
 											<th>Creación Pub.</th>
 											<th>Final Pub.</th>
-											<th>Acciones</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
