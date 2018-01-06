@@ -552,8 +552,18 @@
                         	</div> 
                         	
                         	<div class="col-sm-2"></div>
-                        	<div class="col-sm-2" style="padding-top: 25px;">                       	 
-                        	                       		
+                        	<div class="col-sm-2">                       	 
+                        	   <label>Marcadores</label><br/>
+	                        	<select onChange="filtrar(this.value,10)" class="_filtro form-control select_filtros" style="">
+	                        		<option value="">Todos</option>
+	                        		<option value="0">Descargados</option>
+	                        		<option value="1">Contactado</option>
+	                        		<option value="2">En proceso</option>
+	                        		<option value="3">Evaluando</option>
+	                        		<option value="4">Finalistas</option>
+	                        		<option value="5">Contratados</option>
+									 
+	                        	</select>   	 	              		
                         	</div>
 
                        	 </div>
