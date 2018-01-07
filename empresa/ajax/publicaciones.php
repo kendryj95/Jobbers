@@ -405,13 +405,14 @@
 							$fila['actividad_empresa'],
 							$fila['marcador'],
 							$fila['fecha_creacion'],
-							'<div class="acciones-publicacion" data-target="' . $fila["id_trabajador"] . '"> <a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><span class="ti-comment-alt"></span></a> 
+							'<div class="acciones-publicacion text-center" data-target="' . $fila["id_trabajador"] . '"> 
+							<a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><img src="img/chat.png">
+							</a> 
 
 							</div>',					
 						);
 					}
-				}
-
+				} 
 				echo json_encode(array(
 					"data" => $postulados
 				));

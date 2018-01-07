@@ -585,7 +585,7 @@
 									<th>actividad</th>
 									<th>Estado</th>
 									<th>Fecha y hora</th>
-									<th>Acciones</th>
+									<th>Contactar</th>
 								</tr>
 							</thead>
 							<tbody>
