@@ -47,7 +47,7 @@
 		  });
 		</script>
 	</head>
-	<body style="background-image: url('img/145.jpg'); background-size: cover;background-position: center; height: 100vh">
+	<body style="background-image: url('img/145.jpg'); background-size: cover;background-position: center">
 		
 		<div class="auth">
 			<div class="auth-header">
