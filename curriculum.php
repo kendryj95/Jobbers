@@ -93,7 +93,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 			<div class="preloader"></div>
 
 			<!-- Sidebar -->
-			<!-- <?php require_once 'includes/sidebar.php';?> -->
+			<?php //require_once 'includes/sidebar.php';?>
 
 			<!-- Sidebar second -->
 			<?php require_once 'includes/sidebar-second.php';?>

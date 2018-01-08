@@ -3291,7 +3291,7 @@ footer .f-title {
 
 .auth {
     color: #fff;
-    padding: 25vh 0px;
+    padding: 23vh 0px;
 }
 
 .auth .auth-header {
@@ -9728,8 +9728,8 @@ a.text-grey:hover .underline {
 }
 
 .h6-login-empresas {
-    color: #000;
-    font-weight: bolder;
+    color: #000 !important;
+    font-weight: bolder !important;
     margin-top: 20px;
 }
 
@@ -10062,6 +10062,26 @@ a.text-grey:hover .underline {
 .padding-content {
     padding-top: 55px;
     padding-bottom: 55px;
+}
+
+
+/* =================================================================
+  ACCESO EMPRESAS
+================================================================= */
+
+@media (max-width: 768px) {
+    .login-responsive {
+        border-right: none !important;
+    }
+    .auth {
+        padding: 15vh 0px;
+    }
+}
+
+.login-container {
+    background-color: rgba(188, 188, 188, 0.6);
+    padding-top: 23px;
+    padding-bottom: 23px;
 }
 
 
