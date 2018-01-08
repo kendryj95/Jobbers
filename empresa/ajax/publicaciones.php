@@ -358,7 +358,8 @@
 				t5.remuneracion_pret,
 				t6.calificacion,
                 group_concat(t9.nombre) as actividad_empresa,
-                group_concat(t7.id_idioma) as idiomas
+                group_concat(t7.id_idioma) as idiomas,
+                t10.marcador    
 				FROM publicaciones t1 
 				INNER JOIN postulaciones t2 ON t1.id = t2.id_publicacion 
 				INNER JOIN trabajadores t3 ON t3.id = t2.id_trabajador
@@ -367,20 +368,31 @@
 				LEFT JOIN trabajadores_calificacion t6 ON t6.id_trabajador = t2.id_trabajador
 				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
                 LEFT JOIN trabajadores_experiencia_laboral t8 ON t8.id_trabajador = t2.id_trabajador
+                LEFT JOIN trabajadores_marcadores t10 ON t10.id_trabajador = t2.id_trabajador
                 LEFT JOIN actividades_empresa t9 ON t9.id = t8.id_actividad_empresa
 				WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']." and t1.id=".$id."
 				GROUP BY t3.id
 				ORDER BY t3.fecha_creacion DESC");
  
 
-				if($datos) {					 
+				if($datos) {
+				
+					 $calificar = array(
+					 	'' => '',
+					 	'1' => '★', 
+					 	'2' => '★★', 
+					 	'3' => '★★★', 
+					 	'4' => '★★★★', 
+					 	'5' => '★★★★★',  
+					 	);					 
 					foreach($datos as $k => $fila) {
-						//$fila["fecha_hora_formateada"] = date('d/m/Y h:i:s A', strtotime($fila["fecha_hora"]));
+						 
 						$sexos = array(1 => "M", 2 => "F");
 						$postulados[] = array(
 
 							$k + 1,
 							'<a style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
+							<div style="color: #ffde00;font-size:14px;">'.$calificar[$fila['calificacion']].'</div>
 							<div style="font-size:11px;"><strong>Edad: </strong>' . $fila["edad"] . '<strong> Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '</div> 
 							',						 
 							$fila['edad'],
@@ -391,15 +403,16 @@
 							$fila['calificacion'],
 							$fila['idiomas'],
 							$fila['actividad_empresa'],
-							$k + 1,
+							$fila['marcador'],
 							$fila['fecha_creacion'],
-							'<div class="acciones-publicacion" data-target="' . $fila["id_trabajador"] . '"> <a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><span class="ti-comment-alt"></span></a> 
+							'<div class="acciones-publicacion text-center" data-target="' . $fila["id_trabajador"] . '"> 
+							<a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><img src="img/chat.png">
+							</a> 
 
 							</div>',					
 						);
 					}
-				}
-
+				} 
 				echo json_encode(array(
 					"data" => $postulados
 				));

@@ -267,6 +267,86 @@ $publicaciones = $db->getAll("
                                     <div class="card-header text-uppercase"><b>Resumen del perfil</b></div>
 
                                 </div>-->
+                                <!--Estilos estrellas de ranking-->
+                                <style type="text/css">
+                                    .rating {
+                                          overflow: hidden;
+                                          vertical-align: bottom;
+                                          display: inline-block;
+                                          width: auto;
+                                          height: 20px;
+                                        }
+
+                                        .rating > input {
+                                          opacity: 0; 
+                                        }
+
+                                        .rating > label {
+                                          position: relative;
+                                          display: block;
+                                          float: right;
+                                          background: url('img/star-off-big.png');
+                                          background-size: 20px 20px; 
+                                        }
+
+                                        .rating > label:before {
+                                          display: block;
+                                          opacity: 0;
+                                          content: '';
+                                          width: 20px;
+                                          height: 20px;
+                                          background: url('img/star-on-big.png');
+                                          background-size: 20px 20px;
+                                          transition: opacity 0.2s linear;
+                                          cursor: pointer;
+                                        }
+
+                                        .rating > label:hover:before,  .rating > label:hover ~ label:before,  .rating:not(:hover) > :checked ~ label:before { opacity: 1; }                                        
+ 
+                                </style>
+                                <?php if($_SESSION["ctc"]["type"]==1){?>
+                                <div class="panel panel-default panel-m30">
+                                    <div class="panel-heading"><b>Gestionar Jobber</b></div>
+                                    <div class="panel-body items-list text-center"> 
+                                    <div class="col-sm-6" style="padding-top: 15px;">
+
+                                         <label><strong>Calificar</strong></label><br/>
+                                            <span class="rating" style="margin-left: -80px;">
+                                             
+                                              <input id="rating5" type="radio" name="rating" value="5" onClick="calificar(this.value,<?php echo  $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <label for="rating5">15</label>
+
+                                              <input id="rating4" type="radio" name="rating" value="4"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <label for="rating4">54</label>  
+
+                                              <input id="rating3" type="radio" name="rating" value="3"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <label for="rating3">3</label>
+                                              <input id="rating2" type="radio" name="rating" value="2"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <label for="rating2">2</label>
+                                              <input id="rating1" type="radio" name="rating" value="1"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <label for="rating1">1</label>
+                                            </span>
+                                        </div> 
+
+                                       
+                                        <div class="col-sm-6" style="padding-top: 15px;">
+                                       
+                                            <label><strong>Marcador</strong></label><br/>
+                                            <select id="marcador" onChange="marcar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)" class="form-control">
+                                                <option value="">Marcador</option>
+                                                <option value="0">Descartar</option>
+                                                <option value="1">Contactado</option>
+                                                <option value="2">En proceso</option>
+                                                <option value="3">Evaluado</option>
+                                                <option value="4">Finalista</option>
+                                                <option value="5">Contratado</option>
+                                            </select>
+                                             
+                                        </div>                                          
+                                    </div>
+                                </div>
+
+                                 <?php }?>
                                 <div class="panel panel-default panel-m30">
                                     <div class="panel-heading"><b>Empresas que lo han contactado</b></div>
                                     <div class="panel-body items-list">
@@ -305,6 +385,7 @@ $publicaciones = $db->getAll("
 
                                 </div>
                             </div>
+
                             <div class="col-sm-7 col-md-6">
 
                                 
@@ -534,11 +615,7 @@ $publicaciones = $db->getAll("
             var u2 = <?php echo empty($trabajador["uid"]) ? 0 : $trabajador["uid"]; ?>;
             var empresa = <?php echo $_SESSION["ctc"]["type"] == 1 ? 1 : 0; ?>;
             var cant_c = <?php echo ($_SESSION["ctc"]["type"] == 1 ? $_SESSION["ctc"]["servicio"]["curriculos_disponibles"] : 0); ?>;
-
-
-
-
-            $(function() {
+             $(function() {
                 $("#downloadC").click(function() {
                     var band = true;
                     if(band) {
@@ -575,6 +652,83 @@ $publicaciones = $db->getAll("
                 });
             });
         </script>
+        
+        <?php echo  "<script>var id_user = ".$_GET['t']." ;</script>";?>
+        <?php echo  "<script>var id_emp = ".$_SESSION['ctc']['id']." ;</script>";?>
 
+
+        <script type="text/javascript">
+        $( document ).ready(function() {
+            setear_calificacion(id_user,id_emp);
+            setear_marcador(id_user,id_emp);
+        });
+
+        function setear_calificacion(user,emp)
+        {   
+             $.ajax({
+                url : 'empresa/queries/ajax.php',
+                data : { op : 11,empresa:emp,usuario:user},
+                type : 'POST',
+                success : function(data) { 
+                    if(data!=0)
+                    {
+                        $("#rating"+data).attr('checked', true);
+                    }
+                }, 
+                error : function(xhr, status) {
+                    alert('Disculpe, ocurrió un problema');
+                },  
+                  }); 
+        }        
+          function calificar(valor,emp,user)
+                {
+                $.ajax({
+                url : 'empresa/queries/ajax.php',
+                data : { op : 1,empresa:emp,usuario:user,value:valor},
+                type : 'POST',
+                success : function(data) {
+
+                }, 
+                error : function(xhr, status) {
+                    alert('Disculpe, ocurrió un problema');
+                },  
+                  }); 
+                }
+             
+              function marcar(valor,emp,user)            
+                { 
+
+                   if(valor!="")
+                   {
+                     $.ajax({
+                        url : 'empresa/queries/ajax.php',
+                        data : { op : 2,empresa:emp,usuario:user,value:valor},
+                        type : 'POST',
+                        success : function(data) {  
+                        }, 
+                        error : function(xhr, status) {
+                            alert('Disculpe, ocurrió un problema');
+                        },  
+                          }); 
+                   }
+                }      
+             function setear_marcador(user,emp)
+            {   
+                 $.ajax({
+                    url : 'empresa/queries/ajax.php',
+                    data : { op : 22,empresa:emp,usuario:user},
+                    type : 'POST',
+                    success : function(data) {  
+                        if(data!=0)
+                        {
+                            $("#marcador").val(data);
+                        }
+                    }, 
+                    error : function(xhr, status) {
+                        alert('Disculpe, ocurrió un problema');
+                    },  
+                      }); 
+            }   
+        </script>
     </body>
 </html>

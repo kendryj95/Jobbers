@@ -227,9 +227,11 @@ function checkNewMessagesCount() {
 				var html = '<a class="open-chat text-black" href="#" data-uniqueid="' + row.info.uid + '"><span class="sc-name">' + nombre + '</span>';
 				if(row.messages_unreaded_count > 0) {
 					html += '<span class="tag tag-primary">' + row.messages_unreaded_count + '</span>';
+					$('#noReadNotifications').show().text(row.messages_unreaded_count);
 				}
 				else {
 					html += '<span class="tag"></span>';
+					$('#noReadNotifications').text('').hide();
 				}
 				html += '</a>';
 				$("#sidebar-chats").append(html);

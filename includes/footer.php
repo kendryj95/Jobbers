@@ -72,27 +72,27 @@
 					$db = DatabasePDOInstance();
 					$redes = $db->getRow("SELECT facebook, instagram, twitter, youtube, linkedin FROM plataforma WHERE id=1");
 				}
-				$facebook = $redes["facebook"] ? (strstr($redes["instagram"], "http") ? $redes["facebook"] : ("http://".$redes["facebook"])) : "#";
-				$instagram = $redes["instagram"] ? (strstr($redes["instagram"], "http") ? $redes["instagram"] : ("http://".$redes["instagram"])) : "#";
-				$twitter = $redes["twitter"] ? (strstr($redes["twitter"], "http") ? $redes["twitter"] : ("http://".$redes["twitter"])) : "#";
-				$youtube = $redes["youtube"] ? (strstr($redes["youtube"], "http") ? $redes["youtube"] : ("http://".$redes["youtube"])) : "#";
-				$linkedin = $redes["linkedin"] ? (strstr($redes["linkedin"], "http") ? $redes["linkedin"] : ("http://".$redes["linkedin"])) : "#";
+				$facebook = $redes["facebook"] ? (strstr($redes["facebook"], "http") ? "href='". $redes["facebook"] . "'" : ("href='http://".$redes["facebook"]."'")) : "style='display:none'";
+				$instagram = $redes["instagram"] ? (strstr($redes["instagram"], "http") ? "href='". $redes["instagram"] . "'" : ("href='http://".$redes["instagram"]."'")) : "style='display:none'";
+				$twitter = $redes["twitter"] ? (strstr($redes["twitter"], "http") ? "href='". $redes["twitter"] . "'" : ("href='http://".$redes["twitter"]."'")) : "style='display:none'";
+				$youtube = $redes["youtube"] ? (strstr($redes["youtube"], "http") ? "href='". $redes["youtube"] . "'" : ("href='http://".$redes["youtube"]."'")) : "style='display:none'";
+				$linkedin = $redes["linkedin"] ? (strstr($redes["linkedin"], "http") ? "href='". $redes["linkedin"] . "'" : ("href='http://".$redes["linkedin"]."'")) : "style='display:none'";
 			?>
 			<div class="col-sm-4">
 				<div class="m-b-0-25"><a class="f-logo text-black" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") || strstr($_SERVER["REQUEST_URI"], "admin/") ? ".././" : "./"); ?>">Jobbers</a></div>
-				<a href="<?php echo $facebook; ?>" class="btn bg-facebook btn-sm btn-circle m-r-0-5">
+				<a <?php echo $facebook; ?> class="btn bg-facebook btn-sm btn-circle m-r-0-5">
 					<i class="fa fa-facebook"></i>
 				</a>
-				<a href="<?php echo $instagram; ?>" class="btn bg-twitter btn-sm btn-circle m-r-0-5">
+				<a <?php echo $twitter; ?> class="btn bg-twitter btn-sm btn-circle m-r-0-5">
 					<i class="fa fa-twitter"></i>
 				</a>
-				<a href="<?php echo $twitter; ?>" class="btn bg-instagram btn-sm btn-circle">
+				<a <?php echo $instagram; ?> class="btn bg-instagram btn-sm btn-circle">
 					<i class="fa fa-instagram"></i>
 				</a>
-				<a href="<?php echo $youtube; ?>" class="btn bg-youtube btn-sm btn-circle">
+				<a <?php echo $youtube; ?> class="btn bg-youtube btn-sm btn-circle">
 					<i class="fa fa-youtube"></i>
 				</a>
-				<a href="<?php echo $linkedin; ?>" class="btn bg-linkedin btn-sm btn-circle">
+				<a <?php echo $linkedin; ?> class="btn bg-linkedin btn-sm btn-circle">
 					<i class="fa fa-linkedin"></i>
 				</a>
 			</div>
