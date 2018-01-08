@@ -104,7 +104,7 @@ else {*/
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
 		INNER JOIN empresas_planes AS ep ON p.id_empresa = ep.id_empresa
 		LEFT JOIN imagenes AS img ON img.id=e.id_imagen
-		WHERE ep.logo_home=1 AND (e.suspendido IS NULL OR e.suspendido = 0)
+		WHERE ep.logo_home=1 AND (e.suspendido IS NULL OR e.suspendido = 0) AND p.estatus=1
 		ORDER BY RAND()
 		#LIMIT 3
 	");
@@ -140,7 +140,7 @@ else {*/
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
 		INNER JOIN empresas_planes AS ep ON p.id_empresa = ep.id_empresa
 		LEFT JOIN imagenes AS img ON img.id=e.id_imagen
-		WHERE ep.logo_home=0 AND (e.suspendido IS NULL OR e.suspendido = 0)
+		WHERE ep.logo_home=0 AND (e.suspendido IS NULL OR e.suspendido = 0) AND p.estatus=1
 		ORDER BY RAND()
 		#LIMIT 2
 	");
@@ -176,7 +176,7 @@ else {*/
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
 		INNER JOIN empresas_planes AS ep ON p.id_empresa = ep.id_empresa
 		LEFT JOIN imagenes AS img ON img.id=e.id_imagen
-		WHERE ep.logo_home=3 AND (e.suspendido IS NULL OR e.suspendido = 0)
+		WHERE ep.logo_home=3 AND (e.suspendido IS NULL OR e.suspendido = 0) AND p.estatus=1
 		ORDER BY RAND()
 		#LIMIT 10
 		");
@@ -212,7 +212,7 @@ else {*/
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
 		INNER JOIN empresas_planes AS ep ON p.id_empresa = ep.id_empresa
 		LEFT JOIN imagenes AS img ON img.id=e.id_imagen
-		WHERE ep.logo_home=2 AND (e.suspendido IS NULL OR e.suspendido = 0)
+		WHERE ep.logo_home=2 AND (e.suspendido IS NULL OR e.suspendido = 0) AND p.estatus=1
 		ORDER BY RAND()
 		#LIMIT 5
 	");

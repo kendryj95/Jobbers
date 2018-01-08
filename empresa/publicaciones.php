@@ -129,7 +129,7 @@
 											<th>Postulados</th>
 											<th>Creación Pub.</th>
 											<th>Final Pub.</th>
-											<th>Acciones</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -391,6 +391,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" id="modal-modificar-publicacion-enviar-form">Aceptar</button>
+						<button type="button" class="btn btn-primary" onClick="renovarPublicacion(this,'2')">Renovar Pub.</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 					</div>
 				</div>
@@ -1169,6 +1170,54 @@
 									if(json.msg == 'OK') {
 										swal("Operación exitosa!", "Se eliminó la publicación y sus datos.", "success");
 										tablaPublicaciones.ajax.reload();
+									}
+									break;
+							}
+						});
+					}
+				});
+			}
+
+			function renovarPublicacion(btn, band='1') {
+				var $btn = $(btn);
+				var $parent = $btn.closest('.acciones-publicacion');
+
+				switch(band){
+					case '1':
+						idPub = $parent.attr('data-target');
+						break;
+				}
+				
+				swal({
+				  title: "Renovar Publicación",
+				  text: "Está seguro que desea renovar esta publicación?",
+				  type: "info",
+				  showCancelButton: true,
+				  confirmButtonColor: "#3FC3EE",
+				  confirmButtonText: "Aceptar",
+				  cancelButtonText: "Cancelar",
+				  closeOnConfirm: false
+				});
+				$(".show-swal2.visible .swal2-confirm").attr('data-action', 'renew');
+				$(".show-swal2.visible .swal2-confirm").click(function() {
+					if($(this).attr('data-action') == 'renew') {
+						$(this).attr('data-action', '');
+						$.ajax({
+							url: 'ajax/publicaciones.php',
+							type: 'GET',
+							dataType: 'json',
+							data: {
+								op: 10,
+								i: idPub
+							}
+						}).done(function(data, textStatus, jqXHR) {
+							switch(jqXHR.status) {
+								case 200:
+									var json = JSON.parse(jqXHR.responseText);
+									if(json.msg == 'OK') {
+										swal("Operación exitosa!", "Se renovó la publicación y sus datos.", "success");
+										tablaPublicaciones.ajax.reload();
+										$("#modal-modificar-publicacion").modal('hide');
 									}
 									break;
 							}
