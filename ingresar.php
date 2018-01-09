@@ -8,7 +8,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%">
 	<head>
 		<!-- Meta tags -->
 		<meta charset="utf-8">
@@ -44,7 +44,7 @@
 		  });
 		</script>
 	</head>
-	<body class="img-cover" style="background-image: url(img/OB82100.jpg); height: 100% !important;">
+	<body class="img-cover img-fix-sm" style="background-image: url(img/OB82100.jpg); height: 100% !important;">
 		
 		<div class="container-fluid">
 			<div class="sign-form">

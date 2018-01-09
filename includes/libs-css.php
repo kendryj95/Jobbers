@@ -3,6 +3,7 @@
 	<!-- FIXME: Esta comentado el bootstrap 4 -->
 	<!-- <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../vendor/animate.css/animate.min.css">
 	<link rel="stylesheet" href="../vendor/themify-icons/themify-icons.css">
 	<link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../vendor/animate.css/animate.min.css">
@@ -28,6 +29,7 @@
 	<!-- FIXME: Esta comentado el bootstrap 4 -->
 	<!-- <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="vendor/animate.css/animate.min.css">
 	<link rel="stylesheet" href="vendor/themify-icons/themify-icons.css">
 	<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="vendor/animate.css/animate.min.css">
