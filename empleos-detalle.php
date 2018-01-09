@@ -3,6 +3,27 @@
 	require_once('classes/DatabasePDOInstance.function.php');
 	require_once('slug.function.php');
 
+	function formatDate($dateMayor, $dateMenor){
+		$menor = new DateTime($dateMenor);
+		$mayor = new DateTime(date($dateMayor));
+		$intervalo = $mayor->diff($menor);
+
+		if ($intervalo->format("%m") != 0) {
+			$m = $intervalo->format("%m") == 1 ? "mes" : "meses";
+			return $intervalo->format("Hace %m $m");
+		} elseif ($intervalo->format("%a") != 0){
+			$d = $intervalo->format("%a") == 1 ? "día" : "días";
+			return $intervalo->format("Hace %a $d");
+		} elseif ($intervalo->format("%h") != 0){
+			$h = $intervalo->format("%h") == 1 ? "hora" : "horas";
+			return $intervalo->format("Hace %h $h");
+		} elseif ($intervalo->format("%i") != 0){
+			return $intervalo->format("Hace %i min");
+		} else {
+			return $intervalo->format("Hace %s seg");
+		}
+	}
+
 	$esTrabajador = (isset($_SESSION["ctc"]["type"]) && $_SESSION["ctc"]["type"] == 2) || !isset($_SESSION["ctc"]);
 	$infoT = (isset($_SESSION["ctc"]) && $esTrabajador) ? $_SESSION["ctc"] : null;
 
@@ -17,6 +38,7 @@
 			p.id,
 			p.titulo,
 			p.descripcion,
+			p.fecha_actualizacion,
 			p.coordenadas,
 			e.nombre AS empresa_nombre,
 			e.id AS empresa_id,
@@ -184,7 +206,8 @@
 										
 										<div class="pv-title col-md-12">
 											<a style="font-size: 20px;" href="empresa/perfil.php?e=<?php echo strtolower(str_replace(" ", "-", $publicacion["empresa_nombre"]))."-$publicacion[empresa_id]"; ?>"><?php echo $publicacion["empresa_nombre"]; ?></a>
-											<?php echo $publicacion["titulo"]; ?>	
+											<?php echo $publicacion["titulo"]; ?>
+											<span class="pull-right text-muted"><small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></span>	
 											<div style="font-size: 13px;color: #999;text-transform: none;"><?php echo $publicacion["area_nombre"]; ?> / <?php echo $publicacion["sector_nombre"]; ?></div>
 											<?php if($publicacion["logo_home"] == 3): ?>
 												<div class="icon-medal"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>

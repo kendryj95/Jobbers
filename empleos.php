@@ -44,6 +44,29 @@
 		return $url;
 	}
 
+	function formatDate($dateMayor, $dateMenor){
+		$menor = new DateTime($dateMenor);
+		$mayor = new DateTime(date($dateMayor));
+		$intervalo = $mayor->diff($menor);
+
+		if ($intervalo->format("%m") != 0) {
+			$m = $intervalo->format("%m") == 1 ? "mes" : "meses";
+			return $intervalo->format("Hace %m $m");
+		} elseif ($intervalo->format("%a") != 0){
+			$d = $intervalo->format("%a") == 1 ? "día" : "días";
+			return $intervalo->format("Hace %a $d");
+		} elseif ($intervalo->format("%h") != 0){
+			$h = $intervalo->format("%h") == 1 ? "hora" : "horas";
+			return $intervalo->format("Hace %h $h");
+		} elseif ($intervalo->format("%i") != 0){
+			return $intervalo->format("Hace %i min");
+		} else {
+			return $intervalo->format("Hace %s seg");
+		}
+	}
+
+	
+
 	$infoArea = $db->getRow("
 		SELECT
 			id,
@@ -241,6 +264,7 @@
 			SELECT
 				p.titulo,
 				p.descripcion,
+				p.fecha_actualizacion,
 				CONCAT(img.directorio, '/', img.nombre, '.', img.extension) AS empresa_imagen,
 				e.nombre AS empresa_nombre,
 				e.sitio_web,
@@ -322,6 +346,7 @@
 			SELECT
 				p.titulo,
 				p.descripcion,
+				p.fecha_actualizacion,
 				CONCAT(img.directorio, '/', img.nombre, '.', img.extension) AS empresa_imagen,
 				e.nombre AS empresa_nombre,
 				e.sitio_web,
@@ -404,6 +429,7 @@
 			SELECT
 				p.titulo,
 				p.descripcion,
+				p.fecha_actualizacion,
 				CONCAT(img.directorio, '/', img.nombre, '.', img.extension) AS empresa_imagen,
 				e.nombre AS empresa_nombre,
 				e.sitio_web,
@@ -447,6 +473,7 @@
 			SELECT
 				p.titulo,
 				p.descripcion,
+				p.fecha_actualizacion,
 				CONCAT(img.directorio, '/', img.nombre, '.', img.extension) AS empresa_imagen,
 				e.nombre AS empresa_nombre,
 				e.sitio_web,
@@ -475,6 +502,7 @@
 			SELECT
 				p.titulo,
 				p.descripcion,
+				p.fecha_actualizacion,
 				e.nombre AS empresa_nombre,
 				e.sitio_web,
 				e.facebook,
@@ -509,6 +537,7 @@
 			SELECT
 				p.titulo,
 				p.descripcion,
+				p.fecha_actualizacion,
 				e.nombre AS empresa_nombre,
 				e.sitio_web,
 				e.facebook,
@@ -637,6 +666,7 @@
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 		<!-- <div class="wrapper"> -->
 		<!-- Sidebar -->
+		<?php if (isset($_SESSION['ctc'])): ?>
     		<?php if ($_SESSION['ctc']['type'] == 1):
 			require_once ('includes/sidebar.php');
 			?>
@@ -651,6 +681,7 @@
 				}
 			</style>
 			<?php endif ?>
+		<?php endif; ?>	
 
 		<!-- Sidebar second -->
 		<?php require_once('includes/sidebar-second.php'); ?>
@@ -896,7 +927,7 @@
 																	<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
 																</div>
 																<div class="col-md-8 col-sm-8">
-																	<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+																	<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 																	<h6 style="color: #373a3c; font-weight: 600;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 																	<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
 																		<?php
@@ -1000,7 +1031,7 @@
 																		<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
 																	</div>
 																	<div class="col-md-8 col-sm-8">
-																		<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+																		<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 																		<h6 style="color: #373a3c; font-weight: 600;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 																		<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
 																			<?php
@@ -1101,7 +1132,7 @@
 																	<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : 'avatars/user.png'; ?>" alt="">
 																</div>
 																<div class="col-md-8 col-sm-8">
-																	<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+																	<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 																	<h6 style="color: #373a3c;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 																	<?php if($publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
 																		<?php
@@ -1210,7 +1241,7 @@
 																<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo !$publicacion["imagen"] ? 'avatars/user.png' : $publicacion["imagen"]; ?>" alt="">
 															</div>
 															<div class="col-md-8 col-sm-8">
-																<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+																<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 																<h6 style="color: #373a3c; width: 90%;"><?php echo $publicacion["titulo"]; ?></h6>
 																<p style="color: #373a3c;"><?php echo $publicacion["area_nombre"]; ?></p>
 																
@@ -1317,7 +1348,7 @@
 																<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo !$publicacion["imagen"] ? 'avatars/user.png' : $publicacion["imagen"]; ?>" alt="">
 															</div>
 															<div class="col-md-8 col-sm-8">
-																<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+																<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 																<h6 style="color: #373a3c;"><?php echo $publicacion["titulo"]; ?></h6>
 																<p style="color: #373a3c;"><?php echo $publicacion["area_nombre"]; ?></p>
 																<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
@@ -1421,7 +1452,7 @@
 															<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo $publicacion["empresa_imagen"] ? $publicacion["empresa_imagen"] : "avatars/user.png"; ?>" alt="">
 														</div>
 														<div class="col-md-8 col-sm-8">
-															<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+															<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 															<h6 style="color: #373a3c;"><?php echo $publicacion["titulo"]; ?></h6>
 															<p style="color: #373a3c;"><?php echo $publicacion["area_nombre"]; ?></p>
 															<?php if($publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
@@ -1494,11 +1525,12 @@
 																					</a>
 																				<!-- </div> -->
 																			<?php endif ?>
-																			<button class="btn btn-success">POSTULARME</button>
+																			
 																		</div>
 																	</div>
 																</div>
 															<?php endif ?>
+															<button class="btn btn-postular btn-block">POSTULARME</button>
 														</div>
 													</div>
 												</div>
