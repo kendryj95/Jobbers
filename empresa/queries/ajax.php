@@ -40,5 +40,33 @@ $base = DatabasePDOInstance();
 		{
 			echo "0";
 		}	 
+	}
+
+	if($opcion==2)
+	{
+		//Verificamos si ya hay un registro
+		$contar=$base->getAll("SELECT count(marcador) total FROM trabajadores_marcadores WHERE id_trabajador = ".$_POST['usuario']." AND id_empresa = ".$_POST['empresa']."");
+		if($contar[0]['total']>0)
+		{
+			 $base->getAll("UPDATE trabajadores_marcadores SET marcador = ".$_POST['value']." WHERE id_trabajador = ".$_POST['usuario']." AND id_empresa = ".$_POST['empresa'].""); 
+		}
+		else
+		{
+			 $base->getAll("INSERT INTO trabajadores_marcadores  VALUES(null,".$_POST['usuario'].",".$_POST['empresa'].",".$_POST['value'].");"); 
+		}		 
+	}
+
+	if($opcion==22)
+	{ 
+		$contar=$base->getAll("SELECT count(marcador) total,marcador FROM trabajadores_marcadores WHERE id_trabajador = ".$_POST['usuario']." AND id_empresa = ".$_POST['empresa']."");
+		if($contar[0]['total']>0)
+		{
+			echo $contar[0]['marcador'];
+			
+		}
+		else
+		{
+			echo "0";
+		}	 
 	}		
 ?>

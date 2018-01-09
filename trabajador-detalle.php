@@ -305,7 +305,6 @@ $publicaciones = $db->getAll("
  
                                 </style>
                                 <?php if($_SESSION["ctc"]["type"]==1){?>
-
                                 <div class="panel panel-default panel-m30">
                                     <div class="panel-heading"><b>Gestionar Jobber</b></div>
                                     <div class="panel-body items-list text-center"> 
@@ -331,9 +330,9 @@ $publicaciones = $db->getAll("
 
                                        
                                         <div class="col-sm-6" style="padding-top: 15px;">
-                                        <!--
+                                       
                                             <label><strong>Marcador</strong></label><br/>
-                                            <select class="form-control">
+                                            <select id="marcador" onChange="marcar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)" class="form-control">
                                                 <option value="">Marcador</option>
                                                 <option value="0">Descartar</option>
                                                 <option value="1">Contactado</option>
@@ -342,7 +341,7 @@ $publicaciones = $db->getAll("
                                                 <option value="4">Finalista</option>
                                                 <option value="5">Contratado</option>
                                             </select>
-                                            -->
+                                             
                                         </div>                                          
                                     </div>
                                 </div>
@@ -661,6 +660,7 @@ $publicaciones = $db->getAll("
         <script type="text/javascript">
         $( document ).ready(function() {
             setear_calificacion(id_user,id_emp);
+            setear_marcador(id_user,id_emp);
         });
 
         function setear_calificacion(user,emp)
@@ -676,7 +676,7 @@ $publicaciones = $db->getAll("
                     }
                 }, 
                 error : function(xhr, status) {
-                    alert('Disculpe, cocurrió un problema');
+                    alert('Disculpe, ocurrió un problema');
                 },  
                   }); 
         }        
@@ -690,13 +690,45 @@ $publicaciones = $db->getAll("
 
                 }, 
                 error : function(xhr, status) {
-                    alert('Disculpe, cocurrió un problema');
+                    alert('Disculpe, ocurrió un problema');
                 },  
                   }); 
-                }   
+                }
              
+              function marcar(valor,emp,user)            
+                { 
+
+                   if(valor!="")
+                   {
+                     $.ajax({
+                        url : 'empresa/queries/ajax.php',
+                        data : { op : 2,empresa:emp,usuario:user,value:valor},
+                        type : 'POST',
+                        success : function(data) {  
+                        }, 
+                        error : function(xhr, status) {
+                            alert('Disculpe, ocurrió un problema');
+                        },  
+                          }); 
+                   }
+                }      
+             function setear_marcador(user,emp)
+            {   
+                 $.ajax({
+                    url : 'empresa/queries/ajax.php',
+                    data : { op : 22,empresa:emp,usuario:user},
+                    type : 'POST',
+                    success : function(data) {  
+                        if(data!=0)
+                        {
+                            $("#marcador").val(data);
+                        }
+                    }, 
+                    error : function(xhr, status) {
+                        alert('Disculpe, ocurrió un problema');
+                    },  
+                      }); 
+            }   
         </script>
-
-
     </body>
 </html>

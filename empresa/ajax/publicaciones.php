@@ -10,6 +10,7 @@
 	define('AGREGAR_ESPECIAL', 7);
 	define('CARGAR_ESPECIAL', 8);
 	define('VALIDAR_PUB', 9);
+	define('RENOVAR_PUB', 10);
 
 	require_once('../../classes/DatabasePDOInstance.function.php');
 	require_once('../../slug.function.php');
@@ -225,24 +226,31 @@
 					foreach($datos as $k => $pub) {
 						$pub["link_postulados"] = $pub["postulados"] > 0 ? ('<a class="text-primary" href="javascript: void(0);" data-toggle="modal" data-target="#modal-postulados" data-id="' . $pub["id"] . '"><span class="underline">' . $pub["postulados"] . ' trabajador(es)</span></a>') : "";
 
-						$fecha_creac_pub = date('d/m/Y', strtotime($pub["fecha_creacion"]));
+						$fecha_creac_pub = date('d/m/Y', strtotime($pub["fecha_actualizacion"]));
 						$fecha_final_pub = '&#x221e;';
 
 						switch ($plan['id_plan']){ // Planes
                             case 1: // Plan Gratis
-                                $timestamp_final = strtotime("+15 day", strtotime($pub["fecha_creacion"]));
+                                $timestamp_final = strtotime("+15 day", strtotime($pub["fecha_actualizacion"]));
                                 $fecha_final_pub = date('d/m/Y', $timestamp_final);
 
                                 $timestamp_today = strtotime(date('Y-m-d'));
 
-                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<span class="label label-danger">OFERTA CADUCADA</span>';
+                                if ($timestamp_today >= $timestamp_final) { // ¿Caducó?
+                                	if ($pub["estatus"] == 1) { // Si la publicacion caducó pero sigue estando activa, desactivarla.
+                                		$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
+                                	}
+                                }
+                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
+
+                                $caducada = $timestamp_today <= $timestamp_final ? '' : '&nbsp<span class="label label-danger">OFERTA CADUCADA</span>';
 
                                 // if ($timestamp_today <= $timestamp_final) {
                                     $publicaciones["data"][] = array(
                                         $k + 1,
-                                        $pub["titulo"],
+                                        $pub["titulo"].$caducada,
                                         $pub["descripcion"],
-                                      	$timestamp_today <= $timestamp_final ? $pub["link_postulados"] : '',
+                                      	$pub["link_postulados"],
                                         $fecha_creac_pub,
                                         $fecha_final_pub,
                                         $accion,
@@ -250,19 +258,27 @@
                                 // }
                                 break;
                             case 2: // Plan Bronce
-                                $timestamp_final = strtotime("+30 day", strtotime($pub["fecha_creacion"]));
+                                $timestamp_final = strtotime("+30 day", strtotime($pub["fecha_actualizacion"]));
                                 $fecha_final_pub = date('d/m/Y', $timestamp_final);
 
                                 $timestamp_today = strtotime(date('Y-m-d'));
 
-                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<span class="label label-danger">OFERTA CADUCADA</span>';
+                                if ($timestamp_today >= $timestamp_final) { // ¿Caducó?
+                                	if ($pub["estatus"] == 1) { // Si la publicacion caducó pero sigue estando activa, desactivarla.
+                                		$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
+                                	}
+                                }
+
+                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
+
+                                $caducada = $timestamp_today <= $timestamp_final ? '' : '&nbsp<span class="label label-danger">OFERTA CADUCADA</span>';
 
                                 // if ($timestamp_today <= $timestamp_final) {
                                     $publicaciones["data"][] = array(
                                         $k + 1,
-                                        $pub["titulo"],
+                                        $pub["titulo"].$caducada,
                                         $pub["descripcion"],
-                                        $timestamp_today <= $timestamp_final ? $pub["link_postulados"] : '',
+                                        $pub["link_postulados"],
                                         $fecha_creac_pub,
                                         $fecha_final_pub,
                                         $accion,
@@ -270,19 +286,27 @@
                                 // }
                                 break;
                             case 3: // Plan Plata
-                            	$timestamp_final = strtotime("+30 day", strtotime($pub["fecha_creacion"]));
+                            	$timestamp_final = strtotime("+30 day", strtotime($pub["fecha_actualizacion"]));
                                 $fecha_final_pub = date('d/m/Y', $timestamp_final);
 
                                 $timestamp_today = strtotime(date('Y-m-d'));
 
-                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<span class="label label-danger">OFERTA CADUCADA</span>' ;
+                                if ($timestamp_today >= $timestamp_final) { // ¿Caducó?
+                                	if ($pub["estatus"] == 1) { // Si la publicacion caducó pero sigue estando activa, desactivarla.
+                                		$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
+                                	}
+                                }
+
+                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
+
+                                $caducada = $timestamp_today <= $timestamp_final ? '' : '&nbsp<span class="label label-danger">OFERTA CADUCADA</span>';
 
                                 // if ($timestamp_today <= $timestamp_final) {
                                     $publicaciones["data"][] = array(
                                         $k + 1,
-                                        $pub["titulo"],
+                                        $pub["titulo"].$caducada,
                                         $pub["descripcion"],
-                                        $timestamp_today <= $timestamp_final ? $pub["link_postulados"] : '',
+                                        $pub["link_postulados"],
                                         $fecha_creac_pub,
                                         $fecha_final_pub,
                                         $accion,
@@ -290,14 +314,30 @@
                                 // }
                             	break;    
                             default: // Plan Oro
+
+                            	$timestamp_final = strtotime("+35 day", strtotime($pub["fecha_actualizacion"]));
+                            	$fecha_final_pub = date('d/m/Y', $timestamp_final);
+
+                            	$timestamp_today = strtotime(date('Y-m-d'));
+
+                            	if ($timestamp_today >= $timestamp_final) { // ¿Caducó?
+                            		if ($pub["estatus"] == 1) { // Si la publicacion caducó pero sigue estando activa, desactivarla.
+                            			$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
+                            		}
+                            	}
+
+                            	$accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
+
+                            	$caducada = $timestamp_today <= $timestamp_final ? '' : '&nbsp<span class="label label-danger">OFERTA CADUCADA</span>';
+
                                 $publicaciones["data"][] = array(
                                     $k + 1,
-                                    $pub["titulo"],
+                                    $pub["titulo"].$caducada,
                                     $pub["descripcion"],
                                     $pub["link_postulados"],
                                     $pub["fecha_actualizacion"],
                                     $fecha_final_pub,
-                                    '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>',
+                                    $accion,
                                 );
                                 break;
                         }
@@ -364,7 +404,8 @@
 				t5.remuneracion_pret,
 				t6.calificacion,
                 group_concat(t9.nombre) as actividad_empresa,
-                group_concat(t7.id_idioma) as idiomas
+                group_concat(t7.id_idioma) as idiomas,
+                t10.marcador    
 				FROM publicaciones t1 
 				INNER JOIN postulaciones t2 ON t1.id = t2.id_publicacion 
 				INNER JOIN trabajadores t3 ON t3.id = t2.id_trabajador
@@ -373,6 +414,7 @@
 				LEFT JOIN trabajadores_calificacion t6 ON t6.id_trabajador = t2.id_trabajador
 				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
                 LEFT JOIN trabajadores_experiencia_laboral t8 ON t8.id_trabajador = t2.id_trabajador
+                LEFT JOIN trabajadores_marcadores t10 ON t10.id_trabajador = t2.id_trabajador
                 LEFT JOIN actividades_empresa t9 ON t9.id = t8.id_actividad_empresa
 				WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']." and t1.id=".$id."
 				GROUP BY t3.id
@@ -407,15 +449,16 @@
 							$fila['calificacion'],
 							$fila['idiomas'],
 							$fila['actividad_empresa'],
-							$k + 1,
+							$fila['marcador'],
 							$fila['fecha_creacion'],
-							'<div class="acciones-publicacion" data-target="' . $fila["id_trabajador"] . '"> <a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><span class="ti-comment-alt"></span></a> 
+							'<div class="acciones-publicacion text-center" data-target="' . $fila["id_trabajador"] . '"> 
+							<a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><img src="img/chat.png">
+							</a> 
 
 							</div>',					
 						);
 					}
-				}
-
+				} 
 				echo json_encode(array(
 					"data" => $postulados
 				));
@@ -496,6 +539,14 @@
 					}
 				}
 				break;
+			case RENOVAR_PUB:
+				$id = isset($_REQUEST["i"]) ? json_decode($_REQUEST["i"], true) : false;
+				if($id) {
+					$db->query("UPDATE publicaciones SET fecha_actualizacion='".date('Y-m-d H:i:s')."', estatus=1 WHERE id=".$id);
+					echo json_encode(array(
+						"msg" => "OK"
+					));
+				}
 		}
 	}
 	function getExtension($str) {$i=strrpos($str,".");if(!$i){return"";}$l=strlen($str)-$i;$ext=substr($str,$i+1,$l);return $ext;}
