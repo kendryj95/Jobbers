@@ -2,10 +2,10 @@
 	session_start();
 	require_once('classes/DatabasePDOInstance.function.php');
 	$db = DatabasePDOInstance();
-	$contenido = $db->getOne("SELECT nosotros FROM plataforma WHERE id=1");
+	$plataforma = $db->getRow("SELECT * FROM plataforma WHERE id=1");
 
 	$planes = $db->getAll("SELECT * FROM planes WHERE id != 1");
-	$servicios = $db->getAll("SELECT * FROM servicios WHERE id != 4");
+
 ?>
 
 <!DOCTYPE html>
@@ -271,9 +271,9 @@
 								<h3 class="text-center">Si quieres saber mas acerca de nuestros planes y de como contratarlos.</h3>
 								<h3 class="text-center" style="margin-bottom: 40px;">No dudes en comunicarte con nosotros a traves de nuestros distintos medios de comunicación:</h3>
 								<ul style="list-style: none">
-									<li><h4 style="margin-bottom: 20px;"><i class="fa fa-envelope-o" style="margin-right: 5px;"></i> jobbersargentina@gmail.com</h4></li>
-									<li><h4 style="margin-bottom: 20px;"><i class="fa fa-phone" style="margin-right: 5px;"></i> +55 403928423</h4></li>
-									<li><h4 style="margin-bottom: 40px;"><i class="fa fa-home" style="margin-right: 5px;"></i> Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</h4></li>
+									<li><h4 style="margin-bottom: 20px;"><i class="fa fa-envelope-o" style="margin-right: 5px;"></i> <?= $plataforma["correo_contacto"] ?></h4></li>
+									<li><h4 style="margin-bottom: 20px;"><i class="fa fa-phone" style="margin-right: 5px;"></i> <?= $plataforma["telefono_contacto"] ?></h4></li>
+									<li><h4 style="margin-bottom: 40px;"><i class="fa fa-home" style="margin-right: 5px;"></i> <?= $plataforma["direccion_contacto"] ?></h4></li>
 								</ul>
 								<h3 class="text-center">O puedes abrir una consulta ingresando en nuestra página de contacto haciendo click <a href="https://www.jobbersargentina.com/contacto.php">Aquí</a></h3>
 							</div>
@@ -287,20 +287,15 @@
 
 						<div class="col-md-4 fadeInUp" style="margin-bottom: 30px;">
 							<i class="fa fa-globe" style="font-size: 75px; margin-bottom: 30px; color: #2E3192"></i>
-							<p style="color: #03A7E9; font-weight: bolder">Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+							<p style="color: #03A7E9; font-weight: bolder"><?= $plataforma["section1_landing"] ?> </p>
 						</div>
 						<div class="col-md-4 fadeInUp">
 							<i class="fa fa-group" style="font-size: 75px; margin-bottom: 30px; color: #2E3192"></i>
-							<p style="color: #03A7E9; font-weight: bolder">Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. </p>
+							<p style="color: #03A7E9; font-weight: bolder"><?= $plataforma["section2_landing"] ?> </p>
 						</div>
 						<div class="col-md-4 fadeInUp">
 							<i class="fa fa-mortar-board" style="font-size: 75px; margin-bottom: 30px; color: #2E3192"></i>
-							<ul style="list-style: none; padding-left: 0px; color: #03A7E9; font-weight: bolder">
-								<li>Calidad</li>
-								<li>Seguridad</li>
-								<li>Profesionalismo</li>
-								<li>Responsabilidad</li>
-							</ul>
+							<p style="color: #03A7E9; font-weight: bolder"><?= $plataforma["section3_landing"] ?></p>
 						</div>
 					</div>
 				</div>
