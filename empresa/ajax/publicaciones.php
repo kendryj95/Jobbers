@@ -25,158 +25,209 @@
 		switch($op) {
 			case AGREGAR:
 				$info = isset($_REQUEST["info"]) ? json_decode($_REQUEST["info"], true) : false;
-				if($info) {
-					$coordenadas = "";
-					if($info["latitud"] != "" && $info["latitud"] != null  && $info["longitud"] != "" && $info["longitud"] != null) {
-						$coordenadas = "$info[latitud],$info[longitud]";
+
+				$db->beginTransaction();
+
+				try{
+					if($info) {
+						$coordenadas = "";
+						if($info["latitud"] != "" && $info["latitud"] != null  && $info["longitud"] != "" && $info["longitud"] != null) {
+							$coordenadas = "$info[latitud],$info[longitud]";
+						}
+						$id = $db->getOne("
+							SELECT
+								AUTO_INCREMENT
+							FROM
+								INFORMATION_SCHEMA.TABLES
+							WHERE
+								TABLE_SCHEMA = 'db678638694'
+							AND TABLE_NAME = 'publicaciones'
+						");
+						
+						$db->query("
+							INSERT INTO publicaciones (
+								id,
+								id_empresa,
+								titulo,
+								descripcion,
+								amigable,
+								fecha_creacion,
+								fecha_actualizacion,
+								coordenadas,
+								ubicacion,
+								disponibilidad
+							)
+							VALUES
+							(
+								'$id',
+								'$infoEmpresa[id]',
+								'$info[titulo]',
+								'$info[descripcion]',
+								'" . slug($info["titulo"]) . "',
+								'" . date('Y-m-d H:i:s') . "',
+								'" . date('Y-m-d H:i:s') . "',
+								'$coordenadas',
+								'$info[ubicacion]',
+								'$info[disponibilidad]'
+							)
+						");
+						
+						$db->query("
+							INSERT INTO publicaciones_sectores (
+								id_publicacion,
+								id_sector
+							)
+							VALUES (
+								'$id',
+								'$info[sector]'
+							)
+						");
+						
+						$publicacion = $db->getRow("
+							SELECT
+								*
+							FROM
+								publicaciones
+							WHERE
+								id = $id
+						");
+						
+						$db->commitTransaction();
+
+						echo json_encode(array(
+							"msg" => "OK",
+							"data" => array(
+								"publicacion" => $publicacion
+							)
+						));
 					}
-					$id = $db->getOne("
-						SELECT
-							AUTO_INCREMENT
-						FROM
-							INFORMATION_SCHEMA.TABLES
-						WHERE
-							TABLE_SCHEMA = 'db678638694'
-						AND TABLE_NAME = 'publicaciones'
-					");
-					
-					$db->query("
-						INSERT INTO publicaciones (
-							id,
-							id_empresa,
-							titulo,
-							descripcion,
-							amigable,
-							fecha_creacion,
-							fecha_actualizacion,
-							coordenadas,
-							ubicacion,
-							disponibilidad
+				} catch(Exception $e){
+					$db->rollBackTransaction();
+					echo json_encode(
+						array(
+							"msg" => "Ah ocurrido un error de comunicación con el servidor, por favor verifique su conexión a internet e intente de nuevo.",
+							"console" => $e->getMessage()
 						)
-						VALUES
-						(
-							'$id',
-							'$infoEmpresa[id]',
-							'$info[titulo]',
-							'$info[descripcion]',
-							'" . slug($info["titulo"]) . "',
-							'" . date('Y-m-d H:i:s') . "',
-							'" . date('Y-m-d H:i:s') . "',
-							'$coordenadas',
-							'$info[ubicacion]',
-							'$info[disponibilidad]'
-						)
-					");
-					
-					$db->query("
-						INSERT INTO publicaciones_sectores (
-							id_publicacion,
-							id_sector
-						)
-						VALUES (
-							'$id',
-							'$info[sector]'
-						)
-					");
-					
-					$publicacion = $db->getRow("
-						SELECT
-							*
-						FROM
-							publicaciones
-						WHERE
-							id = $id
-					");
-					
-					echo json_encode(array(
-						"msg" => "OK",
-						"data" => array(
-							"publicacion" => $publicacion
-						)
-					));
+					);
 				}
+
+				
 				break;
 			case MODIFICAR:
 				$id = isset($_REQUEST["i"]) ? json_decode($_REQUEST["i"], true) : false;
 				$info = isset($_REQUEST["info"]) ? json_decode($_REQUEST["info"], true) : false;
-				if($id && $info) {
-					
-					$coordenadas = "";
-					if($info["latitud"] != "" && $info["latitud"] != null  && $info["longitud"] != "" && $info["longitud"] != null) {
-						$coordenadas = "$info[latitud],$info[longitud]";
+
+				$db->beginTransaction();
+
+				try {
+					if($id && $info) {
+						
+						$coordenadas = "";
+						if($info["latitud"] != "" && $info["latitud"] != null  && $info["longitud"] != "" && $info["longitud"] != null) {
+							$coordenadas = "$info[latitud],$info[longitud]";
+						}
+						
+						$db->query("
+							UPDATE publicaciones
+							SET 
+							titulo = '$info[titulo]',
+							descripcion = '$info[descripcion]',
+							amigable = '" . slug($info["titulo"]) . "',
+							 fecha_actualizacion = '" . date('Y-m-d H:i:s') . "',
+							 coordenadas='$coordenadas',
+							 ubicacion='$info[ubicacion]',
+							 disponibilidad=$info[disponibilidad]
+							WHERE
+								id = $id
+						");
+						
+						$db->query("
+							DELETE
+							FROM
+								publicaciones_sectores
+							WHERE
+								id_publicacion = $id
+						");
+						
+						$db->query("
+							INSERT INTO publicaciones_sectores (
+								id_publicacion,
+								id_sector
+							)
+							VALUES (
+								'$id',
+								'$info[sector]'
+							)
+						");
+						
+						$publicacion = $db->getRow("
+							SELECT
+								*
+							FROM
+								publicaciones
+							WHERE
+								id = $id
+						");
+
+						$db->commitTransaction();
+						
+						echo json_encode(array(
+							"msg" => "OK",
+							"data" => array(
+								"publicacion" => $publicacion
+							)
+						));
 					}
-					
-					$db->query("
-						UPDATE publicaciones
-						SET 
-						titulo = '$info[titulo]',
-						descripcion = '$info[descripcion]',
-						amigable = '" . slug($info["titulo"]) . "',
-						 fecha_actualizacion = '" . date('Y-m-d H:i:s') . "',
-						 coordenadas='$coordenadas',
-						 ubicacion='$info[ubicacion]',
-						 disponibilidad=$info[disponibilidad]
-						WHERE
-							id = $id
-					");
-					
-					$db->query("
-						DELETE
-						FROM
-							publicaciones_sectores
-						WHERE
-							id_publicacion = $id
-					");
-					
-					$db->query("
-						INSERT INTO publicaciones_sectores (
-							id_publicacion,
-							id_sector
+				}catch(Exception $e){
+					$db->rollBackTransaction();
+					echo json_encode(
+						array(
+							"msg" => "Ah ocurrido un error de comunicación con el servidor, por favor verifique su conexión a internet e intente de nuevo.",
+							"console" => $e->getMessage()
 						)
-						VALUES (
-							'$id',
-							'$info[sector]'
-						)
-					");
-					
-					$publicacion = $db->getRow("
-						SELECT
-							*
-						FROM
-							publicaciones
-						WHERE
-							id = $id
-					");
-					
-					echo json_encode(array(
-						"msg" => "OK",
-						"data" => array(
-							"publicacion" => $publicacion
-						)
-					));
+					);
 				}
+
+				
 				break;
 			case ELIMINAR:
 				$id = isset($_REQUEST["i"]) ? json_decode($_REQUEST["i"], true) : false;
-				if($id) {
-					$db->query("
-						DELETE
-						FROM
-							publicaciones
-						WHERE
-							id = $id
-					");
-					$db->query("
-						DELETE
-						FROM
-							publicaciones_sectores
-						WHERE
-							id_publicacion = $id
-					");
-					echo json_encode(array(
-						"msg" => "OK"
-					));
+
+				$db->beginTransaction();
+
+				try{
+					if($id) {
+						$db->query("
+							DELETE
+							FROM
+								publicaciones
+							WHERE
+								id = $id
+						");
+						$db->query("
+							DELETE
+							FROM
+								publicaciones_sectores
+							WHERE
+								id_publicacion = $id
+						");
+
+						$db->commitTransaction();
+
+						echo json_encode(array(
+							"msg" => "OK"
+						));
+					}
+				}catch(Exception $e){
+					$db->rollBackTransaction();
+					echo json_encode(
+						array(
+							"msg" => "Ah ocurrido un error de comunicación con el servidor, por favor verifique su conexión a internet e intente de nuevo.",
+							"console" => $e->getMessage()
+						)
+					);
 				}
+				
 				break;
 			case CARGAR_TODAS:
 				$publicaciones = array();
@@ -464,52 +515,88 @@
 				));
 				break;
 			case AGREGAR_ESPECIAL:
+				
+				$db->beginTransaction();
+
 				if(isset($_REQUEST["edit"])) {
 					if(isset($_REQUEST["video"])) {
-						$id_imagen = $db->getOne("SELECT id_imagen FROM empresas_publicaciones_especiales WHERE id_empresa=".$_SESSION["ctc"]["id"]);
-						if($id_imagen != "") {
+
+						try{
+							$id_imagen = $db->getOne("SELECT id_imagen FROM empresas_publicaciones_especiales WHERE id_empresa=".$_SESSION["ctc"]["id"]);
+							if($id_imagen != "") {
+								$imagen = $db->getOne("SELECT CONCAT(directorio,'/',nombre,'.',extension) FROM imagenes WHERE id=$id_imagen");
+								if(file_exists("../img/$imagen")) {
+									unlink("../img/$imagen");
+								}
+								$db->query("DELETE FROM imagenes WHERE id=$id_imagen");
+							}
+							$db->query("UPDATE empresas_publicaciones_especiales SET titulo='$_REQUEST[titulo]', url='$_REQUEST[url]'");
+							$t = 1;
+
+							$db->commitTransaction();
+
+						}catch(Exception $e){
+							$db->rollBackTransaction();
+							$t = 3;
+						}
+						
+					}
+					else {
+
+						try{
+							$ext = getExtension($_FILES["file"]["name"]);
+							$id_imagen = $db->getOne("SELECT id_imagen FROM empresas_publicaciones_especiales WHERE id_empresa=".$_SESSION["ctc"]["id"]);
 							$imagen = $db->getOne("SELECT CONCAT(directorio,'/',nombre,'.',extension) FROM imagenes WHERE id=$id_imagen");
 							if(file_exists("../img/$imagen")) {
 								unlink("../img/$imagen");
 							}
-							$db->query("DELETE FROM imagenes WHERE id=$id_imagen");
-						}
-						$db->query("UPDATE empresas_publicaciones_especiales SET titulo='$_REQUEST[titulo]', url='$_REQUEST[url]'");
-						$t = 1;
-					}
-					else {
-						$ext = getExtension($_FILES["file"]["name"]);
-						$id_imagen = $db->getOne("SELECT id_imagen FROM empresas_publicaciones_especiales WHERE id_empresa=".$_SESSION["ctc"]["id"]);
-						$imagen = $db->getOne("SELECT CONCAT(directorio,'/',nombre,'.',extension) FROM imagenes WHERE id=$id_imagen");
-						if(file_exists("../img/$imagen")) {
-							unlink("../img/$imagen");
-						}
-						$db->query("INSERT INTO empresas_publicaciones_especiales (id, id_empresa, tipo, titulo, descripcion, id_imagen, enlace, fecha_creacion) VALUES ($id, '".$_SESSION["ctc"]["id"]."', 1, '$_REQUEST[titulo]', '$_REQUEST[descripcion]', $id_imagen, NULL, '".date('Y-m-d')."');");
-						if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/product/$id_imagen.$ext")) {
-							$db->query("UPDATE empresas_publicaciones_especiales SET extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=$id_imagen");
-							$t = 1;
-						}
-						else {
-							$t = 2;
+							$db->query("INSERT INTO empresas_publicaciones_especiales (id, id_empresa, tipo, titulo, descripcion, id_imagen, enlace, fecha_creacion) VALUES ($id, '".$_SESSION["ctc"]["id"]."', 1, '$_REQUEST[titulo]', '$_REQUEST[descripcion]', $id_imagen, NULL, '".date('Y-m-d')."');");
+							if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/product/$id_imagen.$ext")) {
+								$db->query("UPDATE empresas_publicaciones_especiales SET extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=$id_imagen");
+								$t = 1;
+							}
+							else {
+								$t = 2;
+							}
+
+							$db->commitTransaction();
+						}catch(Exception $e){
+							$db->rollBackTransaction();
+							$t = 3;
 						}
 					}
 				}
 				else {
 					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'empresas_publicaciones_especiales'");
 					if(isset($_REQUEST["video"])) {
-						$db->query("INSERT INTO empresas_publicaciones_especiales (id, id_empresa, tipo, titulo, descripcion, id_imagen, enlace, fecha_creacion) VALUES ($id, '".$_SESSION["ctc"]["id"]."', 2, '$_REQUEST[titulo]', '', 0, '$_REQUEST[url]', '".date('Y-m-d')."');");
-						$t = 1;
+						
+						try{
+							$db->query("INSERT INTO empresas_publicaciones_especiales (id, id_empresa, tipo, titulo, descripcion, id_imagen, enlace, fecha_creacion) VALUES ($id, '".$_SESSION["ctc"]["id"]."', 2, '$_REQUEST[titulo]', '', 0, '$_REQUEST[url]', '".date('Y-m-d')."');");
+							$t = 1;
+
+							$db->commitTransaction();
+						}catch(Exception $e){
+							$db->rollBackTransaction();
+							$t = 3;
+						}
 					}
 					else {
-						$ext = getExtension($_FILES["file"]["name"]);
-						$id_imagen = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
-						$db->query("INSERT INTO empresas_publicaciones_especiales (id, id_empresa, tipo, titulo, descripcion, id_imagen, enlace) VALUES ($id, '".$_SESSION["ctc"]["id"]."', 1, '$_REQUEST[titulo]', '$_REQUEST[descripcion]', $id_imagen, NULL);");
-						if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/product/$id_imagen.$ext")) {
-							$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id_imagen', '$id_imagen', 'product', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id_imagen')");
-							$t = 1;
-						}
-						else {
-							$t = 2;
+
+						try{
+							$ext = getExtension($_FILES["file"]["name"]);
+							$id_imagen = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
+							$db->query("INSERT INTO empresas_publicaciones_especiales (id, id_empresa, tipo, titulo, descripcion, id_imagen, enlace) VALUES ($id, '".$_SESSION["ctc"]["id"]."', 1, '$_REQUEST[titulo]', '$_REQUEST[descripcion]', $id_imagen, NULL);");
+							if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/product/$id_imagen.$ext")) {
+								$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id_imagen', '$id_imagen', 'product', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id_imagen')");
+								$t = 1;
+							}
+							else {
+								$t = 2;
+							}
+							$db->commitTransaction();
+						}catch(Exception $e){
+							$db->rollBackTransaction();
+							$t = 3;
 						}
 					}
 				}
@@ -541,12 +628,26 @@
 				break;
 			case RENOVAR_PUB:
 				$id = isset($_REQUEST["i"]) ? json_decode($_REQUEST["i"], true) : false;
-				if($id) {
-					$db->query("UPDATE publicaciones SET fecha_actualizacion='".date('Y-m-d H:i:s')."', estatus=1 WHERE id=".$id);
-					echo json_encode(array(
-						"msg" => "OK"
-					));
+				$db->beginTransaction();
+
+				try{
+					if($id) {
+						$db->query("UPDATE publicaciones SET fecha_actualizacion='".date('Y-m-d H:i:s')."', estatus=1 WHERE id=".$id);
+						$db->commitTransaction();
+						echo json_encode(array(
+							"msg" => "OK"
+						));
+					}
+				}catch(Exception $e){
+					$db->rollBackTransaction();
+					echo json_encode(
+						array(
+							"msg" => "Ah ocurrido un error de comunicación con el servidor, por favor verifique su conexión a internet e intente de nuevo.",
+							"console" => $e->getMessage()
+						)
+					);
 				}
+				
 		}
 	}
 	function getExtension($str) {$i=strrpos($str,".");if(!$i){return"";}$l=strlen($str)-$i;$ext=substr($str,$i+1,$l);return $ext;}
