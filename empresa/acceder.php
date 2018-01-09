@@ -24,7 +24,8 @@
 		<title>JOBBERS - Iniciar sesión como empresa</title>
 
 		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css"> -->
+		<link rel="stylesheet" href="../css/bootstrap.css">
 		<link rel="stylesheet" href="../vendor/themify-icons/themify-icons.css">
 		<link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
 		
@@ -47,41 +48,50 @@
 		  });
 		</script>
 	</head>
-	<body style="background-image: url('img/145.jpg'); background-size: cover;background-position: center; height: 100vh">
-		
+
+	<body style="background-image: url('img/145.jpg'); background-size: cover;background-position: center">
+		<div class="overlay"></div>
 		<div class="auth">
-			<div class="auth-header">
-				<a href=".././"><img src="img/logo.png" alt="Logo" style="width: 300px; background-color: rgba(255, 255, 255, 0.4)"></a>
-				<h6 class="h6-login-empresas">Bienvenido! Inicie sesión para acceder a su panel</h6>
-			</div>
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-4 offset-md-4">
-						<div style="max-width: 350px;margin: 0 auto;">
-							<div class="form-group">
-								<div class="input-group">
-									<input type="text" class="form-control" id="exampleInputEmail" placeholder="Email" onkeypress="return runScript(event)" style="border-left-width: 0px;">
-									<div class="input-group-addon"><i class="ti-email"></i></div>
+					<div class="login-container col-md-8 col-md-offset-2 col-xs-12">
+						<div class="col-md-6 col-xs-12 login-responsive" style="border-right: 1px solid black">
+							<div class="auth-header">
+								<a href=".././"><img src="img/logo.png" alt="Logo" style="width: 300px; background-color: rgba(255, 255, 255, 0.4)"></a>
+								<h5 class="h6-login-empresas">Bienvenido! Inicie sesión para acceder a su panel</h5>
+							</div>
+							<div style="max-width: 350px;margin: 0 auto;">
+								<div class="form-group">
+									<div class="input-group">
+										<input type="text" class="form-control" id="exampleInputEmail" placeholder="Email" onkeypress="return runScript(event)" style="border-left-width: 0px;">
+										<div class="input-group-addon"><i class="ti-email"></i></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="input-group">
+									<input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" onkeypress="return runScript(event)" style="border-bottom-width
+									:0px; border-left-width: 0px;">
+										<div class="input-group-addon"><i class="ti-key"></i></div>
+									</div>
+								</div>							
+								<div class="form-group">
+									<button class="btn btn-danger btn-block" onclick="acceder();">Acceder</button>
+								</div>
+								<div class="form-group clearfix">
+									<div class="pull-left">
+										<a class="font-90" style="color: #000" href="javascript:void(0)" id="resetPass" data-toggle="modal" data-target="#forgotPass">Olvidó su contraseña?</a>
+									</div>
+									<div class="pull-right">
+										<a class="font-90" style="color: #000" href="registro.php">Registrar empresa</a>
+									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="input-group">
-								<input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" onkeypress="return runScript(event)" style="border-bottom-width
-								:0px; border-left-width: 0px;">
-									<div class="input-group-addon"><i class="ti-key"></i></div>
-								</div>
-							</div>							
-							<div class="form-group">
-								<button class="btn btn-danger btn-block" onclick="acceder();">Acceder</button>
-							</div>
-							<div class="form-group clearfix">
-								<div class="pull-xs-left">
-									<a class="font-90" style="color: #000" href="javascript:void(0)" id="resetPass" data-toggle="modal" data-target="#forgotPass">Olvidó su contraseña?</a>
-								</div>
-								<div class="pull-xs-right">
-									<a class="font-90" style="color: #000" href="registro.php">Registrar empresa</a>
-								</div>
-							</div>
+						</div>
+						<div class="col-md-6 col-xs-12 text-center" style="color: #131560">
+							<h1>¿Quiéres obtener mas beneficios?</h1>
+							<h1>No pierdas la oportunidad de contratar uno de nuestros planes!</h1>
+							<h3>Para obtener más información visita nuestra sección de empresas</h3>
+							<button class="btn btn-success col-xs-6 col-xs-offset-3" style="margin-top: 20px;">MÁS INFO</button>
 						</div>
 					</div>
 				</div>

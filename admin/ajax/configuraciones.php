@@ -49,8 +49,15 @@
 				echo json_encode(array("msg" => "OK"));
 				break;
 			case CAMBIAR_CONTACTO:
-				$db->query("UPDATE plataforma SET correo_contacto='$_REQUEST[contacto]' WHERE id=1");
-				echo json_encode(array("msg" => "OK"));
+				$db->beginTransaction();
+				try{
+					$db->query("UPDATE plataforma SET correo_contacto='$_REQUEST[contacto]',telefono_contacto='$_REQUEST[telefono]',direccion_contacto='$_REQUEST[direccion]' WHERE id=1");
+					$db->commitTransaction();
+					echo json_encode(array("msg" => "OK"));
+				}catch(Exception $e){
+					$db->rollBackTransaction();
+					echo json_encode(array("msg" => "Lo sentimos, ha ocurrido un error de conexión, por favor verifique su conexión a internet e intente de nuevo."));
+				}
 				break;
 			case CAMBIAR_REDES:
 				$db->query("UPDATE plataforma SET facebook='$_REQUEST[facebook]', instagram='$_REQUEST[instagram]', twitter='$_REQUEST[twitter]', youtube='$_REQUEST[youtube]', linkedin='$_REQUEST[linkedin]' WHERE id=1");

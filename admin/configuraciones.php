@@ -187,9 +187,22 @@
 								<div class="col-md-8 col-xs-12">
 									<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
 									<div class="form-group row" style="margin-top: 20px;">
-										<label for="contenidoContacto" class="col-xs-4 col-form-label">Contenido</label>
+										<label for="contenidoContacto" class="col-xs-4 col-form-label">Correo Corporativo</label>
 										<div class="col-xs-8">
 											<input class="form-control" id="contenidoContacto" type="text" value="<?php echo $plataforma["correo_contacto"]; ?>">
+										</div>
+									</div>
+
+									<div class="form-group row" style="margin-top: 20px;">
+										<label for="tlfPlat" class="col-xs-4 col-form-label">Telefono Corporativo</label>
+										<div class="col-xs-8">
+											<input class="form-control" id="tlfPlat" type="text" value="">
+										</div>
+									</div>
+									<div class="form-group row" style="margin-top: 20px;">
+										<label for="dirPlat" class="col-xs-4 col-form-label">Direccion</label>
+										<div class="col-xs-8">
+											<input class="form-control" id="dirPlat" type="text" value="">
 										</div>
 									</div>
 									<a href="javascript:void(0)" style="margin-top: 5px;" id="saveContacto" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
@@ -375,16 +388,24 @@
 					$.ajax({
 						type: 'POST',
 						url: 'ajax/configuraciones.php',
-						data: 'op=6&contacto=' + $("#contenidoContacto").val(),
+						data: 'op=6&contacto=' + $("#contenidoContacto").val() + '&telefono=' + $('#tlfPlat').val() + '&direccion=' + $('#dirPlat').val(),
 						dataType: 'json',
 						success: function(data) {
-							swal({
-								title: 'Información!',
-								text: 'Contenido almacenado exitosamente.',
-								timer: 2000,
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
+							if (data.msg == 'OK') {
+								swal({
+									title: 'Información!',
+									text: 'Contenido almacenado exitosamente.',
+									timer: 2000,
+									confirmButtonClass: 'btn btn-primary btn-lg',
+									buttonsStyling: false
+								});
+							} else {
+								swal("ERROR!", data.msg, "error");
+							}
+							
+						},
+						error: function(error){
+							swal("ERROR!", "Lo sentimos, ha ocurrido un error. Intentelo de nuevo");
 						}
 					});
 				});

@@ -966,14 +966,24 @@
 											buttonsStyling: false
 										});
 									}
-									else {
+									else if(parseInt(data.status) == 2){
 										swal({
 											title: 'Información!',
 											text: 'Error al guardar la publicacion',
 											confirmButtonClass: 'btn btn-primary btn-lg',
 											buttonsStyling: false
 										});
+									} else {
+										swal({
+											title: 'ERROR!',
+											text: 'Ah ocurrido un error de comunicación con el servidor, por favor verifique su conexión a internet e intente de nuevo.',
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
 									}
+								},
+								error: function(error){
+									swal("ERROR!", "Ha ocurrido un error, intentelo de nuevo.","error");
 								}
 							});
 						}
@@ -1170,9 +1180,13 @@
 									if(json.msg == 'OK') {
 										swal("Operación exitosa!", "Se eliminó la publicación y sus datos.", "success");
 										tablaPublicaciones.ajax.reload();
+									} else {
+										swal("ERROR!",json.msg, "error");
 									}
 									break;
 							}
+						}).fail(function(error){
+							swal("ERROR!","Error al eliminar la publicación", "error");
 						});
 					}
 				});
@@ -1218,9 +1232,13 @@
 										swal("Operación exitosa!", "Se renovó la publicación y sus datos.", "success");
 										tablaPublicaciones.ajax.reload();
 										$("#modal-modificar-publicacion").modal('hide');
+									} else {
+										swal("ERROR!",json.msg, "error");
 									}
 									break;
 							}
+						}).fail(function(error){
+							swal("ERROR!","Error al renovar la publicación", "error");
 						});
 					}
 				});
@@ -1490,22 +1508,23 @@
 												longitud: lngSelected,
 												ubicacion: ubicacion
 											})
-										}
-									}).done(function(data, textStatus, jqXHR) {
-										switch(jqXHR.status) {
-											case 200:
-												var json = JSON.parse(jqXHR.responseText);
-												if(json.msg == 'OK') {
-													var publicacion = json.data.publicacion;
+										},
+										success: function(data){
+											if(data.msg == 'OK') {
+													var publicacion = data.data.publicacion;
 													$("#modal-agregar-publicacion").modal('hide');
 													swal("Operación exitosa!", "Se agregó la publicación y sus datos.", "success");
 													tablaPublicaciones.ajax.reload();
 													latSelected = null;
 													lngSelected = null;
-												}
-												break;
+											} else {
+												swal("ERROR!", data.msg, "error");
+											}
+										},
+										error: function(error){
+											swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
 										}
-									});
+									})
 
 								} else {
 									swal("INFORMACIÓN!", "Lo sentimos, pero ha sobrepasado el limites de publicaciones para este plan gratis (2 MAX.). Para seguir gozando de nuestros servicios le invitamos a suscribirse a un plan con mayores beneficios.", "info");
@@ -1551,23 +1570,24 @@
 								longitud: lngSelected,
 								ubicacion: ubicacion
 							})
+						},
+						success: function(data){
+							if(data.msg == 'OK') {
+								var publicacion = data.data.publicacion;
+								$("#modal-modificar-publicacion").modal('hide');
+								swal("Operación exitosa!", "Se han modificado los datos de la publicación seleccionada.", "success");
+								tablaPublicaciones.ajax.reload();
+								latSelected = null;
+								lngSelected = null;
+							} else {
+								swal("ERROR!", data.msg, "error");
+								console.log(data.console);
+							}
+						},
+						error: function(error){
+							swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
 						}
-					}).done(function(data, textStatus, jqXHR) {
-						switch(jqXHR.status) {
-							case 200:
-								var json = JSON.parse(jqXHR.responseText);
-								if(json.msg == 'OK') {
-									var publicacion = json.data.publicacion;
-									$("#modal-modificar-publicacion").modal('hide');
-									swal("Operación exitosa!", "Se han modificado los datos de la publicación seleccionada.", "success");
-									tablaPublicaciones.ajax.reload();
-									latSelected = null;
-									lngSelected = null;
-								}
-								break;
-						}
-					});
-
+					})
 				}
 			});
 			
