@@ -86,13 +86,13 @@
 				<a <?php echo $twitter; ?> class="btn bg-twitter btn-sm btn-circle m-r-0-5">
 					<i class="fa fa-twitter"></i>
 				</a>
-				<a <?php echo $instagram; ?> class="btn bg-instagram btn-sm btn-circle">
+				<a <?php echo $instagram; ?> class="btn bg-instagram btn-sm btn-circle m-r-0-5">
 					<i class="fa fa-instagram"></i>
 				</a>
-				<a <?php echo $youtube; ?> class="btn bg-youtube btn-sm btn-circle">
+				<a <?php echo $youtube; ?> class="btn bg-youtube btn-sm btn-circle m-r-0-5">
 					<i class="fa fa-youtube"></i>
 				</a>
-				<a <?php echo $linkedin; ?> class="btn bg-linkedin btn-sm btn-circle">
+				<a <?php echo $linkedin; ?> class="btn bg-linkedin btn-sm btn-circle m-r-0-5">
 					<i class="fa fa-linkedin"></i>
 				</a>
 			</div>
