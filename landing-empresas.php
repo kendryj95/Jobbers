@@ -297,7 +297,14 @@
 						</div>
 						<div class="col-md-4 fadeInUp">
 							<i class="fa fa-mortar-board" style="font-size: 75px; margin-bottom: 30px; color: #2E3192"></i>
-							<p style="color: #03A7E9; font-weight: bolder"><?= $plataforma["section3_landing"] ?></p>
+							<?php 
+								$caracteristicas = explode(",", $plataforma["section3_landing"]);
+							?>
+							<ul style="list-style: none; padding-left: 0px; color: #03A7E9; font-weight: bolder">
+							<?php foreach($caracteristicas as $caracteristica): ?>
+								<li><?= trim($caracteristica) ?></li>
+							<?php endforeach; ?>
+							</ul>
 						</div>
 					</div>
 				</div>

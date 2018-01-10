@@ -30,6 +30,7 @@
 		<title>JOBBERS - Configuraciones - Admin</title>
 		<?php require_once('../includes/libs-css.php'); ?>
 		<link rel="stylesheet" href="../vendor/dropify/dist/css/dropify.min.css">
+		<link rel="stylesheet" href="../vendor/bootstrap-tagsinput/src/bootstrap-tagsinput.css">
 
 		<!-- Neptune CSS -->
 		<link rel="stylesheet" href="../css/core.css">
@@ -182,7 +183,7 @@
 									<div class="form-group row" style="margin-top: 20px;">
 										<label for="section3" class="col-xs-4 col-form-label">¿Por qué somos tu mejor opción? - Section 3</label>
 										<div class="col-xs-8">
-											<textarea style="width: 450px; height: 173px" name="" id="section3" class="form-control"><?php echo $plataforma["section3_landing"]; ?></textarea>
+											<input type="text" name="" id="section3" value="<?php echo $plataforma["section3_landing"]; ?>" data-role="tagsinput">
 										</div>
 									</div>
 									
@@ -323,6 +324,7 @@
 		<script type="text/javascript" src="../js/jquery.form.js"></script>
 		<script type="text/javascript" src="../vendor/tinymce/tinymce.min.js"></script>
 		<script type="text/javascript" src="../vendor/tinymce/skins/custom/jquery.tinymce.min.js"></script>
+		<script src="../vendor/bootstrap-tagsinput/src/bootstrap-tagsinput.js"></script>
 
 		<script>
 			$(document).ready(function(){
@@ -365,6 +367,8 @@
 				});
 				
 				$("#saveRedes").click(function() {
+					var $btn = $(this);
+					$btn.addClass('disabled');
 					$.ajax({
 						type: 'POST',
 						url: 'ajax/configuraciones.php',
@@ -378,11 +382,14 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
+							$btn.removeClass('disabled');
 						}
 					});
 				});
 				$("#saveNosotros").click(function() {
 					var texto = tinyMCE.get('contenidoNosotros').getContent();
+					var $btn = $(this);
+					$btn.addClass('disabled');
 					$.post({
 						url: 'ajax/configuraciones.php',
 						data: {
@@ -397,10 +404,13 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
+							$btn.removeClass('disabled');
 						}
 					});
 				});
 				$("#savePoliticas").click(function() {
+					var $btn = $(this);
+					$btn.addClass('disabled');
 					var texto = tinyMCE.get('contenidoPoliticas').getContent();
 					$.post({
 						url: 'ajax/configuraciones.php',
@@ -416,10 +426,13 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
+							$btn.removeClass('disabled');
 						}
 					});
 				});
 				$("#saveContacto").click(function() {
+					var $btn = $(this);
+					$btn.addClass('disabled');
 					$.ajax({
 						type: 'POST',
 						url: 'ajax/configuraciones.php',
@@ -434,17 +447,22 @@
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
 								});
+								$btn.removeClass('disabled');
 							} else {
 								swal("ERROR!", data.msg, "error");
+								$btn.removeClass('disabled');
 							}
 							
 						},
 						error: function(error){
 							swal("ERROR!", "Lo sentimos, ha ocurrido un error. Intentelo de nuevo");
+							$btn.removeClass('disabled');
 						}
 					});
 				});
 				$("#saveAdmLanding").click(function() {
+					var $btn = $(this);
+					$btn.addClass('disabled');
 					$.ajax({
 						type: 'POST',
 						url: 'ajax/configuraciones.php',
@@ -459,18 +477,23 @@
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
 								});
+								$btn.removeClass('disabled');
 							} else {
 								swal("ERROR!", data.msg, "error");
+								$btn.removeClass('disabled');
 							}
 							
 						},
 						error: function(error){
 							swal("ERROR!", "Lo sentimos, ha ocurrido un error. Intentelo de nuevo");
+							$btn.removeClass('disabled');
 						}
 					});
 				});
 				$("#saveTerminos").click(function() {
 					var texto = tinyMCE.get('contenidoTerminos').getContent();
+					var $btn = $(this);
+					$btn.addClass('disabled');
 					$.post({
 						url: 'ajax/configuraciones.php',
 						data: {
@@ -485,6 +508,7 @@
 								confirmButtonClass: 'btn btn-primary btn-lg',
 								buttonsStyling: false
 							});
+							$btn.removeClass('disabled');
 						}
 					});
 				});
@@ -537,6 +561,8 @@
 				
 				$("#saveIVA").click(function() {
 					if($("#ivaPlan").val() != "") {
+						var $btn = $(this);
+						$btn.addClass('disabled');
 						$.ajax({
 							type: 'POST',
 							url: 'ajax/configuraciones.php',
@@ -550,6 +576,7 @@
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
 								});
+								$btn.removeClass('disabled');
 							}
 						});
 					}
@@ -566,6 +593,8 @@
 				
 				$("#savePrices").click(function() {
 					if($("#precioBronce").val() != "" && $("#precioPlata").val() != "" && $("#precioOro").val() != "") {
+						var $btn = $(this);
+						$btn.addClass('disabled');
 						$.ajax({
 							type: 'POST',
 							url: 'ajax/configuraciones.php',
@@ -578,6 +607,7 @@
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
 								});
+								$btn.removeClass('disabled');
 							}
 						});
 					}
@@ -593,6 +623,8 @@
 				
 				$("#saveServices").click(function() {
 					if($("#precioServ1").val() != "" && $("#precioServ2").val() != "" && $("#precioServ3").val() != "") {
+						var $btn = $(this);
+						$btn.addClass('disabled');
 						$.ajax({
 							type: 'POST',
 							url: 'ajax/configuraciones.php',
@@ -605,6 +637,7 @@
 									confirmButtonClass: 'btn btn-primary btn-lg',
 									buttonsStyling: false
 								});
+								$btn.removeClass('disabled');
 							}
 						});
 					}
