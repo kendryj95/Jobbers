@@ -38,6 +38,7 @@
 							$plan,
 							$plan,
 							$pub["correo_electronico"],
+							$pub["clave"],
 							date('d/m/Y', strtotime($pub["fecha_creacion"])),
 							'<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" onclick="empresaVerificada(this);" title="Verificar empresa"><span class="ti-thumb-up"></span></button><button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarEmpresa(this);" title="Modificar plan"><span class="ti-pencil"></span></button><button type="button" class="accion-publicacion btn '. $empSuspendidaClass .' waves-effect waves-light" data-susp="'.$empSuspendida.'" title="'.$empSuspendidaTitle.'" onclick="suspenderEmpresa(this);"><span class="ti-power-off"></span></button><button type="button" class="accion-publicacion btn waves-effect waves-light" style="background: black; color: white;" title="Eliminar empresa" onclick="eliminarEmpresa(this);"><span class="ti-close"></span></button> </div>'
 						);

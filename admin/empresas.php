@@ -69,21 +69,24 @@
 					<div class="card card-block">
 						<div class="box box-block bg-white">
 							<h5 class="m-b-1">Empresas</h5>
-							<table class="table table-striped table-bordered dt-responsive nowrap dataTable" id="tablaPublicaciones" cellspacing="0" width="100%">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Nombre</th>
-										<th>Plan</th>
-										<th>Plan</th>
-										<th>Email</th>
-										<th>Fecha de creación</th>
-										<th>Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered dt-responsive nowrap dataTable" id="tablaPublicaciones" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Nombre</th>
+											<th>Plan</th>
+											<th>Plan</th>
+											<th>Email</th>
+											<th>Contraseña de Acceso</th>
+											<th>Fecha de creación</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
