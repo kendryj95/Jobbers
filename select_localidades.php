@@ -1,7 +1,8 @@
- <select class="select_localidad custom-select form-control" id="localidad_0">
+ <?php $style = $data["localidad"] == "" || $data["localidad"] == 0 ? "" : "style='display: none'"; ?>
+ <select <?= $style ?> class="city select_localidad custom-select form-control" id="localidad_0">
      <option value="0">Seleccionar</option>
  </select>
- <select style="display:none;" class="select_localidad custom-select form-control" id="localidad_1">
+ <select style="display:none;" class="city select_localidad custom-select form-control" id="localidad_1">
                 <option value="1">
                     25 de Mayo
                 </option>
@@ -429,7 +430,7 @@
                     Zárate
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_2">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_2">
                 <option value="143">
                     11 de Septiembre
                 </option>
@@ -836,7 +837,7 @@
                     William Morris
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_3">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_3">
                 <option value="282">
                     Agronomía
                 </option>
@@ -976,7 +977,7 @@
                     Villa Urquiza
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_4">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_4">
                 <option value="330">
                     Aconquija
                 </option>
@@ -1086,7 +1087,7 @@
                     Villa Vil
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_5">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_5">
                 <option value="369">
                     Aviá Teraí
                 </option>
@@ -1289,7 +1290,7 @@
                     Villa R. Bermejito
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_6">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_6">
                 <option value="439">
                     Aldea Apeleg
                 </option>
@@ -1429,7 +1430,7 @@
                     Veintiocho de Julio
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_7">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_7">
                 <option value="485">
                     Achiras
                 </option>
@@ -2679,7 +2680,7 @@
                     Ycho Cruz Sierras
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_8">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_8">
                 <option value="915">
                     Alvear
                 </option>
@@ -2849,7 +2850,7 @@
                     Yataití Calle
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_9">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_9">
                 <option value="981">
                     Alarcón
                 </option>
@@ -3595,7 +3596,7 @@
                     Yeso Oeste
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_10">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_10">
                 <option value="1245">
                     Buena Vista
                 </option>
@@ -3696,7 +3697,7 @@
                     Villa Gral. Güemes
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_11">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_11">
                 <option value="1280">
                     Abdon Castro Tolay
                 </option>
@@ -3863,7 +3864,7 @@
                     Yuto
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_12">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_12">
                 <option value="1342">
                     Abramo
                 </option>
@@ -4096,7 +4097,7 @@
                     Winifreda
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_13">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_13">
                 <option value="1420">
                     Arauco
                 </option>
@@ -4140,7 +4141,7 @@
                     Vinchina
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_14">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_14">
                 <option value="1439">
                     Chacras de Coria
                 </option>
@@ -4172,7 +4173,7 @@
                     Tupungato
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_15">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_15">
                 <option value="1461">
                     Alba Posse
                 </option>
@@ -4360,7 +4361,7 @@
                     Wanda
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_16">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_16">
                 <option value="1539">
                     Aguada San Roque
                 </option>
@@ -4527,7 +4528,7 @@
                     Zapala
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_17">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_17">
                 <option value="1596">
                     Aguada Cecilio
                 </option>
@@ -4733,7 +4734,7 @@
                     Yaminué
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_18">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_18">
                 <option value="1670">
                     A. Saravia
                 </option>
@@ -4891,7 +4892,7 @@
                     Villa San Lorenzo
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_19">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_19">
                 <option value="1732">
                     Albardón
                 </option>
@@ -4926,7 +4927,7 @@
                     Zonda
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_20">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_20">
                 <option value="1752">
                     Alto Pelado
                 </option>
@@ -5087,7 +5088,7 @@
                     Zanjitas
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_21">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_21">
                 <option value="1817">
                     Calafate
                 </option>
@@ -5146,7 +5147,7 @@
                     Veintiocho De Noviembre
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_22">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_22">
                 <option value="1839">
                     Aarón Castellanos
                 </option>
@@ -6141,7 +6142,7 @@
                     Zenón Pereira
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_23">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_23">
                 <option value="2199">
                     Añatuya
                 </option>
@@ -6335,7 +6336,7 @@
                     Weisburd
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_24">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_24">
                 <option value="2270">
                     Río Grande
                 </option>
@@ -6346,7 +6347,7 @@
                     Ushuaia
                 </option>
             </select>
-            <select  style="display:none;" class="select_localidad custom-select form-control" id="localidad_25">
+            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_25">
                 <option value="2273">
                     Acheral
                 </option>

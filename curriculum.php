@@ -1450,32 +1450,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 					<?php endif;?>
 
-                    $('#province').change(function(){
-
-                        $('#city').prop('disabled',true);
-                        var province = $(this).val();
-
-                        $.ajax({
-                            type: 'POST',
-                            data: {op: '10', provincia: province},
-                            dataType: 'json',
-                            url: 'ajax/account.php',
-                            success: function(data){
-                                $('#city').prop('disabled',false)
-                                    .html("<option value='0'>Seleccione</option>");
-
-                                data.localidades.forEach(function(l){
-
-                                    $('#city').append("<option value='"+l.id+"'>"+l.localidad+"</option>")
-
-                                });
-                            },
-                            error: function(error){
-                                swal("Error!", "Ha ocurrido un error al cargar las localidades. Por favor, recarga la pagina", "error");
-                            }
-                        });
-
-                    });
 
 					$("#sNivel").change(function() {
 						if(this.value == 1) {
@@ -1570,11 +1544,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							}
 						});
 					}
+
 					$("#country").val(pais);
 					$("#estadoCivil").val(estadoCivil);
 					$("#dni").val(dni);
-					$("#province").val(provincia);
-					$("#city").val(localidad);
+					$("#vic_provincias").val(provincia);
+					$("#localidad_"+provincia).show().val(localidad);
 
 					$('#birthday').datepicker({
 						format: "mm/dd/yyyy",
@@ -1799,8 +1774,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 						switch(op) {
 							case 1:
-								if($("#name").val() != "" && $("#lastName").val() != "" && $('#email').val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && $("#cuil").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
-									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&email='+ $('#email').val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&cuil='+$("#cuil").val() + '&province='+$("#province").val() + '&city='+$("#city").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val();
+								if($("#name").val() != "" && $("#lastName").val() != "" && $('#email').val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && $("#cuil").val() != "" && parseInt($("#vic_provincias").val()) > 0 && parseInt($(".city:visible").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
+									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&email='+ $('#email').val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&cuil='+$("#cuil").val() + '&province='+$("#vic_provincias").val() + '&city='+$(".city:visible").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val();
 									band = true;
 								}
 								break;
@@ -2470,10 +2445,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 
 			<script type="text/javascript">
-				$( document ).ready(function() {
-					    $(".select_localidad").hide();
-					    $("#localidad_0").show();
-					});
 
 				function seleccionar_localidad(parametro)
 				{ 
