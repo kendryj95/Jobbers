@@ -255,7 +255,7 @@
 				WHERE
 					asec.id_area = $area[id]
 					AND ".($filtroMomento ? "  TIMESTAMPDIFF(SECOND,p.fecha_creacion,NOW()) <= $infoMomento[diff_s] " : " 1=1")."
-					AND ".($filtroDisp ? "  p.disponibilidad= $disps[id] " : " 1=1") );
+					AND ".($filtroDisp ? "  p.disponibilidad= $disps[id] AND p.estatus=1" : " 1=1") );
 		}
 	}
 
@@ -600,7 +600,7 @@
 					SELECT
 						COUNT(*)
 					FROM
-						(SELECT TIMESTAMPDIFF(SECOND,fecha_creacion,NOW()) AS s FROM publicaciones AS p ) AS r
+						(SELECT TIMESTAMPDIFF(SECOND,fecha_creacion,NOW()) AS s FROM publicaciones AS p WHERE p.estatus=1) AS r
 					WHERE
 						r.s <= $momento[diff_s]
 				";

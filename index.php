@@ -96,7 +96,7 @@ else {*/
 			FROM
 			publicaciones AS p
 			WHERE
-			p.disponibilidad = $disp[id]
+			p.disponibilidad = $disp[id] AND p.estatus=1
 		");
 	}
 
@@ -281,7 +281,7 @@ else {*/
 			COUNT(*)
 			FROM (
 			SELECT  TIMESTAMPDIFF(SECOND,fecha_creacion,NOW()) AS s
-			FROM publicaciones AS p ) AS r 
+			FROM publicaciones AS p WHERE p.estatus=1 ) AS r 
 			WHERE
 			r.s <= $momento[diff_s]
 		");
