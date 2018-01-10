@@ -273,34 +273,52 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
                                                     <input type="text" class="form-control" id="cuil" value="<?= $data["cuil"] ?>" onchange="validar(this.id,'num')">
 												</div>
 											</div>
-											<?php $provincias = $db->getAll("SELECT * FROM provincias")?>
+											 <?php //$provincias = $db->getAll("SELECT * FROM provincias")?>
 											<div class="form-group row">
 												<div class="col-xs-12 col-md-2 text-center">
 													<label for="province" style="margin-top: 6px;">Provincia <span style="color: red;">*</span></label>
 												</div>
 												<div class="col-xs-12 col-md-10">
-                                                    <select name="province" id="province"
+                                                    <select onChange="seleccionar_localidad(this.value)" name="province" id="vic_provincias"
                                                             class="custom-select form-control">
                                                         <option value="0">Seleccione</option>
-                                                        <?php foreach ($provincias as $val): ?>
-                                                            <option
-                                                                value="<?=$val['id']?>"><?=$val['provincia']?></option>
-                                                        <?php endforeach;?>
+                                                      	<option value="1">Buenos Aires</option>
+														<option value="2">Buenos Aires-GBA</option>
+														<option value="3">Capital Federal</option>
+														<option value="4">Catamarca</option>
+														<option value="5">Chaco</option>
+														<option value="6">Chubut</option>
+														<option value="7">Córdoba</option>
+														<option value="8">Corrientes</option>
+														<option value="9">Entre Ríos</option>
+														<option value="10">Formosa</option>
+														<option value="11">Jujuy</option>
+														<option value="12">La Pampa</option>
+														<option value="13">La Rioja</option>
+														<option value="14">Mendoza</option>
+														<option value="15">Misiones</option>
+														<option value="16">Neuquén</option>
+														<option value="17">Río Negro</option>
+														<option value="18">Salta</option>
+														<option value="19">San Juan</option>
+														<option value="20">San Luis</option>
+														<option value="21">Santa Cruz</option>
+														<option value="22">Santa Fe</option>
+														<option value="23">Santiago del Estero</option>
+														<option value="24">Tierra del Fuego</option>
+														<option value="25">Tucumán</option>
                                                     </select>
 												</div>
 											</div>
-                                            <?php $localidades = $db->getAll("SELECT * FROM localidades WHERE id_provincia=" . $data['provincia'])?>
+                                            <?php //$localidades = $db->getAll("SELECT * FROM localidades WHERE id_provincia=" . $data['provincia'])?>
 											<div class="form-group row">
 												<div class="col-xs-12 col-md-2 text-center">
 													<label for="city" style="margin-top: 6px;">Localidad / Ciudad <span style="color: red;">*</span></label>
 												</div>
 												<div class="col-xs-12 col-md-10">
-                                                    <select name="city" id="city" class="custom-select form-control">
-                                                        <option value="0">Seleccione</option>
-                                                        <?php foreach ($localidades as $val): ?>
-                                                            <option value="<?=$val['id']?>"><?=$val['localidad']?></option>
-                                                        <?php endforeach;?>
-                                                    </select>
+                                                    
+                                                         <?php include('select_localidades.php');?>
+                                                    
 												</div>
 											</div>
 											<div class="form-group row">
@@ -1432,32 +1450,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 					<?php endif;?>
 
-                    $('#province').change(function(){
-
-                        $('#city').prop('disabled',true);
-                        var province = $(this).val();
-
-                        $.ajax({
-                            type: 'POST',
-                            data: {op: '10', provincia: province},
-                            dataType: 'json',
-                            url: 'ajax/account.php',
-                            success: function(data){
-                                $('#city').prop('disabled',false)
-                                    .html("<option value='0'>Seleccione</option>");
-
-                                data.localidades.forEach(function(l){
-
-                                    $('#city').append("<option value='"+l.id+"'>"+l.localidad+"</option>")
-
-                                });
-                            },
-                            error: function(error){
-                                swal("Error!", "Ha ocurrido un error al cargar las localidades. Por favor, recarga la pagina", "error");
-                            }
-                        });
-
-                    });
 
 					$("#sNivel").change(function() {
 						if(this.value == 1) {
@@ -1552,11 +1544,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							}
 						});
 					}
+
 					$("#country").val(pais);
 					$("#estadoCivil").val(estadoCivil);
 					$("#dni").val(dni);
-					$("#province").val(provincia);
-					$("#city").val(localidad);
+					$("#vic_provincias").val(provincia);
+					$("#localidad_"+provincia).show().val(localidad);
 
 					$('#birthday').datepicker({
 						format: "mm/dd/yyyy",
@@ -1781,8 +1774,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 						switch(op) {
 							case 1:
-								if($("#name").val() != "" && $("#lastName").val() != "" && $('#email').val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && $("#cuil").val() != "" && parseInt($("#province").val()) > 0 && parseInt($("#city").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
-									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&email='+ $('#email').val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&cuil='+$("#cuil").val() + '&province='+$("#province").val() + '&city='+$("#city").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val();
+								if($("#name").val() != "" && $("#lastName").val() != "" && $('#email').val() != "" && $("input[type=radio][name=sex]:checked").length > 0 && parseInt($('#dia').val()) > 0 && parseInt($('#mes').val()) > 0 && parseInt($('#anio').val()) > 0 && parseInt($("#country").val()) > 0 && parseInt($("#dni").val()) > 0 && $("#numberdni").val() != "" && $("#cuil").val() != "" && parseInt($("#vic_provincias").val()) > 0 && parseInt($(".city:visible").val()) > 0 && $("#street").val() != "" && $("#phone").val() != "") {
+									str = '&name='+$("#name").val() + '&lastName='+$("#lastName").val() + '&email='+ $('#email').val() + '&sex='+$("input[type=radio][name=sex]:checked").val() + '&birthday='+$("#anio").val()+'-'+$("#mes").val() +'-'+$("#dia").val() + '&country='+$("#country").val() + '&estadoCivil='+$("#estadoCivil").val() + '&dni='+$("#dni").val() + '&numberdni='+$("#numberdni").val() + '&cuil='+$("#cuil").val() + '&province='+$("#vic_provincias").val() + '&city='+$(".city:visible").val() + '&street='+$("#street").val() + '&phone='+$("#phone").val() + '&phoneAlt='+$("#phoneAlt").val();
 									band = true;
 								}
 								break;
@@ -2447,6 +2440,16 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 				async function demorar() {
 				  await sleep(2000);
+				}
+			</script>
+
+
+			<script type="text/javascript">
+
+				function seleccionar_localidad(parametro)
+				{ 
+					$(".select_localidad").hide();
+					$("#localidad_"+parametro).show();
 				}
 			</script>
 	</body>

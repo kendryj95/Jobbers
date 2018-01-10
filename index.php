@@ -3,6 +3,27 @@
 	require_once 'classes/DatabasePDOInstance.function.php';
 	require_once 'slug.function.php';
 
+	function formatDate($dateMayor, $dateMenor){
+		$menor = new DateTime($dateMenor);
+		$mayor = new DateTime(date($dateMayor));
+		$intervalo = $mayor->diff($menor);
+
+		if ($intervalo->format("%m") != 0) {
+			$m = $intervalo->format("%m") == 1 ? "mes" : "meses";
+			return $intervalo->format("Hace %m $m");
+		} elseif ($intervalo->format("%a") != 0){
+			$d = $intervalo->format("%a") == 1 ? "día" : "días";
+			return $intervalo->format("Hace %a $d");
+		} elseif ($intervalo->format("%h") != 0){
+			$h = $intervalo->format("%h") == 1 ? "hora" : "horas";
+			return $intervalo->format("Hace %h $h");
+		} elseif ($intervalo->format("%i") != 0){
+			return $intervalo->format("Hace %i min");
+		} else {
+			return $intervalo->format("Hace %s seg");
+		}
+	}
+
 	$db = DatabasePDOInstance();
 
 	$areas = $db->getAll("
@@ -75,7 +96,7 @@ else {*/
 			FROM
 			publicaciones AS p
 			WHERE
-			p.disponibilidad = $disp[id]
+			p.disponibilidad = $disp[id] AND p.estatus=1
 		");
 	}
 
@@ -83,6 +104,7 @@ else {*/
 		SELECT
 			p.titulo,
 			p.descripcion,
+			p.fecha_actualizacion,
 			e.nombre AS empresa_nombre,
 			e.sitio_web,
 			e.facebook,
@@ -113,6 +135,7 @@ else {*/
 		SELECT
 		p.titulo,
 		p.descripcion,
+		p.fecha_actualizacion,
 		e.nombre AS empresa_nombre,
 		e.sitio_web,
 		e.facebook,
@@ -149,6 +172,7 @@ else {*/
 		SELECT
 		p.titulo,
 		p.descripcion,
+		p.fecha_actualizacion,
 		e.nombre AS empresa_nombre,
 		e.sitio_web,
 		e.facebook,
@@ -185,6 +209,7 @@ else {*/
 		SELECT
 		p.titulo,
 		p.descripcion,
+		p.fecha_actualizacion,
 		e.nombre AS empresa_nombre,
 		e.sitio_web,
 		e.facebook,
@@ -256,7 +281,7 @@ else {*/
 			COUNT(*)
 			FROM (
 			SELECT  TIMESTAMPDIFF(SECOND,fecha_creacion,NOW()) AS s
-			FROM publicaciones AS p ) AS r 
+			FROM publicaciones AS p WHERE p.estatus=1 ) AS r 
 			WHERE
 			r.s <= $momento[diff_s]
 		");
@@ -839,7 +864,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 										<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo !$publicacion["imagen"] ? 'avatars/user.png' : $publicacion["imagen"]; ?>" alt=""/>
 									</div>
 									<div class="col-md-8 col-sm-8">
-										<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+										<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 										<h6 style="color: #373a3c; font-weight: 600;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 										<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
 											<?php
@@ -964,7 +989,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 									<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo !$publicacion["imagen"] ? 'avatars/user.png' : $publicacion["imagen"]; ?>" alt=""/>
 								</div>
 								<div class="col-md-8 col-sm-8">
-									<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+									<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 									<h6 style="color: #373a3c; font-weight: 600;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 									<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
 										<?php
@@ -1090,7 +1115,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 								<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo !$publicacion["imagen"] ? 'avatars/user.png' : $publicacion["imagen"]; ?>" alt=""/>
 							</div>
 							<div class="col-md-8 col-sm-8">
-								<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+								<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 								<h6 style="color: #373a3c; font-weight: 600;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 								<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
 									<?php
@@ -1216,7 +1241,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 								<img class="img-fluid b-a-radius-circle avatar" src="empresa/img/<?php echo !$publicacion["imagen"] ? 'avatars/user.png' : $publicacion["imagen"]; ?>" alt=""/>
 							</div>
 							<div class="col-md-8 col-sm-8">
-								<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+								<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 								<h6 style="color: #373a3c; font-weight: 600;"><?php echo $publicacion["titulo"]; ?> <span class="text-muted pull-xs-right"><?php echo $publicacion["sector_nombre"]; ?></span></h6>
 								<?php if($publicacion["sitio_web"] != "" || $publicacion["facebook"] != "" || $publicacion["twitter"] != "" || $publicacion["instagram"] != "" || $publicacion["linkedin"] != ""): ?>
 								<?php
@@ -1590,7 +1615,7 @@ $instagram = "http://$publicacion[instagram]";
 <?php if($publicacion["verificado"] == 1): ?>
 <span class="tag tag-warning" style="float: right;"><i class="ti-medall-alt" title="Empresa verificada" style="z-index: 50;"></i></span>
 <?php endif ?>
-<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?></h5>
+<h5 style="color: #373a3c;"><?php echo $publicacion["empresa_nombre"]; ?> <small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></h5>
 <h6 style="color: #373a3c; width: 90%;"><?php echo strlen($publicacion["titulo"]) > 30 ? ( '<span style="color: #373a3c;">'.substr($publicacion["titulo"], 0, 30).'</span>'.' <a href="empleos-detalle.php?a='.$publicacion["area_amigable"].'&s='.$publicacion["sector_amigable"].'&p='.$publicacion["amigable"].'">...</a>') : $publicacion["titulo"]; ?></h6>
 <p style="color: #373a3c;"><?php echo $publicacion["area_nombre"]; ?></p>
 

@@ -9,6 +9,7 @@
 	define('CAMBIAR_CONTACTO', 6);
 	define('CAMBIAR_REDES', 7);
 	define('CAMBIAR_TERMINOS', 8);
+	define('CAMBIAR_ADMLANDING', 9);
 
 	require_once('../../classes/DatabasePDOInstance.function.php');
 
@@ -49,8 +50,15 @@
 				echo json_encode(array("msg" => "OK"));
 				break;
 			case CAMBIAR_CONTACTO:
-				$db->query("UPDATE plataforma SET correo_contacto='$_REQUEST[contacto]' WHERE id=1");
-				echo json_encode(array("msg" => "OK"));
+				$db->beginTransaction();
+				try{
+					$db->query("UPDATE plataforma SET correo_contacto='$_REQUEST[contacto]',telefono_contacto='$_REQUEST[telefono]',direccion_contacto='$_REQUEST[direccion]' WHERE id=1");
+					$db->commitTransaction();
+					echo json_encode(array("msg" => "OK"));
+				}catch(Exception $e){
+					$db->rollBackTransaction();
+					echo json_encode(array("msg" => "Lo sentimos, ha ocurrido un error de conexión, por favor verifique su conexión a internet e intente de nuevo."));
+				}
 				break;
 			case CAMBIAR_REDES:
 				$db->query("UPDATE plataforma SET facebook='$_REQUEST[facebook]', instagram='$_REQUEST[instagram]', twitter='$_REQUEST[twitter]', youtube='$_REQUEST[youtube]', linkedin='$_REQUEST[linkedin]' WHERE id=1");
@@ -59,6 +67,17 @@
 			case CAMBIAR_TERMINOS:
 				$db->query("UPDATE plataforma SET terminos='$_REQUEST[terminos]' WHERE id=1");
 				echo json_encode(array("msg" => "OK"));
+				break;
+			case CAMBIAR_ADMLANDING:
+				$db->beginTransaction();
+				try{
+					$db->query("UPDATE plataforma SET section1_landing='$_REQUEST[section1]',section2_landing='$_REQUEST[section2]',section3_landing='$_REQUEST[section3]' WHERE id=1");
+					$db->commitTransaction();
+					echo json_encode(array("msg" => "OK"));
+				}catch(Exception $e){
+					$db->rollBackTransaction();
+					echo json_encode(array("msg" => "Lo sentimos, ha ocurrido un error de conexión, por favor verifique su conexión a internet e intente de nuevo."));
+				}
 				break;
 		}
 	}
