@@ -294,7 +294,7 @@
                                 }
                                 $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
 
-                                $caducada = $timestamp_today <= $timestamp_final ? '' : '&nbsp<span class="label label-danger">OFERTA CADUCADA</span>';
+                                $caducada = $timestamp_today <= $timestamp_final ? '' : '<br><span class="label label-danger">OFERTA CADUCADA</span>';
 
                                 // if ($timestamp_today <= $timestamp_final) {
                                     $publicaciones["data"][] = array(
@@ -322,7 +322,7 @@
 
                                 $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
 
-                                $caducada = $timestamp_today <= $timestamp_final ? '' : '&nbsp<span class="label label-danger">OFERTA CADUCADA</span>';
+                                $caducada = $timestamp_today <= $timestamp_final ? '' : '<br><span class="label label-danger">OFERTA CADUCADA</span>';
 
                                 // if ($timestamp_today <= $timestamp_final) {
                                     $publicaciones["data"][] = array(
@@ -350,7 +350,7 @@
 
                                 $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
 
-                                $caducada = $timestamp_today <= $timestamp_final ? '' : '&nbsp<span class="label label-danger">OFERTA CADUCADA</span>';
+                                $caducada = $timestamp_today <= $timestamp_final ? '' : '<br><span class="label label-danger">OFERTA CADUCADA</span>';
 
                                 // if ($timestamp_today <= $timestamp_final) {
                                     $publicaciones["data"][] = array(
@@ -379,7 +379,7 @@
 
                             	$accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '" target="_blank"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
 
-                            	$caducada = $timestamp_today <= $timestamp_final ? '' : '&nbsp<span class="label label-danger">OFERTA CADUCADA</span>';
+                            	$caducada = $timestamp_today <= $timestamp_final ? '' : '<br><span class="label label-danger">OFERTA CADUCADA</span>';
 
                                 $publicaciones["data"][] = array(
                                     $k + 1,
@@ -488,7 +488,7 @@
 						$postulados[] = array(
 
 							$k + 1,
-							'<a style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
+							'<a target="_blank" style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
 							<div style="color: #ffde00;font-size:14px;">'.$calificar[$fila['calificacion']].'</div>
 							<div style="font-size:11px;"><strong>Edad: </strong>' . $fila["edad"] . '<strong> Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '</div> 
 							',						 

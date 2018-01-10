@@ -345,7 +345,10 @@ $publicaciones = $db->getAll("
                                         </div>                                          
                                     </div>
                                 </div>
-
+                                <div class="col-xs-12" style="padding: 0px;">
+                                    <button onClick="window.close()" type="buttom" class="btn btn-xs btn-danger form-control">Ver mas jobbers</button>
+                                </div>
+<br/>
                                  <?php }?>
                                 <div class="panel panel-default panel-m30">
                                     <div class="panel-heading"><b>Empresas que lo han contactado</b></div>
