@@ -113,11 +113,16 @@
 									</div>
 								</div>
 								<div class="col-md-4" style="margin-bottom:20px;">
-									<h5>Redes plataforma</h5>
+									<h5>Redes plataforma y Landing-Empresa</h5>
 									<div class="items-list">
 										<div class="il-item">
 											<a class="text-black" id="redes" href="javascript:void(0)">
 												Administrar
+											</a>
+										</div>
+										<div class="il-item">
+											<a class="text-black" id="landing" href="javascript:void(0)">
+												Administrar Landing-Empresa
 											</a>
 										</div>
 									</div>
@@ -159,6 +164,31 @@
 									<a href="javascript:void(0)" style="margin-top: 5px;" id="saveRedes" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
 								</div>
 							</div>
+							<div class="row" style="margin-top: 20px; display: none;" id="containerLanding">
+								<div class="col-md-8 col-xs-12">
+									<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
+									<div class="form-group row" style="margin-top: 20px;">
+										<label for="section1" class="col-xs-4 col-form-label">¿Por qué somos tu mejor opción? - Section 1</label>
+										<div class="col-xs-8">
+											<textarea style="width: 450px; height: 173px" name="" id="section1" class="form-control"><?php echo $plataforma["section1_landing"]; ?></textarea>
+										</div>
+									</div>
+									<div class="form-group row" style="margin-top: 20px;">
+										<label for="section2" class="col-xs-4 col-form-label">¿Por qué somos tu mejor opción? - Section 2</label>
+										<div class="col-xs-8">
+											<textarea style="width: 450px; height: 173px" name="" id="section2" class="form-control"><?php echo $plataforma["section2_landing"]; ?></textarea>
+										</div>
+									</div>
+									<div class="form-group row" style="margin-top: 20px;">
+										<label for="section3" class="col-xs-4 col-form-label">¿Por qué somos tu mejor opción? - Section 3</label>
+										<div class="col-xs-8">
+											<textarea style="width: 450px; height: 173px" name="" id="section3" class="form-control"><?php echo $plataforma["section3_landing"]; ?></textarea>
+										</div>
+									</div>
+									
+									<a href="javascript:void(0)" style="margin-top: 5px;" id="saveAdmLanding" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
+								</div>
+							</div>
 							<div class="row" style="margin-top: 20px; display: none;" id="containerNosotros">
 								<div class="col-md-8 col-xs-12">
 									<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
@@ -196,13 +226,13 @@
 									<div class="form-group row" style="margin-top: 20px;">
 										<label for="tlfPlat" class="col-xs-4 col-form-label">Telefono Corporativo</label>
 										<div class="col-xs-8">
-											<input class="form-control" id="tlfPlat" type="text" value="">
+											<input class="form-control" id="tlfPlat" type="text" value="<?php echo $plataforma["telefono_contacto"]; ?>">
 										</div>
 									</div>
 									<div class="form-group row" style="margin-top: 20px;">
 										<label for="dirPlat" class="col-xs-4 col-form-label">Direccion</label>
 										<div class="col-xs-8">
-											<input class="form-control" id="dirPlat" type="text" value="">
+											<input class="form-control" id="dirPlat" type="text" value="<?php echo $plataforma["direccion_contacto"]; ?>">
 										</div>
 									</div>
 									<a href="javascript:void(0)" style="margin-top: 5px;" id="saveContacto" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
@@ -306,11 +336,16 @@
 					$("#containerContacto").hide();
 					$("#containerRedes").hide();
 					$("#containerTerminos").hide();
+					$("#containerLanding").hide();
 				});
 				
 				$("#redes").click(function() {
 					$("#optionsList").hide();
 					$("#containerRedes").show();
+				});
+				$("#landing").click(function() {
+					$("#optionsList").hide();
+					$("#containerLanding").show();
 				});
 				$("#nosotros").click(function() {
 					$("#optionsList").hide();
@@ -389,6 +424,31 @@
 						type: 'POST',
 						url: 'ajax/configuraciones.php',
 						data: 'op=6&contacto=' + $("#contenidoContacto").val() + '&telefono=' + $('#tlfPlat').val() + '&direccion=' + $('#dirPlat').val(),
+						dataType: 'json',
+						success: function(data) {
+							if (data.msg == 'OK') {
+								swal({
+									title: 'Información!',
+									text: 'Contenido almacenado exitosamente.',
+									timer: 2000,
+									confirmButtonClass: 'btn btn-primary btn-lg',
+									buttonsStyling: false
+								});
+							} else {
+								swal("ERROR!", data.msg, "error");
+							}
+							
+						},
+						error: function(error){
+							swal("ERROR!", "Lo sentimos, ha ocurrido un error. Intentelo de nuevo");
+						}
+					});
+				});
+				$("#saveAdmLanding").click(function() {
+					$.ajax({
+						type: 'POST',
+						url: 'ajax/configuraciones.php',
+						data: 'op=9&section1=' + $("#section1").val() + '&section2=' + $('#section2').val() + '&section3=' + $('#section3').val(),
 						dataType: 'json',
 						success: function(data) {
 							if (data.msg == 'OK') {

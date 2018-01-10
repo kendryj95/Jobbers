@@ -91,7 +91,7 @@
 							<h1>¿Quiéres obtener mas beneficios?</h1>
 							<h1>No pierdas la oportunidad de contratar uno de nuestros planes!</h1>
 							<h3>Para obtener más información visita nuestra sección de empresas</h3>
-							<button class="btn btn-success col-xs-6 col-xs-offset-3" style="margin-top: 20px;">MÁS INFO</button>
+							<a href="../landing-empresas.php" class="btn btn-success col-xs-6 col-xs-offset-3" style="margin-top: 20px;">MÁS INFO</a>
 						</div>
 					</div>
 				</div>
