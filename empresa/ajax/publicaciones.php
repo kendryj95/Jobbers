@@ -485,12 +485,25 @@
 					foreach($datos as $k => $fila) {
 						 
 						$sexos = array(1 => "M", 2 => "F");
+						$marcadores = array("" => "Normal", 
+							"0" => "Descartado",
+							"1" => "Contactado",
+							"2" => "En proceso",
+							"3" => "Evaluando",
+							"4" => "Finalista",
+							"5" => "Contratado",
+
+							);
 						$postulados[] = array(
 
 							$k + 1,
 							'<a target="_blank" style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
 							<div style="color: #ffde00;font-size:14px;">'.$calificar[$fila['calificacion']].'</div>
-							<div style="font-size:11px;"><strong>Edad: </strong>' . $fila["edad"] . '<strong> Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '</div> 
+							<div style="font-size:11px;">
+							<strong>Edad: </strong>' . $fila["edad"] . '<strong> 
+							Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '
+							<strong>Marcador: </strong>' . $marcadores[$fila["marcador"] ]. '
+							</div> 
 							',						 
 							$fila['edad'],
 							$fila['id_area_estudio'],
