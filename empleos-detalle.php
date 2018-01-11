@@ -475,7 +475,7 @@
 					});
 				<?php else: ?>
 					$("#postulate").click(function() {
-						window.location.assign('registro.php?redirect=' + '<?php echo urlencode("empleos-detalle.php?$_SERVER[QUERY_STRING]"); ?>');
+						window.location.assign('ingresar.php?returnUri=' + '<?php echo urlencode("empleos-detalle.php?$_SERVER[QUERY_STRING]"); ?>');
 					});
 				<?php endif ?>
 			});

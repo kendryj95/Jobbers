@@ -187,7 +187,11 @@
 							dataType: 'json',
 							success: function(data) {
 								if(data.status == 1) {
-									window.location.href="./";
+									<?php if(isset($_GET["returnUri"])): ?>
+										window.location.assign("<?= urldecode($_GET["returnUri"]) ?>")
+									<?php else: ?>
+										window.location.href="./";
+									<?php endif; ?>
 								} else if (data.status == 3){
 									swal({
 										title: 'Información!',
