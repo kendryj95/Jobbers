@@ -757,7 +757,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 										<tbody>
 											<?php foreach ($areas as $registro => $area): ?>
 												<?php if ($area["cantidad"]> 0): ?>
-													<tr class="<?php if ($registro > 5) echo 'hideit'; ?>" >
+													<tr class="<?php if ($registro > 100) echo 'hideit'; ?>" >
 														<td>
 															<a class="text-primary" href="empleos.php?area=<?php echo $area["amigable"]; ?>&pagina=1"><span class="underline"><?php echo $area["nombre"]; ?></span></a>
 														</td>
@@ -767,16 +767,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 													</tr>
 												<?php endif?>
 											<?php endforeach?>
-											<?php if ($registro > 5):?>
-												<tr class="vmArea" >
-													<td>
-														<span class="underline">Ver más</span>
-													</td>
-													<td>
-														<span class="text-muted pull-xs-right">+</span></a>
-													</td>
-												</tr>
-											<?php endif?>
+											 
 										</tbody>
 									</table>
 								</div>
