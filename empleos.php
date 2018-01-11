@@ -262,6 +262,7 @@
 	if($busquedaAvanzada) {
 		$query = "
 			SELECT
+				p.id,
 				p.titulo,
 				p.descripcion,
 				p.fecha_actualizacion,
@@ -344,6 +345,7 @@
 	}elseif($filtroActivado) {
 		$query = "
 			SELECT
+				p.id,
 				p.titulo,
 				p.descripcion,
 				p.fecha_actualizacion,
@@ -427,6 +429,7 @@
 	}else if($busqueda) {
 		$publicaciones = $db->getAll("
 			SELECT
+				p.id,
 				p.titulo,
 				p.descripcion,
 				p.fecha_actualizacion,
@@ -471,6 +474,7 @@
 	}else {
 		$publicaciones = $db->getAll("
 			SELECT
+				p.id,
 				p.titulo,
 				p.descripcion,
 				p.fecha_actualizacion,
@@ -500,6 +504,7 @@
 		
 		$publicacionesOro = $db->getAll("
 			SELECT
+				p.id,
 				p.titulo,
 				p.descripcion,
 				p.fecha_actualizacion,
@@ -535,6 +540,7 @@
 		
 		$publicacionesPlata = $db->getAll("
 			SELECT
+				p.id,
 				p.titulo,
 				p.descripcion,
 				p.fecha_actualizacion,
@@ -1010,8 +1016,16 @@
 																			</div>
 																		</div>
 																	<?php endif ?>
+																	<?php
+																		$postular = false; 
+																		if (isset($_SESSION["ctc"])) {
+																			if ($_SESSION["ctc"]["type"] == 2) {
+																				$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+																			}
+																		}
+																	?>
 																	<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-																		<button class="btn btn-postular btn-block">POSTULARME</button>
+																		<button class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO&nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
 																	</div>
 																</div>
 															</div>
@@ -1114,8 +1128,16 @@
 																				</div>
 																			</div>
 																		<?php endif ?>
+																		<?php
+																		$postular = false; 
+																		if (isset($_SESSION["ctc"])) {
+																			if ($_SESSION["ctc"]["type"] == 2) {
+																				$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+																			}
+																		}
+																	?>
 																		<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-																			<button class="btn btn-postular btn-block">POSTULARME</button>
+																			<button class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO&nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
 																		</div>
 																	</div>
 																</div>
@@ -1208,8 +1230,16 @@
 																			</div>
 																		</div>
 																	<?php endif ?>
+																	<?php
+																		$postular = false; 
+																		if (isset($_SESSION["ctc"])) {
+																			if ($_SESSION["ctc"]["type"] == 2) {
+																				$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+																			}
+																		}
+																	?>
 																	<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-																		<button class="btn btn-postular btn-block">POSTULARME</button>
+																		<button class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO&nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
 																	</div>
 																</div>
 															</div>
@@ -1326,8 +1356,16 @@
 																	</div>
 																</div>
 																<?php endif ?>
+																<?php
+																		$postular = false; 
+																		if (isset($_SESSION["ctc"])) {
+																			if ($_SESSION["ctc"]["type"] == 2) {
+																				$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+																			}
+																		}
+																	?>
 																<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-																	<button class="btn btn-postular btn-block">POSTULARME</button>
+																	<button class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO&nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
 																</div>
 															</div>
 														</div>
@@ -1432,8 +1470,16 @@
 																	</div>
 																</div>
 																<?php endif ?>
+																<?php
+																		$postular = false; 
+																		if (isset($_SESSION["ctc"])) {
+																			if ($_SESSION["ctc"]["type"] == 2) {
+																				$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+																			}
+																		}
+																	?>
 																<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-																	<button class="btn btn-postular btn-block">POSTULARME</button>
+																	<button class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO&nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
 																</div>
 															</div>
 														</div>
@@ -1530,7 +1576,15 @@
 																	</div>
 																</div>
 															<?php endif ?>
-															<button class="btn btn-postular btn-block">POSTULARME</button>
+															<?php
+																		$postular = false; 
+																		if (isset($_SESSION["ctc"])) {
+																			if ($_SESSION["ctc"]["type"] == 2) {
+																				$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+																			}
+																		}
+																	?>
+															<button class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO&nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
 														</div>
 													</div>
 												</div>

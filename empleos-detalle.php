@@ -260,7 +260,7 @@
 												<?php echo $contratado["finalizado"] == 0 &&  $contratado["cancelado"] != 1 ? '<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-success"><i class="ti ti-reload"></i> Trabajando</span>': '<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-success"><i class="ti ti-check"></i> Finalizado</span>';?>
 											<?php else: ?>
 												<?php if($postulado): ?>
-													<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-primary">Postulado</span>
+													<span style="position: absolute; top: 5px; right: 5px; font-size: 18px; cursor: auto" class="btn btn-primary btn-postular waves-effect waves-light">Postulado</span>
 												<?php endif ?>	
 											<?php endif ?>
 										</div>
@@ -457,7 +457,7 @@
 									case 200:
 										var json = JSON.parse(jqXHR.responseText);
 										if(json.msg == "OK") {
-											$(".pv-title").prepend('<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-primary">Postulado</span>');
+											$(".pv-title").prepend('<span style="position: absolute; top: 5px; right: 5px; font-size: 18px; cursor: auto" class="btn btn-primary btn-postular waves-effect waves-light">Postulado</span>');
 											$("#postulate").closest('div').remove();
 											swal("Operación exitosa!", "Se ha enviado la solicitud para el empleo seleccionado.<br>La empresa se pondrá en contacto contigo si está interesada.", "success");
 										} else {

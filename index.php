@@ -102,6 +102,7 @@ else {*/
 
 	$publicaciones = $db->getAll("
 		SELECT
+			p.id,
 			p.titulo,
 			p.descripcion,
 			p.fecha_actualizacion,
@@ -133,6 +134,7 @@ else {*/
 
 	$publicacionesGratis = $db->getAll("
 		SELECT
+		p.id,
 		p.titulo,
 		p.descripcion,
 		p.fecha_actualizacion,
@@ -170,6 +172,7 @@ else {*/
 
 	$publicacionesOro = $db->getAll("
 		SELECT
+		p.id,
 		p.titulo,
 		p.descripcion,
 		p.fecha_actualizacion,
@@ -207,6 +210,7 @@ else {*/
 
 	$publicacionesPlata = $db->getAll("
 		SELECT
+		p.id,
 		p.titulo,
 		p.descripcion,
 		p.fecha_actualizacion,
@@ -949,8 +953,16 @@ $link = str_replace('watch?v=', 'embed/', $link);
 												</div>
 											</div>
 										<?php endif ?>
+										<?php
+													$postular = false; 
+													if (isset($_SESSION["ctc"])) {
+														if ($_SESSION["ctc"]["type"] == 2) {
+															$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+														}
+													}
+										?>
 										<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn btn-postular btn-block">MÁS INFO</a>
+											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "MÁS INFO" ?></a>
 										</div>
 									</div>
 								</div>
@@ -1074,8 +1086,16 @@ $link = str_replace('watch?v=', 'embed/', $link);
 											</div>
 										</div>
 									<?php endif ?>
+									<?php
+												$postular = false; 
+												if (isset($_SESSION["ctc"])) {
+													if ($_SESSION["ctc"]["type"] == 2) {
+														$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+													}
+												}
+									?>
 									<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-										<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn btn-postular btn-block">MÁS INFO</button>
+										<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "MÁS INFO" ?></button>
 									</div>
 								</div>
 							</div>
@@ -1200,8 +1220,16 @@ $link = str_replace('watch?v=', 'embed/', $link);
 										</div>
 									</div>
 								<?php endif ?>
+								<?php
+											$postular = false; 
+											if (isset($_SESSION["ctc"])) {
+												if ($_SESSION["ctc"]["type"] == 2) {
+													$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+												}
+											}
+								?>
 								<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn btn-postular btn-block">MÁS INFO</button>
+									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "MÁS INFO" ?></button>
 								</div>
 							</div>
 						</div>
@@ -1324,8 +1352,16 @@ $link = str_replace('watch?v=', 'embed/', $link);
 									</div>
 								</div>
 							<?php endif ?>
+							<?php
+										$postular = false; 
+										if (isset($_SESSION["ctc"])) {
+											if ($_SESSION["ctc"]["type"] == 2) {
+												$postular = $db->getOne("SELECT	id FROM	postulaciones WHERE id_publicacion = $publicacion[id] AND id_trabajador=".$_SESSION["ctc"]["id"]);
+											}
+										}
+							?>
 								<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn btn-postular btn-block">MÁS INFO</button>
+									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "MÁS INFO" ?></button>
 								</div>
 							</div>
 						</div>
