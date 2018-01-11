@@ -24,6 +24,9 @@
 			if($info) {
 
 				$confirmar = $db->getRow("SELECT confirmar FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."'");
+				$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$info["id"]);
+				$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$info["id"]);
+				$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$info["id"]);
 
 
 				if ($confirmar['confirmar'] == 1) {
@@ -34,7 +37,7 @@
 					$_SESSION["ctc"]["email"] = $info["correo_electronico"];
 					$_SESSION["ctc"]["type"] = 2;
 
-					if ($info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_imagen"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "") {
+					if ($info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_imagen"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && $estudios["estudios"] > 0 && $idiomas["idiomas"] > 0 && $info_extra["remuneracion_pret"] != "") {
 						$_SESSION["ctc"]["postulate"] = 1;
 					} else {
 						$_SESSION["ctc"]["postulate"] = 0;
