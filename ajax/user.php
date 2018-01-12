@@ -37,7 +37,7 @@
 					$_SESSION["ctc"]["email"] = $info["correo_electronico"];
 					$_SESSION["ctc"]["type"] = 2;
 
-					if ($info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_imagen"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && $estudios["estudios"] > 0 && $idiomas["idiomas"] > 0 && $info_extra["remuneracion_pret"] != "") {
+					if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios["estudios"]) != 0 && intval($idiomas["idiomas"]) != 0 && $info_extra["remuneracion_pret"] != "") {
 						$_SESSION["ctc"]["postulate"] = 1;
 					} else {
 						$_SESSION["ctc"]["postulate"] = 0;
