@@ -90,7 +90,7 @@
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
 		INNER JOIN disponibilidad AS d ON d.id = p.disponibilidad
 		LEFT JOIN imagenes AS img ON e.id_imagen = img.id
-		WHERE (a.id = $publicacion[area_id] AND ase.id = $publicacion[sector_id]) AND p.id != $publicacion[id]
+		WHERE (a.id = $publicacion[area_id] AND ase.id = $publicacion[sector_id]) AND p.id != $publicacion[id] AND (e.suspendido IS NULL OR e.suspendido = 0) AND p.estatus=1
 		ORDER BY RAND()
 		LIMIT 5
 	");
