@@ -13,7 +13,7 @@ if(!isset($_SESSION["ctc"])) {
 }
 require_once('classes/DatabasePDOInstance.function.php');
 require_once('slug.function.php');
-/*
+
 $db = DatabasePDOInstance();
 
 $busquedaAvanzada = (isset($_REQUEST["accion"]) && $_REQUEST["accion"] == "busqueda") ? true : false;
@@ -1144,7 +1144,11 @@ if($filtroArea) {
     $query .= " GROUP BY tra.id";
     //$query .= " GROUP BY tra.id limit 1";
 
-   v
+    /**
+     * [la consulta que ocurre cuando seleccionas filtro base de]
+     * JDLUGO
+     */
+
     $trabajadores = $db->getAll($query);
 
     if($trabajadores) {
@@ -1958,7 +1962,7 @@ $contGeneros += $c;
 
 }
 
-*/
+
 ?>
 
 <!DOCTYPE html>
@@ -2033,68 +2037,516 @@ $contGeneros += $c;
             <div class="content-area p-y-1">
 
                 <div class="container-fluid">
-                   
+                    <div class="col-md-6">
+                        <?php if($filtroActivado): ?>
+                            <h4>Trabajadores</h4>
+
+                            <?php echo crearBreadcrumb(); ?>
+
+                        <?php else: ?>
+                            <br>
+                        <?php endif ?>
+                    </div>
+                    <?php if($cantidadRegistros > 0): ?>
+                        <?php if($filtroActivado): ?>
+                            <div class="col-md-6 text-xs-right">
+                                <h6 class="m-t-1"><?php echo $filtroArea ? ($infoArea["nombre"] . ($filtroSector ? " ($infoSector[nombre])" : "")) : (empty($infoMomento) ? "" : "$infoMomento[nombre]"); ?></h6>
+                                <h6>Trabajadores: <?php echo ($inicial + 1); ?> - <?php echo ($final * $pagina) > $cantidadRegistros ? $cantidadRegistros : ($final * $pagina); ?> de <?php echo $cantidadRegistros; ?></h6>
+                            </div>
+                        <?php elseif($busqueda): ?>
+                            <div class="col-md-6 text-xs-right">
+                                <h6 class="m-t-1">Resultados de búsqueda para <strong><?php echo $busqueda; ?></strong></h6>
+                                <h6>Trabajadores: <?php echo ($inicial + 1); ?> - <?php echo ($final * $pagina) > $cantidadRegistros ? $cantidadRegistros : ($final * $pagina); ?> de <?php echo $cantidadRegistros; ?></h6>
+                            </div>
+                        <?php endif ?>
+                    <?php endif ?>
                 </div>
 
-                <div class="container-fluid"> 
+                <div class="container-fluid">
+
+                    <div class="col-md-3">
+                        <?php if($contAreas > 0 || $filtroArea): ?>
+                            <!--<div class="box bg-white">
+                                <div class="box-block clearfix">
+                                    <h5 class="pull-xs-left"><i class="ion-ios-list m-sm-r-1"></i> Área de estudio</h5>
+                                </div>
+                                <table class="table m-md-b-0">
+                                    <tbody>
+                                        <?php if($filtroArea): ?>
+                                            <tr>
+                                                <td style="word-break: break-all;">
+                                                    <a style="margin-left: 7px;" class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoArea["nombre"]; ?></a>
+                                                </td>
+                                                <td>
+                                                    <?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+                                                        <span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array(array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+                                                    <?php endif ?>
+                                                </td>
+                                            </tr>
+                                        <?php else: ?>
+                                            <?php foreach($areas as $area): ?>
+                                                <?php if($area["cantidad"] > 0): ?>
+                                                    <tr>
+                                                        <td style="word-break: break-all;">
+                                                            <a style="margin-left: 7px;" class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $area["amigable"] ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><span class="underline"><?php echo $area["nombre"]; ?></span></a>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-muted pull-xs-right"><?php echo $area["cantidad"]; ?></span>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif ?>
+                                            <?php endforeach ?>
+                                        <?php endif ?>
+                                    </tbody>
+                                </table>
+                            </div>-->
+                        <?php endif ?>
+
+                        <?php if($contMomentos > 0 || $filtroMomento): ?>
+                            <div class="box bg-white">
+                                <div class="box-block clearfix">
+                                    <h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Edad</h5>
+                                </div>
+                                <table class="table m-md-b-0">
+                                    <tbody>
+                                        <?php if($filtroMomento): ?>
+                                            <tr>
+                                                <td>
+                                                    <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoMomento["nombre"]; ?><span class="underline"></span></a>
+                                                </td>
+                                                <td>
+                                                    <?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+                                                        <span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+                                                    <?php endif ?>
+                                                </td>
+                                            </tr>
+                                        <?php else: ?>
+                                            <?php foreach($momentos as $momento): ?>
+                                                <?php if($momento["cantidad"] > 0): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $momento["amigable"] ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $momento["nombre"]; ?></a>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-muted pull-xs-right"><?php echo $momento["cantidad"]; ?></span>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif ?>
+                                            <?php endforeach ?>
+                                        <?php endif ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif ?>
+
+                        <?php if($contTipos > 0 || $filtroTipo): ?>
+                            <div class="box bg-white">
+                                <div class="box-block clearfix">
+                                    <h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Etapa</h5>
+                                </div>
+                                <table class="table m-md-b-0">
+                                    <tbody>
+                                        <?php if($filtroTipo): ?>
+                                            <tr>
+                                                <td>
+                                                    <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoTipo["nombre"]; ?><span class="underline"></span></a>
+                                                </td>
+                                                <td>
+                                                    <?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+                                                        <span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+                                                    <?php endif ?>
+                                                </td>
+                                            </tr>
+                                        <?php else: ?>
+                                            <?php foreach($tipos as $tipo): ?>
+                                                <?php if($tipo["cantidad"] > 0): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $tipo["amigable"] ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $tipo["nombre"]; ?></a>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-muted pull-xs-right"><?php echo $tipo["cantidad"]; ?></span>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif ?>
+                                            <?php endforeach ?>
+                                        <?php endif ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endif ?>
+
+                        <?php if($contGeneros > 0 || $filtroGenero): ?>
+
+                         <div class="box bg-white">
+                            <div class="box-block clearfix">
+                                <h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Género</h5>
+                            </div>
+                            <table class="table m-md-b-0">
+                                <tbody>
+                                    <?php if($filtroGenero): ?>
+                                        <tr>
+                                            <td>
+                                                <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoGenero["nombre"]; ?><span class="underline"></span></a>
+                                            </td>
+                                            <td>
+                                                <?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+                                                    <span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+                                                <?php endif ?>
+                                            </td>
+                                        </tr>
+                                    <?php else: ?>
+                                        <?php foreach($generos as $genero): ?>
+                                            <?php if($genero["cantidad"] > 0): ?>
+                                                <tr>
+                                                    <td>
+                                                        <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $genero["amigable"] ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $genero["nombre"]; ?></a>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted pull-xs-right"><?php echo $genero["cantidad"]; ?></span>
+                                                    </td>
+                                                </tr>
+                                            <?php endif ?>
+                                        <?php endforeach ?>
+                                    <?php endif ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif ?>
+
+                    <?php if($contIdiomas > 0 || $filtroIdioma): ?>
+
+                     <div class="box bg-white">
+                        <div class="box-block clearfix">
+                            <h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Idioma</h5>
+                        </div>
+                        <table class="table m-md-b-0">
+                            <tbody>
+                                <?php if($filtroIdioma): ?>
+                                    <tr>
+                                        <td>
+                                            <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoIdioma["nombre"]; ?><span class="underline"></span></a>
+                                        </td>
+                                        <td>
+                                            <?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+                                                <span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+                                            <?php endif ?>
+                                        </td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach($idiomas as $idioma): ?>
+                                        <?php if($idioma["cantidad"] > 0): ?>
+                                            <tr>
+                                                <td>
+                                                    <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "idioma", "valor" => $idioma["amigable"] ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $idioma["nombre"]; ?></a>
+                                                </td>
+                                                <td>
+                                                    <span class="text-muted pull-xs-right"><?php echo $idioma["cantidad"]; ?></span>
+                                                </td>
+                                            </tr>
+                                        <?php endif ?>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif ?>
+
+                <?php if($contLocalidades > 0 || $filtroLocalidades): ?>
+
+                 <div class="box bg-white">
+                    <div class="box-block clearfix">
+                        <h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Localidades</h5>
+                    </div>
+                    <table class="table m-md-b-0">
+                        <tbody>
+                            <?php if($filtroLocalidades): ?>
+                                <tr>
+                                    <td>
+                                        <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "localidad", "valor" => $filtroLocalidades),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoLocalidad["localidad"] ?><span class="underline"></span></a>
+                                    </td>
+                                    <td>
+                                        <?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+                                            <span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+                                        <?php endif ?>
+                                    </td>
+                                </tr>
+                            <?php else: ?>
+                                <?php foreach($localidades as $loc): ?>
+                                    <?php if($loc["cantidad"] > 0): ?>
+                                        <!-- <span>Hola mundo</span> -->
+                                        <tr>
+                                            <td>
+                                                <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion),array("clave" => "localidad", "valor" => $loc["localidad"]), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $loc["localidad"]; ?></a>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted pull-xs-right"><?php echo $loc["cantidad"]; ?></span>
+                                            </td>
+                                        </tr>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            <?php endif ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif ?>
+
+            <?php if($contProvincias > 0 || $filtroProvincia): ?>
+
+             <div class="box bg-white">
+                <div class="box-block clearfix">
+                    <h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Provincias</h5>
+                </div>
+                <table class="table m-md-b-0">
+                    <tbody>
+                        <?php if($filtroProvincia): ?>
+                            <tr>
+                                <td>
+                                    <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "idioma", "valor" => $filtroIdioma ), array( "clave" => "genero", "valor" => $filtroGenero ),array( "clave" => "localidad", "valor" => $filtroLocalidades ),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoProvincia["provincia"] ?><span class="underline"></span></a>
+                                </td>
+                                <td>
+                                    <?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+                                        <span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+                                    <?php endif ?>
+                                </td>
+                            </tr>
+                        <?php else: ?>
+                            <?php foreach($provincias as $prov): ?>
+                                <?php if($prov["cantidad"] > 0): ?>
+                                    <!-- <span>Hola mundo</span> -->
+                                    <tr>
+                                        <td>
+                                            <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array( "clave" => "tipo", "valor" => $filtroLocalidades ),array("clave" => "provincia", "valor" => $prov["provincia"]), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $prov["provincia"]; ?></a>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted pull-xs-right"><?php echo $prov["cantidad"]; ?></span>
+                                        </td>
+                                    </tr>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif ?>
+
+        <?php if($contRemuneracion > 0 || $filtroRemuneracion): ?>
+
+         <div class="box bg-white">
+            <div class="box-block clearfix">
+                <h5 class="pull-xs-left"><i class="m-sm-r-1"></i> Remuneraciones</h5>
+            </div>
+            <table class="table m-md-b-0">
+                <tbody>
+                    <?php if($filtroRemuneracion): ?>
+                        <tr>
+                            <td>
+                                <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ),array("clave" => "genero", "valor" => $filtroGenero), array( "clave" => "idioma", "valor" => $filtroIdioma ),array( "clave" => "localidad", "valor" => $filtroLocalidades ),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $filtroRemuneracion), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $infoRemuneracion["nombre"] ?><span class="underline"></span></a>
+                            </td>
+                            <td>
+                                <?php if(!$busquedaAvanzada || $palabrasClave == ""): ?>
+                                    <span class="text-muted pull-xs-right" title="Remover filtro"><a href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "pagina", "valor" => 1 ))); ?>"><i class="ion-close text-danger"></i></a></span>
+                                <?php endif ?>
+                            </td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach($remuneraciones as $rem): ?>
+                            <?php if($rem["cantidad"] > 0): ?>
+                                <!-- <span>Hola mundo</span> -->
+                                <tr>
+                                    <td>
+                                        <a class="text-primary" href="<?php echo crearURL(array( array( "clave" => "area", "valor" => $filtroArea ), array( "clave" => "momento", "valor" => $filtroMomento ), array( "clave" => "tipo", "valor" => $filtroTipo ), array( "clave" => "genero", "valor" => $filtroGenero ), array( "clave" => "idioma", "valor" => $filtroIdioma ),array( "clave" => "localidad", "valor" => $filtroLocalidades ),array("clave" => "provincia", "valor" => $filtroProvincia),array("clave" => "remuneracion", "valor" => $rem["amigable"]), array( "clave" => "pagina", "valor" => 1 ))); ?>"><?php echo $rem["nombre"]; ?></a>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted pull-xs-right"><?php echo $rem["cantidad"]; ?></span>
+                                    </td>
+                                </tr>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                    <?php endif ?>
+                </tbody>
+            </table>
         </div>
+    <?php endif ?>
 
-<div class="col-sm-12" style="padding: 0px;background-color: #fff;">
-    <div class="text-center">
-        <strong>Encuentra el jobber que necesitas</strong>
-    </div>
-
-    <div class="col-sm-3">
-    <label><strong>Label</strong></label></br>
-        <select class="form-control">
-            <option value="">Seleccionar</option>
-        </select> 
-        <label><strong>Label</strong></label></br>
-        <select class="form-control">
-            <option value="">Seleccionar</option>
-        </select>
-    </div>
-    <div class="col-sm-3">
-        <label><strong>Label</strong></label></br>
-        <select class="form-control">
-            <option value="">Seleccionar</option>
-        </select> 
-        <label><strong>Label</strong></label></br>
-        <select class="form-control">
-            <option value="">Seleccionar</option>
-        </select>
-    </div>
-    <div class="col-sm-3">
-        <label><strong>Label</strong></label></br>
-        <select class="form-control">
-            <option value="">Seleccionar</option>
-        </select> 
-        <label><strong>Label</strong></label></br>
-        <select class="form-control">
-            <option value="">Seleccionar</option>
-        </select>
-    </div>
-    <div class="col-sm-3">
-        <label><strong>Label</strong></label></br>
-        <select class="form-control">
-            <option value="">Seleccionar</option>
-        </select> 
-        <label><strong>Label</strong></label></br>
-        <select class="form-control">
-            <option value="">Seleccionar</option>
-        </select>
-    </div>
 </div>
 
-<div class="col-sm-3">
-    aqui
-</div>
 <div class="col-md-9">
- 
-   aqui      
+
+    <?php if($filtroActivado || $busqueda || $busquedaAvanzada): ?>
+        <?php if($cantidadRegistros > 0): ?>
+            <div class="row row-sm">
+                <?php foreach($trabajadores as $trabajador): ?>
+                    <?php
+                    $sitio_web = $trabajador["sitio_web"] != "" || $trabajador["sitio_web"] != NULL ? "<a target='_blank' href='".$trabajador["sitio_web"]."' style='margin-right: 5px'><i class='fa fa-internet-explorer fa-2x' aria-hidden='true'></i></a>" : "";
+                    $facebook = $trabajador["facebook"] != "" || $trabajador["facebook"] != NULL ? "<a target='_blank' href='".$trabajador["facebook"]."' style='margin-right: 5px'><i class='fa fa-facebook fa-2x' aria-hidden='true'></i></a>" : "";
+                    $twitter = $trabajador["twitter"] != "" || $trabajador["twitter"] != NULL ? "<a target='_blank' href='".$trabajador["twitter"]."' style='margin-right: 5px'><i class='fa fa-twitter fa-2x' aria-hidden='true'></i></a>" : "";
+                    $snapchat = $trabajador["snapchat"] != "" || $trabajador["snapchat"] != NULL ? "<a target='_blank' href='".$trabajador["snapchat"]."' style='margin-right: 5px'><i class='fa fa-snapchat-square fa-2x' aria-hidden='true'></i></a>" : "";
+                    $instagram = $trabajador["instagram"] != "" || $trabajador["instagram"] != NULL ? "<a target='_blank' href='".$trabajador["instagram"]."' style='margin-right: 5px'><i class='fa fa-instagram fa-2x' aria-hidden='true'></i></a>" : "";
+                    $linkedin = $trabajador["linkedin"] != "" || $trabajador["linkedin"] != NULL ? "<a target='_blank' href='".$trabajador["linkedin"]."' style='margin-right: 5px'><i class='fa fa-linkedin fa-2x' aria-hidden='true'></i></a>" : "";
+                    ?>
+                    <div class="col-md-12">
+                        <a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
+                            <div class="tra box box-block bg-white user-5">
+                                <div class="u-content">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-3  text-center">
+                                            <div class="avatar box-96 m-b-2" style="margin-right: 11px;">
+                                                <img class="b-a-radius-circle" src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="max-height: 90px;height: 100%;">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+
+                                            <h4>
+                                                <span class="text-black pull-left"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span>
+
+                                            </h4>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-12">
+
+                                                    <div class="pull-left">
+                                                        <b class="" style="">&nbsp;&nbsp;<?= $trabajador['pais'] ?></b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-12">
+                                                    <div class="pull-left">
+                                                        <?= $sitio_web . " " . $facebook . " " . $twitter . " " . $instagram . " " . $snapchat . " " . $linkedin ?>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="font-size: 28px;"></div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-3">
+                                            <a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>" class="btn btn-info" style="margin-bottom: 10px">Ver Perfil</a>
+                                            <div class="col-xs-12 col-md-12">
+                                                <div class="pull-left">
+                                                    <span style="font-size: 12px">Remuneración Pretendida:</span>
+                                                    <h3><?= $trabajador['remuneracion_pret'] != "" ? "$" . $trabajador['remuneracion_pret'] : "Vacío" ?></h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-12">
+                                            <?php
+                                            $sobre_mi_len = strlen($trabajador['sobre_mi']);
+                                            ?>
+                                            <?php if ($sobre_mi_len > 300): 300?>
+                                                <span class="summary">
+                                                    <?php $resumen = substr($trabajador['sobre_mi'], 0, 300) ?>
+                                                    <?php $completo = substr($trabajador['sobre_mi'], 300) ?>
+                                                    <p style="text-align: justify;"><?= $resumen ?><span class="complete" style=""><?= $completo ?></span>...</p>
+                                                </span>
+
+                                                <span class="more">
+                                                    <a href="javascript:void(0)">Leer más...</a>
+                                                </span>
+                                            <?php else: ?>
+                                                <p style="text-align: justify;"><?= $trabajador['sobre_mi'] ?></p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach ?>
+            </div>
+        <?php else: ?>
+            <div class="alert alert-danger fade in" role="alert">
+                <i class="ion-android-alert"></i> No hemos obtenido ningún resultado que se ajuste a tus criterios de búsqueda.
+            </div>
+        <?php endif ?>
+    <?php else: ?>
+        <div class="row row-sm" id="box-trab">
+            <?php foreach($trabajadores as $trabajador): ?>
+                <?php
+                $sitio_web = $trabajador["sitio_web"] != "" || $trabajador["sitio_web"] != NULL ? "<a target='_blank' href='".$trabajador["sitio_web"]."' style='margin-right: 5px'><i class='fa fa-internet-explorer fa-2x' aria-hidden='true'></i></a>" : "";
+                $facebook = $trabajador["facebook"] != "" || $trabajador["facebook"] != NULL ? "<a target='_blank' href='".$trabajador["facebook"]."' style='margin-right: 5px'><i class='fa fa-facebook fa-2x' aria-hidden='true'></i></a>" : "";
+                $twitter = $trabajador["twitter"] != "" || $trabajador["twitter"] != NULL ? "<a target='_blank' href='".$trabajador["twitter"]."' style='margin-right: 5px'><i class='fa fa-twitter fa-2x' aria-hidden='true'></i></a>" : "";
+                $snapchat = $trabajador["snapchat"] != "" || $trabajador["snapchat"] != NULL ? "<a target='_blank' href='".$trabajador["snapchat"]."' style='margin-right: 5px'><i class='fa fa-snapchat-square fa-2x' aria-hidden='true'></i></a>" : "";
+                $instagram = $trabajador["instagram"] != "" || $trabajador["instagram"] != NULL ? "<a target='_blank' href='".$trabajador["instagram"]."' style='margin-right: 5px'><i class='fa fa-instagram fa-2x' aria-hidden='true'></i></a>" : "";
+                $linkedin = $trabajador["linkedin"] != "" || $trabajador["linkedin"] != NULL ? "<a target='_blank' href='".$trabajador["linkedin"]."' style='margin-right: 5px'><i class='fa fa-linkedin fa-2x' aria-hidden='true'></i></a>" : "";
+                ?>
+                <div class="col-md-12">
+                    <a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>">
+                        <div class="tra box box-block bg-white user-5">
+                            <div class="u-content">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-3  text-center">
+                                        <div class="avatar box-96 m-b-2" style="margin-right: 11px;">
+                                            <img class="b-a-radius-circle" src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="max-height: 90px;height: 100%;">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+
+                                        <h4>
+                                            <span class="text-black pull-left"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span>
+
+                                        </h4>
+                                        <div class="row" style="margin-bottom: 10px">
+                                            <div class="col-xs-12 col-md-12">
+
+                                                <div class="pull-left">
+                                                    <b class="" style="">&nbsp;&nbsp;<?= $trabajador['pais'] ?></b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12 col-md-12">
+                                                <div class="pull-left">
+                                                    <?= $sitio_web . " " . $facebook . " " . $twitter . " " . $instagram . " " . $snapchat . " " . $linkedin ?>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="font-size: 28px;"></div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3">
+                                    <a href="trabajador-detalle.php?t=<?php echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; ?>" class="btn btn-info" style="margin-bottom: 10px">Ver Perfil</a>
+                                        <div class="col-xs-12 col-md-12">
+                                            <div class="pull-left">
+                                                <span style="font-size: 12px">Remuneración Pretendida:</span>
+                                                <h3> <?= $trabajador['remuneracion_pret'] != "" ? "$" . $trabajador['remuneracion_pret'] : "Vacío" ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <?php
+                                        $sobre_mi_len = strlen($trabajador['sobre_mi']);
+                                        ?>
+                                        <?php if ($sobre_mi_len > 300): 300?>
+                                            <span class="summary">
+                                                <?php $resumen = substr($trabajador['sobre_mi'], 0, 300) ?>
+                                                <?php $completo = substr($trabajador['sobre_mi'], 300) ?>
+                                                <p style="text-align: justify;"><?= $resumen ?><span class="complete" style=""><?= $completo ?></span>...</p>
+                                            </span>
+
+                                            <span class="more">
+                                                <a href="javascript:void(0)">Leer más...</a>
+                                            </span>
+                                        <?php else: ?>
+                                            <p style="text-align: justify;"><?= $trabajador['sobre_mi'] ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach ?>
+        </div>
+        <?php if (count($trabajadores) > 0): ?>
+            <div style="text-align: center">
+                <button class="pagination-next">+ Jobbers</button>
+            </div>
+        <?php endif; ?>
+    <?php endif ?>
 
 </div>
-
 </div>
 
 </div>

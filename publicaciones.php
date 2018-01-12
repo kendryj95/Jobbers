@@ -260,7 +260,7 @@
 			</div>
 		</div>
 		
-		<div id="modal-postulados" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+		<div id="modal-postulados" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" >
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -269,7 +269,7 @@
 						</button>
 						<h4 class="modal-title">Trabajadores postulados a este empleo</h4>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" id="test">
 						<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
 							<thead>
 								<tr>
@@ -607,6 +607,6 @@
 			});
 		</script>
 
+		
 	</body>
-
 </html>
