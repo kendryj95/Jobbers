@@ -410,7 +410,7 @@
 						</h4>
 
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" id="cuerpo_de_modal">
                         <?php switch($plan['id_plan']):
                             case 1: ?>
                                 <div class="alert alert-warning">
@@ -1736,14 +1736,10 @@
 		</script>
 
 
-		<script>		  
-			/*$( document ).ready(function() {
-			 setInterval(function() {
-			 //alert("funciona");				
-				
-				}, 15000);
-			});*/
-			//tablaPostulados.ajax.reload(); 
+		<script>
+		$( "#modal-postulados" ).mouseenter(function() {
+		  tablaPostulados.ajax.reload();
+		}); 
 		</script>
 
 	</body>
