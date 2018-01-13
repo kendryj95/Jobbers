@@ -90,7 +90,7 @@
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
 		INNER JOIN disponibilidad AS d ON d.id = p.disponibilidad
 		LEFT JOIN imagenes AS img ON e.id_imagen = img.id
-		WHERE (a.id = $publicacion[area_id] AND ase.id = $publicacion[sector_id]) AND p.id != $publicacion[id]
+		WHERE (a.id = $publicacion[area_id] AND ase.id = $publicacion[sector_id]) AND p.id != $publicacion[id] AND (e.suspendido IS NULL OR e.suspendido = 0) AND p.estatus=1
 		ORDER BY RAND()
 		LIMIT 5
 	");
@@ -260,7 +260,7 @@
 												<?php echo $contratado["finalizado"] == 0 &&  $contratado["cancelado"] != 1 ? '<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-success"><i class="ti ti-reload"></i> Trabajando</span>': '<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-success"><i class="ti ti-check"></i> Finalizado</span>';?>
 											<?php else: ?>
 												<?php if($postulado): ?>
-													<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-primary">Postulado</span>
+													<span style="position: absolute; top: 5px; right: 5px; font-size: 18px; cursor: auto" class="btn btn-primary btn-postular waves-effect waves-light">Postulado</span>
 												<?php endif ?>	
 											<?php endif ?>
 										</div>
@@ -457,7 +457,7 @@
 									case 200:
 										var json = JSON.parse(jqXHR.responseText);
 										if(json.msg == "OK") {
-											$(".pv-title").prepend('<span style="position: absolute; top: 5px; right: 5px; font-size: 18px;" class="tag tag-primary">Postulado</span>');
+											$(".pv-title").prepend('<span style="position: absolute; top: 5px; right: 5px; font-size: 18px; cursor: auto" class="btn btn-primary btn-postular waves-effect waves-light">Postulado</span>');
 											$("#postulate").closest('div').remove();
 											swal("Operación exitosa!", "Se ha enviado la solicitud para el empleo seleccionado.<br>La empresa se pondrá en contacto contigo si está interesada.", "success");
 										} else {
@@ -470,7 +470,7 @@
 						}
 						else {
 							$(this).removeClass('disabled');
-							swal("Información", 'Su perfil no esta completo para poder postularse a un empleo, los requisitos minimos son:<br> (1) Tener foto de perfil.<br> (2) Completar todos los datos del paso 1 en el Currículum. <br> para ir a completar mis datos haga click <a href="cuenta.php">aquí</a>', "info");
+							swal("Información", 'Su perfil no esta completo para poder postularse a un empleo, los requisitos minimos son:<br> (1) Tener foto de perfil.<br> (2) Completar todos los datos en el Currículum. <br><br>Para completar tus datos haga <br> <a href="cuenta.php" class="btn btn-primary btn-block">click aquí</a>', "info");
 						}
 					});
 				<?php else: ?>
