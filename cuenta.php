@@ -369,6 +369,16 @@
 				});
 			});
 		</script>
+		<script></script>
+		<?php 
+		if(isset($_GET['foto']))
+		{
+
+		}
+		echo '<script> 
+					$("#optionsList").css("display", "none");
+					$("#pic").css("display", "block");
+				 </script>';?>
 	</body>
 
 </html>
