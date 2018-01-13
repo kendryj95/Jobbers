@@ -185,7 +185,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-xs-12 col-md-10 no-padding">
 													<div class="col-xs-4">
 														<select name="" id="dia" class="custom-select form-control">
-															<option value="0">Sel</option>
+															<option value="0">Seleccionar</option>
 															<?php for ($i = 1; $i <= 31; $i++): ?>
 																<option value="<?=$i < 10 ? '0' . $i : $i?>"><?=$i?></option>
 															<?php endfor;?>
@@ -194,7 +194,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 		  											<div class="col-xs-4">
 														<select name="" id="mes" class="custom-select form-control">
-															<option value="0">Sel</option>
+															<option value="0">Seleccionar</option>
 															<option value="01">Ene</option>
 															<option value="02">Feb</option>
 															<option value="03">Mar</option>
@@ -211,7 +211,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</div>
 		  											<div class="col-xs-4">
 														<select name="" id="anio" class="custom-select form-control">
-															<option value="0">Sel</option>
+															<option value="0">Seleccionar</option>
 															<?php for ($i = intval(date('Y')); $i >= 1950; $i--): ?>
 															<option value="<?=$i?>"><?=$i?></option>
 															<?php endfor;?>
