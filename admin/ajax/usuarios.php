@@ -79,6 +79,7 @@ if($op) {
 						$pub["nombres"]." ".$pub["apellidos"],
 						$pub["correo_electronico"],
 						$pub["correo_electronico"],
+						date("d-m-Y H:i:s",strtotime($pub["fecha_creacion"])),
 						'<div class="acciones-categoria" data-target="' . $pub["id"] . '"><button type="button" class="accion-categoria btn btn-success waves-effect waves-light" title="Ver status CV" onclick="statusCV(this);"><span class="ti-file	"></span></button> <button type="button" class="accion-categoria btn btn-danger waves-effect waves-light" title="Eliminar Trabajador" onclick="eliminarCategoria(this);"><span class="ti-close"></span></button> </div>'
 					);
 				}

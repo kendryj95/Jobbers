@@ -73,6 +73,7 @@
 											<th>Nombre</th>
 											<th>Correo electrónico</th>
 											<th>Correo electrónico</th>
+											<th>Fecha de registro</th>
 											<th>Eliminar</th>
 										</tr>
 									</thead>
