@@ -119,7 +119,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 <body class="large-sidebar fixed-sidebar fixed-header skin-5">
 	<!-- <div class="wrapper"> -->
 		<!-- Sidebar -->
-		<?php if ($_SESSION['ctc']['type'] == 1):
+		<?php if (isset($_SESSION['ctc']) && $_SESSION['ctc']['type'] == 1):
 			require_once ('includes/sidebar.php');
 			?>
 			<style>
@@ -249,13 +249,18 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 								<?php else: ?>
 									<?php if($noticias): ?>
 										<?php $i = 0; ?>
+										<div>
 										<?php foreach($noticias as $n): ?>
 											<div class="col-md-4">
 												<div class="box bg-white post post-3">
-													<div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);"></div>
+													<div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);">
+														
+													</div>
 													<div class="p-content" style="min-height: 220px;">
-														<h5><a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><?php echo $n["titulo"]; ?></a></h5>
-														<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr($n["descripcion"], 0, 100)."...") : $n["descripcion"]; ?></p>
+														<a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><h5><?php echo $n["titulo"]; ?></h5></a>
+														<div>
+															<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr(strip_tags($n["descripcion"]), 0, 100)."...") : strip_tags($n["descripcion"]); ?></p> <!-- strip_tags: elimina las etiquetas html de un string -->
+														</div>
 														<p class="small text-uppercase text-muted"><?php echo date('d/m/Y', strtotime($n["fecha_actualizacion"])); ?></p>
 														<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>" class="btn btn-success label-right">Leer más <span class="btn-label"><i class="ti-angle-right"></i></span></a>
 													</div>
@@ -274,6 +279,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 												}
 											?>
 										<?php endforeach ?>
+										</div>
 									<?php endif ?>
 								<?php endif ?>
 						</div>
