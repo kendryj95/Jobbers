@@ -98,7 +98,7 @@
 			<div class="preloader"></div>-->
 
 			<!-- Sidebar -->
-			<?php require_once('../includes/sidebar.php'); ?>
+			<?php //require_once('../includes/sidebar.php'); ?>
 
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>
@@ -106,17 +106,24 @@
 			<!-- Header -->
 			<?php require_once('../includes/header.php'); ?>
 
-			<div class="site-content">
+			<div class="site-content" style="margin-left: 0px;">
 				<!-- Content -->
-				<div class="content-area p-y-1">
-					<div class="container-fluid">
+				<div class="container-fluid">
+				<?php if ($_SESSION['ctc']['type'] == 1):
+					$grid = "col-md-9";
+					require_once('../includes/sidebar.php');
+					else:
+					$grid = "container";
+				?>
+				<?php endif ?>
+					<div class="<?php echo $grid?>">
 						<div class="box box-block bg-white">
 							<h5 class="m-b-1">Mis publicaciones</h5>
 							<div class="mb-10">
 								<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
 								
 								<?php if($_SESSION["ctc"]["plan"]["id_plan"] == 4): ?>
-									<a href="#" class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion-especial"> Agregar/modificar publicación especial</a>
+									<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion-especial"> Agregar/modificar publicación especial</a>
 								<?php endif ?>
 							</div>
 							<div class="table-responsive">

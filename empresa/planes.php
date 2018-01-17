@@ -53,19 +53,23 @@
 		<!-- Preloader -->
 		<div class="preloader"></div>
 
-		<!-- Sidebar -->
-		<?php require_once('../includes/sidebar.php'); ?>
-
 		<!-- Sidebar second -->
 		<?php require_once('../includes/sidebar-second.php'); ?>
 
 		<!-- Header -->
 		<?php require_once('../includes/header.php'); ?>
 
-		<div class="site-content">
+		<div class="site-content" style="margin-left: 0px;">
 			<!-- Content -->
-			<div class="content-area p-y-1">
-				<div class="container-fluid">
+			<div class="container-fluid">
+			<?php if ($_SESSION['ctc']['type'] == 1):
+					$grid = "col-md-9";
+					require_once('../includes/sidebar.php');
+					else:
+					$grid = "container";
+				?>
+				<?php endif ?>
+				<div class="<?php echo $grid ?>">
 					<div id="step1">
 						<h2>Planes</h2>
 						<div class="row row-md">
@@ -114,7 +118,7 @@
 										</li>
 									</ul>
 									<div class="card-footer footer-free">
-										<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="1">Seleccionar</a>
+										<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan btn-selection" data-target="1">Seleccionar</a>
 									</div>
 								</div>
 							</div>
@@ -162,7 +166,7 @@
 										</li>
 									</ul>
 									<div class="card-footer footer-bronce">
-										<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px; " data-target="2">Seleccionar</a>
+										<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan btn-selection" data-target="2">Seleccionar</a>
 									</div>
 								</div>
 							</div>
@@ -211,7 +215,7 @@
 										</li>
 									</ul>
 									<div class="card-footer footer-silver">
-										<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px; " data-target="3">Seleccionar</a>
+										<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan btn-selection" data-target="3">Seleccionar</a>
 									</div>
 								</div>
 							</div>
@@ -261,7 +265,7 @@
 										</li>
 									</ul>
 									<div class="card-footer footer-gold">
-										<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px; " data-target="4">Seleccionar</a>
+										<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan btn-selection" data-target="4">Seleccionar</a>
 									</div>
 								</div>
 							</div>

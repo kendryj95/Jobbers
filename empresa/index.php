@@ -201,78 +201,22 @@
 			<!-- Content -->
 			<div class="content-area" style="padding-top: 30px;">
 				<div class="container-fluid">
-					<div class="row row-md">
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-							<a href="publicaciones.php">
-								<div class="box box-block tile tile-2 bg-success m-b-2">
-									<div class="t-icon right"><span class="bg-success"></span><i class="ti-folder"></i></div>
-									<div class="t-content">
-										<h6 class="text-uppercase m-b-1">Publicaciones</h6>
-										<h1 class="m-b-1"><?php echo $cantidadPublicaciones; ?></h1>
-									</div>
-								</div>
-							</a>
-						</div>
-						<!--<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-							<a href="contrataciones.php">
-								<div class="box box-block tile tile-2 bg-success m-b-2">
-									<div class="t-icon right"><span class="bg-success"></span><i class="ti-folder"></i></div>
-									<div class="t-content">
-										<h6 class="text-uppercase m-b-1">Jobbers seleccionados</h6>
-										<h1 class="m-b-1">< ?php echo $cantidadContrataciones; ?></h1>
-									</div>
-								</div>
-							</a>
-						</div>-->
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-							<a href="perfil.php">
-								<div class="box box-block tile tile-2 bg-success m-b-2">
-									<div class="t-icon right"><span class="bg-success"></span><i class="ti-folder"></i></div>
-									<div class="t-content">
-										<h6 class="text-uppercase m-b-1">Ver mi perfil</h6>
-										<h1 class="m-b-1" style="color: #43b968;">0</h1>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-							<a href="../trabajadores.php">
-								<div class="box box-block tile tile-2 bg-success m-b-2">
-									<div class="t-icon right"><span class="bg-success"></span><i class="ti-folder"></i></div>
-									<div class="t-content">
-										<h6 class="text-uppercase m-b-1">Ver jobbers</h6>
-										<h1 class="m-b-1" style="color: #43b968;">0</h1>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-							<a href="../serviciosfree.php">
-								<div class="box box-block tile tile-2 bg-success m-b-2">
-									<div class="t-icon right"><span class="bg-success"></span><i class="ti-folder"></i></div>
-									<div class="t-content">
-										<h6 class="text-uppercase m-b-1">Ver servicios freelance</h6>
-										<h1 class="m-b-1" style="color: #43b968;">0</h1>
-									</div>
-								</div>
-							</a>
-						</div>
-						<!--
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-							<div class="box box-block tile tile-2 bg-warning m-b-2">
-								<div class="t-icon right"><span class="bg-primary"></span><i class="ti-user"></i></div>
-								<div class="t-content">
-									<h6 class="text-uppercase m-b-1">Postulados</h6>
-									<h1 class="m-b-1">9</h1>
-								</div>
+					<div class="col-md-3">
+						<div class="list-group">
+							<div class="list-group-item active text-center item-panel">Panel de Administración</div>
+							<div class="list-group-item text-center">
+								<img src="img/avatars/user.png" style="max-width: 180px;" alt="Logo Empresa">
 							</div>
+							<a href="publicaciones.php" class="list-group-item item-panel"><i class="fa fa-check-square"></i>&nbsp Publicaciones</a>
+							<a href="perfil.php" class="list-group-item item-panel"><i class="fa fa-user"></i>&nbsp Mi perfil</a>
+							<a href="../trabajadores.php" class="list-group-item item-panel"><i class="fa fa-id-badge"></i>&nbsp Jobbers</a>
+							<a href="#" class="list-group-item item-panel"><i class="fa fa-cogs"></i>&nbsp Servicios Freelance</a>
 						</div>
-						-->
 					</div>
 				</div>
 			</div>
 			<!-- Footer -->
-			<?php require_once('../includes/footer.php'); ?>
+			<?php //require_once('../includes/footer.php'); ?>
 		</div>
 	</div>
 

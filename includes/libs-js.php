@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="../vendor/jquery/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="../vendor/tether/js/tether.min.js"></script>
 	<!-- <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script> -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="../vendor/detectmobilebrowser/detectmobilebrowser.js"></script>
 	<script type="text/javascript" src="../vendor/jscrollpane/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="../vendor/jscrollpane/mwheelIntent.js"></script>
@@ -39,7 +39,7 @@
 	<script type="text/javascript" src="vendor/jquery/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="vendor/tether/js/tether.min.js"></script>
 	<!-- <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="vendor/detectmobilebrowser/detectmobilebrowser.js"></script>
 	<script type="text/javascript" src="vendor/jscrollpane/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="vendor/jscrollpane/mwheelIntent.js"></script>

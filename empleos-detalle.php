@@ -125,21 +125,6 @@
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 		<!-- <div class="wrapper" style="background-color: white;"> -->
-			<!-- Sidebar -->
-			<?php if ($_SESSION['ctc']['type'] == 1):
-			require_once ('includes/sidebar.php');
-			?>
-			<style>
-				.site-content{
-					margin-left:220px !important;
-				}
-				@media(max-width: 1024px){
-					.site-content{
-						margin-left: 0px !important;
-					}
-				}
-			</style>
-			<?php endif ?>
 
 			<!-- Sidebar second -->
 			<?php require_once('includes/sidebar-second.php'); ?>

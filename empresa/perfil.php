@@ -92,20 +92,24 @@
 			<!-- Preloader -->
 			<div class="preloader"></div>
 
-			<!-- Sidebar -->
-			<?php require_once('../includes/sidebar.php'); ?>
-
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>
 
 			<!-- Header -->
 			<?php require_once('../includes/header.php'); ?>
 
-			<div class="site-content">
+			<div class="site-content" style="margin-left: 0px;">
 				<!-- Content -->
-				<div class="content-area p-b-1">
+				<?php if ($_SESSION['ctc']['type'] == 1):
+					$grid = "col-md-9";
+					require_once('../includes/sidebar.php');
+					else:
+					$grid = "container";
+				?>
+				<?php endif ?>
+				<div class="<?php echo $grid?>">
 					<div class="profile-header m-b-1">
-						<div class="profile-header-cover img-cover" style="background-image: url(img/photos-1/1.jpg);"></div>
+						<div class="profile-header-cover img-cover" style="background-image: url(img/photos-1/2.jpg);"></div>
 						<div class="profile-header-counters clearfix">
 							<div class="container-fluid">
 								<div class="pull-right">

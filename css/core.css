@@ -501,9 +501,10 @@ a:active {
         -webkit-transition: all 0.2s ease-in-out;
         transition: all 0.2s ease-in-out;
     }
-    .site-header .header-form .form-control:focus {
+    /* Efecto de alargar input */
+    /* .site-header .header-form .form-control:focus {
         width: 300px;
-    }
+    } */
 }
 
 @media (min-width: 992px) {
@@ -9788,6 +9789,20 @@ a.text-grey:hover .underline {
 
 
 /* =================================================================
+  INDEX EMPRESAS - PANEL
+================================================================= */
+
+a.list-group-item:hover {
+    border-left: 4px solid #00AEEF;
+}
+
+.item-panel {
+    padding: 15px !important;
+    font-size: 16px;
+}
+
+
+/* =================================================================
   Seccion Postulaciones
 ================================================================= */
 
@@ -10030,6 +10045,13 @@ a.text-grey:hover .underline {
     border-right-style: solid;
     border-right-color: inherit;
     left: 0px;
+}
+
+.btn-selection {
+    color: #fff !important;
+    font-size: 24px;
+    padding-left: 8px;
+    padding-top: 15px;
 }
 
 

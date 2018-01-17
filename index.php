@@ -576,31 +576,15 @@ else {*/
     		<!-- Preloader -->
     		<div class="preloader"></div>
 
-    		<!-- Sidebar -->
-    		<?php if ($_SESSION['ctc']['type'] == 1):
-			require_once ('includes/sidebar.php');
-			?>
-			<style>
-				.site-content{
-					margin-left:220px !important;
-				}
-				@media(max-width: 1024px){
-					.site-content{
-						margin-left: 0px !important;
-					}
-				}
-			</style>
-			<?php endif ?>
-
     		<!-- Sidebar second -->
     		<?php require_once('includes/sidebar-second.php'); ?>
 
     		<!-- Header -->
     		<?php require_once 'includes/header.php';?>
-			<div class="site-content bg-white" style="margin-left: 0px; padding-top: 5px;">
+			<div class="site-content bg-white" style="margin-left: 0px; padding-top: 15px; margin-top: 70px;">
 
     		<?php if ($publicidadPrincipal): ?>
-    			<div class="row" style="padding: 25px; margin-top: 75px;" id="ad">
+    			<div class="container-fluid" id="ad">
     				<?php foreach ($publicidadPrincipal as $p): ?>
     					<?php
     					$link = "";
@@ -645,108 +629,7 @@ else {*/
     			</div>
     		<?php endif?>
 
-    		<?php/* if(isset($_SESSION["ctc"]["empresa"]) && !isset($_REQUEST["empresas"])): */?>
-
-			<!-- <div class="row" style="padding: 25px;">
-					<div class="col-md-3">
-						<div class="box bg-white">
-							<div class="box-block clearfix">
-								<h5 class="pull-xs-left"><i class="ion-ios-list m-sm-r-1"></i> Área</h5>
-							</div>
-							<table class="table m-md-b-0">
-								<tbody>
-									<?php/* foreach($areas as $area): */?>
-										<?php/* if($area["cantidad"] > 0true): */?>
-											<tr>
-												<td>
-													<a class="link-area" data-area="<?php/* echo $area["amigable"]; */?>" style="margin-left: 7px;" class="text-primary" href="trabajadores.php?area=<?php/* echo $area["amigable"]; */?>&pagina=1"><span class="underline"><?php/* echo $area["nombre"]; */?></span></a>
-												</td>
-												<td>
-													<span class="text-muted pull-xs-right"><?php/* /*echo $area["cantidad"]; */?></span>
-												</td>
-											</tr>
-										<?php/* endif */?>
-									<?php/* endforeach */?>
-								</tbody>
-							</table>
-						</div>
-
-						<?php/* if($publicidadSection): */?>
-							<div class="row" id="ad2">
-								<?php/* foreach($publicidadSection as $p): */?>
-									<?php/*
-$link = "";
-if (strstr($p["url"], 'http')) {
-$link = $p["url"];
-}
-else {
-$link = "http://$p[url]";
-}
- */?>
-									<?php/* if(isset($p["tipo_publicidad"])): */?>
-										<?php/* if($p["tipo_publicidad"] == 1): */?>
-											<div class="col-md-3">
-												<?php/*
-if (strstr($link, 'youtu.be')) {
-$link = str_replace('youtu.be/', 'youtube.com/watch?v=', $link);
-}
-else {
-if (strstr($link, 'vimeo')) {
-$link = "http://".str_replace('vimeo.com/', 'player.vimeo.com/video/', $link);
-}
-}
-$link = str_replace('watch?v=', 'embed/', $link);
- */?>
-												<div class="box bg-white post post-3">
-													<div class="p-img img-cover youtube-video">
-														<iframe class="youtube-player" type="text/html" width="100%" height="100%" src="<?php/* echo $link; */?>" frameborder="0"> </iframe>
-													</div>
-												</div>
-											</div>
-										<?php/* else: */?>
-											<div class="col-md-3">
-												<div class="box bg-white product product-1">
-													<div class="p-img img-cover" style="background-image: url(img/<?php/* echo $p["imagen"]; */?>);">
-														<div class="p-status bg-warning"><?php/* echo $p["titulo"]; */?></div>
-														<div class="p-links">
-															<a href="<?php/* echo $link; */?>"><i class="ti-link"></i></a>
-															<a href="#"><i class="fa fa-star"></i></a>
-														</div>
-													</div>
-												</div>
-											</div>
-										<?php/* endif */?>
-									<?php/* endif */?>
-								<?php/* endforeach */?>
-							</div>
-						<?php/* endif */?>
-					</div>
-
-					<div class="col-md-9">
-
-						<div class="row row-sm">
-							<?php/* foreach($trabajadores as $trabajador): */?>
-								<div class="col-md-4">
-									<a href="trabajador-detalle.php?t=<?php/* echo slug("$trabajador[nombres] $trabajador[apellidos]") . "-$trabajador[id]"; */?>">
-										<div class="tra box box-block bg-white user-5">
-											<div class="u-content">
-												<div class="avatar box-96 m-b-2">
-													<img class="b-a-radius-circle" src="img/<?php/* echo $trabajador["imagen"]; */?>" alt="" style="max-height: 96px;">
-												</div>
-												<h5><span class="text-black"><?php/* echo "$trabajador[nombres] $trabajador[apellidos]"; */?></span></h5>
-												<div style="font-size: 28px;"></div>
-											</div>
-										</div>
-									</a>
-								</div>
-							<?php/* endforeach */?>
-						</div>
-
-					</div>
-				</div> -->
-
-				<?php/* else: */?>
-				<div class="row" style="padding: 25px;">
+				<div class="container-fluid">
 					
 					<div class="col-xs-12 col-md-3">
 						<div class="row">
@@ -762,7 +645,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 															<a class="text-primary" href="empleos.php?area=<?php echo $area["amigable"]; ?>&pagina=1"><span class="underline"><?php echo $area["nombre"]; ?></span></a>
 														</td>
 														<td>
-															<span class="text-muted pull-xs-right"><?php echo $area["cantidad"]; ?></span>
+															<span class="text-muted"><?php echo $area["cantidad"]; ?></span>
 														</td>
 													</tr>
 												<?php endif?>
@@ -788,7 +671,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 															<a class="text-primary" href="empleos.php?momento=<?php echo $momento["amigable"]; ?>&pagina=1"><span class="underline"><?php echo $momento["nombre"]; ?></span></a>
 														</td>
 														<td>
-															<span class="text-muted pull-xs-right"><?php echo $momento["cantidad"]; ?></span>
+															<span class="text-muted pull-right"><?php echo $momento["cantidad"]; ?></span>
 														</td>
 													</tr>
 												<?php endif?>
@@ -799,7 +682,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 														<span class="underline">Ver más</span>
 													</td>
 													<td>
-														<span class="text-muted pull-xs-right">+</span></a>
+														<span class="text-muted pull-right">+</span></a>
 													</td>
 												</tr>
 											<?php endif?>											
@@ -823,7 +706,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 															<a class="text-primary" href="empleos.php?disp=<?php echo $disp["nombre"]; ?>&pagina=1"><span class="underline"><?php echo $disp["nombre"]; ?></span></a>
 														</td>
 														<td>
-															<span class="text-muted pull-xs-right"><?php echo $disp["cantidad"]; ?></span>
+															<span class="text-muted pull-right"><?php echo $disp["cantidad"]; ?></span>
 														</td>
 													</tr>
 												<?php endif?>
@@ -840,7 +723,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 						<h3>Principales ofertas de trabajo</h3>
 
 					<?php if($publicacionesOro): ?>
-						<div class="row" style="padding-right: 10px;">
+						<div class="row">
 							<?php $i = 0;?>
 							<?php foreach ($publicacionesOro as $publicacion):
 							if (strlen($publicacion["titulo"]) > 30) {
@@ -849,7 +732,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 								$publicacion["titulo_corto"] = substr($publicacion["titulo"], 0, 30);
 							}
 							?>
-							<div class="col-md-6 col-xs-12" style="padding-left: 10px;">
+							<div class="col-md-6 col-xs-12">
 							<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>">
 							<div class="pub pub-f box box-block bg-white tile tile-1 gold" title="Ver detalles del empleo">
 							<div class="t-icon right"><span class="bg-warning"></span><i class="ti-medall-alt" title="Publicación destacada" style="z-index: 50;"></i></div>
@@ -973,7 +856,7 @@ $link = str_replace('watch?v=', 'embed/', $link);
 					<?php endif; ?>
 
 				<?php if($publicacionesPlata): ?>
-					<div class="row" style="padding: 25px;">
+					<div class="row">
 						<?php $i = 0;?>
 						<?php foreach ($publicacionesPlata as $publicacion):
 						if (strlen($publicacion["titulo"]) > 30) {

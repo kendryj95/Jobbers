@@ -5,7 +5,8 @@
 	<link rel="stylesheet" href="../css/bootstrap.css">
 	<link rel="stylesheet" href="../vendor/animate.css/animate.min.css">
 	<link rel="stylesheet" href="../vendor/themify-icons/themify-icons.css">
-	<link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css"> -->
+	<link rel="stylesheet" href="../vendor/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../vendor/animate.css/animate.min.css">
 	<link rel="stylesheet" href="../vendor/jscrollpane/jquery.jscrollpane.css">
 	<link rel="stylesheet" href="../vendor/waves/waves.min.css">
@@ -31,7 +32,8 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="vendor/animate.css/animate.min.css">
 	<link rel="stylesheet" href="vendor/themify-icons/themify-icons.css">
-	<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.c?ss"> -->
+	<link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="vendor/animate.css/animate.min.css">
 	<link rel="stylesheet" href="vendor/jscrollpane/jquery.jscrollpane.css">
 	<link rel="stylesheet" href="vendor/waves/waves.min.css">
