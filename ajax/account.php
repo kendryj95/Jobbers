@@ -200,52 +200,27 @@
 			echo json_encode($data);
 			break;
 		case REMOVE_ACCOUNT:
-			/*$pic = $db->getRow("SELECT imagenes.id, CONCAT(imagenes.directorio,'/',imagenes.id,'.', imagenes.extension) AS imagen FROM empresas INNER JOIN imagenes ON imagenes.id = empresas.id_imagen WHERE empresas.id = $_REQUEST[i]");
-			if($pic) {
-				$db->query("DELETE FROM imagenes WHERE id=$pic[id]");
-				if(file_exists("../img/$pic[imagen]")) {
-					unlink("../img/$pic[imagen]");
-				}
-			}
-			$post = $db->getAll("SELECT id FROM publicaciones WHERE id_empresa=$_REQUEST[i]");
-			foreach($post as $p) {
-				$db->query("DELETE FROM publicaciones_imagenes WHERE id_publicacion=$p[id]");
-				$db->query("DELETE FROM publicaciones_sectores WHERE id_publicacion=$p[id]");
-				$db->query("DELETE FROM publicaciones_videos WHERE id_publicacion=$p[id]");
-				$db->query("DELETE FROM publicaciones WHERE id=$p[id]");
-			}
-			$postE = $db->getAll("SELECT id, id_imagen, CONCAT(imagenes.directorio,'/',imagenes.id,'.', imagenes.extension) AS imagen FROM empresas_publicaciones_especiales LEFT JOIN imagenes ON imagenes.id = empresas_publicaciones_especiales.id_imagen WHERE empresas_publicaciones_especiales.id_empresa=$_REQUEST[i]");
-			foreach($postE as  $p) {
-				if($p["id_imagen"] == 0 && $p["id_imagen"] != "") {
-					$db->query("DELETE FROM imagenes WHERE id=$p[id_imagen]");
-					if(file_exists("../img/$p[imagen]")) {
-						unlink("../img/$p[imagen]");
+
+			$db->beginTransaction();
+
+			try{
+				$pic = $db->getRow("SELECT imagenes.id, CONCAT(imagenes.directorio,'/',imagenes.id,'.', imagenes.extension) AS imagen FROM trabajadores INNER JOIN imagenes ON imagenes.id = trabajadores.id_imagen WHERE trabajadores.id = ".$_SESSION["ctc"]["id"]);
+				if($pic) {
+					$db->query("DELETE FROM imagenes WHERE id=$pic[id]");
+					if(file_exists("../img/$pic[imagen]")) {
+						unlink("../img/$pic[imagen]");
 					}
 				}
+				$db->query("DELETE FROM trabajadores WHERE id=".$_SESSION["ctc"]["id"]);
+
+				$db->commitTransaction();
+				session_destroy();
+				echo json_encode(array("msg" => "OK"));
+			} catch(Exception $e){
+				$db->rollBackTransaction();
+				echo json_encode(array("msg" => "Lo sentimos, ha ocurrido un error al tratar de eliminar su cuenta. Por favor intentelo de nuevo"));
 			}
-			$db->query("DELETE FROM empresas WHERE id=$_REQUEST[i]");*/
-			$pic = $db->getRow("SELECT imagenes.id, CONCAT(imagenes.directorio,'/',imagenes.id,'.', imagenes.extension) AS imagen FROM trabajadores INNER JOIN imagenes ON imagenes.id = trabajadores.id_imagen WHERE trabajadores.id = ".$_SESSION["ctc"]["id"]);
-			if($pic) {
-				$db->query("DELETE FROM imagenes WHERE id=$pic[id]");
-				if(file_exists("../img/$pic[imagen]")) {
-					unlink("../img/$pic[imagen]");
-				}
-			}
-			$db->query("DELETE FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$db->query("DELETE FROM trabajadores_experiencia_laboral WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$db->query("DELETE FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$db->query("DELETE FROM trabajadores_otros_conocimientos WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$post = $db->getAll("SELECT id FROM trabajadores_publicaciones WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			foreach($post as $p) {
-				$db->query("DELETE FROM trabajadores_areas_sectores WHERE id_publicacion=$p[i]");
-				$db->query("DELETE FROM trabajadores_publicaciones WHERE id=$p[i]");
-			}
-			$db->query("DELETE FROM trabajadores WHERE id=".$_SESSION["ctc"]["id"]);
-			session_start();
-			session_destroy();
-			unset($_SESSION["ctc"]["empresa"]);
-			unset($_SESSION["ctc"]);
-			echo json_encode(array("msg" => "OK"));
+			
 			break;
 		case SAVE_PUBLIC:
 			$db->query("UPDATE trabajadores SET publico=$_REQUEST[public] WHERE id=" . $_SESSION["ctc"]["id"]);

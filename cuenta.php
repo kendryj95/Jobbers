@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(!isset($_SESSION["ctc"]["id"])) {
-		hearder("Location: ./");
+		header("Location: ./");
 	}
 	require_once('classes/DatabasePDOInstance.function.php');
 	$db = DatabasePDOInstance();
@@ -250,8 +250,13 @@
 											swal("Operación exitosa!", "Gracias por su tiempo.", "success");
 											setTimeout(function() {
 												window.location.assign("./");
-											});
+											}, 1500);
+										} else {
+											swal("ERROR!", json.msg, "error");
 										}
+										break;
+									default:
+										swal("ERROR!", "Error de comunicación. Por favor intentalo de nuevo.", "error");
 										break;
 								}
 							});

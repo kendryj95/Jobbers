@@ -201,10 +201,18 @@
 										buttonsStyling: false
 									});
 								}
-								else {
+								else if (data.status == 2) {
 									swal({
 										title: 'Información!',
 										text: 'Correo electrónico o contraseña incorrectos.',
+										timer: 2000,
+										confirmButtonClass: 'btn btn-primary btn-lg',
+										buttonsStyling: false
+									});
+								} else {
+									swal({
+										title: 'Información!',
+										text: 'Correo electrónico no está registrado.',
 										timer: 2000,
 										confirmButtonClass: 'btn btn-primary btn-lg',
 										buttonsStyling: false
