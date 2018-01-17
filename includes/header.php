@@ -185,12 +185,13 @@
 								Ver ofertas de empleo
 							</a>
 						</li>
-
-						<li class="menuPCTrabajador">
-							<a class="nav-link color-link" href="cuenta.php?foto=1"  style="padding-right: 0px;padding-left: 2px;">
-								Mi foto
-							</a>
-						</li>
+						<?php if ($_SESSION["ctc"]["pic"] == "avatars/user.png"): ?>
+							<li class="menuPCTrabajador">
+								<a class="nav-link color-link" href="cuenta.php?foto=1"  style="padding-right: 0px;padding-left: 2px;">
+									Mi foto
+								</a>
+							</li>
+						<?php endif ?>
 						
 						<li>
 							<a class="nav-link color-link" href="#" data-toggle="dropdown" aria-expanded="false">
