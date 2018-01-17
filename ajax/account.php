@@ -24,8 +24,8 @@
 					$db->query("UPDATE trabajadores SET id_sexo='$_REQUEST[sex]', id_estado_civil='$_REQUEST[estadoCivil]', id_tipo_documento_identificacion='$_REQUEST[dni]', id_pais='$_REQUEST[country]', provincia='$_REQUEST[province]', localidad='$_REQUEST[city]', calle='$_REQUEST[street]', nombres='$_REQUEST[name]',  apellidos='$_REQUEST[lastName]', correo_electronico='$_REQUEST[email]', numero_documento_identificacion='$_REQUEST[numberdni]', cuil='$_REQUEST[cuil]', fecha_nacimiento='".date('Y-m-d', strtotime($_REQUEST['birthday']))."', telefono='$_REQUEST[phone]', telefono_alternativo='$_REQUEST[phoneAlt]', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=".$_SESSION["ctc"]["id"]);
 
 					//Actualizar nombre y apellido en la variable de session.
-					$_SESSION["ctc"]["name"] = $_REQUEST["name"];
-					$_SESSION["ctc"]["lastName"] = $_REQUEST["lastName"];
+					$_SESSION["ctc"]["name"] = explode(" ",$_REQUEST["name"])[0];
+					$_SESSION["ctc"]["lastName"] = explode(" ",$_REQUEST["lastName"])[0];
 					$data = array();
 					$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION["ctc"]["id"]);
 					if($info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_imagen"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != ""  && $info["id_pais"] != ""  && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "") {
@@ -184,7 +184,7 @@
 			echo json_encode(array("status" => $t));
 			break;
 		case LOAD_CURRICULUM:
-			$data["usuario"] = $db->getRow("SELECT trabajadores.nombres, trabajadores.apellidos, trabajadores.correo_electronico, trabajadores.fecha_nacimiento, trabajadores.numero_documento_identificacion AS dni, trabajadores.cuil, trabajadores.telefono, trabajadores.telefono_alternativo, trabajadores.calle, paises.nombre as pais, localidades.localidad, provincias.provincia FROM trabajadores INNER JOIN paises ON paises.id = trabajadores.id_pais INNER JOIN localidades ON localidades.id = trabajadores.localidad	INNER JOIN provincias ON provincias.id = trabajadores.provincia WHERE trabajadores.id=".$_SESSION["ctc"]["id"]);
+			$data["usuario"] = $db->getRow("SELECT trabajadores.nombres, trabajadores.apellidos, trabajadores.correo_electronico, trabajadores.fecha_nacimiento, TIMESTAMPDIFF(YEAR,trabajadores.fecha_nacimiento,CURDATE()) AS edad, trabajadores.numero_documento_identificacion AS dni, trabajadores.cuil, trabajadores.telefono, trabajadores.telefono_alternativo, trabajadores.calle, paises.nombre as pais, localidades.localidad, provincias.provincia FROM trabajadores INNER JOIN paises ON paises.id = trabajadores.id_pais INNER JOIN localidades ON localidades.id = trabajadores.localidad	INNER JOIN provincias ON provincias.id = trabajadores.provincia WHERE trabajadores.id=".$_SESSION["ctc"]["id"]);
 			$data["experiencias"] = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id'] ." ORDER BY trabajadores_experiencia_laboral.ano_egreso DESC, trabajadores_experiencia_laboral.mes_egreso DESC");
 			$data["educacion"] = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=".$_SESSION["ctc"]["id"]);
 			$idiomas = array();
@@ -200,52 +200,27 @@
 			echo json_encode($data);
 			break;
 		case REMOVE_ACCOUNT:
-			/*$pic = $db->getRow("SELECT imagenes.id, CONCAT(imagenes.directorio,'/',imagenes.id,'.', imagenes.extension) AS imagen FROM empresas INNER JOIN imagenes ON imagenes.id = empresas.id_imagen WHERE empresas.id = $_REQUEST[i]");
-			if($pic) {
-				$db->query("DELETE FROM imagenes WHERE id=$pic[id]");
-				if(file_exists("../img/$pic[imagen]")) {
-					unlink("../img/$pic[imagen]");
-				}
-			}
-			$post = $db->getAll("SELECT id FROM publicaciones WHERE id_empresa=$_REQUEST[i]");
-			foreach($post as $p) {
-				$db->query("DELETE FROM publicaciones_imagenes WHERE id_publicacion=$p[id]");
-				$db->query("DELETE FROM publicaciones_sectores WHERE id_publicacion=$p[id]");
-				$db->query("DELETE FROM publicaciones_videos WHERE id_publicacion=$p[id]");
-				$db->query("DELETE FROM publicaciones WHERE id=$p[id]");
-			}
-			$postE = $db->getAll("SELECT id, id_imagen, CONCAT(imagenes.directorio,'/',imagenes.id,'.', imagenes.extension) AS imagen FROM empresas_publicaciones_especiales LEFT JOIN imagenes ON imagenes.id = empresas_publicaciones_especiales.id_imagen WHERE empresas_publicaciones_especiales.id_empresa=$_REQUEST[i]");
-			foreach($postE as  $p) {
-				if($p["id_imagen"] == 0 && $p["id_imagen"] != "") {
-					$db->query("DELETE FROM imagenes WHERE id=$p[id_imagen]");
-					if(file_exists("../img/$p[imagen]")) {
-						unlink("../img/$p[imagen]");
+
+			$db->beginTransaction();
+
+			try{
+				$pic = $db->getRow("SELECT imagenes.id, CONCAT(imagenes.directorio,'/',imagenes.id,'.', imagenes.extension) AS imagen FROM trabajadores INNER JOIN imagenes ON imagenes.id = trabajadores.id_imagen WHERE trabajadores.id = ".$_SESSION["ctc"]["id"]);
+				if($pic) {
+					$db->query("DELETE FROM imagenes WHERE id=$pic[id]");
+					if(file_exists("../img/$pic[imagen]")) {
+						unlink("../img/$pic[imagen]");
 					}
 				}
+				$db->query("DELETE FROM trabajadores WHERE id=".$_SESSION["ctc"]["id"]);
+
+				$db->commitTransaction();
+				session_destroy();
+				echo json_encode(array("msg" => "OK"));
+			} catch(Exception $e){
+				$db->rollBackTransaction();
+				echo json_encode(array("msg" => "Lo sentimos, ha ocurrido un error al tratar de eliminar su cuenta. Por favor intentelo de nuevo"));
 			}
-			$db->query("DELETE FROM empresas WHERE id=$_REQUEST[i]");*/
-			$pic = $db->getRow("SELECT imagenes.id, CONCAT(imagenes.directorio,'/',imagenes.id,'.', imagenes.extension) AS imagen FROM trabajadores INNER JOIN imagenes ON imagenes.id = trabajadores.id_imagen WHERE trabajadores.id = ".$_SESSION["ctc"]["id"]);
-			if($pic) {
-				$db->query("DELETE FROM imagenes WHERE id=$pic[id]");
-				if(file_exists("../img/$pic[imagen]")) {
-					unlink("../img/$pic[imagen]");
-				}
-			}
-			$db->query("DELETE FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$db->query("DELETE FROM trabajadores_experiencia_laboral WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$db->query("DELETE FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$db->query("DELETE FROM trabajadores_otros_conocimientos WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			$post = $db->getAll("SELECT id FROM trabajadores_publicaciones WHERE id_trabajador=".$_SESSION["ctc"]["id"]);
-			foreach($post as $p) {
-				$db->query("DELETE FROM trabajadores_areas_sectores WHERE id_publicacion=$p[i]");
-				$db->query("DELETE FROM trabajadores_publicaciones WHERE id=$p[i]");
-			}
-			$db->query("DELETE FROM trabajadores WHERE id=".$_SESSION["ctc"]["id"]);
-			session_start();
-			session_destroy();
-			unset($_SESSION["ctc"]["empresa"]);
-			unset($_SESSION["ctc"]);
-			echo json_encode(array("msg" => "OK"));
+			
 			break;
 		case SAVE_PUBLIC:
 			$db->query("UPDATE trabajadores SET publico=$_REQUEST[public] WHERE id=" . $_SESSION["ctc"]["id"]);

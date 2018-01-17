@@ -204,13 +204,6 @@
 							WHERE
 								id = $id
 						");
-						$db->query("
-							DELETE
-							FROM
-								publicaciones_sectores
-							WHERE
-								id_publicacion = $id
-						");
 
 						$db->commitTransaction();
 

@@ -20,44 +20,53 @@
 	define('SENT_MAIL', 12);
 	switch($op) {
 		case LOGIN:
-			$info = $db->getRow("SELECT * FROM trabajadores WHERE (correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."') AND clave='".md5($_REQUEST["password"])."'");
-			if($info) {
+			
+			$id = $db->getOne("SELECT id FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."'");
 
-				$confirmar = $db->getRow("SELECT confirmar FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."'");
-				$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$info["id"]);
-				$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$info["id"]);
-				$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$info["id"]);
+			if ($id) {
+				$info = $db->getRow("SELECT * FROM trabajadores WHERE (correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."') AND clave='".md5($_REQUEST["password"])."'");
+				if($info) {
+
+					$confirmar = $db->getRow("SELECT confirmar FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."'");
+					$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$info["id"]);
+					$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$info["id"]);
+					$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$info["id"]);
 
 
-				if ($confirmar['confirmar'] == 1) {
-					$_SESSION["ctc"]["id"] = $info["id"];
-					$_SESSION["ctc"]["uid"] = $info["uid"];
-					$_SESSION["ctc"]["name"] = $info["nombres"];
-					$_SESSION["ctc"]["lastName"] = $info["apellidos"];
-					$_SESSION["ctc"]["email"] = $info["correo_electronico"];
-					$_SESSION["ctc"]["type"] = 2;
+					if ($confirmar['confirmar'] == 1) {
+						$_SESSION["ctc"]["id"] = $info["id"];
+						$_SESSION["ctc"]["uid"] = $info["uid"];
+						$_SESSION["ctc"]["name"] = explode(" ",$info["nombres"])[0];
+						$_SESSION["ctc"]["lastName"] = explode(" ",$info["apellidos"])[0];
+						$_SESSION["ctc"]["email"] = $info["correo_electronico"];
+						$_SESSION["ctc"]["type"] = 2;
 
-					if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
-						$_SESSION["ctc"]["postulate"] = 1;
+						if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
+							$_SESSION["ctc"]["postulate"] = 1;
+						} else {
+							$_SESSION["ctc"]["postulate"] = 0;
+						}
+
+						if ($info["id_imagen"] != 0) {
+							$pic = $db->getOne("SELECT CONCAT(directorio,'/',titulo,'.',extension) FROM imagenes WHERE id=" . $info["id_imagen"]);
+							$_SESSION["ctc"]["pic"] = $pic;
+						}
+	                    else {
+	                        $_SESSION["ctc"]["pic"] = 'avatars/user.png';
+	                    }
+						echo json_encode(array("status" => 1));
 					} else {
-						$_SESSION["ctc"]["postulate"] = 0;
+						echo json_encode(array("status" => 3));
 					}
-
-					if ($info["id_imagen"] != 0) {
-						$pic = $db->getOne("SELECT CONCAT(directorio,'/',titulo,'.',extension) FROM imagenes WHERE id=" . $info["id_imagen"]);
-						$_SESSION["ctc"]["pic"] = $pic;
-					}
-                    else {
-                        $_SESSION["ctc"]["pic"] = 'avatars/user.png';
-                    }
-					echo json_encode(array("status" => 1));
-				} else {
-					echo json_encode(array("status" => 3));
 				}
+	            else {
+					echo json_encode(array("status" => 2));
+	            }
+			} else {
+				echo json_encode(array("status" => 4));
 			}
-            else {
-				echo json_encode(array("status" => 2));
-            }
+
+			
 		break;
          case ADD:
 			$id = $db->getOne("SELECT id FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."'");
@@ -69,69 +78,19 @@
 				$uid = $db->getOne("SELECT valor FROM uid");
 				$db->query("INSERT INTO trabajadores (id, uid, id_imagen, id_sexo, id_estado_civil, id_tipo_documento_identificacion, id_pais, provincia, localidad, calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion, fecha_nacimiento, telefono, telefono_alternativo, clave, correo_electronico, fecha_creacion, fecha_actualizacion, publicidad, newsletter) VALUES ('$id', '$uid', '0', '', '', '', '', '', '', '', '', '$_REQUEST[name]', '$_REQUEST[lastName]', '', NULL, '', '', '".md5($_REQUEST["password"])."', '".strtolower($_REQUEST['email'])."', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[publicidad]', '$_REQUEST[newsletter]')");
 
-				//$idU = $db->getInsertID();
-
 				$db->query("UPDATE uid SET valor = (valor + 1) WHERE id = 1");
 				$_SESSION["ctc"]["id"] = $id;
 				$_SESSION["ctc"]["uid"] = $uid;
-				$_SESSION["ctc"]["name"] = $_REQUEST["name"];
-				$_SESSION["ctc"]["lastName"] = $_REQUEST["lastName"];
+				$_SESSION["ctc"]["name"] = explode(" ",$_REQUEST["name"])[0];
+				$_SESSION["ctc"]["lastName"] = explode(" ",$_REQUEST["lastName"])[0];
 				$_SESSION["ctc"]["email"] = $_REQUEST["email"];
 				$_SESSION["ctc"]["type"] = 2;
 				$_SESSION["ctc"]["pic"] = 'avatars/user.png';
 				$_SESSION["ctc"]["postulate"] = 0;
 
-				//$idU = $db->getOne("SELECT id FROM trabajadores ORDER BY id DESC LIMIT 1");
-
-				/*$destinatario = $_REQUEST['email'];
-				$asunto = "Confirmación de correo electronico - JOBBERS ARGENTINA";
-				$headers = "MIME-Version: 1.0\r\n";
-				$headers .= "Content-type: text/html; charset= iso-8859-1\r\n";
-				$headers .= "From: Jobbers Argentina < administracion@jobbers.com >\r\n";
-
-				$mensaje = "Hola $_REQUEST[name],<br><br>";
-
-				$nombre_link = str_replace(array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú"),array("%20","a","e","i","o","u","A","E","I","O","U"),$_REQUEST['name']);
-
-				$apellido_link = str_replace(array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú"),array("%20","a","e","i","o","u","A","E","I","O","U"),$_REQUEST['lastName']);
-
-				$mensaje .= "Por favor confirma tu registro en la plataforma de Jobbers Argentina haciendo clic <a href='www.jobbersargentina.com/bienvenida.php?id=$idU&n=$nombre_link&a=$apellido_link'>aquí</a>. <br><br><br>";
-
-				$enlace = "<a href='www.jobbersargentina.com/bienvenida.php?id=$idU&n=$nombre_link&a=$apellido_link'>www.jobbersargentina.com/bienvenida.php?id=$idU&n=$nombre_link&a=$apellido_link</a>";
-
-				$mensaje .= "Si no funciona el enlace anterior puedes acceder a la siguiente URL: $enlace";
-
-				$mensaje .= "<br>
-				<br>
-				<br> Gracias, <br><br> <b>Team JobbersArgentina.</b>";
-
-				# CONDICIONAL PARA VALIDAR SI EL CORREO PERTENECE A "HOTMAIL" U "OUTLOOK"
-				if (strstr($destinatario, "hotmail") || strstr($destinatario, "outlook")) {
-					$mensaje= "Saludos $_REQUEST[name],<br><br>";
-
-					$nombre_link = str_replace(array(" ","á","é","í","ó","ú","Á","É","Í","Ó","Ú"),array("%20","a","e","i","o","u","A","E","I","O","U"),$_REQUEST['name']);
-
-					$mensaje .= "Por favor confirma el registro de su empresa en la plataforma de Jobbers Argentina copiando la siguiente URL: <b>www.jobbersargentina.com/bienvenida.php?id=$idU&n=$nombre_link&a=$apellido_link </b> y pegandola en su navegador. <br><br><br>";
-
-					$mensaje .= "<br>
-					<br>
-					<br> Gracias, <br><br> <b>Team JobbersArgentina.</b>";
-				}
-
-
-				if (mail($destinatario,$asunto,$mensaje,$headers)) {
-					echo json_encode(array(
-						"status" => 1,
-					));
-				} else {
-					echo json_encode(array(
-						"status" => 0,
-					));
-				}*/ # COMENTADO PORQUE DANIEL MAIDANA LE PARECE MUY DIFICIL PARA LOS USUARIOS CONFIRMAR SU CORREO
-
 				echo json_encode(array(
 						"status" => 1,
-					));
+				));
               }
          break;
          case LOGOUT:
