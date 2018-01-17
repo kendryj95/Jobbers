@@ -32,8 +32,8 @@
 				if ($confirmar['confirmar'] == 1) {
 					$_SESSION["ctc"]["id"] = $info["id"];
 					$_SESSION["ctc"]["uid"] = $info["uid"];
-					$_SESSION["ctc"]["name"] = $info["nombres"];
-					$_SESSION["ctc"]["lastName"] = $info["apellidos"];
+					$_SESSION["ctc"]["name"] = explode(" ",$info["nombres"])[0];
+					$_SESSION["ctc"]["lastName"] = explode(" ",$info["apellidos"])[0];
 					$_SESSION["ctc"]["email"] = $info["correo_electronico"];
 					$_SESSION["ctc"]["type"] = 2;
 

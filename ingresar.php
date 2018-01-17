@@ -59,7 +59,7 @@
 							</div>
 							<form class="form-material m-b-1">
 								<div class="form-group">
-									<input type="email" class="form-control" id="email" placeholder="Usuario o correo electrónico" onkeypress="return runScript(event)">
+									<input type="email" class="form-control" id="email" placeholder="Correo electrónico" onkeypress="return runScript(event)">
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control" id="passw" placeholder="Contraseña" onkeypress="return runScript(event)">
