@@ -5,6 +5,9 @@
 		header('Location: acceder.php');
 	}
 
+	header("Location: publicaciones.php");
+	exit;
+
 	require_once('../classes/DatabasePDOInstance.function.php');
 
 	$db = DatabasePDOInstance();
