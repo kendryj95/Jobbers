@@ -29,7 +29,7 @@
 				if($datos) {
 					$datos = array_reverse($datos);					
 					foreach($datos as $k => $pub) {
-						$pub["link_postulados"] = '<a class="text-primary" href="../trabajador-detalle.php?t='.$pub["link"].'" target="_blank"><span class="underline">'.$pub["trabajador"].'</span></a>';
+						$pub["link_postulados"] = '<a class="text-primary" href="../trabajador-detalle.php?t='.$pub["link"].'"><span class="underline">'.$pub["trabajador"].'</span></a>';
 						$publicaciones["data"][] = array(
 							$k + 1,
 							$pub["titulo"],

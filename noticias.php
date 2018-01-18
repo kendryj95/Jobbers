@@ -250,7 +250,6 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 												<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
 											</div>
 										</div>
-
 									<?php endif ?>
 								<?php else: ?>
 									<?php if($noticias): ?>

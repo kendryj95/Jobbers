@@ -1744,10 +1744,17 @@
 
 
 		<script>
-		$( "#modal-postulados" ).mouseenter(function() {
-		  tablaPostulados.ajax.reload();
-		}); 
-		</script>
+		  contador=0;
+		  $( "#modal-postulados" ).mouseenter(function() {
+		   if(contador==0)
+		   {
+		     tablaPostulados.ajax.reload();      
+		      contador=1;   }
+		  }); 
+		  $( "#modal-postulados" ).mouseleave(function() {
+		    contador=0;
+		  }); 
+		  </script>
 
 	</body>
 
