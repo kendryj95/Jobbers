@@ -54,38 +54,38 @@
 			 <!-- Preloader  -->
 			<div class="preloader"></div>
 
-			<!-- Sidebar -->
-			<?php require_once('../includes/sidebar.php'); ?>
-
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>
 
 			<!-- Header -->
 			<?php require_once('../includes/header.php'); ?>
 
-			<div class="site-content">
+			<div class="site-content" style="margin-left: 0px;">
+			<?php require_once('../includes/sidebar.php'); ?>
 				<!-- Content -->
-				<div class="content-area p-y-1">
-					<div class="card card-block">
-						<div class="box box-block bg-white">
-							<h5 class="m-b-1">Empresas</h5>
-							<div class="table-responsive">
-								<table class="table table-striped table-bordered dt-responsive nowrap dataTable" id="tablaPublicaciones" cellspacing="0" width="100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Nombre</th>
-											<th>Plan</th>
-											<th>Plan</th>
-											<th>Email</th>
-											<th>Contraseña de Acceso</th>
-											<th>Fecha de creación</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
+				<div class="col-md-9">
+					<div class="content-area p-y-1">
+						<div class="card card-block">
+							<div class="box box-block bg-white">
+								<h5 class="m-b-1">Empresas</h5>
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered dt-responsive nowrap dataTable" id="tablaPublicaciones" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Nombre</th>
+												<th>Plan</th>
+												<th>Plan</th>
+												<th>Email</th>
+												<th>Contraseña de Acceso</th>
+												<th>Fecha de creación</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>

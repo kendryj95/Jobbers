@@ -53,73 +53,73 @@
 			<!-- Preloader 
 			<div class="preloader"></div>-->
 
-			<!-- Sidebar -->
-			<?php require_once('../includes/sidebar.php'); ?>
-
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>
 
 			<!-- Header -->
 			<?php require_once('../includes/header.php'); ?>
 
-			<div class="site-content">
+			<div class="site-content" style="margin-left: 0px;">
+			<?php require_once('../includes/sidebar.php'); ?>
 				<!-- Content -->
-				<div class="content-area p-y-1">
-					<div class="card card-block">
-						<div class="row">
-							<ul class="nav nav-tabs nav-tabs-2" role="tablist">
-								<li class="nav-item">
-									<a class="nav-link active" data-toggle="tab" href="#tab1" role="tab">Categorías</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" data-toggle="tab" href="#tab2" role="tab">Noticias</a>
-								</li>
-							</ul>
-							<div class="tab-content">
-								<div class="tab-pane active" id="tab1" role="tabpanel">
-									<div class="container-fluid">
-										<div class="box box-block bg-white">
-											<h5 class="m-b-1">Mis categorías</h5>
-											<div class="m-b-1">
-												<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-categoria"><span class="ti-plus"></span> Agregar</a>
+				<div class="col-md-9">
+					<div class="content-area p-y-1">
+						<div class="card card-block">
+							<div class="row">
+								<ul class="nav nav-tabs nav-tabs-2" role="tablist" style="padding-left: 15px;">
+									<li class="nav-item">
+										<a class="nav-link active" data-toggle="tab" href="#tab1" role="tab">Categorías</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#tab2" role="tab">Noticias</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab1" role="tabpanel">
+										<div class="container-fluid">
+											<div class="box box-block bg-white">
+												<h5 class="m-b-1">Mis categorías</h5>
+												<div class="m-b-1">
+													<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-categoria"><span class="ti-plus"></span> Agregar</a>
+												</div>
+												<table class="table table-striped table-bordered dataTable" id="tablaCategorias">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>Título</th>
+															<th>Fecha de creación</th>
+															<th>Fecha de creación</th>
+															<th>Acciones</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+												</table>
 											</div>
-											<table class="table table-striped table-bordered dataTable" id="tablaCategorias">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Título</th>
-														<th>Fecha de creación</th>
-														<th>Fecha de creación</th>
-														<th>Acciones</th>
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-											</table>
 										</div>
 									</div>
-								</div>
-								<div class="tab-pane" id="tab2" role="tabpanel">
-									<div class="container-fluid">
-										<div class="box box-block bg-white">
-											<h5 class="m-b-1">Mis noticias</h5>
-											<div class="m-b-1">
-												<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
+									<div class="tab-pane" id="tab2" role="tabpanel">
+										<div class="container-fluid">
+											<div class="box box-block bg-white">
+												<h5 class="m-b-1">Mis noticias</h5>
+												<div class="m-b-1">
+													<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
+												</div>
+												<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>Título</th>
+															<th>Categoría</th>
+															<th>Categoría</th>
+															<th>Fecha de creación</th>
+															<th>Acciones</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+												</table>
 											</div>
-											<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Título</th>
-														<th>Categoría</th>
-														<th>Categoría</th>
-														<th>Fecha de creación</th>
-														<th>Acciones</th>
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-											</table>
 										</div>
 									</div>
 								</div>
