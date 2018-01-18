@@ -59,7 +59,7 @@
 							</div>
 							<form class="form-material m-b-1">
 								<div class="form-group">
-									<input type="email" class="form-control" id="email" placeholder="Usuario o correo electrónico" onkeypress="return runScript(event)">
+									<input type="email" class="form-control" id="email" placeholder="Correo electrónico" onkeypress="return runScript(event)">
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control" id="passw" placeholder="Contraseña" onkeypress="return runScript(event)">
@@ -201,10 +201,18 @@
 										buttonsStyling: false
 									});
 								}
-								else {
+								else if (data.status == 2) {
 									swal({
 										title: 'Información!',
 										text: 'Correo electrónico o contraseña incorrectos.',
+										timer: 2000,
+										confirmButtonClass: 'btn btn-primary btn-lg',
+										buttonsStyling: false
+									});
+								} else {
+									swal({
+										title: 'Información!',
+										text: 'Correo electrónico no está registrado.',
 										timer: 2000,
 										confirmButtonClass: 'btn btn-primary btn-lg',
 										buttonsStyling: false

@@ -5,7 +5,7 @@ if (!isset($_SESSION["ctc"]["id"])) {
 }
 require_once 'classes/DatabasePDOInstance.function.php';
 $db        = DatabasePDOInstance();
-$data      = $db->getRow("SELECT * FROM trabajadores WHERE id=" . $_SESSION["ctc"]["id"]);
+$data      = $db->getRow("SELECT *, TIMESTAMPDIFF(YEAR,fecha_nacimiento,CURDATE()) AS edad FROM trabajadores WHERE id=" . $_SESSION["ctc"]["id"]);
 $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador =" . $_SESSION['ctc']['id']);
 $experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador = " . $_SESSION['ctc']['id']);
 $educacion = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=".$_SESSION["ctc"]["id"]);
@@ -185,7 +185,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-xs-12 col-md-10 no-padding">
 													<div class="col-xs-4">
 														<select name="" id="dia" class="custom-select form-control">
-															<option value="0">Sel</option>
+															<option value="0">Seleccionar</option>
 															<?php for ($i = 1; $i <= 31; $i++): ?>
 																<option value="<?=$i < 10 ? '0' . $i : $i?>"><?=$i?></option>
 															<?php endfor;?>
@@ -194,7 +194,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 		  											<div class="col-xs-4">
 														<select name="" id="mes" class="custom-select form-control">
-															<option value="0">Sel</option>
+															<option value="0">Seleccionar</option>
 															<option value="01">Ene</option>
 															<option value="02">Feb</option>
 															<option value="03">Mar</option>
@@ -211,7 +211,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</div>
 		  											<div class="col-xs-4">
 														<select name="" id="anio" class="custom-select form-control">
-															<option value="0">Sel</option>
+															<option value="0">Seleccionar</option>
 															<?php for ($i = intval(date('Y')); $i >= 1950; $i--): ?>
 															<option value="<?=$i?>"><?=$i?></option>
 															<?php endfor;?>
@@ -262,7 +262,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 												<div class="col-xs-12 col-md-2 text-center"><label for="numberdni" style="margin-top: 6px;">Número <span style="color: red;">*</span></label></div>
 												<div class="col-xs-12 col-md-4">
-													<input class="form-control" value="<?php echo $data["numero_documento_identificacion"]; ?>" id="numberdni" type="number" onchange="validar(this.id,'num')">
+													<input class="form-control" value="<?php echo $data["numero_documento_identificacion"]; ?>" id="numberdni" type="number" onchange="validar(this.id,'num')" placeholder="Ejemplo: 40598746">
 												</div>
 											</div>
 											<div class="form-group row">
@@ -270,7 +270,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<label for="cuil" style="margin-top: 6px;">Numero de CUIL <span style="color: red;">*</span></label>
 												</div>
 												<div class="col-xs-12 col-md-10">
-                                                    <input type="text" class="form-control" id="cuil" value="<?= $data["cuil"] ?>" onchange="validar(this.id,'num')">
+                                                    <input type="text" class="form-control" id="cuil" value="<?= $data["cuil"] ?>" onchange="validar(this.id,'num')" placeholder="Ejemplo: 15975325864">
 												</div>
 											</div>
 											 <?php //$provincias = $db->getAll("SELECT * FROM provincias")?>
@@ -1110,7 +1110,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $data["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$data[id_pais]") : "Sin especificar"; ?></span><br>
 														<strong>Dirección: </strong> <span id="labelCalle"><?php echo $data["calle"]; ?></span><br>
 														<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo date('d/m/y', strtotime($data["fecha_nacimiento"])); ?></span><br>
-														<strong>Edad: </strong> <span id="edad"><?php echo intval(date('Y')) - intval(date('Y', strtotime($data["fecha_nacimiento"]))) . "años"; ?></span><br>
+														<strong>Edad: </strong> <span id="edad"><?php $data["edad"] . " años"; ?></span><br>
 														<strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $data["correo_electronico"]; ?></span><br>
 														<strong>Telefonos: </strong> <span id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] = !"" ? " / " . $data["telefono_alternativo"] : ''; ?></span><br>
 													</p>
@@ -1480,8 +1480,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										$("#labelTlf").html(data.usuario.telefono + " / " + data.usuario.telefono_alternativo);
 	                                    var fecha = formato(data.usuario.fecha_nacimiento);
 										$("#fecha_nac").html(fecha);
-	                                    var edad = calcularEdad(data.usuario.fecha_nacimiento);
-	                                    $("#edad").html((edad)+"años");
+	                                    var edad = data.usuario.edad;
+	                                    $("#edad").html((edad)+" años");
 
 	                                    if (Object.keys(data.info_extra).length > 0) {
 	                                    	var html = "<p style='margin-left: 50px'><strong>Remuneración pretendida: </strong> $<span id='labelRem'>"+data.info_extra.remuneracion_pret+"</span> <br><strong>Sobre mí: </strong> <span id='labelSobreMi'>"+data.info_extra.sobre_mi+"</span> <br><strong>Disponibilidad: </strong> <span id='labelDisp'>"+data.info_extra.disponibilidad+"</span></p>";

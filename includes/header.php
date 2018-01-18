@@ -176,15 +176,22 @@
 				<?php if($_SESSION["ctc"]["type"] == 2): ?>
 
 						<li class="menuPCTrabajador">
-							<a class="nav-link color-link" href="curriculum.php">
+							<a class="nav-link color-link" href="curriculum.php" style="padding-right: 0px;padding-left: 2px;">
 								Modificar Curriculum
 							</a>
 						</li>
 						<li class="menuPCTrabajador">
-							<a class="nav-link color-link" href="empleos.php">
+							<a class="nav-link color-link" href="empleos.php"  style="padding-right: 0px;padding-left: 2px;">
 								Ver ofertas de empleo
 							</a>
 						</li>
+						<?php if ($_SESSION["ctc"]["pic"] == "avatars/user.png"): ?>
+							<li class="menuPCTrabajador">
+								<a class="nav-link color-link" href="cuenta.php?foto=1"  style="padding-right: 0px;padding-left: 2px;">
+									Mi foto
+								</a>
+							</li>
+						<?php endif ?>
 						
 						<li>
 							<a class="nav-link color-link" href="#" data-toggle="dropdown" aria-expanded="false">

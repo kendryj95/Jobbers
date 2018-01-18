@@ -417,7 +417,7 @@
 						</h4>
 
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" id="cuerpo_de_modal">
                         <?php switch($plan['id_plan']):
                             case 1: ?>
                                 <div class="alert alert-warning">
@@ -1614,7 +1614,7 @@
 
  	
  		function filtrar(valor,columna)
- 		{
+ 		{	   tablaPostulados.ajax.reload();
  			   var table = $('#tablaPostulados').DataTable();
 			   table.columns(columna).search(valor).draw(); 			 
  		}
@@ -1623,6 +1623,7 @@
  		 
  		$(document).ready(function() {
  			//Filtrar salario
+ 			 tablaPostulados.ajax.reload();
  			$('#remuneracion').change( function() {        		 
 
  				$.fn.dataTable.ext.search.push(
@@ -1680,7 +1681,8 @@
 		} );
 
  			//Filtrar la edad
- 			$('#edad').change( function() { 				
+ 			$('#edad').change( function() { 
+ 			 tablaPostulados.ajax.reload();				
  				$.fn.dataTable.ext.search.push(
 		    	function( settings, data, dataIndex ) {
 		    	var min = 0;
@@ -1729,7 +1731,7 @@
 		 		
 
  		function limpiarFiltros()
- 		{  
+ 		{   tablaPostulados.ajax.reload();
  			$("._filtro").prop('selectedIndex', 0);
  			 
  			 var table = $('#tablaPostulados').DataTable();
@@ -1741,6 +1743,11 @@
 		</script>
 
 
+		<script>
+		$( "#modal-postulados" ).mouseenter(function() {
+		  tablaPostulados.ajax.reload();
+		}); 
+		</script>
 
 	</body>
 

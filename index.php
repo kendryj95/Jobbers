@@ -836,7 +836,7 @@ else {*/
 													}
 										?>
 										<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></a>
+											<a href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "MÁS INFO" ?></a>
 										</div>
 									</div>
 								</div>
@@ -969,7 +969,7 @@ else {*/
 												}
 									?>
 									<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-										<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
+										<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "MÁS INFO" ?></button>
 									</div>
 								</div>
 							</div>
@@ -1103,7 +1103,7 @@ else {*/
 											}
 								?>
 								<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
+									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "MÁS INFO" ?></button>
 								</div>
 							</div>
 						</div>
@@ -1235,7 +1235,7 @@ else {*/
 										}
 							?>
 								<div class="col-xs-12" style="padding-left: 0px; margin-top: 5px;"> 
-									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "POSTULARME" ?></button>
+									<button href="empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" class="btn <?= $postular ? "btn-postulado" : "btn-postular" ?> btn-block"><?= $postular ? "POSTULADO &nbsp <i class='fa fa-check'></i>" : "MÁS INFO" ?></button>
 								</div>
 							</div>
 						</div>
