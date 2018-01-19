@@ -130,12 +130,12 @@
 								</div><br>
 								<div class="p-x-2">
 									<div class="row">
-										<div class="col-xs-12">
+										<!-- <div class="col-xs-12">
 											<a href="javascript:void(0)" onClick="Login()" class="btn bg-facebook btn-block label-left m-b-0-25">
 												<span class="btn-label"><i class="ti-facebook"></i></span>
 												Regístrate con Facebook
 											</a>
-										</div>
+										</div> -->
 								
 										<!-- <div class="col-xs-6">
 											<button type="button" class="btn bg-googleplus btn-block label-left m-b-0-25">
@@ -286,19 +286,25 @@
 
 
 			$("#register").click(function() {
+				var $btn = $(this);
 				if($("#email").val() != "" && $("#passw1").val() != "" && $("#passw2").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#userName").val() != "") {
 					if($("#aceptaCondiciones:checked").length > 0) {
 						if(isEmail($("#email").val())) { // Confirma si es un email valido
 							if ($('#email').val().toLowerCase().trim() == $('#confirmEmail').val().toLowerCase().trim()) { // Confirma si los emails coinciden
 								if($("#passw1").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
 									if(($("#passw1").val().length >= 8 && $("#passw1").val().length <= 12)&&($("#passw2").val().length >= 8 && $("#passw2").val().length <= 12  )) { // Confirma si las contraseñas tienen la lomgitud
-										
+
+										$btn.addClass('disabled');
+
 										$.ajax({
 											type: 'POST',
 											url: 'ajax/user.php',
 											data: 'op=2&email=' + $("#email").val() + '&password=' + $("#passw1").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&publicidad=' + $("#aceptaPublicidad:checked").length + '&newsletter=' + $("#aceptaNewsletter:checked").length,
 											dataType: 'json',
 											success: function(data) {
+
+												$btn.removeClass('disabled');
+
 												if(data.status == 1) {
 													swal("EXITO!", "Registrado Satisfactoriamente", "success");
 													$('.form-material')[0].reset();
@@ -310,10 +316,7 @@
 															$(el).removeClass('has-error');
 													});
 
-												} else if(data.status == 0){
-													//console.log("Error al enviar correo electronico");
-												}
-												else {
+												} else if(data.status == 2){
 													swal({
 														title: 'Información!',
 														text: 'Correo electrónico en uso intente de nuevo',
@@ -322,6 +325,14 @@
 														buttonsStyling: false
 													});
 													
+												} else {
+													swal({
+														title: 'ERROR!',
+														text: 'Ha ocurrido un error al registrarse, por favor intentelo de nuevo.',
+														timer: 2500,
+														confirmButtonClass: 'btn btn-primary btn-lg',
+														buttonsStyling: false
+													});
 												}
 											}
 										});

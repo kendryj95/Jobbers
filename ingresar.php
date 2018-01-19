@@ -167,7 +167,9 @@
 		<script>
 			function runScript(e) {
            		if (e.keyCode == 13) {
-					validateForm();
+           			var $btn = $("#login");
+					$btn.addClass('disabled');
+					validateForm($btn);
                		return false;
            		}
 			}
@@ -177,7 +179,8 @@
 			  return regex.test(email);
 			}
 			
-			function validateForm() {
+			function validateForm(btn) {
+				var $btn = btn;
 				if($("#email").val() != "" && $("#passw").val() != "") {
 					if(isEmail($("#email").val())) {
 						$.ajax({
@@ -186,6 +189,9 @@
 							data: 'op=1&email=' + $("#email").val() + '&password=' + $("#passw").val(),
 							dataType: 'json',
 							success: function(data) {
+								
+								$btn.removeClass('disabled');
+
 								if(data.status == 1) {
 									<?php if(isset($_GET["returnUri"])): ?>
 										window.location.assign("<?= urldecode($_GET["returnUri"]) ?>")
@@ -450,7 +456,9 @@
 				}
 			});
 			$("#login").click(function() {
-				validateForm();
+				var $btn = $(this);
+				$btn.addClass('disabled');
+				validateForm($btn);
 			});
 		</script>
 	</body>
