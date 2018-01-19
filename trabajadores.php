@@ -68,35 +68,27 @@ include('includes/filtros_trabajadores.php');
 
         <!-- Header -->
         <?php require_once('includes/header.php'); ?>
-        <div class="site-content bg-white" style="margin-left: 0px;">
+        <div class="site-content" style="margin-left: 0px;">
+
             <!-- Content -->
-            <div class="content-area p-y-1">
+            <div class="container-fluid">
 
-                <div class="container-fluid">
-                   
-                </div>
+            <!--Menu Filters-->
 
-                <div class="container-fluid"> 
-        </div>
+            <?php include('includes/barra_filtros_trabajador.php');?>
  
 <div class="col-md-9" style="padding: 0px;" id="contenedor_publicaciones">
  
     
-  
-  
-   
-
 </div>
     
-    <!--Menu right-->
-
-   <?php include('includes/barra_filtros_trabajador.php');?>
 
 </div>
-
-</div>
+<div class="bg-white">
 <?php require_once('includes/footer.php'); ?>
 </div>
+</div>
+
 </div>
 
 <?php require_once('includes/libs-js.php'); ?>
@@ -133,11 +125,11 @@ function filtro(par,v1,v2)
             trabajador=datos[key]['nombre']+"-"+datos[key]['id'];
             imagen=datos[key]['id_imagen']+"."+datos[key]['extension'];
           
-             info=info+"<div class='col-sm-6' style='word-break: break-all;word-wrap: break-word;margin-top: 10px;'><div class='col-xs-12' style='height: 200px;background-color: #fff;padding-top: 10px;padding-bottom: 10px;'><div class='col-xs-3 text-center'><img class='img-circle' src='img/profile/"+datos[key]['imagen']+"' style='width: 50px;'></div><div class='col-xs-9'><span style='font-size:12px;'><a target='_brank' href='trabajador-detalle.php?t="+trabajador+"'><strong>"+datos[key]['nombre']+"</strong></a></span></br><span>"+datos[key]['pais']+"</span> </div><div class='col-xs-12' style='padding: 0px;padding-top: 15px;border-top: 1px dashed #d1d1d1;margin-top: 15px;'><p style='font-size: 16px;'><img src='img/coins.png' style='width: 20px;height: 20px;margin-right: 5px;'><strong>$ "+datos[key]['remuneracion_pret']+"</strong></p><p style='font-size: 12px;'> "+jQuery.trim(datos[key]['sobre_mi']).substring(0, 100)+"</p><p class='text-center'><a target='_blank' href='trabajador-detalle.php?t="+trabajador+"'> Ver perfil</a></p></div></div></div>"
+             info=info+"<div class='col-md-6 col-xs-12' style='word-break: break-all;word-wrap: break-word;'><div class='col-xs-12' style='height: 200px;background-color: #fff;padding-top: 10px;padding-bottom: 10px; margin-top: 10px;'><div class='col-xs-3 text-center'><img class='img-circle' src='img/profile/"+datos[key]['imagen']+"' style='width: 50px;'></div><div class='col-xs-9'><span style='font-size:12px;'><a target='_brank' href='trabajador-detalle.php?t="+trabajador+"'><strong>"+datos[key]['nombre']+"</strong></a></span></br><span>"+datos[key]['pais']+"</span> </div><div class='col-xs-12' style='padding: 0px;padding-top: 15px;border-top: 1px dashed #d1d1d1;margin-top: 15px;'><p style='font-size: 16px;'><img src='img/coins.png' style='width: 20px;height: 20px;margin-right: 5px;'><strong>$ "+datos[key]['remuneracion_pret']+"</strong></p><p style='font-size: 12px;'> "+jQuery.trim(datos[key]['sobre_mi']).substring(0, 100)+"</p><p class='text-center'><a target='_blank' href='trabajador-detalle.php?t="+trabajador+"'> Ver perfil</a></p></div></div></div>"
                 
             
             }); 
-           $( "#contenedor_publicaciones" ).html(info+'<div class="col-xs-12 text-center " style="padding-top:20px;"><button class="btn btn-xs btn-primary" onClick="filtro(0,'+(v1-10)+',0)">Anterior</button><button class="btn btn-xs btn-primary" onClick="filtro(0,'+(v1+10)+',0)">Siguiente</button></div> ');
+           $( "#contenedor_publicaciones" ).html(info+'<div class="col-xs-12 text-center " style="padding-top:20px; padding-bottom: 20px;"><button class="btn btn-xs btn-primary" onClick="filtro(0,'+(v1-10)+',0)"><i class="fa fa-arrow-left"></i> Anterior</button><button class="btn btn-xs btn-primary" onClick="filtro(0,'+(v1+10)+',0)">Siguiente <i class="fa fa-arrow-right"></i></button></div> ');
 
           });
     } 
