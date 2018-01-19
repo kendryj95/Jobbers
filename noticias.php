@@ -119,22 +119,6 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 <body class="large-sidebar fixed-sidebar fixed-header skin-5">
 	<!-- <div class="wrapper"> -->
 
-		<!-- Sidebar -->
-		<?php if (isset($_SESSION['ctc']) && $_SESSION['ctc']['type'] == 1):
-			require_once ('includes/sidebar.php');
-			?>
-			<style>
-				.site-content{
-					margin-left:220px !important;
-				}
-				@media(max-width: 1024px){
-					.site-content{
-						margin-left: 0px !important;
-					}
-				}
-			</style>
-			<?php endif ?>
-
 		<!-- Sidebar second -->
 		<?php require_once('includes/sidebar-second.php'); ?>
 
@@ -143,14 +127,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 		<div class="site-content bg-white" style="margin-left: 0px;">
 			<!-- Content -->
 			<div class="container-fluid">
-			<?php if ($_SESSION['ctc']['type'] == 1):
-					$grid = "col-md-9";
-					require_once('includes/sidebar.php');
-					else:
-					$grid = "container";
-				?>
-			<?php endif ?>
-				<div class="<?php echo $grid ?>">
+				<div class="container">
 					<div class="row m-b-0 m-md-b-1">
 						<div class="col-md-9">
 							
@@ -207,7 +184,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 											<?php endforeach ?>
 										</div>
 									</div>
-								<?php else: ?>
+									<?php else: ?>
 									<div>
 									<?php 
 										$permalink = urlencode("http://www.jobbersargentina.com/noticias.php?".$_SERVER["QUERY_STRING"]);
@@ -287,7 +264,6 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 									<?php endif ?>
 								<?php endif ?>
-							<?php endif ?>
 						</div>
 						
 						<div class="col-md-3">
