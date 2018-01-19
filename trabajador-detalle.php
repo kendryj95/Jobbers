@@ -151,21 +151,6 @@ $publicaciones = $db->getAll("
     </head>
     <body class="large-sidebar fixed-sidebar fixed-header skin-5">
         <!-- <div class="wrapper" style="background-color: white;"> -->
-            <!-- Sidebar -->
-            <?php if ($_SESSION['ctc']['type'] == 1):
-			require_once ('includes/sidebar.php');
-			?>
-			<style>
-				.site-content{
-					margin-left:220px !important;
-				}
-				@media(max-width: 1024px){
-					.site-content{
-						margin-left: 0px !important;
-					}
-				}
-			</style>
-			<?php endif ?>
 
             <!-- Sidebar second -->
             <?php require_once('includes/sidebar-second.php'); ?>
@@ -173,11 +158,18 @@ $publicaciones = $db->getAll("
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
             
-            <div class="site-content bg-white" style="padding-top: 0px; margin-left: 0px;">
+            <div class="site-content bg-white" style="padding-top: 25px; margin-left: 0px;">
                 <!-- Content -->
-                <div class="content-area p-b-1">
-                    <div class="container-fluid">
-                        <ol class="breadcrumb no-bg m-b-1 m-t-1" style="margin-top: 50px;">
+                <div class="container-fluid">
+                <?php if ($_SESSION['ctc']['type'] == 1):
+ 					$grid = "col-md-9";
+ 					require_once('includes/sidebar.php');
+					else:
+ 					$grid = "container";
+ 				?>
+                <?php endif?>
+                    <div class="<?php echo $grid ?>">
+                        <ol class="breadcrumb no-bg m-b-1 m-t-1" style="margin-top: 20px;">
                             <li class="breadcrumb-item"><a href="./">JOBBERS</a></li>
                             <li class="breadcrumb-item"><a href="trabajadores.php">Trabajadores</a></li>
                             <li class="breadcrumb-item active"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></li>
