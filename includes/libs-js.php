@@ -27,12 +27,12 @@
 	
 	<?php if (!strstr($_SERVER["REQUEST_URI"], "admin/")) { ?>
 		<?php if(isset($_SESSION["ctc"])): ?>
+		<script type="text/javascript" src="../js/app.js"></script>
 		<script type="text/javascript" src="../js/chat.js"></script>
 		<?php endif; ?>
 	<?php } ?>
 
 	<!-- Neptune JS -->
-	<script type="text/javascript" src="../js/app.js"></script>
 	<script type="text/javascript" src="../js/demo.js"></script>
 <?php else: ?>
 	<!-- Vendor JS -->
