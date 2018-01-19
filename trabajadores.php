@@ -2051,7 +2051,7 @@ $contGeneros += $c;
 
                     <div class="col-md-3">
                         <?php if($contAreas > 0 || $filtroArea): ?>
-                            <div class="box bg-white">
+                            <!--<div class="box bg-white">
                                 <div class="box-block clearfix">
                                     <h5 class="pull-xs-left"><i class="ion-ios-list m-sm-r-1"></i> Área de estudio</h5>
                                 </div>
@@ -2084,7 +2084,7 @@ $contGeneros += $c;
                                         <?php endif ?>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div>-->
                         <?php endif ?>
 
                         <?php if($contMomentos > 0 || $filtroMomento): ?>

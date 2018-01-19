@@ -289,9 +289,10 @@
 				if($("#email").val() != "" && $("#passw1").val() != "" && $("#passw2").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#userName").val() != "") {
 					if($("#aceptaCondiciones:checked").length > 0) {
 						if(isEmail($("#email").val())) { // Confirma si es un email valido
-							if ($('#email').val() == $('#confirmEmail').val()) { // Confirma si los emails coinciden
+							if ($('#email').val().toLowerCase().trim() == $('#confirmEmail').val().toLowerCase().trim()) { // Confirma si los emails coinciden
 								if($("#passw1").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
 									if(($("#passw1").val().length >= 8 && $("#passw1").val().length <= 12)&&($("#passw2").val().length >= 8 && $("#passw2").val().length <= 12  )) { // Confirma si las contraseñas tienen la lomgitud
+										
 										$.ajax({
 											type: 'POST',
 											url: 'ajax/user.php',
@@ -299,13 +300,6 @@
 											dataType: 'json',
 											success: function(data) {
 												if(data.status == 1) {
-													/*swal({
-														title: 'Información!',
-														text: 'Para confirmar tu registro, revisa la bandeja de tu correo electronico.',
-														timer: 240000,
-														confirmButtonClass: 'btn btn-primary btn-lg',
-														buttonsStyling: false
-													});*/
 													swal("EXITO!", "Registrado Satisfactoriamente", "success");
 													$('.form-material')[0].reset();
 													setTimeout(function(){
@@ -329,22 +323,9 @@
 													});
 													
 												}
-											} else if(data.status == 0){
-												//console.log("Error al enviar correo electronico");
 											}
-											else {
-												swal({
-													title: 'Información!',
-													text: 'Correo electrónico en uso intente de nuevo',
-													timer: 2500,
-													confirmButtonClass: 'btn btn-primary btn-lg',
-													buttonsStyling: false
-												});
-												
-											}
-
-										}
-									});
+										});
+									}
 								}
 								else {
 									swal({

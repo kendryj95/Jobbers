@@ -119,6 +119,22 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 <body class="large-sidebar fixed-sidebar fixed-header skin-5">
 	<!-- <div class="wrapper"> -->
 
+		<!-- Sidebar -->
+		<?php if (isset($_SESSION['ctc']) && $_SESSION['ctc']['type'] == 1):
+			require_once ('includes/sidebar.php');
+			?>
+			<style>
+				.site-content{
+					margin-left:220px !important;
+				}
+				@media(max-width: 1024px){
+					.site-content{
+						margin-left: 0px !important;
+					}
+				}
+			</style>
+			<?php endif ?>
+
 		<!-- Sidebar second -->
 		<?php require_once('includes/sidebar-second.php'); ?>
 
@@ -234,36 +250,42 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 												<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
 											</div>
 										</div>
-									</div>
-								<?php endif ?>
-							<?php else: ?>
-								<?php if($noticias): ?>
-									<?php $i = 0; ?>
-									<?php foreach($noticias as $n): ?>
-										<div class="col-md-4">
-											<div class="box bg-white post post-3">
-												<div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);"></div>
-												<div class="p-content" style="min-height: 220px;">
-													<h5><a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><?php echo $n["titulo"]; ?></a></h5>
-													<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr($n["descripcion"], 0, 100)."...") : $n["descripcion"]; ?></p>														
-													<p class="small text-uppercase text-muted"><?php echo date('d/m/Y', strtotime($n["fecha_actualizacion"])); ?></p>
-													<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>" class="btn btn-success label-right">Leer más <span class="btn-label"><i class="ti-angle-right"></i></span></a>
-												</div>
-												<div class="p-info clearfix">
-													<div class="pull-xs-right">
-														<a class="text-success" href="#"><i class=" ti-book"></i><?php echo $n["veces_leido"]; ?></a>
+									<?php endif ?>
+								<?php else: ?>
+									<?php if($noticias): ?>
+										<?php $i = 0; ?>
+										<div>
+										<?php foreach($noticias as $n): ?>
+											<div class="col-md-4">
+												<div class="box bg-white post post-3">
+													<div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);">
+														
+													</div>
+													<div class="p-content" style="min-height: 220px;">
+														<a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><h5><?php echo $n["titulo"]; ?></h5></a>
+														<div>
+															<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr(strip_tags($n["descripcion"]), 0, 100)."...") : strip_tags($n["descripcion"]); ?></p> <!-- strip_tags: elimina las etiquetas html de un string -->
+														</div>
+														<p class="small text-uppercase text-muted"><?php echo date('d/m/Y', strtotime($n["fecha_actualizacion"])); ?></p>
+														<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>" class="btn btn-success label-right">Leer más <span class="btn-label"><i class="ti-angle-right"></i></span></a>
+													</div>
+													<div class="p-info clearfix">
+														<div class="pull-xs-right">
+															<a class="text-success" href="#"><i class=" ti-book"></i><?php echo $n["veces_leido"]; ?></a>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>					
-										<?php 
-											$i++;
-											if ($i == 3) {
-												echo "<div class='clearfix'></div>";
-												$i = 0;
-											}
-										?>
-									<?php endforeach ?>
+											<?php 
+												$i++;
+												if ($i == 3) {
+													echo "<div class='clearfix'></div>";
+													$i = 0;
+												}
+											?>
+										<?php endforeach ?>
+										</div>
+									<?php endif ?>
 								<?php endif ?>
 							<?php endif ?>
 						</div>

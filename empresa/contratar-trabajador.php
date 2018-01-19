@@ -123,7 +123,7 @@
 										<div class="form-group row m-b-0">
 											<label class="col-sm-3 col-form-label">Título</label>
 											<div class="col-sm-9">
-												<p class="form-control-static"><a href="../empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>" target="_blank"><?php echo $publicacion["titulo"]; ?></a></p>
+												<p class="form-control-static"><a href="../empleos-detalle.php?a=<?php echo $publicacion["area_amigable"]; ?>&s=<?php echo $publicacion["sector_amigable"]; ?>&p=<?php echo $publicacion["amigable"]; ?>"><?php echo $publicacion["titulo"]; ?></a></p>
 											</div>
 										</div>
 										<div class="form-group row m-b-0">
