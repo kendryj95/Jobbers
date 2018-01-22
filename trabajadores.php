@@ -135,70 +135,15 @@ function filtro(par,v1,v2)
     } 
 $( document ).ready(function() {    
  filtro(1,0,0);
+
+ 
 });
 
-
-/*
-    var limit_ini = 0;
-
-    $(document).ready(function() {
-
-        $('.complete').hide();
-
-        $('.more').on('click',function(){
-            console.log('boton');
-            var btnMore = $(this).find("a").text();
-
-            if (btnMore == 'Leer más...') {
-                $(this).find("a").text('Retraer...');
-            } else {
-                $(this).find("a").text('Leer más...');
-            }
-
-                //$(this).parent().siblings('summary').find('pspan.complete').toggle('slow');
-                    //$(this).closest('span.complete').toggle();
-                    //$('.more').text('Leer más...');
-                //});
-            $(this).parent().find('.complete').toggle('slow');
-        });
-
-        $('.pagination-next').on('click',function(){
-
-            limit_ini += 15;
-
-            $.ajax({
-                url: 'ajax/trabajadores.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {op: 1, limit_ini: limit_ini},
-                success: function(response){
-
-                    var html = "";
-
-                    var json_length = Object.keys(response.trabajador).length;
-
-                    if (json_length > 0) {
-                        response.trabajador.forEach(function(e){
-                            html += e;
-                        });
-                    } else {
-                        $('.pagination-next').remove();
-                    }
-
-
-
-                    $('#box-trab').append(html);
-                },
-                error: function(error){
-                    console.log('Error en el ajax: '+error);
-                }
-            });
-
-
-        });
-
-    });
-*/
+ function limpiar()
+ {
+     $(".control_filtro").val("");
+     filtro(1,0,0);
+ }
 </script>
 </body>
 </html>
