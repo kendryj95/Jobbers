@@ -1,20 +1,24 @@
-<div class="col-sm-3" style="background-color: #fff;padding: 10px;">
+<div class="col-sm-3" style="background-color: #fff;padding: 10px;margin-top: 10px;">
     <div class="text-center" style="border-bottom: 1px dashed #adadad;padding-bottom: 15px;">
         <img src="img/filter.png"></br>
         <span><strong>Encuentra tu Jobber</strong></span></br>
-    </div></br>
+
+    </div>
+    <br/>
+    <a href="empresa/publicaciones.php"><img src="empresa/img/back.png"> Volver</a><a href="#" style="margin-left: 10px;" onClick="limpiar()"><img src="empresa/img/eraser.png" style="padding-right: 5px;">Limpiar filtros</a>
+    <br/> <br/>
     <label><strong>Area de estudio</strong></label></br>
-        <select id="area_estudio" class="form-control" onChange="filtro(1,0,0)">
+        <select id="area_estudio" class="form-control control_filtro" onChange="filtro(1,0,0)">
             <option value="">Seleccionar</option>
             <?php foreach ($datos_area_estudio as $key) {
                 if($key['nombre']!="")
                 {
-                    echo'<option value="'.$key["id_area_estudio"].'">'.$key["nombre"]." ".' ('.$key["cantidad"].')</option>';
+                    echo'<option value="'.$key["id_area_estudio"].'">'.$key["nombre"]." ".' </option>';
                 }
             }?> 
         </select> 
         <label><strong>Edad</strong></label></br>
-        <select onChange="filtro(1,0,0)" id="edad" class="form-control">
+        <select onChange="filtro(1,0,0)" id="edad" class="form-control  control_filtro">
             <option value="">Seleccionar</option>
             <?php
             $dieciocho=0;
@@ -39,10 +43,11 @@
                         $trenta_seis=$trenta_seis+$key['cantidad'];                        
                     }
                 }
-                echo '<option value="1823">De 18 a 23 años ('.$dieciocho.')</option>';
-                echo '<option value="2430">De 24 a 30 años ('.$vente_tres.')</option>';
-                echo '<option value="3136">De 31 a 36 años ('.$trenta_uno.')</option>';
-                echo '<option value="M37">Mayor de 37 años ('.$trenta_seis.')</option>';
+              
+                echo '<option value="1823">De 18 a 23 años  </option>';
+                echo '<option value="2430">De 24 a 30 años  </option>';
+                echo '<option value="3136">De 31 a 36 años  </option>';
+                echo '<option value="M37">Mayor de 37 años  </option>';
             ?>
         </select>
       <!--
@@ -52,41 +57,41 @@
         </select> 
       -->
         <label><strong>Genero</strong></label></br>
-        <select  onChange="filtro(1,0,0)" id="genero" class="form-control">
+        <select  onChange="filtro(1,0,0)" id="genero" class="form-control  control_filtro">
             <option value="">Seleccionar</option>
-            <?php echo"<option value='1'>Masculino (".$datos_sexo[1]['cantidad'].")</option>"?>
-            <?php echo"<option value='2'>Femenino (".$datos_sexo[2]['cantidad'].")</option>"?>
+            <?php echo"<option value='1'>Masculino  </option>"?>
+            <?php echo"<option value='2'>Femenino  </option>"?>
         </select>
           <label><strong>Idioma</strong></label></br>
-        <select  onChange="filtro(1,0,0)" id="idioma" class="form-control">
+        <select  onChange="filtro(1,0,0)" id="idioma" class="form-control  control_filtro">
             <option value="">Seleccionar</option>
             <?php foreach ($datos_idiomas as $key) {
-                echo'<option value="'.$key["id_idioma"].'">'.$key["nombre"]." ".' ('.$key["cantidad"].')</option>';
+                echo'<option value="'.$key["id_idioma"].'">'.$key["nombre"]." ".' </option>';
             }?>
         </select> 
 
         <label><strong>Localidades</strong></label></br>
-        <select onChange="filtro(1,0,0)" id="localidad" class="form-control">
+        <select onChange="filtro(1,0,0)" id="localidad" class="form-control  control_filtro">
             <option value="">Seleccionar</option>
              <?php foreach ($datos_localidad as $key) {
                 if($key['nombre']!="")
                 {
-                    echo'<option value="'.$key["localidad"].'">'.$key["nombre"]." ".' ('.$key["cantidad"].')</option>';
+                    echo'<option value="'.$key["localidad"].'">'.$key["nombre"]." ".' </option>';
                 }
             }?>
         </select>
           <label><strong>Provincias</strong></label></br>
-        <select  onChange="filtro(1,0,0)" id="provincia" class="form-control">
+        <select  onChange="filtro(1,0,0)" id="provincia" class="form-control  control_filtro">
             <option value="">Seleccionar</option> 
             <?php foreach ($datos_provincia as $key) {
                 if($key['nombre']!="")
                 {
-                    echo'<option value="'.$key["provincia"].'">'.$key["nombre"]." ".' ('.$key["cantidad"].')</option>';
+                    echo'<option value="'.$key["provincia"].'">'.$key["nombre"]." ".' </option>';
                 }
             }?>
         </select> 
         <label><strong>Remuneraciones</strong></label></br>
-        <select  onChange="filtro(1,0,0)" id="remuneracion" class="form-control">
+        <select  onChange="filtro(1,0,0)" id="remuneracion" class="form-control  control_filtro">
 
             <option value="">Seleccionar</option>
             <?php 
@@ -105,13 +110,13 @@
                  if($key['nombre']>15000 && $key['nombre']<20001){$v5=$v5+1;}
                  if($key['nombre']>20000){$v6=$v6+1;}
             }?>
-            <option value="02000">$0 - $2000 (<?php echo $v1;?>)</option>
-            <option value="20015000">$2001 - $5000 (<?php echo $v2;?>)</option>
-            <option value="500110000">$5001 - $10000 (<?php echo $v3;?>)</option>
+            <option value="02000">$0 - $2000  </option>
+            <option value="20015000">$2001 - $5000  </option>
+            <option value="500110000">$5001 - $10000  </option>
 
-            <option value="1000115000">$10001 - $15000 (<?php echo $v4;?>)</option>
-            <option value="1500120000">$15001 - $20000 (<?php echo $v5;?>)</option>
-            <option value="M20001">$20001 o más (<?php echo $v6;?>)</option>
+            <option value="1000115000">$10001 - $15000  </option>
+            <option value="1500120000">$15001 - $20000  </option>
+            <option value="M20001">$20001 o más  </option>
         </select>       
 </div>
 
