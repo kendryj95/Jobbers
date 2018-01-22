@@ -254,10 +254,6 @@
 
 											<?php echo $publicacion["descripcion"]; ?>
 											
-											<?php if($publicacion["coordenadas"] != ""): ?>
-												<h6>Ubicación del empleo</h6>
-												<div id="map" style="height: 450px;width: 100%; margin-bottom: 30px;"></div>
-											<?php endif ?>
 											
 											<?php if(!$postulado && $esTrabajador): ?>
 												<?php if(!$contratado): ?>
