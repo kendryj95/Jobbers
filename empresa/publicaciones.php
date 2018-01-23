@@ -1008,7 +1008,59 @@
 					}
 				});
 			}
-			
+
+			function stopStartPub(btn, dataValue){
+				var $btn = $(btn);
+				var $parent = $btn.closest('.acciones-publicacion');
+				idPub = $parent.attr('data-target');
+
+				let mensaje = dataValue == 0 ? "¿Está seguro que desea detener la publicación en Jobbers?" : "¿Está seguro que desea volver a renaudar la publicación en Jobbers?";
+
+				swal({
+				  title: "Aplicar cambio",
+				  text: mensaje,
+				  type: "question",
+				  showCancelButton: true,
+				  confirmButtonColor: "#3FC3EE",
+				  confirmButtonText: "Aceptar",
+				  cancelButtonText: "Cancelar",
+				  closeOnConfirm: false
+				});
+
+				$(".show-swal2.visible .swal2-confirm").attr({'data-action': 'update', 'data-value': dataValue});
+				$(".show-swal2.visible .swal2-confirm").on("click",function() {
+					if($(this).attr('data-action') == 'update') {
+						let dataValue = $(this).attr('data-value');
+						$(this).attr('data-action', '');
+						$(this).attr('data-value', '');
+						
+						$.ajax({
+							url: 'ajax/publicaciones.php',
+							type: 'GET',
+							dataType: 'json',
+							data: {
+								op: 11, 
+								i: idPub, 
+								valor: dataValue
+							},
+							success: function(response){
+								if (response.msg == "OK") {
+									swal("EXITO!", "Su actualización se ha aplicado correctamente.", "success");
+									tablaPublicaciones.ajax.reload();
+								} else {
+									swal("ERROR!", response.msg, "error");
+								}
+							},
+							error: function(error){
+								console.log(error);
+								swal("ERROR!", "Ha ocurrido un error en el proceso. Intentalo de nuevo por favor", "error");
+							}
+						});
+					}
+				});
+			}
+
+				
 			var $tablaPublicaciones = jQuery("#tablaPublicaciones");
 
 			var tablaPublicaciones = $tablaPublicaciones.DataTable( {
@@ -1231,12 +1283,7 @@
 			$('#select2-demo-23').select2({
 				width: '100%'
 			});
-			
-			window.onload = function() {
-				//$("#modal-agregar-publicacion").modal('show');
-				//$("#modal-modificar-publicacion").modal('show');
-			};
-			
+
 			$("#modal-agregar-publicacion-enviar-form").click(function() {
 				var idArea = $("#select2-demo-1").val();
 				var idSector = $("#select2-demo-2").val();
