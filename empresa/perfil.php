@@ -100,7 +100,7 @@
 
 			<div class="site-content" style="margin-left: 0px;">
 				<!-- Content -->
-				<?php if ($_SESSION['ctc']['type'] == 1):
+				<?php if (isset($_SESSION['ctc']) && $_SESSION['ctc']['type'] == 1):
 					$grid = "col-md-9";
 					require_once('../includes/sidebar.php');
 					else:
@@ -437,7 +437,14 @@
 			activities.forEach(function(a) {
 				act.push({value: a.id, text: a.nombre});
 			});
-			$(document).ready(function(){				
+			$(document).ready(function(){
+
+				/* Preloader */
+				setTimeout(function() {
+					$('.preloader').fadeOut();
+				}, 500);
+
+							
 				$.fn.editableform.buttons = 
 				'<button type="submit" class="btn btn-primary editable-submit waves-effect waves-light"><i class="ti-check"></i></button>' +
 				'<button type="button" class="btn editable-cancel btn-secondary waves-effect"><i class="ti-close"></i></button>';
