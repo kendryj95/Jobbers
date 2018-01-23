@@ -1009,12 +1009,10 @@
 				});
 			}
 
-			function stopStartPub(btn){
+			function stopStartPub(btn, dataValue){
 				var $btn = $(btn);
-				var dataValue = $btn.attr('data-value');
 				var $parent = $btn.closest('.acciones-publicacion');
 				idPub = $parent.attr('data-target');
-				console.log("dataValue", dataValue, "idPub", idPub);
 
 				let mensaje = dataValue == 0 ? "¿Está seguro que desea detener la publicación en Jobbers?" : "¿Está seguro que desea volver a renaudar la publicación en Jobbers?";
 
@@ -1029,11 +1027,13 @@
 				  closeOnConfirm: false
 				});
 
-				$(".show-swal2.visible .swal2-confirm").attr('data-action', 'update');
-				$(".show-swal2.visible .swal2-confirm").click(function() {
+				$(".show-swal2.visible .swal2-confirm").attr({'data-action': 'update', 'data-value': dataValue});
+				$(".show-swal2.visible .swal2-confirm").on("click",function() {
 					if($(this).attr('data-action') == 'update') {
+						let dataValue = $(this).attr('data-value');
 						$(this).attr('data-action', '');
-
+						$(this).attr('data-value', '');
+						
 						$.ajax({
 							url: 'ajax/publicaciones.php',
 							type: 'GET',

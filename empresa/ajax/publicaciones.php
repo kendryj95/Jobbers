@@ -287,7 +287,7 @@
                                 	}
                                 }
                                 
-                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this)" data-value="0"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this)" data-value="1"><span class="ti-control-play"></span></button>';
+                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
 
                                 $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> ' . $startStopPub . '</div>' : '
                                 	<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> 
@@ -319,7 +319,7 @@
                                 	}
                                 }
 
-                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this)" data-value="0"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this)" data-value="1"><span class="ti-control-play"></span></button>';
+                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
 
                                 $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> ' . $startStopPub . '</div>' : '
                                 	<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> 
@@ -351,7 +351,7 @@
                                 	}
                                 }
 
-                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this)" data-value="0"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this)" data-value="1"><span class="ti-control-play"></span></button>';
+                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
 
                                 $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> ' . $startStopPub . '</div>' : '
                                 	<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> 
@@ -384,7 +384,7 @@
                             		}
                             	}
 
-                            	$startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this)" data-value="0"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this)" data-value="1"><span class="ti-control-play"></span></button>';
+                            	$startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
 
                             	$accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> ' . $startStopPub . '</div>' : '
                             		<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> 
@@ -677,8 +677,8 @@
 				$db->beginTransaction();
 				$estatus = $_REQUEST["valor"];
 
-				echo "UPDATE publicaciones SET estatus=$estatus WHERE id=".$id;
-				exit;
+				/*echo "UPDATE publicaciones SET estatus=$estatus WHERE id=".$id;
+				exit;*/
 
 				try{
 					if($id) {
