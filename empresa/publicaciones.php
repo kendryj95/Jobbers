@@ -256,7 +256,7 @@
 									<label for="modal-agregar-publicacion-ubicacion">Escribe la ubicación</label>
 									<input type="text" class="form-control controls" id="modal-agregar-publicacion-ubicacion" placeholder="">
 								</div>
-								<div id="map" style="height: 250px;width: 100%;"></div>
+								<div id="map" style="height: 250px;width: 100%;display: none;"></div>
 							</form>
 						  </div> 
 						</div>
