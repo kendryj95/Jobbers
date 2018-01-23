@@ -196,9 +196,6 @@
 														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
 													</li>													
 													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
-													</li>
-													<li>
 														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
 													</li>
 												</ul>
@@ -233,9 +230,6 @@
 													<li>
 														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
 													</li>													
-													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
-													</li>
 													<li>
 														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
 													</li>
@@ -272,9 +266,6 @@
 														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
 													</li>													
 													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
-													</li>
-													<li>
 														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
 													</li>
 												</ul>
@@ -309,9 +300,6 @@
 													<li>
 														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
 													</li>													
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
-													</li>
 													<li>
 														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
 													</li>

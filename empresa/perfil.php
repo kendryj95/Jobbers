@@ -113,7 +113,7 @@
 						<div class="profile-header-counters clearfix">
 							<div class="container-fluid">
 								<div class="pull-right">
-									<a href="<?php echo $empresa == 1 ? 'publicaciones.php' : 'javascript:void(0)'; ?>" class="text-black">
+									<a href="<?php echo $empresa == 1 ? 'publicaciones.php' : 'javascript:void(0)'; ?>" class="text-black block-pub">
 										<h5 class="font-weight-bold"><?php echo $cantidadPublicaciones; ?></h5>
 										<span class="text-muted">Publicaciones</span>
 									</a>
@@ -125,8 +125,8 @@
 						<div class="row">
 							<div class="col-sm-5 col-md-5">
 								<div class="card profile-card">
-									<div class="profile-avatar" style="text-align: center;">
-										<img src="img/<?php echo $foto; ?>" alt="" style="max-width: 150px;margin-top: 20px;">
+									<div class="profile-avatar" style="text-align: center; margin-top: 66px;">
+										<img src="img/<?php echo $foto; ?>" alt="" style="max-width: 150px;">
 										<br>
 										<?php if($empresa == 1): ?>
 											<a href="javascript:void(0)" data-toggle="modal" data-target="#pic" title="cambiar foto de perfil">Cambiar foto</a>
