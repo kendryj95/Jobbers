@@ -365,6 +365,10 @@
 					$("#optionsList").hide();
 					$("#containerTerminos").show();
 				});
+
+				setTimeout(function() {
+					$('.preloader').fadeOut();
+				}, 500);
 				
 				$("#saveRedes").click(function() {
 					var $btn = $(this);

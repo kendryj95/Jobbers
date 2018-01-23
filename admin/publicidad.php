@@ -49,8 +49,8 @@
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 		<div class="wrapper">
 
-			<!-- Preloader 
-			<div class="preloader"></div>-->
+			 <!-- Preloader  -->
+			<div class="preloader"></div>
 
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>
@@ -234,6 +234,10 @@
 			var idNoticia = 0;
 			$(document).ready(function(){
 				var idPub = 0;
+
+				setTimeout(function() {
+					$('.preloader').fadeOut();
+				}, 500);
 				
 				$("input[type=radio][name=radioOpcion]").change(function() {
 					$("#containerVideo").hide();

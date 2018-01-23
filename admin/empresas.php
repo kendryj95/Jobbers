@@ -162,6 +162,10 @@
 			var tablaPublicaciones='';
 			$(document).ready(function(){
 				var idPub = 0;
+
+				setTimeout(function() {
+					$('.preloader').fadeOut();
+				}, 500);
 				
 				$tablaPublicaciones = jQuery("#tablaPublicaciones");
 				tablaPublicaciones = $tablaPublicaciones.DataTable( {
