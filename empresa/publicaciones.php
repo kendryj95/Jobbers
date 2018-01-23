@@ -60,7 +60,10 @@
 		<title>JOBBERS - Publicaciones</title>
 		<?php require_once('../includes/libs-css.php'); ?> 
 
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/datatables.min.css"/>
+		<link rel="stylesheet" href="../vendor/DataTables/css/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" href="../vendor/DataTables/Responsive/css/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.dataTables.min.css">
+		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css">
 		
 		<link rel="stylesheet" href="../vendor/select2/dist/css/select2.min.css">
 		<link rel="stylesheet" href="../vendor/dropify/dist/css/dropify.min.css">
@@ -94,8 +97,8 @@
 
 		<div class="wrapper">
 
-			<!-- Preloader 
-			<div class="preloader"></div>-->
+			<!-- Preloader -->
+			<div class="preloader"></div>
 
 			<!-- Sidebar -->
 			<?php //require_once('../includes/sidebar.php'); ?>
@@ -122,12 +125,9 @@
 							<div class="mb-10">
 								<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
 								
-								<?php if($_SESSION["ctc"]["plan"]["id_plan"] == 4): ?>
-									<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion-especial"> Agregar/modificar publicación especial</a>
-								<?php endif ?>
 							</div>
 							<div class="table-responsive">
-								<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
+								<table class="table table-striped table-bordered dt-responsive nowrap dataTable" id="tablaPublicaciones">
 									<thead>
 										<tr>
 											<th>#</th>
@@ -263,60 +263,6 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" id="modal-agregar-publicacion-enviar-form">Aceptar</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div id="modal-agregar-publicacion-especial" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title">Agregar/Modificar publicación especial</h4>
-					</div>
-					<div class="modal-body">
-						<h6 class="m-t-2">Qué desea agregar?</h6>
-						<label class="custom-control custom-radio">
-							<input id="radio1" name="opcion" class="custom-control-input" type="radio" value="1">
-							<span class="custom-control-indicator"></span>
-							<span class="custom-control-description">Un producto de venta</span>
-						</label>
-						<label class="custom-control custom-radio">
-							<input id="radio2" name="opcion" class="custom-control-input" type="radio" value="2">
-							<span class="custom-control-indicator"></span>
-							<span class="custom-control-description">Un video</span>
-						</label>
-						<div id="venta" style="display: none;">
-							<form method="POST" id="upload">
-								<div class="form-group">
-									<label for="producto">Nombre del producto</label>
-									<input class="form-control" id="producto" name="titulo" placeholder="Nombre" type="text">
-								</div>
-								<div class="form-group">
-									<label for="descripcionProducto">Descripción</label>
-									<textarea class="form-control" id="descripcionProducto" name="descripcion" rows="3"></textarea>
-								</div>
-								<h6 class="m-t-2">Agrega una foto</h6>
-								<input class="dropify" name="file" id="file" type="file">
-							</form>
-						</div>
-						<div id="video" style="display: none;">
-							<div class="form-group">
-								<label for="tituloVideo">Título</label>
-								<input class="form-control" id="tituloVideo" placeholder="Título" type="text">
-							</div>
-							<div class="form-group">
-								<label for="urlVideo">Enlace del video</label>
-								<input class="form-control" id="urlVideo" placeholder="Ejemplo: https://www.ejemplo.com" type="url">
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" id="agregar-publicacion-especial" data-target="1">Aceptar</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 					</div>
 				</div>
@@ -922,193 +868,6 @@
 				}
 			});
 			
-			$("#agregar-publicacion-especial").click(function() {
-				if(parseInt($(this).attr("data-target")) == 1) {
-					if($("input[type=radio][name=opcion]:checked").val() == 1) {
-						if($("#producto").val() != "" && $("#descripcionProducto").val() != "" && $("#file")[0].files.length > 0) {
-							$("#upload").attr("action", "ajax/publicaciones.php?op=7");
-							var options={
-								url     : $("#upload").attr("action"),
-								success : function(response,status) {
-									var data = JSON.parse(response);
-									if(parseInt(data.status) == 1) {
-										$('#modal-agregar-publicacion-especial').modal("hide");
-									}
-									else {
-										swal({
-											title: 'Información!',
-											text: 'Ocurrio un error al subir la foto.',
-											timer: 2000,
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-									}
-								}
-							};
-							$("#upload").ajaxSubmit(options);
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'Todos los campos son obligatorios.',
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
-					}
-					else {
-						if($("#tituloVideo").val() != "" && $("#urlVideo").val()) {
-							$.ajax({
-								type: 'POST',
-								url: 'ajax/publicaciones.php',
-								data: 'op=7&video=1&titulo=' + $("#tituloVideo").val() + '&url=' + $("#urlVideo").val(),
-								dataType: 'json',
-								success: function(data) {
-									if(parseInt(data.status) == 1) {
-										swal({
-											title: 'Información!',
-											text: 'Publicación agregrada exitosamente.',
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-									}
-									else if(parseInt(data.status) == 2){
-										swal({
-											title: 'Información!',
-											text: 'Error al guardar la publicacion',
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-									} else {
-										swal({
-											title: 'ERROR!',
-											text: 'Ah ocurrido un error de comunicación con el servidor, por favor verifique su conexión a internet e intente de nuevo.',
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-									}
-								},
-								error: function(error){
-									swal("ERROR!", "Ha ocurrido un error, intentelo de nuevo.","error");
-								}
-							});
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'Todos los campos son obligatorios.',
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
-					}
-				}
-				else {
-					if($("input[type=radio][name=opcion]:checked").val() == 1) {
-						if($("#producto").val() != "" && $("#descripcionProducto").val() != "" && $("#file")[0].files.length > 0) {
-							$("#upload").attr("action", "ajax/publicaciones.php?op=7&edit=1");
-							var options={
-								url     : $("#upload").attr("action"),
-								success : function(response,status) {
-									var data = JSON.parse(response);
-									if(parseInt(data.status) == 1) {
-										$('#modal-agregar-publicacion-especial').modal("hide");
-									}
-									else {
-										swal({
-											title: 'Información!',
-											text: 'Ocurrio un error al subir la foto.',
-											timer: 2000,
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-									}
-								}
-							};
-							$("#upload").ajaxSubmit(options);
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'Todos los campos son obligatorios.',
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
-					}
-					else {
-						if($("#tituloVideo").val() != "" && $("#urlVideo").val()) {
-							$.ajax({
-								type: 'POST',
-								url: 'ajax/publicaciones.php',
-								data: 'op=7&video=1&edit=1&titulo=' + $("#tituloVideo").val() + '&url=' + $("#urlVideo").val(),
-								dataType: 'json',
-								success: function(data) {
-									if(parseInt(data.status) == 1) {
-										swal({
-											title: 'Información!',
-											text: 'Publicación agregrada exitosamente.',
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-									}
-									else {
-										swal({
-											title: 'Información!',
-											text: 'Error al guardar la publicacion',
-											confirmButtonClass: 'btn btn-primary btn-lg',
-											buttonsStyling: false
-										});
-									}
-								}
-							});
-						}
-						else {
-							swal({
-								title: 'Información!',
-								text: 'Todos los campos son obligatorios.',
-								confirmButtonClass: 'btn btn-primary btn-lg',
-								buttonsStyling: false
-							});
-						}
-					}
-				}
-			});
-			
-			$('#modal-agregar-publicacion-especial').on('show.bs.modal', function (e) {
-				$.ajax({
-					type: 'POST',
-					url: 'ajax/publicaciones.php',
-					data: 'op=8',
-					dataType: 'json',
-					success: function(data) {
-						if(data.msg == "OK") {
-							if(parseInt(data.info.tipo) == 1) {
-								$("#radio1").click();
-								$("#producto").val(data.info.titulo);
-								$("#descripcionProducto").val(data.info.descripcion);
-							}
-							else {
-								$("#radio2").click();
-								$("#titulolVideo").val(data.info.titulo);
-								$("#urlVideo").val(data.info.enlace);
-							}
-							$("#agregar-publicacion-especial").attr("data-target", 2);
-						}
-					}
-				});
-			});
-			
-			$('#modal-agregar-publicacion-especial').on('hide.bs.modal', function (e) {
-				$("#producto").val("");
-				$("#descripcionProducto").val("");
-				$("#titulolVideo").val("");
-				$("#urlVideo").val("");
-				$("#agregar-publicacion-especial").attr("data-target", 1);
-				$("#video").css("display", "none");
-				$("#venta").css("display", "none");
-			});
-			
 			function modificarPublicacion(btn) {
 				var $btn = $(btn);
 				var $parent = $btn.closest('.acciones-publicacion');
@@ -1249,7 +1008,59 @@
 					}
 				});
 			}
-			
+
+			function stopStartPub(btn, dataValue){
+				var $btn = $(btn);
+				var $parent = $btn.closest('.acciones-publicacion');
+				idPub = $parent.attr('data-target');
+
+				let mensaje = dataValue == 0 ? "¿Está seguro que desea detener la publicación en Jobbers?" : "¿Está seguro que desea volver a renaudar la publicación en Jobbers?";
+
+				swal({
+				  title: "Aplicar cambio",
+				  text: mensaje,
+				  type: "question",
+				  showCancelButton: true,
+				  confirmButtonColor: "#3FC3EE",
+				  confirmButtonText: "Aceptar",
+				  cancelButtonText: "Cancelar",
+				  closeOnConfirm: false
+				});
+
+				$(".show-swal2.visible .swal2-confirm").attr({'data-action': 'update', 'data-value': dataValue});
+				$(".show-swal2.visible .swal2-confirm").on("click",function() {
+					if($(this).attr('data-action') == 'update') {
+						let dataValue = $(this).attr('data-value');
+						$(this).attr('data-action', '');
+						$(this).attr('data-value', '');
+						
+						$.ajax({
+							url: 'ajax/publicaciones.php',
+							type: 'GET',
+							dataType: 'json',
+							data: {
+								op: 11, 
+								i: idPub, 
+								valor: dataValue
+							},
+							success: function(response){
+								if (response.msg == "OK") {
+									swal("EXITO!", "Su actualización se ha aplicado correctamente.", "success");
+									tablaPublicaciones.ajax.reload();
+								} else {
+									swal("ERROR!", response.msg, "error");
+								}
+							},
+							error: function(error){
+								console.log(error);
+								swal("ERROR!", "Ha ocurrido un error en el proceso. Intentalo de nuevo por favor", "error");
+							}
+						});
+					}
+				});
+			}
+
+				
 			var $tablaPublicaciones = jQuery("#tablaPublicaciones");
 
 			var tablaPublicaciones = $tablaPublicaciones.DataTable( {
@@ -1472,12 +1283,7 @@
 			$('#select2-demo-23').select2({
 				width: '100%'
 			});
-			
-			window.onload = function() {
-				//$("#modal-agregar-publicacion").modal('show');
-				//$("#modal-modificar-publicacion").modal('show');
-			};
-			
+
 			$("#modal-agregar-publicacion-enviar-form").click(function() {
 				var idArea = $("#select2-demo-1").val();
 				var idSector = $("#select2-demo-2").val();

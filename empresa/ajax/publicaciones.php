@@ -11,6 +11,7 @@
 	define('CARGAR_ESPECIAL', 8);
 	define('VALIDAR_PUB', 9);
 	define('RENOVAR_PUB', 10);
+	define('DETENER_RENAUDAR', 11);
 
 	require_once('../../classes/DatabasePDOInstance.function.php');
 	require_once('../../slug.function.php');
@@ -285,7 +286,12 @@
                                 		$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
                                 	}
                                 }
-                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
+                                
+                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
+
+                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> ' . $startStopPub . '</div>' : '
+                                	<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> 
+                                	<a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
 
                                 $caducada = $timestamp_today <= $timestamp_final ? '' : '<br><span class="label label-danger">OFERTA CADUCADA</span>';
 
@@ -313,7 +319,11 @@
                                 	}
                                 }
 
-                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
+                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
+
+                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> ' . $startStopPub . '</div>' : '
+                                	<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> 
+                                	<a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
 
                                 $caducada = $timestamp_today <= $timestamp_final ? '' : '<br><span class="label label-danger">OFERTA CADUCADA</span>';
 
@@ -341,7 +351,11 @@
                                 	}
                                 }
 
-                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
+                                $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
+
+                                $accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> ' . $startStopPub . '</div>' : '
+                                	<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> 
+                                	<a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
 
                                 $caducada = $timestamp_today <= $timestamp_final ? '' : '<br><span class="label label-danger">OFERTA CADUCADA</span>';
 
@@ -370,8 +384,10 @@
                             		}
                             	}
 
-                            	$accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>' : '
-                            		<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> 
+                            	$startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
+
+                            	$accion = $timestamp_today <= $timestamp_final ? '<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> <a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar publicación"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> ' . $startStopPub . '</div>' : '
+                            		<div class="acciones-publicacion btn-group" role="group" data-target="' . $pub["id"] . '"> 
                             		<a class="accion-publicacion btn btn-success waves-effect waves-light" title="Previsualizar publicación" href="../empleos-detalle.php?a=' . $pub["area_amigable"] . '&s=' . $pub["sector_amigable"] . '&p=' . $pub["amigable"] . '"><span class="ti-eye"></span></a> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="renovarPublicacion(this);" title="Renovar publicación"><span class="ti-reload"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar publicación" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>';
 
                             	$caducada = $timestamp_today <= $timestamp_final ? '' : '<br><span class="label label-danger">OFERTA CADUCADA</span>';
@@ -655,6 +671,33 @@
 						)
 					);
 				}
+				break;
+			case DETENER_RENAUDAR:
+				$id = isset($_REQUEST["i"]) ? json_decode($_REQUEST["i"], true) : false;
+				$db->beginTransaction();
+				$estatus = $_REQUEST["valor"];
+
+				/*echo "UPDATE publicaciones SET estatus=$estatus WHERE id=".$id;
+				exit;*/
+
+				try{
+					if($id) {
+						$db->query("UPDATE publicaciones SET estatus=$estatus WHERE id=".$id);
+						$db->commitTransaction();
+						echo json_encode(array(
+							"msg" => "OK"
+						));
+					}
+				}catch(Exception $e){
+					$db->rollBackTransaction();
+					echo json_encode(
+						array(
+							"msg" => "Ah ocurrido un error de comunicación con el servidor, por favor verifique su conexión a internet e intente de nuevo.",
+							"console" => $e->getMessage()
+						)
+					);
+				}
+				break;	
 				
 		}
 	}

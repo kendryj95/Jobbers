@@ -109,11 +109,6 @@
 					?>
 
 						<li class="menuPCEmpresa">
-							<a class="nav-link color-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>promociones.php">
-								Promociones
-							</a>
-						</li>
-						<li class="menuPCEmpresa">
 							<?php if($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
 							<a class="nav-link color-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
 								Ver jobbers
@@ -220,12 +215,6 @@
 									</li>
 
 									<li class="dropdown-item">
-										<a href="promociones.php">
-											<i class="ti-medall m-r-0-5"></i> Promociones
-										</a>
-									</li>
-
-									<li class="dropdown-item">
 										<a href="postulaciones.php">
 											<i class="ti-check-box m-r-0-5"></i> Ver postulaciones realizadas
 										</a>
@@ -317,9 +306,6 @@
 											Menu
 										</a>
 										<div class="dropdown-menu animated flipInY">
-											<a class="dropdown-item" href="promociones.php">
-												Promociones
-											</a>
 											<a class="dropdown-item" href="empleos.php">Ver ofertas de empleo</a>
 										</div>
 									</li>
@@ -346,9 +332,6 @@
 													Menu
 												</a>
 												<div class="dropdown-menu animated flipInY">
-													<a class="dropdown-item" href="promociones.php">
-														Promociones
-													</a>
 													<a class="dropdown-item" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>trabajadores.php">Ver jobbers</a>
 												</div>
 											</li>
