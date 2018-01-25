@@ -80,13 +80,13 @@
 				else {
 					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores'");
 					$uid = $db->getOne("SELECT valor FROM uid");
-					$db->query("INSERT INTO trabajadores (id, uid, id_imagen, id_sexo, id_estado_civil, id_tipo_documento_identificacion, id_pais, provincia, localidad, calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion, fecha_nacimiento, telefono, telefono_alternativo, clave, correo_electronico, fecha_creacion, fecha_actualizacion, publicidad, newsletter) VALUES ('$id', '$uid', '0', '', '', '', '', '', '', '', '', '$_REQUEST[name]', '$_REQUEST[lastName]', '', NULL, '', '', '".md5($_REQUEST["password"])."', '".strtolower($_REQUEST['email'])."', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[publicidad]', '$_REQUEST[newsletter]')");
+					$db->query("INSERT INTO trabajadores (id, uid, id_imagen, id_sexo, id_estado_civil, id_tipo_documento_identificacion, id_pais, provincia, localidad, calle, id_metodo_acceso, nombres, apellidos, numero_documento_identificacion, fecha_nacimiento, telefono, telefono_alternativo, clave, correo_electronico, fecha_creacion, fecha_actualizacion, publicidad, newsletter) VALUES ('$id', '$uid', '0', '', '', '', '', '', '', '', '', '".ucwords(strtolower($_REQUEST["name"]))."', '".ucwords(strtolower($_REQUEST["lastName"]))."', '', NULL, '', '', '".md5($_REQUEST["password"])."', '".strtolower($_REQUEST['email'])."', '".date("Y-m-d h:i:s")."', '".date("Y-m-d h:i:s")."', '$_REQUEST[publicidad]', '$_REQUEST[newsletter]')");
 
 					$db->query("UPDATE uid SET valor = (valor + 1) WHERE id = 1");
 					$_SESSION["ctc"]["id"] = $id;
 					$_SESSION["ctc"]["uid"] = $uid;
-					$_SESSION["ctc"]["name"] = explode(" ",$_REQUEST["name"])[0];
-					$_SESSION["ctc"]["lastName"] = explode(" ",$_REQUEST["lastName"])[0];
+					$_SESSION["ctc"]["name"] = explode(" ",ucwords(strtolower($_REQUEST["name"])))[0];
+					$_SESSION["ctc"]["lastName"] = explode(" ",ucwords(strtolower($_REQUEST["lastName"])))[0];
 					$_SESSION["ctc"]["email"] = $_REQUEST["email"];
 					$_SESSION["ctc"]["type"] = 2;
 					$_SESSION["ctc"]["pic"] = 'avatars/user.png';
