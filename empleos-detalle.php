@@ -411,7 +411,7 @@
 			$(function() {
 				
 				<?php if($publicacion["coordenadas"] != ""): ?>
-					initMap();
+					//initMap();
 				<?php endif ?>
 				
 				$("#socialLinks .btn").click(function(){

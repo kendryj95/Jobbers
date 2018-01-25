@@ -220,12 +220,6 @@
 										</a>
 									</li>
 
-									<li class="dropdown-item">
-										<a href="publicaciones.php">
-											<i class="ti-clipboard  m-r-0-5"></i> Mis servicios free lance
-										</a>
-									</li>
-									
 									<li class="divider" role="separator"></li>
 
 									<li class="dropdown-item text-center">

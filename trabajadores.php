@@ -77,7 +77,7 @@ include('includes/filtros_trabajadores.php');
 
             <?php include('includes/barra_filtros_trabajador.php');?>
  
-<div class="col-md-9" style="padding: 0px;" id="contenedor_publicaciones">
+<div class="col-sm-9" style="padding: 0px;" id="contenedor_publicaciones">
  
     
 </div>

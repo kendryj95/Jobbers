@@ -109,10 +109,7 @@
 										<li>
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Filtros Personalizados.</span>
 										</li>
-										
-										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Opcion de publicar un producto de venta o video institucional.</span>
-										</li>
+									
 										<li>
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">CHAT INTERNO CON CANDIDATOS.</span>
 										</li>
@@ -159,9 +156,6 @@
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Filtros Personalizados.</span>
 										</li>
 										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Opcion de publicar un producto de venta o video institucional.</span>
-										</li>
-										<li>
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">CHAT INTERNO CON CANDIDATOS.</span>
 										</li>
 									</ul>
@@ -205,10 +199,6 @@
 										</li>
 										<li>
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Filtros Personalizados.</span>
-										</li>
-				
-										<li>
-											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Opcion de publicar un producto de venta o video institucional.</span>
 										</li>
 										<li>
 											<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">CHAT INTERNO CON CANDIDATOS.</span>
@@ -256,10 +246,6 @@
 										<li>
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Filtros Personalizados.</span>
 										</li>
-										<li>
-											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Opcion de publicar un producto de venta o video institucional.</span>
-										</li>
-										
 										<li>
 											<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">CHAT INTERNO CON CANDIDATOS.</span>
 										</li>

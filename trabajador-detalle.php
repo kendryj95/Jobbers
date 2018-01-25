@@ -67,33 +67,6 @@ if (!$trabajador["imagen"]) {
     $trabajador["imagen"] = "avatars/user.png";
 }
 
-$empleos = $db->getAll("
-        SELECT publicaciones.titulo, empresas_contrataciones.*, empresas.nombre AS nombre_empresa, areas_sectores.nombre AS nombre_sector, areas.nombre AS nombre_area
-        FROM empresas_contrataciones
-        INNER JOIN empresas ON empresas.id=empresas_contrataciones.id_empresa
-        INNER JOIN publicaciones ON publicaciones.id=empresas_contrataciones.id_publicacion
-        INNER JOIN publicaciones_sectores ON publicaciones_sectores.id_publicacion=publicaciones.id
-        INNER JOIN areas_sectores ON areas_sectores.id=publicaciones_sectores.id_sector
-        INNER JOIN areas ON areas.id=areas_sectores.id_area
-        WHERE empresas_contrataciones.id_trabajador=$t
-    ");
-
-/*$empresas =  $db->getAll("
-SELECT empresas.id, empresas.nombre AS nombre_empresa,
-CONCAT(
-imagenes.directorio,
-'/',
-imagenes.nombre,
-'.',
-imagenes.extension
-) AS imagen,
-actividades_empresa.nombre AS actividad
-FROM empresas_contrataciones
-INNER JOIN empresas ON empresas.id=empresas_contrataciones.id_empresa
-LEFT JOIN imagenes ON imagenes.id=empresas.id_imagen
-LEFT JOIN actividades_empresa ON actividades_empresa.id=empresas.id_actividad
-WHERE empresas_contrataciones.id_trabajador=$t GROUP BY empresas.id
-");*/
 $uid      = $db->getOne("SELECT uid FROM trabajadores WHERE id=$t");
 $empresas = $db->getAll("
         SELECT empresas.id, empresas.nombre AS nombre_empresa,
@@ -113,16 +86,6 @@ $empresas = $db->getAll("
 
     ");
 
-$publicaciones = $db->getAll("
-        SELECT
-            trabajadores_publicaciones.*,
-            areas_sectores.nombre,
-            areas_sectores.amigable AS sector_amigable
-        FROM trabajadores_publicaciones
-        INNER JOIN trabajadores_areas_sectores ON trabajadores_areas_sectores.id_publicacion=trabajadores_publicaciones.id
-        INNER JOIN areas_sectores ON areas_sectores.id=trabajadores_areas_sectores.id_sector
-        WHERE trabajadores_publicaciones.id_trabajador=$t"
-);
 
 ?>
 
@@ -151,21 +114,6 @@ $publicaciones = $db->getAll("
     </head>
     <body class="large-sidebar fixed-sidebar fixed-header skin-5">
         <!-- <div class="wrapper" style="background-color: white;"> -->
-            <!-- Sidebar -->
-            <?php if ($_SESSION['ctc']['type'] == 1):
-			require_once ('includes/sidebar.php');
-			?>
-			<style>
-				.site-content{
-					margin-left:220px !important;
-				}
-				@media(max-width: 1024px){
-					.site-content{
-						margin-left: 0px !important;
-					}
-				}
-			</style>
-			<?php endif ?>
 
             <!-- Sidebar second -->
             <?php require_once('includes/sidebar-second.php'); ?>
@@ -173,11 +121,18 @@ $publicaciones = $db->getAll("
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
             
-            <div class="site-content bg-white" style="padding-top: 0px; margin-left: 0px;">
+            <div class="site-content bg-white" style="padding-top: 25px; margin-left: 0px;">
                 <!-- Content -->
-                <div class="content-area p-b-1">
-                    <div class="container-fluid">
-                        <ol class="breadcrumb no-bg m-b-1 m-t-1" style="margin-top: 50px;">
+                <div class="container-fluid">
+                <?php if ($_SESSION['ctc']['type'] == 1):
+ 					$grid = "col-md-9";
+ 					require_once('includes/sidebar.php');
+					else:
+ 					$grid = "container";
+ 				?>
+                <?php endif?>
+                    <div class="<?php echo $grid ?>">
+                        <ol class="breadcrumb no-bg m-b-1 m-t-1" style="margin-top: 20px;">
                             <li class="breadcrumb-item"><a href="./">JOBBERS</a></li>
                             <li class="breadcrumb-item"><a href="trabajadores.php">Trabajadores</a></li>
                             <li class="breadcrumb-item active"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></li>
@@ -398,25 +353,8 @@ $publicaciones = $db->getAll("
                                             <a class="nav-link active" data-toggle="tab" href="#curriculum" role="tab" style="margin-right: 0px;">Curriculum</a>
                                         </li>
                                         <?php endif;?>
-                                        <li class="nav-item" style="margin-left: 0px;">
-                                            <a class="nav-link" data-toggle="tab" href="#publicaciones" role="tab">Servicios free lance</a>
-                                        </li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div class="tab-pane card-block" id="publicaciones" role="tabpanel">
-                                            <?php foreach ($publicaciones as $p): ?>
-                                                <div class="pl-item">
-                                                    <div class="media">
-                                                        <div class="media-body">
-                                                            <div class="pli-content">
-                                                                <h5><a class="text-black" href="javascript:void(0)"><?php echo $p["titulo"]; ?></a></h5>
-                                                                <p class="m-b-0-5"><?php echo $p["descripcion"]; ?></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php endforeach?>
-                                        </div>
                                         <?php
                                             $idTrab = '';
                                             if (isset($_REQUEST['t'])) {

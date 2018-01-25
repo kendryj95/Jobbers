@@ -346,6 +346,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<div class="row container" style="margin-top: 10px">
 										<!-- <div class="col-md-4"></div> -->
 										<div class="col-xs-12 col-sm-4 col-sm-offset-5"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
+										
 										<?php if($data['numero_documento_identificacion'] != ""): ?>
 											<div class="col-xs-12 col-sm-3"> <a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
