@@ -1,4 +1,6 @@
 function validar(idCampo,type,campo=''){
+
+	let value = type == 'email' ? $('#'+idCampo).val().toLowerCase().trim() : $('#'+idCampo).val();
 	
 	if(type=='email'){
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -20,7 +22,7 @@ function validar(idCampo,type,campo=''){
 		campo == ''? 'Numero':campo;
 	}
 
-	if (regex.test($('#'+idCampo).val())) {
+	if (regex.test(value)) {
 		$('#'+idCampo).parent().removeClass('has-error');
 		return true;
 	}else{

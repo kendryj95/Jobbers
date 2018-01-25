@@ -100,7 +100,7 @@
 
 			<div class="site-content" style="margin-left: 0px;">
 				<!-- Content -->
-				<?php if ($_SESSION['ctc']['type'] == 1):
+				<?php if (isset($_SESSION['ctc']) && $_SESSION['ctc']['type'] == 1):
 					$grid = "col-md-9";
 					require_once('../includes/sidebar.php');
 					else:
@@ -113,7 +113,7 @@
 						<div class="profile-header-counters clearfix">
 							<div class="container-fluid">
 								<div class="pull-right">
-									<a href="<?php echo $empresa == 1 ? 'publicaciones.php' : 'javascript:void(0)'; ?>" class="text-black">
+									<a href="<?php echo $empresa == 1 ? 'publicaciones.php' : 'javascript:void(0)'; ?>" class="text-black block-pub">
 										<h5 class="font-weight-bold"><?php echo $cantidadPublicaciones; ?></h5>
 										<span class="text-muted">Publicaciones</span>
 									</a>
@@ -125,8 +125,8 @@
 						<div class="row">
 							<div class="col-sm-5 col-md-5">
 								<div class="card profile-card">
-									<div class="profile-avatar" style="text-align: center;">
-										<img src="img/<?php echo $foto; ?>" alt="" style="max-width: 150px;margin-top: 20px;">
+									<div class="profile-avatar" style="text-align: center; margin-top: 66px;">
+										<img src="img/<?php echo $foto; ?>" alt="" style="max-width: 150px;">
 										<br>
 										<?php if($empresa == 1): ?>
 											<a href="javascript:void(0)" data-toggle="modal" data-target="#pic" title="cambiar foto de perfil">Cambiar foto</a>
@@ -437,7 +437,14 @@
 			activities.forEach(function(a) {
 				act.push({value: a.id, text: a.nombre});
 			});
-			$(document).ready(function(){				
+			$(document).ready(function(){
+
+				/* Preloader */
+				setTimeout(function() {
+					$('.preloader').fadeOut();
+				}, 500);
+
+							
 				$.fn.editableform.buttons = 
 				'<button type="submit" class="btn btn-primary editable-submit waves-effect waves-light"><i class="ti-check"></i></button>' +
 				'<button type="button" class="btn editable-cancel btn-secondary waves-effect"><i class="ti-close"></i></button>';

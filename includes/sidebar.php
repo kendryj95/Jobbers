@@ -19,7 +19,6 @@
 			<a href="publicaciones.php" class="list-group-item item-panel"><i class="fa fa-check-square"></i>&nbsp Publicaciones</a>
 			<a href="perfil.php" class="list-group-item item-panel"><i class="fa fa-user"></i>&nbsp Mi perfil</a>
 			<a href="../trabajadores.php" class="list-group-item item-panel"><i class="fa fa-id-badge"></i>&nbsp Jobbers</a>
-			<a href="../serviciosfree.php" class="list-group-item item-panel"><i class="fa fa-cogs"></i>&nbsp Servicios Freelance</a>
 		<?php else: ?>
 
 			<div class="list-group-item active text-center item-panel" style="background-color: #3e70c9">Panel de Administrador</div>
