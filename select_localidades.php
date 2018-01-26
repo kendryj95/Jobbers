@@ -2,7 +2,8 @@
  <select <?= $style ?> class="city select_localidad custom-select form-control" id="localidad_0">
      <option value="0">Seleccionar</option>
  </select>
- <select style="display:none;" class="city select_localidad custom-select form-control" id="localidad_1">
+<select style="display:none;"  class="city select_localidad custom-select form-control" id="localidad_1">
+ <option value="0">Seleccionar</option>
                 <option value="1">
                     25 de Mayo
                 </option>
@@ -431,6 +432,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_2">
+            <option value="0">Seleccionar</option>
                 <option value="143">
                     11 de Septiembre
                 </option>
@@ -838,6 +840,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_3">
+            <option value="0">Seleccionar</option>
                 <option value="282">
                     Agronomía
                 </option>
@@ -978,6 +981,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_4">
+            <option value="0">Seleccionar</option>
                 <option value="330">
                     Aconquija
                 </option>
@@ -1088,6 +1092,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_5">
+            <option value="0">Seleccionar</option>
                 <option value="369">
                     Aviá Teraí
                 </option>
@@ -1291,6 +1296,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_6">
+            <option value="0">Seleccionar</option>
                 <option value="439">
                     Aldea Apeleg
                 </option>
@@ -1431,6 +1437,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_7">
+            <option value="0">Seleccionar</option>
                 <option value="485">
                     Achiras
                 </option>
@@ -2681,6 +2688,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_8">
+            <option value="0">Seleccionar</option>
                 <option value="915">
                     Alvear
                 </option>
@@ -2851,6 +2859,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_9">
+            <option value="0">Seleccionar</option>
                 <option value="981">
                     Alarcón
                 </option>
@@ -3597,6 +3606,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_10">
+            <option value="0">Seleccionar</option>
                 <option value="1245">
                     Buena Vista
                 </option>
@@ -3698,6 +3708,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_11">
+            <option value="0">Seleccionar</option>
                 <option value="1280">
                     Abdon Castro Tolay
                 </option>
@@ -3865,6 +3876,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_12">
+            <option value="0">Seleccionar</option>
                 <option value="1342">
                     Abramo
                 </option>
@@ -4098,6 +4110,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_13">
+            <option value="0">Seleccionar</option>
                 <option value="1420">
                     Arauco
                 </option>
@@ -4142,6 +4155,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_14">
+            <option value="0">Seleccionar</option>
                 <option value="1439">
                     Chacras de Coria
                 </option>
@@ -4174,6 +4188,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_15">
+            <option value="0">Seleccionar</option>
                 <option value="1461">
                     Alba Posse
                 </option>
@@ -4362,6 +4377,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_16">
+            <option value="0">Seleccionar</option>
                 <option value="1539">
                     Aguada San Roque
                 </option>
@@ -4529,6 +4545,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_17">
+            <option value="0">Seleccionar</option>
                 <option value="1596">
                     Aguada Cecilio
                 </option>
@@ -4735,6 +4752,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_18">
+            <option value="0">Seleccionar</option>
                 <option value="1670">
                     A. Saravia
                 </option>
@@ -4893,6 +4911,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_19">
+            <option value="0">Seleccionar</option>
                 <option value="1732">
                     Albardón
                 </option>
@@ -4928,6 +4947,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_20">
+            <option value="0">Seleccionar</option>
                 <option value="1752">
                     Alto Pelado
                 </option>
@@ -5089,6 +5109,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_21">
+            <option value="0">Seleccionar</option>
                 <option value="1817">
                     Calafate
                 </option>
@@ -5148,6 +5169,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_22">
+            <option value="0">Seleccionar</option>
                 <option value="1839">
                     Aarón Castellanos
                 </option>
@@ -6143,6 +6165,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_23">
+            <option value="0">Seleccionar</option>
                 <option value="2199">
                     Añatuya
                 </option>
@@ -6337,6 +6360,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_24">
+            <option value="0">Seleccionar</option>
                 <option value="2270">
                     Río Grande
                 </option>
@@ -6348,6 +6372,7 @@
                 </option>
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_25">
+            <option value="0">Seleccionar</option>
                 <option value="2273">
                     Acheral
                 </option>
