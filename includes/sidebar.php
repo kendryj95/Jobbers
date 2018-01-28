@@ -8,7 +8,7 @@
 		</div>
 	</a> -->
 <?php else: ?>
-	<div class="col-md-3" style="margin-top: 12px;">
+	<div class="col-md-3" style="margin-top: 20px;">
 		<div class="list-group">
 		<?php if ($_SESSION['ctc']['type'] != 3):?>
 

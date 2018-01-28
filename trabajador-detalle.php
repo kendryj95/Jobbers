@@ -121,7 +121,7 @@ $empresas = $db->getAll("
             <!-- Header -->
             <?php require_once 'includes/header.php';?>
             
-            <div class="site-content bg-white" style="padding-top: 25px; margin-left: 0px;">
+            <div class="site-content bg-white" style="padding-top: 40px; margin-left: 0px;">
                 <!-- Content -->
                 <div class="container-fluid">
                 <?php if ($_SESSION['ctc']['type'] == 1):
