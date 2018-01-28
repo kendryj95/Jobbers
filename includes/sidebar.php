@@ -16,9 +16,9 @@
 			<div class="list-group-item text-center">
 				<img src="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "" : "empresa/")."img/".$_SESSION["ctc"]["pic"]; ?>" alt="Logo Empresa" style="width: 60%; height: auto">
 			</div>
-			<a href="publicaciones.php" class="list-group-item item-panel"><i class="fa fa-check-square"></i>&nbsp Publicaciones</a>
-			<a href="perfil.php" class="list-group-item item-panel"><i class="fa fa-user"></i>&nbsp Mi perfil</a>
-			<a href="../trabajadores.php" class="list-group-item item-panel"><i class="fa fa-id-badge"></i>&nbsp Jobbers</a>
+			<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "publicaciones.php" : "empresa/publicaciones.php") ?>" class="list-group-item item-panel"><i class="fa fa-check-square"></i>&nbsp Publicaciones</a>
+			<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "perfil.php" : "empresa/perfil.php") ?>" class="list-group-item item-panel"><i class="fa fa-user"></i>&nbsp Mi perfil</a>
+			<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../trabajadores.php" : "trabajadores.php") ?>" class="list-group-item item-panel"><i class="fa fa-id-badge"></i>&nbsp Jobbers</a>
 		<?php else: ?>
 
 			<div class="list-group-item active text-center item-panel" style="background-color: #3e70c9">Panel de Administrador</div>
