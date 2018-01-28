@@ -137,92 +137,110 @@ $empresas = $db->getAll("
                             <li class="breadcrumb-item"><a href="trabajadores.php">Trabajadores</a></li>
                             <li class="breadcrumb-item active"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></li>
                         </ol>
-                        <div class="container" style="margin-top: 20px;">
-                            <div class="col-sm-4 col-md-5">
-                                <div class="content-perfil profile-card" style="margin-top: 0px;">
-                                    <div class="profile-avatar" style="text-align: center;margin-top: 15px;">
-                                        <img src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="width: 130px;">
-                                    </div>
-                                    <div class="card-block" style="text-align: center;">
-                                        <h4 style="margin-bottom: -5px;"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></h4>
-                                        <div style="font-size: 28px;margin-bottom: 5px;">
+                        <div style="margin-top: 20px;">
 
-                                        </div>
+                            <!-- Seccion FOTO -->
+                            <div class="col-sm-4 col-md-4 no-padding-lat">
+                                <div class="content-perfil profile-card" style="margin-top: 0px; padding-bottom: 0px; padding-top: 0px;">
+                                    <div class="profile-avatar" style="text-align: center; background-color: #E4E6E3; margin-top: 0px; padding-top: 40px; padding-bottom: 40px;">
+                                        <img src="img/<?php echo $trabajador["imagen"]; ?>" alt="" style="width: 130px; margin-bottom: 10px;">
+                                        <!-- <button type="button" class="col-md-12 btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Contactar
+                                        </button> -->
+                                        <!-- <h4 style="padding-bottom: 20px; text-align: center; margin-bottom: 0px;"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></h4> -->
+                                    </div>
+                                    <div class="card-block" style="background-color: #E4E6E3;">
+                                        <ul class="list-group" style="margin-bottom: 0px;">
+                                        <li class="list-group-item item-profile" style="border-radius: 0px; background-color:#2E358D;">
+                                            <span class="fa-stack fa-lg icon-item-profile">
+                                            <i class="fa fa-square-o fa-stack-2x"></i>
+                                            <i class="fa fa-user fa-stack-1x"></i>
+                                            </span>
+                                            <span class="info-item-profile" style="text-transform: uppercase" id="labelCalle"><?php echo "$trabajador[nombres] $trabajador[apellidos]"; ?></span>
+                                        </li>
+
+                                        <li class="list-group-item item-profile" style="border-radius: 0px; background-color:#2043a0;">
+                                            <span class="fa-stack fa-lg icon-item-profile">
+                                            <i class="fa fa-square-o fa-stack-2x"></i>
+                                            <i class="fa fa-map-marker fa-stack-1x"></i>
+                                            </span>
+                                            <span class="info-item-profile" id="labelCalle"><?php echo $trabajador["calle"]; ?></span>
+                                        </li>
+
+                                        <li class="list-group-item item-profile" style="background-color: #235AD1">
+                                            <span class="fa-stack fa-lg icon-item-profile">
+                                            <i class="fa fa-square-o fa-stack-2x"></i>
+                                            <i class="fa fa-phone fa-stack-1x"></i>
+                                            </span>
+                                            <span class="info-item-profile" id="labelTlf"><?php echo $trabajador["telefono"] . $trabajador["telefono_alternativo"] = !"" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
+                                        </li>
+
+                                        <li class="list-group-item item-profile" style="background-color: #2393D2; border-radius: 0px;">
+                                            <span class="fa-stack fa-lg icon-item-profile">
+                                            <i class="fa fa-square-o fa-stack-2x"></i>
+                                            <i class="fa fa-envelope fa-stack-1x" style="bottom: 2px;"></i>
+                                            </span>
+                                            <span class="info-item-profile" id="labelEmail"><?php echo $trabajador["correo_electronico"]; ?></span>
+                                        </li>
+                                        </ul>
                                         <?php if(isset($_SESSION["ctc"])): ?>
-                                            <?php if($_SESSION["ctc"]["type"] != 2): ?>
-                                                <?php if ($trabajador["telefono"] != ""): ?>
-                                                    <div class="btn-group" role="group">
-                                                        <button type="button" class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Contactar
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#contactPhone"><span class="ti-mobile" style="margin-right: 3px;"></span> Whatsapp</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"  id="contact" data-toggle="modal" data-target="#contactM"><span class="ti-comments" style="margin-right: 3px;"></span> Chat / Correo</a>
+                                                <?php if($_SESSION["ctc"]["type"] != 2): ?>
+                                                    <?php if ($trabajador["telefono"] != ""): ?>
+                                                    <div style="padding-bottom: 20px;">
+                                                        <div class="btn-group " role="group" style="margin-top: 20px; width: 100%">
+                                                            <button type="button" class="btn btn-outline-primary btn-block btn-rounded waves-effect dropdown-toggle contact-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%">
+                                                                Contactar
+                                                            </button>
+                                                            <div class="dropdown-menu col-md-12">
+                                                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#contactPhone"><span class="ti-mobile" style="margin-right: 3px;"></span> Whatsapp</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)"  id="contact" data-toggle="modal" data-target="#contactM"><span class="ti-comments" style="margin-right: 3px;"></span> Chat / Correo</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                <?php else: ?>
-                                                    <button type="button" class="btn btn-primary btn-rounded waves-effect" id="contact" data-toggle="modal" data-target="#contactM">Contactar</button>
+                                                    <?php else: ?>
+                                                        <button type="button" class="btn btn-primary btn-block btn-rounded waves-effect contact-btn" id="contact" data-toggle="modal" data-target="#contactM" style="width: 100%">Contactar</button>
+                                                    <?php endif ?>
                                                 <?php endif ?>
                                             <?php endif ?>
-                                        <?php endif ?>
-                                        <?php if (($_SESSION['ctc']['type'] == 1 && $trabajador['publico'] == 1) || ($_SESSION['ctc']['type'] == 2) || count($postulado) > 0): ?>
-                                        <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-outline-primary btn-rounded waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Más
-                                            </button>
-                                            <div class="dropdown-menu">
+
+
+                                            
+                                            <?php if (($_SESSION['ctc']['type'] == 1 && $trabajador['publico'] == 1) || ($_SESSION['ctc']['type'] == 2) || count($postulado) > 0): ?>
+
                                                 <?php if (isset($_SESSION["ctc"])): ?>
-                                                    <a class="dropdown-item" href="javascript:void(0)" id="downloadC" data-href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $t; ?>"><span class="ti-download" style="margin-right: 3px;"></span> Descargar currículum</a>
+                                                    <a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="javascript:void(0)" id="downloadC" data-href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $t; ?>"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
                                                 <?php endif?>
-                                                <!--<a class="dropdown-item" href="#"><span style="margin-right: 3px;" class="ti-star"></span> Agregar a favoritos</a>-->
-                                            </div>
-                                        </div>
                                         <?php endif;?>
                                     </div>
 
-                                    <?php if ($trabajador["sitio_web"] || $trabajador["facebook"] || $trabajador["twitter"] || $trabajador["instagram"] || $trabajador["snapchat"]): ?>
-                                        <?php if ($trabajador["sitio_web"]): ?>
-                                            <a class="list-group-item" href="<?php echo $trabajador["sitio_web"]; ?>">
-                                                <i class="ti-world m-r-0-5"></i> <?php echo $trabajador["sitio_web"]; ?>
-                                            </a>
+                                    <div class="empresas" style="background-color: #e4e6e3; padding: 20px 10px; margin-top: 3px;">
+                                        <h5 style="text-align: left; margin-top: 0px;">EMPRESAS QUE LO HAN CONTACTADO</h5>
+                                        <?php $i = 1;if ($empresas): ?>
+                                            <?php foreach ($empresas as $e): ?>
+                                                <?php if ($i <= 5): ?>
+                                                    <div class="il-item">
+                                                        <a class="text-black" href="empresa/perfil.php?e=<?php echo strtolower(str_replace(" ", "-", $e["nombre_empresa"])) . "-$e[id]"; ?>">
+                                                            <div class="media">
+                                                                <div class="media-left">
+                                                                    <div class="avatar box-48">
+                                                                        <img class="b-a-radius-circle" src="empresa/img/<?php echo !$e["imagen"] ? "avatars/user.png" : $e["imagen"]; ?>" alt="">
+                                                                        <i class="status bg-success bottom right"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <h6 class="media-heading"><?php echo $e["nombre_empresa"]; ?></h6>
+                                                                    <span class="text-muted"><?php echo $e["actividad"] ? $e["actividad"] : 'Sin definir'; ?></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="il-icon"><i class="fa fa-angle-right"></i></div>
+                                                        </a>
+                                                    </div>
+                                                <?php endif?>
+                                            <?php $i++;endforeach?>
                                         <?php endif?>
+                                    </div>
 
-                                        <?php if ($trabajador["facebook"]): ?>
-                                            <a class="list-group-item" href="<?php echo $trabajador["facebook"]; ?>">
-                                                <i class="ti-facebook m-r-0-5"></i> <?php echo $trabajador["facebook"]; ?>
-                                            </a>
-                                        <?php endif?>
-
-                                        <?php if ($trabajador["twitter"]): ?>
-                                            <a class="list-group-item" href="<?php echo $trabajador["twitter"]; ?>">
-                                                <i class="ti-twitter m-r-0-5"></i> <?php echo $trabajador["twitter"]; ?>
-                                            </a>
-                                        <?php endif?>
-
-                                        <?php if ($trabajador["instagram"]): ?>
-                                            <a class="list-group-item" href="<?php echo $trabajador["instagram"]; ?>">
-                                                <i class="ti-instagram m-r-0-5"></i> <?php echo $trabajador["instagram"]; ?>
-                                            </a>
-                                        <?php endif?>
-
-                                        <?php if ($trabajador["snapchat"]): ?>
-                                            <a class="list-group-item" href="<?php echo $trabajador["snapchat"]; ?>">
-                                                <i class="ion-social-snapchat m-r-0-5"></i> <?php echo $trabajador["snapchat"]; ?>
-                                            </a>
-                                        <?php endif?>
-
-                                        <?php if ($trabajador["linkedin"]): ?>
-                                            <a class="list-group-item" href="<?php echo $trabajador["linkedin"]; ?>">
-                                                <i class="ti-linkedin m-r-0-5"></i> <?php echo $trabajador["linkedin"]; ?>
-                                            </a>
-                                        <?php endif?>
-                                    <?php endif?>
-                                </div>
-                                <!--<div class="card">
-                                    <div class="card-header text-uppercase"><b>Resumen del perfil</b></div>
-
-                                </div>-->
-                                <!--Estilos estrellas de ranking-->
+                                    <!--Estilos estrellas de ranking-->
                                 <style type="text/css">
                                     .rating {
                                           overflow: hidden;
@@ -259,11 +277,11 @@ $empresas = $db->getAll("
                                         .rating > label:hover:before,  .rating > label:hover ~ label:before,  .rating:not(:hover) > :checked ~ label:before { opacity: 1; }                                        
  
                                 </style>
+
                                 <?php if($_SESSION["ctc"]["type"]==1){?>
-                                <div class="panel panel-default panel-m30">
-                                    <div class="panel-heading"><b>Gestionar Jobber</b></div>
-                                    <div class="panel-body items-list text-center"> 
-                                    <div class="col-sm-6" style="padding-top: 15px;">
+                                <div class="jobbers" style="background-color: #e4e6e3; padding: 20px 10px; margin-top: 3px;">
+                                    <h5 style="text-align: left; margin-top: 0px;">GESTIONAR JOBBER</h5>
+                                    <div style="padding-top: 15px;">
 
                                          <label><strong>Calificar</strong></label><br/>
                                             <span class="rating" style="margin-left: -80px;">
@@ -284,7 +302,7 @@ $empresas = $db->getAll("
                                         </div> 
 
                                        
-                                        <div class="col-sm-6" style="padding-top: 15px;">
+                                        <div style="padding-top: 15px;">
                                        
                                             <label><strong>Marcador</strong></label><br/>
                                             <select id="marcador" onChange="marcar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)" class="form-control">
@@ -297,7 +315,28 @@ $empresas = $db->getAll("
                                                 <option value="5">Contratado</option>
                                             </select>
                                              
-                                        </div>                                          
+                                        </div>
+                                        <br> 
+                                        <button onClick="window.close()" type="buttom" class="btn btn-xs btn-danger form-control">Ver mas jobbers</button>
+
+                                </div>
+                                <?php } ?>
+
+                                </div>
+
+                                <!-- <div class="panel panel-default panel-m30">
+                                        <div class="panel-heading">Contacto</div>
+                                        <div class="panel-body text-center">
+                                            
+                                        </div>
+                                    </div> -->
+
+                                
+                                <!-- <?php if($_SESSION["ctc"]["type"]==1){?>
+                                <div class="panel panel-default panel-m30">
+                                    <div class="panel-heading"><b>Gestionar Jobber</b></div>
+                                    <div class="panel-body items-list text-center"> 
+                                                                             
                                     </div>
                                 </div>
                                 <div class="col-xs-12" style="padding: 0px;">
@@ -308,29 +347,7 @@ $empresas = $db->getAll("
                                 <div class="panel panel-default panel-m30">
                                     <div class="panel-heading"><b>Empresas que lo han contactado</b></div>
                                     <div class="panel-body items-list">
-                                        <?php $i = 1;if ($empresas): ?>
-                                            <?php foreach ($empresas as $e): ?>
-                                                <?php if ($i <= 5): ?>
-                                                    <div class="il-item">
-                                                        <a class="text-black" href="empresa/perfil.php?e=<?php echo strtolower(str_replace(" ", "-", $e["nombre_empresa"])) . "-$e[id]"; ?>">
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <div class="avatar box-48">
-                                                                        <img class="b-a-radius-circle" src="empresa/img/<?php echo !$e["imagen"] ? "avatars/user.png" : $e["imagen"]; ?>" alt="">
-                                                                        <i class="status bg-success bottom right"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    <h6 class="media-heading"><?php echo $e["nombre_empresa"]; ?></h6>
-                                                                    <span class="text-muted"><?php echo $e["actividad"] ? $e["actividad"] : 'Sin definir'; ?></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="il-icon"><i class="fa fa-angle-right"></i></div>
-                                                        </a>
-                                                    </div>
-                                                <?php endif?>
-                                            <?php $i++;endforeach?>
-                                        <?php endif?>
+                                        
                                     </div>
 
 
@@ -341,19 +358,13 @@ $empresas = $db->getAll("
                                             <?php endif;?>
                                     </div>
 
-                                </div>
-                            </div>
+                                </div>-->
+                            </div> 
 
-                            <div class="col-sm-7 col-md-6">
 
-                                
-                                    <ul class="nav nav-tabs border-nav" role="tablist" style="color: white !important">
-                                        <?php if (($_SESSION['ctc']['type'] == 1 && $trabajador['publico'] == 1) || ($_SESSION['ctc']['type'] == 2) || count($postulado) > 0): ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#curriculum" role="tab" style="margin-right: 0px;">Curriculum</a>
-                                        </li>
-                                        <?php endif;?>
-                                    </ul>
+                            <!-- Seccion INFORMACION -->
+                            <div class="col-sm-8 col-md-8 no-padding-lat">
+                                    
                                     <div class="tab-content">
                                         <?php
                                             $idTrab = '';
@@ -362,12 +373,13 @@ $empresas = $db->getAll("
                                                 $idTrab = array_pop($detTrab);
                                             }
                                         ?>
-                                        <div class="col-md-12 tab-pane card-block active content-perfil" id="curriculum" role="tabpanel" style="border-top: none; padding-right: 0px; padding-left:0px;">
+                                        <div class="col-md-12 tab-pane card-block active content-perfil" id="curriculum" role="tabpanel" style="padding-right: 0px; padding-left:0px; padding-top: 0px;">
                                             <!-- <div class="row"> -->
-                                            <div class="col-md-12">
-                                                <p>
-                                                    <strong>Nombres: </strong> <span id="labelName"><?php echo $trabajador["nombres"]; ?></span><br>
-                                                    <strong>Apellidos: </strong> <span id="labelLastName"><?php echo $trabajador["apellidos"]; ?></span><br>
+                                            <div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
+                                            <h4 class="title-cv" style="margin-top: 0px;">&nbsp INFORMACION PERSONAL</h4>
+                                                <p class="content-cv">
+                                                    <!-- <strong>Nombres: </strong> <span id="labelName"><?php echo $trabajador["nombres"]; ?></span><br>
+                                                    <strong>Apellidos: </strong> <span id="labelLastName"><?php echo $trabajador["apellidos"]; ?></span><br> -->
                                                     <?php if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['id'] == $idTrab): ?>
                                                     <?php if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['id'] == $idTrab): ?>
                                                     <strong>DNI: </strong> <span id="labelDNI"><?php echo $trabajador["numero_documento_identificacion"]; ?></span><br>
@@ -377,22 +389,22 @@ $empresas = $db->getAll("
                                                     <strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $trabajador["localidad"] . ", " . $trabajador["provincia"] . ", " . $trabajador["pais"] ?></span><br>
                                                     <?php if(isset($_SESSION['ctc']['empresa'])): ?>
                                                     <?php if($_SESSION['ctc']['plan']['id_plan'] > 1): ?>
-                                                    <strong>Dirección: </strong> <span id="labelCalle"><?php echo $trabajador["calle"]; ?></span><br>
+                                                    <!-- <strong>Dirección: </strong> <span id="labelCalle"><?php echo $trabajador["calle"]; ?></span><br> -->
                                                     <?php endif; ?>
                                                     <?php endif; ?>
                                                     <strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $trabajador["fecha_nacimiento"] !== null ? date('Y-m-d', strtotime($trabajador["fecha_nacimiento"])) : ""; ?></span><br>
                                                     <strong>Edad: </strong> <span id="edad"><?php echo $trabajador["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($trabajador["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
-                                                    <strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $trabajador["correo_electronico"]; ?></span><br>
+                                                    <!-- <strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $trabajador["correo_electronico"]; ?></span><br> -->
                                                     <strong>Telefonos: </strong> <span id="labelTlf"><?php echo $trabajador["telefono"] . $trabajador["telefono_alternativo"] = !"" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
                                                 </p>
-                                                <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Experiencia laboral</h4>
+                                                <h4 class="title-cv">&nbsp EXPERIENCIA LABORAL</h4>
                                                 <div id="experiencias">
                                                     <?php $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");?>
                                                     <?php if ($experiencias): ?>
                                                     <?php foreach ($experiencias as $e): ?>
 
                                                     <?php $egreso = $e['trab_actualmt'] == 1 ? 'Actualmente' : $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?>
-                                                    <p style="margin-bottom: 20px;">
+                                                    <p class="content-cv" style="margin-bottom: 20px;">
                                                         <strong>Empresa: </strong>
                                                         <?php echo $e["nombre_empresa"]; ?><br>
                                                         <strong>País: </strong>
@@ -408,22 +420,22 @@ $empresas = $db->getAll("
                                                         <strong>Telefono del Encargado: </strong>
                                                         <?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
                                                         <strong>Descripción de tareas: </strong>
-                                                        <p>
+                                                        
                                                             <?php echo $e["descripcion_tareas"] ?>
-                                                        </p>
+                                                        
                                                     </p>
                                                     <?php endforeach?>
                                                     <?php else: ?>
-                                                    <p style="margin-bottom: 20px;"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
+                                                    <p class="content-cv" style="margin-bottom: 20px;"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
                                                     <?php endif?>
                                                 </div>
 
 
-                                                <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Estudios</h4>
+                                                <h4 class="title-cv">&nbsp Estudios</h4>
                                                 <div id="educacion">
                                                     <?php if ($educacion): ?>
                                                     <?php foreach ($educacion as $e): ?>
-                                                    <p style="margin-bottom: 20px;">
+                                                    <p class="content-cv" style="margin-bottom: 20px;">
                                                         <strong>Nivel estudio: </strong>
                                                         <?php echo $e["nivel"]; ?><br>
                                                         <strong>Título o Certificación: </strong>
@@ -437,17 +449,17 @@ $empresas = $db->getAll("
                                                     </p>
                                                     <?php endforeach?>
                                                     <?php else: ?>
-                                                    <p style="margin-bottom: 20px;">Sin registros</p>
+                                                    <p class="content-cv" style="margin-bottom: 20px;">Sin registros</p>
                                                     <?php endif?>
                                                 </div>
 
-                                                <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Idiomas</h4>
+                                                <h4 class="title-cv">&nbsp Idiomas</h4>
                                                 <div id="idiomas">
                                                     <?php if ($idiomas): ?>
                                                     <?php foreach ($idiomas as $i): ?>
                                                     <?php $nivel_oral    = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]");?>
                                                     <?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]");?>
-                                                    <p style="margin-bottom: 20px;">
+                                                    <p class="content-cv" style="margin-bottom: 20px;">
                                                         <strong>Idioma: </strong>
                                                         <?php echo $i["nombre_idioma"]; ?><br>
                                                         <strong>Nivel Oral: </strong>
@@ -457,41 +469,41 @@ $empresas = $db->getAll("
                                                     </p>
                                                     <?php endforeach?>
                                                     <?php else: ?>
-                                                    <p style="margin-bottom: 20px;">Sin registros</p>
+                                                    <p class="content-cv" style="margin-bottom: 20px;">Sin registros</p>
                                                     <?php endif?>
                                                 </div>
 
-                                                <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Otros conocimientos</h4>
+                                                <h4 class="title-cv">&nbsp Otros conocimientos</h4>
                                                 <div id="otros_conocimientos">
                                                     <?php if ($otros_conocimientos): ?>
                                                     <?php foreach ($otros_conocimientos as $o): ?>
-                                                    <p style="margin-bottom: 20px;">
+                                                    <p class="content-cv" style="margin-bottom: 20px;">
                                                         <strong>Título: </strong>
                                                         <?php echo $o["nombre"]; ?><br>
                                                         <strong>Descripción: </strong>
-                                                        <p>
+                                                       
                                                             <?php echo $o["descripcion"]; ?>
-                                                        </p><br>
+                                                        <br>
                                                     </p>
                                                     <?php endforeach?>
                                                     <?php else: ?>
-                                                    <p style="margin-bottom: 20px;">Sin registros</p>
+                                                    <p class="content-cv" style="margin-bottom: 20px;">Sin registros</p>
                                                     <?php endif?>
                                                 </div>
 
                                                 <?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra inner join disponibilidad on disponibilidad.id = trabajadores_infextra.disponibilidad WHERE id_trabajador=" . $t);?>
 
-                                                <h4 style="border-bottom: 1px solid #3e70c9;margin-right: 25px;margin-bottom:10px;padding-bottom: 5px; width: 220px;">Información Extra</h4>
+                                                <h4 class="title-cv">&nbsp Información Extra</h4>
                                                 <div id="infoExtra">
-                                                    <p style="margin-bottom: 20px;">
+                                                    <p class="content-cv" style="margin-bottom: 20px;">
                                                         <strong>Remuneración pretendida: </strong> $
                                                         <?=$infoExtra['remuneracion_pret']?> <br>
                                                             <strong>Disponibilidad: </strong>
                                                             <?=$infoExtra['nombre']?> <br>
                                                                 <strong>Sobre mí: </strong>
-                                                                <p>
+                                                                
                                                                     <?=$infoExtra['sobre_mi']?>
-                                                                </p> <br>
+                                                                 <br>
                                                     </p>
                                                 </div>
                                             </div>

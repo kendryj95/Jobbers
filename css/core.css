@@ -9771,6 +9771,62 @@ a.text-grey:hover .underline {
     margin-top: 30px;
 }
 
+.item-profile {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.icon-item-profile {
+    border-right: 1px solid #fff;
+    padding-right: 60px;
+    color: #fff
+}
+
+.info-item-profile {
+    font-weight: bolder;
+    margin-left: 10px;
+    color: #fff
+}
+
+.title-cv {
+    background-color: #E4E6E3;
+    border-bottom: 3px solid #3e70c9;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-transform: uppercase;
+}
+
+.content-cv {
+    margin-left: 10px !important;
+}
+
+.contact-btn {
+    text-transform: uppercase;
+    background-color: #2393D2 !important;
+    border-color: #2393D2 !important;
+    color: #fff !important;
+}
+
+.contact-btn:focus,
+.contact-btn:active,
+.contact-btn:hover {
+    background-color: #2393D2 !important;
+    border-color: #2393D2 !important;
+    color: #fff !important;
+}
+
+@media(max-width: 500px) {
+    .icon-item-profile {
+        padding-right: 50px;
+    }
+    .info-item-profile {
+        margin-left: 5px;
+    }
+}
+
 
 /* =================================================================
   Seccion Curriculum
