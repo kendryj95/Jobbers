@@ -666,7 +666,7 @@ else {*/
 										<tbody>
 											<?php foreach ($momentos as $registroM => $momento): ?>
 												<?php if ($momento["cantidad"] > 0): ?>
-													<tr class="<?php if ($registroM > 3) echo 'hideit'; ?>">
+													<tr class="">
 														<td>
 															<a class="text-primary" href="empleos.php?momento=<?php echo $momento["amigable"]; ?>&pagina=1"><span class="underline"><?php echo $momento["nombre"]; ?></span></a>
 														</td>
@@ -675,17 +675,7 @@ else {*/
 														</td>
 													</tr>
 												<?php endif?>
-											<?php endforeach?>
-											<?php if ($registroM > 3):?>
-												<tr class="vmMomento" >
-													<td>
-														<span class="underline">Ver más</span>
-													</td>
-													<td>
-														<span class="text-muted pull-right">+</span></a>
-													</td>
-												</tr>
-											<?php endif?>											
+											<?php endforeach?>									 										
 										</tbody>
 									</table>
 								</div>

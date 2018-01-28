@@ -345,9 +345,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									</div>
 									<div class="row container" style="margin-top: 10px">
 										<!-- <div class="col-md-4"></div> -->
-										<div class="col-xs-12 col-sm-4 col-sm-offset-5"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="1">Guardar</a></div>
+										<div class="col-xs-12 col-sm-4 col-sm-offset-5">
+
+										 <button onClick="guardar_datos()" class="btn btn-primary">Guardar</button></div>
+										
 										<?php if($data['numero_documento_identificacion'] != ""): ?>
-											<div class="col-xs-12 col-sm-3"> <a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-xs-12 col-sm-3"> <a id="testvic" href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
 								</div>
@@ -2451,6 +2454,138 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 					$(".select_localidad").hide();
 					$("#localidad_"+parametro).show();
 				}
+
+				function guardar_datos()
+				{
+					 
+					var_sexo=1;
+					localidad="localidad_" + $("#vic_provincias").val();
+
+					if($('#radio1').is(':checked'))
+					{
+						var_sexo=2;
+					}
+
+					if($("#name").val()=="")
+					{
+					 
+						$("#name").focus();
+						$("#name").css({"border": "1px solid #870009"});
+					}
+					else if($("#lastName").val()=="")
+					{
+						 
+						$("#lastName").focus();
+						$("#lastName").css({"border": "1px solid #870009"});
+					}
+					else if($("#email").val()=="")
+					{
+						 $("#email").css({"border": "1px solid #870009"});
+						$("#email").focus();
+					}
+					
+					
+					else if($("#dia").val()=="0")
+					{
+						 $("#dia").css({"border": "1px solid #870009"});
+						$("#dia").focus();
+					}
+					else if($("#mes").val()=="0")
+					{
+						 $("#mes").css({"border": "1px solid #870009"});
+						$("#mes").focus();
+					}
+					else if($("#anio").val()=="0")
+					{
+						 $("#anio").css({"border": "1px solid #870009"});
+						$("#anio").focus();
+					}
+					else if($("#country").val()=="0")
+					{
+						 $("#country").css({"border": "1px solid #870009"});
+								$("#country").focus();
+					}
+					else if($("#estadoCivil").val()=="0")
+					{
+						 $("#estadoCivil").css({"border": "1px solid #870009"});
+					    $("#estadoCivil").focus();
+					}
+					else if($("#dni").val()=="0")
+					{
+					 $("#dni").css({"border": "1px solid #870009"});
+					    $("#dni").focus();
+					}
+					else if($("#numberdni").val()=="")
+					{
+						 $("#numberdni").css({"border": "1px solid #870009"});
+					    $("#numberdni").focus();
+					}
+					else if($("#cuil").val()=="")
+					{
+						 $("#cuil").css({"border": "1px solid #870009"});
+					    $("#cuil").focus();
+					}
+					else if($("#vic_provincias").val()=="0")
+					{
+						 $("#vic_provincias").css({"border": "1px solid #870009"});
+					    $("#vic_provincias").focus();
+					}
+					 else if(($("#"+localidad).val())=="0")
+					{
+						$("#"+localidad).css({"border": "1px solid #870009"});
+					   $("#"+localidad).focus();
+					}  
+					 else if($("#street").val()=="")
+					{
+						 $("#street").css({"border": "1px solid #870009"});
+					   $("#street").focus();
+					} 
+					else if($("#phone").val()=="")
+					{$("#phone").css({"border": "1px solid #870009"});
+						 
+					    $("#phone").focus();
+					}  
+
+					else
+					{
+						$.ajax({
+						  method: "POST",
+						  url: "ajax/curriculum.php",
+						  data: {nombre:$("#name").val(),
+								apellido:$("#lastName").val(),
+								correo:$("#email").val(),
+								dia:$("#dia").val(),
+								mes:$("#mes").val(),
+								 anio:$("#anio").val(),
+								naciomiento:$("#country").val(),
+								edo_civil:$("#estadoCivil").val(),
+								dni:$("#dni").val(),
+								numberdni:$("#numberdni").val(),
+								cuil:$("#cuil").val(),
+								provincia:$("#vic_provincias").val(),
+								localidad:$("#"+localidad).val(),
+								calle:$("#street").val(),
+								telefono:$("#phone").val(),
+								telefono_2:$("#phoneAlt").val(),
+
+								sexo:var_sexo }
+						})
+						  .done(function( msg ) {
+						    if(msg!=1)
+						    {
+						    	alert("Ops, algo salio mal. Intente de nuevo.");
+						    }
+						    else{
+						    	$("#testvic").trigger("click"); 
+							    }
+						  }); 
+					}
+					
+							
+				}
+
+			 
+				 
 			</script>
 	</body>
 

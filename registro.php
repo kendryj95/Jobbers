@@ -202,7 +202,8 @@
 		<script>
 			function isEmail(email) {
 			  var regex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
-			  return regex.test(email);
+			  let correo = email.toLowerCase().trim();
+			  return regex.test(correo);
 			}
 			
 			var info = {};
@@ -289,7 +290,7 @@
 				var $btn = $(this);
 				if($("#email").val() != "" && $("#passw1").val() != "" && $("#passw2").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#userName").val() != "") {
 					if($("#aceptaCondiciones:checked").length > 0) {
-						if(isEmail($("#email").val())) { // Confirma si es un email valido
+						if(isEmail(document.getElementById('email').value)) { // Confirma si es un email valido
 							if ($('#email').val().toLowerCase().trim() == $('#confirmEmail').val().toLowerCase().trim()) { // Confirma si los emails coinciden
 								if($("#passw1").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
 									if(($("#passw1").val().length >= 8 && $("#passw1").val().length <= 12)&&($("#passw2").val().length >= 8 && $("#passw2").val().length <= 12  )) { // Confirma si las contraseñas tienen la lomgitud
