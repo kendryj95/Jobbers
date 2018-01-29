@@ -118,7 +118,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<a class="nav-link active" data-toggle="tab" href="#tab1" role="tab">Datos personales</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link <?php echo $attr." ".$attr2; ?>" data-toggle="tab" href="#tab2" role="tab">Experiencia laboral</a>
+									<a id="experiencia" class="nav-link <?php echo $attr." ".$attr2; ?>" data-toggle="tab" href="#tab2" role="tab">Experiencia laboral</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link <?php echo $attr." ".$attr3; ?>" data-toggle="tab" href="#tab3" role="tab">Estudios</a>
@@ -168,7 +168,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<span class="custom-control-description">Sexo <span style="color: red;">*</span></span>
 												</label>
 												<label class="custom-control custom-radio col-md-5 col-xs-6">
-													<input id="radio1" name="sex" class="custom-control-input" type="radio" value="2">
+													<input checked id="radio1" name="sex" class="custom-control-input" type="radio" value="2">
 													<span class="custom-control-indicator"></span>
 													<span class="custom-control-description">Femenino</span>
 												</label>
@@ -348,10 +348,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="col-xs-12 col-sm-4 col-sm-offset-5">
 
 										 <button onClick="guardar_datos()" class="btn btn-primary">Guardar</button></div>
-										
-										<?php if($data['numero_documento_identificacion'] != ""): ?>
-											<div class="col-xs-12 col-sm-3"> <a id="testvic" href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
-										<?php endif; ?>
+										<div style="display: none;" id="boton_siguiente" class="col-xs-12 col-sm-3"> <a id="testvic" href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next " data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
+ 
 									</div>
 								</div>
 
@@ -2576,7 +2574,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						    	alert("Ops, algo salio mal. Intente de nuevo.");
 						    }
 						    else{
-						    	$("#testvic").trigger("click"); 
+						    	swal("EXITO!", "Datos guardados con éxito", "success");
+						    	 $("#experiencia").removeClass("disabled");
+						    	$("#experiencia").trigger("click"); 
 							    }
 						  }); 
 					}
