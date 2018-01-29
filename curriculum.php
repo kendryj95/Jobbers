@@ -348,7 +348,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="col-xs-12 col-sm-4 col-sm-offset-5">
 
 										 <button onClick="guardar_datos()" class="btn btn-primary">Guardar</button></div>
-										<div style="display: none;" id="boton_siguiente" class="col-xs-12 col-sm-3"> <a id="testvic" href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next " data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
+										 
+
+										<?php if($data['numero_documento_identificacion'] != ""): ?>
+											<div class="col-xs-12 col-sm-3"> <a id="testvic" href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
+										<?php endif; ?>
  
 									</div>
 								</div>
