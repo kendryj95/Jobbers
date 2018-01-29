@@ -293,7 +293,7 @@
 						if(isEmail(document.getElementById('email').value)) { // Confirma si es un email valido
 							if ($('#email').val().toLowerCase().trim() == $('#confirmEmail').val().toLowerCase().trim()) { // Confirma si los emails coinciden
 								if($("#passw1").val() == $("#passw2").val()) { // Confirma si las contraseñas coinciden
-									if(($("#passw1").val().length >= 8 && $("#passw1").val().length <= 12)&&($("#passw2").val().length >= 8 && $("#passw2").val().length <= 12  )) { // Confirma si las contraseñas tienen la lomgitud
+									if($("#passw1").val().length >= 8 && $("#passw1").val().length <= 12) { // Confirma si las contraseñas tienen la lomgitud
 
 										$btn.addClass('disabled');
 
@@ -336,6 +336,14 @@
 													});
 												}
 											}
+										});
+									} else {
+										swal({
+											title: 'ERROR!',
+											text: 'La contraseña debe contener entre 8 y 12 caracteres.',
+											timer: 2500,
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
 										});
 									}
 								}
