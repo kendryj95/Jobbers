@@ -376,7 +376,7 @@ $empresas = $db->getAll("
                                         <div class="col-md-12 tab-pane card-block active content-perfil" id="curriculum" role="tabpanel" style="padding-right: 0px; padding-left:0px; padding-top: 0px;">
                                             <!-- <div class="row"> -->
                                             <div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
-                                            <h4 class="title-cv" style="margin-top: 0px;">&nbsp INFORMACION PERSONAL</h4>
+                                            <h4 class="title-cv" style="margin-top: 0px;">&nbsp INFORMACIÓN PERSONAL</h4>
                                                 <p class="content-cv">
                                                     <!-- <strong>Nombres: </strong> <span id="labelName"><?php echo $trabajador["nombres"]; ?></span><br>
                                                     <strong>Apellidos: </strong> <span id="labelLastName"><?php echo $trabajador["apellidos"]; ?></span><br> -->
