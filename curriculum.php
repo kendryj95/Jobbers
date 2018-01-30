@@ -917,7 +917,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="4">Guardar</a></div>
 										<div class="col-xs-12 col-sm-3"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="4">Borrar</a></div>				
-										<?php if($idiomasT || $otros_conocimientos): ?>
+										<?php if($idiomasT): ?>
 											<div class="col-xs-12 col-sm-3"> <a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
