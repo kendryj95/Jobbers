@@ -13,7 +13,7 @@
 		<meta name="author" content="">
 
 		<!-- Title -->
-		<title>JOBBERS - Soport Tecnico</title>
+		<title>JOBBERS - Soporte Técnico</title>
 		<?php require_once('includes/libs-css.php'); ?>
 
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -63,12 +63,13 @@
 									 	<?php endif; ?>
 										
 										<div class="form-group">
-											<select name="" id="" class="custom-select form-control" onChange="select_soporte(this.value)">
+											<select name="" id="asunto1" class="custom-select form-control" onChange="select_soporte(this.value)">
 												<option value="0">Asunto (*)</option>
 												<option value="1">No pude registrame</option>
 												<option value="2">No pude cargar mis datos de CV</option>
 												<option value="3">Problema de diseño en la pagina</option>
 												<option value="4">No puedo cargar mi foto de perfil</option>
+												<option value="5">Otro</option>
 											</select>
 										</div>
 
@@ -104,64 +105,80 @@
 					case '1':
 						$('#soporte_1').show();
 						$('#soporte_2').hide();
-						$('#soporte_3').hide();
 						$('#soporte_4').hide();
 						value = 'No pude registrame';
 						break;
 					case '2':
 						$('#soporte_1').hide();
 						$('#soporte_2').show();
-						$('#soporte_3').hide();
 						$('#soporte_4').hide();
 						value = 'No pude cargar mis datos de CV';
 						break;
 					case '3':
 						$('#soporte_1').hide();
 						$('#soporte_2').hide();
-						$('#soporte_3').show();
 						$('#soporte_4').hide();
 						value = 'Problema de diseño en la pagina';
 						break;
 					case '4':
 						$('#soporte_1').hide();
 						$('#soporte_2').hide();
-						$('#soporte_3').hide();
 						$('#soporte_4').show();
 						value = 'No puedo cargar mi foto de perfil';
+						break;
+					case '5':
+						$('#soporte_1').hide();
+						$('#soporte_2').hide();
+						$('#soporte_4').hide();
+						value = 'Otro';
 						break;
 					default:
 						$('#soporte_1').hide();
 						$('#soporte_2').hide();
-						$('#soporte_3').hide();
 						$('#soporte_4').hide();
 						value = '';
 						break;
 				}
 
-				console.log("idValue ===> ", val, "Value ===>", value);
+				var valueSubMenu = val != 3 && val != 5 ? $('#select_soporte_'+val).val() : "";
 
-				return new Array(value, $('#select_soporte_'+val).val()); // position 0 = Asunto principal, position 1 = asunto secundario
+				return new Array(value, valueSubMenu); // position 0 = Asunto principal, position 1 = asunto secundario
 			}
 			
 			$("#sent").click(function() {
-				if($("#subject").val() != "" && $("#email").val() != "" && $("#message").val() != "") {
-					if(isEmail($("#email").val())) {
+
+				var name = '',
+					email = '',
+					asunto1 = select_soporte($('#asunto1').val())[0],
+					asunto2 = select_soporte($('#asunto1').val())[1],
+					mensaje = $("#message").val();
+
+				<?php if (isset($_SESSION['ctc'])): ?>
+						name = "<?= $_SESSION['ctc']['name'] . " " . $_SESSION['ctc']['lastName'] ?>";
+						email = "<?= $_SESSION['ctc']['email'] ?>";
+				<?php else: ?>
+						name = $('#name').val();
+						email = $('#email').val();
+				<?php endif; ?>
+
+				if(name != "" && email != "" && asunto1 != "" && mensaje != "") {
+					if(isEmail(email)) {
 						$.ajax({
 							type: 'POST',
 							url: 'ajax/user.php',
-							data: 'op=12&email=' + $("#email").val() + '&subject=' + $("#subject").val() + '&message=' + $("#message").val(),
+							data: 'op=13&email=' + email + '&subject=' + asunto1 + '&message=' + mensaje + '&name=' + name + '&subject2=' + asunto2,
 							dataType: 'json',
 							success: function(data) {
 								if(data.msg == "OK") {
 									swal({
 										title: 'Información!',
-										text: 'Su mensaje se ha enviado exitosamente, gracias por contactarnos, le responderemos a la brevedad posible.',
+										text: 'Su ticket se ha enviado exitosamente, gracias por contactarnos, le responderemos a la brevedad posible.',
 										confirmButtonClass: 'btn btn-primary btn-lg',
 										buttonsStyling: false
 									});
-									$("#email").val("");
-									$("#subject").val("");
-									$("#message").val("");
+									setTimeout(function(){
+										window.location.reload();
+									}, 2000);
 								}
 								else {
 									swal({

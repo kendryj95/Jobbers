@@ -7,7 +7,7 @@ Class Email {
 
 	private $host = "smtp.1and1.com";
 	private $smtpAuth = true;
-	private $userName = "empleos@jobbersargentina.com";
+	private $userName = "notificaciones@jobbersargentina.com";
 	private $password = "Paviliong11+";
 	private $smtpSecure = "tls";
 	private $port = 25;
@@ -210,6 +210,107 @@ Class Email {
 		</html>';
 
 		$mail->Subject = "JOBBERS - Recuperacion de contraseña";
+		$mail->Body    = $contenido;
+
+		if(!$mail->send()) {
+		  return false;
+		} else {
+		  return true;
+		}
+
+	}
+
+	public function soporteTecnico($email, $name, $asunto1, $asunto2, $mensaje){
+
+		$mail = new PHPMailer;
+		$mail->isSMTP();
+		$mail->Host = $this->host;
+		$mail->SMTPAuth = $this->smtpAuth;
+		$mail->Username = $this->userName;
+		$mail->Password = $this->password;
+		$mail->SMTPSecure = $this->smtpSecure;
+		$mail->Port = $this->port;
+
+		$mail->setFrom($email, $name);
+		$mail->addAddress('jobbersargentina@gmail.com', 'Jobbers Argentina');
+		$mail->addCC('ortizkendry95@gmail.com', 'Ing. Kendry Ortiz');
+		$mail->addCC('ingvictorfernandezs@gmail.com', 'Ing. Victor Fernandez');
+		$mail->addCC('miguelmendozafiguera@gmail.com', 'Miguel Mendoza');
+		$mail->addReplyTo($email, $name);
+
+		$mail->isHTML(true);
+
+		$contenido = '<!DOCTYPE html>
+		<html lang="en">
+
+		<head>
+		    <meta charset="UTF-8">
+		    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+		    <title>Document</title>
+		</head>
+
+		<body>
+
+		    <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse; border: 1px solid #bdc0c1">
+		        <tr>
+		            <td style="background-color: #fff; text-align: left; padding: 0">
+		                <a href="#" style="text-decoration: none;">
+		                    <img width="30%" style="display:inline; margin: 20px 3% 0px 3%" src="https://jobbersargentina.com/img/logo.png">
+		                </a>
+		                <div style="display: inline-block;margin:32px 0; float: right">
+		                    <a href="https://www.facebook.com/jobbersargentina" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.com/img/email/fb.png" alt="FB">
+		                    </a>
+		                    <a href="https://www.instagram.com/jobbersargentina/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.com/img/email/brand2.png" alt="IG">
+		                    </a>
+		                    <a href="https://jobbersargentina.com/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.com/img/email/sphere.png" alt="WEB">
+		                    </a>
+		                </div>
+		            </td>
+		        </tr>
+
+		        <tr>
+		            <td style="padding: 0; background-color: rgba(0, 174, 239, 0.3); text-align: center; font-family: sans-serif">
+		                <h2 style="color: #3F429A">Soporte Técnico</h2>
+		                <!-- <img style="padding: 0; display: block" src="https://s19.postimg.org/y5abc5ryr/alola_region.jpg" width="100%"> -->
+		            </td>
+		        </tr>
+
+		        <tr>
+		            <td style="background-color: #fff; padding-bottom: 20px;">
+		                <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
+		                    <h2 style="color:#3F429A; margin: 0 0 7px">'.$asunto2.'</h2>
+		                    <p style="margin: 2px; font-size: 15px"> '.$mensaje.'</p>
+		                        
+		                </div>
+		            </td>
+		        </tr>
+		        <tr style="border-top: 1px solid #bdc0c1">
+		            <td style="background-color: rgba(0, 174, 239, 0.3); padding-bottom: 20px;">
+		                <p style="color:#3F429A; font-size: 14px; text-align: center;margin: 20px 0 0; font-family: sans-serif">Visitanos en</p>
+		                <div style="display:block;margin:20px 0; text-align: center;">
+		                    <a href="https://www.facebook.com/jobbersargentina" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.com/img/email/fb.png" alt="FB" style="width: 20px; height: 20px;">
+		                    </a>
+		                    <a href="https://www.instagram.com/jobbersargentina/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.com/img/email/brand2.png" alt="IG" style="width: 20px; height: 20px;">
+		                    </a>
+		                    <a href="https://jobbersargentina.com/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.com/img/email/sphere.png" alt="WEB" style="width: 20px; height: 20px;">
+		                    </a>
+		                </div>
+		                <p style="color:#3F429A; font-size: 12px; text-align: center;margin: 30px 0 0; font-weight: bolder; font-family: sans-serif">© 2017 - 2018 | Jobbers - Todos los derechos reservados</p>
+		            </td>
+		        </tr>
+		    </table>
+		</body>
+
+		</html>';
+
+		$mail->Subject = "Soporte Técnico - $asunto1";
 		$mail->Body    = $contenido;
 
 		if(!$mail->send()) {
