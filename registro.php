@@ -287,6 +287,7 @@
 
 
 			$("#register").click(function() {
+				 
 				var $btn = $(this);
 				if($("#email").val() != "" && $("#passw1").val() != "" && $("#passw2").val() != "" && $("#name").val() != "" && $("#lastName").val() != "" && $("#userName").val() != "") {
 					if($("#aceptaCondiciones:checked").length > 0) {
