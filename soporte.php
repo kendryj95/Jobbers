@@ -147,6 +147,9 @@
 			
 			$("#sent").click(function() {
 
+				var $btn = $(this);
+				$btn.addClass('disabled');
+
 				var name = '',
 					email = '',
 					asunto1 = select_soporte($('#asunto1').val())[0],
@@ -169,6 +172,9 @@
 							data: 'op=13&email=' + email + '&subject=' + asunto1 + '&message=' + mensaje + '&name=' + name + '&subject2=' + asunto2,
 							dataType: 'json',
 							success: function(data) {
+
+								$btn.removeClass('disabled');
+
 								if(data.msg == "OK") {
 									swal({
 										title: 'Información!',

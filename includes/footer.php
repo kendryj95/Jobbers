@@ -101,6 +101,6 @@
 		</div>
 	</div>
 	<div class="box-block text-center">
-		&copy; 2017 JOBBERS, Todos los derechos reservados
+		&copy; <?= date('Y') ?> JOBBERS, Todos los derechos reservados
 	</div>
 </footer>
