@@ -1548,7 +1548,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 	                                    $("#edad").html((edad)+" años");
 
 	                                    if (Object.keys(data.info_extra).length > 0) {
-	                                    	var html = "<p style='margin-left: 50px'><strong>Remuneración pretendida: </strong> $<span id='labelRem'>"+data.info_extra.remuneracion_pret+"</span> <br><strong>Sobre mí: </strong> <span id='labelSobreMi'>"+data.info_extra.sobre_mi+"</span> <br><strong>Disponibilidad: </strong> <span id='labelDisp'>"+data.info_extra.disponibilidad+"</span></p>";
+	                                    	var html = "<p class='content-cv'><strong>Remuneración pretendida: </strong> $<span id='labelRem'>"+data.info_extra.remuneracion_pret+"</span> <br><strong>Sobre mí: </strong> <span id='labelSobreMi'>"+data.info_extra.sobre_mi+"</span> <br><strong>Disponibilidad: </strong> <span id='labelDisp'>"+data.info_extra.disponibilidad+"</span></p>";
 	                                    	$('#infoExtra').html(html);
 
 	                                    }
@@ -1557,7 +1557,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										var mes = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 										if(data.educacion.length > 0) {
 											data.educacion.forEach(function(e) {
-												html += '<p style="margin-left: 50px;"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>Título o Certificación: </strong> '+e.titulo+' <br /> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
+												html += '<p class="content-cv"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>Título o Certificación: </strong> '+e.titulo+' <br /> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
 											});
 											$("#educacion").html(html);
 										}
@@ -1569,7 +1569,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												let tlf_encargado = ex.tlf_encargado == null || ex.tlf_encargado == '' ? 'No Aplica' : ex.tlf_encargado;
 												let egreso = ex.trab_actualmt == 1 ? 'Actualmente' : mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso;
 
-												html += '<p style="margin-left: 50px"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' - ' + egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong>'+
+												html += '<p class="content-cv"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' - ' + egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong>'+
 													ex.descripcion_tareas + '</p>';
 											});
 											$('#experiencias').html(html);
@@ -1577,14 +1577,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										if(data.idiomas.length > 0) {
 											html = "";
 											data.idiomas.forEach(function(i) {
-												html += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+i.nombre_idioma+'<br> <strong>Nivel Oral: </strong> '+i.nivel_oral+'<br> <strong>Nivel escrito: </strong> '+i.nivel_escrito+'<br> </p>';
+												html += '<p class="content-cv"> <strong>Idioma: </strong> '+i.nombre_idioma+'<br> <strong>Nivel Oral: </strong> '+i.nivel_oral+'<br> <strong>Nivel escrito: </strong> '+i.nivel_escrito+'<br> </p>';
 											});
 											$("#idiomas").html(html);
 										}
 										if(data.otros_conocimientos.length > 0) {
 											html = "";
 											data.otros_conocimientos.forEach(function(oc) {
-												html += '<p style="margin-left: 50px;"> <strong>Título: </strong> '+oc.nombre+'<br> <strong>Descripción: </strong> '+oc.descripcion+'<br> </p>';
+												html += '<p class="content-cv"> <strong>Título: </strong> '+oc.nombre+'<br> <strong>Descripción: </strong> '+oc.descripcion+'<br> </p>';
 											});
 											$("#otros_conocimientos").html(html);
 										}
