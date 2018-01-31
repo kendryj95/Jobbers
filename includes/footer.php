@@ -29,6 +29,7 @@
 								<ul class="list-unstyled">
 									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "admin") ? "../" : ""); ?>nosotros.php">Nosotros</a></li>
 									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "admin") ? "../" : ""); ?>contacto.php">Contacto</a></li>
+									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "admin") ? "../" : ""); ?>soporte.php">Soporte Técnico</a></li>
 									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "admin") ? "../" : ""); ?>politicas.php">Políticas de privacidad</a></li>
 									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "admin") ? "../" : ""); ?>terminos.php">Términos y condiciones</a></li>
 								</ul>
@@ -55,6 +56,7 @@
 								<ul class="list-unstyled">
 									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>nosotros.php">Nosotros</a></li>
 									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>contacto.php">Contacto</a></li>
+									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>soporte.php">Soporte Técnico</a></li>
 									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>politicas.php">Políticas de privacidad</a></li>
 									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>terminos.php">Términos y condiciones</a></li>
 								</ul>
@@ -99,6 +101,6 @@
 		</div>
 	</div>
 	<div class="box-block text-center">
-		&copy; 2017 JOBBERS, Todos los derechos reservados
+		&copy; <?= date('Y') ?> JOBBERS, Todos los derechos reservados
 	</div>
 </footer>

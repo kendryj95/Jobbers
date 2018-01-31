@@ -48,6 +48,18 @@
 							$db->query("INSERT INTO trabajadores_experiencia_laboral (id_trabajador, nombre_empresa, id_pais, id_actividad_empresa, tipo_puesto, mes_ingreso, ano_ingreso, mes_egreso, ano_egreso, trab_actualmt, nombre_encargado, tlf_encargado, descripcion_tareas) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[company]', '$_REQUEST[rCompany]', '$_REQUEST[tCompany]', '$_REQUEST[tEmployeer]', '$_REQUEST[monthI]', '$_REQUEST[yearI]', '$_REQUEST[monthE]', '$_REQUEST[yearE]', '$_REQUEST[trab_actual]', '$_REQUEST[nom_enc]', '$_REQUEST[tlf_enc]', '$_REQUEST[descriptionArea]')");
 						}
 					}
+					$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION['ctc']['id']);
+					$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$_SESSION['ctc']['id']);
+
+					if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
+						$_SESSION["ctc"]["postulate"] = 1;
+					} else {
+						$_SESSION["ctc"]["postulate"] = 0;
+					}
+
+
 					$data = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id=$id");
 					break;
 				case 3:
@@ -55,12 +67,24 @@
 						$db->query("UPDATE trabajadores_educacion SET id_nivel_estudio=$_REQUEST[sNivel], titulo='$_REQUEST[titleS]', id_estado_estudio=$_REQUEST[stateS], id_area_estudio=$_REQUEST[areaS], nombre_institucion='$_REQUEST[institute]', id_pais=$_REQUEST[countryS], mes_inicio=$_REQUEST[monthIn], ano_inicio=$_REQUEST[yearIn], mes_finalizacion=$_REQUEST[monthFi], ano_finalizacion=$_REQUEST[yearFi], materias_carrera=$_REQUEST[mat], materias_aprobadas=$_REQUEST[aprob] WHERE id=$_REQUEST[i]");
 					}else {
 						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores_educacion'");
-						if ((isset($_REQUEST[monthFi]) || ($_REQUEST[monthFi] != ''))  && (isset($_REQUEST[yearFi]) || ($_REQUEST[yearFi] != ''))){
+						if ((isset($_REQUEST['monthFi']) || ($_REQUEST['monthFi'] != ''))  && (isset($_REQUEST['yearFi']) || ($_REQUEST['yearFi'] != ''))){
 							$db->query("INSERT INTO trabajadores_educacion (id_trabajador, id_nivel_estudio, titulo, id_estado_estudio, id_area_estudio, nombre_institucion, id_pais, mes_inicio, ano_inicio, mes_finalizacion, ano_finalizacion, materias_carrera, materias_aprobadas) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[sNivel]', '$_REQUEST[titleS]', '$_REQUEST[stateS]', '$_REQUEST[areaS]', '$_REQUEST[institute]', '$_REQUEST[countryS]', '$_REQUEST[monthIn]', '$_REQUEST[yearIn]', '$_REQUEST[monthFi]', '$_REQUEST[yearFi]', '$_REQUEST[mat]', '$_REQUEST[aprob]')");
 						}else{
 							$db->query("INSERT INTO trabajadores_educacion (id_trabajador, id_nivel_estudio, titulo, id_estado_estudio, id_area_estudio, nombre_institucion, id_pais, mes_inicio, ano_inicio, materias_carrera, materias_aprobadas) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[sNivel]', '$_REQUEST[titleS]', '$_REQUEST[stateS]', '$_REQUEST[areaS]', '$_REQUEST[institute]', '$_REQUEST[countryS]', '$_REQUEST[monthIn]', '$_REQUEST[yearIn]', '$_REQUEST[mat]', '$_REQUEST[aprob]')");
 						}
 					}
+
+					$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION['ctc']['id']);
+					$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$_SESSION['ctc']['id']);
+
+					if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
+						$_SESSION["ctc"]["postulate"] = 1;
+					} else {
+						$_SESSION["ctc"]["postulate"] = 0;
+					}
+
 					$data = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id=$id");
 					break;
 				case 4:
@@ -71,6 +95,18 @@
 						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'trabajadores_idiomas'");
 						$db->query("INSERT INTO trabajadores_idiomas (id_trabajador, id_idioma, nivel_oral, nivel_escrito) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[idioma]', '$_REQUEST[nivelO]', '$_REQUEST[nivelE]')");
 					}
+
+					$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION['ctc']['id']);
+					$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$_SESSION['ctc']['id']);
+
+					if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
+						$_SESSION["ctc"]["postulate"] = 1;
+					} else {
+						$_SESSION["ctc"]["postulate"] = 0;
+					}
+
 					$idiomas = $db->getAll("SELECT trabajadores_idiomas.*, idiomas.nombre as nombre_idioma FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id=$id");
 					foreach($idiomas as $i) {
 						$nivel_oral = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]"); 
@@ -91,6 +127,18 @@
 							$db->query("INSERT INTO trabajadores_otros_conocimientos (id_trabajador, nombre, descripcion) VALUES ('".$_SESSION["ctc"]["id"]."', '$_REQUEST[nameC]', '$_REQUEST[descriptionC]')");
 						}
 					}
+
+					$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION['ctc']['id']);
+					$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$_SESSION['ctc']['id']);
+
+					if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
+						$_SESSION["ctc"]["postulate"] = 1;
+					} else {
+						$_SESSION["ctc"]["postulate"] = 0;
+					}
+
 					$data = $db->getAll("SELECT * FROM trabajadores_otros_conocimientos WHERE id=$id");
 					break;
 				case 6:
@@ -110,6 +158,17 @@
 						// Información adicional de las redes sociales
 						$db->query("UPDATE trabajadores SET sitio_web ='$_REQUEST[sitio_web]', facebook='$_REQUEST[fb]', twitter='$_REQUEST[tw]', instagram='$_REQUEST[ig]', snapchat ='$_REQUEST[snap]', linkedin='$_REQUEST[lkd]' WHERE id=".$_SESSION["ctc"]["id"]);
 						
+					}
+
+					$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION['ctc']['id']);
+					$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION['ctc']['id']);
+					$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$_SESSION['ctc']['id']);
+
+					if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
+						$_SESSION["ctc"]["postulate"] = 1;
+					} else {
+						$_SESSION["ctc"]["postulate"] = 0;
 					}
 
 					$data = $db->getAll("SELECT ti.*, d.nombre AS disponibilidad FROM trabajadores_infextra ti INNER JOIN disponibilidad d ON d.id = ti.disponibilidad WHERE id=$id");
@@ -181,6 +240,18 @@
 			else{
 				$t = 0;
 			}
+
+			$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION['ctc']['id']);
+			$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION['ctc']['id']);
+			$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION['ctc']['id']);
+			$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$_SESSION['ctc']['id']);
+
+			if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
+				$_SESSION["ctc"]["postulate"] = 1;
+			} else {
+				$_SESSION["ctc"]["postulate"] = 0;
+			}
+			
 			echo json_encode(array("status" => $t));
 			break;
 		case LOAD_CURRICULUM:

@@ -18,6 +18,7 @@
 	define('ADD_FB', 10);
 	define('LOGIN_ADMIN', 11);
 	define('SENT_MAIL', 12);
+	define('SOPORTE_TECNICO', 13);
 	switch($op) {
 		case LOGIN:
 			
@@ -295,6 +296,15 @@
 				else {
 					echo json_encode(array("msg" => "ERROR"));
 				}
+			break;
+		case SOPORTE_TECNICO:
+			$sendMail = $email->soporteTecnico($_REQUEST['email'], $_REQUEST['name'], $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
+
+			if ($sendMail) {
+				echo json_encode(array("msg" => "OK"));
+			} else {
+				echo json_encode(array("msg" => "ERROR"));
+			}
 			break;
 	}
 	
