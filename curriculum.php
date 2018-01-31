@@ -1092,120 +1092,179 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								</div>
 
 								<!-- Paso 7 - vista previa -->
+								<!-- SECCION FOTO -->
 								<div class="tab-pane" id="tab7" role="tabpanel">
 									<br><br>
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Vista previa de mi curriculum</h4>
-									<p></p>
-									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Datos de contacto</h4>
 									<div class="row">
-										<div class="col-md-8">
-											<div class="row">
-												<div class="col-md-1"></div>
-												<div class="col-md-3">
-													<img src="img/<?php echo $_SESSION["ctc"]["pic"]; ?>" alt="" class="img-circle m-r-1" width="100" height="100">
+										<div class="col-md-12">
+										<div class="col-sm-4 col-md-4 no-padding-lat">
+											<div class="content-perfil profile-card" style="margin-top: 0px; padding-bottom: 0px; padding-top: 0px;">
+												<div class="profile-avatar" style="text-align: center; background-color: #E4E6E3; margin-top: 0px; padding-top: 40px; padding-bottom: 40px;">
+													<img src="img/<?php echo $_SESSION["ctc"]["pic"]; ?>" alt="" style="width: 130px; margin-bottom: 10px;">
 												</div>
-												<div class="col-md-6">
-													<p>
-														<strong>Nombres: </strong> <span id="labelName"><?php echo $data["nombres"]; ?></span><br>
-														<strong>Apellidos: </strong> <span id="labelLastName"><?php echo $data["apellidos"]; ?></span><br>
-														<strong>DNI: </strong> <span id="labelDNI"><?php echo $data["numero_documento_identificacion"]; ?></span><br>
-														<strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $data["cuil"]; ?></span><br>
-														<strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $data["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$data[id_pais]") : "Sin especificar"; ?></span><br>
-														<strong>Dirección: </strong> <span id="labelCalle"><?php echo $data["calle"]; ?></span><br>
-														<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo date('d/m/y', strtotime($data["fecha_nacimiento"])); ?></span><br>
-														<strong>Edad: </strong> <span id="edad"><?php $data["edad"] . " años"; ?></span><br>
-														<strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $data["correo_electronico"]; ?></span><br>
-														<strong>Telefonos: </strong> <span id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] = !"" ? " / " . $data["telefono_alternativo"] : ''; ?></span><br>
-													</p>
+												<div class="card-block" style="background-color: #E4E6E3;">
+													<ul class="list-group" style="margin-bottom: 0px;">
+													<li class="list-group-item item-profile" style="border-radius: 0px; background-color:#2E358D;">
+														<span class="fa-stack fa-lg icon-item-profile">
+														<i class="fa fa-square-o fa-stack-2x"></i>
+														<i class="fa fa-user fa-stack-1x"></i>
+														</span>
+														<span class="info-item-profile" style="text-transform: uppercase" id="labelCalle"><?php echo "$data[nombres] $data[apellidos]"; ?></span>
+													</li>
+
+													<li class="list-group-item item-profile" style="border-radius: 0px; background-color:#2043a0;">
+														<span class="fa-stack fa-lg icon-item-profile">
+														<i class="fa fa-square-o fa-stack-2x"></i>
+														<i class="fa fa-map-marker fa-stack-1x"></i>
+														</span>
+														<span class="info-item-profile" id="labelCalle"><?php echo $data["calle"]; ?></span>
+													</li>
+
+													<li class="list-group-item item-profile" style="background-color: #235AD1">
+														<span class="fa-stack fa-lg icon-item-profile">
+														<i class="fa fa-square-o fa-stack-2x"></i>
+														<i class="fa fa-phone fa-stack-1x"></i>
+														</span>
+														<span class="info-item-profile" id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] = !"" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
+													</li>
+
+													<li class="list-group-item item-profile" style="background-color: #2393D2; border-radius: 0px;">
+														<span class="fa-stack fa-lg icon-item-profile">
+														<i class="fa fa-square-o fa-stack-2x"></i>
+														<i class="fa fa-envelope fa-stack-1x" style="bottom: 2px;"></i>
+														</span>
+														<span class="info-item-profile" id="labelEmail"><?php echo $data["correo_electronico"]; ?></span>
+													</li>
+													</ul>
 												</div>
-											</div>
+											</div>	
 										</div>
-										<div class="col-md-6"></div>
-									</div>
-									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Experiencia laboral</h4>
-									<div id="experiencias">
-									<?php $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");?>
-										<?php if ($experiencias): ?>
-											<?php foreach ($experiencias as $e): ?>
-												<p style="margin-left: 50px;">
-													<strong>Empresa: </strong> <?php echo $e["nombre_empresa"]; ?><br>
-													<strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
-													<strong>Actividad: </strong> <?php echo $e["actividad_empresa"]; ?><br>
-													<strong>Tipo puesto: </strong> <?php echo $e["tipo_puesto"]; ?><br>
-													<strong>Tiempo: </strong> <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " a " . $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"] ?><br>
-													<strong>Descripción de tareas: </strong> <?php echo $e["descripcion_tareas"] ?> <br>
-												</p>
-											<?php endforeach?>
-										<?php else: ?>
-											<p style="margin-left: 50px;"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
-										<?php endif?>
-									</div>
+										<!-- SECCION INFORMACION -->
+											<div class="col-sm-8 col-md-8 no-padding-lat">
+											
+											<!-- <div class="tab-content"> -->
+												<div class="col-md-12 card-block active content-perfil" id="curriculum" role="tabpanel" style="padding-right: 0px; padding-left:0px; padding-top: 0px;">
+													<!-- <div class="row"> -->
+													<div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
+													<h4 class="title-cv" style="margin-top: 0px;">&nbsp INFORMACION PERSONAL</h4>
+														<p class="content-cv">
+															<strong>DNI: </strong> <span id="labelDNI"><?php echo $data["numero_documento_identificacion"]; ?></span><br>
+															<strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $data["cuil"]; ?></span><br>
+															<strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $data["localidad"] . ", " . $data["provincia"] . ", " . $data["pais"] ?></span><br>
+															<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $data["fecha_nacimiento"] !== null ? date('Y-m-d', strtotime($data["fecha_nacimiento"])) : ""; ?></span><br>
+															<strong>Edad: </strong> <span id="edad"><?php echo $data["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($data["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
+															<strong>Telefonos: </strong> <span id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] = !"" ? " / " . $data["telefono_alternativo"] : ''; ?></span>
+														</p>
+														<h4 class="title-cv">&nbsp EXPERIENCIA LABORAL</h4>
+														<div id="experiencias">
+															<?php $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");?>
+															<?php if ($experiencias): ?>
+															<?php foreach ($experiencias as $e): ?>
 
-									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Estudios</h4>
-									<div id="educacion">
-										<?php if ($educacion): ?>
-											<?php foreach ($educacion as $e): ?>
-												<p style="margin-left: 50px;">
-													<strong>Nivel estudio: </strong> <?php echo $e["nivel"]; ?><br>
-													<strong>País: </strong> <?php echo $e["nombre_pais"]; ?><br>
-													<strong>Estado estudio: </strong> <?php echo $e["estado_estudio"]; ?><br>
-													<strong>Área estudio: </strong> <?php echo $e["nombre_estudio"]; ?><br>
-												</p>
-											<?php endforeach?>
-										<?php else: ?>
-											<p style="margin-left: 50px;">Sin registros</p>
-										<?php endif?>
-									</div>
+															<p class="content-cv" style="margin-bottom: 20px;">
+																<strong>Empresa: </strong>
+																<?php echo $e["nombre_empresa"]; ?><br>
+																<strong>País: </strong>
+																<?php echo $e["nombre_pais"]; ?><br>
+																<strong>Actividad: </strong>
+																<?php echo $e["actividad_empresa"]; ?><br>
+																<strong>Tipo puesto: </strong>
+																<?php echo $e["tipo_puesto"]; ?><br>
+																<strong>Tiempo: </strong>
+																<?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso ?><br>
+																<strong>Descripción de tareas: </strong>
+																
+																	<?php echo $e["descripcion_tareas"] ?>
+																
+															</p>
+															<?php endforeach?>
+															<?php else: ?>
+															<p class="content-cv" style="margin-bottom: 20px;"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
+															<?php endif?>
+														</div>
 
-									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Idiomas</h4>
-									<div id="idiomas">
-										<?php if ($idiomasT): ?>
-											<?php foreach ($idiomasT as $i): ?>
-												<?php $nivel_oral    = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]");?>
-												<?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]");?>
-												<p style="margin-left: 50px;">
-													<strong>Idioma: </strong> <?php echo $i["nombre_idioma"]; ?><br>
-													<strong>Nivel Oral: </strong> <?php echo $nivel_oral; ?><br>
-													<strong>Nivel escrito: </strong> <?php echo $nivel_escrito; ?><br>
-												</p>
-											<?php endforeach?>
-										<?php else: ?>
-											<p style="margin-left: 50px;">Sin registros</p>
-										<?php endif?>
-									</div>
 
-									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Otros conocimientos</h4>
-									<div id="otros_conocimientos">
-										<?php if ($otros_conocimientos): ?>
-											<?php foreach ($otros_conocimientos as $o): ?>
-												<p style="margin-left: 50px;">
-													<strong>Título: </strong> <?php echo $o["nombre"]; ?><br>
-													<strong>Descripción: </strong> <?php echo $o["descripcion"]; ?><br>
-												</p>
-											<?php endforeach?>
-										<?php else: ?>
-											<p style="margin-left: 50px;">Sin registros</p>
-										<?php endif?>
-									</div>
+														<h4 class="title-cv">&nbsp Estudios</h4>
+														<div id="educacion">
+															<?php if ($educacion): ?>
+																<?php foreach ($educacion as $e): ?>
+																	<p class="content-cv" style="margin-bottom: 20px;">
+																		<strong>Nivel estudio: </strong>
+																		<?php echo $e["nivel"]; ?><br>
+																		<strong>País: </strong>
+																		<?php echo $e["nombre_pais"]; ?><br>
+																		<strong>Estado estudio: </strong>
+																		<?php echo $e["estado_estudio"]; ?><br>
+																		<strong>Área estudio: </strong>
+																		<?php echo $e["nombre_estudio"]; ?><br>
+																	</p>
+																<?php endforeach?>
+															<?php else: ?>
+															<p class="content-cv" style="margin-bottom: 20px;">Sin registros</p>
+															<?php endif?>
+														</div>
 
-									<?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador=" . $_SESSION['ctc']['id']);?>
+														<h4 class="title-cv">&nbsp Idiomas</h4>
+														<div id="idiomas">
+															<?php if ($idiomasT): ?>
+																<?php foreach ($idiomasT as $i): ?>
+																<?php $nivel_oral    = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_oral]");?>
+																<?php $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$i[nivel_escrito]");?>
+																	<p class="content-cv" style="margin-bottom: 20px;">
+																		<strong>Idioma: </strong>
+																		<?php echo $i["nombre_idioma"]; ?><br>
+																		<strong>Nivel Oral: </strong>
+																		<?php echo $nivel_oral; ?><br>
+																		<strong>Nivel escrito: </strong>
+																		<?php echo $nivel_escrito; ?><br>
+																	</p>
+																<?php endforeach?>
+																<?php else: ?>
+																	<p class="content-cv" style="margin-bottom: 20px;">Sin registros</p>
+															<?php endif?>
+														</div>
+
+														<h4 class="title-cv">&nbsp Otros conocimientos</h4>
+														<div id="otros_conocimientos">
+															<?php if ($otros_conocimientos): ?>
+															<?php foreach ($otros_conocimientos as $o): ?>
+															<p class="content-cv" style="margin-bottom: 20px;">
+																<strong>Título: </strong>
+																<?php echo $o["nombre"]; ?><br>
+																<strong>Descripción: </strong>
+															
+																	<?php echo $o["descripcion"]; ?>
+																<br>
+															</p>
+															<?php endforeach?>
+															<?php else: ?>
+															<p class="content-cv" style="margin-bottom: 20px;">Sin registros</p>
+															<?php endif?>
+														</div>
+
+														<?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador=" . $_SESSION['ctc']['id']);?>
+
+														<h4 class="title-cv">&nbsp Información Extra</h4>
+														<div id="infoExtra">
+														<?php if ($infoExtra): ?>
+															<p class= "content-cv" style="margin-bottom: 20px;">
+																<strong>Remuneración pretendida: </strong> $<span id="labelRem"><?=$infoExtra['remuneracion_pret']?></span> <br>
+																<strong>Sobre mí: </strong> <span id="labelSobreMi"><?=$infoExtra['sobre_mi']?></span> <br>
+																<strong>Disponibilidad: </strong> 
+																<span id="labelDisp"><?=$db->getOne("SELECT nombre FROM disponibilidad WHERE id=$infoExtra[disponibilidad]");?></span> <br>
+															</p>
+															<?php else: ?>
+																<p class="content-cv" style="margin-bottom: 20px;">Sin registros</p>
+															<?php endif?>
+														</div>
+													</div>
+													<!-- </div> -->
+												</div>
+											<!-- </div> -->
+										</div>
+									</div>
 									
-
-									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px; width: 220px;">Información Extra</h4>
-									<div id="infoExtra">
-										<?php if ($infoExtra): ?>
-												<p style="margin-left: 50px;">
-													<strong>Remuneración pretendida: </strong> $<span id="labelRem"><?=$infoExtra['remuneracion_pret']?></span> <br>
-													<strong>Sobre mí: </strong> <span id="labelSobreMi"><?=$infoExtra['sobre_mi']?></span> <br>
-													<strong>Disponibilidad: </strong> 
-													<span id="labelDisp"><?=$db->getOne("SELECT nombre FROM disponibilidad WHERE id=$infoExtra[disponibilidad]");?></span> <br>
-												</p>
-										<?php else: ?>
-											<p style="margin-left: 50px;">Sin registros</p>
-										<?php endif?>
-									</div>
-									
-
 									<div class="row" style="margin-top: 20px;">
 										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
 										<div class="col-md-4" style="text-align: center;"></div>
