@@ -137,7 +137,7 @@
 				}
 				else {
 					$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
-					echo json_encode(array("status" => 1));
+					echo json_encode(array("status" => 3));
 				}
 			}
 			else {
