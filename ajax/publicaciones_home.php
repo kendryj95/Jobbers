@@ -21,27 +21,27 @@ if($_POST["fecha"]!="")
 {
 	if($condicion=="")
 	{
-			if($_POST['fecha']==24){$condicion=$condicion." WHERE dias < 2 ";}
-			if($_POST['fecha']==3){$condicion=$condicion." WHERE dias < 4 ";}
-			if($_POST['fecha']==1){$condicion=$condicion." WHERE dias < 8 ";}
-			if($_POST['fecha']==2){$condicion=$condicion." WHERE dias < 15 ";}
-			if($_POST['fecha']==4){$condicion=$condicion." WHERE dias < 31 ";}
+			if($_POST['fecha']==24){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 2 ";}
+			if($_POST['fecha']==3){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 4 ";}
+			if($_POST['fecha']==1){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 8 ";}
+			if($_POST['fecha']==2){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 15 ";}
+			if($_POST['fecha']==4){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 31 ";}
 			 
 	}
 	else
 	{
-			if($_POST['fecha']==24){$condicion=$condicion." and dias < 2 ";}
-			if($_POST['fecha']==3){$condicion=$condicion." and dias < 4 ";}
-			if($_POST['fecha']==1){$condicion=$condicion." and dias < 8 ";}
-			if($_POST['fecha']==2){$condicion=$condicion." and dias < 15 ";}
-			if($_POST['fecha']==4){$condicion=$condicion." and dias < 31 ";}
+			if($_POST['fecha']==24){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 2 ";}
+			if($_POST['fecha']==3){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 4 ";}
+			if($_POST['fecha']==1){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 8 ";}
+			if($_POST['fecha']==2){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 15 ";}
+			if($_POST['fecha']==4){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 31 ";}
 	}
 }
 //if($_POST["disponibilidad"]!=""){}
 
 $sql="
 SELECT t1.id as id_publicacion, 
-t2.razon_social as nombre_empresa,
+t2.nombre as nombre_empresa,
 concat('empresa/img/',t7.directorio,'/',t2.id_imagen,'.',t7.extension) as imagen_empresa,
 t1.descripcion as descripcion_publicacion,
 t1.titulo as titulo_publicacion, 
