@@ -468,6 +468,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 									 	?>
 									 </select>
 								</div>
+
+								<button class="btn btn-primary form-control" onClick="limpiarfiltros(0)">Limpiar filtros</button>
 							</div>
 						</div>						
 					</div> <!-- Pegar aqui el codigo cuando esté listo -->
@@ -625,7 +627,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 			//ajax para laspublicaiones
 			paginador=0;
 			$( document ).ready(function() {
-			 				  
+			 	limpiarfiltros();	  
 			   listar_publicaciones(paginador);
 			   const MARGEN = 500;
 
@@ -642,6 +644,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 
 
 			});
+
+			function limpiarfiltros()
+			{
+					$("#area_estudio").val("");
+		          	$("#area_fecha").val("");
+		          	$("#area_disponibilidad").val("");
+		          	listar_publicaciones(0);
+			}
 			function listar_publicaciones(pagina)
 			{
 
