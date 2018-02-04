@@ -1128,7 +1128,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<i class="fa fa-square-o fa-stack-2x"></i>
 														<i class="fa fa-phone fa-stack-1x"></i>
 														</span>
-														<span class="info-item-profile" id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] = !"" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
+														<span class="info-item-profile labelTlf" id=""><?php echo $data["telefono"] . $data["telefono_alternativo"] != "" ? " / " . $data["telefono_alternativo"] : ''; ?></span>
 													</li>
 
 													<li class="list-group-item item-profile" style="background-color: #2393D2; border-radius: 0px;">
@@ -1156,7 +1156,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 															<strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $data["localidad"] . ", " . $data["provincia"] . ", " . $data["pais"] ?></span><br>
 															<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $data["fecha_nacimiento"] !== null ? date('Y-m-d', strtotime($data["fecha_nacimiento"])) : ""; ?></span><br>
 															<strong>Edad: </strong> <span id="edad"><?php echo $data["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($data["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
-															<strong>Telefonos: </strong> <span id="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] = !"" ? " / " . $data["telefono_alternativo"] : ''; ?></span>
+															<strong>Telefonos: </strong> <span class="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] != "" ? " / " . $data["telefono_alternativo"] : ''; ?></span>
 														</p>
 														<h4 class="title-cv">&nbsp EXPERIENCIA LABORAL</h4>
 														<div id="experiencias">
@@ -1541,7 +1541,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										$("#labelCuil").html(data.usuario.cuil);
 										$("#labelCountry").html(data.usuario.localidad+", "+data.usuario.provincia+", "+data.usuario.pais);
 										$("#labelEmail").html(data.usuario.correo_electronico);
-										$("#labelTlf").html(data.usuario.telefono + " / " + data.usuario.telefono_alternativo);
+										$(".labelTlf").html(data.usuario.telefono + " / " + data.usuario.telefono_alternativo);
 	                                    var fecha = formato(data.usuario.fecha_nacimiento);
 										$("#fecha_nac").html(fecha);
 	                                    var edad = data.usuario.edad;
