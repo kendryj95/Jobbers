@@ -1,8 +1,7 @@
 <?php
 require_once('../classes/DatabasePDOInstance.function.php'); 
 	$base = DatabasePDOInstance();
-
-
+ 
 $condicion="";
 
 if($_POST["area"]!=""){$condicion=$condicion." WHERE id_sector= ".$_POST['area']." ";}
@@ -39,13 +38,14 @@ if($_POST["fecha"]!="")
 }
 
 if($condicion=="")
-	{
-		$condicion=$condicion." WHERE t2.suspendido is null or t2.suspendido = 0 ";				 
-	}
-	else
-	{
-		$condicion=$condicion." AND t2.suspendido is null or t2.suspendido = 0 ";
-	}
+{
+	$condicion=$condicion." WHERE t2.suspendido <> 1";
+}
+else
+{
+	$condicion=$condicion." AND t2.suspendido <> 1";
+}
+
 //if($_POST["disponibilidad"]!=""){}
 
 $sql="
