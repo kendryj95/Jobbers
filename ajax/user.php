@@ -302,7 +302,12 @@
 				}
 			break;
 		case SOPORTE_TECNICO:
-			$sendMail = soporteTecnico(3, $_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
+
+			do {
+
+				$sendMail = soporteTecnico(3, $_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
+
+			} while(strlen($sendMail) > 1);
 
 			if ($sendMail == "1") {
 				echo json_encode(array("msg" => "OK"));
