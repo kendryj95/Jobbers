@@ -37,6 +37,15 @@ if($_POST["fecha"]!="")
 			if($_POST['fecha']==4){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 31 ";}
 	}
 }
+
+if($condicion=="")
+	{
+		$condicion=$condicion." WHERE t2.suspendido is null or t2.suspendido = 0 ";				 
+	}
+	else
+	{
+		$condicion=$condicion." AND t2.suspendido is null or t2.suspendido = 0 ";
+	}
 //if($_POST["disponibilidad"]!=""){}
 
 $sql="
