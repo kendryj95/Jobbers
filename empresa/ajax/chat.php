@@ -2,7 +2,7 @@
  
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/DatabasePDOInstance.function.php");
 	require_once("$_SERVER[DOCUMENT_ROOT]/classes/Chat.class.php");
-	require_once("$_SERVER[DOCUMENT_ROOT]/classes/Email.class.php");
+	require_once("$_SERVER[DOCUMENT_ROOT]/webservice/enviarEmail.php"); 
 
 	define('GET_MESSAGES', 1);
 	define('ADD_MESSAGE', 2);
@@ -12,7 +12,6 @@
 
 	$db = DatabasePDOInstance();
 	$chat = new Chat();
-	$email = new Email();
 
 	$op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : false;
 	
@@ -61,7 +60,7 @@
                             "Return-path: administracion@jobbers.com\r\n" .
                             "MIME-Version: 1.0\n" .
                             "Content-type: text/html; charset=utf-8");*/
-                            $email->email_chat($empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
+                            email_chat(1, $empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
 						} else {
 							$empresa = $db->getRow("
                                 SELECT correo_electronico, nombre FROM empresas WHERE uid = $idc2
@@ -76,7 +75,7 @@
                             "Return-path: administracion@jobbers.com\r\n" .
                             "MIME-Version: 1.0\n" .
                             "Content-type: text/html; charset=utf-8");*/
-                            $email->email_chat($trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
+                            email_chat(1, $trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
 						}
 
 						
