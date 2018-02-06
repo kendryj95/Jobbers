@@ -700,18 +700,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 
 						if(datos[key]["meses"]>12)
 						{
-							dias=datos[key]["anos"]+" Años";
+							dias="Hace "+datos[key]["anos"]+" Años";
 						}
 						else
 						{
-							dias=datos[key]["meses"]+" meses";
+							dias="Hace "+datos[key]["meses"]+" meses";
 						}
 					}
 					else
 					{
-						dias=datos[key]["dias"]+" dias";
+						if(datos[key]["dias"]==0)
+						{
+							dias="Hoy";
+						}
+						else
+						{
+							dias="Hace "+datos[key]["dias"]+" dias";
+						} 
 					}	
-					publicacion='<div class="col-sm-6 victor_publicacion" style="border: 1px solid #ededed;min-height: 225px; margin-top: 20px;"> <div class="col-sm-12" style="padding: 0px;float: left;padding-top: 5px;"> '+facebook+' '+instagram+' '+linkedin+'  </div> <div class="col-sm-12 text-center" style="padding: 0px;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href=""><strong>'+datos[key]["nombre_empresa"]+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>Hace '+dias+'</strong></span><br> <a href="">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 10px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div>'; 
+					publicacion='<div class="col-sm-6 victor_publicacion" style="border: 1px solid #ededed;min-height: 225px; margin-top: 20px;"> <div class="col-sm-12" style="padding: 0px;float: left;padding-top: 5px;"> '+facebook+' '+instagram+' '+linkedin+'  </div> <div class="col-sm-12 text-center" style="padding: 0px;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href=""><strong>'+datos[key]["nombre_empresa"]+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a href="">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 10px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div>'; 
 						$("#listado_publicaciones").append(publicacion);
 		           
 		            });
