@@ -1,9 +1,8 @@
 <?php
 	session_start();
 	require_once('../classes/DatabasePDOInstance.function.php');
-	require_once("../classes/Email.class.php");
+	require_once("../webservice/enviarEmail.php");
 	$db = DatabasePDOInstance();
-	$email = new Email();
 	
 	$op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : false;
 	define('LOGIN', 1);
@@ -123,15 +122,20 @@
 			}
             break;
 		case RESET_PASS:
-			//require_once("../vendor/phpmailer/PHPMailerAutoload.php");
 			$exist = $db->getRow("SELECT id, CONCAT(nombres,' ',apellidos) AS name FROM trabajadores WHERE correo_electronico='$_REQUEST[email]'");
 			if($exist) {
-				$controlador = strtotime(date('Hms'));
+				$controlador = (string) strtotime(date('Hms'));
 				$para = $_REQUEST["email"];
 
-				$mail = $email->userForgotPass($para, $exist['name'], $controlador);
+
+				do {
+
+					$mail = userForgotPass(2, $para, $exist['name'], $controlador);
+
+				} while (strlen($mail) > 1);
+
 				
-				if($mail) {
+				if($mail == "1") {
 					$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
 					echo json_encode(array("status" => 1));
 				}
@@ -298,9 +302,9 @@
 				}
 			break;
 		case SOPORTE_TECNICO:
-			$sendMail = $email->soporteTecnico($_REQUEST['email'], $_REQUEST['name'], $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
+			$sendMail = soporteTecnico(3, $_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
 
-			if ($sendMail) {
+			if ($sendMail == "1") {
 				echo json_encode(array("msg" => "OK"));
 			} else {
 				echo json_encode(array("msg" => "ERROR"));
