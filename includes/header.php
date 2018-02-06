@@ -175,12 +175,12 @@
 								Modificar Curriculum
 							</a>
 						</li>
-						<li class="menuPCTrabajador">
+						<!--<li class="menuPCTrabajador">
 							<a class="nav-link color-link" href="empleos.php"  style="padding-right: 0px;padding-left: 2px;">
 								Ver ofertas de empleo
 							</a>
 						</li>
-						
+						-->
 						<li>
 							<a class="nav-link color-link" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="row" style="margin-left: 0;margin-right: 0;">
@@ -357,11 +357,11 @@
 
       <ul class="nav navbar-nav pull-right">
 
-		<li>
-			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>empleos.php">
+		<!--<li>
+			<a class="nav-link color-link" href="<?php // echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>empleos.php">
 				Bolsa de Empleos
 			</a>
-		</li>
+		</li>-->
 		<?php $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
         <li>
 			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>ingresar.php?returnUri=<?= urlencode($actual_link) ?>">
