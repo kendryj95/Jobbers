@@ -392,7 +392,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 
 				<div class="container-fluid">
 					
-					<div class="col-xs-12 col-md-3">
+					<div class="col-xs-12 col-md-3" style="z-index: 1;">
 						<div class="row">
 							<div class="col-md-12">
 								<h3>Ofertas de empleo por área</h3>
