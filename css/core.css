@@ -9671,7 +9671,7 @@ a.text-grey:hover .underline {
 ================================================================= */
 
 .color-link {
-    color: #fff !important;
+    color: #00aeef !important;
 }
 
 .padding-mobile {
@@ -9702,10 +9702,6 @@ a.text-grey:hover .underline {
 
 .icon-free {
     color: #43B968;
-}
-
-.empresas-hover:hover {
-    background-color: #2E3192 !important;
 }
 
 
