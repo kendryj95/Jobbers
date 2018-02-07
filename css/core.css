@@ -9704,6 +9704,10 @@ a.text-grey:hover .underline {
     color: #43B968;
 }
 
+.empresas-hover:hover {
+    background-color: #2E3192 !important;
+}
+
 
 /* =================================================================
   INDEX

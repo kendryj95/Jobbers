@@ -376,7 +376,7 @@
 		</li>
 
 		<li>
-			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
+			<a class="nav-link color-link empresas-hover" style="border:2px solid #2E3192; color: #2E3192; font-weight: bolder" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
 				Acceso Empresas
 			</a>
 		</li>
