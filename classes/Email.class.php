@@ -8,12 +8,11 @@ Class Email {
 	private $host = "smtp.1and1.com";
 	private $smtpAuth = true;
 	private $userName = "notificaciones@jobbersargentina.com";
-	private $password = "Paviliong11+";
+	private $password = "Job93513080197#$";
 	private $smtpSecure = "tls";
 	private $port = 25;
-	private $from = "administracion@jobbers.com";
+	private $from = "notificaciones@jobbersargentina.com";
 	private $fromName = "Jobbers Argentina";
-
 
 	public function email_chat($emisorMsg,$destEmail,$destName, $msg){
 

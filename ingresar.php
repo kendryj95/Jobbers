@@ -343,8 +343,14 @@
 										$("#sendF").attr("data-value", 2);
 										$("#contentEmail").css("display", "none");
 										$("#contentCode").css("display", "block");
-									}
-									else {
+									} else if (data.status == 3){
+										swal({
+											title: 'ERROR!',
+											text: 'Lo sentimos, no se pudo enviar el correo. Por favor intentelo de nuevo.',
+											confirmButtonClass: 'btn btn-primary btn-lg',
+											buttonsStyling: false
+										});
+									} else {
 										swal({
 											title: 'Información!',
 											text: 'Correo electrónico no registrado, por favor intente con otro, de lo contrario puede registrarse haciendo click <a href="registro.php">aquí</a>.',
