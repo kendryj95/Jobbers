@@ -1,8 +1,7 @@
 <?php
 require_once('../classes/DatabasePDOInstance.function.php'); 
 	$base = DatabasePDOInstance();
-
-
+ 
 $condicion="";
 
 if($_POST["area"]!=""){$condicion=$condicion." WHERE id_sector= ".$_POST['area']." ";}
@@ -37,6 +36,16 @@ if($_POST["fecha"]!="")
 			if($_POST['fecha']==4){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 31 ";}
 	}
 }
+
+if($condicion=="")
+{
+	$condicion=$condicion." WHERE t2.suspendido <> 1";
+}
+else
+{
+	$condicion=$condicion." AND t2.suspendido <> 1";
+}
+
 //if($_POST["disponibilidad"]!=""){}
 
 $sql="
@@ -46,14 +55,14 @@ concat('empresa/img/',t7.directorio,'/',t2.id_imagen,'.',t7.extension) as imagen
 t1.descripcion as descripcion_publicacion,
 t1.titulo as titulo_publicacion, 
 t3.id_plan as plan,
-timestampdiff(month,t1.fecha_creacion,curdate()) as meses,
-timestampdiff(day,t1.fecha_creacion,curdate()) as dias,
-timestampdiff(year,t1.fecha_creacion,curdate()) as anos,
+timestampdiff(month,t1.fecha_actualizacion,curdate()) as meses,
+timestampdiff(day,t1.fecha_actualizacion,curdate()) as dias,
+timestampdiff(year,t1.fecha_actualizacion,curdate()) as anos,
 t2.facebook,
 t2.instagram,
 t2.twitter,
 t2.linkedin,
-t1.fecha_creacion,
+t1.fecha_actualizacion,
 t5.amigable as sector,
 t6.amigable as area,
 t1.amigable as publicacion,

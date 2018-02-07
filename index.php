@@ -392,7 +392,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 
 				<div class="container-fluid">
 					
-					<div class="col-xs-12 col-md-3">
+					<div class="col-xs-12 col-md-3" style="z-index: 1;">
 						<div class="row">
 							<div class="col-md-12">
 								<h3>Ofertas de empleo por área</h3>
@@ -468,6 +468,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 									 	?>
 									 </select>
 								</div>
+
+								<button class="btn btn-primary form-control" onClick="limpiarfiltros(0)">Limpiar filtros</button>
 							</div>
 						</div>						
 					</div> <!-- Pegar aqui el codigo cuando esté listo -->
@@ -496,6 +498,118 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 </div>
 
 <?php require_once 'includes/libs-js.php';?>
+
+
+<script type="text/javascript">
+			//ajax para laspublicaiones
+			paginador=0;
+			
+			$( document ).ready(function() {
+			 	limpiarfiltros();	  
+			   	listar_publicaciones(paginador);
+			   const MARGEN = 500;
+
+				$(function(){
+				 $(window).on("scroll",endPage)
+				})
+				function endPage(){
+				 if(MARGEN > $(document).height() - $(window).scrollTop() - $(window).height()) {
+				  listar_publicaciones(paginador);
+				 
+				  paginador=paginador+10
+				 }
+				}
+
+
+			});
+
+			function limpiarfiltros()
+			{
+					$("#area_estudio").val("");
+		          	$("#area_fecha").val("");
+		          	$("#area_disponibilidad").val("");
+		          	listar_publicaciones(0);
+			}
+			function listar_publicaciones(pagina)
+			{
+			 
+			 if(pagina==0)
+			 {
+			 	$("#listado_publicaciones").html("");
+			 	paginador=0;
+			 }	
+			  $.ajax({
+		          method: "POST", 
+		          url: "ajax/publicaciones_home.php",
+		          dataType:"json", 
+		          data:{
+		          	pag:pagina,
+		          	area:$("#area_estudio").val(),
+		          	fecha:$("#area_fecha").val(),
+		          	disponibilidad:$("#area_disponibilidad").val(),
+		          }
+		       				 
+				}).done(function(datos) {						
+				
+			
+					$.each( datos, function( key, value ) {
+						
+						facebook="";
+						twitter="";
+						link=""
+						instagram=""
+						medalla=""; 
+
+						url="empleos-detalle.php?a="+datos[key]["area"]+"&s="+datos[key]["sector"]+"&p="+datos[key]["publicacion"]+"";
+
+						if(datos[key]["plan"]==4){medalla='<img src="img/gold-medal.png" style="float: right;margin-top: -10px;">';}
+					 	if(datos[key]["plan"]==3){medalla='<img src="img/silver-medal.png" style="float: right;margin-top: -10px;">';}
+					 	if(datos[key]["plan"]==2){medalla='<img src="img/bronze-medal.png" style="float: right;margin-top: -10px;">';}
+
+
+						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><img src="img/redes/facebook.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
+						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a href="'+datos[key]["twitter"]+'"><img src="img/redes/twitter.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
+						if(datos[key]["instagram"]!="" && datos[key]["instagram"]!=null){instagram='<a href="'+datos[key]["instagram"]+'"> <img src="img/redes/instagram.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>' ;}
+						if(datos[key]["link"]!="" && datos[key]["link"]!=null){link='<a href="'+datos[key]["link"]+'"><img src="img/redes/link.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
+
+
+					dias="";
+
+					if(datos[key]["dias"]>31)
+					{
+
+						if(datos[key]["meses"]>12)
+						{
+							dias="Hace "+datos[key]["anos"]+" Años";
+						}
+						else
+						{
+							dias="Hace "+datos[key]["meses"]+" meses";
+						}
+					}
+					else
+					{
+						if(datos[key]["dias"]==0)
+						{
+							dias="Hoy";
+						}
+						else
+						{
+							dias="Hace "+datos[key]["dias"]+" dias";
+						} 
+					}
+					
+					publicacion='<div class="col-sm-6 victor_publicacion" style="border: 1px solid #ededed;min-height: 225px; margin-top: 20px;"> <div class="col-sm-12" style="padding: 0px;float: left;padding-top: 5px;"> '+facebook+' '+instagram+' '+link+'  </div> <div class="col-sm-12 text-center" style="padding: 0px;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href=""><strong>'+datos[key]["nombre_empresa"]+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a href="">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 10px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div>'; 
+						
+						$("#listado_publicaciones").append(publicacion);
+		           		 
+		            });
+							 
+				});
+			}
+
+		</script>
+
 
 <script>
 	var c = "";
@@ -621,93 +735,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 			</script>
 		</body>
 
-		<script type="text/javascript">
-			//ajax para laspublicaiones
-			paginador=0;
-			$( document ).ready(function() {
-			 				  
-			   listar_publicaciones(paginador);
-			   const MARGEN = 500;
 
-				$(function(){
-				 $(window).on("scroll",endPage)
-				})
-				function endPage(){
-				 if(MARGEN > $(document).height() - $(window).scrollTop() - $(window).height()) {
-				  listar_publicaciones(paginador);
-				 
-				  paginador=paginador+10
-				 }
-				}
-
-
-			});
-			function listar_publicaciones(pagina)
-			{
-
-			 if(pagina==0)
-			 {
-			 	$("#listado_publicaciones").html("");
-			 	paginador=0;
-			 }	
-			  $.ajax({
-		          method: "POST", 
-		          url: "ajax/publicaciones_home.php",
-		          dataType:"json", 
-		          data:{
-		          	pag:pagina,
-		          	area:$("#area_estudio").val(),
-		          	fecha:$("#area_fecha").val(),
-		          	disponibilidad:$("#area_disponibilidad").val(),
-		          }
-		       				 
-				}).done(function(datos) {						
-					
-
-					$.each( datos, function( key, value ) {
-						facebook="";
-						twitter="";
-						link=""
-						instagram=""
-						medalla=""; 
-
-						url="empleos-detalle.php?a="+datos[key]["area"]+"&s="+datos[key]["sector"]+"&p="+datos[key]["publicacion"]+"";
-
-						if(datos[key]["plan"]==4){medalla='<img src="img/gold-medal.png" style="float: right;margin-top: -10px;">';}
-					 	if(datos[key]["plan"]==3){medalla='<img src="img/silver-medal.png" style="float: right;margin-top: -10px;">';}
-					 	if(datos[key]["plan"]==2){medalla='<img src="img/bronze-medal.png" style="float: right;margin-top: -10px;">';}
-
-
-						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><img src="img/redes/facebook.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
-						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a href="'+datos[key]["twitter"]+'"><img src="img/redes/twitter.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
-						if(datos[key]["instagram"]!="" && datos[key]["instagram"]!=null){instagram='<a href="'+datos[key]["instagram"]+'"> <img src="img/redes/instagram.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>' ;}
-						if(datos[key]["linkedin"]!="" && datos[key]["linkedin"]!=null){linkedin='<a href="'+datos[key]["linkedin"]+'"><img src="img/redes/linkedin.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
-
-
-					dias="";
-					if(datos[key]["dias"]>31)
-					{
-
-						if(datos[key]["meses"]>12)
-						{
-							dias=datos[key]["anos"]+" Años";
-						}
-						else
-						{
-							dias=datos[key]["meses"]+" meses";
-						}
-					}
-					else
-					{
-						dias=datos[key]["dias"]+" dias";
-					}	
-					publicacion='<div class="col-sm-6 victor_publicacion" style="border: 1px solid #ededed;min-height: 225px; margin-top: 20px;"> <div class="col-sm-12" style="padding: 0px;float: left;padding-top: 5px;"> '+facebook+' '+instagram+' '+linkedin+'  </div> <div class="col-sm-12 text-center" style="padding: 0px;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href=""><strong>'+datos[key]["nombre_empresa"]+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>Hace '+dias+'</strong></span><br> <a href="">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 10px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div>'; 
-						$("#listado_publicaciones").append(publicacion);
-		           
-		            });
-							 
-				});
-			}
-
-		</script>
 		</html>
