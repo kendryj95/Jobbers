@@ -9674,6 +9674,12 @@ a.text-grey:hover .underline {
     color: #00aeef !important;
 }
 
+@media(max-width: 500px) {
+    .color-link {
+        color: #fff !important;
+    }
+}
+
 .padding-mobile {
     padding-right: 15px;
     padding-left: 15px;
