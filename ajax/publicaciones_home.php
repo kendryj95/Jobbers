@@ -66,7 +66,8 @@ t1.fecha_actualizacion,
 t5.amigable as sector,
 t6.amigable as area,
 t1.amigable as publicacion,
-t4.id_sector
+t4.id_sector,
+t2.id  as id_empresa
 from publicaciones t1 
 LEFT JOIN empresas t2 ON t1.id_empresa = t2.id
 LEFT JOIN empresas_planes t3 ON t1.id_empresa = t3.id_empresa
