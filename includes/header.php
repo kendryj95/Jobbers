@@ -110,18 +110,18 @@
 
 						<li class="menuPCEmpresa">
 							<?php if($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
-							<a class="nav-link color-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
+							<a class="nav-link" style="color: #fff" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
 								Ver jobbers
 							</a>
 							<?php else: ?>
-							<a class="nav-link color-link actualiza_plan" href="javascript:void(0)" style="cursor: no-drop;">
+							<a class="nav-link actualiza_plan" style="color: #fff" href="javascript:void(0)" style="cursor: no-drop;">
 								Ver jobbers
 							</a>
 							<?php endif; ?>
 						</li>
 						<li>
-							<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
-								<span>Plan:</span>
+							<a class="nav-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
+								<span style="color: #fff">Plan:</span>
 								<span class="tag top" style="top: 0;"><i class="fa fa-trophy icon-free" style="<?php echo $color; ?>; font-size: 26px" aria-hidden="true"></i></span>
 							</a>
 						</li>
@@ -376,7 +376,7 @@
 		</li>
 
 		<li>
-			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
+			<a class="nav-link color-link empresas-hover" style="border:2px solid #2E3192; color: #2E3192; font-weight: bolder; height: 45px; line-height: 39px; margin-top: 12px; padding: 0 26px;" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
 				Acceso Empresas
 			</a>
 		</li>

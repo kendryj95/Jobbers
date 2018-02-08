@@ -9671,7 +9671,13 @@ a.text-grey:hover .underline {
 ================================================================= */
 
 .color-link {
-    color: #fff !important;
+    color: #00aeef !important;
+}
+
+@media(max-width: 500px) {
+    .color-link {
+        color: #fff !important;
+    }
 }
 
 .padding-mobile {
