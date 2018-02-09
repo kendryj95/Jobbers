@@ -420,9 +420,9 @@ $empresas = $db->getAll("
                                                         <strong>Telefono del Encargado: </strong>
                                                         <?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
                                                         <strong>Descripción de tareas: </strong>
-                                                        
+                                                        <span style="word-wrap: break-word;">
                                                             <?php echo $e["descripcion_tareas"] ?>
-                                                        
+                                                        </span>
                                                     </p>
                                                     <?php endforeach?>
                                                     <?php else: ?>
@@ -481,8 +481,9 @@ $empresas = $db->getAll("
                                                         <strong>Título: </strong>
                                                         <?php echo $o["nombre"]; ?><br>
                                                         <strong>Descripción: </strong>
-                                                       
-                                                            <?php echo $o["descripcion"]; ?>
+                                                            <span style="word-wrap: break-word">
+                                                                <?php echo $o["descripcion"]; ?>
+                                                            </span>
                                                         <br>
                                                     </p>
                                                     <?php endforeach?>
@@ -501,9 +502,10 @@ $empresas = $db->getAll("
                                                             <strong>Disponibilidad: </strong>
                                                             <?=$infoExtra['nombre']?> <br>
                                                                 <strong>Sobre mí: </strong>
-                                                                
+                                                                <span style="word-wrap: break-word">
                                                                     <?=$infoExtra['sobre_mi']?>
-                                                                 <br>
+                                                                </span>
+                                                                <br>
                                                     </p>
                                                 </div>
                                             </div>
