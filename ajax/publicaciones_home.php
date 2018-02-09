@@ -20,20 +20,20 @@ if($_POST["fecha"]!="")
 {
 	if($condicion=="")
 	{
-			if($_POST['fecha']==24){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 2 ";}
-			if($_POST['fecha']==3){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 4 ";}
-			if($_POST['fecha']==1){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 8 ";}
-			if($_POST['fecha']==2){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 15 ";}
-			if($_POST['fecha']==4){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_creacion,curdate()) < 31 ";}
+			if($_POST['fecha']==24){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_actualizacion,curdate()) < 2 ";}
+			if($_POST['fecha']==3){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_actualizacion,curdate()) < 4 ";}
+			if($_POST['fecha']==1){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_actualizacion,curdate()) < 8 ";}
+			if($_POST['fecha']==2){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_actualizacion,curdate()) < 15 ";}
+			if($_POST['fecha']==4){$condicion=$condicion." WHERE timestampdiff(day,t1.fecha_actualizacion,curdate()) < 31 ";}
 			 
 	}
 	else
 	{
-			if($_POST['fecha']==24){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 2 ";}
-			if($_POST['fecha']==3){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 4 ";}
-			if($_POST['fecha']==1){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 8 ";}
-			if($_POST['fecha']==2){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 15 ";}
-			if($_POST['fecha']==4){$condicion=$condicion." and timestampdiff(day,t1.fecha_creacion,curdate()) < 31 ";}
+			if($_POST['fecha']==24){$condicion=$condicion." and timestampdiff(day,t1.fecha_actualizacion,curdate()) < 2 ";}
+			if($_POST['fecha']==3){$condicion=$condicion." and timestampdiff(day,t1.fecha_actualizacion,curdate()) < 4 ";}
+			if($_POST['fecha']==1){$condicion=$condicion." and timestampdiff(day,t1.fecha_actualizacion,curdate()) < 8 ";}
+			if($_POST['fecha']==2){$condicion=$condicion." and timestampdiff(day,t1.fecha_actualizacion,curdate()) < 15 ";}
+			if($_POST['fecha']==4){$condicion=$condicion." and timestampdiff(day,t1.fecha_actualizacion,curdate()) < 31 ";}
 	}
 }
 
@@ -77,7 +77,7 @@ LEFT JOIN areas_sectores t5 ON t4.id_sector=t5.id
 LEFT JOIN areas t6 ON t5.id_area=t6.id 
 LEFT JOIN imagenes t7 ON t2.id_imagen=t7.id
 ".$condicion."
-ORDER BY plan DESC limit ".$_POST['pag'].",10";
+ORDER BY fecha_actualizacion,plan DESC limit ".$_POST['pag'].",10";
 $datos_publicaciones = $base->getAll($sql);
 
 //echo $sql;
