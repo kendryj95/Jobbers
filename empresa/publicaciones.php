@@ -101,7 +101,9 @@
 		<div class="wrapper">
 
 			<!-- Preloader -->
-			<div class="preloader"></div>
+			<div class="content-loader">
+				<div class="preloader"></div>
+			</div>
 
 			<!-- Sidebar -->
 			<?php //require_once('../includes/sidebar.php'); ?>

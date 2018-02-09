@@ -52,8 +52,10 @@
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 		<div class="wrapper">
 
-			 <!-- Preloader  -->
-			<div class="preloader"></div>
+			<!-- Preloader -->
+			<div class="content-loader">
+				<div class="preloader"></div>
+			</div>
 
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>

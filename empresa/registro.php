@@ -317,7 +317,9 @@
 										<div class="col-md-2"></div>
 										<div class="col-md-8">
 											
-											<div class="preloader" style="position: absolute;"></div>
+										<div class="content-loader">
+											<div class="preloader"></div>
+										</div>
 											
 											<div id="containerFree">
 												<h4 class="text-muted">Datos del plan</h4>
@@ -633,7 +635,7 @@
 										$("#listServices").html(html);
 										
 										$("#services").css("display", "block");
-										
+										$(".content-loader").css("display", "none");
 										$(".preloader").css("display", "none");
 										
 										$("#payMP").click(function() {
@@ -654,6 +656,7 @@
 							else {
 								$("#containerFree").css("display", "block");
 								$("#containerPay").css("display", "none");
+								$(".content-loader").css("display", "none");
 								$(".preloader").css("display", "none");
 							}
 							
