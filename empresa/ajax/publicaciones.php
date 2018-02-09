@@ -469,11 +469,11 @@
                 group_concat(t7.id_idioma) as idiomas,
                 t10.marcador    
 				FROM publicaciones t1 
-				INNER JOIN postulaciones t2 ON t1.id = t2.id_publicacion 
-				INNER JOIN trabajadores t3 ON t3.id = t2.id_trabajador
-				INNER JOIN trabajadores_educacion t4 ON t4.id_trabajador = t2.id_trabajador 
+				LEFT JOIN postulaciones t2 ON t1.id = t2.id_publicacion 
+				LEFT JOIN trabajadores t3 ON t3.id = t2.id_trabajador
+				LEFT JOIN trabajadores_educacion t4 ON t4.id_trabajador = t2.id_trabajador 
 				LEFT JOIN trabajadores_infextra t5 ON t5.id_trabajador = t2.id_trabajador
-				LEFT JOIN trabajadores_calificacion t6 ON t6.id_trabajador = t2.id_trabajador
+				LEFT JOIN trabajadores_calificacion t6 ON t6.id_publicacion = t1.id
 				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
                 LEFT JOIN trabajadores_experiencia_laboral t8 ON t8.id_trabajador = t2.id_trabajador
                 LEFT JOIN trabajadores_marcadores t10 ON t10.id_trabajador = t2.id_trabajador
@@ -508,7 +508,7 @@
 						$postulados[] = array(
 
 							$k + 1,
-							'<a target="_blank" style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
+							'<a target="_blank" style="font-size:12px;" href="../trabajador-detalle.php?t=' . $fila["id_trabajador"] . '&pubid=' . $fila["id"] . '"><strong>' . "$fila[nombre]" . '</strong></a>
 							<div style="color: #ffde00;font-size:14px;">'.$calificar[$fila['calificacion']].'</div>
 							<div style="font-size:11px;">
 							<strong>Edad: </strong>' . $fila["edad"] . '<strong> 
