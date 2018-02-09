@@ -1104,6 +1104,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										<div class="col-md-12">
 										<div class="col-sm-4 col-md-4 no-padding-lat">
 											<div class="content-perfil profile-card" style="margin-top: 0px; padding-bottom: 0px; padding-top: 0px;">
+
 												<div class="profile-avatar" style="text-align: center; background-color: #E4E6E3; margin-top: 0px; padding-top: 40px; padding-bottom: 40px;">
 													<img src="img/<?php echo $_SESSION["ctc"]["pic"]; ?>" alt="" style="width: 130px; margin-bottom: 10px;">
 												</div>
@@ -1140,7 +1141,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														</span>
 														<span class="info-item-profile" id="labelEmail"><?php echo $data["correo_electronico"]; ?></span>
 													</li>
+
 													</ul>
+													<a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $t; ?>" target="_blank"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
 												</div>
 											</div>	
 										</div>
