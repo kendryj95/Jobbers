@@ -286,17 +286,17 @@ $empresas = $db->getAll("
                                          <label><strong>Calificar</strong></label><br/>
                                             <span class="rating" style="margin-left: -80px;">
                                              
-                                              <input id="rating5" type="radio" name="rating" value="5" onClick="calificar(this.value,<?php echo  $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <input id="rating5" type="radio" name="rating" value="5" onClick="calificar(this.value,<?php echo  $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>,<?php echo $_GET['pubid']?>)">
                                               <label for="rating5">15</label>
 
-                                              <input id="rating4" type="radio" name="rating" value="4"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <input id="rating4" type="radio" name="rating" value="4"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>,<?php echo $_GET['pubid']?>)">
                                               <label for="rating4">54</label>  
 
-                                              <input id="rating3" type="radio" name="rating" value="3"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <input id="rating3" type="radio" name="rating" value="3"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>,<?php echo $_GET['pubid']?>)">
                                               <label for="rating3">3</label>
-                                              <input id="rating2" type="radio" name="rating" value="2"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <input id="rating2" type="radio" name="rating" value="2"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>,<?php echo $_GET['pubid']?>)">
                                               <label for="rating2">2</label>
-                                              <input id="rating1" type="radio" name="rating" value="1"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)">
+                                              <input id="rating1" type="radio" name="rating" value="1"  onClick="calificar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>,<?php echo $_GET['pubid']?>)">
                                               <label for="rating1">1</label>
                                             </span>
                                         </div> 
@@ -305,7 +305,7 @@ $empresas = $db->getAll("
                                         <div style="padding-top: 15px;">
                                        
                                             <label><strong>Marcador</strong></label><br/>
-                                            <select id="marcador" onChange="marcar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>)" class="form-control">
+                                            <select id="marcador" onChange="marcar(this.value,<?php echo $_SESSION['ctc']['id'];?>,<?php echo $_GET['t']?>,<?php echo $_GET['pubid']?>)" class="form-control">
                                                 <option value="">Marcador</option>
                                                 <option value="0">Descartar</option>
                                                 <option value="1">Contactado</option>
@@ -608,19 +608,19 @@ $empresas = $db->getAll("
         
         <?php echo  "<script>var id_user = ".$_GET['t']." ;</script>";?>
         <?php echo  "<script>var id_emp = ".$_SESSION['ctc']['id']." ;</script>";?>
-
+        <?php echo  "<script>var id_pub = ".$_GET['pubid']." ;</script>";?>
 
         <script type="text/javascript">
         $( document ).ready(function() {
-            setear_calificacion(id_user,id_emp);
-            setear_marcador(id_user,id_emp);
+            setear_calificacion(id_user,id_emp,id_pub);
+            setear_marcador(id_user,id_emp,id_pub);
         });
 
-        function setear_calificacion(user,emp)
+        function setear_calificacion(user,emp,id_pub)
         {   
              $.ajax({
                 url : 'empresa/queries/ajax.php',
-                data : { op : 11,empresa:emp,usuario:user},
+                data : { op : 11,empresa:emp,usuario:user,public:id_pub},
                 type : 'POST',
                 success : function(data) { 
                     if(data!=0)
@@ -633,11 +633,11 @@ $empresas = $db->getAll("
                 },  
                   }); 
         }        
-          function calificar(valor,emp,user)
+          function calificar(valor,emp,user,pub)
                 {
                 $.ajax({
                 url : 'empresa/queries/ajax.php',
-                data : { op : 1,empresa:emp,usuario:user,value:valor},
+                data : { op : 1,empresa:emp,usuario:user,value:valor,public:pub},
                 type : 'POST',
                 success : function(data) {
 
@@ -648,14 +648,14 @@ $empresas = $db->getAll("
                   }); 
                 }
              
-              function marcar(valor,emp,user)            
+              function marcar(valor,emp,user,pub)            
                 { 
 
                    if(valor!="")
                    {
                      $.ajax({
                         url : 'empresa/queries/ajax.php',
-                        data : { op : 2,empresa:emp,usuario:user,value:valor},
+                        data : { op : 2,empresa:emp,usuario:user,value:valor,public:pub},
                         type : 'POST',
                         success : function(data) {  
                         }, 
@@ -665,11 +665,11 @@ $empresas = $db->getAll("
                           }); 
                    }
                 }      
-             function setear_marcador(user,emp)
+             function setear_marcador(user,emp,id_pub)
             {   
                  $.ajax({
                     url : 'empresa/queries/ajax.php',
-                    data : { op : 22,empresa:emp,usuario:user},
+                    data : { op : 22,empresa:emp,usuario:user,public:id_pub},
                     type : 'POST',
                     success : function(data) {  
                         if(data!=0)
