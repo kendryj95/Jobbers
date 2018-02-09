@@ -502,11 +502,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 
 <script type="text/javascript">
 			//ajax para laspublicaiones
-			paginador=0;
+			var paginador=0;
 			
 			$( document ).ready(function() {
-			 	limpiarfiltros();	  
-			   	listar_publicaciones(paginador);
+			 		  
+			   listar_publicaciones(paginador); 
 			   const MARGEN = 500;
 
 				$(function(){
@@ -514,9 +514,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 				})
 				function endPage(){
 				 if(MARGEN > $(document).height() - $(window).scrollTop() - $(window).height()) {
-				  listar_publicaciones(paginador);
-				 
-				  paginador=paginador+10
+				   paginador=paginador+10
+				  listar_publicaciones(paginador);				 
 				 }
 				}
 
@@ -525,19 +524,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 
 			function limpiarfiltros()
 			{
+					
+					 
 					$("#area_estudio").val("");
 		          	$("#area_fecha").val("");
 		          	$("#area_disponibilidad").val("");
+		          	$("#listado_publicaciones").text("");
 		          	listar_publicaciones(0);
+		          
+		          	
 			}
 			function listar_publicaciones(pagina)
 			{
-			 
-			 if(pagina==0)
-			 {
-			 	$("#listado_publicaciones").html("");
-			 	paginador=0;
-			 }	
+				paginador=pagina;
+				 if(paginador==0)
+				 { 
+				 	$("#listado_publicaciones").text("");
+				 }
+			 	
 			  $.ajax({
 		          method: "POST", 
 		          url: "ajax/publicaciones_home.php",
@@ -559,6 +563,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						link=""
 						instagram=""
 						medalla=""; 
+						urlEmpresa=datos[key]["nombre_empresa"];
+						urlEmp=urlEmpresa.replace(" ", "-")+"-"+datos[key]["id_empresa"];
 
 						url="empleos-detalle.php?a="+datos[key]["area"]+"&s="+datos[key]["sector"]+"&p="+datos[key]["publicacion"]+"";
 
@@ -570,7 +576,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><img src="img/redes/facebook.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
 						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a href="'+datos[key]["twitter"]+'"><img src="img/redes/twitter.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
 						if(datos[key]["instagram"]!="" && datos[key]["instagram"]!=null){instagram='<a href="'+datos[key]["instagram"]+'"> <img src="img/redes/instagram.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>' ;}
-						if(datos[key]["link"]!="" && datos[key]["link"]!=null){link='<a href="'+datos[key]["link"]+'"><img src="img/redes/link.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
+						if(datos[key]["linkedin"]!="" && datos[key]["linkedin"]!=null){link='<a href="'+datos[key]["link"]+'"><img src="img/redes/linkedin.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
 
 
 					dias="";
@@ -599,12 +605,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						} 
 					}
 					
-					publicacion='<div class="col-sm-6 victor_publicacion" style="border: 1px solid #ededed;min-height: 225px; margin-top: 20px;"> <div class="col-sm-12" style="padding: 0px;float: left;padding-top: 5px;"> '+facebook+' '+instagram+' '+link+'  </div> <div class="col-sm-12 text-center" style="padding: 0px;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href=""><strong>'+datos[key]["nombre_empresa"]+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a href="">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 10px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div>'; 
-						
+					publicacion='<div class="col-sm-6 victor_publicacion" style="border: 1px solid #ededed;min-height: 225px; margin-top: 20px;"> <div class="col-sm-12" style="padding: 0px;float: left;padding-top: 5px;"> '+facebook+' '+instagram+' '+link+'  </div> <div class="col-sm-12 text-center" style="padding: 0px;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a href="'+url+'">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 10px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div>'; 
+						 
 						$("#listado_publicaciones").append(publicacion);
-		           		 
+		           		
 		            });
-							 
+						  
 				});
 			}
 
