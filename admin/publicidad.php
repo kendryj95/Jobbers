@@ -43,6 +43,9 @@
 			#tablaPublicaciones {
 				width: 100% !important;
 			}
+			.color-link{
+				color: #fff !important;
+			}
 		</style>
 	</head>
 
@@ -239,6 +242,9 @@
 
 				setTimeout(function() {
 					$('.preloader').fadeOut();
+				}, 500);
+				setTimeout(function() {
+					$('.content-loader').fadeOut();
 				}, 500);
 				
 				$("input[type=radio][name=radioOpcion]").change(function() {

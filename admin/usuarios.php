@@ -39,6 +39,9 @@
 			.swal2-modal {
 				border: 1px solid rgb(223, 223, 223);
 			}
+			.color-link{
+				color: #fff !important;
+			}
 		</style>
 	</head>
 
@@ -217,6 +220,9 @@
 
 				setTimeout(function() {
 					$('.preloader').fadeOut();
+				}, 500);
+				setTimeout(function() {
+					$('.content-loader').fadeOut();
 				}, 500);
 				
 				var $tablaCategorias = jQuery("#tablaCategorias");

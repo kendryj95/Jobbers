@@ -84,6 +84,11 @@
 		    enable_page_level_ads: true
 		  });
 		</script>
+		<style>
+			.color-link{
+				color: #fff !important;
+			}
+		</style>
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 
