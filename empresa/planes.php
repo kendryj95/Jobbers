@@ -51,7 +51,9 @@
 	<div class="wrapper">
 
 		<!-- Preloader -->
-		<div class="preloader"></div>
+		<div class="content-loader">
+			<div class="preloader"></div>
+		</div>
 
 		<!-- Sidebar second -->
 		<?php require_once('../includes/sidebar-second.php'); ?>
@@ -264,8 +266,10 @@
 						</div>
 					</div>
 					<div class="row" id="step2" style="display: none;">
-						<div class="col-md-12">
-							<!-- <div class="preloader" style="position: absolute;"></div> -->
+						<div class="col-md-8">
+						<div class="content-loader">
+							<div class="preloader"></div>
+						</div>
 							<div class="card card-block">
 								<h3 class="col-md-8 col-md-offset-2" style="padding-left: 0px;">Información para el pago</h3>
 								<div id="containerFree">
@@ -388,7 +392,8 @@
 			if(band) {
 				$("#step1").css("display", "none");
 				$("#step2").css("display", "block");
-				
+
+				$(".content-loader").css("display", "none");
 				$(".preloader").css("display", "block");
 				
 				if(parseInt(plan) != 1) {
@@ -420,6 +425,7 @@
 
 							$("#services").css("display", "block");
 
+							$(".content-loader").css("display", "none");
 							$(".preloader").css("display", "none");
 
 							$("#payMP").click(function() {
@@ -438,6 +444,7 @@
 				else {
 					$("#containerFree").css("display", "block");
 					$("#containerPay").css("display", "none");
+					$(".content-loader").css("display", "none");
 					$(".preloader").css("display", "none");
 				}
 			}
