@@ -248,8 +248,9 @@ if ($id) {
             $egreso = $e['trab_actualmt'] == 1 ? "Actualmente" : $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"];
 
             if ($i === 1) {
+                $colspan = 'colspan="2"';
                 if ($j === $cantExp) { // ¿Es la última iteración?
-                    $colspan = 'colspan="2"';
+                    $colspan = 'colspan="4"';
                 }
                 $html .= '<tr>';
             }
@@ -285,7 +286,7 @@ if ($id) {
         }
     } else {
         $html .= '<tr style="border-bottom: 1px solid #848584">
-                    <th style="padding-top: 40px;padding-bottom: 40px" colspan="2">
+                    <th style="padding-top: 40px;padding-bottom: 40px" colspan="4">
                         <div style="
                             font-size: 1.5em;
                             text-align:center;
@@ -295,7 +296,7 @@ if ($id) {
                     </th>
                 </tr>';
 
-        $html .= '<tr><td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;" colspan="2">
+        $html .= '<tr><td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;" colspan="4">
                         <br />
                             <p style="text-align: center"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
                   </td></tr>';
@@ -306,7 +307,7 @@ if ($id) {
     if ($educacion) {
 
         $html .= '<tr style="border-bottom: 1px solid #848584">
-                    <td style="padding-top: 40px; padding-left: 30px; padding-bottom: 40px;" colspan="2">
+                    <td style="padding-top: 40px; padding-left: 30px; padding-bottom: 40px;" colspan="4">
                         <div style="
                             font-size: 1.5em;
                             text-align:center;
@@ -324,8 +325,9 @@ if ($id) {
         foreach ($educacion as $e) {
 
             if ($i === 1) {
+                $colspan = 'colspan="2"';
                 if ($j === $cantEdu) { // ¿Es la última iteración?
-                    $colspan = 'colspan="2"';
+                    $colspan = 'colspan="4"';
                 }
                 $html .= '<tr>';
             }
@@ -359,7 +361,7 @@ if ($id) {
     if ($idiomas) {
 
         $html .= '<tr style="border-bottom: 1px solid #848584">
-                    <td colspan="2">
+                    <td colspan="4">
                         <div style="
                             font-size: 1.5em;
                             text-align:center;
@@ -379,8 +381,9 @@ if ($id) {
             $nivel_escrito = $db->getOne("SELECT nombre FROM nivel_idioma WHERE id=$id[nivel_escrito]");
 
             if ($i === 1) {
+                $colspan = 'colspan="2"';
                 if ($j === $cantIdi) { // ¿Es la última iteración?
-                    $colspan = 'colspan="2"';
+                    $colspan = 'colspan="4"';
                 }
                 $html .= '<tr>';
             }
@@ -411,7 +414,7 @@ if ($id) {
     if ($otros_conocimientos) {
 
         $html .= '<tr style="border-bottom: 1px solid #848584">
-                    <td style="max-width: 190px; padding-top: 40px; padding-bottom: 40px;" colspan="2">
+                    <td style="max-width: 190px; padding-top: 40px; padding-bottom: 40px;" colspan="4">
                         <div style="
                             font-size: 1.5em;
                             text-align:center;
@@ -429,8 +432,9 @@ if ($id) {
         foreach ($otros_conocimientos as $o) {
 
             if ($i === 1) {
+                $colspan = 'colspan="2"';
                 if ($j === $cantOtr) { // ¿Es la última iteración?
-                    $colspan = 'colspan="2"';
+                    $colspan = 'colspan="4"';
                 }
                 $html .= '<tr>';
             }
@@ -461,7 +465,7 @@ if ($id) {
     if ($infoExtra) {
 
         $html .= '<tr>
-                    <td style="padding-top: 40px;padding-bottom: 40px;" colspan="2">
+                    <td style="padding-top: 40px;padding-bottom: 40px;" colspan="4">
                         <div style="
                             font-size: 1.5em;
                             text-align:center;
@@ -472,7 +476,7 @@ if ($id) {
                 </tr>';
 
         $html .= '<tr>    
-                    <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;" colspan="2">
+                    <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;" colspan="4">
                         <br />
                         <span style="color: #00AEEF; font-size: 16px">Remuneración pretendida: </span> <span> $' . $infoExtra["remuneracion_pret"] . '</span><br />
                         <span style="color: #00AEEF; font-size: 16px">Disponibilidad: </span> <span> '. $infoExtra["disponibilidad"] . '</span><br />
