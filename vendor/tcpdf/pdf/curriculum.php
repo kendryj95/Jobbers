@@ -17,8 +17,11 @@ if ($id) {
 
     $trabajador = $db->getRow("
         SELECT
+                CONCAT(
                 tra.nombres,
-                tra.apellidos,
+                ' ',
+                tra.apellidos
+                ) AS nombres,
                 tra.numero_documento_identificacion,
                 tra.cuil,
                 tra.calle,
@@ -30,6 +33,7 @@ if ($id) {
                     img.extension
                 ) AS imagen,
                 tra.fecha_nacimiento,
+                TIMESTAMPDIFF(YEAR,tra.fecha_nacimiento,CURDATE()) AS edad,
                 tra.calificacion_general,
                 tra.sitio_web,
                 tra.facebook,
@@ -93,7 +97,7 @@ if ($id) {
             $this->Image($name_file, 70, 5, 70, '', 'png', '', 'C', false, 300, '', false, false, 0, false, false, false);
 
             $this->Image('body.jpg', 45, 85, 170, 200, '', '', '', false, 0, '', false, false, 0, false, false, false);*/
-            $this->Image('logo_d.png', 75, 115, 70, 25, '', '', '', false, 0, '', false, false, 0, false, false, false);
+            $this->Image('logo_d.png', 13, 257, 50, 20, '', '', '', false, 0, '', false, false, 0, false, false, false);
             $this->SetFont('helvetica', 'B', 20);
         }
         public function Footer()
@@ -142,68 +146,174 @@ if ($id) {
 
     $pdf->setJPEGQuality(75);
 
-    $html = '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold;"> CURRICULUM ' . strtoupper("$trabajador[nombres] $trabajador[apellidos]") . '</p><br><br>
-        ';
-
-    /*$html .= '<table cellpadding="4" style="background-color: white; border: 1px solid #e5e5e5; font-size: 9px; line-height: 1.2; font-family: "Open Sans", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 400; width: 400px; line-height: 1.5; color: #666666; background-color: transparent; border-collapse: collapse; border-spacing: 0;">
-    <tr style="background-color: #d9f1d5; color: #3f9532;">
-    <th align="center" style="border-bottom: 1px solid #afe1a8;">Inico de parada</th>
-    <th align="center" style="border-bottom: 1px solid #afe1a8;">Fin</th>
-    <th align="center" style="border-bottom: 1px solid #afe1a8;">Tiempo</th>
-    <th align="center" width="200px" style="border-bottom: 1px solid #afe1a8;">Ubicacion</th>
+    $html = '<table style="border-collapse: collapse">
+    <tr style="border-bottom: 3px solid #00AEEF;">
+        <td>
+            <div style="text-align: center">
+                <img src="../../../img/'.$trabajador["imagen"].'" alt="Foto Usuario" style="width : 110px;
+                height: 100px;
+                border-radius: 50%;" />
+                <div style="font-size: 22px; color: #2E3192"><b>'.$trabajador["nombres"].'</b></div>
+            </div>
+        </td>
+        <td style="background-color: #bbbcc1">
+        <sub>
+            <ul style="list-style-type: none; padding-top: 20px;">
+                <li style=" color: #2E358D;"><img src="../../../curriculum/001-contact.svg" alt="phone" width="20"><sup><span style="font-size: 14px; color: #fff"> &nbsp; Correo Electrónico</span></sup><sup><b> &nbsp; <h2 style="font-size: 16px">'.$trabajador["correo_electronico"].'</h2></b></sup></li>
+                <li style=" color: #2E358D"><img src="../../../curriculum/003-house.svg" alt="email" width="20"><sup><span style="font-size: 14px; color: #fff"> &nbsp; Ubicación</span></sup><sup><b> &nbsp; <h2 style="font-size: 16px">'.$trabajador["pais"].'</h2> </b></sup></li>
+                <li style=" color: #2E358D"><img src="../../../curriculum/002-phone-call.svg" alt="web" width="20"><sup><span style="font-size: 14px; color: #fff"> &nbsp; Teléfono</span></sup><sup><b> &nbsp; <h2 style="font-size: 16px">'.$trabajador["telefono"].'</h2></b></sup></li>
+            </ul>
+            </sub>
+        </td>
     </tr>
-    ';*/
+    <tr style="border-bottom: 1px solid #848584;">
+        <th style="max-width: 170px; padding-top: 40px; vertical-align:middle" colspan="2">
+            <div style="
+                font-size: 1.5em;
+                text-align:center;
+                color: rgb(46, 49, 146);
+                background-color: rgb(206, 206, 206);
+                padding: 5px;"><b>Información Personal</b></div>
+        </th>
+    </tr>';
+
 
     $idTrab = ''; 
     if (isset($_REQUEST['i'])) {
         $idTrab = $_REQUEST['i'];
     }
 
-    $tlf_alternativo = $trabajador["telefono_alternativo"] = !"" ? ' / ' . $trabajador["telefono_alternativo"] : '';
+    $tlf_alternativo = $trabajador["telefono_alternativo"] != "" ? $trabajador["telefono_alternativo"] : 'Sin especificar';
 
-    $html .= '<p></p><p></p>
-            <table border="0">
-                <tr>
-                    <td colspan="2">
-                        <b>Nombres: </b> <span id="labelName">' . $trabajador["nombres"] . '</span><br>
-                        <b>Apellidos: </b> <span id="labelLastName">' . $trabajador["apellidos"] . '</span><br>';
+    $dni = '';
+    $cuil = '';
+    $calle = '';
 
-    if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['id'] == $idTrab){
+    if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['id'] == $idTrab){ // DNI Y CUIL
 
        if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['id'] == $idTrab){
-            $html .= ' <b> DNI: </b> <span id="labelDNI">' . $trabajador["numero_documento_identificacion"] . '</span><br>
-                      <b>Numero de CUIL: </b> <span id="labelCuil">' . $trabajador["cuil"] . '</span><br>';
+            $dni = '<span style="font-weight: bolder; color: #00AEEF; font-size: 18px">DNI: </span> <span>'.$trabajador["numero_documento_identificacion"].'</span><br />';
+            $cuil = '<span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Numero de CUIL: </span> <span>'.$trabajador["cuil"].'</span><br />';
        } 
     }
 
 
-    $html .= ' <b> Edad: </b> <span id="labelE">' . $edad . '</span><br>
-              <b>Lugar de nacimiento: </b> <span id="labelCountry">' . ($trabajador["id_pais"] != "" ? $db->getOne("SELECT nombre FROM paises WHERE id=$trabajador[id_pais]") : "Sin especificar") . '</span><br>';
-
-    if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['type'] == 2){
+    if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['type'] == 2){ // DIRECCIÓN
 
        if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['type'] == 2){
-            $html .= ' <b> Dirección: </b> <span id="labelCalle">' . $trabajador["calle"] . '</span><br>';
+            $calle = '<span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Lugar de nacimiento: </span> <span> '.$trabajador["calle"].'</span>';
        } 
     }
 
-    $html .= ' <b> Correo electrónico: </b> <span id="labelEmail">' . $trabajador["correo_electronico"] . '</span><br>
-              <b>Telefonos: </b> <span id="labelTlf">' . $trabajador["telefono"] . $tlf_alternativo . '</span><br>
-                        <a href="https://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '">Visitar perfil</a><br>
-                        O copia y pega esto en tu navegador para visitar el perfil
-                        <strong>https://jobbersargentina.com/trabajador-detalle.php?t=' . $trabajador["nombres"] . '-' . $trabajador["apellidos"] . '-' . $id . '</strong>
-                    </td>
-                    <td></td>
-                    <td>
-                        <img src="../../../img/' . $trabajador["imagen"] . '" alt="" class="img-circle m-r-1" width="100" height="100">
-                    </td>
-                </tr>
-            </table>
-        ';
+    $html .= '<tr>
+        <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;">
+        <br />
+                '.$dni.'
+                '.$cuil.'
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Lugar de nacimiento: </span> <span>'.$trabajador["pais"].'</span> <br />
+                '.$calle.'
+        </td>
+        <td>
+        <br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Fecha de nacimiento: </span> <span> '.$trabajador["fecha_nacimiento"].'</span><br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Edad: </span> <span> '.$trabajador["edad"].' años</span><br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Telefono Alternativo: </span> <span>'.$tlf_alternativo.'</span>
+            
+        </td>
+    </tr>';
 
-    if ($educacion) {
+    if ($experiencias) {
 
-        $html .= '<p></p><p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; border-bottom: 1px solid #3e70c9; "> ESTUDIOS </p><p></p>';
+        $html .= '<tr style="border-bottom: 1px solid #848584">
+                    <th style="padding-top: 40px;padding-bottom: 40px" colspan="2">
+                        <div style="
+                            font-size: 1.5em;
+                            text-align:center;
+                            color: rgb(46, 49, 146);
+                            background-color: rgb(206, 206, 206);
+                            padding: 5px;"><b>Experiencia Laboral</b></div>
+                    </th>
+                </tr>';
+
+        $i = 1;
+        $j = 1;
+        $cantExp = count($experiencias);
+        $colspan = '';
+        
+        foreach ($experiencias as $e) {
+            $encargado_ref = $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"];
+            $tlf_encargado = $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"];
+            $egreso = $e['trab_actualmt'] == 1 ? "Actualmente" : $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"];
+
+            if ($i === 1) {
+                if ($j === $cantExp) { // ¿Es la última iteración?
+                    $colspan = "colspan='2'";
+                }
+                $html .= '<tr>';
+            }
+
+            $html .= '<td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;" '.$colspan.'>
+                        <br />
+                                <span style="
+                                font-size: 1.3em;
+                                color: #2e3192;"><b>'.$e["nombre_empresa"].'</b></span>
+                                <div>
+                                <br />
+                                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Pais:</span> '.$e["nombre_pais"].'<br />
+                                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Actividad:</span> '.$e["actividad_empresa"].'<br />
+                                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Tipo de Puesto:</span> ' . $e["tipo_puesto"] . '<br />
+                                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Tiempo:</span> ' . $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso . '<br />
+                                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Encargado de Referencias:</span> ' . $encargado_ref . '<br />
+                                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Telefono del encargado:</span> ' . $tlf_encargado . '<br />
+                                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Descripcón de tareas:</span> ' . $e["descripcion_tareas"] . '
+                                </div>
+                           
+                        </td>';
+
+
+            if ($i === 2) {
+                $html .= '</tr>';
+                $i = 0;
+            } elseif ($j === $cantExp) { // ¿Es la última iteración?
+                $html .= '</tr>';
+            }
+
+            $i++;
+            $j++;
+        }
+    } else {
+        $html .= '<tr style="border-bottom: 1px solid #848584">
+                    <th style="padding-top: 40px;padding-bottom: 40px" colspan="2">
+                        <div style="
+                            font-size: 1.5em;
+                            text-align:center;
+                            color: rgb(46, 49, 146);
+                            background-color: rgb(206, 206, 206);
+                            padding: 5px;"><b>Experiencia Laboral</b></div>
+                    </th>
+                </tr>';
+
+        $html .= '<tr><td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;" colspan="2">
+                        <br />
+                            <p style="text-align: center"><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>
+                  </td></tr>';
+
+    }
+
+    $html .= '</table>';
+
+    /*if ($educacion) {
+
+        $html .= '<tr style="border-bottom: 1px solid #848584">
+        <td style="padding-top: 40px; padding-left: 30px; padding-bottom: 40px;" colspan="2">
+            <div style="
+                font-size: 1.5em;
+                text-align:center;
+                color: rgb(46, 49, 146);
+                background-color: rgb(206, 206, 206);
+                padding: 5px;"><b>Estudios</b></div>
+        </td>
+    </tr>  ';
 
         foreach ($educacion as $e) {
             $html .= '
@@ -218,51 +328,9 @@ if ($id) {
         }
     }
 
-    if ($empleos) {
-
-        $html .= '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; border-bottom: 1px solid #3e70c9; "> EXPERIENCIA LABORAL </p><p></p>';
-
-        $html .= '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; "> DENTRO DE LA PLATAFORMA </p><p></p>';
-        foreach ($empleos as $e) {
-            $html .= '
-                    <br>
-                    <b>Empresa: </b> ' . $e["nombre_empresa"] . '<br>
-                    <b>Actividad:</b> ' . $e["actividad"] . '<br>
-                ';
-        }
-
-        if ($experiencias) {
-            $html .= '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; "> AÑADIDO COMO EXPERIENCIA AL CURRICULUM </p><p></p>';
-        }
-    }
-
     $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
 
-    if ($experiencias) {
-        if (!$empleos) {
-            $html .= '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; border-bottom: 1px solid #3e70c9; "> EXPERIENCIA LABORAL </p><p></p>';
-        }
-        foreach ($experiencias as $e) {
-            $encargado_ref = $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"];
-            $tlf_encargado = $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"];
-            $egreso = $e['trab_actualmt'] == 1 ? "Actualmente" : $mes[$e["mes_egreso"] - 1] . "/" . $e["ano_egreso"];
-            $html .= '
-                    <br>
-                    <b>Empresa: </b> ' . $e["nombre_empresa"] . '<br>
-                    <b>País: </b> ' . $e["nombre_pais"] . '<br>
-                    <b>Actividad:</b> ' . $e["actividad_empresa"] . '<br>
-                    <b>Tipo puesto: </b> ' . $e["tipo_puesto"] . '<br>
-                    <b>Tiempo: </b> ' . $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso . '<br>
-                    <b>Encargado de Referencias: </b> ' . $encargado_ref . '<br>
-                    <b>Telefono del Encargado: </b> ' . $tlf_encargado . '<br>
-                    <b>Descripción de tareas: </b> ' . $e["descripcion_tareas"] . '<br>
-                ';
-        }
-    } else {
-        $html .= '<p align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt; font-weight:bold; border-bottom: 1px solid #3e70c9; "> EXPERIENCIA LABORAL </p><p></p><br>';
-
-        $html.= '<p><em><b>"Sin Experiencia Laboral, pero con muchas ganas de aprender"</b></em></p>';
-    }
+    
 
     if ($idiomas) {
 
@@ -320,12 +388,226 @@ if ($id) {
                     <strong>Disponibilidad: </strong> '. $infoExtra["disponibilidad"] . '<br>
                 ';
 
-    }
+    }*/
+
+    //$html .= '</table>';
+
+    $test = '<table style="border-collapse: collapse">
+    <!-- Cabecera (foto, nombre y contacto) -->
+    <tr style="border-bottom: 3px solid #00AEEF;">
+        <td>
+            <div style="text-align: center">
+                <img src="../../../curriculum/headshot.jpg" alt="Foto Usuario" style="width : 110px;
+                height: 100px;
+                border-radius: 50%;" />
+                <div style="font-size: 22px; color: #2E3192"><b>Miguel Mendoza</b></div>
+                <div style="font-size: 22px; color: #2E3192"><b>Frontend Dev</b></div>
+            </div>
+        </td>
+        <td style="background-color: #bbbcc1">
+        <sub>
+            <ul style="list-style-type: none; padding-top: 20px;">
+                <li style=" color: #2E358D;"><img src="../../../curriculum/001-contact.svg" alt="phone" width="20"><sup><span style="font-size: 14px; color: #fff"> &nbsp; Correo Electrónico</span></sup><sup><b> &nbsp; <h2 style="font-size: 16px">miguelmendozafiguera@gmail.com</h2></b></sup></li>
+                <li style=" color: #2E358D"><img src="../../../curriculum/003-house.svg" alt="email" width="20"><sup><span style="font-size: 14px; color: #fff"> &nbsp; Ubicación</span></sup><sup><b> &nbsp; <h2 style="font-size: 16px">Venezuela</h2> </b></sup></li>
+                <li style=" color: #2E358D"><img src="../../../curriculum/002-phone-call.svg" alt="web" width="20"><sup><span style="font-size: 14px; color: #fff"> &nbsp; Teléfono</span></sup><sup><b> &nbsp; <h2 style="font-size: 16px">0123456789</h2></b></sup></li>
+            </ul>
+            </sub>
+        </td>
+    </tr>
+    <!-- Contenido -->
+    <!-- Informacion Personal -->
+    <tr style="border-bottom: 1px solid #848584;">
+        <th style="max-width: 170px; padding-top: 40px; vertical-align:middle" colspan="2">
+            <div style="
+                font-size: 1.5em;
+                text-align:center;
+                color: rgb(46, 49, 146);
+                background-color: rgb(206, 206, 206);
+                padding: 5px;"><b>Información Personal</b></div>
+        </th>
+    </tr>
+    <tr>
+        <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;">
+        <br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">DNI: </span> <span> 3821471478912</span><br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Numero de CUIL: </span> <span> 3821471478912</span><br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Lugar de nacimiento: </span> <span> Venezuela</span>
+        </td>
+        <td>
+        <br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Fecha de nacimiento: </span> <span> 28/06/1995</span><br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Edad: </span> <span> 22 años</span><br />
+                <span style="font-weight: bolder; color: #00AEEF; font-size: 18px">Telefonos: </span> <span> 3821471912 / 2179632</span>
+            
+        </td>
+    </tr>
+
+    <!-- Experiencia Laboral -->
+    <tr style="border-bottom: 1px solid #848584">
+        <th style="padding-top: 40px;padding-bottom: 40px" colspan="2">
+            <div style="
+                font-size: 1.5em;
+                text-align:center;
+                color: rgb(46, 49, 146);
+                background-color: rgb(206, 206, 206);
+                padding: 5px;"><b>Experiencia Laboral</b></div>
+        </th>
+    </tr>
+    <tr>
+        <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;">
+        <br />
+                <span style="
+                font-size: 1.3em;
+                color: #2e3192;"><b>Desarrollador en Dynos Energy C.A.</b></span>
+                <p style="font-size: 10px;
+                font-style: italic;
+                margin-bottom: 3px;">April 2011 - Present</p>
+                <div>
+                <br />
+                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Pais:</span> Venezuela<br />
+                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Actividad:</span> IT & Tecnologia<br />
+                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Tiempo:</span> Octubre/2014 - Presente<br />
+                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Encargado de Referencias:</span> Ricardo Marcano<br />
+                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Telefono del encargado:</span> 0412038192<br />
+                    <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Descripcón de tareas:</span> Desarrollo de aplicaciones basadas en distintas tecnologias
+                </div>
+           
+        </td> 
+        <td style="border-left: 1px solid #000;">
+        <br />
+                <span style="margin-top: 20px;
+                font-size: 1.3em;
+                color: #2e3192;"><b>Desarrollador Front-End en Jobbers</b></span>
+                <p style="font-size: 10px;
+                    font-style: italic;
+                    margin-bottom: 3px;">April 2011 - Present</p>
+
+                    <div>
+                    <br />
+                        <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Pais:</span> Venezuela<br />
+                        <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Actividad:</span> IT & Tecnologia<br />
+                        <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Tiempo:</span> Octubre/2014 - Presente<br />
+                        <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Encargado de Referencias:</span> Ricardo Marcano<br />
+                        <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Telefono del encargado:</span> 0412038192<br />
+                        <span style="color: #00AEEF; font-size: 16px; font-weight:bolder;">Descripcón de tareas:</span> Coordinador de Estándares Responsable de los lineamientos relacionados con la identidad de la empresa plasmados en Manuales de Identidad Corporativa. Reporte a Dirección. -    Manejo de equipos de trabajo ubicados en Venezuela, Costa Rica, Guatemala, El Salvador.
+                    </div>
+            
+        </td>
+    </tr>
+
+    <!-- Estudios -->
+    <tr style="border-bottom: 1px solid #848584">
+        <td style="padding-top: 40px; padding-left: 30px; padding-bottom: 40px;" colspan="2">
+            <div style="
+                font-size: 1.5em;
+                text-align:center;
+                color: rgb(46, 49, 146);
+                background-color: rgb(206, 206, 206);
+                padding: 5px;"><b>Estudios</b></div>
+        </td>
+    </tr>   
+    <tr> 
+        <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;">
+            
+            <br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Nivel de estudio: </span> <span> Lorem ipsum</span> <br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Título o certificación: </span> <span> Aenean imperdiet</span><br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">País: </span> <span> Sed fringilla</span><br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Estado estudio: </span> <span> Cras dapibus</span><br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Área estudio: </span> <span> Sed fringilla</span>            
+        </td>
+        <td style="border-left: 1px solid black">
+            
+            <br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Nivel de estudio: </span> <span> Otro</span><br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Título o certificación: </span> <span> Fundamentos de Marketing Digital </span><br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">País: </span> <span> Venezuela</span><br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Estado estudio: </span> <span> Graduado</span><br />
+                    <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Área estudio: </span> <span> Tecnologías de la Información</span>
+        </td>
+    </tr>
+
+    <!-- Idiomas -->
+    <tr style="border-bottom: 1px solid #848584">
+        <td colspan="2">
+            <div style="
+                font-size: 1.5em;
+                text-align:center;
+                color: rgb(46, 49, 146);
+                background-color: rgb(206, 206, 206);
+                padding: 5px;"><b>Idiomas</b></div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;">
+            <br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Idioma: </span> <span> Lorem ipsum</span><br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Nivel Oral: </span> <span> Aenean imperdiet</span><br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Nivel Escrito: </span> <span> Sed fringilla</span>
+        </td>
+        <td style="border-left: 1px solid black;">
+        <br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Idioma: </span> <span> Lorem ipsum</span><br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Nivel Oral: </span> <span> Aenean imperdiet</span><br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Nivel Escrito: </span> <span> Sed fringilla</span>
+        </td>
+    </tr>
+
+    <!-- Otros Conocimientos -->
+    <tr style="border-bottom: 1px solid #848584">
+        <td style="max-width: 190px; padding-top: 40px; padding-bottom: 40px;" colspan="2">
+            <div style="
+                font-size: 1.5em;
+                text-align:center;
+                color: rgb(46, 49, 146);
+                background-color: rgb(206, 206, 206);
+                padding: 5px;"><b>Otros Conocimientos</b></div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;">
+            <br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Título: </span> <span> Lorem ipsum dolor sit amet</span><br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Descripción: </span>
+            <span style="margin: 0px;"> Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</span> 
+        </td>
+
+        <td style="border-left: 1px solid black;">
+            <br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Título: </span> <span> Lorem ipsum dolor sit amet</span><br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Descripción: </span>
+            <span style="margin: 0px;"> Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</span>
+        </td>
+    </tr>
+    <!-- Informacion Extra -->
+    <tr>
+        <td style="padding-top: 40px;padding-bottom: 40px;" colspan="2">
+            <div style="
+                font-size: 1.5em;
+                text-align:center;
+                color: rgb(46, 49, 146);
+                background-color: rgb(206, 206, 206);
+                padding: 5px;"><b>Información Extra</b></div>
+        </td>
+    </tr>
+    <tr>    
+        <td style="padding-left: 30px; padding-top: 40px; padding-bottom: 40px;" colspan="2">
+            <br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Remuneración pretendida: </span> <span> $4000</span><br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Disponibilidad: </span> <span> Donec pede</span><br />
+            <span style="font-weight: bolder; color: #00AEEF; font-size: 16px">Sobre mí: </span> <span> Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. 
+                Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. 
+                Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. 
+                Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt.</span>
+        </td>
+    </tr>
+
+</table>';
 
     $pdf->writeHTML($html, true, false, true, false, '');
 
     // reset pointer to the last page
     $pdf->lastPage();
 
-    $pdf_filename = $pdf->Output("curriculum_$trabajador[nombres]_$trabajador[apellidos].pdf", "I");
+    $pdf_filename = $pdf->Output("curriculum_".strtolower(str_replace(" ", "_", $trabajador["nombres"])).".pdf", "I");
 }
