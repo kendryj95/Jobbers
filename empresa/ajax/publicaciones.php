@@ -473,7 +473,7 @@
 				LEFT JOIN trabajadores t3 ON t3.id = t2.id_trabajador
 				LEFT JOIN trabajadores_educacion t4 ON t4.id_trabajador = t2.id_trabajador 
 				LEFT JOIN trabajadores_infextra t5 ON t5.id_trabajador = t2.id_trabajador
-				LEFT JOIN trabajadores_calificacion t6 ON t6.id_publicacion = t1.id
+				LEFT JOIN trabajadores_calificacion t6 ON t6.id_trabajador = t2.id_trabajador
 				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
                 LEFT JOIN trabajadores_experiencia_laboral t8 ON t8.id_trabajador = t2.id_trabajador
                 LEFT JOIN trabajadores_marcadores t10 ON t10.id_trabajador = t2.id_trabajador
