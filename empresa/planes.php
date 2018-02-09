@@ -36,6 +36,9 @@
 		.card {
 			border-radius: 6px;
 		}
+		.color-link{
+			color:#fff !important;
+		}
 	</style>
 
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

@@ -39,6 +39,9 @@
 			.modal.in.modal-agregar-rubro .modal-dialog {
 				max-width: 400px;
 			}
+			.color-link{
+				color: #fff !important;
+			}
 		</style>
 	</head>
 
@@ -368,6 +371,9 @@
 
 				setTimeout(function() {
 					$('.preloader').fadeOut();
+				}, 500);
+				setTimeout(function() {
+					$('.content-loader').fadeOut();
 				}, 500);
 				
 				$("#saveRedes").click(function() {

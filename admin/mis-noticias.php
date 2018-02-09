@@ -44,6 +44,9 @@
 			#tablaPublicaciones {
 				width: 100% !important;
 			}
+			.color-link{
+				color: #fff !important;
+			}
 		</style>
 	</head>
 
@@ -299,6 +302,9 @@
 
 				setTimeout(function() {
 					$('.preloader').fadeOut();
+				}, 500);
+				setTimeout(function() {
+					$('.content-loader').fadeOut();
 				}, 500);
 				
 				var $tablaCategorias = jQuery("#tablaCategorias");
