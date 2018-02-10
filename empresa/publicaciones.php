@@ -241,12 +241,32 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
-									<select id="select2-demo-3" class="form-control" data-plugin="select2">
-										<?php foreach($disps as $disp): ?>
-											<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
-										<?php endforeach ?>
-									</select>
+									<div class="col-sm-4" style="padding-left: 0px;">
+										<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
+										<select id="select2-demo-3" class="form-control" data-plugin="select2">
+											<?php foreach($disps as $disp): ?>
+												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+
+									<div class="col-sm-4">
+										<label for="select2-demo-3" class="form-control-label">Provincia</label>
+										<select id="select2-demo-3" class="form-control" data-plugin="select2">
+											<?php foreach($disps as $disp): ?>
+												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+
+									<div class="col-sm-4" style="padding-right: 0px;">
+										<label for="select2-demo-3" class="form-control-label">Localidad</label>
+										<select id="select2-demo-3" class="form-control" data-plugin="select2">
+											<?php foreach($disps as $disp): ?>
+												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
 								</div>
 								<div class="form-group">
 									<label for="modal-agregar-publicacion-titulo">Título</label>
@@ -1199,6 +1219,7 @@
 				tablaPostulados.clear().draw();
 			});
 			$('#modal-postulados').on('show.bs.modal', function (e) {
+				//alert($(e.relatedTarget).attr('data-id')); 
 				tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + $(e.relatedTarget).attr('data-id'));
 				tablaPostulados.ajax.reload(); 
 			});
@@ -1556,11 +1577,14 @@
 
 		<script>
 		contador=0;
-		$( "#modal-postulados" ).mouseenter(function() {
+		$( "#modal-postulados" ).mouseenter(  function (e) {
 		 if(contador==0)
 		 {
+		 
+			 
 		 	 tablaPostulados.ajax.reload();		  	 
-		  	 contador=1;		 }
+		  	 contador=1;		  
+		  	}
 		}); 
 		$( "#modal-postulados" ).mouseleave(function() {
 		  contador=0;

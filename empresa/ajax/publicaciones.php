@@ -452,8 +452,38 @@
 						$limit = " LIMIT 100";
 						break;
 				}
-					 
-				$datos = $db->getAll("SELECT 
+				$sql="SELECT 
+					t1.id,
+					t2.id_trabajador, 
+					t3.uid AS uid_trabajador,  
+					t3.id_sexo,
+					t3.fecha_creacion,
+					t3.provincia,
+					t4.id_area_estudio,
+					UPPER(CONCAT(t3.nombres,' ',t3.apellidos)) as nombre,
+					TIMESTAMPDIFF(YEAR,t3.fecha_nacimiento,CURDATE()) AS edad,
+					t5.calificacion,
+					t6.marcador,
+					t7.remuneracion_pret,
+					group_concat(t8.id_idioma) as idiomas,
+					group_concat(t10.nombre) as actividad_empresa
+					FROM publicaciones t1
+					LEFT JOIN postulaciones t2 ON t2.id_publicacion = t1.id
+					LEFT JOIN trabajadores t3 ON t3.id = t2.id_trabajador
+					LEFT JOIN trabajadores_educacion t4 ON t4.id_trabajador = t3.id
+					LEFT JOIN trabajadores_calificacion t5 ON t5.id_trabajador = t3.id and t5.id_publicacion = t1.id
+					LEFT JOIN trabajadores_marcadores t6 ON t6.id_trabajador = t3.id and t6.id_publicacion = t1.id
+					LEFT JOIN trabajadores_infextra t7 ON t7.id_trabajador = t3.id
+					LEFT JOIN trabajadores_idiomas t8 ON t8.id_trabajador = t3.id
+
+					LEFT JOIN trabajadores_experiencia_laboral t9 ON t9.id_trabajador = t3.id
+					LEFT JOIN actividades_empresa t10 ON t10.id = t9.id_actividad_empresa
+					                
+					WHERE t1.id=".$id."
+					GROUP by t3.id";
+
+
+				/*$sql="SELECT 
 				t1.id,
 				t3.id AS id_trabajador,
 				t3.uid AS uid_trabajador,  
@@ -473,15 +503,17 @@
 				LEFT JOIN trabajadores t3 ON t3.id = t2.id_trabajador
 				LEFT JOIN trabajadores_educacion t4 ON t4.id_trabajador = t2.id_trabajador 
 				LEFT JOIN trabajadores_infextra t5 ON t5.id_trabajador = t2.id_trabajador
-				LEFT JOIN trabajadores_calificacion t6 ON t6.id_trabajador = t2.id_trabajador
+				RIGHT JOIN trabajadores_calificacion t6 ON t6.id_publicacion = t1.id
 				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
                 LEFT JOIN trabajadores_experiencia_laboral t8 ON t8.id_trabajador = t2.id_trabajador
-                LEFT JOIN trabajadores_marcadores t10 ON t10.id_trabajador = t2.id_trabajador
+                LEFT JOIN trabajadores_marcadores t10 ON t10.id_publicacion = t1.id
                 LEFT JOIN actividades_empresa t9 ON t9.id = t8.id_actividad_empresa
 				WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']." and t1.id=".$id."
 				GROUP BY t3.id
-				ORDER BY t3.fecha_creacion DESC");
- 
+				ORDER BY t3.fecha_creacion DESC";	 */ 
+				$datos = $db->getAll($sql);
+
+				
 
 				if($datos) {
 				
@@ -535,7 +567,7 @@
 					}
 				} 
 				echo json_encode(array(
-					"data" => $postulados
+					"data" => $postulados, 
 				));
 				break;
 			case AGREGAR_ESPECIAL:
