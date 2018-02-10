@@ -39,11 +39,11 @@ if($_POST["fecha"]!="")
 
 if($condicion=="")
 {
-	$condicion=$condicion." WHERE t2.suspendido <> 1";
+	$condicion=$condicion." WHERE t2.suspendido <> 1 AND t1.estatus=1";
 }
 else
 {
-	$condicion=$condicion." AND t2.suspendido <> 1";
+	$condicion=$condicion." AND t2.suspendido <> 1 AND t1.estatus=1";
 }
 
 //if($_POST["disponibilidad"]!=""){}
