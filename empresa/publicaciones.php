@@ -82,6 +82,9 @@
 			{
 				margin-bottom: 7px;padding-top: 0px;padding-bottom: 0px;
 			}
+			.color-link{
+				color: #fff !important;
+			}
 		</style>
 
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -98,7 +101,9 @@
 		<div class="wrapper">
 
 			<!-- Preloader -->
-			<div class="preloader"></div>
+			<div class="content-loader">
+				<div class="preloader"></div>
+			</div>
 
 			<!-- Sidebar -->
 			<?php //require_once('../includes/sidebar.php'); ?>

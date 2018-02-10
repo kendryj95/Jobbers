@@ -208,7 +208,7 @@ $empresas = $db->getAll("
                                             <?php if (($_SESSION['ctc']['type'] == 1 && $trabajador['publico'] == 1) || ($_SESSION['ctc']['type'] == 2) || count($postulado) > 0): ?>
 
                                                 <?php if (isset($_SESSION["ctc"])): ?>
-                                                    <a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="javascript:void(0)" id="downloadC" data-href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $t; ?>"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
+                                                    <a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $t; ?>" target="_blank"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
                                                 <?php endif?>
                                         <?php endif;?>
                                     </div>
@@ -420,9 +420,9 @@ $empresas = $db->getAll("
                                                         <strong>Telefono del Encargado: </strong>
                                                         <?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
                                                         <strong>Descripción de tareas: </strong>
-                                                        
+                                                        <span style="word-wrap: break-word;">
                                                             <?php echo $e["descripcion_tareas"] ?>
-                                                        
+                                                        </span>
                                                     </p>
                                                     <?php endforeach?>
                                                     <?php else: ?>
@@ -481,8 +481,9 @@ $empresas = $db->getAll("
                                                         <strong>Título: </strong>
                                                         <?php echo $o["nombre"]; ?><br>
                                                         <strong>Descripción: </strong>
-                                                       
-                                                            <?php echo $o["descripcion"]; ?>
+                                                            <span style="word-wrap: break-word">
+                                                                <?php echo $o["descripcion"]; ?>
+                                                            </span>
                                                         <br>
                                                     </p>
                                                     <?php endforeach?>
@@ -501,9 +502,10 @@ $empresas = $db->getAll("
                                                             <strong>Disponibilidad: </strong>
                                                             <?=$infoExtra['nombre']?> <br>
                                                                 <strong>Sobre mí: </strong>
-                                                                
+                                                                <span style="word-wrap: break-word">
                                                                     <?=$infoExtra['sobre_mi']?>
-                                                                 <br>
+                                                                </span>
+                                                                <br>
                                                     </p>
                                                 </div>
                                             </div>
@@ -569,12 +571,7 @@ $empresas = $db->getAll("
             var empresa = <?php echo $_SESSION["ctc"]["type"] == 1 ? 1 : 0; ?>;
             var cant_c = <?php echo ($_SESSION["ctc"]["type"] == 1 ? $_SESSION["ctc"]["servicio"]["curriculos_disponibles"] : 0); ?>;
              $(function() {
-                $("#downloadC").click(function() {
-                    var band = true;
-                    if(band) {
-                        window.location.assign($(this).attr("data-href"));
-                    }
-                });
+                
                 $("#sendMesage").click(function() {
                     var message = $("#messageText").val();
                     if(message != '') {

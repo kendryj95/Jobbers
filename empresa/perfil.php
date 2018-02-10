@@ -84,13 +84,20 @@
 		    enable_page_level_ads: true
 		  });
 		</script>
+		<style>
+			.color-link{
+				color: #fff !important;
+			}
+		</style>
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 
 		<div class="wrapper">
 
 			<!-- Preloader -->
-			<div class="preloader"></div>
+			<div class="content-loader">
+				<div class="preloader"></div>
+			</div>
 
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>

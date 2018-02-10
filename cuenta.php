@@ -46,7 +46,9 @@
 		<!-- <div class="wrapper"> -->
 
 			<!-- Preloader -->
-			<div class="preloader"></div>
+			<div class="content-loader">
+				<div class="preloader"></div>
+			</div>
 
 			<!-- Sidebar -->
 			<!-- <?php require_once('includes/sidebar.php'); ?> -->
@@ -98,8 +100,8 @@
 										</div>
 										<div class="il-item">
 											<!--<a class="text-black" href="curriculum.php?o=view">-->
-											<a class="text-black" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $_SESSION["ctc"]["id"]; ?>">
-												Vista previa
+											<a class="text-black" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $_SESSION["ctc"]["id"]; ?>" target="_blank">
+												Descargar curriculum
 											</a>
 										</div>
 										<div class="il-item">

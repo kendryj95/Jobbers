@@ -45,14 +45,19 @@
 			#tablaPublicaciones {
 				width: 100% !important;
 			}
+			.color-link{
+				color: #fff !important;
+			}
 		</style>
 	</head>
 
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 		<div class="wrapper">
 
-			 <!-- Preloader  -->
-			<div class="preloader"></div>
+			<!-- Preloader -->
+			<div class="content-loader">
+				<div class="preloader"></div>
+			</div>
 
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>
@@ -165,6 +170,9 @@
 
 				setTimeout(function() {
 					$('.preloader').fadeOut();
+				}, 500);
+				setTimeout(function() {
+					$('.content-loader').fadeOut();
 				}, 500);
 				
 				$tablaPublicaciones = jQuery("#tablaPublicaciones");

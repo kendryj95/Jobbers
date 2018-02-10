@@ -39,6 +39,9 @@
 			.modal.in.modal-agregar-rubro .modal-dialog {
 				max-width: 400px;
 			}
+			.color-link{
+				color: #fff !important;
+			}
 		</style>
 	</head>
 
@@ -46,7 +49,9 @@
 		<div class="wrapper">
 
 			<!-- Preloader -->
-			<div class="preloader"></div>
+			<div class="content-loader">
+				<div class="preloader"></div>
+			</div>
 
 			<!-- Sidebar second -->
 			<?php require_once('../includes/sidebar-second.php'); ?>
@@ -368,6 +373,9 @@
 
 				setTimeout(function() {
 					$('.preloader').fadeOut();
+				}, 500);
+				setTimeout(function() {
+					$('.content-loader').fadeOut();
 				}, 500);
 				
 				$("#saveRedes").click(function() {
