@@ -9780,6 +9780,12 @@ a.text-grey:hover .underline {
     margin-top: 20px;
 }
 
+.sidebar-index-hover:hover {
+    border-left: 0px !important;
+    background-color: #2E3192 !important;
+    color: #fff !important;
+}
+
 
 /* =================================================================
   Promociones
