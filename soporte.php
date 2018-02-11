@@ -148,7 +148,6 @@
 			$("#sent").click(function() {
 
 				var $btn = $(this);
-				$btn.addClass('disabled');
 
 				var name = '',
 					email = '',
@@ -166,6 +165,9 @@
 
 				if(name != "" && email != "" && asunto1 != "" && mensaje != "") {
 					if(isEmail(email)) {
+
+						$btn.addClass('disabled');
+						
 						$.ajax({
 							type: 'POST',
 							url: 'ajax/user.php',

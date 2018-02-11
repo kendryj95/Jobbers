@@ -219,38 +219,45 @@
 			break;
 		case ADD_PHOTO:
 			$ext = getExtension($_FILES["file"]["name"]);
-			$id = $db->getOne("SELECT id_imagen FROM trabajadores WHERE id=".$_SESSION["ctc"]["id"]);
-			if($id) {
-				//$file = $db->getRow("SELECT directorio, extension FROM imagenes WHERE id=$id");
-				$file = $db->getOne("SELECT CONCAT(directorio, '/', 'id', '.', extension) FROM imagenes WHERE id= $id ");
-				if(file_exists("../img/$file")) {
-					unlink("../img/$file");
+			$size = $_FILES["file"]["size"];
+
+			if ($size < 1000000) {
+				$id = $db->getOne("SELECT id_imagen FROM trabajadores WHERE id=".$_SESSION["ctc"]["id"]);
+				if($id) {
+					//$file = $db->getRow("SELECT directorio, extension FROM imagenes WHERE id=$id");
+					$file = $db->getOne("SELECT CONCAT(directorio, '/', 'id', '.', extension) FROM imagenes WHERE id= $id ");
+					if(file_exists("../img/$file")) {
+						unlink("../img/$file");
+					}
+					$db->query("UPDATE extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' FROM imagenes WHERE id=$id");
 				}
-				$db->query("UPDATE extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' FROM imagenes WHERE id=$id");
-			}
-			else {
-				$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
-				$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id', '$id', 'profile', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id')");
-				$db->query("UPDATE trabajadores SET id_imagen='$id' WHERE id=".$_SESSION["ctc"]["id"]);
-			}
-			if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/profile/$id.$ext")) {
-				$t = 1;
-				$_SESSION["ctc"]["pic"] = "profile/$id.$ext";
-			}
-			else{
-				$t = 0;
-			}
+				else {
+					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
+					$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id', '$id', 'profile', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id')");
+					$db->query("UPDATE trabajadores SET id_imagen='$id' WHERE id=".$_SESSION["ctc"]["id"]);
+				}
+				if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/profile/$id.$ext")) {
+					$t = 1;
+					$_SESSION["ctc"]["pic"] = "profile/$id.$ext";
+				}
+				else{
+					$t = 0;
+				}
 
-			$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION['ctc']['id']);
-			$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION['ctc']['id']);
-			$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION['ctc']['id']);
-			$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$_SESSION['ctc']['id']);
+				$info = $db->getRow("SELECT * FROM trabajadores WHERE id = ".$_SESSION['ctc']['id']);
+				$estudios = $db->getOne("SELECT COUNT(*) AS estudios FROM trabajadores_educacion WHERE id_trabajador=".$_SESSION['ctc']['id']);
+				$idiomas = $db->getOne("SELECT COUNT(*) AS idiomas FROM trabajadores_idiomas WHERE id_trabajador=".$_SESSION['ctc']['id']);
+				$info_extra = $db->getOne("SELECT remuneracion_pret FROM trabajadores_infextra WHERE id_trabajador=".$_SESSION['ctc']['id']);
 
-			if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
-				$_SESSION["ctc"]["postulate"] = 1;
+				if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {
+					$_SESSION["ctc"]["postulate"] = 1;
+				} else {
+					$_SESSION["ctc"]["postulate"] = 0;
+				}
 			} else {
-				$_SESSION["ctc"]["postulate"] = 0;
+				$t = 2;
 			}
+			
 			
 			echo json_encode(array("status" => $t));
 			break;
