@@ -348,29 +348,37 @@
 
 			case ADD_PHOTO:
 
-				 $ext = getExtension($_FILES["file"]["name"]);
-				$id = $db->getOne("SELECT id_imagen FROM empresas WHERE id=".$_SESSION["ctc"]["id"]);
-				if($id > 0) {
-					$file = $db->getRow("SELECT directorio, extension FROM imagenes WHERE id=$id");
-					if(file_exists("../img/$file[directorio]/$id.$file[extension]")) {
-						unlink("../img/$file[directorio]/$id.$file[extension]");
+				$ext = getExtension($_FILES["file"]["name"]);
+				$size = $_FILES["file"]["size"];
+
+
+				if ($size < 1000000) {
+					$id = $db->getOne("SELECT id_imagen FROM empresas WHERE id=".$_SESSION["ctc"]["id"]);
+					if($id > 0) {
+						$file = $db->getRow("SELECT directorio, extension FROM imagenes WHERE id=$id");
+						if(file_exists("../img/$file[directorio]/$id.$file[extension]")) {
+							unlink("../img/$file[directorio]/$id.$file[extension]");
+						}
+						$db->query("UPDATE imagenes SET extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=$id");
 					}
-					$db->query("UPDATE imagenes SET extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=$id");
-				}
-				else {
+					else {
 
-					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
+						$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
 
-					$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id', '$id', 'profile', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id')");
-					$db->query("UPDATE empresas SET id_imagen='$id' WHERE id=".$_SESSION["ctc"]["id"]);
+						$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id', '$id', 'profile', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id')");
+						$db->query("UPDATE empresas SET id_imagen='$id' WHERE id=".$_SESSION["ctc"]["id"]);
+					}
+					if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/profile/$id.$ext")) {
+						$t = 1;
+						$_SESSION["ctc"]["pic"] = "profile/$id.$ext";
+					}
+					else{
+						$t = 0;
+					}
+				} else {
+					$t = 2;
 				}
-				if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/profile/$id.$ext")) {
-					$t = 1;
-					$_SESSION["ctc"]["pic"] = "profile/$id.$ext";
-				}
-				else{
-					$t = 0;
-				}
+				
 				echo json_encode(array("status" => $t)); 
 				break;
 
