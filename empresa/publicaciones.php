@@ -367,17 +367,17 @@
 								<div class="form-group">
 									<label for="modal-modificar-publicacion-descripcion">Descripción</label>
 									<texarea id="modal-modificar-publicacion-descripcion"></texarea>
-								</div>
-								<h6>Agregar ubicación del empleo</h6>
-								 
+								</div> 
 							</form>
 						  </div>
-						  <div id="modal-modificar-publicacion-imagenes" class="tab-pane fade">
+						<!--
+							  <div id="modal-modificar-publicacion-imagenes" class="tab-pane fade">
 							<h3>Imágenes</h3>
 						  </div>
 						  <div id="modal-modificar-publicacion-videos" class="tab-pane fade">
 							<h3>Videos</h3>
 						  </div>
+						-->
 						</div>
 					</div>
 					<div class="modal-footer">
