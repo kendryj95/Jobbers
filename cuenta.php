@@ -151,8 +151,12 @@
 								<div class="col-md-4 col-xs-12">
 									<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
 									<form method="POST" id="upload">
-										<input class="dropify" name="file" id="file" type="file">
+										<input class="dropify" name="file" id="file" type="file" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png">
 									</form>
+									<br>
+									<div class="alert alert-danger" id="prompt" style="display: none">
+										<p><b>Sugerencia!</b> Te invitamos a comprimir tu imagen de perfil <a href="http://compressjpeg.com/es/" target="_blank" style="color: black">aquí</a></p>
+									</div>
 									<a href="javascript:void(0)" style="margin-top: 5px;" id="savePic" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
 								</div>
 							</div>
@@ -266,7 +270,16 @@
 					});
 				});
 				
-				$('.dropify').dropify();
+				var dropify = $('.dropify').dropify({
+					error: {
+						'fileSize' : 'El tamaño del archivo es muy grande ({{ value }} max).',
+						'imageFormat': 'El formato de la imagen no es permitido (Únicamente {{ value }}).'
+					}
+				});
+
+				dropify.on('dropify.error.fileSize', function(event, element){
+				    $('#prompt').show();
+				});
 				
 				$("#addPic").click(function() {
 					$("#optionsList").css("display", "none");
@@ -294,6 +307,8 @@
 								var data = JSON.parse(response);
 								if(parseInt(data.status) == 1) {
 									window.location.assign("cuenta.php");
+								} else if(parseInt(data.status) == 2){
+									swal("ERROR!", "El tamaño del archivo es muy grande (1M max).", "error");
 								}
 								else {
 									swal({

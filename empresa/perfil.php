@@ -380,8 +380,12 @@
 											</div>
 											<div class="modal-body">
 												<form method="POST" id="upload">
-													<input class="dropify" name="file" id="file" type="file">
+													<input class="dropify" name="file" id="file" type="file" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png">
 												</form>
+												<br>
+												<div class="alert alert-danger" id="prompt" style="display: none">
+													<p><b>Sugerencia!</b> Te invitamos a comprimir tu imagen de perfil <a href="http://compressjpeg.com/es/" target="_blank" style="color: black">aquí</a></p>
+												</div>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -955,7 +959,17 @@
 					}
 				});
 				
-				$('.dropify').dropify();
+				var dropify = $('.dropify').dropify({
+					error: {
+						'fileSize' : 'El tamaño del archivo es muy grande ({{ value }} max).',
+						'imageFormat': 'El formato de la imagen no es permitido (Únicamente {{ value }}).'
+					}
+				});
+
+				dropify.on('dropify.error.fileSize', function(event, element){
+				    $('#prompt').show();
+				});
+
 				$("#savePic").click(function() {
 					if($("#file")[0].files.length > 0) {
 						$("#savePic").attr("disabled", true);
@@ -966,7 +980,7 @@
 							success : function(response,status) { 
 								var data = JSON.parse(response);
 								if(parseInt(data.status) == 2) {
-									alert("si");
+									swal("ERROR!", "El tamaño del archivo es muy grande (1M max).", "error");
 								}
 								if(parseInt(data.status) == 1) {
 									window.location.assign("perfil.php");
