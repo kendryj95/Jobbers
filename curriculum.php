@@ -1143,7 +1143,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</li>
 
 													</ul>
-													<a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $t; ?>" target="_blank"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
+													<a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $data["id"]; ?>" target="_blank"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
 												</div>
 											</div>	
 										</div>
@@ -1154,7 +1154,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-md-12 card-block active content-perfil" id="curriculum" role="tabpanel" style="padding-right: 0px; padding-left:0px; padding-top: 0px;">
 													<!-- <div class="row"> -->
 													<div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
-													<h4 class="title-cv" style="margin-top: 0px;">&nbsp INFORMACION PERSONAL</h4>
+													<h4 class="title-cv" style="margin-top: 0px;">&nbsp; INFORMACION PERSONAL</h4>
 														<p class="content-cv">
 															<strong>DNI: </strong> <span id="labelDNI"><?php echo $data["numero_documento_identificacion"]; ?></span><br>
 															<strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $data["cuil"]; ?></span><br>
@@ -1163,7 +1163,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 															<strong>Edad: </strong> <span id="edad"><?php echo $data["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($data["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
 															<strong>Telefonos: </strong> <span class="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] != "" ? " / " . $data["telefono_alternativo"] : ''; ?></span>
 														</p>
-														<h4 class="title-cv">&nbsp EXPERIENCIA LABORAL</h4>
+														<h4 class="title-cv">&nbsp; EXPERIENCIA LABORAL</h4>
 														<div id="experiencias">
 															<?php $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");?>
 															<?php if ($experiencias): ?>
@@ -1182,7 +1182,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 																<?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso ?><br>
 																<strong>Descripción de tareas: </strong>
 																
-																	<?php echo $e["descripcion_tareas"] ?>
+																	<span style="word-break: break-word;"><?php echo $e["descripcion_tareas"] ?></span>
 																
 															</p>
 															<?php endforeach?>
@@ -1192,7 +1192,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														</div>
 
 
-														<h4 class="title-cv">&nbsp Estudios</h4>
+														<h4 class="title-cv">&nbsp; Estudios</h4>
 														<div id="educacion">
 															<?php if ($educacion): ?>
 																<?php foreach ($educacion as $e): ?>
@@ -1212,7 +1212,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 															<?php endif?>
 														</div>
 
-														<h4 class="title-cv">&nbsp Idiomas</h4>
+														<h4 class="title-cv">&nbsp; Idiomas</h4>
 														<div id="idiomas">
 															<?php if ($idiomasT): ?>
 																<?php foreach ($idiomasT as $i): ?>
@@ -1232,7 +1232,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 															<?php endif?>
 														</div>
 
-														<h4 class="title-cv">&nbsp Otros conocimientos</h4>
+														<h4 class="title-cv">&nbsp; Otros conocimientos</h4>
 														<div id="otros_conocimientos">
 															<?php if ($otros_conocimientos): ?>
 															<?php foreach ($otros_conocimientos as $o): ?>
@@ -1252,7 +1252,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 														<?php $infoExtra = $db->getRow("SELECT * FROM trabajadores_infextra WHERE id_trabajador=" . $_SESSION['ctc']['id']);?>
 
-														<h4 class="title-cv">&nbsp Información Extra</h4>
+														<h4 class="title-cv">&nbsp; Información Extra</h4>
 														<div id="infoExtra">
 														<?php if ($infoExtra): ?>
 															<p class= "content-cv" style="margin-bottom: 20px;">
@@ -1574,8 +1574,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												let tlf_encargado = ex.tlf_encargado == null || ex.tlf_encargado == '' ? 'No Aplica' : ex.tlf_encargado;
 												let egreso = ex.trab_actualmt == 1 ? 'Actualmente' : mes[ex.mes_egreso-1] +'/'+ ex.ano_egreso;
 
-												html += '<p class="content-cv"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' - ' + egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong>'+
-													ex.descripcion_tareas + '</p>';
+												html += '<p class="content-cv"><strong>Empresa: </strong>'+ex.nombre_empresa+'<br> <strong>País: </strong>'+ex.nombre_pais+' <br> <strong>Actividad: </strong>'+ex.actividad_empresa+'<br> <strong>Tipo puesto: </strong>'+ex.tipo_puesto+'<br><strong>Tiempo: </strong>'+mes[ex.mes_ingreso-1]+'/'+ex.ano_ingreso + ' - ' + egreso + '<br> <strong>Encargado de Referencias: </strong>'+ nom_encargado + '<br> <strong>Telefono del Encargado: </strong>'+ tlf_encargado + '<br> <strong>Descripción de tareas: </strong><span style="word-wrap: break-word;"'+
+													ex.descripcion_tareas + '</span></p>';
 											});
 											$('#experiencias').html(html);
 										}

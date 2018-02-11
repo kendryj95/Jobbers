@@ -60,7 +60,12 @@
                             "Return-path: administracion@jobbers.com\r\n" .
                             "MIME-Version: 1.0\n" .
                             "Content-type: text/html; charset=utf-8");*/
-                            email_chat(1, $empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
+                            
+
+                            do {
+                            	$enviar = email_chat(1, $empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
+                            } while(strlen($enviar) > 1);
+
 						} else {
 							$empresa = $db->getRow("
                                 SELECT correo_electronico, nombre FROM empresas WHERE uid = $idc2
@@ -75,7 +80,11 @@
                             "Return-path: administracion@jobbers.com\r\n" .
                             "MIME-Version: 1.0\n" .
                             "Content-type: text/html; charset=utf-8");*/
-                            email_chat(1, $trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
+                           
+
+                           do {
+                           		$enviar = email_chat(1, $trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
+                           } while(strlen($enviar) > 1);
 						}
 
 						
