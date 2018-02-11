@@ -27,6 +27,8 @@
 									INNER JOIN provincias t4 ON t4.id = t3.provincia
 									WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']."
 									GROUP BY provincia");
+
+	$provincias = $base->getAll("SELECT * FROM provincias");
 	
 	//Datos para el select actividad empresa	
 	$actividad_empresa = $base->getAll("SELECT t4.id_actividad_empresa,t5.nombre 

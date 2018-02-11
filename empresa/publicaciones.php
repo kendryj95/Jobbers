@@ -252,20 +252,17 @@
 
 									<div class="col-sm-4">
 										<label for="select2-demo-3" class="form-control-label">Provincia</label>
-										<select id="select2-demo-3" class="form-control" data-plugin="select2">
-											<?php foreach($disps as $disp): ?>
-												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+										<select onChange="localidad(this.value)" id="provincias_select" class="form-control" data-plugin="select2">
+										<option  value="0">Seleccionar</option>
+											<?php foreach($provincias as $p): ?>
+												<option value="<?php echo $p["id"]; ?>"><?php echo $p["provincia"]; ?></option>
 											<?php endforeach ?>
 										</select>
 									</div>
 
 									<div class="col-sm-4" style="padding-right: 0px;">
 										<label for="select2-demo-3" class="form-control-label">Localidad</label>
-										<select id="select2-demo-3" class="form-control" data-plugin="select2">
-											<?php foreach($disps as $disp): ?>
-												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
-											<?php endforeach ?>
-										</select>
+										 <?php include('../select_localidades.php');?>
 									</div>
 								</div>
 								<div class="form-group">
@@ -276,12 +273,7 @@
 									<label for="modal-agregar-publicacion-descripcion">Descripción</label>
 									<texarea id="modal-agregar-publicacion-descripcion"></texarea>
 								</div>
-								<h6>Agregar ubicación del empleo</h6>
-								<div class="form-group">
-									<label for="modal-agregar-publicacion-ubicacion">Escribe la ubicación</label>
-									<input type="text" class="form-control controls" id="modal-agregar-publicacion-ubicacion" placeholder="">
-								</div>
-								<div id="map" style="height: 250px;width: 100%;display: none;"></div>
+								  
 							</form>
 						  </div> 
 						</div>
@@ -344,19 +336,40 @@
 									</select>
 								</div>
 								<div class="form-group">
+									<div class="col-sm-4" style="padding-left: 0px;">
+										<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
+										<select id="select2-demo-3" class="form-control" data-plugin="select2">
+											<?php foreach($disps as $disp): ?>
+												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+
+									<div class="col-sm-4">
+										<label for="select2-demo-3" class="form-control-label">Provincia</label>
+										<select onChange="modificar_localidad(this.value)" id="m_provincias_select" class="form-control" data-plugin="select2">
+										<option  value="0">Seleccionar</option>
+											<?php foreach($provincias as $p): ?>
+												<option value="<?php echo $p["id"]; ?>"><?php echo $p["provincia"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+
+									<div class="col-sm-4" style="padding-right: 0px;">
+										<label for="select2-demo-3" class="form-control-label">Localidad</label>
+										 <?php include('../select_localidades_modificar.php');?>
+									</div>
+								 <div class="form-group">
 									<label for="modal-modificar-publicacion-titulo">Título</label>
 									<input type="text" class="form-control" id="modal-modificar-publicacion-titulo" placeholder="">
 								</div>
+
 								<div class="form-group">
 									<label for="modal-modificar-publicacion-descripcion">Descripción</label>
 									<texarea id="modal-modificar-publicacion-descripcion"></texarea>
 								</div>
 								<h6>Agregar ubicación del empleo</h6>
-								<div class="form-group">
-									<label for="modal-modificar-publicacion-ubicacion">Escribe la ubicación</label>
-									<input type="text" class="form-control" id="modal-modificar-publicacion-ubicacion" placeholder="">
-								</div>
-								<div id="map2" style="height: 250px;width: 100%;"></div>
+								 
 							</form>
 						  </div>
 						  <div id="modal-modificar-publicacion-imagenes" class="tab-pane fade">
@@ -614,7 +627,7 @@
 			var input2 = null;
 			var empresa_nueva = "<?= $empresa_nueva['id_imagen'] ?>";
 			empresa_nueva = parseInt(empresa_nueva);
-			function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+			/*function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 				marker = new google.maps.Marker({
 					position: pos,
 					map: map,
@@ -630,7 +643,7 @@
 					  draggable: true
 				});
 			}
-			
+			*/
 			function geocodeLatLng(geocoder, map, marker) {
 				var latlng = marker.getPosition();
 				geocoder.geocode({
@@ -648,7 +661,7 @@
 				});
 			}
 			
-			function initMap() {
+			/*function initMap() {
 				if(map == null) {
 					map = new google.maps.Map(document.getElementById('map'), {
 						center: {lat: -34.397, lng: 150.644},
@@ -737,7 +750,7 @@
 			  setTimeout(function () {
 					google.maps.event.trigger(map, "resize");
 				}, 2500);
-			}
+			}*/
 			
 			function initMap2(coordenadas) {
 				if(map2 == null) {
@@ -923,12 +936,17 @@
 								$('#select2-demo-23').val(publicacion.disponibilidad).trigger('change');
 								$("#modal-modificar-publicacion-titulo").val(publicacion.titulo);
 								$("#modal-modificar-publicacion-ubicacion").val(publicacion.ubicacion);
+								$("#m_provincias_select").val(publicacion.provincia);
+								//$("#m_localidad_"+publicacion.provincia).show();
+								m_id_campo_localidades=publicacion.provincia;
+								modificar_localidad(publicacion.provincia);
+								$("#m_localidad_"+publicacion.provincia).val(publicacion.localidad);
+
 								tinyMCE.get('modal-modificar-publicacion-descripcion').setContent(publicacion.descripcion);
 								var coordenadas = "";
 								if(publicacion.coordenadas != "" && publicacion.coordenadas != null) {
 									coordenadas = publicacion.coordenadas;
-								}
-								initMap2(coordenadas);
+								} 
 							}
 							break;
 					}
@@ -1309,17 +1327,33 @@
 			$('#select2-demo-23').select2({
 				width: '100%'
 			});
-
+			var id_campo_localidades=0;
+			var m_id_campo_localidades=0;
 			$("#modal-agregar-publicacion-enviar-form").click(function() {
+				 
 				var idArea = $("#select2-demo-1").val();
 				var idSector = $("#select2-demo-2").val();
 				var idDisp = $("#select2-demo-3").val();
 				var titulo = $("#modal-agregar-publicacion-titulo").val();
 				var ubicacion = $("#modal-agregar-publicacion-ubicacion").val();
 				var descripcion = tinyMCE.get('modal-agregar-publicacion-descripcion').getContent();
-				if(titulo == '' || descripcion == '') {
-					swal("Error!", "Faltan algunos campos.", "error");
-				} else {
+				if(titulo == '')
+				{
+					swal("Error!", "Debe agregar un titulo a la publicaición.", "error");
+				}
+				else if(descripcion == '') {
+					swal("Error!", "Debe agregar un descripción a la publicaición.", "error");
+				}
+			 
+				else if($("#provincias_select").val() == 0)
+				{
+					swal("Error!", "Debe seleccionar una provincia.", "error");
+				}
+				else if($("#localidad_"+id_campo_localidades).val()==0) {
+					swal("Error!", "Debe seleccionar una localidad.", "error");
+				} 
+
+				else {
 
 					$.ajax({
 						url: 'ajax/publicaciones.php',
@@ -1343,11 +1377,13 @@
 												titulo: titulo,
 												descripcion: descripcion,
 												latitud: latSelected,
-												longitud: lngSelected,
-												ubicacion: ubicacion
+												longitud: lngSelected, 
+												provincia:$("#provincias_select").val(),
+												localidad:$("#localidad_"+id_campo_localidades).val()
 											})
 										},
 										success: function(data){
+										 
 											if(data.msg == 'OK') {
 													var publicacion = data.data.publicacion;
 													$("#modal-agregar-publicacion").modal('hide');
@@ -1360,6 +1396,7 @@
 											}
 										},
 										error: function(error){
+											//console.log(error);
 											swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
 										}
 									})
@@ -1380,15 +1417,33 @@
 			});
 			
 			$("#modal-modificar-publicacion-enviar-form").click(function() {
+				 
 				var idArea = $("#select2-demo-12").val();
 				var idSector = $("#select2-demo-22").val();
 				var idDisp = $("#select2-demo-23").val();
 				var titulo = $("#modal-modificar-publicacion-titulo").val();
 				var ubicacion = $("#modal-modificar-publicacion-ubicacion").val();
+
+
 				var descripcion = tinyMCE.get('modal-modificar-publicacion-descripcion').getContent();
-				if(titulo == '' || descripcion == '') {
-					alert("Faltan algunos campos");
+				
+				if(titulo == '')
+				{
+					swal("Error!", "Debe agregar un titulo a la publicaición.", "error");
 				}
+				else if(descripcion == '') {
+					swal("Error!", "Debe agregar un descripción a la publicaición.", "error");
+				}
+			 
+				else if($("#m_provincias_select").val() == 0)
+				{
+					swal("Error!", "Debe seleccionar una provincia.", "error");
+				}
+				//
+				else if($("#m_localidad_"+m_id_campo_localidades).val()==0) {
+					swal("Error!", "Debe seleccionar una localidad.", "error");
+				} 
+
 				else {
 
 					$.ajax({
@@ -1405,8 +1460,9 @@
 								titulo: titulo,
 								descripcion: descripcion,
 								latitud: latSelected,
-								longitud: lngSelected,
-								ubicacion: ubicacion
+								longitud: lngSelected, 
+								provincia:$("#m_provincias_select").val(),
+								localidad:$("#m_localidad_"+m_id_campo_localidades).val()
 							})
 						},
 						success: function(data){
@@ -1423,14 +1479,15 @@
 							}
 						},
 						error: function(error){
-							swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
+							console.log(error);
+							//swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
 						}
 					})
 				}
 			});
 			
 			$('#modal-agregar-publicacion').on('show.bs.modal', function (e) {
-				initMap();
+				 
 				$("#select2-demo-1").val($("#select2-demo-1 option:first").val()).trigger('change');
 				var idArea = $("#select2-demo-1").val();
 				var html = '';
@@ -1591,6 +1648,23 @@
 		}); 
 		</script>
 
+		<script type="text/javascript">
+			function localidad(par)
+			{
+				//alert("#localidad_"+par);
+				id_campo_localidades=par;
+				$(".select_localidad").hide();
+				$("#localidad_"+par).show();
+			}
+
+			function modificar_localidad(par)
+			{
+				//alert("#localidad_"+par);
+				m_id_campo_localidades=par;
+				$(".m_select_localidad").hide();
+				$("#m_localidad_"+par).show();
+			}
+		</script>
 	</body>
 
 </html>

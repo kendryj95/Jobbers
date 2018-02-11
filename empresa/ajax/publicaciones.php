@@ -45,7 +45,7 @@
 							AND TABLE_NAME = 'publicaciones'
 						");
 						
-						$db->query("
+						$sql="
 							INSERT INTO publicaciones (
 								id,
 								id_empresa,
@@ -55,8 +55,10 @@
 								fecha_creacion,
 								fecha_actualizacion,
 								coordenadas,
-								ubicacion,
-								disponibilidad
+								ubicacion, 
+								disponibilidad,
+								provincia,
+								localidad
 							)
 							VALUES
 							(
@@ -68,10 +70,12 @@
 								'" . date('Y-m-d H:i:s') . "',
 								'" . date('Y-m-d H:i:s') . "',
 								'$coordenadas',
-								'$info[ubicacion]',
-								'$info[disponibilidad]'
-							)
-						");
+								'',								
+								'$info[disponibilidad]',
+								 $info[provincia],
+								 $info[localidad]
+							)";
+						$db->query($sql);
 						
 						$db->query("
 							INSERT INTO publicaciones_sectores (
@@ -127,20 +131,23 @@
 						if($info["latitud"] != "" && $info["latitud"] != null  && $info["longitud"] != "" && $info["longitud"] != null) {
 							$coordenadas = "$info[latitud],$info[longitud]";
 						}
-						
-						$db->query("
+						$sql="
 							UPDATE publicaciones
 							SET 
 							titulo = '$info[titulo]',
 							descripcion = '$info[descripcion]',
 							amigable = '" . slug($info["titulo"]) . "',
-							 fecha_actualizacion = '" . date('Y-m-d H:i:s') . "',
-							 coordenadas='$coordenadas',
-							 ubicacion='$info[ubicacion]',
-							 disponibilidad=$info[disponibilidad]
+							fecha_actualizacion = '" . date('Y-m-d H:i:s') . "',
+							coordenadas='$coordenadas', 
+							provincia=$info[provincia],
+							localidad=$info[localidad],
+							disponibilidad=$info[disponibilidad]
 							WHERE
 								id = $id
-						");
+						";
+						
+
+						$db->query($sql);
 						
 						$db->query("
 							DELETE
