@@ -85,6 +85,9 @@
 			.color-link{
 				color: #fff !important;
 			}
+			table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before{
+				content: "";
+			}
 		</style>
 
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -132,7 +135,7 @@
 								
 							</div>
 							<div class="table-responsive">
-								<table class="table table-striped table-bordered dt-responsive nowrap dataTable" id="tablaPublicaciones">
+								<table class="table table-striped table-bordered dt-responsive responsive nowrap dataTable" id="tablaPublicaciones" style="width: 100%">
 									<thead>
 										<tr>
 											<th>#</th>
@@ -141,7 +144,7 @@
 											<th>Postulados</th>
 											<th>Creación Pub.</th>
 											<th>Final Pub.</th>
-											<th></th>
+											<th>Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -528,7 +531,8 @@
                        	</div>
                        	<!-- fin contenedor filtros-->
 						<div class="col-sm-12">
-							<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
+							<div class="table-responsive">
+							<table id="tablaPostulados" class="table table-striped table-bordered dataTable dt-responsive responsive nowrap" style="width: 100%">
 							<thead>
 								<tr>
 									<th>#</th>
@@ -549,6 +553,7 @@
 							<tbody>
 							</tbody>
 						</table>
+						</div>
 						</div>
                        </div> 
 					</div>
@@ -1069,6 +1074,7 @@
 			var $tablaPublicaciones = jQuery("#tablaPublicaciones");
 
 			var tablaPublicaciones = $tablaPublicaciones.DataTable( {
+				"responsive": true,
 				"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 				"buttons": [
 					'copyHtml5',
@@ -1079,8 +1085,8 @@
 				"aoColumnDefs": [
 					{ "width": "40px", "targets": 0 },
 					{ "visible": false, "targets": 2 },
-					{ "width": "150px", "targets": 3 },
-					{ "width": "150px", "targets": 4 },
+					{ "width": "100px", "targets": 3 },
+					{ "width": "100px", "targets": 4 },
 					{ "orderable": false, "targets": 4 },
 					{ "className": "dt-center", "targets": [0, 2, 3, 4] }
 				  ],
@@ -1114,7 +1120,7 @@
 			var $tablaPostulados = jQuery("#tablaPostulados");
 
 			var tablaPostulados = $tablaPostulados.DataTable( {
-				 
+				 "responsive": true,
 				 "aoColumnDefs": [ 
 					{ "visible": false, "targets": 2 },
 					{ "visible": false, "targets": 3 }, 	
