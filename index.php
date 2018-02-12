@@ -478,7 +478,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						<div class="row" style="margin-top: 20px;">
 							<div class="col-md-12">
 								<div class="list-group">
-									<a href="#" class="list-group-item sidebar-index-hover">
+									<a href="noticias.php" class="list-group-item sidebar-index-hover">
 										<h4>Noticias</h4>
 										<p class="list-group-item-text">Enterate de las ultimas noticias ! En Jobbers te queremos informado...</p>
 									</a>
@@ -518,7 +518,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 										</a>
 									</li>
 
-									<a href="#" class="list-group-item sidebar-index-hover">
+									<a href="soporte.php" class="list-group-item sidebar-index-hover">
 										<h4>Soporte Técnico</h4>
 										<p class="list-group-item-text">Tienes dudas o alguna consulta? Pues preguntale a nuestros expertos !</p>
 									</a>
