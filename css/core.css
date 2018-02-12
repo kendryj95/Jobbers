@@ -7587,7 +7587,7 @@ a.bg-white:hover {
 
 .bg-instagram {
     color: #fff !important;
-    background-color: #517fa4 !important;
+    background-color: #bc2a8d !important;
 }
 
 .bg-pinterest {
@@ -9784,6 +9784,12 @@ a.text-grey:hover .underline {
     border-left: 0px !important;
     background-color: #2E3192 !important;
     color: #fff !important;
+}
+
+@media(max-width: 500px) {
+    .logo-medal {
+        padding-top: 20px !important;
+    }
 }
 
 

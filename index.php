@@ -483,10 +483,40 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 										<p class="list-group-item-text">Enterate de las ultimas noticias ! En Jobbers te queremos informado...</p>
 									</a>
 
-									<a href="#" class="list-group-item sidebar-index-hover">
+									<li class="list-group-item sidebar-index-hover">
 										<h4>Redes Sociales</h4>
-										<p class="list-group-item-text">Siguenos para enterarte de nuestras ultimas novedades y compartir con nosotros.</p>
-									</a>
+										<p class="list-group-item-text" style="margin-bottom: 10px;">Siguenos para enterarte de nuestras ultimas novedades y compartir con nosotros.</p>
+										<?php
+											if(isset($db)) {
+												$redes = $db->getRow("SELECT facebook, instagram, twitter, youtube, linkedin FROM plataforma WHERE id=1");
+											}
+											else {
+												require_once(strstr($_SERVER["REQUEST_URI"], "empresa/") || strstr($_SERVER["REQUEST_URI"], "admin/") ? "../" : "".'classes/DatabasePDOInstance.function.php');
+												$db = DatabasePDOInstance();
+												$redes = $db->getRow("SELECT facebook, instagram, twitter, youtube, linkedin FROM plataforma WHERE id=1");
+											}
+											$facebook = $redes["facebook"] ? (strstr($redes["facebook"], "http") ? "href='". $redes["facebook"] . "'" : ("href='http://".$redes["facebook"]."'")) : "style='display:none'";
+											$instagram = $redes["instagram"] ? (strstr($redes["instagram"], "http") ? "href='". $redes["instagram"] . "'" : ("href='http://".$redes["instagram"]."'")) : "style='display:none'";
+											$twitter = $redes["twitter"] ? (strstr($redes["twitter"], "http") ? "href='". $redes["twitter"] . "'" : ("href='http://".$redes["twitter"]."'")) : "style='display:none'";
+											$youtube = $redes["youtube"] ? (strstr($redes["youtube"], "http") ? "href='". $redes["youtube"] . "'" : ("href='http://".$redes["youtube"]."'")) : "style='display:none'";
+											$linkedin = $redes["linkedin"] ? (strstr($redes["linkedin"], "http") ? "href='". $redes["linkedin"] . "'" : ("href='http://".$redes["linkedin"]."'")) : "style='display:none'";
+										?>
+										<a <?php echo $facebook; ?> class="btn bg-facebook btn-sm btn-circle m-r-0-5">
+											<i class="fa fa-facebook"></i>
+										</a>
+										<a <?php echo $twitter; ?> class="btn bg-twitter btn-sm btn-circle m-r-0-5">
+											<i class="fa fa-twitter"></i>
+										</a>
+										<a <?php echo $instagram; ?> class="btn bg-instagram btn-sm btn-circle m-r-0-5">
+											<i class="fa fa-instagram"></i>
+										</a>
+										<a <?php echo $youtube; ?> class="btn bg-youtube btn-sm btn-circle m-r-0-5">
+											<i class="fa fa-youtube"></i>
+										</a>
+										<a <?php echo $linkedin; ?> class="btn bg-linkedin btn-sm btn-circle m-r-0-5">
+											<i class="fa fa-linkedin"></i>
+										</a>
+									</li>
 
 									<a href="#" class="list-group-item sidebar-index-hover">
 										<h4>Soporte Técnico</h4>
@@ -595,6 +625,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 					 	if(datos[key]["plan"]==3){medalla='<img src="img/silver-medal.png" style="float: right;margin-top: -10px;">';}
 					 	if(datos[key]["plan"]==2){medalla='<img src="img/bronze-medal.png" style="float: right;margin-top: -10px;">';}
 
+						// if(datos[key]["plan"]==4){borde='gold';}
+					 	// if(datos[key]["plan"]==3){borde='silver';}
+					 	// if(datos[key]["plan"]==2){borde='bronze';}
+						// if(datos[key]["plan"]==1){borde='free';}
+
 
 						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><img src="img/redes/facebook.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
 						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a href="'+datos[key]["twitter"]+'"><img src="img/redes/twitter.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
@@ -628,7 +663,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						} 
 					}
 					
-					publicacion='<div class="col-sm-6 victor_publicacion" style="border: 1px solid #ededed;min-height: 225px; margin-top: 20px;"> <div class="col-sm-12" style="padding: 0px;float: left;padding-top: 5px;"> '+facebook+' '+instagram+' '+link+'  </div> <div class="col-sm-12 text-center" style="padding: 0px;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a href="'+url+'">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 10px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div>'; 
+					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion" style="height: 220px; margin-bottom: 10px; padding-right: 10px; padding-left: 10px; border: 1px solid #e5e5e5"> <div class="col-sm-12 text-center logo-medal" style="padding: 20px 0 0 0;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a href="'+url+'">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 8px;"><div class="col-md-12" style="margin-bottom: 10px;"> '+facebook+link+twitter+instagram+'</div> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div></div>'; 
 						 
 						$("#listado_publicaciones").append(publicacion);
 		           		
