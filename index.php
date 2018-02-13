@@ -376,7 +376,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
     							</div>
     						</div>
     					<?php else: ?>
-    						<div class="col-md-3">
+    						<div class="col-md-3 col-sm-6">
     							<div class="box bg-white product product-1">
     								<div class="p-img img-cover" style="background-image: url(img/<?php echo $p["imagen"]; ?>);">
     									<div class="p-status bg-warning"><?php echo $p["titulo"]; ?></div>
