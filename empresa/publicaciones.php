@@ -101,6 +101,195 @@
 
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 
+<div id="modal-postulados" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+			<div class="modal-dialog modal-lg" style="width: 80%;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title">Trabajadores postulados a este empleo
+						
+						</h4>
+
+					</div>
+					<div class="modal-body" id="cuerpo_de_modal">
+                        <?php switch($plan['id_plan']):
+                            case 1: ?>
+                                <div class="alert alert-warning">
+                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>10</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
+                                </div>
+                        <?php break; ?>
+
+                        <?php case 2: // Plan Bronce?>
+                                <div class="alert alert-warning">
+                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>40</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
+                                </div>
+                        <?php break; ?>
+                        <?php case 3: // Plan Plata?>
+                                <div class="alert alert-warning">
+                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>100</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
+                                </div>
+                        <?php break; ?>
+                        <?php endswitch; ?>
+ 
+						 
+                       <div class="row" style="padding: 10px;padding-top: 0px;">
+                       	<!--contenedor filtros-->
+                       		<span style=" padding-bottom: 3px; float: right;font-size: 12px;padding-right: 10px;cursor: pointer;"  onClick="limpiarFiltros()"><strong><img src="img/eraser.png"> Limpiar filtros</strong></span>
+                       	<div class="col-xs-12" style="border: 1px dashed #dbdbdb;padding: 0px;margin-bottom: 15px;">
+
+                       		<div class="col-sm-12" style="padding: 0px;"><p style="background-color: #3e70c9;padding: 4px;text-align: center;color: #fff;"><strong>Busqueda avanzada</strong>                       
+                       </p></div>
+                       	 <div class="col-sm-12" style="padding: 0px;margin-bottom: 20px;">
+                       	 	<div class="col-sm-2">
+                       	 		<label>Sexo</label><br/>
+                        	<select  onChange="filtrar(this.value,5)" class="_filtro form-control select_filtros" >
+                        		<option value="">Ambos</option>
+                        		<option value="1">Masculino</option>
+                        		<option value="2">Femenino</option>
+                        	</select>
+                       	 	                      	
+                        	<label>Calificación</label><br/>
+                        	<select  onChange="filtrar(this.value,7)" class="_filtro form-control select_filtros" style="">
+                        		<option value="">Todas</option>
+								<option value="1" style="color: #ffde00;">★</option>
+								<option value="2" style="color: #ffde00;">★★</option>
+								<option value="3" style="color: #ffde00;">★★★</option>
+								<option value="4" style="color: #ffde00;">★★★★</option>
+								<option value="5" style="color: #ffde00;">★★★★★</option>
+
+
+                        	</select>
+								  
+                        	</div> 
+
+                        	<div class="col-sm-2">
+                        	<label>Idioma</label><br/>
+                        	<select onChange="filtrar(this.value,8)" name="select_idiomas" class="_filtro form-control select_filtros" >
+                        	<option value="">Todos</option>
+                        		<?php
+                        			foreach ($datos_idiomas as $datos) {
+                        				echo "<option value='".$datos["id"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>
+                        	</select> 
+
+                        	</div>
+                        	<div class="col-sm-2">
+                        	<label>Edad</label><br/>
+                        	<select onChange="test(this.value)" id="edad" name="edad" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<option value="1823">De 18 a 23 años</option>
+                        		<option value="2430">De 24 a 30 años</option>
+                        		<option value="3136">De 31 a 36 años</option>
+                        		<option value="3745">De 37 a 45 años</option>
+                        	</select> 
+                        </div>
+                        <div class="col-sm-2">
+                        		
+                        	<label>Area de estudio</label><br/>
+                        	<select onChange="filtrar(this.value,3)" id="area_estudio" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<?php
+                        			foreach ($areas_estudio as $datos) {
+                        				echo "<option value='".$datos["id_area"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>
+                        	</select>
+                        	
+                        	
+                        	</div>
+                        	 
+                        	<div class="col-sm-2">
+                        	<label>Provincia</label><br/>
+                        	<select onChange="filtrar(this.value,4)" id="select_provincias" name="provincias" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<?php
+                        			foreach ($datos_provincias as $datos) {
+                        				echo "<option value='".$datos["id"]."'>".$datos["provincia"]."</option>";
+                        			}
+                        		?>
+                        	</select>
+	
+                         
+                        	</div>
+
+                        	<div class="col-sm-2">
+                        		<label>Remuneracion</label><br/>
+                        	<select id="remuneracion" name="remuneracion" class="_filtro form-control select_filtros" >
+                        		<option value="0">Todas</option>
+                        		<option value="02000">$0 - $2000 </option>
+                        		<option value="20015000">$2001 - $5000 </option>                           		
+                        		<option value="500110000">$5001 - $10000 </option>   
+                        		<option value="1000115000">$10001 - $15000 </option>   
+                        		<option value="1500120000">$15001 - $20000 </option>   
+                        		<option value="20001">$20000 o más</option>  
+                        	</select>                         		
+                        	</div> 
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-4" style="padding-left: 0px;padding-right: 0px; background-color: #f2f2f2;padding-bottom: 5px;">
+                        		<p class="text-center"><strong>Experiencia laboral</strong></p>
+                        		<div class="col-sm-12">
+                        			<select onChange="filtrar(this.value,9)" id="actividad_empresa" name="actividad_empresa" class="_filtro form-control select_filtros" >
+	                        		<option value="0">Actividad</option> 
+                        		<?php
+                        			foreach ($actividad_empresa as $datos) {
+                        				echo "<option value='".$datos["nombre"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>	                        		 
+	                        	</select>  
+                        		</div> 
+                        	</div> 
+                        	
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-2">                       	 
+                        	   <label>Marcadores</label><br/>
+	                        	<select onChange="filtrar(this.value,10)" class="_filtro form-control select_filtros" style="">
+	                        		<option value="">Todos</option>
+	                        		<option value="0">Descartados</option>
+	                        		<option value="1">Contactado</option>
+	                        		<option value="2">En proceso</option>
+	                        		<option value="3">Evaluando</option>
+	                        		<option value="4">Finalistas</option>
+	                        		<option value="5">Contratados</option>									 
+	                        	</select>   	 	              		
+                        	</div>
+
+                       	 </div>
+                       	</div>
+                       	<!-- fin contenedor filtros-->
+						<div class="col-sm-12">
+							<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th style="padding: 0px;">Trabajador</th>
+									 <th>Edad</th>
+									  <th>aestudio</th>
+									   <th>provincia</th>
+									    <th>sexo</th>
+									 <th>remuneracion</th>
+									<th>calificacion</th>
+									<th>idioma</th>
+									<th>actividad</th>
+									<th>Estado</th>
+									<th>Fecha y hora</th>
+									<th>Contactar</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						</div>
+                       </div> 
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="wrapper">
 
 			<!-- Preloader -->
@@ -131,7 +320,7 @@
 						<div class="box box-block bg-white">
 							<h5 class="m-b-1">Mis publicaciones</h5>
 							<div class="mb-10">
-								<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
+	 <a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
 								
 							</div>
 							<div class="table-responsive">
@@ -244,12 +433,29 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
-									<select id="select2-demo-3" class="form-control" data-plugin="select2">
-										<?php foreach($disps as $disp): ?>
-											<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
-										<?php endforeach ?>
-									</select>
+									<div class="col-sm-4" style="padding-left: 0px;">
+										<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
+										<select id="select2-demo-3" class="form-control" data-plugin="select2">
+											<?php foreach($disps as $disp): ?>
+												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+
+									<div class="col-sm-4">
+										<label for="select2-demo-3" class="form-control-label">Provincia</label>
+										<select onChange="localidad(this.value)" id="provincias_select" class="form-control" data-plugin="select2">
+										<option  value="0">Seleccionar</option>
+											<?php foreach($provincias as $p): ?>
+												<option value="<?php echo $p["id"]; ?>"><?php echo $p["provincia"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+
+									<div class="col-sm-4" style="padding-right: 0px;">
+										<label for="select2-demo-3" class="form-control-label">Localidad</label>
+										 <?php include('../select_localidades.php');?>
+									</div>
 								</div>
 								<div class="form-group">
 									<label for="modal-agregar-publicacion-titulo">Título</label>
@@ -259,12 +465,7 @@
 									<label for="modal-agregar-publicacion-descripcion">Descripción</label>
 									<texarea id="modal-agregar-publicacion-descripcion"></texarea>
 								</div>
-								<h6>Agregar ubicación del empleo</h6>
-								<div class="form-group">
-									<label for="modal-agregar-publicacion-ubicacion">Escribe la ubicación</label>
-									<input type="text" class="form-control controls" id="modal-agregar-publicacion-ubicacion" placeholder="">
-								</div>
-								<div id="map" style="height: 250px;width: 100%;display: none;"></div>
+								  
 							</form>
 						  </div> 
 						</div>
@@ -327,27 +528,48 @@
 									</select>
 								</div>
 								<div class="form-group">
+									<div class="col-sm-4" style="padding-left: 0px;">
+										<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
+										<select id="select2-demo-3" class="form-control" data-plugin="select2">
+											<?php foreach($disps as $disp): ?>
+												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+
+									<div class="col-sm-4">
+										<label for="select2-demo-3" class="form-control-label">Provincia</label>
+										<select onChange="modificar_localidad(this.value)" id="m_provincias_select" class="form-control" data-plugin="select2">
+										<option  value="0">Seleccionar</option>
+											<?php foreach($provincias as $p): ?>
+												<option value="<?php echo $p["id"]; ?>"><?php echo $p["provincia"]; ?></option>
+											<?php endforeach ?>
+										</select>
+									</div>
+
+									<div class="col-sm-4" style="padding-right: 0px;">
+										<label for="select2-demo-3" class="form-control-label">Localidad</label>
+										 <?php include('../select_localidades_modificar.php');?>
+									</div>
+								 <div class="form-group">
 									<label for="modal-modificar-publicacion-titulo">Título</label>
 									<input type="text" class="form-control" id="modal-modificar-publicacion-titulo" placeholder="">
 								</div>
+
 								<div class="form-group">
 									<label for="modal-modificar-publicacion-descripcion">Descripción</label>
 									<texarea id="modal-modificar-publicacion-descripcion"></texarea>
-								</div>
-								<h6>Agregar ubicación del empleo</h6>
-								<div class="form-group">
-									<label for="modal-modificar-publicacion-ubicacion">Escribe la ubicación</label>
-									<input type="text" class="form-control" id="modal-modificar-publicacion-ubicacion" placeholder="">
-								</div>
-								<div id="map2" style="height: 250px;width: 100%;"></div>
+								</div> 
 							</form>
 						  </div>
-						  <div id="modal-modificar-publicacion-imagenes" class="tab-pane fade">
+						<!--
+							  <div id="modal-modificar-publicacion-imagenes" class="tab-pane fade">
 							<h3>Imágenes</h3>
 						  </div>
 						  <div id="modal-modificar-publicacion-videos" class="tab-pane fade">
 							<h3>Videos</h3>
 						  </div>
+						-->
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -359,210 +581,7 @@
 			</div>
 		</div>
 		
-		<div id="modal-postulados" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-			<div class="modal-dialog modal-lg" style="width: 80%;">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title">Trabajadores postulados a este empleo
-						
-						</h4>
-
-					</div>
-					<div class="modal-body" id="cuerpo_de_modal">
-                        <?php switch($plan['id_plan']):
-                            case 1: ?>
-                                <div class="alert alert-warning">
-                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>10</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
-                                </div>
-                        <?php break; ?>
-
-                        <?php case 2: // Plan Bronce?>
-                                <div class="alert alert-warning">
-                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>40</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
-                                </div>
-                        <?php break; ?>
-                        <?php case 3: // Plan Plata?>
-                                <div class="alert alert-warning">
-                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>100</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
-                                </div>
-                        <?php break; ?>
-                        <?php endswitch; ?>
- 
-						 
-                       <div class="row" style="padding: 10px;padding-top: 0px;">
-                       	<!--contenedor filtros-->
-                       		<span style=" padding-bottom: 3px; float: right;font-size: 12px;padding-right: 10px;cursor: pointer;"  onClick="limpiarFiltros()"><strong><img src="img/eraser.png"> Limpiar filtros</strong></span>
-                       	<div class="col-xs-12" style="border: 1px dashed #dbdbdb;padding: 0px;margin-bottom: 15px;">
-
-                       		<div class="col-sm-12" style="padding: 0px;"><p style="background-color: #3e70c9;padding: 4px;text-align: center;color: #fff;"><strong>Busqueda avanzada</strong>                       
-                       </p></div>
-                       	 <div class="col-sm-12" style="padding: 0px;margin-bottom: 20px;">
-                       	 	<div class="col-sm-2">
-                       	 		<label>Sexo</label><br/>
-                        	<select  onChange="filtrar(this.value,5)" class="_filtro form-control select_filtros" >
-                        		<option value="">Ambos</option>
-                        		<option value="1">Masculino</option>
-                        		<option value="2">Femenino</option>
-                        	</select>
-                       	 	                      	
-                        	<label>Calificación</label><br/>
-                        	<select  onChange="filtrar(this.value,7)" class="_filtro form-control select_filtros" style="">
-                        		<option value="">Todas</option>
-								<option value="1" style="color: #ffde00;">★</option>
-								<option value="2" style="color: #ffde00;">★★</option>
-								<option value="3" style="color: #ffde00;">★★★</option>
-								<option value="4" style="color: #ffde00;">★★★★</option>
-								<option value="5" style="color: #ffde00;">★★★★★</option>
-
-
-                        	</select>
-								 
-                        	
-                        	
-                        	</div> 
-
-                        	<div class="col-sm-2">
-                        	<label>Idioma</label><br/>
-                        	<select onChange="filtrar(this.value,8)" name="select_idiomas" class="_filtro form-control select_filtros" >
-                        	<option value="">Todos</option>
-                        		<?php
-                        			foreach ($datos_idiomas as $datos) {
-                        				echo "<option value='".$datos["id"]."'>".$datos["nombre"]."</option>";
-                        			}
-                        		?>
-                        	</select> 
-
-                        	</div>
-                        	<div class="col-sm-2">
-                        	<label>Edad</label><br/>
-                        	<select onChange="test(this.value)" id="edad" name="edad" class="_filtro form-control select_filtros" >
-                        		<option value="">Todas</option>
-                        		<option value="1823">De 18 a 23 años</option>
-                        		<option value="2430">De 24 a 30 años</option>
-                        		<option value="3136">De 31 a 36 años</option>
-                        		<option value="3745">De 37 a 45 años</option>
-                        	</select> 
-                        </div>
-                        <div class="col-sm-2">
-                        		
-                        	<label>Area de estudio</label><br/>
-                        	<select onChange="filtrar(this.value,3)" id="area_estudio" class="_filtro form-control select_filtros" >
-                        		<option value="">Todas</option>
-                        		<?php
-                        			foreach ($areas_estudio as $datos) {
-                        				echo "<option value='".$datos["id_area"]."'>".$datos["nombre"]."</option>";
-                        			}
-                        		?>
-                        	</select>
-                        	
-                        	
-                        	</div>
-                        	 
-                        	<div class="col-sm-2">
-                        	<label>Provincia</label><br/>
-                        	<select onChange="filtrar(this.value,4)" id="select_provincias" name="provincias" class="_filtro form-control select_filtros" >
-                        		<option value="">Todas</option>
-                        		<?php
-                        			foreach ($datos_provincias as $datos) {
-                        				echo "<option value='".$datos["id"]."'>".$datos["provincia"]."</option>";
-                        			}
-                        		?>
-                        	</select>
-	
-                         
-                        	</div>
-
-                        	<div class="col-sm-2">
-                        		<label>Remuneracion</label><br/>
-                        	<select id="remuneracion" name="remuneracion" class="_filtro form-control select_filtros" >
-                        		<option value="0">Todas</option>
-                        		<option value="02000">$0 - $2000 </option>
-                        		<option value="20015000">$2001 - $5000 </option>                           		
-                        		<option value="500110000">$5001 - $10000 </option>   
-                        		<option value="1000115000">$10001 - $15000 </option>   
-                        		<option value="1500120000">$15001 - $20000 </option>   
-                        		<option value="20001">$20000 o más</option>  
-                        	</select>                         		
-                        	</div> 
-                        	<div class="col-sm-2"></div>
-                        	<div class="col-sm-4" style="padding-left: 0px;padding-right: 0px; background-color: #f2f2f2;padding-bottom: 5px;">
-                        		<p class="text-center"><strong>Experiencia laboral</strong></p>
-                        		<div class="col-sm-12">
-                        			<select onChange="filtrar(this.value,9)" id="actividad_empresa" name="actividad_empresa" class="_filtro form-control select_filtros" >
-	                        		<option value="0">Actividad</option> 
-                        		<?php
-                        			foreach ($actividad_empresa as $datos) {
-                        				echo "<option value='".$datos["nombre"]."'>".$datos["nombre"]."</option>";
-                        			}
-                        		?>	                        		 
-	                        	</select>  
-                        		</div>
-                        		<!--<div class="col-sm-6">
-	                        		<select id="anos_exp" name="anos_exp"  class="_filtro form-control select_filtros" >
-	                        		<option value="0">Años</option>
-	                        		<option value="02">0 - 2 </option>
-	                        		<option value="35">3 - 5</option>                           		
-	                        		<option value="410">4 - 10 </option>   
-	                        		<option value="1120">11 - 20</option>   
-	                        		<option value="2140">21 - 40</option>    
-	                        	</select> 	
-                        		</div>--> 
-
-                        	</div> 
-                        	
-                        	<div class="col-sm-2"></div>
-                        	<div class="col-sm-2">                       	 
-                        	   <label>Marcadores</label><br/>
-	                        	<select onChange="filtrar(this.value,10)" class="_filtro form-control select_filtros" style="">
-	                        		<option value="">Todos</option>
-	                        		<option value="0">Descartados</option>
-	                        		<option value="1">Contactado</option>
-	                        		<option value="2">En proceso</option>
-	                        		<option value="3">Evaluando</option>
-	                        		<option value="4">Finalistas</option>
-	                        		<option value="5">Contratados</option>									 
-	                        	</select>   	 	              		
-                        	</div>
-
-                       	 </div>
-                       	</div>
-                       	<!-- fin contenedor filtros-->
-						<div class="col-sm-12">
-							<div class="table-responsive">
-							<table id="tablaPostulados" class="table table-striped table-bordered dataTable dt-responsive responsive nowrap" style="width: 100%">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th style="padding: 0px;">Trabajador</th>
-									 <th>Edad</th>
-									  <th>aestudio</th>
-									   <th>provincia</th>
-									    <th>sexo</th>
-									 <th>remuneracion</th>
-									<th>calificacion</th>
-									<th>idioma</th>
-									<th>actividad</th>
-									<th>Estado</th>
-									<th>Fecha y hora</th>
-									<th>Contactar</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-						</div>
-						</div>
-                       </div> 
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 
 		<?php require_once('../includes/libs-js.php'); ?>
 
@@ -599,7 +618,7 @@
 			var input2 = null;
 			var empresa_nueva = "<?= $empresa_nueva['id_imagen'] ?>";
 			empresa_nueva = parseInt(empresa_nueva);
-			function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+			/*function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 				marker = new google.maps.Marker({
 					position: pos,
 					map: map,
@@ -615,7 +634,7 @@
 					  draggable: true
 				});
 			}
-			
+			*/
 			function geocodeLatLng(geocoder, map, marker) {
 				var latlng = marker.getPosition();
 				geocoder.geocode({
@@ -633,7 +652,7 @@
 				});
 			}
 			
-			function initMap() {
+			/*function initMap() {
 				if(map == null) {
 					map = new google.maps.Map(document.getElementById('map'), {
 						center: {lat: -34.397, lng: 150.644},
@@ -722,7 +741,7 @@
 			  setTimeout(function () {
 					google.maps.event.trigger(map, "resize");
 				}, 2500);
-			}
+			}*/
 			
 			function initMap2(coordenadas) {
 				if(map2 == null) {
@@ -908,12 +927,17 @@
 								$('#select2-demo-23').val(publicacion.disponibilidad).trigger('change');
 								$("#modal-modificar-publicacion-titulo").val(publicacion.titulo);
 								$("#modal-modificar-publicacion-ubicacion").val(publicacion.ubicacion);
+								$("#m_provincias_select").val(publicacion.provincia);
+								//$("#m_localidad_"+publicacion.provincia).show();
+								m_id_campo_localidades=publicacion.provincia;
+								modificar_localidad(publicacion.provincia);
+								$("#m_localidad_"+publicacion.provincia).val(publicacion.localidad);
+
 								tinyMCE.get('modal-modificar-publicacion-descripcion').setContent(publicacion.descripcion);
 								var coordenadas = "";
 								if(publicacion.coordenadas != "" && publicacion.coordenadas != null) {
 									coordenadas = publicacion.coordenadas;
-								}
-								initMap2(coordenadas);
+								} 
 							}
 							break;
 					}
@@ -1205,12 +1229,13 @@
 				tablaPostulados.clear().draw();
 			});
 			$('#modal-postulados').on('show.bs.modal', function (e) {
+				//alert($(e.relatedTarget).attr('data-id')); 
 				tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + $(e.relatedTarget).attr('data-id'));
 				tablaPostulados.ajax.reload(); 
 			});
 			
 			function callEvent(element) {
-				console.log(element);
+				//console.log(element);
 				$("#modal-postulados").modal("hide");
 				$("#sendMesage").attr("data-id", $(element).attr("data-id"));
 			}
@@ -1294,17 +1319,33 @@
 			$('#select2-demo-23').select2({
 				width: '100%'
 			});
-
+			var id_campo_localidades=0;
+			var m_id_campo_localidades=0;
 			$("#modal-agregar-publicacion-enviar-form").click(function() {
+				 
 				var idArea = $("#select2-demo-1").val();
 				var idSector = $("#select2-demo-2").val();
 				var idDisp = $("#select2-demo-3").val();
 				var titulo = $("#modal-agregar-publicacion-titulo").val();
 				var ubicacion = $("#modal-agregar-publicacion-ubicacion").val();
 				var descripcion = tinyMCE.get('modal-agregar-publicacion-descripcion').getContent();
-				if(titulo == '' || descripcion == '') {
-					swal("Error!", "Faltan algunos campos.", "error");
-				} else {
+				if(titulo == '')
+				{
+					swal("Error!", "Debe agregar un titulo a la publicaición.", "error");
+				}
+				else if(descripcion == '') {
+					swal("Error!", "Debe agregar un descripción a la publicaición.", "error");
+				}
+			 
+				else if($("#provincias_select").val() == 0)
+				{
+					swal("Error!", "Debe seleccionar una provincia.", "error");
+				}
+				else if($("#localidad_"+id_campo_localidades).val()==0) {
+					swal("Error!", "Debe seleccionar una localidad.", "error");
+				} 
+
+				else {
 
 					$.ajax({
 						url: 'ajax/publicaciones.php',
@@ -1328,11 +1369,13 @@
 												titulo: titulo,
 												descripcion: descripcion,
 												latitud: latSelected,
-												longitud: lngSelected,
-												ubicacion: ubicacion
+												longitud: lngSelected, 
+												provincia:$("#provincias_select").val(),
+												localidad:$("#localidad_"+id_campo_localidades).val()
 											})
 										},
 										success: function(data){
+										 
 											if(data.msg == 'OK') {
 													var publicacion = data.data.publicacion;
 													$("#modal-agregar-publicacion").modal('hide');
@@ -1345,6 +1388,7 @@
 											}
 										},
 										error: function(error){
+											//console.log(error);
 											swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
 										}
 									})
@@ -1365,15 +1409,33 @@
 			});
 			
 			$("#modal-modificar-publicacion-enviar-form").click(function() {
+				 
 				var idArea = $("#select2-demo-12").val();
 				var idSector = $("#select2-demo-22").val();
 				var idDisp = $("#select2-demo-23").val();
 				var titulo = $("#modal-modificar-publicacion-titulo").val();
 				var ubicacion = $("#modal-modificar-publicacion-ubicacion").val();
+
+
 				var descripcion = tinyMCE.get('modal-modificar-publicacion-descripcion').getContent();
-				if(titulo == '' || descripcion == '') {
-					alert("Faltan algunos campos");
+				
+				if(titulo == '')
+				{
+					swal("Error!", "Debe agregar un titulo a la publicaición.", "error");
 				}
+				else if(descripcion == '') {
+					swal("Error!", "Debe agregar un descripción a la publicaición.", "error");
+				}
+			 
+				else if($("#m_provincias_select").val() == 0)
+				{
+					swal("Error!", "Debe seleccionar una provincia.", "error");
+				}
+				//
+				else if($("#m_localidad_"+m_id_campo_localidades).val()==0) {
+					swal("Error!", "Debe seleccionar una localidad.", "error");
+				} 
+
 				else {
 
 					$.ajax({
@@ -1390,8 +1452,9 @@
 								titulo: titulo,
 								descripcion: descripcion,
 								latitud: latSelected,
-								longitud: lngSelected,
-								ubicacion: ubicacion
+								longitud: lngSelected, 
+								provincia:$("#m_provincias_select").val(),
+								localidad:$("#m_localidad_"+m_id_campo_localidades).val()
 							})
 						},
 						success: function(data){
@@ -1408,14 +1471,15 @@
 							}
 						},
 						error: function(error){
-							swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
+							console.log(error);
+							//swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
 						}
 					})
 				}
 			});
 			
 			$('#modal-agregar-publicacion').on('show.bs.modal', function (e) {
-				initMap();
+				 
 				$("#select2-demo-1").val($("#select2-demo-1 option:first").val()).trigger('change');
 				var idArea = $("#select2-demo-1").val();
 				var html = '';
@@ -1439,6 +1503,7 @@
  	
  		 
  		$(document).ready(function() {
+
  			//Filtrar salario
  			 tablaPostulados.ajax.reload();
  			$('#remuneracion').change( function() {        		 
@@ -1562,17 +1627,35 @@
 
 		<script>
 		contador=0;
-		$( "#modal-postulados" ).mouseenter(function() {
+		$( "#modal-postulados" ).mouseenter(  function (e) {
 		 if(contador==0)
-		 {
+		 {  
 		 	 tablaPostulados.ajax.reload();		  	 
-		  	 contador=1;		 }
+		  	 contador=1;		  
+		  	}
 		}); 
 		$( "#modal-postulados" ).mouseleave(function() {
 		  contador=0;
 		}); 
 		</script>
 
+		<script type="text/javascript">
+			function localidad(par)
+			{
+				//alert("#localidad_"+par);
+				id_campo_localidades=par;
+				$(".select_localidad").hide();
+				$("#localidad_"+par).show();
+			}
+
+			function modificar_localidad(par)
+			{
+				//alert("#localidad_"+par);
+				m_id_campo_localidades=par;
+				$(".m_select_localidad").hide();
+				$("#m_localidad_"+par).show();
+			}
+		</script>
 	</body>
 
 </html>

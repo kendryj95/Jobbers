@@ -469,6 +469,38 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 									 		}
 									 	?>
 									 </select>
+								</div> 
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+
+								<h3>Por Provincias</h3>
+
+								<div class="box bg-white">
+									 <select  onChange="listar_publicaciones(0)" id="por_provincia" name="area_disponibilidad" class="form-control">
+									 	<option value="0">Seleccionar</option>
+									 	<?php
+									 		foreach ($datos_provincias as $key) {
+									 			if($key["provincia"]!="")
+									 			{
+									 				echo '<option value="'.$key["id"].'">'.$key["provincia"].'</option>';
+									 			}
+									 		}
+									 	?>
+									 </select>
+								</div> 
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+
+								<h3>Por Localidades</h3>
+
+								<div class="box bg-white">
+									 <?php include('select_localidades.php');?>
 								</div>
 
 								<button class="btn btn-primary form-control" onClick="limpiarfiltros(0)">Limpiar filtros</button>
@@ -478,7 +510,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						<div class="row" style="margin-top: 20px;">
 							<div class="col-md-12">
 								<div class="list-group">
-									<a href="#" class="list-group-item sidebar-index-hover">
+									<a href="noticias.php" class="list-group-item sidebar-index-hover">
 										<h4>Noticias</h4>
 										<p class="list-group-item-text">Enterate de las ultimas noticias ! En Jobbers te queremos informado...</p>
 									</a>
@@ -518,7 +550,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 										</a>
 									</li>
 
-									<a href="#" class="list-group-item sidebar-index-hover">
+									<a href="soporte.php" class="list-group-item sidebar-index-hover">
 										<h4>Soporte Técnico</h4>
 										<p class="list-group-item-text">Tienes dudas o alguna consulta? Pues preguntale a nuestros expertos !</p>
 									</a>
@@ -554,6 +586,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 
 
 <script type="text/javascript">
+		var filtro_localidad=0;
+		var parametro_localidad=0;
 			//ajax para laspublicaiones
 			var paginador=0;
 			
@@ -582,13 +616,44 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 					$("#area_estudio").val("");
 		          	$("#area_fecha").val("");
 		          	$("#area_disponibilidad").val("");
+		          	$("#por_provincia").val(0);
+		          	localidad(0);
+		          	filtro_localidad=0;
 		          	$("#listado_publicaciones").text("");
 		          	listar_publicaciones(0);
 		          
 		          	
 			}
+
+				function localidad(par)
+				{
+
+					//parametro_localidad=par;
+					$(".select_localidad").hide();
+					$("#localidad_"+par).show();
+					//alert(parametro_localidad);
+				}
+
+				$( "#por_provincia" ).change(function() {
+				   	localidad($( "#por_provincia" ).val());
+				});
+
+				$(".select_localidad").change(function() {
+					 //alert( $(this).find(":selected").val() );					 
+					filtro_localidad=$("#"+$(this).attr('id')).val();
+					//alert(filtro_localidad);
+				    listar_publicaciones(0);
+				});
+
+
 			function listar_publicaciones(pagina)
 			{
+
+			 
+				if(pagina==0)
+				{
+					//filtro_localidad=0;
+				} 
 				paginador=pagina;
 				 if(paginador==0)
 				 { 
@@ -604,6 +669,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 		          	area:$("#area_estudio").val(),
 		          	fecha:$("#area_fecha").val(),
 		          	disponibilidad:$("#area_disponibilidad").val(),
+		          	provincia:$("#por_provincia").val(),
+		          	localidad:filtro_localidad
 		          }
 		       				 
 				}).done(function(datos) {						
@@ -797,6 +864,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 				<?php endif ?>
 			});
 			</script>
+
+		 
 		</body>
 
 

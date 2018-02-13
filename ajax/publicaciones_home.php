@@ -16,6 +16,31 @@ if($_POST["disponibilidad"]!="")
 		$condicion=$condicion." and disponibilidad= ".$_POST['disponibilidad']." ";
 	}
 }
+
+if($_POST["provincia"]!=0)
+{
+	if($condicion=="")
+	{
+			$condicion=$condicion." WHERE provincia= ".$_POST['provincia']." ";
+	}
+	else
+	{
+		$condicion=$condicion." and provincia = ".$_POST['provincia']." ";
+	}
+}
+
+if($_POST["localidad"]!=0)
+{
+	if($condicion=="")
+	{
+			$condicion=$condicion." WHERE localidad= ".$_POST['localidad']." ";
+	}
+	else
+	{
+		$condicion=$condicion." and localidad = ".$_POST['localidad']." ";
+	}
+}
+
 if($_POST["fecha"]!="")
 {
 	if($condicion=="")
@@ -45,6 +70,8 @@ else
 {
 	$condicion=$condicion." AND t2.suspendido <> 1 AND t1.estatus=1";
 }
+
+
 
 //if($_POST["disponibilidad"]!=""){}
 

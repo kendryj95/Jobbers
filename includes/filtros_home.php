@@ -19,6 +19,6 @@ GROUP by t1.disponibilidad ORDER by t2.nombre ASC");
 $datos_area = $base->getAll("
 	SELECT t1.id_sector,t2.nombre FROM `publicaciones_sectores` t1 LEFT JOIN  areas_sectores t2 ON t1.id_sector= t2.id  GROUP by t1.id_sector order by nombre asc");
 
-
+$datos_provincias=$base->getAll("SELECT t1.* FROM provincias t1 RIGHT JOIN publicaciones t2 ON t2.provincia = t1.id GROUP BY id");
  
 ?>
