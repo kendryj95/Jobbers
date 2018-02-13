@@ -94,19 +94,19 @@
 								<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
 							</div>
 							<div class="table-responsive">
-							<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Título</th>
-										<th>Descripción</th>
-										<th>Descripción</th>
-										<th>Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+								<table class="table table-striped table-bordered dataTable" id="tablaPublicaciones">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Título</th>
+											<th>Descripción</th>
+											<th>Descripción</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -403,6 +403,7 @@
 			var $tablaPublicaciones = jQuery("#tablaPublicaciones");
 
 			var tablaPublicaciones = $tablaPublicaciones.DataTable( {
+				"responsive" : true,
 				"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 				"buttons": [
 					'copyHtml5',

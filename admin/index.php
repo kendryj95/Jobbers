@@ -38,25 +38,24 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body class="auth-bg">
-		
+	<body class="img-cover img-fix-sm" style="background-image: url(235-min.jpg); height: 100vh !important;">
 		<div class="auth">
-			<div class="auth-header">
-				<a href=".././"><img src="../img/logo_d.png" alt="" style="margin-left: 50px;width: 300px;"></a>
-				<h6>Bienvenido! Inicie sesión para acceder a su panel</h6>
+			<div class="auth-header text-center">
+				<a href=".././" style="z-index:999"><img src="../img/logo_d.png" alt="" style="width: 300px;"></a>
+				<h6 style="color: #000;">Bienvenido! Inicie sesión para acceder a su panel</h6>
 			</div>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-4 offset-md-4">
 						<div style="max-width: 350px;margin: 0 auto;">
 							<div class="form-group">
-								<div class="input-group">
+								<div class="input-group" style="border: 1px solid #e5e5e5">
 									<input type="text" class="form-control" id="exampleInputEmail" placeholder="Email" onkeypress="return runScript(event)">
 									<div class="input-group-addon"><i class="ti-email"></i></div>
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="input-group">
+								<div class="input-group" style="border: 1px solid #e5e5e5">
 								<input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" onkeypress="return runScript(event)">
 									<div class="input-group-addon"><i class="ti-key"></i></div>
 								</div>
