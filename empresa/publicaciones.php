@@ -259,7 +259,7 @@
                        	 </div>
                        	</div>
                        	<!-- fin contenedor filtros-->
-						<div class="col-sm-12">
+						<div class="col-sm-12 table-responsive">
 							<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
 							<thead>
 								<tr>
