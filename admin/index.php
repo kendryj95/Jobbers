@@ -38,7 +38,7 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body class="img-cover img-fix-sm" style="background-image: url(235-min.jpg); height: 100% !important;">
+	<body class="img-cover img-fix-sm" style="background-image: url(235-min.jpg); height: 100vh !important;">
 		<div class="auth">
 			<div class="auth-header text-center">
 				<a href=".././" style="z-index:999"><img src="../img/logo_d.png" alt="" style="width: 300px;"></a>
