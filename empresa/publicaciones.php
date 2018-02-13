@@ -98,6 +98,195 @@
 
 	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
 
+<div id="modal-postulados" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+			<div class="modal-dialog modal-lg" style="width: 80%;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title">Trabajadores postulados a este empleo
+						
+						</h4>
+
+					</div>
+					<div class="modal-body" id="cuerpo_de_modal">
+                        <?php switch($plan['id_plan']):
+                            case 1: ?>
+                                <div class="alert alert-warning">
+                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>10</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
+                                </div>
+                        <?php break; ?>
+
+                        <?php case 2: // Plan Bronce?>
+                                <div class="alert alert-warning">
+                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>40</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
+                                </div>
+                        <?php break; ?>
+                        <?php case 3: // Plan Plata?>
+                                <div class="alert alert-warning">
+                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>100</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
+                                </div>
+                        <?php break; ?>
+                        <?php endswitch; ?>
+ 
+						 
+                       <div class="row" style="padding: 10px;padding-top: 0px;">
+                       	<!--contenedor filtros-->
+                       		<span style=" padding-bottom: 3px; float: right;font-size: 12px;padding-right: 10px;cursor: pointer;"  onClick="limpiarFiltros()"><strong><img src="img/eraser.png"> Limpiar filtros</strong></span>
+                       	<div class="col-xs-12" style="border: 1px dashed #dbdbdb;padding: 0px;margin-bottom: 15px;">
+
+                       		<div class="col-sm-12" style="padding: 0px;"><p style="background-color: #3e70c9;padding: 4px;text-align: center;color: #fff;"><strong>Busqueda avanzada</strong>                       
+                       </p></div>
+                       	 <div class="col-sm-12" style="padding: 0px;margin-bottom: 20px;">
+                       	 	<div class="col-sm-2">
+                       	 		<label>Sexo</label><br/>
+                        	<select  onChange="filtrar(this.value,5)" class="_filtro form-control select_filtros" >
+                        		<option value="">Ambos</option>
+                        		<option value="1">Masculino</option>
+                        		<option value="2">Femenino</option>
+                        	</select>
+                       	 	                      	
+                        	<label>Calificación</label><br/>
+                        	<select  onChange="filtrar(this.value,7)" class="_filtro form-control select_filtros" style="">
+                        		<option value="">Todas</option>
+								<option value="1" style="color: #ffde00;">★</option>
+								<option value="2" style="color: #ffde00;">★★</option>
+								<option value="3" style="color: #ffde00;">★★★</option>
+								<option value="4" style="color: #ffde00;">★★★★</option>
+								<option value="5" style="color: #ffde00;">★★★★★</option>
+
+
+                        	</select>
+								  
+                        	</div> 
+
+                        	<div class="col-sm-2">
+                        	<label>Idioma</label><br/>
+                        	<select onChange="filtrar(this.value,8)" name="select_idiomas" class="_filtro form-control select_filtros" >
+                        	<option value="">Todos</option>
+                        		<?php
+                        			foreach ($datos_idiomas as $datos) {
+                        				echo "<option value='".$datos["id"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>
+                        	</select> 
+
+                        	</div>
+                        	<div class="col-sm-2">
+                        	<label>Edad</label><br/>
+                        	<select onChange="test(this.value)" id="edad" name="edad" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<option value="1823">De 18 a 23 años</option>
+                        		<option value="2430">De 24 a 30 años</option>
+                        		<option value="3136">De 31 a 36 años</option>
+                        		<option value="3745">De 37 a 45 años</option>
+                        	</select> 
+                        </div>
+                        <div class="col-sm-2">
+                        		
+                        	<label>Area de estudio</label><br/>
+                        	<select onChange="filtrar(this.value,3)" id="area_estudio" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<?php
+                        			foreach ($areas_estudio as $datos) {
+                        				echo "<option value='".$datos["id_area"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>
+                        	</select>
+                        	
+                        	
+                        	</div>
+                        	 
+                        	<div class="col-sm-2">
+                        	<label>Provincia</label><br/>
+                        	<select onChange="filtrar(this.value,4)" id="select_provincias" name="provincias" class="_filtro form-control select_filtros" >
+                        		<option value="">Todas</option>
+                        		<?php
+                        			foreach ($datos_provincias as $datos) {
+                        				echo "<option value='".$datos["id"]."'>".$datos["provincia"]."</option>";
+                        			}
+                        		?>
+                        	</select>
+	
+                         
+                        	</div>
+
+                        	<div class="col-sm-2">
+                        		<label>Remuneracion</label><br/>
+                        	<select id="remuneracion" name="remuneracion" class="_filtro form-control select_filtros" >
+                        		<option value="0">Todas</option>
+                        		<option value="02000">$0 - $2000 </option>
+                        		<option value="20015000">$2001 - $5000 </option>                           		
+                        		<option value="500110000">$5001 - $10000 </option>   
+                        		<option value="1000115000">$10001 - $15000 </option>   
+                        		<option value="1500120000">$15001 - $20000 </option>   
+                        		<option value="20001">$20000 o más</option>  
+                        	</select>                         		
+                        	</div> 
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-4" style="padding-left: 0px;padding-right: 0px; background-color: #f2f2f2;padding-bottom: 5px;">
+                        		<p class="text-center"><strong>Experiencia laboral</strong></p>
+                        		<div class="col-sm-12">
+                        			<select onChange="filtrar(this.value,9)" id="actividad_empresa" name="actividad_empresa" class="_filtro form-control select_filtros" >
+	                        		<option value="0">Actividad</option> 
+                        		<?php
+                        			foreach ($actividad_empresa as $datos) {
+                        				echo "<option value='".$datos["nombre"]."'>".$datos["nombre"]."</option>";
+                        			}
+                        		?>	                        		 
+	                        	</select>  
+                        		</div> 
+                        	</div> 
+                        	
+                        	<div class="col-sm-2"></div>
+                        	<div class="col-sm-2">                       	 
+                        	   <label>Marcadores</label><br/>
+	                        	<select onChange="filtrar(this.value,10)" class="_filtro form-control select_filtros" style="">
+	                        		<option value="">Todos</option>
+	                        		<option value="0">Descartados</option>
+	                        		<option value="1">Contactado</option>
+	                        		<option value="2">En proceso</option>
+	                        		<option value="3">Evaluando</option>
+	                        		<option value="4">Finalistas</option>
+	                        		<option value="5">Contratados</option>									 
+	                        	</select>   	 	              		
+                        	</div>
+
+                       	 </div>
+                       	</div>
+                       	<!-- fin contenedor filtros-->
+						<div class="col-sm-12">
+							<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th style="padding: 0px;">Trabajador</th>
+									 <th>Edad</th>
+									  <th>aestudio</th>
+									   <th>provincia</th>
+									    <th>sexo</th>
+									 <th>remuneracion</th>
+									<th>calificacion</th>
+									<th>idioma</th>
+									<th>actividad</th>
+									<th>Estado</th>
+									<th>Fecha y hora</th>
+									<th>Contactar</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						</div>
+                       </div> 
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="wrapper">
 
 			<!-- Preloader -->
@@ -128,7 +317,7 @@
 						<div class="box box-block bg-white">
 							<h5 class="m-b-1">Mis publicaciones</h5>
 							<div class="mb-10">
-								<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
+	 <a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
 								
 							</div>
 							<div class="table-responsive">
@@ -389,208 +578,7 @@
 			</div>
 		</div>
 		
-		<div id="modal-postulados" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-			<div class="modal-dialog modal-lg" style="width: 80%;">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<h4 class="modal-title">Trabajadores postulados a este empleo
-						
-						</h4>
-
-					</div>
-					<div class="modal-body" id="cuerpo_de_modal">
-                        <?php switch($plan['id_plan']):
-                            case 1: ?>
-                                <div class="alert alert-warning">
-                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>10</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
-                                </div>
-                        <?php break; ?>
-
-                        <?php case 2: // Plan Bronce?>
-                                <div class="alert alert-warning">
-                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>40</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
-                                </div>
-                        <?php break; ?>
-                        <?php case 3: // Plan Plata?>
-                                <div class="alert alert-warning">
-                                    <p><b>OJO!</b> Solo podrás visualizar maximo <b>100</b> postulantes para esta publicación. Para evitar esto te invitamos a mejor tu plan de servicios <a href="planes.php">Aquí</a>.</p>
-                                </div>
-                        <?php break; ?>
-                        <?php endswitch; ?>
- 
-						 
-                       <div class="row" style="padding: 10px;padding-top: 0px;">
-                       	<!--contenedor filtros-->
-                       		<span style=" padding-bottom: 3px; float: right;font-size: 12px;padding-right: 10px;cursor: pointer;"  onClick="limpiarFiltros()"><strong><img src="img/eraser.png"> Limpiar filtros</strong></span>
-                       	<div class="col-xs-12" style="border: 1px dashed #dbdbdb;padding: 0px;margin-bottom: 15px;">
-
-                       		<div class="col-sm-12" style="padding: 0px;"><p style="background-color: #3e70c9;padding: 4px;text-align: center;color: #fff;"><strong>Busqueda avanzada</strong>                       
-                       </p></div>
-                       	 <div class="col-sm-12" style="padding: 0px;margin-bottom: 20px;">
-                       	 	<div class="col-sm-2">
-                       	 		<label>Sexo</label><br/>
-                        	<select  onChange="filtrar(this.value,5)" class="_filtro form-control select_filtros" >
-                        		<option value="">Ambos</option>
-                        		<option value="1">Masculino</option>
-                        		<option value="2">Femenino</option>
-                        	</select>
-                       	 	                      	
-                        	<label>Calificación</label><br/>
-                        	<select  onChange="filtrar(this.value,7)" class="_filtro form-control select_filtros" style="">
-                        		<option value="">Todas</option>
-								<option value="1" style="color: #ffde00;">★</option>
-								<option value="2" style="color: #ffde00;">★★</option>
-								<option value="3" style="color: #ffde00;">★★★</option>
-								<option value="4" style="color: #ffde00;">★★★★</option>
-								<option value="5" style="color: #ffde00;">★★★★★</option>
-
-
-                        	</select>
-								 
-                        	
-                        	
-                        	</div> 
-
-                        	<div class="col-sm-2">
-                        	<label>Idioma</label><br/>
-                        	<select onChange="filtrar(this.value,8)" name="select_idiomas" class="_filtro form-control select_filtros" >
-                        	<option value="">Todos</option>
-                        		<?php
-                        			foreach ($datos_idiomas as $datos) {
-                        				echo "<option value='".$datos["id"]."'>".$datos["nombre"]."</option>";
-                        			}
-                        		?>
-                        	</select> 
-
-                        	</div>
-                        	<div class="col-sm-2">
-                        	<label>Edad</label><br/>
-                        	<select onChange="test(this.value)" id="edad" name="edad" class="_filtro form-control select_filtros" >
-                        		<option value="">Todas</option>
-                        		<option value="1823">De 18 a 23 años</option>
-                        		<option value="2430">De 24 a 30 años</option>
-                        		<option value="3136">De 31 a 36 años</option>
-                        		<option value="3745">De 37 a 45 años</option>
-                        	</select> 
-                        </div>
-                        <div class="col-sm-2">
-                        		
-                        	<label>Area de estudio</label><br/>
-                        	<select onChange="filtrar(this.value,3)" id="area_estudio" class="_filtro form-control select_filtros" >
-                        		<option value="">Todas</option>
-                        		<?php
-                        			foreach ($areas_estudio as $datos) {
-                        				echo "<option value='".$datos["id_area"]."'>".$datos["nombre"]."</option>";
-                        			}
-                        		?>
-                        	</select>
-                        	
-                        	
-                        	</div>
-                        	 
-                        	<div class="col-sm-2">
-                        	<label>Provincia</label><br/>
-                        	<select onChange="filtrar(this.value,4)" id="select_provincias" name="provincias" class="_filtro form-control select_filtros" >
-                        		<option value="">Todas</option>
-                        		<?php
-                        			foreach ($datos_provincias as $datos) {
-                        				echo "<option value='".$datos["id"]."'>".$datos["provincia"]."</option>";
-                        			}
-                        		?>
-                        	</select>
-	
-                         
-                        	</div>
-
-                        	<div class="col-sm-2">
-                        		<label>Remuneracion</label><br/>
-                        	<select id="remuneracion" name="remuneracion" class="_filtro form-control select_filtros" >
-                        		<option value="0">Todas</option>
-                        		<option value="02000">$0 - $2000 </option>
-                        		<option value="20015000">$2001 - $5000 </option>                           		
-                        		<option value="500110000">$5001 - $10000 </option>   
-                        		<option value="1000115000">$10001 - $15000 </option>   
-                        		<option value="1500120000">$15001 - $20000 </option>   
-                        		<option value="20001">$20000 o más</option>  
-                        	</select>                         		
-                        	</div> 
-                        	<div class="col-sm-2"></div>
-                        	<div class="col-sm-4" style="padding-left: 0px;padding-right: 0px; background-color: #f2f2f2;padding-bottom: 5px;">
-                        		<p class="text-center"><strong>Experiencia laboral</strong></p>
-                        		<div class="col-sm-12">
-                        			<select onChange="filtrar(this.value,9)" id="actividad_empresa" name="actividad_empresa" class="_filtro form-control select_filtros" >
-	                        		<option value="0">Actividad</option> 
-                        		<?php
-                        			foreach ($actividad_empresa as $datos) {
-                        				echo "<option value='".$datos["nombre"]."'>".$datos["nombre"]."</option>";
-                        			}
-                        		?>	                        		 
-	                        	</select>  
-                        		</div>
-                        		<!--<div class="col-sm-6">
-	                        		<select id="anos_exp" name="anos_exp"  class="_filtro form-control select_filtros" >
-	                        		<option value="0">Años</option>
-	                        		<option value="02">0 - 2 </option>
-	                        		<option value="35">3 - 5</option>                           		
-	                        		<option value="410">4 - 10 </option>   
-	                        		<option value="1120">11 - 20</option>   
-	                        		<option value="2140">21 - 40</option>    
-	                        	</select> 	
-                        		</div>--> 
-
-                        	</div> 
-                        	
-                        	<div class="col-sm-2"></div>
-                        	<div class="col-sm-2">                       	 
-                        	   <label>Marcadores</label><br/>
-	                        	<select onChange="filtrar(this.value,10)" class="_filtro form-control select_filtros" style="">
-	                        		<option value="">Todos</option>
-	                        		<option value="0">Descartados</option>
-	                        		<option value="1">Contactado</option>
-	                        		<option value="2">En proceso</option>
-	                        		<option value="3">Evaluando</option>
-	                        		<option value="4">Finalistas</option>
-	                        		<option value="5">Contratados</option>									 
-	                        	</select>   	 	              		
-                        	</div>
-
-                       	 </div>
-                       	</div>
-                       	<!-- fin contenedor filtros-->
-						<div class="col-sm-12">
-							<table id="tablaPostulados" class="table table-striped table-bordered dataTable">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th style="padding: 0px;">Trabajador</th>
-									 <th>Edad</th>
-									  <th>aestudio</th>
-									   <th>provincia</th>
-									    <th>sexo</th>
-									 <th>remuneracion</th>
-									<th>calificacion</th>
-									<th>idioma</th>
-									<th>actividad</th>
-									<th>Estado</th>
-									<th>Fecha y hora</th>
-									<th>Contactar</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-						</div>
-                       </div> 
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 
 		<?php require_once('../includes/libs-js.php'); ?>
 
@@ -1243,7 +1231,7 @@
 			});
 			
 			function callEvent(element) {
-				console.log(element);
+				//console.log(element);
 				$("#modal-postulados").modal("hide");
 				$("#sendMesage").attr("data-id", $(element).attr("data-id"));
 			}
@@ -1511,6 +1499,7 @@
  	
  		 
  		$(document).ready(function() {
+
  			//Filtrar salario
  			 tablaPostulados.ajax.reload();
  			$('#remuneracion').change( function() {        		 
@@ -1636,9 +1625,7 @@
 		contador=0;
 		$( "#modal-postulados" ).mouseenter(  function (e) {
 		 if(contador==0)
-		 {
-		 
-			 
+		 {  
 		 	 tablaPostulados.ajax.reload();		  	 
 		  	 contador=1;		  
 		  	}

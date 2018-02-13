@@ -1438,7 +1438,22 @@
             </select>
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_7">
             <option value="0">Seleccionar</option>
-                <option value="485">
+                <option value="2383">
+                    Córdoba Capital
+                </option>
+                <option value="790">
+                    Río Cuarto
+                </option>
+                <option value="495">
+                    Alta Gracia
+                </option>
+                <option value="871">
+                    Villa Carlos Paz
+                </option>
+                <option value="592">
+                    Cosquín
+                </option>
+ <option value="485">
                     Achiras
                 </option>
                 <option value="486">
@@ -1467,9 +1482,6 @@
                 </option>
                 <option value="494">
                     Alpa Corral
-                </option>
-                <option value="495">
-                    Alta Gracia
                 </option>
                 <option value="496">
                     Alto Alegre
@@ -1738,9 +1750,6 @@
                 <option value="586">
                     Copacabana
                 </option>
-                <option value="2383">
-                    Córdoba Capital
-                </option>
                 <option value="588">
                     Coronel Baigorria
                 </option>
@@ -1752,9 +1761,6 @@
                 </option>
                 <option value="591">
                     Corralito
-                </option>
-                <option value="592">
-                    Cosquín
                 </option>
                 <option value="593">
                     Costa Sacate
@@ -2326,9 +2332,6 @@
                 <option value="789">
                     Río Ceballos
                 </option>
-                <option value="790">
-                    Río Cuarto
-                </option>
                 <option value="791">
                     Río de Los Sauces
                 </option>
@@ -2554,9 +2557,6 @@
                 <option value="870">
                     Villa Candelaria N.
                 </option>
-                <option value="871">
-                    Villa Carlos Paz
-                </option>
                 <option value="872">
                     Villa Cerro Azul
                 </option>
@@ -2687,6 +2687,7 @@
                     Ycho Cruz Sierras
                 </option>
             </select>
+
             <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_8">
             <option value="0">Seleccionar</option>
                 <option value="915">
