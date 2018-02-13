@@ -23,11 +23,13 @@
 
 			<div class="list-group-item active text-center item-panel" style="background-color: #3e70c9">Panel de Administrador</div>
 			<a href="mis-noticias.php" class="list-group-item item-panel"><i class="fa fa-newspaper-o"></i>&nbsp Noticias</a>
+			<?php if ($_SESSION["ctc"]["rol"] == "A"): ?>
 			<a href="configuraciones.php" class="list-group-item item-panel"><i class="fa fa-cog"></i>&nbsp Configuraciones</a>
 			<a href="publicidad.php" class="list-group-item item-panel"><i class="fa fa-certificate"></i>&nbsp Publicidad</a>
 			<a href="empresas.php" class="list-group-item item-panel"><i class="fa fa-industry"></i>&nbsp Empresas</a>
 			<a href="trabajadores.php" class="list-group-item item-panel"><i class="fa fa-briefcase"></i>&nbsp Trabajadores</a>
 			<a href="usuarios.php" class="list-group-item item-panel"><i class="fa fa-users"></i>&nbsp Usuarios</a>
+			<?php endif; ?>
 
 		<?php endif ?>
 
