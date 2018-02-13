@@ -89,6 +89,8 @@ t2.facebook,
 t2.instagram,
 t2.twitter,
 t2.linkedin,
+t8.provincia,
+t9.localidad,
 t1.fecha_actualizacion,
 t5.amigable as sector,
 t6.amigable as area,
@@ -98,6 +100,9 @@ t2.id  as id_empresa
 from publicaciones t1 
 LEFT JOIN empresas t2 ON t1.id_empresa = t2.id
 LEFT JOIN empresas_planes t3 ON t1.id_empresa = t3.id_empresa
+
+LEFT JOIN provincias t8 ON t8.id = t1.provincia
+LEFT JOIN localidades t9 ON t9.id = t1.localidad
 
 LEFT JOIN publicaciones_sectores t4 ON t1.id=t4.id_publicacion
 LEFT JOIN areas_sectores t5 ON t4.id_sector=t5.id 

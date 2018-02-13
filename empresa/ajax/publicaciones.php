@@ -276,7 +276,7 @@
                 if($datos) {
 					$datos = array_reverse($datos);					
 					foreach($datos as $k => $pub) {
-						$pub["link_postulados"] = $pub["postulados"] > 0 ? ('<a class="text-primary" href="javascript: void(0);" data-toggle="modal" data-target="#modal-postulados" data-id="' . $pub["id"] . '"><span class="underline">' . $pub["postulados"] . ' trabajador(es)</span></a>') : "";
+						$pub["link_postulados"] = $pub["postulados"] > 0 ? ('<a value="'.$pub["titulo"].'" class="text-primary" href="javascript: void(0);" data-toggle="modal" data-target="#modal-postulados" data-id="' . $pub["id"] . '"><span class="underline">' . $pub["postulados"] . ' trabajador(es)</span></a>') : "";
 
 						$fecha_creac_pub = date('d/m/Y', strtotime($pub["fecha_actualizacion"]));
 						$fecha_final_pub = '&#x221e;';
@@ -490,34 +490,7 @@
 					GROUP by t3.id";
 
 
-				/*$sql="SELECT 
-				t1.id,
-				t3.id AS id_trabajador,
-				t3.uid AS uid_trabajador,  
-				t3.id_sexo,
-				UPPER(CONCAT(t3.nombres,' ',t3.apellidos)) as nombre,
-				TIMESTAMPDIFF(YEAR,t3.fecha_nacimiento,CURDATE()) AS edad,
-				t3.fecha_creacion,
-				t3.provincia,
-				t4.id_area_estudio,
-				t5.remuneracion_pret,
-				t6.calificacion,
-                group_concat(t9.nombre) as actividad_empresa,
-                group_concat(t7.id_idioma) as idiomas,
-                t10.marcador    
-				FROM publicaciones t1 
-				LEFT JOIN postulaciones t2 ON t1.id = t2.id_publicacion 
-				LEFT JOIN trabajadores t3 ON t3.id = t2.id_trabajador
-				LEFT JOIN trabajadores_educacion t4 ON t4.id_trabajador = t2.id_trabajador 
-				LEFT JOIN trabajadores_infextra t5 ON t5.id_trabajador = t2.id_trabajador
-				RIGHT JOIN trabajadores_calificacion t6 ON t6.id_publicacion = t1.id
-				LEFT JOIN trabajadores_idiomas t7 ON t7.id_trabajador = t2.id_trabajador
-                LEFT JOIN trabajadores_experiencia_laboral t8 ON t8.id_trabajador = t2.id_trabajador
-                LEFT JOIN trabajadores_marcadores t10 ON t10.id_publicacion = t1.id
-                LEFT JOIN actividades_empresa t9 ON t9.id = t8.id_actividad_empresa
-				WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']." and t1.id=".$id."
-				GROUP BY t3.id
-				ORDER BY t3.fecha_creacion DESC";	 */ 
+			 
 				$datos = $db->getAll($sql);
 
 				
