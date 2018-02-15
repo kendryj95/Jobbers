@@ -144,6 +144,7 @@ $( document ).ready(function() {
  function limpiar()
  {
      $(".control_filtro").val("");
+     localidad(0);
      filtro(1,0,0);
  }
     function localidad(par)
