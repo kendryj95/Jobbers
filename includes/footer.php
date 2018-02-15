@@ -82,20 +82,20 @@
 			?>
 			<div class="col-sm-4">
 				<div class="m-b-0-25"><a class="f-logo text-black" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") || strstr($_SERVER["REQUEST_URI"], "admin/") ? ".././" : "./"); ?>">Jobbers</a></div>
-				<a <?php echo $facebook; ?> class="btn bg-facebook btn-sm btn-circle m-r-0-5">
-					<i class="fa fa-facebook"></i>
+				<a <?php echo $facebook; ?>>
+					<i class="fa fa-facebook fa-stack-1x social-fb"></i>
 				</a>
-				<a <?php echo $twitter; ?> class="btn bg-twitter btn-sm btn-circle m-r-0-5">
-					<i class="fa fa-twitter"></i>
+				<a <?php echo $twitter; ?>>
+					<i class="fa fa-twitter fa-stack-1x social-tw"></i>
 				</a>
-				<a <?php echo $instagram; ?> class="btn bg-instagram btn-sm btn-circle m-r-0-5">
-					<i class="fa fa-instagram"></i>
+				<a <?php echo $instagram; ?>>
+					<i class="fa fa-instagram fa-stack-1x social-ig"></i>
 				</a>
-				<a <?php echo $youtube; ?> class="btn bg-youtube btn-sm btn-circle m-r-0-5">
-					<i class="fa fa-youtube"></i>
+				<a <?php echo $youtube; ?>>
+					<i class="fa fa-youtube fa-stack-1x social-yt"></i>
 				</a>
-				<a <?php echo $linkedin; ?> class="btn bg-linkedin btn-sm btn-circle m-r-0-5">
-					<i class="fa fa-linkedin"></i>
+				<a <?php echo $linkedin; ?>>
+					<i class="fa fa-linkedin fa-stack-1x social-in"></i>
 				</a>
 			</div>
 		</div>

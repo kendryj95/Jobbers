@@ -321,10 +321,10 @@
 			 .victor_publicacion:hover
 			 {
 			 	cursor: pointer;
-background: -moz-linear-gradient(top, rgba(247,247,247,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(247,247,247,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(247,247,247,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+				background: -moz-linear-gradient(top, rgba(247,247,247,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+				background: -webkit-linear-gradient(top, rgba(247,247,247,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient(to bottom, rgba(247,247,247,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
 			 }
         </style>
  
@@ -397,7 +397,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 					<div class="col-xs-12 col-md-3" style="z-index: 1;">
 						<div class="row">
 							<div class="col-md-12">
-								<h3>Ofertas de empleo por área</h3>
+								<h4>Ofertas de empleo por área</h4>
 								<div class="box bg-white">
 									 <select onChange="listar_publicaciones(0)" id="area_estudio" name="area_estudio" class="form-control">
 									 	<option value="">Seleccionar</option>
@@ -438,7 +438,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						<div class="row">
 							<div class="col-md-12">
 
-								<h3>Por Fecha de Publicación</h3> 
+								<h4>Por Fecha de Publicación</h4> 
 								<div class="box bg-white">
 									 <select  onChange="listar_publicaciones(0)" id="area_fecha" name="area_fecha" class="form-control">
 									 	<option value="">Seleccionar</option>
@@ -455,7 +455,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						<div class="row">
 							<div class="col-md-12">
 
-								<h3>Por Disponibilidad</h3>
+								<h4>Por Disponibilidad</h4>
 
 								<div class="box bg-white">
 									 <select  onChange="listar_publicaciones(0)" id="area_disponibilidad" name="area_disponibilidad" class="form-control">
@@ -476,7 +476,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						<div class="row">
 							<div class="col-md-12">
 
-								<h3>Por Provincias</h3>
+								<h4>Por Provincias</h4>
 
 								<div class="box bg-white">
 									 <select  onChange="listar_publicaciones(0)" id="por_provincia" name="area_disponibilidad" class="form-control">
@@ -497,7 +497,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						<div class="row">
 							<div class="col-md-12">
 
-								<h3>Por Localidades</h3>
+								<h4>Por Localidades</h4>
 
 								<div class="box bg-white">
 									 <?php include('select_localidades.php');?>
@@ -533,20 +533,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 											$youtube = $redes["youtube"] ? (strstr($redes["youtube"], "http") ? "href='". $redes["youtube"] . "'" : ("href='http://".$redes["youtube"]."'")) : "style='display:none'";
 											$linkedin = $redes["linkedin"] ? (strstr($redes["linkedin"], "http") ? "href='". $redes["linkedin"] . "'" : ("href='http://".$redes["linkedin"]."'")) : "style='display:none'";
 										?>
-										<a <?php echo $facebook; ?> class="btn bg-facebook btn-sm btn-circle m-r-0-5">
-											<i class="fa fa-facebook"></i>
+										<a <?php echo $facebook; ?>>
+											<i class="fa fa-facebook fa-stack-1x social-fb"></i>
 										</a>
-										<a <?php echo $twitter; ?> class="btn bg-twitter btn-sm btn-circle m-r-0-5">
-											<i class="fa fa-twitter"></i>
+										<a <?php echo $twitter; ?>>
+											<i class="fa fa-twitter fa-stack-1x social-tw"></i>
 										</a>
-										<a <?php echo $instagram; ?> class="btn bg-instagram btn-sm btn-circle m-r-0-5">
-											<i class="fa fa-instagram"></i>
+										<a <?php echo $instagram; ?>>
+											<i class="fa fa-instagram fa-stack-1x social-ig"></i>
 										</a>
-										<a <?php echo $youtube; ?> class="btn bg-youtube btn-sm btn-circle m-r-0-5">
-											<i class="fa fa-youtube"></i>
+										<a <?php echo $youtube; ?>>
+											<i class="fa fa-youtube fa-stack-1x social-yt"></i>
 										</a>
-										<a <?php echo $linkedin; ?> class="btn bg-linkedin btn-sm btn-circle m-r-0-5">
-											<i class="fa fa-linkedin"></i>
+										<a <?php echo $linkedin; ?>>
+											<i class="fa fa-linkedin fa-stack-1x social-in"></i>
 										</a>
 									</li>
 
@@ -683,6 +683,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						link=""
 						instagram=""
 						medalla=""; 
+						socialNone="";
 						urlEmpresa=datos[key]["nombre_empresa"];
 						urlEmp=urlEmpresa.replace(" ", "-")+"-"+datos[key]["id_empresa"];
 
@@ -692,16 +693,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 					 	if(datos[key]["plan"]==3){medalla='<img src="img/silver-medal.png" style="float: right;margin-top: -10px;">';}
 					 	if(datos[key]["plan"]==2){medalla='<img src="img/bronze-medal.png" style="float: right;margin-top: -10px;">';}
 
-						// if(datos[key]["plan"]==4){borde='gold';}
-					 	// if(datos[key]["plan"]==3){borde='silver';}
-					 	// if(datos[key]["plan"]==2){borde='bronze';}
-						// if(datos[key]["plan"]==1){borde='free';}
+						if(datos[key]["plan"]==4){borde='gold';}
+					 	if(datos[key]["plan"]==3){borde='silver';}
+					 	if(datos[key]["plan"]==2){borde='bronze';}
+						if(datos[key]["plan"]==1){borde='free';}
 
 
-						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><img src="img/redes/facebook.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
-						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a href="'+datos[key]["twitter"]+'"><img src="img/redes/twitter.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
-						if(datos[key]["instagram"]!="" && datos[key]["instagram"]!=null){instagram='<a href="'+datos[key]["instagram"]+'"> <img src="img/redes/instagram.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>' ;}
-						if(datos[key]["linkedin"]!="" && datos[key]["linkedin"]!=null){link='<a href="'+datos[key]["link"]+'"><img src="img/redes/linkedin.png" style="margin-right: 5px;width: 16px;height: 16px;"></a>';}
+						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><i class="fa fa-facebook fa-stack-1x social-fb"></i></a>';}
+						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a style="margin-left: 5px;" href="'+datos[key]["twitter"]+'"><i class="fa fa-twitter fa-stack-1x social-tw"></i></a>';}
+						if(datos[key]["instagram"]!="" && datos[key]["instagram"]!=null){instagram='<a style="margin-left: 5px;" href="'+datos[key]["instagram"]+'"><i class="fa fa-instagram fa-stack-1x social-ig"></i></a>' ;}
+						if(datos[key]["linkedin"]!="" && datos[key]["linkedin"]!=null){link='<a style="margin-left: 5px;" href="'+datos[key]["link"]+'"><i class="fa fa-linkedin fa-stack-1x social-in"></i></a>';}
+						
+						if(datos[key]["linkedin"] == null && datos[key]["instagram"]=="" && datos[key]["facebook"]=="" && datos[key]["twitter"]==""){socialNone = "margin-bottom: 9px;";}
 
 
 					dias="";
@@ -730,7 +733,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 						} 
 					}
 					
-					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion" style="height: 220px; margin-bottom: 10px; padding-right: 10px; padding-left: 10px; border: 1px solid #e5e5e5"> <div class="col-sm-12 text-center logo-medal" style="padding: 20px 0 0 0;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a href="'+url+'">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 8px;"><div class="col-md-12" style="margin-bottom: 10px;"> '+facebook+link+twitter+instagram+'</div> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div></div>'; 
+					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal" style="padding: 20px 0 10px 0; '+socialNone+' "> '+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style="width: 170px;height: 140px;"></br></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </div></div>'; 
 						 
 						$("#listado_publicaciones").append(publicacion);
 		           		
