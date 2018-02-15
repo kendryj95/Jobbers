@@ -5,6 +5,8 @@
 	} else {
 		if ($_SESSION["ctc"]["type"] != 3 || isset($_SESSION["ctc"]["empresa"])) {
 			header("Location: ../");
+		} elseif ($_SESSION["ctc"]["rol"] == "N") {
+			header("Location: mis-noticias.php");
 		} 
 	}
 	require_once('../classes/DatabasePDOInstance.function.php');
