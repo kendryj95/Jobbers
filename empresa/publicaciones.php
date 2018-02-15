@@ -108,7 +108,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
-						<h4 class="modal-title">Trabajadores postulados a este empleo
+						<h4 class="modal-title" id="titulo_postulados">
 						
 						</h4>
 
@@ -1226,10 +1226,12 @@
 				});
 			
 			$('#modal-postulados').on('show.bs.modal', function (e) {
+
 				tablaPostulados.clear().draw();
 			});
 			$('#modal-postulados').on('show.bs.modal', function (e) {
-				//alert($(e.relatedTarget).attr('data-id')); 
+				 
+				$("#titulo_postulados").html($(e.relatedTarget).attr('value').toUpperCase());
 				tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + $(e.relatedTarget).attr('data-id'));
 				tablaPostulados.ajax.reload(); 
 			});
@@ -1647,7 +1649,7 @@
 				$(".select_localidad").hide();
 				$("#localidad_"+par).show();
 			}
-
+			
 			function modificar_localidad(par)
 			{
 				//alert("#localidad_"+par);

@@ -10,7 +10,7 @@
 	
 	//echo json_encode($_SESSION);
 
-	$activities = $db->getAll("SELECT * FROM actividades_empresa");
+	$activities = $db->getAll("SELECT * FROM actividades_empresa ORDER BY nombre");
 	$id_empresa = isset($_SESSION["ctc"]["id"]) ? $_SESSION["ctc"]["id"] : 0;
 	$e = isset($_REQUEST["e"]) ? $_REQUEST["e"] : false;
 	$empresa = 1;

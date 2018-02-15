@@ -118,7 +118,7 @@
 			r.s <= $momento[diff_s]
 		");
 	}
-//}
+ 
 
 	$publicaciones_especiales = $db->getAll("
 		SELECT empresas_publicaciones_especiales.*, CONCAT(imagenes.directorio,'/', imagenes.nombre,'.', imagenes.extension) AS imagen, empresas.nombre AS nombre_empresa FROM empresas_publicaciones_especiales INNER JOIN empresas ON empresas.id=empresas_publicaciones_especiales.id_empresa INNER JOIN empresas_planes ON empresas_planes.id_empresa=empresas.id LEFT JOIN imagenes ON imagenes.id=empresas_publicaciones_especiales.id_imagen WHERE empresas_planes.logo_home=3 ORDER BY RAND()
@@ -692,12 +692,16 @@
 						if(datos[key]["plan"]==4){medalla='<img src="img/gold-medal.png" style="float: right;margin-top: -10px;">';}
 					 	if(datos[key]["plan"]==3){medalla='<img src="img/silver-medal.png" style="float: right;margin-top: -10px;">';}
 					 	if(datos[key]["plan"]==2){medalla='<img src="img/bronze-medal.png" style="float: right;margin-top: -10px;">';}
+<<<<<<< HEAD
 
 						if(datos[key]["plan"]==4){borde='gold';}
 					 	if(datos[key]["plan"]==3){borde='silver';}
 					 	if(datos[key]["plan"]==2){borde='bronze';}
 						if(datos[key]["plan"]==1){borde='free';}
 
+=======
+ 
+>>>>>>> master
 
 						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><i class="fa fa-facebook fa-stack-1x social-fb"></i></a>';}
 						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a style="margin-left: 5px;" href="'+datos[key]["twitter"]+'"><i class="fa fa-twitter fa-stack-1x social-tw"></i></a>';}
@@ -733,7 +737,7 @@
 						} 
 					}
 					
-					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal" style="padding: 20px 0 10px 0; '+socialNone+' "> '+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style="width: 170px;height: 140px;"></br></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </div></div>'; 
+					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion" style="height: 220px; margin-bottom: 10px; padding-right: 10px; padding-left: 10px; border: 1px solid #e5e5e5"> <div class="col-sm-12 text-center logo-medal" style="padding: 20px 0 0 0;"> '+medalla+'  <img src="'+datos[key]["imagen_empresa"]+'" class="img-circle" style="width: 50px;height: 50px;margin-right: -25px;margin-top: -10px;"></br> <a href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p class="text-justify"> <span style="font-size: 11px;"><strong>'+dias+' </strong></span><span style="font-size: 11px;float:right;font-weight: bold;"><strong>'+datos[key]["provincia"]+" - "+datos[key]["localidad"]+'</strong></span><br> <a href="'+url+'">'+datos[key]["titulo_publicacion"]+'</a> </p> <p style="font-size: 12px;" class="text-justify"> </p> </div><div class="col-sm-12 text-center" style="padding: 0px;padding-top: 10px;padding-bottom: 8px;"><div class="col-md-12" style="margin-bottom: 10px;"> '+facebook+link+twitter+instagram+'</div> <a target="_blank" href="'+url+'" class="btn btn-primary btn-sm" style="width: 100px;">Ver</a> </div> <div class="col-sm-8"></div> </div></div>'; 
 						 
 						$("#listado_publicaciones").append(publicacion);
 		           		
@@ -742,8 +746,7 @@
 				});
 			}
 
-		</script>
-
+		</script> 
 
 <script>
 	var c = "";
