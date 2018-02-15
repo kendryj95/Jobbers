@@ -69,19 +69,8 @@
                 echo'<option value="'.$key["id_idioma"].'">'.$key["nombre"]." ".' </option>';
             }?>
         </select> 
-
-        <label><strong>Localidades</strong></label></br>
-        <select onChange="filtro(1,0,0)" id="localidad" class="form-control  control_filtro">
-            <option value="">Seleccionar</option>
-             <?php foreach ($datos_localidad as $key) {
-                if($key['nombre']!="")
-                {
-                    echo'<option value="'.$key["localidad"].'">'.$key["nombre"]." ".' </option>';
-                }
-            }?>
-        </select>
-          <label><strong>Provincias</strong></label></br>
-        <select  onChange="filtro(1,0,0)" id="provincia" class="form-control  control_filtro">
+         <label><strong>Provincias</strong></label></br>
+        <select  onChange="filtro(1,0,0),localidad(this.value)" id="provincia" class="form-control  control_filtro">
             <option value="">Seleccionar</option> 
             <?php foreach ($datos_provincia as $key) {
                 if($key['nombre']!="")
@@ -90,6 +79,14 @@
                 }
             }?>
         </select> 
+
+        <label><strong>Localidades</strong></label></br>
+        <?php  include('select_localidades.php');?>
+       <!-- <select onChange="filtro(1,0,0)" id="localidad" class="form-control  control_filtro">
+            <option value="">Seleccionar</option>
+             
+        </select>-->
+         
         <label><strong>Remuneraciones</strong></label></br>
         <select  onChange="filtro(1,0,0)" id="remuneracion" class="form-control  control_filtro">
 

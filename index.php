@@ -413,28 +413,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 								</div>
 							</div>
 						</div>
-						<!--<div class="row">
-							<div class="col-md-12">
-								<h3>Ofertas de empleo por provincia</h3>
-								<div class="box bg-white">
-									 <select name="area_estudio" class="form-control">
-									 	<option value="">Seleccionar</option>
-									 	 
-									 </select>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<h3>Ofertas de empleo por localidad</h3>
-								<div class="box bg-white">
-									 <select name="area_estudio" class="form-control">
-									 	<option value="">Seleccionar</option>
-									 	 
-									 </select>
-								</div>
-							</div>
-						</div>-->
+						 
 						<div class="row">
 							<div class="col-md-12">
 
@@ -626,22 +605,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 			}
 
 				function localidad(par)
-				{
-
-					//parametro_localidad=par;
+				{ 
 					$(".select_localidad").hide();
-					$("#localidad_"+par).show();
-					//alert(parametro_localidad);
+					$("#localidad_"+par).show(); 
 				}
 
 				$( "#por_provincia" ).change(function() {
 				   	localidad($( "#por_provincia" ).val());
 				});
 
-				$(".select_localidad").change(function() {
-					 //alert( $(this).find(":selected").val() );					 
-					filtro_localidad=$("#"+$(this).attr('id')).val();
-					//alert(filtro_localidad);
+				$(".select_localidad").change(function() { 					 
+					filtro_localidad=$("#"+$(this).attr('id')).val(); 
 				    listar_publicaciones(0);
 				});
 

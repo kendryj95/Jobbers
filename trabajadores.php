@@ -97,7 +97,7 @@ include('includes/filtros_trabajadores.php');
 <?php require_once('includes/libs-js.php'); ?>
 
 <script>
-
+var select_local="";
 function filtro(par,v1,v2)
     {
        // $( "#contenedor_publicaciones" ).empty();
@@ -108,7 +108,7 @@ function filtro(par,v1,v2)
         var f2=$("#edad").val();
         var f3=$("#genero").val();
         var f4=$("#idioma").val();
-        var f5=$("#localidad").val();
+        var f5=select_local;
         var f6=$("#provincia").val();
         var f7=$("#remuneracion").val();          
 
@@ -137,16 +137,38 @@ function filtro(par,v1,v2)
           });
     } 
 $( document ).ready(function() {    
- filtro(1,0,0);
-
- 
-});
+        filtro(1,0,0); 
+        select_local="";
+    });
 
  function limpiar()
  {
      $(".control_filtro").val("");
      filtro(1,0,0);
  }
+    function localidad(par)
+        { 
+            valor="";
+            if(par=="")
+            {
+                valor=0;
+            }else
+            {
+                valor=par;
+            }
+            $(".select_localidad").hide();         
+            $("#localidad_"+valor).show(); 
+            select_local=""; 
+            filtro(1,0,0);           
+        }
+    $(".select_localidad").change(function() {
+                if($("#"+$(this).attr('id')).val()==0)
+                {
+                    select_local="";
+                }                   
+                    select_local=$("#"+$(this).attr('id')).val(); 
+                    filtro(1,0,0);
+                }); 
 </script>
 </body>
 </html>
