@@ -71,21 +71,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	<ul class="nav navbar-nav pull-left">
-		<li>
-				<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""; ?>buscador.php?tipo=empleos">
-					Búsqueda avanzada
-				</a>
-			</li>
-			<li>
-				<div class="header-form m-md-r-1 padding-mobile">
-					<form id='busqueda_form'>
-						<input type="text" id="search-input" class="form-control b-a" style="box-shadow: none" placeholder="Búsqueda">
-						<a href="javascript:void(0)" id="search" class="btn bg-white b-a-0">
-							<i class="ti-search"></i>
-						</a>
-					</form>
-				</div>
-			</li>
+		 
 		</ul>
 		<ul class="nav navbar-nav pull-right">
 			
