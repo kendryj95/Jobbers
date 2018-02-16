@@ -33,14 +33,24 @@ if($_POST["localidad"]!=0)
 {
 	if($condicion=="")
 	{
-			$condicion=$condicion." WHERE t1.localidad= ".$_POST['localidad']." ";
+			$condicion=$condicion." WHERE t1.localidad = ".$_POST['localidad']." ";
 	}
 	else
 	{
 		$condicion=$condicion." and t1.localidad = ".$_POST['localidad']." ";
 	}
 }
-
+if($_POST["busqueda"]!="")
+{
+	if($condicion=="")
+	{
+			$condicion=$condicion." WHERE (t1.titulo like '%".$_POST['busqueda']."%')  ";
+	}
+	else
+	{
+		$condicion=$condicion." and t1.titulo like '%".$_POST['busqueda']."%' ";
+	}
+}
 if($_POST["fecha"]!="")
 {
 	if($condicion=="")

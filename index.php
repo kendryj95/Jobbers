@@ -395,6 +395,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 				<div class="container-fluid">
 					
 					<div class="col-xs-12 col-md-3" style="z-index: 1;">
+					<div class="row">
+							<div class="col-md-12">
+								<h3>Buscar</h3>
+								<div class="box bg-white">
+									  <input class="form-control" type="text" name="" id="busquedaAvanzada" onKeyup="listar_publicaciones(0)"/>
+								</div>
+							</div>
+						</div>
+
 						<div class="row">
 							<div class="col-md-12">
 								<h3>Ofertas de empleo por área</h3>
@@ -590,11 +599,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 			function limpiarfiltros()
 			{
 					
-					 
+					 $("#busquedaAvanzada").val("");
 					$("#area_estudio").val("");
 		          	$("#area_fecha").val("");
 		          	$("#area_disponibilidad").val("");
 		          	$("#por_provincia").val(0);
+		          	
 		          	localidad(0);
 		          	filtro_localidad=0;
 		          	$("#listado_publicaciones").text("");
@@ -628,12 +638,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 
 			function listar_publicaciones(pagina)
 			{
-
-				 			 
-				if(pagina==0)
-				{
-					//filtro_localidad=0;
-				} 
+ 				//alert($("#busquedaAvanzada").val());
 				paginador=pagina;
 				 if(paginador==0)
 				 { 
@@ -650,11 +655,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', end
 		          	fecha:$("#area_fecha").val(),
 		          	disponibilidad:$("#area_disponibilidad").val(),
 		          	provincia:$("#por_provincia").val(),
-		          	localidad:filtro_localidad
+		          	localidad:filtro_localidad,
+		          	busqueda:$("#busquedaAvanzada").val(),
 		          }
 		       				 
 				}).done(function(datos) {						
-				
+			 
 
 					$.each( datos, function( key, value ) {
 						
