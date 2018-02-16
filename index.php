@@ -692,16 +692,11 @@
 						if(datos[key]["plan"]==4){medalla='<img src="img/gold-medal.png" style="float: right;margin-top: -10px;">';}
 					 	if(datos[key]["plan"]==3){medalla='<img src="img/silver-medal.png" style="float: right;margin-top: -10px;">';}
 					 	if(datos[key]["plan"]==2){medalla='<img src="img/bronze-medal.png" style="float: right;margin-top: -10px;">';}
-<<<<<<< HEAD
 
 						if(datos[key]["plan"]==4){borde='gold';}
 					 	if(datos[key]["plan"]==3){borde='silver';}
 					 	if(datos[key]["plan"]==2){borde='bronze';}
 						if(datos[key]["plan"]==1){borde='free';}
-
-=======
- 
->>>>>>> master
 
 						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><i class="fa fa-facebook fa-stack-1x social-fb"></i></a>';}
 						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a style="margin-left: 5px;" href="'+datos[key]["twitter"]+'"><i class="fa fa-twitter fa-stack-1x social-tw"></i></a>';}
