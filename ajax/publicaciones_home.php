@@ -119,7 +119,7 @@ LEFT JOIN areas_sectores t5 ON t4.id_sector=t5.id
 LEFT JOIN areas t6 ON t5.id_area=t6.id 
 LEFT JOIN imagenes t7 ON t2.id_imagen=t7.id
 ".$condicion." 
-ORDER BY t1.fecha_actualizacion DESC,plan DESC limit ".$_POST['pag'].",10";
+ORDER BY t3.id_plan DESC,t1.fecha_actualizacion DESC limit ".$_POST['pag'].",10";
 
 $datos_publicaciones = $base->getAll($sql);
 
