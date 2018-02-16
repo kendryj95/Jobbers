@@ -658,27 +658,40 @@
 						instagram=""
 						medalla=""; 
 						socialNone="";
+						minHeightFree = "";
+						paddingEmpresasFree = "";
+						paddingEmpresas = "";
 						urlEmpresa=datos[key]["nombre_empresa"];
 						urlEmp=urlEmpresa.replace(" ", "-")+"-"+datos[key]["id_empresa"];
 
 						url="empleos-detalle.php?a="+datos[key]["area"]+"&s="+datos[key]["sector"]+"&p="+datos[key]["publicacion"]+"";
 
+						// Medallas
 						if(datos[key]["plan"]==4){medalla='<img src="img/gold-medal.png" style="float: right;margin-top: -10px;">';}
 					 	if(datos[key]["plan"]==3){medalla='<img src="img/silver-medal.png" style="float: right;margin-top: -10px;">';}
 					 	if(datos[key]["plan"]==2){medalla='<img src="img/bronze-medal.png" style="float: right;margin-top: -10px;">';}
 
+						// Bordes
 						if(datos[key]["plan"]==4){borde='gold';}
 					 	if(datos[key]["plan"]==3){borde='silver';}
 					 	if(datos[key]["plan"]==2){borde='bronze';}
 						if(datos[key]["plan"]==1){borde='free';}
 
+						// Redes sociales
 						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><i class="fa fa-facebook fa-stack-1x social-fb"></i></a>';}
 						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a style="margin-left: 5px;" href="'+datos[key]["twitter"]+'"><i class="fa fa-twitter fa-stack-1x social-tw"></i></a>';}
 						if(datos[key]["instagram"]!="" && datos[key]["instagram"]!=null){instagram='<a style="margin-left: 5px;" href="'+datos[key]["instagram"]+'"><i class="fa fa-instagram fa-stack-1x social-ig"></i></a>' ;}
 						if(datos[key]["linkedin"]!="" && datos[key]["linkedin"]!=null){link='<a style="margin-left: 5px;" href="'+datos[key]["link"]+'"><i class="fa fa-linkedin fa-stack-1x social-in"></i></a>';}
-						
-						if(datos[key]["linkedin"] == null && datos[key]["instagram"]=="" && datos[key]["facebook"]=="" && datos[key]["twitter"]==""){socialNone = "margin-bottom: 9px;";}
+						if(datos[key]["linkedin"] == null && datos[key]["instagram"]=="" && datos[key]["facebook"]=="" && datos[key]["twitter"]==""){socialNone = "margin-bottom: 10px;";}
 
+						// Tamaño imagenes de empresas
+						if(datos[key]["plan"]==1){widthImg = 'width:80px;height:70px;';}
+						if(datos[key]["plan"]!=1){widthImg = 'width:170px;height:140px;';}
+
+						// Padding empresas
+						if(datos[key]["plan"]==1){paddingEmpresasFree = ' padding-empresas-free';}
+						if(datos[key]["plan"]!=1){paddingEmpresas = ' padding-empresas';}
+						if(datos[key]["plan"]==1){minHeightFree = ' min-height-free';}
 
 					dias="";
 
@@ -706,7 +719,7 @@
 						} 
 					}
 					
-					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal" style="padding: 20px 0 10px 0; '+socialNone+' "> '+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style="width: 170px;height: 140px;"></br></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </div></div>'; 						 
+					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+minHeightFree+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal '+paddingEmpresas+paddingEmpresasFree+' " style="'+socialNone+'"> '+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style=" '+widthImg+' "></br></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </div></div>'; 						 
 						$("#listado_publicaciones").append(publicacion);
 		           		
 		            });

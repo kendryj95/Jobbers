@@ -9774,6 +9774,20 @@ a.text-grey:hover .underline {
     border: 2px solid #EFC75E;
 }
 
+.padding-empresas {
+    padding: 20px 0px 10px 0px;
+}
+
+.padding-empresas-free {
+    padding: 68px 0px 10px 0px;
+}
+
+@media(max-width: 1024px) {
+    .padding-empresas-free {
+        padding: 49px 0px 10px 0px;
+    }
+}
+
 .h6-login-empresas {
     color: #000 !important;
     font-weight: bolder !important;
@@ -9793,12 +9807,18 @@ a.text-grey:hover .underline {
 }
 
 .height-fix {
-    min-height: 260px;
+    min-height: 280px;
 }
 
 @media(max-width: 768px) {
     .height-fix {
-        min-height: 340px;
+        min-height: 380px;
+    }
+}
+
+@media(max-width: 500px) {
+    .min-height-free {
+        min-height: 200px;
     }
 }
 
