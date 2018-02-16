@@ -86,7 +86,8 @@ else
 //if($_POST["disponibilidad"]!=""){}
 
 $sql="
-SELECT t1.id as id_publicacion, 
+SELECT t1.id as id_publicacion,
+t2.verificado as verificado,  
 t2.nombre as nombre_empresa,
 concat('empresa/img/',t7.directorio,'/',t2.id_imagen,'.',t7.extension) as imagen_empresa,
 t1.descripcion as descripcion_publicacion,

@@ -675,6 +675,12 @@
 						paddingEmpresas = "";
 						urlEmpresa=datos[key]["nombre_empresa"];
 						urlEmp=urlEmpresa.replace(" ", "-")+"-"+datos[key]["id_empresa"];
+						verificado="";
+
+						if(datos[key]["verificado"]==1)
+						{
+							verificado="Verificada";
+						}
 
 						url="empleos-detalle.php?a="+datos[key]["area"]+"&s="+datos[key]["sector"]+"&p="+datos[key]["publicacion"]+"";
 
@@ -731,7 +737,7 @@
 						} 
 					}
 					
-					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+minHeightFree+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal '+paddingEmpresas+paddingEmpresasFree+' " style="'+socialNone+'"> '+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style=" '+widthImg+' "></br></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </div></div>'; 						 
+					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+minHeightFree+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal '+paddingEmpresas+paddingEmpresasFree+' " style="'+socialNone+'">'+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style=" '+widthImg+' "></br><span style="font-size:10px;">'+datos[key]["provincia"]+" - "+datos[key]["localidad"]+'</span> '+verificado+'</div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </br></div></div>'; 						 
 						$("#listado_publicaciones").append(publicacion);
 		           		
 		            });
