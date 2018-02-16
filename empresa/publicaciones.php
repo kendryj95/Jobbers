@@ -320,7 +320,7 @@
 						<div class="box box-block bg-white">
 							<h5 class="m-b-1">Mis publicaciones</h5>
 							<div class="mb-10">
-	 <a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#modal-agregar-publicacion" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
+	 <a href="#" class="btn btn-primary waves-effect waves-light" id="agregar-publicacion"><span class="ti-plus"></span> Agregar</a>
 								
 							</div>
 							<div class="table-responsive">
@@ -895,6 +895,30 @@
 
 					return false;
 				}
+
+				$.ajax({
+					url: 'ajax/publicaciones.php',
+					type: 'GET',
+					dataType: 'json',
+					data: {op:9},
+					success: function(response){
+						if (response){
+							if(response.msg == 'NO'){
+
+								swal("INFORMACIÓN!", "Lo sentimos, pero ha sobrepasado el limites de publicaciones para este plan gratis (2 MAX.). Para seguir gozando de nuestros servicios le invitamos a suscribirse a un plan con mayores beneficios.", "info");
+
+								return 0;
+							} else {
+								$('#modal-agregar-publicacion').modal('show');
+							}
+						} else {
+							swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
+						}
+					},
+					error: function(error){
+						swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
+					}
+				});
 			});
 			
 			function modificarPublicacion(btn) {
@@ -1353,59 +1377,38 @@
 						url: 'ajax/publicaciones.php',
 						type: 'GET',
 						dataType: 'json',
-						data: {op:9},
-						success: function(response){
-							if (response){
-								if(response.msg == 'OK'){
-
-									$.ajax({
-										url: 'ajax/publicaciones.php',
-										type: 'GET',
-										dataType: 'json',
-										data: {
-											op: 1,
-											info: JSON.stringify({
-												area: idArea,
-												sector: idSector,
-												disponibilidad:idDisp,
-												titulo: titulo,
-												descripcion: descripcion,
-												latitud: latSelected,
-												longitud: lngSelected, 
-												provincia:$("#provincias_select").val(),
-												localidad:$("#localidad_"+id_campo_localidades).val()
-											})
-										},
-										success: function(data){
-										 
-											if(data.msg == 'OK') {
-													var publicacion = data.data.publicacion;
-													$("#modal-agregar-publicacion").modal('hide');
-													swal("Operación exitosa!", "Se agregó la publicación y sus datos.", "success");
-													tablaPublicaciones.ajax.reload();
-													latSelected = null;
-													lngSelected = null;
-											} else {
-												swal("ERROR!", data.msg, "error");
-											}
-										},
-										error: function(error){
-											//console.log(error);
-											swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
-										}
-									})
-
-								} else {
-									swal("INFORMACIÓN!", "Lo sentimos, pero ha sobrepasado el limites de publicaciones para este plan gratis (2 MAX.). Para seguir gozando de nuestros servicios le invitamos a suscribirse a un plan con mayores beneficios.", "info");
-								}
+						data: {
+							op: 1,
+							info: JSON.stringify({
+								area: idArea,
+								sector: idSector,
+								disponibilidad:idDisp,
+								titulo: titulo,
+								descripcion: descripcion,
+								latitud: latSelected,
+								longitud: lngSelected, 
+								provincia:$("#provincias_select").val(),
+								localidad:$("#localidad_"+id_campo_localidades).val()
+							})
+						},
+						success: function(data){
+						 
+							if(data.msg == 'OK') {
+									var publicacion = data.data.publicacion;
+									$("#modal-agregar-publicacion").modal('hide');
+									swal("Operación exitosa!", "Se agregó la publicación y sus datos.", "success");
+									tablaPublicaciones.ajax.reload();
+									latSelected = null;
+									lngSelected = null;
 							} else {
-								swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
+								swal("ERROR!", data.msg, "error");
 							}
 						},
 						error: function(error){
+							//console.log(error);
 							swal("ERROR!", "Ha ocurrido un error. Por favor, vuelve a intentarlo", "error");
 						}
-					});
+					})
 
 				}
 			});
