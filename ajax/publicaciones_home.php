@@ -40,17 +40,7 @@ if($_POST["localidad"]!=0)
 		$condicion=$condicion." and t1.localidad = ".$_POST['localidad']." ";
 	}
 }
-if($_POST["busqueda"]!="")
-{
-	if($condicion=="")
-	{
-			$condicion=$condicion." WHERE (t1.titulo like '%".$_POST['busqueda']."%')  ";
-	}
-	else
-	{
-		$condicion=$condicion." and t1.titulo like '%".$_POST['busqueda']."%' ";
-	}
-}
+
 if($_POST["fecha"]!="")
 {
 	if($condicion=="")
@@ -72,6 +62,18 @@ if($_POST["fecha"]!="")
 	}
 }
 
+
+if($_POST["busqueda"]!="")
+{
+	if($condicion=="")
+	{
+			$condicion=$condicion." WHERE t1.titulo like '%".$_POST['busqueda']."%'  ";
+	}
+	else
+	{
+		$condicion=$condicion." and t1.titulo like '%".$_POST['busqueda']."%' ";
+	}
+}
 if($condicion=="")
 {
 	$condicion=$condicion." WHERE t2.suspendido <> 1 AND t1.estatus=1";
@@ -120,7 +122,10 @@ LEFT JOIN areas_sectores t5 ON t4.id_sector=t5.id
 LEFT JOIN areas t6 ON t5.id_area=t6.id 
 LEFT JOIN imagenes t7 ON t2.id_imagen=t7.id
 ".$condicion." 
-ORDER BY t3.id_plan DESC,t1.fecha_actualizacion DESC limit ".$_POST['pag'].",10";
+
+GROUP BY t1.id ORDER BY t3.id_plan DESC,t1.fecha_actualizacion DESC  limit ".$_POST['pag'].",10"
+
+;
 
 $datos_publicaciones = $base->getAll($sql);
 

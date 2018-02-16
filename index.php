@@ -399,7 +399,13 @@
 							<div class="col-md-12">
 								<h3>Buscar</h3>
 								<div class="box bg-white">
-									  <input class="form-control" type="text" name="" id="busquedaAvanzada" onKeyup="listar_publicaciones(0)"/>
+									  <div class="col-xs-10" style="padding: 0px">
+									  	<input placeholder="Buscar..." class="form-control" type="text" name="" id="busquedaAvanzada"/>
+									  </div>
+									  <div class="col-xs-2" style="padding: 0px">
+									  	<button style="padding: 0px;padding-top: 7px;padding-bottom: 7px; text-align: 
+									  	center; width: 50px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;" type="buttom" class="btn btn-sm btn-primary" onClick="listar_publicaciones(0)">Buscar</button>
+									  </div>
 								</div>
 							</div>
 						</div>
@@ -593,9 +599,15 @@
 				 }
 				}
 
-
+				
 			});
-
+			/*$( "#busquedaAvanzada").keyup(function() {
+					setTimeout(
+				   function(){
+				      alert( "Handler for .keyup() called." );
+				   }, 1000);
+				  
+				});*/
 			function limpiarfiltros()
 			{
 					
@@ -638,11 +650,11 @@
 
 			function listar_publicaciones(pagina)
 			{
- 				//alert($("#busquedaAvanzada").val());
+ 				 
 				paginador=pagina;
 				 if(paginador==0)
 				 { 
-				 	$("#listado_publicaciones").text("");
+				 	$("#listado_publicaciones").html("");
 				 }
 			 	
 			  $.ajax({
@@ -660,7 +672,7 @@
 		          }
 		       				 
 				}).done(function(datos) {						
-			 
+			 		 
 
 					$.each( datos, function( key, value ) {
 						
@@ -868,6 +880,9 @@
 					});
 				<?php endif ?>
 			});
+
+
+				
 			</script>
 
 		 
