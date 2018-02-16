@@ -9760,18 +9760,18 @@ a.text-grey:hover .underline {
 }
 
 .bronze {
-    background-color: rgba(205, 127, 50, 0.5) !important;
+    /* background-color: rgba(205, 127, 50, 0.5) !important; */
     border: 2px solid #9e5e22;
 }
 
 .silver {
-    background-color: rgba(138, 149, 151, 0.5) !important;
+    /* background-color: rgba(138, 149, 151, 0.5) !important; */
     border: 2px solid #676e70;
 }
 
 .gold {
-    background-color: rgba(153, 114, 0, 0.4) !important;
-    border: 2px solid #997200;
+    /* background-color: rgba(153, 114, 0, 0.4) !important; */
+    border: 2px solid #EFC75E;
 }
 
 .h6-login-empresas {
@@ -9790,6 +9790,109 @@ a.text-grey:hover .underline {
     .logo-medal {
         padding-top: 20px !important;
     }
+}
+
+.height-fix {
+    min-height: 260px;
+}
+
+@media(max-width: 768px) {
+    .height-fix {
+        min-height: 340px;
+    }
+}
+
+.link-pub-main {
+    color: #2E3192 !important;
+}
+
+.link-pub-sec {
+    color: #00AEEF !important;
+}
+
+.btn-see-pub:hover {
+    background-color: #00AEEF !important;
+    border-color: #00AEEF !important;
+}
+
+.social-fb {
+    color: #3b5998;
+    background: #fff;
+    border: 2px solid #3b5998;
+    font-size: 25px;
+    border-radius: 25%;
+    width: 35px;
+    height: 35px;
+    position: relative;
+}
+
+.social-fb:hover {
+    background: #3b5998;
+    color: #fff;
+}
+
+.social-tw {
+    color: #00ACED;
+    background: #fff;
+    border: 2px solid #00ACED;
+    font-size: 25px;
+    border-radius: 25%;
+    width: 35px;
+    height: 35px;
+    position: relative;
+}
+
+.social-tw:hover {
+    background: #00ACED;
+    color: #fff;
+}
+
+.social-ig {
+    color: #8a3ab9;
+    background: #fff;
+    border: 2px solid #8a3ab9;
+    font-size: 25px;
+    border-radius: 25%;
+    width: 35px;
+    height: 35px;
+    position: relative;
+}
+
+.social-ig:hover {
+    background: #8a3ab9;
+    color: #fff;
+}
+
+.social-in {
+    color: #007AB9;
+    background: #fff;
+    border: 2px solid #007AB9;
+    font-size: 25px;
+    border-radius: 25%;
+    width: 35px;
+    height: 35px;
+    position: relative;
+}
+
+.social-in:hover {
+    background: #007AB9;
+    color: #fff;
+}
+
+.social-yt {
+    color: #FF0000;
+    background: #fff;
+    border: 2px solid #FF0000;
+    font-size: 25px;
+    border-radius: 25%;
+    width: 35px;
+    height: 35px;
+    position: relative;
+}
+
+.social-yt:hover {
+    background: #FF0000;
+    color: #fff;
 }
 
 
