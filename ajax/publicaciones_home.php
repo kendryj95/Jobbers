@@ -21,11 +21,11 @@ if($_POST["provincia"]!=0)
 {
 	if($condicion=="")
 	{
-			$condicion=$condicion." WHERE provincia= ".$_POST['provincia']." ";
+			$condicion=$condicion." WHERE t1.provincia= ".$_POST['provincia']." ";
 	}
 	else
 	{
-		$condicion=$condicion." and provincia = ".$_POST['provincia']." ";
+		$condicion=$condicion." and t1.provincia = ".$_POST['provincia']." ";
 	}
 }
 
@@ -33,11 +33,11 @@ if($_POST["localidad"]!=0)
 {
 	if($condicion=="")
 	{
-			$condicion=$condicion." WHERE localidad= ".$_POST['localidad']." ";
+			$condicion=$condicion." WHERE t1.localidad= ".$_POST['localidad']." ";
 	}
 	else
 	{
-		$condicion=$condicion." and localidad = ".$_POST['localidad']." ";
+		$condicion=$condicion." and t1.localidad = ".$_POST['localidad']." ";
 	}
 }
 
