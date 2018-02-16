@@ -427,8 +427,7 @@
 									 	<option value="3">Durante los últimos 3 días</option>
 									 	<option value="1">Durante la última semana</option>
 									 	<option value="2">Durante las ultimas 2 semanas</option>
-									 	<option value="4">Hace un mes o menos</option> 
-									 	 
+									 	<option value="4">Hace un mes o menos</option>  
 									 </select>
 								</div>  
 							</div>
@@ -602,18 +601,25 @@
 		          	filtro_localidad=0;
 		          	$("#listado_publicaciones").text("");
 		          	listar_publicaciones(0);
+
 		          
 		          	
 			}
 
 				function localidad(par)
 				{ 
+
 					$(".select_localidad").hide();
-					$("#localidad_"+par).show(); 
+					$("#localidad_"+par).show();
+
+
 				}
 
 				$( "#por_provincia" ).change(function() {
 				   	localidad($( "#por_provincia" ).val());
+				   	filtro_localidad=0;
+				   	listar_publicaciones(0);
+
 				});
 
 				$(".select_localidad").change(function() { 					 
@@ -625,7 +631,7 @@
 			function listar_publicaciones(pagina)
 			{
 
-			 
+				 			 
 				if(pagina==0)
 				{
 					//filtro_localidad=0;
@@ -651,7 +657,7 @@
 		       				 
 				}).done(function(datos) {						
 				
-			
+
 					$.each( datos, function( key, value ) {
 						
 						facebook="";
