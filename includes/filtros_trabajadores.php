@@ -39,4 +39,10 @@ $datos_area_estudio = $base->getAll("SELECT t2.nombre, t1.id_area_estudio,count(
 $datos_area_remuneracion = $base->getAll("SELECT remuneracion_pret as nombre 
 										  FROM `trabajadores_infextra`  
 										  ORDER BY remuneracion_pret ASC");
+$experiencia_laboral = $base->getAll("SELECT t2.id_actividad_empresa,t3.nombre FROM trabajadores t1
+						LEFT JOIN trabajadores_experiencia_laboral t2 ON t1.id= t2.id_trabajador
+						LEFT JOIN actividades_empresa t3 ON t3.id= t2.id_actividad_empresa
+						where t3.nombre IS NOT null
+						GROUP by t2.id_actividad_empresa
+						order by t3.nombre asc");
 ?>
