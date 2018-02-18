@@ -211,11 +211,8 @@
                         				if($datos["provincia"]!=""){echo "<option value='".$datos["id"]."'>".$datos["provincia"]."</option>";} 
                         			}
                         		?>
-                        	</select>
-	
-                         
+                        	</select>                         
                         	</div>
-
                         	<div class="col-sm-2">
                         		<label>Remuneracion</label><br/>
                         	<select id="remuneracion" name="remuneracion" class="_filtro form-control select_filtros" >
