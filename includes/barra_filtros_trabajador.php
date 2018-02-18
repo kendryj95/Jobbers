@@ -80,6 +80,16 @@
             }?>
         </select> 
 
+         <label><strong>Experiencia laboral</strong></label></br>
+        <select  onChange="filtro(1,0,0)" id="experiecia_laboral" class="form-control  control_filtro">
+            <option value="">Seleccionar</option> 
+            <?php foreach ($experiencia_laboral as $key) {
+                if($key['nombre']!="")
+                {
+                    echo'<option value="'.$key["id_actividad_empresa"].'">'.$key["nombre"]." ".' </option>';
+                }
+            }?>
+        </select> 
         <label><strong>Localidades</strong></label></br>
         <?php  include('select_localidades.php');?>
        <!-- <select onChange="filtro(1,0,0)" id="localidad" class="form-control  control_filtro">

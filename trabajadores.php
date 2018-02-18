@@ -110,16 +110,17 @@ function filtro(par,v1,v2)
         var f4=$("#idioma").val();
         var f5=select_local;
         var f6=$("#provincia").val();
-        var f7=$("#remuneracion").val();          
+        var f7=$("#remuneracion").val();
+        var f8=$("#experiecia_laboral").val();                
 
         $.ajax({
           method: "POST", 
           url: "ajax/filtrar.php",
           dataType:"json",
-          data: { op: "filtro",estudio:f1,edad:f2,genero:f3,idioma:f4,localidad:f5,provincia:f6,remuneracion:f7,p1:a,p2:b}
+          data: { op: "filtro",estudio:f1,edad:f2,genero:f3,idioma:f4,localidad:f5,provincia:f6,remuneracion:f7,experiencia:f8,p1:a,p2:b}
         })
           .done(function( datos ) {
-            //alert(datos);
+            //console.log(datos);
             info="";
            contador=0;
            $.each( datos, function( key, value ) { 
