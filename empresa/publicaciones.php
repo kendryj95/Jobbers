@@ -193,7 +193,7 @@
                         		<option value="">Todas</option>
                         		<?php
                         			foreach ($areas_estudio as $datos) {
-                        				echo "<option value='".$datos["id_area"]."'>".$datos["nombre"]."</option>";
+                        				if($datos["nombre"]!=""){echo "<option value='".$datos["id_area"]."'>".$datos["nombre"]."</option>";} 
                         			}
                         		?>
                         	</select>
@@ -207,7 +207,8 @@
                         		<option value="">Todas</option>
                         		<?php
                         			foreach ($datos_provincias as $datos) {
-                        				echo "<option value='".$datos["id"]."'>".$datos["provincia"]."</option>";
+
+                        				if($datos["provincia"]!=""){echo "<option value='".$datos["id"]."'>".$datos["provincia"]."</option>";} 
                         			}
                         		?>
                         	</select>
@@ -235,7 +236,7 @@
 	                        		<option value="0">Actividad</option> 
                         		<?php
                         			foreach ($actividad_empresa as $datos) {
-                        				echo "<option value='".$datos["nombre"]."'>".$datos["nombre"]."</option>";
+                        				if($datos["nombre"]!=""){echo "<option value='".$id["nombre"]."'>".$datos["nombre"]."</option>";}  
                         			}
                         		?>	                        		 
 	                        	</select>  
