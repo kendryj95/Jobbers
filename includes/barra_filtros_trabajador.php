@@ -7,6 +7,16 @@
     <br/>
     <a href="empresa/publicaciones.php"><img src="empresa/img/back.png"> Volver</a><a href="#" style="margin-left: 10px;" onClick="limpiar()"><img src="empresa/img/eraser.png" style="padding-right: 5px;">Limpiar filtros</a>
     <br/> <br/>
+     <label><strong>Experiencia laboral</strong></label></br>
+        <select  onChange="filtro(1,0,0)" id="experiecia_laboral" class="form-control  control_filtro">
+            <option value="">Seleccionar</option> 
+            <?php foreach ($experiencia_laboral as $key) {
+                if($key['nombre']!="")
+                {
+                    echo'<option value="'.$key["id_actividad_empresa"].'">'.$key["nombre"]." ".' </option>';
+                }
+            }?>
+        </select> 
     <label><strong>Area de estudio</strong></label></br>
         <select id="area_estudio" class="form-control control_filtro" onChange="filtro(1,0,0)">
             <option value="">Seleccionar</option>
@@ -80,16 +90,7 @@
             }?>
         </select> 
 
-         <label><strong>Experiencia laboral</strong></label></br>
-        <select  onChange="filtro(1,0,0)" id="experiecia_laboral" class="form-control  control_filtro">
-            <option value="">Seleccionar</option> 
-            <?php foreach ($experiencia_laboral as $key) {
-                if($key['nombre']!="")
-                {
-                    echo'<option value="'.$key["id_actividad_empresa"].'">'.$key["nombre"]." ".' </option>';
-                }
-            }?>
-        </select> 
+        
         <label><strong>Localidades</strong></label></br>
         <?php  include('select_localidades.php');?>
        <!-- <select onChange="filtro(1,0,0)" id="localidad" class="form-control  control_filtro">
