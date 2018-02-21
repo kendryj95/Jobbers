@@ -157,6 +157,12 @@
 				<?php if($_SESSION["ctc"]["type"] == 2): ?>
 
 						<li class="menuPCTrabajador">
+							<a href="cuenta.php?foto=1" class="nav-link color-link" style="padding-right: 0px;padding-left: 2px;">
+								Mi foto
+							</a>
+						</li>
+
+						<li class="menuPCTrabajador">
 							<a class="nav-link color-link" href="curriculum.php" style="padding-right: 0px;padding-left: 2px;">
 								Modificar Curriculum
 							</a>
@@ -185,12 +191,6 @@
 									<li class="dropdown-item">
 										<a href="trabajador-detalle.php?t=<?php echo $_SESSION["ctc"]["name"]."-".$_SESSION["ctc"]["lastName"]."-".$_SESSION["ctc"]["id"]; ?>">
 											<i class="ti-user m-r-0-5"></i> Perfil
-										</a>
-									</li>
-
-									<li class="dropdown-item">
-										<a href="cuenta.php?foto=1">
-											<i class="ti-image m-r-0-5"></i> Mi foto
 										</a>
 									</li>
 

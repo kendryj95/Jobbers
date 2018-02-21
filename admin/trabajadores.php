@@ -72,20 +72,23 @@
 									<br>
 									<h5 class="m-b-1">Mis trabajadores</h5>
 									<br>
-									<table class="table table-striped table-bordered dataTable" id="tablaCategorias">
-										<thead>
-											<tr>
-												<th>#</th>
-												<th>Nombre</th>
-												<th>Correo electrónico</th>
-												<th>Correo electrónico</th>
-												<th>Fecha de registro</th>
-												<th>Eliminar</th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered dataTable dt-responsive responsive nowrap dataTable" id="tablaCategorias" style="width: 100%">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Nombre</th>
+													<th>Correo electrónico</th>
+													<th>Correo electrónico</th>
+													<th>Fecha de registro</th>
+													<th>% CV</th>
+													<th>Eliminar</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -118,7 +121,7 @@
 								</tr>
 								<tr>
 									<td align="center">
-										<b>Experiencia laboral</b>
+										<b>Experiencia laboral <span class="text-muted">(Opcional)</span></b>
 									</td>
 									<td id="EL">
 										No aplica
@@ -142,7 +145,7 @@
 								</tr>
 								<tr>
 									<td align="center">
-										<b>Otros Conocimientos</b>
+										<b>Otros Conocimientos <span class="text-muted">(Opcional)</span></b>
 									</td>
 									<td id="OC">
 										No aplica
@@ -183,13 +186,8 @@
 		<script type="text/javascript" src="../vendor/DataTables/pdfmake/build/vfs_fonts.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.html5.min.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.print.min.js"></script>
-		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.colVis.min.js"></script>
-		
+		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.colVis.min.js"></script>		
 		<script type="text/javascript" src="../vendor/select2/dist/js/select2.min.js"></script>
-		
-		<!-- TinyMCE -->
-		<script type="text/javascript" src="../vendor/tinymce/tinymce.min.js"></script>
-		<script type="text/javascript" src="../vendor/tinymce/skins/custom/jquery.tinymce.min.js"></script>
 		<script type="text/javascript" src="../vendor/dropify/dist/js/dropify.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.form.js"></script>
 

@@ -69,6 +69,7 @@ if($op) {
 						*
 					FROM
 						trabajadores
+					ORDER BY fecha_creacion
 				");
 
 			if($datos) {
@@ -80,6 +81,7 @@ if($op) {
 						$pub["correo_electronico"],
 						$pub["correo_electronico"],
 						date("d-m-Y H:i:s",strtotime($pub["fecha_creacion"])),
+						statusCV($db, $pub["id"]) . '%',
 						'<div class="acciones-categoria" data-target="' . $pub["id"] . '"><button type="button" class="accion-categoria btn btn-success waves-effect waves-light" title="Ver status CV" onclick="statusCV(this);"><span class="ti-file	"></span></button> <button type="button" class="accion-categoria btn btn-danger waves-effect waves-light" title="Eliminar Trabajador" onclick="eliminarCategoria(this);"><span class="ti-close"></span></button> </div>'
 					);
 				}
@@ -92,90 +94,52 @@ if($op) {
 			break;
 		case DETALLE_STATUS_CV:
 
-
 			# STATUS DE DATOS PERSONALES
 
 			$contadorDatosP = 0;
 			$datos_personales = $db->getRow("SELECT * FROM trabajadores WHERE id=".$_REQUEST["i"]);
 			$totalDatosP = 14;
-			$contadorDatosP += $datos_personales['nombres'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['apellidos'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['correo_electronico'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['id_sexo'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['fecha_nacimiento'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['id_pais'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['id_estado_civil'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['id_tipo_documento_identificacion'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['numero_documento_identificacion'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['provincia'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['localidad'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['calle'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['telefono'] != '' ? 1 : 0;
-			$contadorDatosP += $datos_personales['telefono_alternativo'] != '' ? 1 : 0;
+			
+			$contadorDatosP += $datos_personales['telefono'] != '' ? 13 : 0;
+			$contadorDatosP += $datos_personales['id_imagen'] != '' ? 1 : 0;
 
 			$statusDP = ($contadorDatosP * 20) / $totalDatosP;
 			$valDP = ceil($statusDP);
 
 			# STATUS DE EXPERIENCIA LABORAL
 
-			$experiencias = $db->getAll("SELECT trabajadores_experiencia_laboral.*, paises.nombre as nombre_pais, actividades_empresa.nombre as actividad_empresa FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador=".$_REQUEST['i']);
+			$cantidades = $db->getRow("SELECT
+	(SELECT COUNT(*) FROM trabajadores_experiencia_laboral INNER JOIN paises ON paises.id=trabajadores_experiencia_laboral.id_pais INNER JOIN actividades_empresa ON actividades_empresa.id=trabajadores_experiencia_laboral.id_actividad_empresa WHERE trabajadores_experiencia_laboral.id_trabajador=$_REQUEST[i]) AS cant_exp,
+	(SELECT COUNT(*) FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=$_REQUEST[i]) AS cant_estudio,
+    (SELECT COUNT(*) FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=$_REQUEST[i]) AS cant_idiomas,
+    (SELECT COUNT(*) FROM trabajadores_otros_conocimientos WHERE id_trabajador=$_REQUEST[i]) AS cant_otrosc");
 
-			$contadorExpLab = 0;
-			$totalExpLab = 2;
-
-			foreach ($experiencias as $e){
-				if ($e['nombre_empresa'] != ''){
-					$contadorExpLab += 1;
-				}
-			}
+			$contadorExpLab = $cantidades['cant_exp'] != 0 ? 1 : 0;
+			$totalExpLab = 1;
 
 			$statusExpLab = ($contadorExpLab * 20) / $totalExpLab;
 			$valExpLab = ceil($statusExpLab);
 
 			# STATUS NIVEL DE ESTUDIOS
 
-			$educacion = $db->getAll("SELECT trabajadores_educacion.*, paises.nombre as nombre_pais, nivel_estudio.nombre as nivel, areas_estudio.nombre as nombre_estudio, estado_estudio.nombre as estado_estudio FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=".$_REQUEST['i']);
-
-			$contadorEduc = 0;
-			$totalEduc = 2;
-
-			foreach ($educacion as $e){
-				if ($e['nivel'] != ''){
-					$contadorEduc += 1;
-				}
-			}
+			$contadorEduc = $cantidades['cant_estudio'] != 0 ? 1 : 0;
+			$totalEduc = 1;
 
 			$statusEduc = ($contadorEduc * 20) / $totalEduc;
 			$valEduc = ceil($statusEduc);
 
 			# STATUS IDIOMAS
 
-			$idiomasT = $db->getAll("SELECT trabajadores_idiomas.*, idiomas.nombre as nombre_idioma FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=".$_REQUEST['i']);
-
-			$contadorIdioma = 0;
-			$totalIdioma = 2;
-
-			foreach ($idiomasT as $i){
-				if ($i['nombre_idioma'] != ''){
-					$contadorIdioma += 1;
-				}
-			}
+			$contadorIdioma = $cantidades['cant_idiomas'] != 0 ? 1 : 0;
+			$totalIdioma = 1;
 
 			$statusIdioma = ($contadorIdioma * 20) / $totalIdioma;
 			$valIdioma = ceil($statusIdioma);
 
 			# STATUS OTROS CONOCIMIENTOS
 
-			$otros_conocimientos = $db->getAll("SELECT * FROM trabajadores_otros_conocimientos WHERE id_trabajador=".$_REQUEST['i']);
-
-			$contadorOC = 0;
-			$totalOC = 3;
-
-			foreach ($otros_conocimientos as $o){
-				if ($o['nombre'] != ''){
-					$contadorOC += 1;
-				}
-			}
+			$contadorOC = $cantidades['cant_otrosc'] != 0 ? 1 : 0;
+			$totalOC = 1;
 
 			$statusOC = ($contadorOC * 20) / $totalOC;
 			$valOC = ceil($statusOC);
@@ -224,4 +188,42 @@ if($op) {
 	}
 }
 function getExtension($str) {$i=strrpos($str,".");if(!$i){return"";}$l=strlen($str)-$i;$ext=substr($str,$i+1,$l);return $ext;}
+
+function statusCV($db, $id){
+	# STATUS DE DATOS PERSONALES
+
+	$contadorDatosP = 0;
+	$datos_personales = $db->getRow("SELECT * FROM trabajadores WHERE id=".$id);
+	$totalDatosP = 14;
+	$contadorDatosP += $datos_personales['telefono'] != '' ? 13 : 0;
+	$contadorDatosP += $datos_personales['id_imagen'] != 0 ? 1 : 0;
+
+	$statusDP = ($contadorDatosP * 33.33) / $totalDatosP;
+	$valDP = ceil($statusDP);
+
+	# STATUS NIVEL DE ESTUDIOS
+
+	$cantidades = $db->getRow("SELECT
+	(SELECT COUNT(*) FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=$id) AS cant_estudio,
+    (SELECT COUNT(*) FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=$id) AS cant_idiomas");
+
+	$contadorEduc = $cantidades['cant_estudio'] != 0 ? 1 : 0;
+	$totalEduc = 1;
+
+	$statusEduc = ($contadorEduc * 33.33) / $totalEduc;
+	$valEduc = ceil($statusEduc);
+	
+	# STATUS IDIOMAS
+	
+	$contadorIdioma = $cantidades['cant_idiomas'] != 0 ? 1 : 0;
+	$totalIdioma = 1;
+
+	$statusIdioma = ($contadorIdioma * 33.33) / $totalIdioma;
+	$valIdioma = ceil($statusIdioma);
+
+	$total = $valDP + $valEduc + $valIdioma;
+
+
+	return ($total > 100 ? 100 : $total);
+}
 ?>

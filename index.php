@@ -379,7 +379,9 @@
     						<div class="col-md-3 col-sm-6">
     							<div class="box bg-white product product-1">
     								<div class="p-img img-cover" style="background-image: url(img/<?php echo $p["imagen"]; ?>);">
+    									<?php if ($p["mi_publicidad"] == 1): ?>
     									<div class="p-status bg-warning"><?php echo $p["titulo"]; ?></div>
+    									<?php endif ?>
     									<div class="p-links">
     										<a href="<?php echo $link; ?>"><i class="ti-link"></i></a>
     										<!--<a href="#"><i class="fa fa-star"></i></a>-->

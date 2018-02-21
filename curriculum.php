@@ -412,7 +412,20 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<label for="tEmployeer">Tipo de puesto o jerarquía <span style="color: red;">*</span></label>
 												</div>
 												<div class="col-xs-12 col-md-10">
-													<input class="form-control" value="" id="tEmployeer" type="text">
+													<select name="tEmployeer" id="tEmployeer" class="custom-select form-control">
+														<option value="">Seleccionar</option>
+														<option value="Pasante">Pasante</option>
+														<option value="Empleado">Empleado</option>
+														<option value="Analista">Analista</option>
+														<option value="Técnico">Técnico</option>
+														<option value="Líder de Proyecto">Líder de Proyecto</option>
+														<option value="Supervisor / Encargado">Supervisor / Encargado</option>
+														<option value="Jefe">Jefe</option>
+														<option value="Gerente">Gerente</option>
+														<option value="Director">Director</option>
+														<option value="Gerente General / CEO">Gerente General / CEO</option>
+														<option value="Otro">Otro</option>
+													</select>
 												</div>
 											</div>
 											<div class="form-group row">
@@ -1302,8 +1315,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 				$(document).ready(function(){
 
 					$('#stateS').change(function(){
-						if (parseInt($(this).val()) == 1){
-							//alert('ocultando fecha fin');
+						if (parseInt($(this).val()) == 1 || parseInt($(this).val()) == 3){
 							$('#fechaFin').css('display','none');
 						}else{
 							$('#fechaFin').css('display','block');

@@ -112,7 +112,7 @@
 							<label class="custom-control custom-checkbox">
 								<input class="custom-control-input" type="checkbox" id="mipublicidad">
 								<span class="custom-control-indicator"></span>
-								<span class="custom-control-description">Agregar a mi publicidad</span>
+								<span class="custom-control-description">Agregar título a mi publicidad</span>
 							</label>
 							<div class="form-group">
 								<label for="modal-agregar-publicacion-titulo">Título</label>
