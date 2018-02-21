@@ -181,6 +181,7 @@
 		<script type="text/javascript" src="../vendor/DataTables/Responsive/js/dataTables.responsive.min.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/Responsive/js/responsive.bootstrap4.min.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.bootstrap4.min.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/JSZip/jszip.min.js"></script>
 		<script type="text/javascript" src="../vendor/DataTables/pdfmake/build/pdfmake.min.js"></script>
@@ -207,11 +208,9 @@
 				var $tablaCategorias = jQuery("#tablaCategorias");
 				var tablaCategorias = $tablaCategorias.DataTable( {
 					"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+					"dom": 'Bfrtip',
 					"buttons": [
-						'copyHtml5',
-						'excelHtml5',
-						'csvHtml5',
-						'pdfHtml5'
+						'excel',
 					],
 					"aoColumnDefs": [
 						{ "width": "40px", "targets": 0 },
