@@ -556,8 +556,7 @@
 
 
 					<div class="col-md-9">
-						<h3>Principales ofertas de trabajo</h3>
- 						
+						<h3>Principales ofertas de trabajo</h3> 
  						<div class=" col-sm-12 " style="padding: 0px;" id="listado_publicaciones"></div>	
  					 
 					</div>
