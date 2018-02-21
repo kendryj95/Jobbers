@@ -80,6 +80,7 @@
 													<th>Nombre</th>
 													<th>Correo electrónico</th>
 													<th>Correo electrónico</th>
+													<th>Contácto</th>
 													<th>Fecha de registro</th>
 													<th>% CV</th>
 													<th>Eliminar</th>
