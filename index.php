@@ -893,7 +893,7 @@
 				$info = $db->getRow($sql);
 	 			if($info["TOTAL"]<5)
 					{
-						echo '<script type="text/javascript">swal("Importante!", "Recuerde que si completa su curriculum tendra mayor oportunidad de se contratado por una de nuestras empresas.  ", "info");</script>'; 
+						echo '<script type="text/javascript">swal("Importante!", "Recuerde que al completar 100 %  su currículum y tenerlo siempre actualizado tendrá mayor posibilidad de ser contratado por las empresas!  ", "info");</script>'; 
 					}
 			}
 			
