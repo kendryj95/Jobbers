@@ -24,7 +24,9 @@
 			$id = $db->getOne("SELECT id FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."'");
 
 			if ($id) {
-				$info = $db->getRow("SELECT * FROM trabajadores WHERE (correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."') AND clave='".md5($_REQUEST["password"])."'");
+				$info = $db->getRow("SELECT t1.*,t2.total FROM trabajadores t1 
+					LEFT JOIN trabajador_porcentaje t2 ON t1.id = t2.id
+					WHERE (t1.correo_electronico='".strtolower($_REQUEST['email'])."' OR t1.usuario='".strtolower($_REQUEST['email'])."') AND t1.clave='".md5($_REQUEST["password"])."'");
 				if($info) {
 
 					$confirmar = $db->getRow("SELECT confirmar FROM trabajadores WHERE correo_electronico='".strtolower($_REQUEST['email'])."' OR usuario='".strtolower($_REQUEST['email'])."'");
@@ -39,6 +41,7 @@
 						$_SESSION["ctc"]["name"] = explode(" ",$info["nombres"])[0];
 						$_SESSION["ctc"]["lastName"] = explode(" ",$info["apellidos"])[0];
 						$_SESSION["ctc"]["email"] = $info["correo_electronico"];
+						$_SESSION["ctc"]["total"] = $info["total"];
 						$_SESSION["ctc"]["type"] = 2;
 
 						if ($info["id_imagen"] != 0 && $info["nombres"] != "" && $info["apellidos"] != "" && $info["correo_electronico"] != "" && $info["id_estado_civil"] != "" && $info["id_tipo_documento_identificacion"] != "" && $info["id_pais"] != "" && $info["provincia"] != "" && $info["localidad"] != "" && $info["calle"] != "" && $info["numero_documento_identificacion"] != "" && $info["fecha_nacimiento"] != "" && $info["telefono"] != "" && intval($estudios) != 0 && intval($idiomas) != 0 && $info_extra != "") {

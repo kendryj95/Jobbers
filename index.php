@@ -395,7 +395,7 @@
     		<?php endif?>
 
 				<div class="container-fluid">
-					
+
 					<div class="col-xs-12 col-md-3" style="z-index: 1;">
 					<div class="row">
 							<div class="col-md-12">
@@ -885,8 +885,19 @@
 
 				
 			</script>
-
-		 
+			<?php
+			if(isset($_SESSION["ctc"]["id"]))
+			{
+				require_once('classes/DatabasePDOInstance.function.php');
+				$sql="SELECT TOTAL FROM trabajador_porcentaje WHERE id = ".$_SESSION["ctc"]["id"]."";
+				$info = $db->getRow($sql);
+	 			if($info["TOTAL"]<5)
+					{
+						echo '<script type="text/javascript">swal("Importante!", "Recuerde que si completa su curriculum tendra mayor oportunidad de se contratado por una de nuestras empresas.  ", "info");</script>'; 
+					}
+			}
+			
+			?>
 		</body>
 
 
