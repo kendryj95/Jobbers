@@ -84,7 +84,7 @@
 				FROM trabajadores t1
 				LEFT JOIN trabajadores_educacion t2 ON t1.id = t2.id_trabajador
 				LEFT JOIN trabajadores_experiencia_laboral t7 ON t1.id= t7.id_trabajador
-				LEFT JOIN trabajador_porcentaje t8 ON t1.id = t8.id_trabajador
+				LEFT JOIN trabajador_porcentaje t8 ON t1.id = t8.id
 				LEFT JOIN trabajadores_idiomas t3 ON t1.id = t3.id_trabajador
 				LEFT JOIN trabajadores_infextra t4 ON t1.id = t4.id_trabajador
 		 		LEFT JOIN imagenes t5 ON t1.id_imagen = t5.id
