@@ -3454,10 +3454,6 @@ footer .f-title {
     font-weight: bold;
 }
 
-.profile-card .list-group {
-    /* border-top: 1px solid rgba(0, 0, 0, 0.125); */
-}
-
 .profile-card .list-group-item {
     border: none;
 }
@@ -9937,6 +9933,46 @@ a.text-grey:hover .underline {
     background-color: #00aeef !important;
     border-color: #00aeef !important;
     color: #fff;
+}
+
+
+/* =================================================================
+  Seccion Trabajadores
+================================================================= */
+
+.height-jobbers {
+    height: 270px !important;
+}
+
+.mt-jobbers {
+    margin-top: 4vh;
+}
+
+@media(max-width: 768px) {
+    .height-jobbers {
+        height: 370px !important;
+    }
+    .mt-jobbers {
+        margin-top: 1vh;
+    }
+}
+
+@media(min-width: 1024px) {
+    .height-jobbers {
+        height: 380px !important;
+    }
+    .mt-jobbers {
+        margin-top: 1vh;
+    }
+}
+
+@media(min-width: 1025px) {
+    .height-jobbers {
+        height: 280px !important;
+    }
+    .mt-jobbers {
+        margin-top: 3vh;
+    }
 }
 
 
