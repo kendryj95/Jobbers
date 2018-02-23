@@ -9695,6 +9695,11 @@ a.text-grey:hover .underline {
     padding: 30px;
 }
 
+.no-hover:hover {
+    border-left: 0px !important;
+    border-bottom: 0px !important;
+}
+
 @media (max-width: 768px) {
     .img-fix-sm {
         background-size: inherit;

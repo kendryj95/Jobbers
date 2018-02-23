@@ -149,7 +149,7 @@
 										<h5 style="margin-left: 10px;">Datos de la empresa</h5>
 										<hr>
 										<form action="">
-											<div class="row" style="margin-left: 10px">
+											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
 														<label for="empresa"><b>Nombre de la empresa <span style="color: red">*</span></b> </label>
@@ -209,7 +209,7 @@
 										<hr>
 										<h5 style="margin-left: 10px;">Cambiar Contraseña</h5>
 										<br>
-										<div class="row" style="margin-left: 10px">
+										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
 													<label for="currentPass"><b>Contraseña Actual <span style="color: red">*</span></b> </label>
@@ -235,7 +235,7 @@
 										</div>
 										<hr>
 										<?php } ?>	
-										<div class="row" style="margin-left: 10px;">			
+										<div class="row">			
 											<?php if($empresa == 1): ?>
 											<?php if($infoEmpresa["actividad"]): ?>
 												<div class="col-md-12">
@@ -259,75 +259,75 @@
 											<br><br>
 											<?php if($infoEmpresa["sitio_web"]): ?>
 												<div class="col-md-12" style="margin-top: 20px;">
-													<a class="list-group-item editable editable-click" href="#" id="inline-site" data-type="text" data-pk="1" data-title="Sitio web"><i class="ti-world m-r-0-5"></i> <?php echo $infoEmpresa["sitio_web"]; ?></a>
+													<a class="list-group-item editable editable-click no-hover" style="word-wrap: break-word;font-size: 17px; background-color:#008080; color: #fff;" href="#" id="inline-site" data-type="text" data-pk="1" data-title="Sitio web"><i class="ti-world m-r-0-5"></i> <?php echo $infoEmpresa["sitio_web"]; ?></a>
 												</div>
 											<?php else: ?>
-												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerWeb">
-													<div class="col-md-10">
-														<input class="form-control" id="web" placeholder="Sitio Web" type="text">
-													</div>
-													<div class="col-md-2">
-														<a class="btn btn-primary action" href="javascript:void(0)" data-target="web">+</a>
+												<div class="col-md-12" style="margin-top: 20px;" id="containerWeb">
+													<div class="input-group" style="border: 2px dashed red; padding: 5px;">
+														<input type="text" class="form-control" placeholder="Sitio Web" id="web" style="height: 42px;border-color: #008080">
+														<span class="input-group-btn">
+															<a class="btn btn-primary action" style="background-color:#008080; color: #fff; border-color: #008080" href="javascript:void(0)" data-target="web"><i class="fa fa-plus-circle" style="font-size: 27px;"></i></a>
+														</span>
 													</div>
 												</div>
 											<?php endif ?>
 											<br><br>
 											<?php if($infoEmpresa["facebook"]): ?>
 												<div class="col-md-12" style="margin-top: 20px;">
-													<a class="list-group-item editable editable-click" href="#" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook"><i class="ti-facebook m-r-0-5"></i> <?php echo $infoEmpresa["facebook"]; ?></a>
+													<a class="list-group-item editable editable-click bg-facebook no-hover" style="word-wrap: break-word; font-size: 17px;" href="#" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook"><i class="ti-facebook m-r-0-5"></i><?php echo $infoEmpresa["facebook"]; ?></a>
 												</div>
 											<?php else: ?>
-												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerFB">
-													<div class="col-md-8 col-xs-9">
-														<input class="form-control" id="fb" placeholder="Facebook" type="text">
-													</div>
-													<div class="col-md-4">
-														<a class="btn btn-primary action" href="javascript:void(0)" data-target="fb">+</a>
+												<div class="col-md-12" style="margin-top: 20px;" id="containerFB">
+													<div class="input-group" style="border: 2px dashed red; padding: 5px;">
+														<input type="text" class="form-control" placeholder="Facebook" id="fb" style="height: 42px;border-color: #3B5998">
+														<span class="input-group-btn">
+															<a class="btn btn-primary bg-facebook action" style="border-color: #3B5998" href="javascript:void(0)" data-target="fb"><i class="fa fa-plus-circle" style="font-size: 27px;"></i></a>
+														</span>
 													</div>
 												</div>
 											<?php endif ?>										
 											<br><br>
 											<?php if($infoEmpresa["twitter"]): ?>
 												<div class="col-md-12" style="margin-top: 20px;">
-													<a class="list-group-item" href="#" id="inline-twitter" data-type="text" data-pk="1" data-title="Twitter" class="editable editable-click"><i class="ti-twitter m-r-0-5"></i> <?php echo $infoEmpresa["twitter"]; ?></a>
+													<a class="list-group-item editable editable-click bg-twitter no-hover" href="#" style="word-wrap: break-word; font-size: 17px;" id="inline-twitter" data-type="text" data-pk="1" data-title="Twitter"><i class="ti-twitter m-r-0-5"></i> <?php echo $infoEmpresa["twitter"]; ?></a>
 												</div>
 											<?php else: ?>
-												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerTW">
-													<div class="col-md-10 col-xs-9">
-														<input class="form-control" id="tw" placeholder="Twitter" type="text">
-													</div>
-													<div class="col-md-2">
-														<a class="btn btn-primary action" href="javascript:void(0)" data-target="tw">+</a>
+												<div class="col-md-12" style="margin-top: 20px;" id="containerTW">
+													<div class="input-group" style="border: 2px dashed red; padding: 5px;">
+														<input type="text" class="form-control" placeholder="Twitter" id="tw" style="height: 42px;border-color: #00ACEF">
+														<span class="input-group-btn">
+															<a class="btn btn-primary bg-twitter action" style="border-color: #00ACEF" href="javascript:void(0)" data-target="tw"><i class="fa fa-plus-circle" style="font-size: 27px;"></i></a>
+														</span>
 													</div>
 												</div>
 											<?php endif ?>									
 											<br><br>
 											<?php if($infoEmpresa["instagram"]): ?>
 												<div class="col-md-12" style="margin-top: 20px;">
-													<a class="list-group-item"  href="#" id="inline-instagram" data-type="text" data-pk="1" data-title="Instagram" class="editable editable-click"><i class="ti-instagram m-r-0-5"></i> <?php echo $infoEmpresa["instagram"]; ?></a>
+													<a class="list-group-item editable editable-click bg-instagram no-hover"  href="#" style="word-wrap: break-word; font-size: 17px;" id="inline-instagram" data-type="text" data-pk="1" data-title="Instagram"><i class="ti-instagram m-r-0-5"></i> <?php echo $infoEmpresa["instagram"]; ?></a>
 												</div>
 											<?php else: ?>
-												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerINS">
-													<div class="col-md-10 col-xs-9">
-														<input class="form-control" id="ins" placeholder="Instagram" type="text">
-													</div>
-													<div class="col-md-2">
-														<a class="btn btn-primary action" href="javascript:void(0)" data-target="ins">+</a>
+												<div class="col-md-12" style="margin-top: 20px;" id="containerINS">
+													<div class="input-group" style="border: 2px dashed red; padding: 5px;">
+														<input type="text" class="form-control" placeholder="Instagram" id="ins" style="height: 42px;border-color: #BC2A8D">
+														<span class="input-group-btn">
+															<a class="btn btn-primary bg-instagram action" style="border-color: #BC2A8D" href="javascript:void(0)" data-target="ins"><i class="fa fa-plus-circle" style="font-size: 27px;"></i></a>
+														</span>
 													</div>
 												</div>
 											<?php endif ?>									
 											<br><br>
 											<?php if($infoEmpresa["linkedin"]): ?>
 												<div class="col-md-12" style="margin-top: 20px;">
-													<a class="list-group-item"  href="#" id="inline-linkedin" data-type="text" data-pk="1" data-title="Linkedin" class="editable editable-click"><i class="ti-linkedin m-r-0-5"></i> <?php echo $infoEmpresa["linkedin"]; ?></a>
+													<a class="list-group-item editable editable-click bg-linkedin no-hover"  href="#" style="word-wrap: break-word; font-size: 17px;" id="inline-linkedin" data-type="text" data-pk="1" data-title="Linkedin"><i class="ti-linkedin m-r-0-5"></i> <?php echo $infoEmpresa["linkedin"]; ?></a>
 												</div>
 											<?php else: ?>
-												<div class="col-md-12" style="margin-top: 20px; padding-left: 0px;" id="containerLIN">
-													<div class="col-md-10 col-xs-9">
-														<input class="form-control" id="lin" placeholder="Linkedin" type="text">
-													</div>
-													<div class="col-md-2">
-														<a class="btn btn-primary action" href="javascript:void(0)" data-target="lin">+</a>
+												<div class="col-md-12" style="margin-top: 20px;" id="containerLIN">
+													<div class="input-group" style="border: 2px dashed red; padding: 5px;">
+														<input type="text" class="form-control" placeholder="Linkedin" id="lin" style="height: 42px;border-color: #007BB6">
+														<span class="input-group-btn">
+															<a class="btn btn-primary bg-linkedin action" style="border-color: #007BB6" href="javascript:void(0)" data-target="lin"><i class="fa fa-plus-circle" style="font-size: 27px;"></i></a>
+														</span>
 													</div>
 												</div>
 											<?php endif ?>
@@ -344,7 +344,7 @@
 											<?php endif ?>
 											<?php if($infoEmpresa["facebook"]): ?>
 												<a class="list-group-item" href="<?php echo $infoEmpresa["facebook"]; ?>">
-													<i class="ti-facebook m-r-0-5"></i> <?php echo $infoEmpresa["facebook"]; ?>
+													<i class="ti-facebook m-r-0-5"></i><?php echo $infoEmpresa["facebook"]; ?>
 												</a>
 											<?php endif ?>
 											<?php if($infoEmpresa["twitter"]): ?>
@@ -843,7 +843,7 @@
 										window.location.assign("perfil.php");
 										break;
 									case 'web':
-										$("#containerWeb").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-site" data-type="text" data-pk="1" data-title="Sitio web" class="editable editable-click"><i class="ti-world m-r-0-5"></i>'+text+'</a>');
+										$("#containerWeb").html('<a class="list-group-item editable editable-click no-hover"  href="#" style="word-wrap: break-word; font-size: 17px; background-color: #008080; color: #fff" id="inline-site" data-type="text" data-pk="1" data-title="Sitio Web"><i class="ti-world m-r-0-5"></i> '+text+'</a>');
 										swal({
 											title: 'Información!',
 											text: 'Cambios realizados correctamente',
@@ -864,7 +864,7 @@
 										});
 										break;
 									case 'fb':
-										$("#containerFB").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook" class="editable editable-click"><i class="ti-facebook m-r-0-5"></i>'+text+'</a>');
+										$("#containerFB").html('<a class="list-group-item editable editable-click bg-facebook no-hover"  href="#" style="word-wrap: break-word; font-size: 17px;" id="inline-facebook" data-type="text" data-pk="1" data-title="Facebook"><i class="ti-facebook m-r-0-5"></i> '+text+'</a>');
 										swal({
 											title: 'Información!',
 											text: 'Cambios realizados correctamente',
@@ -885,7 +885,7 @@
 										});
 										break;
 									case 'tw':
-										$("#containerTW").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-twitter" data-type="text" data-pk="1" data-title="Twitter" class="editable editable-click"><i class="ti-twitter m-r-0-5"></i>'+text+'</a>');
+										$("#containerTW").html('<a class="list-group-item editable editable-click bg-twitter no-hover"  href="#" style="word-wrap: break-word; font-size: 17px;" id="inline-twitter" data-type="text" data-pk="1" data-title="Twitter"><i class="ti-twitter m-r-0-5"></i> '+text+'</a>');
 										swal({
 											title: 'Información!',
 											text: 'Cambios realizados correctamente',
@@ -906,7 +906,7 @@
 										});
 										break;
 									case 'ins':
-										$("#containerINS").html('<a class="list-group-item" style="display: inline;" href="#" id="inline-instagram" data-type="text" data-pk="1" data-title="Instagram" class="editable editable-click"><i class="ti-instagram m-r-0-5"></i>'+text+'</a>');
+										$("#containerINS").html('<a class="list-group-item editable editable-click bg-instagram no-hover"  href="#" style="word-wrap: break-word; font-size: 17px;" id="inline-instagram" data-type="text" data-pk="1" data-title="Instagram"><i class="ti-instagram m-r-0-5"></i> '+text+'</a>');
 										swal({
 											title: 'Información!',
 											text: 'Cambios realizados correctamente',
@@ -927,7 +927,7 @@
 										});
 										break;
 									case 'lin':
-										$("#containerLIN").html('<a class="list-group-item editable editable-click" style="display: inline;" href="#" id="inline-linkedin" data-type="text" data-pk="1" data-title="Linkedin"><i class="ti-linkedin m-r-0-5"></i>'+text+'</a>');
+										$("#containerLIN").html('<a class="list-group-item editable editable-click bg-linkedin no-hover"  href="#" style="word-wrap: break-word; font-size: 17px;" id="inline-linkedin" data-type="text" data-pk="1" data-title="Linkedin"><i class="ti-linkedin m-r-0-5"></i> '+text+'</a>');
 
 										swal({
 											title: 'Información!',
