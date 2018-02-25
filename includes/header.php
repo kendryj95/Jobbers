@@ -233,7 +233,7 @@
 									</div>
 								</div>
 							</a>
-							<div class="dropdown-menu dropdown-menu-right animated flipInY">
+							<div class="dropdown-menu dropdown-menu-right animated flipInY" style="background-color: #E8EBF0">
 								<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "admin") ? '': 'admin/'; ?>mis-noticias.php">
 									<i class="ti-notepad m-r-0-5"></i> Mis noticias
 								</a>
