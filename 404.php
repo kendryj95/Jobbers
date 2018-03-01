@@ -9,7 +9,7 @@
 		<meta name="author" content="">
 
 		<!-- Title -->
-		<title>JOBBERS - promociones</title>
+		<title>JOBBERS - Pagina no Encontrada</title>
         <?php require_once('includes/libs-css.php'); ?>
         <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
 		
