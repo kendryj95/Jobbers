@@ -553,11 +553,76 @@
 							</div>
 						</div>						
 					</div> <!-- Pegar aqui el codigo cuando esté listo -->
+<!--Modal alertas trabajos relacionados-->
 
+<div class="modal fade" id="modal_alerta">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title pull-left">Alerta publicaciones</h5>
+        <button  type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body row">
+      <div class="col-sm-6">
+      	 <p><strong>¿Qué ofertas le gustaría seguir?</strong></p>
+        <select  id="select_alertas" style="margin-top: 15px;" class="form-control" s>
+        	<option value="">Seleccionar</option>
+        	<?php
+			foreach ($datos_area as $key) {
+						if($key["nombre"]!="")
+							{
+								echo '<option value=" '.$key["id_sector"].'">'.$key["nombre"].'</option>';
+							}
+						}
+			?>
+        </select>
+      </div>
+		<div class="col-sm-6 text-center" style="padding-bottom: 20px;padding-top: 20px;">
+      	<img src="img/alerta_trabajo.png" class="img-responsive">
+      </div>
 
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onClick="guardar_alerta(<?php echo $_SESSION["ctc"]["id"];?>)">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+ function guardar_alerta(usuario)
+ {
+  	if($("#select_alertas").val()!="")
+  	{
+  		$.ajax({
+  				method: "POST",
+			  url: "ajax/alertas_usuarios.php",
+			    data:{user:usuario,actividad:$("#select_alertas").val()}
+			}).done(function(data) {
+			   if(data){ 
+			   $("#modal_alerta").modal('hide');
+			   	swal("Perfecto!", "La categoría esta siendo seguida", "success");
+			}
+			   else {swal("Error!", "Algo falló intente de nuevo.", "error");}
+			}); 
+  	}
+  	else
+  	{
+  		$("#select_alertas").focus();
+  	}
+  			
+ }
+</script>
+<!-- Fin Modal alertas trabajos relacionados-->
 					<div class="col-md-9">
-						<h3>Principales ofertas de trabajo</h3> 
- 						<div class=" col-sm-12 " style="padding: 0px;" id="listado_publicaciones"></div>	
+						<h3 style="padding-left: 10px;">Principales ofertas de trabajo
+							<img data-toggle="modal" data-target="#modal_alerta" src="img/bell.png" class="pull-right" style="margin-right: 10px;cursor: pointer;">
+						</h3> 
+ 						<div class=" col-sm-12 " style="padding: 0px;margin-top: 15px;" id="listado_publicaciones"></div>	
  					 
 					</div>
 					
