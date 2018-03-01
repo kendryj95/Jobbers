@@ -1,4 +1,4 @@
-0<?php
+<?php
 	session_start();
 	if(!isset($_SESSION["ctc"])) {
 		header("Location: index.php");
@@ -12,7 +12,7 @@
 	require_once('../classes/DatabasePDOInstance.function.php');
 	$db = DatabasePDOInstance();
 	$iva = $db->getOne("SELECT iva FROM configuraciones WHERE id=1");
-	$planes = $db->getAll("SELECT * FROM planes WHERE id != 1");
+	$planes = $db->getAll("SELECT * FROM planes");
 	$servicios = $db->getAll("SELECT * FROM servicios WHERE id != 4");
 	$plataforma = $db->getRow("SELECT * FROM plataforma WHERE id=1");
 ?>
@@ -33,7 +33,11 @@
 		<?php require_once('../includes/libs-css.php'); ?>
 		<link rel="stylesheet" href="../vendor/dropify/dist/css/dropify.min.css">
 		<link rel="stylesheet" href="../vendor/bootstrap-tagsinput/src/bootstrap-tagsinput.css">
-
+		<link rel="stylesheet" href="../vendor/DataTables/css/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" href="../vendor/DataTables/Responsive/css/responsive.bootstrap4.min.css">
+		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.dataTables.min.css">
+		<link rel="stylesheet" href="../vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css">
+		<link rel="stylesheet" href="../vendor/select2/dist/css/select2.min.css">
 		<!-- Neptune CSS -->
 		<link rel="stylesheet" href="../css/core.css">
 
@@ -44,6 +48,11 @@
 			.color-link{
 				color: #fff !important;
 			}
+
+			th.dt-center, td.dt-center { text-align: center; }
+
+			.select2-container { width: 100% !important }
+
 		</style>
 	</head>
 
@@ -85,6 +94,11 @@
 											<div class="il-item">
 												<a class="text-black" id="planes" href="javascript:void(0)">
 													Planes
+												</a>
+											</div>
+											<div class="il-item">
+												<a class="text-black" id="planes_beneficios" href="javascript:void(0)">
+													Planes - Beneficios
 												</a>
 											</div>
 											<div class="il-item">
@@ -293,6 +307,170 @@
 										<a href="javascript:void(0)" style="margin-top: 5px;" id="savePrices" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
 									</div>
 								</div>
+
+								<div class="row" style="margin-top: 20px; display: none;" id="containerPlanesBenef">
+									<div class="col-md-12 col-xs-12">
+										<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
+										<br><br>
+
+										<a href="#" class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target="#modal-agregar-beneficio"><span class="ti-plus"></span> Agregar</a>
+
+										<div class="table-responsive">
+											<table class="table table-striped table-bordered dataTable dt-responsive responsive nowrap dataTable" id="tableBeneficios" style="width: 100% !important">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Beneficio</th>
+														<th>Asignados a planes</th>
+														<th>Acciones</th>
+													</tr>
+												</thead>
+												<tbody></tbody>
+											</table>
+										</div>
+										
+										<a href="javascript:void(0)" style="margin-top: 5px;" id="savePrices" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
+									</div>
+								</div>
+
+								<div id="modal-agregar-beneficio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+												<h4 class="modal-title">Agregar Beneficio</h4>
+											</div>
+											<div class="modal-body">
+												<ul class="nav nav-tabs nav-tabs-2">
+													<li class="nav-item">
+														<a class="nav-link active" href="#modal-agregar-beneficio-info" data-toggle="tab"><i class="ti-info text-muted m-r-0-25"></i> Datos</a>
+													</li> 
+												</ul>
+												<div class="tab-content" style="padding: 25px;">
+												  <div id="modal-agregar-beneficio-info" class="tab-pane fade in active">
+													<form>
+														
+														<div class="form-group">
+															<label for="">Descripción de beneficio: </label>
+															<input type="text" id="desc_beneficio" class="form-control" placeholder="Nombre del beneficio">
+														</div>
+
+														<div class="form-group">
+															<label for="">Alias para Plan Gratis: </label>
+															<input type="text" id="alias_gratis" class="form-control" placeholder="Escribir alias para este plan">
+														</div>
+
+														<div class="form-group">
+															<label for="">Alias para Plan Bronce: </label>
+															<input type="text" id="alias_bronce" class="form-control" placeholder="Escribir alias para este plan">
+														</div>
+
+														<div class="form-group">
+															<label for="">Alias para Plan Plata: </label>
+															<input type="text" id="alias_plata" class="form-control" placeholder="Escribir alias para este plan">
+														</div>
+
+														<div class="form-group">
+															<label for="">Alias para Plan Oro: </label>
+															<input type="text" id="alias_oro" class="form-control" placeholder="Escribir alias para este plan">
+														</div>
+
+														<div class="form-group">
+															<label for="">Asignar Planes: </label>
+															<br>
+															<select name="" id="asig_planes" class="select_planes" multiple>
+																<optgroup label="Planes">
+																	<?php foreach ($planes as $plan): ?>
+																		<option value="<?= $plan['id'] ?>"><?= $plan['nombre']?> </option>
+																	<?php endforeach; ?>
+																</optgroup>
+															</select>
+														</div>
+														  
+													</form>
+												  </div> 
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary" id="modal-agregar-beneficio-enviar-form">Aceptar</button>
+												<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div id="modal-modificar-beneficio" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+												<h4 class="modal-title">Modificar Beneficio</h4>
+											</div>
+											<div class="modal-body">
+												<ul class="nav nav-tabs nav-tabs-2">
+													<li class="nav-item">
+														<a class="nav-link active" href="#modal-modificar-beneficio-info" data-toggle="tab"><i class="ti-info text-muted m-r-0-25"></i> Datos</a>
+													</li> 
+												</ul>
+												<div class="tab-content" style="padding: 25px;">
+												  <div id="modal-modificar-beneficio-info" class="tab-pane fade in active">
+													<form>
+														
+														<div class="form-group">
+															<label for="">Descripción de beneficio: </label>
+															<input type="text" id="m_desc_beneficio" class="form-control" placeholder="Nombre del beneficio">
+														</div>
+
+														<div class="form-group">
+															<label for="">Alias para Plan Gratis: </label>
+															<input type="text" id="m_alias_gratis" class="form-control" placeholder="Escribir alias para este plan">
+														</div>
+
+														<div class="form-group">
+															<label for="">Alias para Plan Bronce: </label>
+															<input type="text" id="m_alias_bronce" class="form-control" placeholder="Escribir alias para este plan">
+														</div>
+
+														<div class="form-group">
+															<label for="">Alias para Plan Plata: </label>
+															<input type="text" id="m_alias_plata" class="form-control" placeholder="Escribir alias para este plan">
+														</div>
+
+														<div class="form-group">
+															<label for="">Alias para Plan Oro: </label>
+															<input type="text" id="m_alias_oro" class="form-control" placeholder="Escribir alias para este plan">
+														</div>
+
+														<div class="form-group">
+															<label for="">Asignar Planes: </label>
+															<br>
+															<select name="" id="m_asig_planes" class="select_planes" multiple>
+																<optgroup label="Planes">
+																	<?php foreach ($planes as $plan): ?>
+																		<option value="<?= $plan['id'] ?>"><?= $plan['nombre']?> </option>
+																	<?php endforeach; ?>
+																</optgroup>
+															</select>
+														</div>
+
+														<input type="hidden" id="m_id_beneficio">
+														  
+													</form>
+												  </div> 
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary" id="modal-modificar-beneficio-enviar-form">Aceptar</button>
+												<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<div class="row" style="margin-top: 20px; display: none;" id="containerServicios">
 									<div class="col-md-8 col-xs-12">
 										<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
@@ -332,8 +510,25 @@
 		<script type="text/javascript" src="../vendor/tinymce/tinymce.min.js"></script>
 		<script type="text/javascript" src="../vendor/tinymce/skins/custom/jquery.tinymce.min.js"></script>
 		<script src="../vendor/bootstrap-tagsinput/src/bootstrap-tagsinput.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/js/dataTables.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/Responsive/js/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/Responsive/js/responsive.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/dataTables.buttons.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.bootstrap4.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/JSZip/jszip.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/pdfmake/build/pdfmake.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/pdfmake/build/vfs_fonts.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.html5.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.print.min.js"></script>
+		<script type="text/javascript" src="../vendor/DataTables/Buttons/js/buttons.colVis.min.js"></script>
+		<script src="../vendor/select2/dist/js/select2.min.js"></script>	
 
 		<script>
+			
+			var tableBeneficios = '';
+
 			$(document).ready(function(){
 				$(".back").click(function() {
 					$("#optionsList").show();
@@ -346,6 +541,7 @@
 					$("#containerRedes").hide();
 					$("#containerTerminos").hide();
 					$("#containerLanding").hide();
+					$("#containerPlanesBenef").hide();
 				});
 				
 				$("#redes").click(function() {
@@ -379,6 +575,38 @@
 				setTimeout(function() {
 					$('.content-loader').fadeOut();
 				}, 500);
+
+				var $tableBeneficios = jQuery("#tableBeneficios");
+					tableBeneficios = $tableBeneficios.DataTable( {
+					"aoColumnDefs": [
+						{ "className": "dt-center", "targets": [0, 1, 2, 3] }
+					  ],
+					"language": {
+						"decimal":        "",
+						"emptyTable":     "Sin registros",
+						"info":           "Mostrando de _START_ a _END_ registros de _TOTAL_ en total",
+						"infoEmpty":      "Mostrando 0 de 0 de 0 registros",
+						"infoFiltered":   "(filtrado desde _MAX_ registros en total)",
+						"infoPostFix":    "",
+						"thousands":      ",",
+						"lengthMenu":     "Mostrar _MENU_ registros",
+						"loadingRecords": "Cargando...",
+						"processing":     "Procesando...",
+						"search":         "Buscar:",
+						"zeroRecords":    "No se encontraron registros",
+						"paginate": {
+							"first":      "Primero",
+							"last":       "Último",
+							"next":       "Siguiente",
+							"previous":   "Anterior"
+						},
+						"aria": {
+							"sortAscending":  ": activar para ordenar la columna ascendente",
+							"sortDescending": ": activar para ordenar la columna descendente"
+						}
+					},
+					"ajax": "ajax/configuraciones.php?op=10"
+				} );
 				
 				$("#saveRedes").click(function() {
 					var $btn = $(this);
@@ -526,6 +754,8 @@
 						}
 					});
 				});
+
+				$('.select_planes').select2();
 				
 				tinymce.init({
 					selector: '#contenidoTerminos',
@@ -567,6 +797,10 @@
 				$("#planes").click(function() {
 					$("#optionsList").hide();
 					$("#containerPlanes").show();
+				});
+				$("#planes_beneficios").click(function() {
+					$("#optionsList").hide();
+					$("#containerPlanesBenef").show();
 				});
 				$("#servicios").click(function() {
 					$("#optionsList").hide();
@@ -664,7 +898,177 @@
 						});
 					}
 				});
+
+				$('#modal-agregar-beneficio-enviar-form').click(function(){
+
+					if ($("#desc_beneficio").val() != "" && $("#alias_gratis").val() != "" && $("#alias_bronce").val() != "" && $("#alias_plata").val() != "" && $("#alias_oro").val() != "" && $("#asig_planes").val() != null) {
+						$.ajax({
+							url: 'ajax/configuraciones.php',
+							type: 'GET',
+							dataType: 'json',
+							data: {
+								op: 11,
+								desc_beneficio: $("#desc_beneficio").val(),
+								alias_gratis: $("#alias_gratis").val(),
+								alias_bronce: $("#alias_bronce").val(),
+								alias_plata: $("#alias_bronce").val(),
+								alias_oro: $("#alias_oro").val(),
+								asig_planes: $("#asig_planes").val()
+							},
+							success: function (response){
+								if (response.data == 200) {
+									swal("EXITO!", "Se ha creado un nuevo beneficio para los planes satisfactoriamente.", "success");
+									$("#modal-agregar-beneficio").modal("hide");
+
+									tableBeneficios.ajax.reload();
+
+								} else {
+									swal("Lo sentimos!", "Ha ocurrido un error inesperado, verifique la conexión a internet y vuelva a intentarlo", "info");
+								}
+							},
+							error: function (error){
+								swal("Lo sentimos!", "Ha ocurrido un error inesperado, vuelva a intentarlo", "info");
+							}
+						});
+						
+					} else {
+						swal("ERROR!", "Todos los campos son obligatorios", "error");
+					}
+				});
+
+				$('#modal-modificar-beneficio-enviar-form').click(function(){
+
+					if ($("#m_desc_beneficio").val() != "" && $("#m_alias_gratis").val() != "" && $("#m_alias_bronce").val() != "" && $("#m_alias_plata").val() != "" && $("#m_alias_oro").val() != "" && $("#m_asig_planes").val() != null) {
+						$.ajax({
+							url: 'ajax/configuraciones.php',
+							type: 'GET',
+							dataType: 'json',
+							data: {
+								op: 14,
+								desc_beneficio: $("#m_desc_beneficio").val(),
+								alias_gratis: $("#m_alias_gratis").val(),
+								alias_bronce: $("#m_alias_bronce").val(),
+								alias_plata: $("#m_alias_bronce").val(),
+								alias_oro: $("#m_alias_oro").val(),
+								asig_planes: $("#m_asig_planes").val(),
+								id_beneficio: $("#m_id_beneficio").val()
+							},
+							success: function (response){
+								if (response.data == 200) {
+									swal("EXITO!", "Se ha actualizado el beneficio para los planes satisfactoriamente.", "success");
+									$("#modal-modificar-beneficio").modal("hide");
+
+									tableBeneficios.ajax.reload();
+
+								} else {
+									swal("Lo sentimos!", "Ha ocurrido un error inesperado, verifique la conexión a internet y vuelva a intentarlo", "info");
+								}
+							},
+							error: function (error){
+								swal("Lo sentimos!", "Ha ocurrido un error inesperado, vuelva a intentarlo", "info");
+							}
+						});
+						
+					} else {
+						swal("ERROR!", "Todos los campos son obligatorios", "error");
+					}
+				});
 			});
+
+			function modBenef(btn){
+				var $btn = $(btn);
+
+				var id_beneficio = $btn.attr('data-benef');
+
+				$("#m_asig_planes").val([]); // Limpiar select2
+
+				$.ajax({
+					url: 'ajax/configuraciones.php',
+					type: 'GET',
+					dataType: 'json',
+					data: {
+						op: 13,
+						id_beneficio: id_beneficio
+					},
+					success: function(response){
+						if (response.status == 200) {
+							$("#m_desc_beneficio").val(response.data.beneficio);
+							$("#m_alias_gratis").val(response.data.alias_gratis);
+							$("#m_alias_bronce").val(response.data.alias_bronce);
+							$("#m_alias_plata").val(response.data.alias_plata);
+							$("#m_alias_oro").val(response.data.alias_oro);
+							$("#m_id_beneficio").val(id_beneficio);
+
+							var planes = (response.data.planes_asignados).split(","),
+								valueSelect = [];
+
+							planes.forEach(function(val, i){
+								valueSelect[i] = val.split("-")[0];
+							});
+
+							$("#m_asig_planes").val(valueSelect).trigger('change');
+
+						} else {
+							swal("Lo sentimos!", "Ha ocurrido un error inesperado, vuelva a intentarlo", "info");
+						}
+					},
+					error: function(error){
+						swal("Lo sentimos!", "Ha ocurrido un error inesperado, vuelva a intentarlo", "info");
+					}
+				});
+
+				$("#modal-modificar-beneficio").modal("show");
+				
+			}
+
+			function elimBenef(btn){
+				var $btn = $(btn);
+
+				var id_beneficio = $btn.attr('data-benef');
+
+				swal({
+				  title: "Advertencia",
+				  text: "Está seguro que desea eliminar este beneficio?",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "Aceptar",
+				  cancelButtonText: "Cancelar",
+				  closeOnConfirm: false
+				});
+
+				$(".show-swal2.visible .swal2-confirm").attr('data-action', 'remove');
+				$(".show-swal2.visible .swal2-confirm").click(function() {
+					if($(this).attr('data-action') == 'remove') {
+						$(this).attr('data-action', '');
+
+						$.ajax({
+							url: 'ajax/configuraciones.php',
+							type: 'GET',
+							dataType: 'json',
+							data: {
+								op: 12,
+								id_beneficio: id_beneficio
+							},
+							success: function (response){
+								if (response.data == 200) {
+									swal("EXITO!", "Se ha eliminado el beneficio satisfactoriamente", "success");
+									
+									tableBeneficios.ajax.reload();
+
+								} else {
+									swal("Lo sentimos!", "Ha ocurrido un error inesperado, verifique la conexión a internet y vuelva a intentarlo", "info");
+								}
+							},
+							error: function (error){
+								swal("Lo sentimos!", "Ha ocurrido un error inesperado, vuelva a intentarlo", "info");
+							}
+						});
+					}
+
+				});
+
+			}
 		</script>
 
 

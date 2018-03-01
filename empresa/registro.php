@@ -13,6 +13,7 @@
 	$db = DatabasePDOInstance();
 
 	$planes = $db->getAll("SELECT * FROM planes WHERE id != 1");
+	$beneficios_planes = $db->getAll("SELECT pb.alias_gratis, pb.alias_bronce, pb.alias_plata, pb.alias_oro, GROUP_CONCAT(id_plan ORDER BY id_plan ASC SEPARATOR ',') AS planes_asignados FROM planes_beneficios pb INNER JOIN beneficios_per_plan bpp ON pb.id=bpp.id_beneficio GROUP BY id_beneficio");
 	$servicios = $db->getAll("SELECT * FROM servicios WHERE id != 4");
 	$info = $db->getRow("SELECT politicas, terminos FROM plataforma WHERE id=1");
 ?>
@@ -180,24 +181,11 @@
 													</h3>
 												</div>
 												<ul class="price-card-list p-l-0 price-list-free">
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">15 días de publicacion</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">10 CVs disponibles para descargar en un mes.</span>
-													</li>
-													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Visibilidad en la home</span>
-													</li>
-													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño chico en la pantalla principal</span>
-													</li>
-													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
-													</li>													
-													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
-													</li>
+													<?php foreach ($beneficios_planes as $ben): ?>
+															<li>
+																<?= strstr($ben['planes_asignados'], "1") ? '<i class="fa fa-check text-success m-r-0-25"></i>' : '<i class="fa fa-remove text-danger m-r-0-25"></i>' ?> <span class="text-price"><?= $ben['alias_gratis'] ?></span>
+															</li>
+													<?php endforeach ?>
 												</ul>
 												<div class="footer-free">
 													<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="1">Seleccionar</a>
@@ -215,24 +203,11 @@
 													</h3>
 												</div>
 												<ul class="price-card-list p-l-0 price-list-bronce">
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">30 días de publicacion</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">40 CVs disponibles para descargar en un mes.</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Visibilidad en la home</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño chico en la pantalla principal</span>
-													</li>
-													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
-													</li>													
-													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
-													</li>
+													<?php foreach ($beneficios_planes as $ben): ?>
+															<li>
+																<?= strstr($ben['planes_asignados'], "2") ? '<i class="fa fa-check text-success m-r-0-25"></i>' : '<i class="fa fa-remove text-danger m-r-0-25"></i>' ?> <span class="text-price"><?= $ben['alias_bronce'] ?></span>
+															</li>
+													<?php endforeach ?>
 												</ul>
 												<div class="footer-bronce">
 													<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="2">Seleccionar</a>
@@ -250,24 +225,11 @@
 													</h3>
 												</div>
 												<ul class="price-card-list p-l-0 price-list-silver">
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">30 días de publicacion</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">100 CVs disponibles para descargar en un mes.</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Buena visibilidad en la home</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño mediano en lugar privilegiado</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
-													</li>													
-													<li>
-														<i class="fa fa-remove text-danger m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
-													</li>
+													<?php foreach ($beneficios_planes as $ben): ?>
+															<li>
+																<?= strstr($ben['planes_asignados'], "3") ? '<i class="fa fa-check text-success m-r-0-25"></i>' : '<i class="fa fa-remove text-danger m-r-0-25"></i>' ?> <span class="text-price"><?= $ben['alias_plata'] ?></span>
+															</li>
+													<?php endforeach ?>
 												</ul>
 												<div class="footer-silver">
 													<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="3">Seleccionar</a>
@@ -285,24 +247,11 @@
 													</h3>
 												</div>
 												<ul class="price-card-list p-l-0 price-list-gold">
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">35 días de publicacion</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">No tendrás limites de descarga para CVs.</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Exposicion en principal home</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price">Incluye logo corporativo tamaño grande en lugar preferencial</span>
-													</li>
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> Link de acceso a pagina de la empresa.</span>
-													</li>													
-													<li>
-														<i class="fa fa-check text-success m-r-0-25"></i> <span class="text-price"> CHAT INTERNO CON CANDIDATOS.</span>
-													</li>
+													<?php foreach ($beneficios_planes as $ben): ?>
+															<li>
+																<?= strstr($ben['planes_asignados'], "4") ? '<i class="fa fa-check text-success m-r-0-25"></i>' : '<i class="fa fa-remove text-danger m-r-0-25"></i>' ?> <span class="text-price"><?= $ben['alias_oro'] ?></span>
+															</li>
+													<?php endforeach ?>
 												</ul>
 												<div class="footer-gold">
 													<a href="javascript:void(0)" class="btn btn-block btn-lg addPlan" style="color:#fff; font-size: 30px;" data-target="4">Seleccionar</a>
