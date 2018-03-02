@@ -230,10 +230,10 @@
                         		<p class="text-center"><strong>Experiencia laboral</strong></p>
                         		<div class="col-sm-12">
                         			<select onChange="filtrar(this.value,9)" id="actividad_empresa" name="actividad_empresa" class="_filtro form-control select_filtros" >
-	                        		<option value="0">Actividad</option> 
+	                        		<option value="">Actividad</option> 
                         		<?php
                         			foreach ($actividad_empresa as $datos) {
-                        				if($datos["nombre"]!=""){echo "<option value='".$id["nombre"]."'>".$datos["nombre"]."</option>";}  
+                        				if($datos["nombre"]!=""){echo "<option value='".$datos["nombre"]."'>".$datos["nombre"]."</option>";}  
                         			}
                         		?>	                        		 
 	                        	</select>  
@@ -263,11 +263,11 @@
 								<tr>
 									<th>#</th>
 									<th style="padding: 0px;">Trabajador</th>
-									 <th>Edad</th>
-									  <th>aestudio</th>
-									   <th>provincia</th>
-									    <th>sexo</th>
-									 <th>remuneracion</th>
+									<th>Edad</th>
+									<th>aestudio</th>
+									<th>provincia</th>
+									<th>sexo</th>
+									<th>remuneracion</th>
 									<th>calificacion</th>
 									<th>idioma</th>
 									<th>actividad</th>
@@ -1176,7 +1176,7 @@
 					{ "visible": false, "targets": 7 }, 	
 					{ "visible": false, "targets": 8 },
 					{ "visible": false, "targets": 9 },
-					{ "visible": false, "targets": 10 }, 	 	
+					{ "visible": false, "targets": 10 }, 	 	 	
  	
 
 				  ],
