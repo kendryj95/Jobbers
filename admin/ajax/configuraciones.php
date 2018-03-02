@@ -98,7 +98,7 @@
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    <i class="glyphicon glyphicon-wrench"></i>
 							  </button>
-							  <ul class="dropdown-menu">
+							  <ul class="dropdown-menu" style="left: -38px; min-width: 100px;">
 							    <li><a href="javascript:void(0)" data-benef="'.$pub["id"].'" onClick="modBenef(this)"><i class="glyphicon glyphicon-pencil"></i> Editar</a></li>
 							    <li><a href="javascript:void(0)" data-benef="'.$pub["id"].'" onClick="elimBenef(this)"><i class="glyphicon glyphicon-remove"></i> Eliminar</a></li>
 							  </ul>
