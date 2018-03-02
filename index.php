@@ -620,7 +620,13 @@
 <!-- Fin Modal alertas trabajos relacionados-->
 					<div class="col-md-9">
 						<h3 style="padding-left: 10px;">Principales ofertas de trabajo
-							<img data-toggle="modal" data-target="#modal_alerta" src="img/bell.png" class="pull-right" style="margin-right: 10px;cursor: pointer;">
+						<?php
+							if(isset($_SESSION["ctc"]["id"]))
+							{
+								echo'<img data-toggle="modal" data-target="#modal_alerta" src="img/bell.png" class="pull-right" style="margin-right: 10px;cursor: pointer;">';
+							}
+						?>
+							
 						</h3> 
  						<div class=" col-sm-12 " style="padding: 0px;margin-top: 15px;" id="listado_publicaciones"></div>	
  					 
@@ -738,8 +744,7 @@
 		          }
 		       				 
 				}).done(function(datos) {						
-			 		 
-
+			  
 					$.each( datos, function( key, value ) {
 						
 						facebook="";
