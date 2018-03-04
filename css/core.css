@@ -9916,6 +9916,22 @@ a.text-grey:hover .underline {
     color: #fff;
 }
 
+.cookies-alert {
+    position: fixed;
+    bottom: 0px;
+    text-align: center;
+    background-color: #b0e0f2;
+    z-index: 9999;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-cookies {
+    border-radius: 5px;
+    border-color: #2E3192 !important;
+    background-color: #2E3192 !important;
+}
+
 
 /* =================================================================
   Promociones
