@@ -2,6 +2,7 @@
 	session_start();
 	require_once('../classes/DatabasePDOInstance.function.php');
 	require_once("../webservice/enviarEmail.php");
+	require('../limpiarCadena.php');
 	$db = DatabasePDOInstance();
 	
 	$op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : false;
@@ -274,7 +275,7 @@
 			}
 			break;
 		case LOGIN_ADMIN:
-			$info = $db->getRow("SELECT * FROM usuarios WHERE (correo_electronico='$_REQUEST[usuario]' OR usuario='$_REQUEST[usuario]') AND clave='".$_REQUEST["clave"]."'");
+			$info = $db->getRow("SELECT * FROM usuarios WHERE (correo_electronico='".funcLimpiarCadena($_REQUEST['usuario'])."' OR usuario='".funcLimpiarCadena($_REQUEST['usuario'])."') AND clave='".funcLimpiarCadena($_REQUEST['clave'])."'");
 			if($info) {
                 $_SESSION["ctc"]["id"] = $info["id"];
 				$_SESSION["ctc"]["name"] = $info["nombre"];
