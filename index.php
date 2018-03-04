@@ -403,13 +403,9 @@
 							<div class="col-md-12">
 								<h3>Buscar</h3>
 								<div class="box bg-white">
-									  <div class="col-xs-10" style="padding: 0px">
-									  	<input placeholder="Buscar..." class="form-control" type="text" name="" id="busquedaAvanzada"/>
-									  </div>
-									  <div class="col-xs-2" style="padding: 0px">
-									  	<button style="padding: 0px;padding-top: 7px;padding-bottom: 7px; text-align: 
-									  	center; width: 100%;background-color:#2E3192; border-color:#2E3192;" type="buttom" class="btn btn-sm btn-primary" onClick="listar_publicaciones(0)">Buscar</button>
-									  </div>
+									  <div class="col-xs-12" style="padding: 0px">
+									  	<input onKeyup="listar_publicaciones(0)" placeholder="Buscar..." class="form-control" type="text" name="" id="busquedaAvanzada"/>
+									  </div> 
 								</div>
 							</div>
 						</div>
@@ -752,6 +748,7 @@
 		       				 
 				}).done(function(datos) {						
 			  
+			  	publicacion="";
 					$.each( datos, function( key, value ) {
 						
 						facebook="";
@@ -833,12 +830,12 @@
 							dias="Hace "+datos[key]["dias"]+" dias";
 						} 
 					}
-					
-					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+minHeightFree+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal '+paddingEmpresas+paddingEmpresasFree+' " style="'+socialNone+'">'+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style=" '+widthImg+' "></br><span style="font-size:10px;">'+datos[key]["provincia"]+" - "+datos[key]["localidad"]+'</span></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+verificado+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </br></div></div>'; 						 
-						$("#listado_publicaciones").append(publicacion);
+
+					publicacion=publicacion+'<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+minHeightFree+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal '+paddingEmpresas+paddingEmpresasFree+' " style="'+socialNone+'">'+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style=" '+widthImg+' "></br><span style="font-size:10px;">'+datos[key]["provincia"]+" - "+datos[key]["localidad"]+'</span></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+verificado+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </br></div></div></div>'; 						 
+						
 		           		
 		            });
-						  
+						  $("#listado_publicaciones").append(publicacion);
 				});
 			}
 		</script> 
