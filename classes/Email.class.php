@@ -5,13 +5,13 @@ require_once("../vendor/phpmailer/class.smtp.php");
 
 Class Email {
 
-	private $host = "smtp.1and1.com";
+	private $host = "a2plcpnl0525.prod.iad2.secureserver.net";
 	private $smtpAuth = true;
-	private $userName = "notificaciones@jobbersargentina.com";
-	private $password = "Job93513080197#$";
-	private $smtpSecure = "tls";
-	private $port = 25;
-	private $from = "notificaciones@jobbersargentina.com";
+	private $userName = "administracion@jobbersargentina.net";
+	private $password = '=E!74f$WC?8_';
+	private $smtpSecure = "ssl";
+	private $port = 465;
+	private $from = "administracion@jobbersargentina.net";
 	private $fromName = "Jobbers Argentina";
 
 	public function email_chat($emisorMsg,$destEmail,$destName, $msg){
@@ -230,7 +230,7 @@ Class Email {
 		$mail->SMTPSecure = $this->smtpSecure;
 		$mail->Port = $this->port;
 
-		$mail->setFrom($email, $name);
+		$mail->setFrom($this->from, $this->fromName);
 		$mail->addAddress('jobbersargentina@gmail.com', 'Jobbers Argentina');
 		$mail->addCC('ortizkendry95@gmail.com', 'Ing. Kendry Ortiz');
 		$mail->addCC('ingvictorfernandezs@gmail.com', 'Ing. Victor Fernandez');
@@ -282,7 +282,7 @@ Class Email {
 		            <td style="background-color: #fff; padding-bottom: 20px;">
 		                <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
 		                    <h2 style="color:#3F429A; margin: 0 0 7px">'.$asunto2.'</h2>
-		                    <p style="margin: 2px; font-size: 15px"> '.$mensaje.'</p>
+		                    <p style="margin: 2px; font-size: 15px"> <b>'.$name .'</b> dice: ' . $mensaje.'</p>
 		                        
 		                </div>
 		            </td>
