@@ -453,6 +453,7 @@
 				/* Preloader */
 				setTimeout(function() {
 					$('.preloader').fadeOut();
+					$('.content-loader').fadeOut();
 				}, 500);
 
 							
