@@ -826,7 +826,7 @@
 					}
 					else
 					{
-						if(datos[key]["dias"]==0)
+						if(datos[key]["dias"]<=0)
 						{
 							dias="Hoy";
 						}
@@ -970,7 +970,9 @@
 				
 			</script>
 			<?php
-			if(isset($_SESSION["ctc"]["id"]))
+			if($_SESSION["ctc"]["type"]!=1)
+			{
+				if(isset($_SESSION["ctc"]["id"]))
 			{
 				require_once('classes/DatabasePDOInstance.function.php');
 				$sql="SELECT TOTAL FROM trabajador_porcentaje WHERE id = ".$_SESSION["ctc"]["id"]."";
@@ -979,8 +981,10 @@
 					{
 						echo '<script type="text/javascript">swal("Importante!", "Recuerde que al completar 100 %  su currículum y tenerlo siempre actualizado tendrá mayor posibilidad de ser contratado por las empresas!  ", "info");</script>'; 
 					}
+				}	
 			}
 			
+							
 			?>
 		</body>
 
