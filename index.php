@@ -777,7 +777,7 @@
 
 						if(datos[key]["verificado"]==1)
 						{
-							verificado="&nbsp <i class='fa fa-check-circle' data-toggle='tooltip' data-placement='top' style='color:#00bc00; font-size: 16px;'></i>";
+							verificado="&nbsp <i class='fa fa-check-circle' data-toggle='tooltip' data-placement='top' style='color:#00bc00; font-size: 14px;'></i>";
 						}
 
 						$(document).ready(function(){

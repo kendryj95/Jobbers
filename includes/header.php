@@ -96,43 +96,43 @@
 
 						<li class="menuPCEmpresa">
 							<?php if($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
-							<a class="nav-link color-link" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
+							<a class="nav-link color-link sidebar-index-hover" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
 								Ver jobbers
 							</a>
 							<?php else: ?>
-							<a class="nav-link color-link actualiza_plan" href="javascript:void(0)" style="cursor: no-drop;">
+							<a class="nav-link color-link sidebar-index-hover actualiza_plan" href="javascript:void(0)" style="cursor: no-drop;">
 								Ver jobbers
 							</a>
 							<?php endif; ?>
 						</li>
 						<li>
-							<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
+							<a class="nav-link color-link sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
 								<span>Plan:</span>
 								<span class="tag top" style="top: 0;"><i class="fa fa-trophy icon-free" style="<?php echo $color; ?>; font-size: 26px" aria-hidden="true"></i></span>
 							</a>
 						</li>
 						<li>
-							<a class="nav-link color-link" href="#" data-toggle="dropdown" aria-expanded="false">
+							<a class="nav-link color-link sidebar-index-hover" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="avatar box-32">
 									<img src="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "" : "empresa/")."img/".$_SESSION["ctc"]["pic"]; ?>" alt="">
 								</div>
 							</a>
 							<!-- Menu Desplegable -->
-							<div class="dropdown-menu dropdown-menu-right animated flipInY" style="background-color:#E8EBF0;">
+							<div class="dropdown-menu dropdown-menu-right animated flipInY" style="background-color:#fff; border: 2px solid #2e3192">
 								<ul class="no-padding menu-desplegable">
 									<li class="dropdown-item">
-										<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "./" : "empresa/"; ?>">
-											<i class="ti-folder m-r-0-5"></i> Panel
+										<a class="dropdown-item sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "./" : "empresa/"; ?>">
+											<i class="fa fa-laptop" aria-hidden="true"></i>&nbsp Panel
 										</a>
 									</li>
 									<li class="dropdown-item">
-										<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "perfil" : "empresa/perfil"; ?>.php">
-											<i class="ti-user m-r-0-5"></i> Perfil
+										<a class="dropdown-item sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "perfil" : "empresa/perfil"; ?>.php">
+											<i class="fa fa-user-o" aria-hidden="true"></i>&nbsp Perfil
 										</a>
 									</li>
 									<li class="divider" role="separator"></li>
 									<li class="dropdown-item text-center">
-										<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "salir" : "empresa/salir"; ?>.php"><i class="ti-power-off m-r-0-5"></i> Cerrar sesión</a>
+										<a class="dropdown-item sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "salir" : "empresa/salir"; ?>.php"><i class="fa fa-power-off m-r-0-5"></i> Cerrar sesión</a>
 									</li>
 																	
 									<!--
@@ -157,13 +157,13 @@
 				<?php if($_SESSION["ctc"]["type"] == 2): ?>
 
 						<li class="menuPCTrabajador">
-							<a href="cuenta.php?foto=1" class="nav-link color-link" style="padding-right: 0px;padding-left: 2px;">
+							<a href="cuenta.php?foto=1" class="nav-link color-link sidebar-index-hover">
 								Mi foto
 							</a>
 						</li>
 
 						<li class="menuPCTrabajador">
-							<a class="nav-link color-link" href="curriculum.php" style="padding-right: 0px;padding-left: 2px;">
+							<a class="nav-link color-link sidebar-index-hover" href="curriculum.php">
 								Modificar Curriculum
 							</a>
 						</li>
@@ -174,7 +174,7 @@
 						</li>
 						-->
 						<li>
-							<a class="nav-link color-link" href="#" data-toggle="dropdown" aria-expanded="false">
+							<a class="nav-link color-link sidebar-index-hover" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="row" style="margin-left: 0;margin-right: 0;">
 									<div class="col-md-9 col-xs-9 no-padding-left name-margin"><?php echo $_SESSION["ctc"]["name"]." ".$_SESSION["ctc"]["lastName"]; ?></div>
 									<div style="" class="col-md-3 col-xs-3">
@@ -186,30 +186,30 @@
 							</a>
 
 							<!-- Menu Desplegable -->
-							<div class="dropdown-menu dropdown-menu-right animated flipInY" style="background-color: #E8EBF0">
+							<div class="dropdown-menu dropdown-menu-right animated flipInY" style="background-color: #fff; border: 2px solid #2e3192">
 								<ul class="no-padding menu-desplegable">
 									<li class="dropdown-item">
-										<a href="trabajador-detalle.php?t=<?php echo $_SESSION["ctc"]["name"]."-".$_SESSION["ctc"]["lastName"]."-".$_SESSION["ctc"]["id"]; ?>">
-											<i class="ti-user m-r-0-5"></i> Perfil
+										<a class="dropdown-item sidebar-index-hover" href="trabajador-detalle.php?t=<?php echo $_SESSION["ctc"]["name"]."-".$_SESSION["ctc"]["lastName"]."-".$_SESSION["ctc"]["id"]; ?>">
+											<i class="fa fa-user-o m-r-0-5"></i>&nbsp Perfil
 										</a>
 									</li>
 
 									<li class="dropdown-item">
-										<a href="cuenta.php">
-											<i class="ti-pencil-alt m-r-0-5"></i> Mi cuenta
+										<a class="dropdown-item sidebar-index-hover" href="cuenta.php">
+											<i class="fa fa-id-badge m-r-0-5"></i>&nbsp Mi cuenta
 										</a>
 									</li>
 
 									<li class="dropdown-item">
-										<a href="postulaciones.php">
-											<i class="ti-check-box m-r-0-5"></i> Ver postulaciones realizadas
+										<a class="dropdown-item sidebar-index-hover" href="postulaciones.php">
+											<i class="fa fa-check-square-o m-r-0-5"></i>&nbsp Ver postulaciones realizadas
 										</a>
 									</li>
 
 									<li class="divider" role="separator"></li>
 
 									<li class="dropdown-item text-center">
-										<a class="1logout" href="salir.php" onclick="Logout();"><i class="ti-power-off m-r-0-5"></i> Cerrar sesión</a>
+										<a class="1logout dropdown-item sidebar-index-hover" href="salir.php" onclick="Logout();"><i class="fa fa-power-off m-r-0-5"></i>&nbsp Cerrar sesión</a>
 									</li>
 								</ul>
 							</div>
@@ -350,19 +350,19 @@
 		</li>-->
 		<?php $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
         <li>
-			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>ingresar.php?returnUri=<?= urlencode($actual_link) ?>">
+			<a class="nav-link color-link sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>ingresar.php?returnUri=<?= urlencode($actual_link) ?>">
 				Ingresar
 			</a>
 		</li>
 
 		<li>
-			<a class="nav-link color-link" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>registro.php">
+			<a class="nav-link color-link sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>registro.php">
 				Registrarse
 			</a>
 		</li>
 
 		<li>
-			<a class="nav-link color-link empresas-hover" style="border:2px solid #2E3192; color: #2E3192; font-weight: bolder; height: 45px; line-height: 39px; margin-top: 12px; padding: 0 26px;" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
+			<a class="nav-link color-link  empresas-hover" style="border:2px solid #2E3192; color: #2E3192; font-weight: bolder; height: 45px; line-height: 39px; margin-top: 12px; padding: 0 26px;" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '': 'empresa/'; ?>acceder.php">
 				Acceso Empresas
 			</a>
 		</li>

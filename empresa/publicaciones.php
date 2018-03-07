@@ -82,9 +82,6 @@
 			{
 				margin-bottom: 7px;padding-top: 0px;padding-bottom: 0px;
 			}
-			.color-link{
-				color: #fff !important;
-			}
 			table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before{
 				content: "";
 			}
@@ -99,7 +96,7 @@
 		</script>
 	</head>
 
-	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
+	<body class="large-sidebar fixed-sidebar fixed-header">
 
 <div id="modal-postulados" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 			<div class="modal-dialog modal-lg" style="width: 80%;">
