@@ -976,7 +976,7 @@
 				
 			</script>
 			<?php
-			if($_SESSION["ctc"]["type"]!=1)
+			if(isset($_SESSION["ctc"]) && $_SESSION["ctc"]["type"]!=1)
 			{
 				if(isset($_SESSION["ctc"]["id"]))
 			{
