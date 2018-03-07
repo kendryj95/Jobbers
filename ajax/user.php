@@ -1,7 +1,9 @@
 <?php
 	session_start();
 	require_once('../classes/DatabasePDOInstance.function.php');
-	require_once("../webservice/enviarEmail.php");
+	require_once('../classes/Email.class.php');
+	// require_once("../webservice/enviarEmail.php");
+	require('../limpiarCadena.php');
 	$db = DatabasePDOInstance();
 	
 	$op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : false;
@@ -130,15 +132,10 @@
 				$controlador = (string) strtotime(date('Hms'));
 				$para = $_REQUEST["email"];
 
-
-				do {
-
-					$mail = userForgotPass(2, $para, $exist['name'], $controlador);
-
-				} while (strlen($mail) > 1);
-
+				$mail = new Email;
+				$mail->userForgotPass($para, $exist['name'], $controlador);
 				
-				if($mail == "1") {
+				if($mail) {
 					$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
 					echo json_encode(array("status" => 1));
 				}
@@ -274,7 +271,7 @@
 			}
 			break;
 		case LOGIN_ADMIN:
-			$info = $db->getRow("SELECT * FROM usuarios WHERE (correo_electronico='$_REQUEST[usuario]' OR usuario='$_REQUEST[usuario]') AND clave='".$_REQUEST["clave"]."'");
+			$info = $db->getRow("SELECT * FROM usuarios WHERE (correo_electronico='".funcLimpiarCadena($_REQUEST['usuario'])."' OR usuario='".funcLimpiarCadena($_REQUEST['usuario'])."') AND clave='".funcLimpiarCadena($_REQUEST['clave'])."'");
 			if($info) {
                 $_SESSION["ctc"]["id"] = $info["id"];
 				$_SESSION["ctc"]["name"] = $info["nombre"];
@@ -306,13 +303,11 @@
 			break;
 		case SOPORTE_TECNICO:
 
-			do {
+			$mail = new Email;
+			$mail->soporteTecnico($_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
 
-				$sendMail = soporteTecnico(3, $_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
 
-			} while(strlen($sendMail) > 1);
-
-			if ($sendMail == "1") {
+			if ($mail) {
 				echo json_encode(array("msg" => "OK"));
 			} else {
 				echo json_encode(array("msg" => "ERROR"));

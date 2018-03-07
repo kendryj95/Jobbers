@@ -133,13 +133,9 @@
 	<!DOCTYPE html>
 	<html lang="es">
 	<head>
-		<!-- Meta tags -->
-		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<meta name="description" content="">
-		<meta name="author" content="">
-
+		
+		 <?php include('meta_tags.php');?>
 		<!-- Title -->
 		<title>JOBBERS - BUSQUEDA DE TRABAJO INTELIGENTE</title>
 		<?php require_once 'includes/libs-css.php';?>
@@ -407,13 +403,14 @@
 							<div class="col-md-12">
 								<h3>Buscar</h3>
 								<div class="box bg-white">
-									  <div class="col-xs-10" style="padding: 0px">
-									  	<input placeholder="Buscar..." class="form-control" type="text" name="" id="busquedaAvanzada"/>
-									  </div>
-									  <div class="col-xs-2" style="padding: 0px">
-									  	<button style="padding: 0px;padding-top: 7px;padding-bottom: 7px; text-align: 
-									  	center; width: 100%;background-color:#2E3192; border-color:#2E3192;" type="buttom" class="btn btn-sm btn-primary" onClick="listar_publicaciones(0)">Buscar</button>
-									  </div>
+									  <div class="col-xs-12" style="padding: 0px">
+									  	
+									  	<button style="float: right;width: 20%;padding-left: 4px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;" class="btn btn-primary btn-see-pub" onClick="listar_publicaciones(0)">Buscar</button>
+									  	<input style="max-width: 80%;float: right;"  placeholder="Buscar..." class="form-control" type="text" name="" id="busquedaAvanzada"/>
+									  </div> 
+									 
+									  	
+									   
 								</div>
 							</div>
 						</div>
@@ -627,11 +624,17 @@
 					<div class="col-md-9">
 						<h3 style="padding-left: 10px;">Principales ofertas de trabajo
 						<?php
+			if($_SESSION["ctc"]["type"]!=1)
+			{
+				
 							if(isset($_SESSION["ctc"]["id"]))
 							{
 								echo'<img data-toggle="modal" data-target="#modal_alerta" src="img/bell.png" class="pull-right" style="margin-right: 10px;cursor: pointer;">';
-							}
-						?>
+							} 
+			}
+			  			
+			?>
+					 
 							
 						</h3> 
  						<div class=" col-sm-12 " style="padding: 0px;margin-top: 15px;" id="listado_publicaciones"></div>	
@@ -756,6 +759,7 @@
 		       				 
 				}).done(function(datos) {						
 			  
+			  	publicacion="";
 					$.each( datos, function( key, value ) {
 						
 						facebook="";
@@ -828,7 +832,7 @@
 					}
 					else
 					{
-						if(datos[key]["dias"]==0)
+						if(datos[key]["dias"]<=0)
 						{
 							dias="Hoy";
 						}
@@ -837,12 +841,11 @@
 							dias="Hace "+datos[key]["dias"]+" dias";
 						} 
 					}
-					
-					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+minHeightFree+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal '+paddingEmpresas+paddingEmpresasFree+' " style="'+socialNone+'">'+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style=" '+widthImg+' "></br><span style="font-size:10px;">'+datos[key]["provincia"]+" - "+datos[key]["localidad"]+'</span></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+verificado+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </br></div></div>'; 						 
-						$("#listado_publicaciones").append(publicacion);
-		           		
+
+					publicacion='<div class="col-sm-6" style="padding-right: 10px; padding-left: 10px;"><div class="victor_publicacion height-fix '+borde+minHeightFree+'" style="margin-bottom: 10px; padding-right: 10px; padding-left: 10px;"> <div class="col-sm-12 text-center logo-medal '+paddingEmpresas+paddingEmpresasFree+' " style="'+socialNone+'">'+medalla+' <div class="col-md-6">  <img src="'+datos[key]["imagen_empresa"]+'" style=" '+widthImg+' "></br><span style="font-size:10px;">'+datos[key]["provincia"]+" - "+datos[key]["localidad"]+'</span></div> <div class="col-md-6"> <a class="link-pub-main" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+verificado+'</strong></a> <p> <span style="font-size: 11px;"><strong>'+dias+'</strong></span><br> <a class="link-pub-sec" href="'+url+'">'+datos[key]["titulo_publicacion"]+'<div>'+facebook+link+twitter+instagram+'</div> </a> </p> <p style="font-size: 12px;" class="text-justify"> </p></div> </div><div class="col-sm-12 text-center" style="border-top: 1px solid #e5e5e5;padding: 0px;padding-top: 10px;padding-bottom: 8px;"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-see-pub" style="width: 100px; margin-top: 8px;border-radius: 5%; background-color:#2E3192; border-color:#2E3192;">Ver</a> </br></div></div>';  
+		           		 $("#listado_publicaciones").append(publicacion);
 		            });
-						  
+						 
 				});
 			}
 		</script> 
@@ -973,7 +976,9 @@
 				
 			</script>
 			<?php
-			if(isset($_SESSION["ctc"]["id"]))
+			if($_SESSION["ctc"]["type"]!=1)
+			{
+				if(isset($_SESSION["ctc"]["id"]))
 			{
 				require_once('classes/DatabasePDOInstance.function.php');
 				$sql="SELECT TOTAL FROM trabajador_porcentaje WHERE id = ".$_SESSION["ctc"]["id"]."";
@@ -982,8 +987,10 @@
 					{
 						echo '<script type="text/javascript">swal("Importante!", "Recuerde que al completar 100 %  su currículum y tenerlo siempre actualizado tendrá mayor posibilidad de ser contratado por las empresas!  ", "info");</script>'; 
 					}
+				}	
 			}
 			
+							
 			?>
 		</body>
 

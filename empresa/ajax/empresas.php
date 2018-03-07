@@ -1,4 +1,6 @@
 <?php
+require('../../limpiarCadena.php');
+ 
 	session_start();
 
 	define('ACCEDER', 1);
@@ -44,9 +46,9 @@
 						FROM
 							empresas
 						WHERE
-							correo_electronico = '$usuarioCorreo'
+							correo_electronico = '".funcLimpiarCadena($usuarioCorreo)."'
 						AND
-							clave = '$clave'
+							clave = '".funcLimpiarCadena($clave)."'
 					");
 					
 					if($info) {
