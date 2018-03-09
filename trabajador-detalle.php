@@ -208,7 +208,7 @@ $empresas = $db->getAll("
                                             <?php if (($_SESSION['ctc']['type'] == 1 && $trabajador['publico'] == 1) || ($_SESSION['ctc']['type'] == 2) || count($postulado) > 0): ?>
 
                                                 <?php if (isset($_SESSION["ctc"])): ?>
-                                                    <a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $t; ?>" target="_blank"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
+                                                    <a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="cv_jobbers/cv.php?id=<?php echo $t; ?>" target="_blank"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
                                                 <?php endif?>
                                         <?php endif;?>
                                     </div>
