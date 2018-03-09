@@ -886,7 +886,7 @@
 
 			$("#agregar-publicacion").click(function(){
 				if(empresa_nueva == 0){
-					swal("Error!", "Lo sentimos! Debes colocar una nueva imagen de perfil que represente tu empresa para empezar a publicar.", "error");
+					swal("Error!", "Lo sentimos! Debes colocar una nueva imagen de perfil que represente tu empresa para empezar a publicar. <a href='perfil.php?foto=true'>Hazlo aquí</a>", "error");
 
 					return false;
 				}
@@ -1257,7 +1257,7 @@
 			
 			function callEvent(element) {
 				//console.log(element);
-				$("#modal-postulados").modal("hide");
+				// $("#modal-postulados").modal("hide");
 				$("#sendMesage").attr("data-id", $(element).attr("data-id"));
 			}
 			

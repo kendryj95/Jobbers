@@ -131,7 +131,7 @@
 										<img src="img/<?php echo $foto; ?>" alt="" style="max-width: 150px;">
 										<br>
 										<?php if($empresa == 1): ?>
-											<a href="javascript:void(0)" data-toggle="modal" data-target="#pic" title="cambiar foto de perfil">Cambiar foto</a>
+											<a href="javascript:void(0)" data-toggle="modal" data-target="#pic" title="cambiar foto de perfil" id="changePic">Cambiar foto</a>
 										<?php endif ?>
 									</div>
 									<div class="card-block" style="text-align: center;">
@@ -965,6 +965,12 @@
 				dropify.on('dropify.error.fileSize', function(event, element){
 				    $('#prompt').show();
 				});
+
+				<?php if (isset($_GET['foto']) && $_GET['foto'] == true): ?>
+
+					$('#changePic').click();
+					
+				<?php endif; ?>
 
 				$("#savePic").click(function() {
 					if($("#file")[0].files.length > 0) {
