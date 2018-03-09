@@ -237,6 +237,7 @@
 									if(json.msg == 'OK') {
 										$("#modal-modificar-publicacion").modal('hide');
 										swal("Operación exitosa!", "Se agregó el plan y el servicio seleccionado.", "success");
+										tablaPublicaciones.ajax.reload();
 									}
 									break;
 							}
