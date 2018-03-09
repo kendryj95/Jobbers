@@ -3,8 +3,6 @@ require('fpdf/fpdf.php');
 require_once '../classes/DatabasePDOInstance.function.php';
 require_once '../slug.function.php';
 include('includes/sql.php');
-
- 
  
 $pdf = new FPDF();
 $pdf->AddPage();

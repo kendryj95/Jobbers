@@ -1156,7 +1156,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</li>
 
 													</ul>
-													<a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $data["id"]; ?>" target="_blank"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
+													<a class="btn btn-outline-primary btn-block btn-rounded waves-effect contact-btn" style="margin-top: 10px;" href="cv_jobbers/cv.php?id=<?php echo $data["id"]; ?>" target="_blank"><span class="fa fa-download" style="margin-right: 3px;"></span> Descargar currículum</a>
 												</div>
 											</div>	
 										</div>
