@@ -69,7 +69,7 @@ if($op) {
 						*
 					FROM
 						trabajadores
-					ORDER BY fecha_creacion
+					ORDER BY fecha_creacion LIMIT 2300
 				");
 
 			if($datos) {

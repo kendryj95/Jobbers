@@ -11,6 +11,52 @@
 	}
 	require_once('../classes/DatabasePDOInstance.function.php');
 	$db = DatabasePDOInstance();
+	$datos = $db->getAll("
+					SELECT
+						*
+					FROM
+						trabajadores
+					ORDER BY fecha_creacion
+				");
+
+
+	function statusCV($db, $id){
+		# STATUS DE DATOS PERSONALES
+
+		$contadorDatosP = 0;
+		$datos_personales = $db->getRow("SELECT * FROM trabajadores WHERE id=".$id);
+		$totalDatosP = 14;
+		$contadorDatosP += $datos_personales['telefono'] != '' ? 13 : 0;
+		$contadorDatosP += $datos_personales['id_imagen'] != 0 ? 1 : 0;
+
+		$statusDP = ($contadorDatosP * 33.33) / $totalDatosP;
+		$valDP = ceil($statusDP);
+
+		# STATUS NIVEL DE ESTUDIOS
+
+		$cantidades = $db->getRow("SELECT
+		(SELECT COUNT(*) FROM trabajadores_educacion INNER JOIN paises ON paises.id=trabajadores_educacion.id_pais INNER JOIN nivel_estudio ON nivel_estudio.id=trabajadores_educacion.id_nivel_estudio INNER JOIN areas_estudio ON areas_estudio.id=trabajadores_educacion.id_area_estudio INNER JOIN estado_estudio ON estado_estudio.id=trabajadores_educacion.id_estado_estudio WHERE trabajadores_educacion.id_trabajador=$id) AS cant_estudio,
+	    (SELECT COUNT(*) FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=$id) AS cant_idiomas");
+
+		$contadorEduc = $cantidades['cant_estudio'] != 0 ? 1 : 0;
+		$totalEduc = 1;
+
+		$statusEduc = ($contadorEduc * 33.33) / $totalEduc;
+		$valEduc = ceil($statusEduc);
+		
+		# STATUS IDIOMAS
+		
+		$contadorIdioma = $cantidades['cant_idiomas'] != 0 ? 1 : 0;
+		$totalIdioma = 1;
+
+		$statusIdioma = ($contadorIdioma * 33.33) / $totalIdioma;
+		$valIdioma = ceil($statusIdioma);
+
+		$total = $valDP + $valEduc + $valIdioma;
+
+
+		return ($total > 100 ? 100 : $total);
+	}
 ?>
 
 <!DOCTYPE html>
@@ -72,23 +118,46 @@
 									<br>
 									<h5 class="m-b-1">Mis trabajadores</h5>
 									<br>
-									<div class="table-responsive">
-										<table class="table table-striped table-bordered dataTable dt-responsive responsive nowrap dataTable" id="tablaCategorias" style="width: 100%">
-											<thead>
-												<tr>
-													<th>#</th>
-													<th>Nombre</th>
-													<th>Correo electrónico</th>
-													<th>Correo electrónico</th>
-													<th>Contácto</th>
-													<th>Fecha de registro</th>
-													<th>% CV</th>
-													<th>Eliminar</th>
-												</tr>
-											</thead>
-											<tbody>
-											</tbody>
-										</table>
+
+									<ul class="nav nav-pills" role="tablist">
+									    <li role="presentation" class="active"><a href="#table1" aria-controls="table1" role="tab" data-toggle="tab">Trabajadores</a></li>
+									  </ul>
+
+									<div class="tab-content">
+										<div class="tab-pane active" role="tabpanel" id="table1">
+											<div class="table-responsive">
+												<table class="table table-striped table-bordered" id="tableTrabajadores1" style="width: 100%">
+													<thead>
+														<tr>
+															<th>#</th>
+															<th>Nombre</th>
+															<th>Correo electrónico</th>
+															<th>Correo electrónico</th>
+															<th>Contácto</th>
+															<th>Fecha de registro</th>
+															<th>% CV</th>
+															<th>Eliminar</th>
+														</tr>
+													</thead>
+													<tbody>
+													<?php foreach($datos as $k => $dato): ?>
+														<tr id="row<?= $k + 1 ?>">
+															<td><?= $k + 1 ?></td>
+															<td><?= $dato["nombres"]." ".$dato["apellidos"] ?></td>
+															<td><?= $dato["correo_electronico"] ?></td>
+															<td><?= $dato["correo_electronico"] ?></td>
+															<td><?= $dato["telefono"] != "" ? $dato["telefono"] : "<b>Sin registro</b>" ?></td>
+															<td><?= date("d-m-Y H:i:s",strtotime($dato["fecha_creacion"])) ?></td>
+															<td><?= statusCV($db, $dato["id"]) . '%' ?></td>
+															<td><div class="acciones-categoria" data-target="<?= $dato["id"] ?>"><button type="button" class="accion-categoria btn btn-success waves-effect waves-light" title="Ver status CV" onclick="statusCV(this);"><span class="ti-file	"></span></button> <button type="button" class="accion-categoria btn btn-danger waves-effect waves-light" title="Eliminar Trabajador" onclick="eliminarCategoria(this);" data-row="row<?= $k + 1 ?>"><span class="ti-close"></span></button> </div></td>
+														</tr>
+													<?php endforeach ?>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+										
 									</div>
 								</div>
 							</div>
@@ -197,6 +266,7 @@
 			var idNoticia = 0;
 			$(document).ready(function(){
 				var idPub = 0;
+				var idRow = '';
 
 				setTimeout(function() {
 					$('.preloader').fadeOut();
@@ -205,21 +275,12 @@
 					$('.content-loader').fadeOut();
 				}, 500);
 
-				var $tablaCategorias = jQuery("#tablaCategorias");
-				var tablaCategorias = $tablaCategorias.DataTable( {
-					"aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+				var $tableTrabajadores1 = jQuery("#tableTrabajadores1");
+				var tableTrabajadores1 = $tableTrabajadores1.DataTable( {
 					"dom": 'Bfrtip',
 					"buttons": [
 						'excel',
 					],
-					"aoColumnDefs": [
-						{ "width": "40px", "targets": 0 },
-						{ "visible": false, "targets": 2 },
-						{ "width": "150px", "targets": 3 },
-						{ "width": "150px", "targets": 4 },
-						{ "orderable": false, "targets": 4 },
-						{ "className": "dt-center", "targets": [0, 2, 3, 4] }
-					  ],
 					"language": {
 						"decimal":        "",
 						"emptyTable":     "Sin registros",
@@ -239,14 +300,8 @@
 							"next":       "Siguiente",
 							"previous":   "Anterior"
 						},
-						"aria": {
-							"sortAscending":  ": activar para ordenar la columna ascendente",
-							"sortDescending": ": activar para ordenar la columna descendente"
-						}
 					},
-					"ajax": 'ajax/usuarios.php?op=6'
 				} );
-				
 
 				$('#enviarMail').on('click', function () {
 					
@@ -281,6 +336,7 @@
 				var $btn = $(btn);
 				var $parent = $btn.closest('.acciones-categoria');
 				idPub = $parent.attr('data-target');
+				idRow = $btn.attr('data-row');
 				
 				swal({
 				  title: "Advertencia",
@@ -307,7 +363,8 @@
 									var json = JSON.parse(jqXHR.responseText);
 									if(json.msg == 'OK') {
 										swal("Operación exitosa!", "Se eliminó el usuario.", "success");
-										window.location.reload();
+										// window.location.reload();
+										$('#'+idRow).remove();
 									}
 									break;
 							}
