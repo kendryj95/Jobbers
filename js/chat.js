@@ -90,6 +90,12 @@ function bindOpenChat() {
 			success: function (response) {
 				var conversations = response[0];
 				$("#sidebar-chat-window-user-name").text(conversations.info.nombre);
+				var url = "empleos-detalle.php?a="+conversations.publicacion.area+"&s="+conversations.publicacion.sector+"&p="+conversations.publicacion.url_publicacion;
+
+				var titulo_publicacion = (conversations.publicacion.titulo_publicacion).length > 26 ? (conversations.publicacion.titulo_publicacion).substr(0, 26) + "..." : conversations.publicacion.titulo_publicacion;
+
+				$('.titulo_publicacion').attr('href', url).html("<small title='"+conversations.publicacion.titulo_publicacion+"'>"+titulo_publicacion+"</small>");
+
 				if(parseInt(typeUser) == 1) {
 					$("#sidebar-chat-window-user-picture").attr('src', (((urlCurrent == "empresa/" || urlCurrent == "") ? '../' : "" )+'img/') + (conversations.info.image_path != null ? conversations.info.image_path : 'avatars/user.png'));
 				}
@@ -137,9 +143,9 @@ function refreshCurrentChat() {
 				conversations.messages.forEach(function (info) {
 
 					if (info.uid_usuario1 == c_uid1) {
-						html += '<div class="scw-item self"> <span>' + info.mensaje + '</span> </div>';
+						html += '<div class="scw-item self"> <span>' + info.mensaje + '</span> <br> <small title="'+info.fecha_envio+'">'+ diffDates(info.fecha_envio)+'</small> </div>';
 					} else {
-						html += '<div class="scw-item"> <span>' + info.mensaje + '</span> </div>';
+						html += '<div class="scw-item"> <span>' + info.mensaje + '</span> <br> <small title="'+info.fecha_envio+'">'+ diffDates(info.fecha_envio) +'</small> </div>';
 						arr.push(info.mensaje);
 
 						if (lastMessagesReceived !== null) {
@@ -217,6 +223,11 @@ function checkNewMessagesCount() {
 			$("#sidebar-chats").html("");
 			conversations.forEach(function(row) {
 				var nombre = null;
+				var titulo_publicacion = null;
+
+				if (typeof row.titulo_publicacion.titulo_publicacion != 'undefined') {
+					titulo_publicacion = (row.titulo_publicacion.titulo_publicacion).length > 26 ? (row.titulo_publicacion.titulo_publicacion).substr(0, 26) + "..." : row.titulo_publicacion.titulo_publicacion;
+				}
 				
 				if (typeof row.info.nombre != 'undefined') {
 					nombre = row.info.nombre;
@@ -224,16 +235,21 @@ function checkNewMessagesCount() {
 					nombre = row.info.nombres + " " + row.info.apellidos;
 				}
 
-				var html = '<a class="open-chat text-black" href="#" data-uniqueid="' + row.info.uid + '"><span class="sc-name">' + nombre + '</span>';
-				if(row.messages_unreaded_count > 0) {
-					html += '<span class="tag tag-primary">' + row.messages_unreaded_count + '</span>';
-					$('#noReadNotifications').show().text(row.messages_unreaded_count);
+				if (nombre !== "undefined undefined") {
+					
+					var html = '<a class="open-chat text-black" href="#" data-uniqueid="' + row.info.uid + '"><span class="sc-name">' + nombre + '</span>';
+					if(row.messages_unreaded_count > 0) {
+						html += '<span class="tag tag-primary">' + row.messages_unreaded_count + '</span>';
+						$('#noReadNotifications').show().text(row.messages_unreaded_count);
+					}
+					else {
+						html += '<span class="tag"></span>';
+						$('#noReadNotifications').text('').hide();
+					}
+					 html += '<br><small class="text-muted">'+titulo_publicacion+'</small>';
+					html += '</a>';
 				}
-				else {
-					html += '<span class="tag"></span>';
-					$('#noReadNotifications').text('').hide();
-				}
-				html += '</a>';
+
 				$("#sidebar-chats").append(html);
 			});
 			bindOpenChat();
@@ -260,4 +276,40 @@ function intervalRefreshCurrentChatttt(){
 			refreshCurrentChat();
 		//}
 	}, 5000);
+}
+
+function diffDates(fecha){
+	var fecha1 = moment().format("YYYY-MM-DD HH:mm:ss"),
+		fecha1 = moment(fecha1),
+		fecha2 = moment(fecha);
+
+	var diffDays = fecha1.diff(fecha2, 'days');
+	var diffHours = fecha1.diff(fecha2, 'hours');
+	var diffMonths = fecha1.diff(fecha2, 'months');
+	var diffYears = fecha1.diff(fecha2, 'years');
+	var diffSeconds = fecha1.diff(fecha2, 'seconds');
+	var diffMinutes = fecha1.diff(fecha2, 'minutes');
+
+	/*console.log("fecha1", fecha1, "fecha2", fecha2);
+	console.log(diffSeconds,diffMinutes,diffHours,diffDays,diffMonths,diffYears);*/
+
+	if (diffSeconds >= 0 && diffSeconds <= 59) {
+		return "Hace " + diffSeconds + " Seg";
+	} else if (diffMinutes >= 1 && diffMinutes <= 59){
+		return "Hace " + diffMinutes + " Min";
+	} else if (diffHours >= 1 && diffHours <= 24) {
+		let textHour = diffHours > 1 ? " Horas" : " Hora";
+		return "Hace " + diffHours + textHour;
+	} else if (diffDays >= 1 && diffDays <= 31){
+		let textDay = diffDays > 1 ? " Días" : " Día";
+		return "Hace " + diffDays + textDay;
+	} else if (diffMonths >= 1 && diffMonths <= 12) {
+		let textMonth = diffMonths > 1 ? " Meses" : " Mes";
+		return "Hace " + diffMonths + textMonth;
+	} else {
+		let textYear = diffYears > 1 ? " Años" : " Año";
+		return "Hace " + diffYears + textYear;
+	}
+
+	// return diffSeconds + ' ' + diffMinutes + ' ' + diffHours + ' ' + diffDays + ' ' + diff
 }
