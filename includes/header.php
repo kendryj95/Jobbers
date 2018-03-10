@@ -250,7 +250,10 @@
 									<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "admin") ? '': 'admin/'; ?>trabajadores.php">
 										<i class="ti-id-badge m-r-0-5"></i> Trabajadores
 									</a>
-									<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "admin") ? '': 'admin/'; ?>configuraciones.php">
+									<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "admin") ? '': 'admin/'; ?>trabajadores.php">
+										<i class="ti-search m-r-0-5"></i> Trabajadores por Busqueda
+									</a>
+									<a class="dropdown-item" href="<?php echo strstr($_SERVER["REQUEST_URI"], "admin") ? '': 'admin/'; ?>trabajadores_search.php">
 										<i class="ti-settings m-r-0-5"></i> Configuraciones
 									</a>
 								<?php endif ?>

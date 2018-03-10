@@ -28,6 +28,7 @@
 			<a href="publicidad.php" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-certificate"></i>&nbsp Publicidad</a>
 			<a href="empresas.php" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-industry"></i>&nbsp Empresas</a>
 			<a href="trabajadores.php" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-briefcase"></i>&nbsp Trabajadores</a>
+			<a href="trabajadores_search.php" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-search"></i>&nbsp Trabajadores por Busqueda</a>
 			<a href="usuarios.php" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-users"></i>&nbsp Usuarios</a>
 			<?php endif; ?>
 
