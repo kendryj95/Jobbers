@@ -20,6 +20,8 @@
 	define('LOGIN_ADMIN', 11);
 	define('SENT_MAIL', 12);
 	define('SOPORTE_TECNICO', 13);
+	define('COOKIES', 14);
+	define('DELETE_COOKIE', 15);
 	switch($op) {
 		case LOGIN:
 			
@@ -312,6 +314,26 @@
 			} else {
 				echo json_encode(array("msg" => "ERROR"));
 			}
+			break;
+		case COOKIES:
+
+			$status = null;
+			if (!isset($_COOKIE["accept_cookie"])) {
+				$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+				setcookie('accept_cookie', "OK", time()+(3600*24), "/", $domain, false);
+				$status = 200;
+			} else {
+				$status = 500;
+			}
+
+			echo json_encode(array(
+				"status" => $status
+			));
+			break;
+		case DELETE_COOKIE:
+			$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+			setcookie('accept_cookie', "OK", time()-1000000000, "/", $domain, false);
+			echo "Ok";
 			break;
 	}
 	

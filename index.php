@@ -336,11 +336,13 @@
 			</div>
 
 			<!-- Cookies -->
-			<!-- <div class="col-md-12 cookies-alert">
+			<?php if (!(isset($_COOKIE["accept_cookie"]))): ?>
+			 <div class="col-md-12 cookies-alert">
 				<p>Usamos cookies para darle la mejor experiencia en nuestro sitio web y asi ayudarnos tambien a entender como utiliza nuestro sitio. Al visitar nuestro sitio usted esta aceptando el uso de cookies</p>
 				<button class="btn btn-danger btn-sm btn-cookies" id="close">Continuar</button>
 			</div>
-			 -->
+			<?php endif ?>
+			 
     		<!-- Sidebar second -->
     		<?php require_once('includes/sidebar-second.php'); ?>
 
@@ -658,12 +660,6 @@
 
 <?php require_once 'includes/libs-js.php';?>
 
-<script>
-	$('#close').on('click', function(){
-		$('.cookies-alert').hide('slow');
-	})
-
-</script>
 <script type="text/javascript">
 		var filtro_localidad=0;
 		var parametro_localidad=0;
@@ -671,6 +667,25 @@
 			var paginador=0;
 			
 			$( document ).ready(function() {
+
+				$('#close').on('click', function(){
+
+					$.ajax({
+						url: 'ajax/user.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {accept: true, op: 14},
+						success: function(response){
+
+							if (response.status == 200) {
+								$('.cookies-alert').hide('slow');
+							}
+						},
+						error: function(error){
+							console.dir(error);
+						}
+					});
+				})
 			 		  
 			   listar_publicaciones(paginador); 
 			   const MARGEN = 500;
