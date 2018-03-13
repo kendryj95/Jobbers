@@ -9710,6 +9710,18 @@ a.text-grey:hover .underline {
     font-family: 'Playfair Display', serif;
 }
 
+.btn-outline {
+    background-color: transparent !important;
+    color: #333695 !important;
+    height: 50px;
+    font-size: 17px;
+}
+
+.btn-outline:hover {
+    background-color: #333695 !important;
+    color: #fff !important;
+}
+
 
 /* =================================================================
   Header
