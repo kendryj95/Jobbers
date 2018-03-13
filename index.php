@@ -624,14 +624,15 @@
 </script>
 <!-- Fin Modal alertas trabajos relacionados-->
 					<div class="col-md-9">
-						<h3 style="padding-left: 10px;">Principales ofertas de trabajo
+						<h3 style="padding-left: 10px; padding-right: 10px;">Principales ofertas de trabajo
 						<?php
 			if(isset($_SESSION["ctc"]) && $_SESSION["ctc"]["type"]!=1)
 			{
 				
 							if(isset($_SESSION["ctc"]["id"]))
 							{
-								echo'<img data-toggle="modal" data-target="#modal_alerta" src="img/bell.png" class="pull-right" style="margin-right: 10px;cursor: pointer;">';
+								//echo'<img data-toggle="modal" data-target="#modal_alerta" src="img/bell.png" class="pull-right" style="margin-right: 10px;cursor: pointer;">';
+								echo '<button class="btn btn-warning pull-right btn-alert-empleos" data-toggle="modal" data-target="#modal_alerta"><i class="fa fa-bell bell"></i> <i class="fa fa-bell fa-rotate-310 bell-45" style="display: none"></i> &nbspAlerta de Empleos</button> ';
 							} 
 			}
 			  			
@@ -659,6 +660,22 @@
 </div>
 
 <?php require_once 'includes/libs-js.php';?>
+<script>
+	$('.btn-alert-empleos').hover(onHover, onLeave);
+	function onHover(){
+		$('.bell').hide();
+		$('.bell-45').show();
+		$('.btn-alert-empleos').css('background-color','#03b50f');
+		$('.btn-alert-empleos').css('border','1px solid #058c0e');
+	}
+
+	function onLeave(){
+		$('.bell-45').hide();
+		$('.bell').show();
+		$('.btn-alert-empleos').css('background-color','#f0ad4e');
+		$('.btn-alert-empleos').css('border','1px solid #f0ad4e');
+	}
+</script>
 
 <script type="text/javascript">
 		var filtro_localidad=0;

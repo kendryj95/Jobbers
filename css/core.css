@@ -9722,6 +9722,12 @@ a.text-grey:hover .underline {
     color: #fff !important;
 }
 
+.fa-rotate-310 {
+    -webkit-transform: rotate(310deg);
+    -ms-transform: rotate(310deg);
+    transform: rotate(310deg);
+}
+
 
 /* =================================================================
   Header
@@ -10066,6 +10072,18 @@ a.text-grey:hover .underline {
     border-left: 70px solid transparent;
     border-right: 70px solid #EFC75E;
     border-bottom: 70px solid transparent;
+}
+
+.btn-alert-empleos {
+    font-size: 16px;
+}
+
+@media (max-width: 500px) {
+    .btn-alert-empleos {
+        display: block;
+        float: none !important;
+        margin-top: 20px;
+    }
 }
 
 
@@ -10573,6 +10591,7 @@ a.list-group-item:hover {
 
 .main-title-landing {
     background: -webkit-linear-gradient(#00aeef, #383B97);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: #383B97;
@@ -10591,7 +10610,7 @@ a.list-group-item:hover {
     font-weight: bolder;
 }
 
-@-webkit-keyframes hue {
+@keyframes hue {
     from {
         -webkit-filter: hue-rotate(0deg);
     }
