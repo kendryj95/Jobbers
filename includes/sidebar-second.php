@@ -52,6 +52,7 @@
 							<div class="avatar box-32">
 								<img id="sidebar-chat-window-user-picture" src="" alt="">
 							</div>
+							<a href="" style="margin-left: 20px" class="titulo_publicacion"></a>
 						</div>
 					</div>
 					<div id="sidebar-chat-window-messages" style="padding: 0px 28px; padding-top: 50px;">					
@@ -80,7 +81,7 @@
 
 	<?php if(isset($_SESSION["ctc"])): ?>
 		<!-- Template options -->
-		<div class="template-options custom-scroll custom-scroll-dark">
+		<div class="template-options custom-scroll custom-scroll-dark" id="btnChat">
 			<div class="to-toggle">
 				<i class="fa fa-envelope"></i> 
 				CHAT

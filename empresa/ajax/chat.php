@@ -1,8 +1,9 @@
 <?php
  
-	require_once("$_SERVER[DOCUMENT_ROOT]/classes/DatabasePDOInstance.function.php");
-	require_once("$_SERVER[DOCUMENT_ROOT]/classes/Chat.class.php");
-	require_once("$_SERVER[DOCUMENT_ROOT]/webservice/enviarEmail.php"); 
+	require_once("../../classes/DatabasePDOInstance.function.php");
+	require_once("../../classes/Email.class.php");
+	require_once("../../classes/Chat.class.php");
+	// require_once("$_SERVER[DOCUMENT_ROOT]/webservice/enviarEmail.php"); 
 
 	define('GET_MESSAGES', 1);
 	define('ADD_MESSAGE', 2);
@@ -30,6 +31,7 @@
 				$idc2 = isset($_REQUEST["idc2"]) ? $_REQUEST["idc2"] : false;
 				$t = isset($_REQUEST["t"]) ? $_REQUEST["t"] : false;
 				$msg  = isset($_REQUEST["msg"])  ? $_REQUEST["msg"]  : false;
+				$mail = new Email;
                 if($idc1 && $idc2 && $msg) {
 					$bln = $chat->addMessage($idc1, $idc2, $msg);
 
@@ -62,9 +64,7 @@
                             "Content-type: text/html; charset=utf-8");*/
                             
 
-                            do {
-                            	$enviar = email_chat(1, $empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
-                            } while(strlen($enviar) > 1);
+                            	$mail->email_chat($empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
 
 						} else {
 							$empresa = $db->getRow("
@@ -82,9 +82,7 @@
                             "Content-type: text/html; charset=utf-8");*/
                            
 
-                           do {
-                           		$enviar = email_chat(1, $trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
-                           } while(strlen($enviar) > 1);
+                           		$mail->email_chat($trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
 						}
 
 						

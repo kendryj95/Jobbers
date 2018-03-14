@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="col-sm-12" style="padding-right: 10px; padding-left: 10px;">
+        <div class="col-sm-12 recomendacion '+borde+'"><span class="recomendacion-text">SELECCIÓN</span><img class="img-responsive width-img-offer" src="img/logo.png" alt="Logo"></div>
+        <div class="victor_publicacion height-offer big-pub '+borde+'" style="">
+            <div class="col-sm-12 text-center logo-medal '+paddingEmpresas+paddingEmpresasFree+' " style="padding-top: 10px;'+socialNone+'"><img class="gold-medal-offer" style="width: 100px; position: absolute; right: -30px; top: -10px;" src="img/gold-medal-offer.png" alt="Gold Medal">
+                <div class="col-md-4"> <img src="'+datos[key][" imagen_empresa "]+'" style=" width: 220px; height: 210px; border: 4px solid #EFC75E; border-radius: 100px;"></br><span style="font-size:12px; color: #000;">'+datos[key]["provincia"]+" - "+datos[key]["localidad"]+'</span></div>
+                <div class="col-md-8"> <a class="link-pub-main font-playfair" style="font-size: 28px;" href="empresa/perfil.php?e='+urlEmp+'"><strong>'+urlEmpresa+'&nbsp <i class="fa fa-check-circle" data-toggle="tooltip" data-placement="top" style="color:#00bc00; font-size: 28px;"></i></strong></a>
+                    <p> <span style="font-size: 14px;">'+dias+'</span><br> <a class="link-pub-sec font-playfair" style="font-size: 20px;" href="'+url+'">'+datos[key]["titulo_publicacion"]+' </a>
+                        <div class="col-md-6">
+                            <div class="col-md-6">
+                                <p class="p-content-pub">10</p>
+                                <p class="link-pub-main" style="font-size:16px;">Contratados</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="p-content-pub">5</p>
+                                <p class="link-pub-main" style="font-size:16px;">Ofertas</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p>'+facebook+link+twitter+instagram+'</p>
+                            <p class="link-pub-main" style="font-size:16px;">Redes</p>
+                        </div>
+                    </p>
+                    <p style="font-size: 12px;" class="text-justify"> </p>
+                </div>
+            </div>
+            <div class="col-sm-12 text-center btn-section-pub"> <a target="_blank" href="'+url+'" class="btn btn-primary btn-lg btn-see-pub" style="width: 100%">Ver Más <i class="fa fa-plus-circle"></i></a> </br>
+            </div>
+        </div>
+
+</body>
+
+</html>

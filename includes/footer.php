@@ -40,25 +40,25 @@
 							<div class="col-xs-4">
 								<div class="f-title">Menu</div>
 								<ul class="list-unstyled">
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>ingresar.php">Jobbers</a></li>
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "" : "empresa/"); ?>acceder.php">Empresas</a></li>
+									<a class="footer-hover" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>ingresar.php"><li class="footer-hover">Jobbers</li></a>
+									<a class="footer-hover" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "" : "empresa/"); ?>acceder.php"><li class="footer-hover">Empresas</li></a>
 								</ul>
 							</div>
 							<div class="col-xs-4">
 								<div class="f-title">Noticias</div>
 								<ul class="list-unstyled">
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>noticias.php">Noticias</a></li>
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>categorias.php">Categorías</a></li>
+									<a class="footer-hover" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>noticias.php"><li class="footer-hover">Noticias</li></a>
+									<a class="footer-hover" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>categorias.php"><li class="footer-hover">Categorías</li></a>
 								</ul>
 							</div>
 							<div class="col-xs-4">
 								<div class="f-title">Empresa</div>
 								<ul class="list-unstyled">
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>nosotros.php">Nosotros</a></li>
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>contacto.php">Contacto</a></li>
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>soporte.php">Soporte Técnico</a></li>
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>politicas.php">Políticas de privacidad</a></li>
-									<li><a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>terminos.php">Términos y condiciones</a></li>
+									<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>nosotros.php"><li class="footer-hover">Nosotros</li></a>
+									<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>contacto.php"><li class="footer-hover">Contacto</li></a>
+									<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>soporte.php"><li class="footer-hover">Soporte Técnico</li></a>
+									<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>politicas.php"><li class="footer-hover">Políticas de privacidad</li></a>
+									<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa") ? "../" : ""); ?>terminos.php"><li class="footer-hover">Términos y condiciones</li></a>
 								</ul>
 							</div>
 						</div>

@@ -37,9 +37,6 @@
 		.card {
 			border-radius: 6px;
 		}
-		.color-link{
-			color:#fff !important;
-		}
 	</style>
 
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -51,7 +48,7 @@
 	</script>
 </head>
 
-<body class="large-sidebar fixed-sidebar fixed-header skin-5">
+<body class="large-sidebar fixed-sidebar fixed-header">
 	<div class="wrapper">
 
 		<!-- Preloader -->

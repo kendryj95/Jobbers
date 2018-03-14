@@ -1,7 +1,8 @@
 <?php
 	session_start();
 	require_once('../classes/DatabasePDOInstance.function.php');
-	require_once("../webservice/enviarEmail.php");
+	require_once('../classes/Email.class.php');
+	// require_once("../webservice/enviarEmail.php");
 	require('../limpiarCadena.php');
 	$db = DatabasePDOInstance();
 	
@@ -19,6 +20,8 @@
 	define('LOGIN_ADMIN', 11);
 	define('SENT_MAIL', 12);
 	define('SOPORTE_TECNICO', 13);
+	define('COOKIES', 14);
+	define('DELETE_COOKIE', 15);
 	switch($op) {
 		case LOGIN:
 			
@@ -131,15 +134,10 @@
 				$controlador = (string) strtotime(date('Hms'));
 				$para = $_REQUEST["email"];
 
-
-				do {
-
-					$mail = userForgotPass(2, $para, $exist['name'], $controlador);
-
-				} while (strlen($mail) > 1);
-
+				$mail = new Email;
+				$mail->userForgotPass($para, $exist['name'], $controlador);
 				
-				if($mail == "1") {
+				if($mail) {
 					$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
 					echo json_encode(array("status" => 1));
 				}
@@ -307,17 +305,35 @@
 			break;
 		case SOPORTE_TECNICO:
 
-			do {
+			$mail = new Email;
+			$mail->soporteTecnico($_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
 
-				$sendMail = soporteTecnico(3, $_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
 
-			} while(strlen($sendMail) > 1);
-
-			if ($sendMail == "1") {
+			if ($mail) {
 				echo json_encode(array("msg" => "OK"));
 			} else {
 				echo json_encode(array("msg" => "ERROR"));
 			}
+			break;
+		case COOKIES:
+
+			$status = null;
+			if (!isset($_COOKIE["accept_cookie"])) {
+				$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+				setcookie('accept_cookie', "OK", time()+(3600*24), "/", $domain, false);
+				$status = 200;
+			} else {
+				$status = 500;
+			}
+
+			echo json_encode(array(
+				"status" => $status
+			));
+			break;
+		case DELETE_COOKIE:
+			$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+			setcookie('accept_cookie', "OK", time()-1000000000, "/", $domain, false);
+			echo "Ok";
 			break;
 	}
 	

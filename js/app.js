@@ -25,11 +25,14 @@ $(document).ready(function() {
         }).data('jsp');
 
     function addDummyContentToChatBox() { /* Mantiene el scroll al final */
-        api.reinitialise();
-        if (api.getIsScrollableV() && shouldStickToBottom) {
-            api.scrollToBottom();
+        if ($('#btnChat').is(':visible')) {
+            
             api.reinitialise();
-            shouldStickToBottom = false;
+            if (api.getIsScrollableV() && shouldStickToBottom) {
+                api.scrollToBottom();
+                api.reinitialise();
+                shouldStickToBottom = false;
+            }
         }
     }
 

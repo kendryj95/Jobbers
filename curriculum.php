@@ -85,7 +85,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		</script>
 	</head>
 
-	<body class="large-sidebar fixed-sidebar fixed-header skin-5">
+	<body class="large-sidebar fixed-sidebar fixed-header">
 
 		<!-- <div class="wrapper"> -->
 
