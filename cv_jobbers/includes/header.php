@@ -12,9 +12,9 @@ $pdf->Cell(190,5,''.utf8_decode(" ".$datos_trabajadores[0]['telefono']." - ".$da
 
 
  
-if(count($informacion_imagen)>0)
+if($informacion_imagen[0]["imagen"]!=null)
 {
-	$pdf->Image('../img/profile/'.$informacion_imagen[0]["imagen"].'' , 15 ,8, 25 , 35,'jpg', '');
+	$pdf->Image('../img/profile/'.$informacion_imagen[0]["imagen"].'' , 15 ,8, 25 , 35,$informacion_imagen[0]["extension"], '');
 }
 else
 {
