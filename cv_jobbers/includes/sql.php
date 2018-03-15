@@ -2,7 +2,7 @@
 	$db = DatabasePDOInstance();
 
 	$id=$_GET['id'];
-	$trabajadores="SELECT *,TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE())  as edad FROM trabajadores WHERE id=".$id."";
+	$trabajadores="SELECT *,TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE())  as edad,DATE_FORMAT( fecha_nacimiento,  '%d-%m-%Y' ) as fecha_n FROM trabajadores WHERE id=".$id."";
 	$datos_trabajadores=$db->getAll($trabajadores);
 	
 	$direccion="SELECT t1.calle,t2.localidad,t3.provincia FROM trabajadores t1 
@@ -21,7 +21,7 @@
 		WHERE t1.id_trabajador=".$id."";
 	$datos_idioma=$db->getAll($idioma);
 
-	$experiencias = "SELECT t1.nombre_empresa,t1.tipo_puesto,t1.nombre_encargado,t1.tlf_encargado,t1.descripcion_tareas,t2.nombre as pais, concat('(',t1.mes_ingreso,'-',t1.ano_ingreso,' a ',t1.mes_egreso,'-',t1.ano_egreso,')') as fecha FROM `trabajadores_experiencia_laboral` t1 
+	$experiencias = "SELECT t1.trab_actualmt, t1.nombre_empresa,t1.tipo_puesto,t1.nombre_encargado,t1.tlf_encargado,t1.descripcion_tareas,t2.nombre as pais, concat('',t1.mes_ingreso,'-',t1.ano_ingreso,' a ',t1.mes_egreso,'-',t1.ano_egreso,'') as fecha FROM `trabajadores_experiencia_laboral` t1 
 left JOIN paises t2 ON t1.id_pais = t2.id 
 		WHERE t1.id_trabajador=".$id."";
 	$datos_experiencias=$db->getAll($experiencias);
