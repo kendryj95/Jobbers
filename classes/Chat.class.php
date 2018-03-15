@@ -64,7 +64,9 @@
 								LEFT JOIN imagenes AS img ON com.id_imagen = img.id
 								WHERE
 									com.uid = $row[uid_usuario2]
-							";									
+							";
+
+							$sql2 = "SELECT p.titulo AS titulo_publicacion, p.amigable AS url_publicacion, asec.amigable AS sector, a.amigable AS area FROM publicaciones p INNER JOIN publicaciones_sectores ps ON p.id=ps.id_publicacion INNER JOIN areas_sectores asec ON ps.id_sector=asec.id INNER JOIN areas a ON asec.id_area=a.id INNER JOIN postulaciones pt ON p.id=pt.id_publicacion INNER JOIN trabajadores t ON pt.id_trabajador=t.id INNER JOIN empresas e ON p.id_empresa=e.id WHERE (t.uid=$row[uid_usuario1] AND e.uid=$row[uid_usuario2]) OR (t.uid=$row[uid_usuario2] AND e.uid=$row[uid_usuario1])";									
 						}
 						else {
 							$sql = "
@@ -84,12 +86,15 @@
 								WHERE
 									com.uid = $row[uid_usuario2]
 							";
+							$sql2 = "SELECT p.titulo AS titulo_publicacion, p.amigable AS url_publicacion, asec.amigable AS sector, a.amigable AS area FROM publicaciones p INNER JOIN publicaciones_sectores ps ON p.id=ps.id_publicacion INNER JOIN areas_sectores asec ON ps.id_sector=asec.id INNER JOIN areas a ON asec.id_area=a.id INNER JOIN postulaciones pt ON p.id=pt.id_publicacion INNER JOIN trabajadores t ON pt.id_trabajador=t.id INNER JOIN empresas e ON p.id_empresa=e.id WHERE (t.uid=$row[uid_usuario1] AND e.uid=$row[uid_usuario2]) OR (t.uid=$row[uid_usuario2] AND e.uid=$row[uid_usuario1])";
 						}
 						
 						$info = $db->getRow($sql);
+						$publicacion = $db->getRow($sql2);
 
 						$messages[] = array(
-							"info" => $info
+							"info" => $info,
+							"titulo_publicacion" => $publicacion
 						);
 					}
 				}
@@ -119,6 +124,7 @@
 								WHERE
 									com.uid = $row[uid_usuario1]
 							";
+							$sql2 = "SELECT p.titulo AS titulo_publicacion, p.amigable AS url_publicacion, asec.amigable AS sector, a.amigable AS area FROM publicaciones p INNER JOIN publicaciones_sectores ps ON p.id=ps.id_publicacion INNER JOIN areas_sectores asec ON ps.id_sector=asec.id INNER JOIN areas a ON asec.id_area=a.id INNER JOIN postulaciones pt ON p.id=pt.id_publicacion INNER JOIN trabajadores t ON pt.id_trabajador=t.id INNER JOIN empresas e ON p.id_empresa=e.id WHERE (t.uid=$row[uid_usuario2] AND e.uid=$row[uid_usuario1]) OR (t.uid=$row[uid_usuario1] AND e.uid=$row[uid_usuario2])";
 						}
 						else {
 							$sql = "
@@ -138,12 +144,15 @@
 								WHERE
 									com.uid = $row[uid_usuario1]
 							";
+							$sql2 = "SELECT p.titulo AS titulo_publicacion, p.amigable AS url_publicacion, asec.amigable AS sector, a.amigable AS area FROM publicaciones p INNER JOIN publicaciones_sectores ps ON p.id=ps.id_publicacion INNER JOIN areas_sectores asec ON ps.id_sector=asec.id INNER JOIN areas a ON asec.id_area=a.id INNER JOIN postulaciones pt ON p.id=pt.id_publicacion INNER JOIN trabajadores t ON pt.id_trabajador=t.id INNER JOIN empresas e ON p.id_empresa=e.id WHERE (t.uid=$row[uid_usuario2] AND e.uid=$row[uid_usuario1]) OR (t.uid=$row[uid_usuario1] AND e.uid=$row[uid_usuario2])";
 						}
 						
 						$info = $db->getRow($sql);
+						$publicacion = $db->getRow($sql2);
 
 						$messages[] = array(
-							"info" => $info
+							"info" => $info,
+							"titulo_publicacion" => $publicacion
 						);
 					}
 				}
@@ -192,6 +201,14 @@
 					");
 				}
 			}
+
+			if (isset($idc) && isset($idc2)) {
+				$publicacion = $db->getRow("SELECT p.titulo AS titulo_publicacion, p.amigable AS url_publicacion, asec.amigable AS sector, a.amigable AS area FROM publicaciones p INNER JOIN publicaciones_sectores ps ON p.id=ps.id_publicacion INNER JOIN areas_sectores asec ON ps.id_sector=asec.id INNER JOIN areas a ON asec.id_area=a.id INNER JOIN postulaciones pt ON p.id=pt.id_publicacion INNER JOIN trabajadores t ON pt.id_trabajador=t.id INNER JOIN empresas e ON p.id_empresa=e.id WHERE (t.uid=$idc AND e.uid=$idc2) OR (t.uid=$idc2 AND e.uid=$idc)");
+
+				$messages[0]["publicacion"] = $publicacion;
+			}
+
+			
 
 			return $messages;
 		}

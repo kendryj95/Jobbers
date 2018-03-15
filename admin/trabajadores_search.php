@@ -11,14 +11,6 @@
 	}
 	require_once('../classes/DatabasePDOInstance.function.php');
 	$db = DatabasePDOInstance();
-	$datos = $db->getAll("
-					SELECT
-						*
-					FROM
-						trabajadores
-					ORDER BY fecha_creacion
-				");
-
 
 	function statusCV($db, $id){
 		# STATUS DE DATOS PERSONALES
@@ -71,7 +63,7 @@
 		<meta name="author" content="">
 
 		<!-- Title -->
-		<title>JOBBERS - Trabajadores</title>
+		<title>JOBBERS - Trabajadores por Busqueda</title>
 		<?php require_once('../includes/libs-css.php'); ?>
 
 		<link rel="stylesheet" href="../vendor/DataTables/css/dataTables.bootstrap4.min.css">
@@ -116,49 +108,21 @@
 							<div class="container-fluid">
 								<div class="box box-block bg-white">
 									<br>
-									<h5 class="m-b-1">Mis trabajadores</h5>
+									<h5 class="m-b-1">Buscar trabajador</h5>
 									<br>
 
-									<ul class="nav nav-pills" role="tablist">
-									    <li role="presentation" class="active"><a href="#table1" aria-controls="table1" role="tab" data-toggle="tab">Trabajadores</a></li>
-									  </ul>
 
-									<div class="tab-content">
-										<div class="tab-pane active" role="tabpanel" id="table1">
-											<div class="table-responsive">
-												<table class="table table-striped table-bordered" id="tableTrabajadores1" style="width: 100%">
-													<thead>
-														<tr>
-															<th>#</th>
-															<th>Nombre</th>
-															<th>Correo electrónico</th>
-															<th>Correo electrónico</th>
-															<th>Contácto</th>
-															<th>Fecha de registro</th>
-															<th>% CV</th>
-															<th>Eliminar</th>
-														</tr>
-													</thead>
-													<tbody>
-													<?php foreach($datos as $k => $dato): ?>
-														<tr id="row<?= $k + 1 ?>">
-															<td><?= $k + 1 ?></td>
-															<td><?= $dato["nombres"]." ".$dato["apellidos"] ?></td>
-															<td><?= $dato["correo_electronico"] ?></td>
-															<td><?= $dato["correo_electronico"] ?></td>
-															<td><?= $dato["telefono"] != "" ? $dato["telefono"] : "<b>Sin registro</b>" ?></td>
-															<td><?= date("d-m-Y H:i:s",strtotime($dato["fecha_creacion"])) ?></td>
-															<td><?= statusCV($db, $dato["id"]) . '%' ?></td>
-															<td><div class="acciones-categoria" data-target="<?= $dato["id"] ?>"><button type="button" class="accion-categoria btn btn-success waves-effect waves-light" title="Ver status CV" onclick="statusCV(this);"><span class="ti-file	"></span></button> <button type="button" class="accion-categoria btn btn-danger waves-effect waves-light" title="Eliminar Trabajador" onclick="eliminarCategoria(this);" data-row="row<?= $k + 1 ?>"><span class="ti-close"></span></button> </div></td>
-														</tr>
-													<?php endforeach ?>
-													</tbody>
-												</table>
-											</div>
-										</div>
+									<div class="input-group">
+									  <input type="text" class="form-control" placeholder="Por correo electronico (*)" id="email_trab">
+									  <div class="input-group-btn">
+										<button class="btn btn-primary" id="search_trab"><i class="fa fa-search"></i> Buscar</button>
+									  </div>
+									</div>
 
+									<div id="containerDatos" style="margin-top: 20px">
 										
 									</div>
+
 								</div>
 							</div>
 						</div>
@@ -275,33 +239,62 @@
 					$('.content-loader').fadeOut();
 				}, 500);
 
-				var $tableTrabajadores1 = jQuery("#tableTrabajadores1");
-				var tableTrabajadores1 = $tableTrabajadores1.DataTable( {
-					"dom": 'Bfrtip',
-					"buttons": [
-						'excel',
-					],
-					"language": {
-						"decimal":        "",
-						"emptyTable":     "Sin registros",
-						"info":           "Mostrando de _START_ a _END_ registros de _TOTAL_ en total",
-						"infoEmpty":      "Mostrando 0 de 0 de 0 registros",
-						"infoFiltered":   "(filtrado desde _MAX_ registros en total)",
-						"infoPostFix":    "",
-						"thousands":      ",",
-						"lengthMenu":     "Mostrar _MENU_ registros",
-						"loadingRecords": "Cargando...",
-						"processing":     "Procesando...",
-						"search":         "Buscar:",
-						"zeroRecords":    "No se encontraron registros",
-						"paginate": {
-							"first":      "Primero",
-							"last":       "Último",
-							"next":       "Siguiente",
-							"previous":   "Anterior"
-						},
-					},
-				} );
+				$('#search_trab').on('click', function(){
+
+					var html = '';
+
+					if ($('#email_trab').val() != "") {
+						if (isEmail($('#email_trab').val())) {
+
+							$.ajax({
+								url: 'ajax/usuarios.php',
+								type: 'GET',
+								dataType: 'json',
+								data: {
+									op: 10,
+									email: $('#email_trab').val()
+								},
+								beforeSend: function(){
+									$('.preloader').show();
+									$('.content-loader').show();
+								},
+								success: function(response){
+									if (response.status == 200) {
+										if (response.t != 1) {
+											html += '<table class="table table-striped table-bordered">'+
+											'<tr>'+
+											'<th>#</th><th>Nombre</th><th>Correo Electronico</th><th>Contacto</th><th>Fecha de registro</th><th>% CV</th><th>Acciones</th>'+
+											'<tr>'+
+											'<td>1</td><td>'+response.data.trabajador.nombres+'</td><td>'+response.data.trabajador.correo+'</td><td>'+response.data.trabajador.telefono+'</td><td>'+response.data.trabajador.fecha_creacion+'</td><td>'+response.data.statusCV+'</td><td><div class="acciones-categoria" data-target="'+response.data.trabajador.id+'"><button type="button" class="accion-categoria btn btn-success waves-effect waves-light" title="Ver status CV" onclick="statusCV(this);"><span class="ti-file	"></span></button> <button type="button" class="accion-categoria btn btn-danger waves-effect waves-light" title="Eliminar Trabajador" onclick="eliminarCategoria(this);"><span class="ti-close"></span></button> </div></td>'
+											+'</tr>'
+											+'</tr>'
+											+'</table>';
+											$('#containerDatos').html(html);
+										} else {
+											swal("No encontrado!", "Lo sentimos, el trabajador que ud ha buscado no existe.", "info");
+										}
+									} else {
+										swal("ERROR!", "Lo sentimos, ha ocurrido un error. Por favor verifica su conexión a internet e intenlo de nuevo", "error");
+									}
+								},
+								error: function(error){
+									swal("ERROR!", "Lo sentimos, ha ocurrido un error. Por favor verifica su conexión a internet e intenlo de nuevo", "error");
+								},
+								complete: function(){
+									$('.preloader').fadeOut();
+									$('.content-loader').fadeOut();
+								}
+							});
+							
+						} else {
+							swal("ERROR!", "El correo electronico no es valido.", "error");
+						}
+					} else {
+						swal("Vacío!", "No puedes dejar vacío el campo.", "warning");
+					}
+
+				});
+
 
 				$('#enviarMail').on('click', function () {
 					
@@ -336,7 +329,6 @@
 				var $btn = $(btn);
 				var $parent = $btn.closest('.acciones-categoria');
 				idPub = $parent.attr('data-target');
-				idRow = $btn.attr('data-row');
 				
 				swal({
 				  title: "Advertencia",
@@ -363,8 +355,10 @@
 									var json = JSON.parse(jqXHR.responseText);
 									if(json.msg == 'OK') {
 										swal("Operación exitosa!", "Se eliminó el usuario.", "success");
-										// window.location.reload();
-										$('#'+idRow).remove();
+										setTimeout(function(){
+
+											window.location.reload();
+										}, 1000);
 									}
 									break;
 							}
@@ -406,6 +400,12 @@
 				$("#modal-status-cv").modal('show');
 
 
+			}
+
+			function isEmail(email) {
+			  var regex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
+			  let correo = email.toLowerCase().trim();
+			  return regex.test(correo);
 			}
 		</script>
 

@@ -336,11 +336,13 @@
 			</div>
 
 			<!-- Cookies -->
-			<!-- <div class="col-md-12 cookies-alert">
+			<?php if (!(isset($_COOKIE["accept_cookie"]))): ?>
+			 <div class="col-md-12 cookies-alert">
 				<p>Usamos cookies para darle la mejor experiencia en nuestro sitio web y asi ayudarnos tambien a entender como utiliza nuestro sitio. Al visitar nuestro sitio usted esta aceptando el uso de cookies</p>
 				<button class="btn btn-danger btn-sm btn-cookies" id="close">Continuar</button>
 			</div>
-			 -->
+			<?php endif ?>
+			 
     		<!-- Sidebar second -->
     		<?php require_once('includes/sidebar-second.php'); ?>
 
@@ -624,7 +626,7 @@
 					<div class="col-md-9">
 						<h3 style="padding-left: 10px;">Principales ofertas de trabajo
 						<?php
-			if($_SESSION["ctc"]["type"]!=1)
+			if(isset($_SESSION["ctc"]) && $_SESSION["ctc"]["type"]!=1)
 			{
 				
 							if(isset($_SESSION["ctc"]["id"]))
@@ -658,12 +660,6 @@
 
 <?php require_once 'includes/libs-js.php';?>
 
-<script>
-	$('#close').on('click', function(){
-		$('.cookies-alert').hide('slow');
-	})
-
-</script>
 <script type="text/javascript">
 		var filtro_localidad=0;
 		var parametro_localidad=0;
@@ -671,6 +667,25 @@
 			var paginador=0;
 			
 			$( document ).ready(function() {
+
+				$('#close').on('click', function(){
+
+					$.ajax({
+						url: 'ajax/user.php',
+						type: 'POST',
+						dataType: 'json',
+						data: {accept: true, op: 14},
+						success: function(response){
+
+							if (response.status == 200) {
+								$('.cookies-alert').hide('slow');
+							}
+						},
+						error: function(error){
+							console.dir(error);
+						}
+					});
+				})
 			 		  
 			   listar_publicaciones(paginador); 
 			   const MARGEN = 500;
@@ -777,7 +792,7 @@
 
 						if(datos[key]["verificado"]==1)
 						{
-							verificado="&nbsp <i class='fa fa-check-circle' data-toggle='tooltip' data-placement='top' style='color:#00bc00; font-size: 16px;'></i>";
+							verificado="&nbsp <i class='fa fa-check-circle' data-toggle='tooltip' data-placement='top' style='color:#00bc00; font-size: 14px;'></i>";
 						}
 
 						$(document).ready(function(){
@@ -976,7 +991,7 @@
 				
 			</script>
 			<?php
-			if($_SESSION["ctc"]["type"]!=1)
+			if(isset($_SESSION["ctc"]) && $_SESSION["ctc"]["type"]!=1)
 			{
 				if(isset($_SESSION["ctc"]["id"]))
 			{

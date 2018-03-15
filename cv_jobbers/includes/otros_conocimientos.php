@@ -8,7 +8,7 @@ $pdf->Cell(190,5,''.utf8_decode("OTROS CONOCIMIENTOS").'',0,1,'C','true');
 
 if(count($datos_otros_conocimentos)>0)
 {
-	for ($i=0; $i < $total ; $i++) 
+	for ($i=0; $i < count($datos_otros_conocimentos) ; $i++) 
 		{
 			$pdf->SetFont('Arial','B',10); 
 			$pdf->SetTextColor(46, 49, 146);

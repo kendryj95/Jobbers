@@ -22,7 +22,7 @@ $pdf->Text(46,56+$linea,"".utf8_decode(strtoupper($datos_direccion[0]['localidad
 $linea=$linea+4;
 $pdf->Text(28,56+$linea,"".utf8_decode(strtoupper($datos_direccion[0]['provincia'].' / '.$datos_direccion[0]['localidad'].' / '.$datos_direccion[0]['calle'])).""); 
 $linea=$linea+4;
-$pdf->Text(46,56+$linea,"20/07/1993"); 
+$pdf->Text(46,56+$linea,"".$datos_trabajadores[0]['fecha_nacimiento'].""); 
 $linea=$linea+4;
 $pdf->Text(20,56+$linea," ".utf8_decode(''.$datos_trabajadores[0]['edad'].' años')." ");  
 ?>

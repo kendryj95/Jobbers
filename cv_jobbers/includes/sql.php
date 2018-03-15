@@ -34,12 +34,12 @@ $estudios = "SELECT t1.id_trabajador,t1.nombre_institucion,t1.titulo,t4.nombre a
 	$datos_estudios=$db->getAll($estudios);
 
 $otros_conocimentos = "SELECT * FROM `trabajadores_otros_conocimientos`
-		WHERE t1.id_trabajador=".$id."";
+		WHERE  id_trabajador=".$id."";
 	$datos_otros_conocimentos=$db->getAll($otros_conocimentos);
 
-$imagen = " SELECT t1.id,concat(t2.nombre,".",t2.extension) as imagen,t2.extension FROM trabajadores t1
+$consulta_imagen = " SELECT t1.id,concat(t2.nombre,'.',t2.extension) as imagen,t2.extension FROM trabajadores t1
 			LEFT JOIN imagenes t2 On t1.id_imagen = t2.id 
 			WHERE t1.id=".$id."";
-	$datos_imagen=$db->getAll($imagen);
+	$informacion_imagen=$db->getAll($consulta_imagen);
 
 ?>

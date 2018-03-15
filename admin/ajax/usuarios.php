@@ -13,6 +13,7 @@ define('CARGAR_TRAB', 6);
 define('ELIMINAR_TRAB', 7);
 define('DETALLE_STATUS_CV', 8);
 define('RECORDATORIO_CV', 9);
+define('SEARCH_TRAB', 10);
 
 require_once('../../classes/DatabasePDOInstance.function.php');
 
@@ -69,7 +70,7 @@ if($op) {
 						*
 					FROM
 						trabajadores
-					ORDER BY fecha_creacion
+					ORDER BY fecha_creacion LIMIT 2300
 				");
 
 			if($datos) {
@@ -185,6 +186,33 @@ if($op) {
 			}
 
 			echo json_encode($json);
+			break;
+		case SEARCH_TRAB:
+
+			$email = isset($_REQUEST['email']) ? $_REQUEST['email'] : false;
+			$status = null;
+			$t = null;
+			$trabajador = null;
+			$statusCV = null;
+			
+			if ($email) {
+				$trabajador = $db->getRow("SELECT id, CONCAT(nombres, ' ', apellidos) AS nombres, correo_electronico AS correo, telefono, fecha_creacion FROM trabajadores WHERE correo_electronico=?", array($email));
+
+				if ($trabajador) {
+					$statusCV = statusCV($db, $trabajador['id']);
+				} else {
+					$t = 1;
+				}
+				$status = 200;
+			} else {
+				$status = 500;
+			}
+
+			echo json_encode(array(
+				"status" => $status,
+				"data" => array("trabajador" => $trabajador, "statusCV" => $statusCV),
+				"t" => $t
+			));
 			break;
 	}
 }
