@@ -18,11 +18,13 @@ $pdf->SetFont('Arial','',8);
 $pdf->Text(18,56,"".$datos_trabajadores[0]['numero_documento_identificacion'].""); 
 $pdf->Text(23,56+$linea,"".$datos_trabajadores[0]['cuil'].""); 
 $linea=$linea+4;
-$pdf->Text(46,56+$linea,"".utf8_decode(strtoupper($datos_direccion[0]['localidad'])).""); 
+$pdf->Text(46,56+$linea,"".utf8_decode( mb_strtoupper($datos_direccion[0]['localidad'])).""); 
 $linea=$linea+4;
-$pdf->Text(28,56+$linea,"".utf8_decode(strtoupper($datos_direccion[0]['provincia'].' / '.$datos_direccion[0]['localidad'].' / '.$datos_direccion[0]['calle'])).""); 
+$pdf->Text(28,56+$linea,"".utf8_decode( mb_strtoupper($datos_direccion[0]['provincia'].' / '.$datos_direccion[0]['localidad'].' / '.$datos_direccion[0]['calle'])).""); 
 $linea=$linea+4;
-$pdf->Text(46,56+$linea,"".$datos_trabajadores[0]['fecha_nacimiento'].""); 
+$pdf->Text(46,56+$linea,"".$datos_trabajadores[0]['fecha_n'].""); 
 $linea=$linea+4;
 $pdf->Text(20,56+$linea," ".utf8_decode(''.$datos_trabajadores[0]['edad'].' años')." ");  
+
+$pdf->Text(43,285,"".utf8_decode('Cree en tí, como creemos nosotros. Jobbers el mejor portal para encontrar y publicar empleos.').""); 
 ?>

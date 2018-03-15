@@ -326,7 +326,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row">
 												<label for="street" class="col-xs-12 col-md-2 text-center">Calle <span style="color: red;">*</span></label>
 												<div class="col-xs-12 col-md-10">
-													<input class="form-control" value="<?php echo $data["calle"]; ?>" id="street" type="text">
+													<input maxlength="45"> class="form-control" value="<?php echo $data["calle"]; ?>" id="street" type="text">
 												</div>
 											</div>
 											<div class="form-group row">

@@ -1,10 +1,10 @@
 <?php
 $pdf->SetFont('Arial','',12); 
-$pdf->Cell(190,10,''.utf8_decode(strtoupper($datos_trabajadores[0]['nombres'].' '.$datos_trabajadores[0]['apellidos'])).'',0,1,'C');
-$pdf->SetFont('Arial','',10); 
+$pdf->Cell(190,10,''.utf8_decode( mb_strtoupper($datos_trabajadores[0]['nombres'].' '.$datos_trabajadores[0]['apellidos'])).'',0,1,'C');
+$pdf->SetFont('Arial','',8); 
 $pdf->SetTextColor(255,255,255);  // Establece el color del texto (en este caso es blanco) 
 $pdf->SetFillColor(46, 49, 146);  
-$pdf->Cell(190,8,''.utf8_decode(strtoupper($datos_direccion[0]['provincia'].' / '.$datos_direccion[0]['localidad'].' / '.$datos_direccion[0]['calle'])).'',0,1,'C','true');
+$pdf->Cell(190,8,''.utf8_decode( mb_strtoupper($datos_direccion[0]['provincia'].' / '.$datos_direccion[0]['localidad'].' / '.$datos_direccion[0]['calle'])).'',0,1,'C','true');
 $pdf->SetFont('Arial','',8); 
 $pdf->SetTextColor(0,0,0);  // Establece el color del texto (en este caso es blanco) 
 $pdf->SetFillColor(255, 255, 255); 
@@ -18,6 +18,6 @@ if($informacion_imagen[0]["imagen"]!=null)
 }
 else
 {
-	$pdf->Image('http://pagines.uab.cat/noken/sites/pagines.uab.cat.noken/files/foto.png' , 15 ,8, 25 , 35,'png', '');
+	$pdf->Image('http://neu.bodenbelaege-koch.de/wp-content/uploads/2017/02/mustermann-e1487862745115.jpeg' , 15 ,8, 25 , 35,'jpg', '');
 } 
 ?>
