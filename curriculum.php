@@ -326,7 +326,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row">
 												<label for="street" class="col-xs-12 col-md-2 text-center">Calle <span style="color: red;">*</span></label>
 												<div class="col-xs-12 col-md-10">
-													<input maxlength="45"> class="form-control" value="<?php echo $data["calle"]; ?>" id="street" type="text">
+													<input maxlength="45" class="form-control" value="<?php echo $data["calle"]; ?>" id="street" type="text">
 												</div>
 											</div>
 											<div class="form-group row">
@@ -1630,6 +1630,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 					$("#estadoCivil").val(estadoCivil);
 					$("#dni").val(dni);
 					$("#vic_provincias").val(provincia);
+					if (provincia != 0) {
+						$('#localidad_0').hide();
+					}
 					$("#localidad_"+provincia).show().val(localidad);
 
 					$('#birthday').datepicker({
@@ -2626,6 +2629,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 					else
 					{
+						var name =($("#name").val()).split(" ")[0],
+							lastName = ($("#lastName").val()).split(" ")[0];
+						var nombres = name + " " + lastName;
+
 						$.ajax({
 						  method: "POST",
 						  url: "ajax/curriculum.php",
@@ -2656,7 +2663,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						    else{
 						    	swal("EXITO!", "Datos guardados con éxito", "success");
 						    	 $("#experiencia").removeClass("disabled");
-						    	$("#experiencia").trigger("click"); 
+						    	$("#experiencia").trigger("click");
+						    	$("#name_user").text(nombres);
 							    }
 						  }); 
 					}

@@ -176,7 +176,7 @@
 						<li>
 							<a class="nav-link color-link sidebar-index-hover" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="row" style="margin-left: 0;margin-right: 0;">
-									<div class="col-md-9 col-xs-9 no-padding-left name-margin"><?php echo $_SESSION["ctc"]["name"]." ".$_SESSION["ctc"]["lastName"]; ?></div>
+									<div class="col-md-9 col-xs-9 no-padding-left name-margin"> <span id="name_user"><?php echo $_SESSION["ctc"]["name"]." ".$_SESSION["ctc"]["lastName"]; ?></span> </div>
 									<div style="" class="col-md-3 col-xs-3">
 										<div class="avatar box-32 avatar-float">
 											<img src="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa") ? '../': ''; ?>img/<?php echo $_SESSION["ctc"]["pic"]; ?>" alt="" style="height: 30px;">

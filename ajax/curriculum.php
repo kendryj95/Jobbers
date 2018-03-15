@@ -25,6 +25,9 @@
 
  	try {
  		$db->query($sql);
+ 		//Actualizar nombre y apellido en la variable de session.
+ 		$_SESSION["ctc"]["name"] = explode(" ",$_REQUEST["nombre"])[0];
+ 		$_SESSION["ctc"]["lastName"] = explode(" ",$_REQUEST["apellido"])[0];
  		echo "1";
  	} catch (Exception $e) {
  		echo 0;
