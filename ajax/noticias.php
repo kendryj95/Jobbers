@@ -96,7 +96,7 @@
 					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");				
 					if(move_uploaded_file($_FILES["file"]["tmp_name"], "../img/notices/$id.$ext")) {
 						$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id', '$id', 'notices', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id')");
-						$amigable = str_replace(" ", "-", $_REQUEST["titulo"]);
+						$amigable = str_replace(array("\"", "'", " "), array("", "", "-"), $_REQUEST["titulo"]);
 						$query = "INSERT INTO noticias (id_imagen, id_categoria, titulo, amigable, descripcion, fecha_creacion, fecha_actualizacion, veces_leido) VALUES ($id, '$_REQUEST[id_categoria]', '$_REQUEST[titulo]', '$amigable', '".addslashes($_REQUEST["descripcion"])."', '".date('Y-m-d H:i:s')."', '".date('Y-m-d H:i:s')."', 0)";
 						$db->query($query);
 						$db->commitTransaction();
