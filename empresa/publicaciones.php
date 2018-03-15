@@ -133,7 +133,6 @@
 						 
                        <div class="row" style="padding: 10px;padding-top: 0px;">
                        	<!--contenedor filtros-->
-                       		<span style=" padding-bottom: 3px; float: right;font-size: 12px;padding-right: 10px;cursor: pointer;"  onClick="limpiarFiltros()"><strong><img src="img/eraser.png"> Limpiar filtros</strong></span>
                        	<div class="col-xs-12" style="border: 1px dashed #dbdbdb;padding: 0px;margin-bottom: 15px;">
 
                        		<div class="col-sm-12" style="padding: 0px;"><p style="background-color: #3e70c9;padding: 4px;text-align: center;color: #fff;"><strong>Busqueda avanzada</strong>                       
@@ -249,7 +248,12 @@
 	                        		<option value="4">Finalistas</option>
 	                        		<option value="5">Contratados</option>									 
 	                        	</select>   	 	              		
-                        	</div>
+							</div>
+							<div class="col-md-12" style="margin-top: 10px;">
+								<button class="col-xs-12 col-md-4 col-md-offset-4 btn btn-outline btn-primary" style="margin-bottom: 10px;" id="filterButton" onclick="limpiarFiltros()"><i class="fa fa-filter fa-lg filters"></i> <i class="fa fa-eraser fa-lg clear-filters" style="display:none;">
+									</i> Limpiar Filtros
+								</button>
+							</div>
 
                        	 </div>
                        	</div>
@@ -261,7 +265,7 @@
 									<th>#</th>
 									<th style="padding: 0px;">Trabajador</th>
 									<th>Edad</th>
-									<th>aestudio</th>
+									<th>estudio</th>
 									<th>provincia</th>
 									<th>sexo</th>
 									<th>remuneracion</th>
@@ -599,7 +603,18 @@
 		<script type="text/javascript" src="../vendor/tinymce/tinymce.min.js"></script>
 		<script type="text/javascript" src="../vendor/tinymce/skins/custom/jquery.tinymce.min.js"></script>		
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw69wIi6XSBIldqmZdoMnihzi-9pWvjeo&libraries=places"></script>
+		<script>
+			$('#filterButton').hover(onHover, onLeave);
+			function onHover(){
+				$('.filters').hide();
+				$('.clear-filters').show();
+			}
 
+			function onLeave(){
+				$('.clear-filters').hide();
+				$('.filters').show();
+			}
+		</script>
 		<script>
 			var map = null;
 			var map2 = null;
