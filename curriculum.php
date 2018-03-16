@@ -457,7 +457,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											</div>
 											
 											<div class="form-group row">
-												<div class="col-xs-12 col-md-2 text-center"><label for="monthE" style="margin-top: 6px;">Mes de egreso <span style="color: red;">*</span></label></div>
+												<div id="label_monthE" class="col-xs-12 col-md-2 text-center"><label for="monthE" style="margin-top: 6px;">Mes de egreso <span style="color: red;">*</span></label></div>
 												<div class="col-xs-12 col-md-4">
 													<select class="custom-select form-control" style="width: 100%;" id="monthE">
 														<option selected value="1">Enero</option>
@@ -474,7 +474,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<option value="12">Diciembre</option>
 													</select>
 												</div>
-												<div class="col-xs-12 col-md-2 text-center"><label for="yearE" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
+												<div id="label_yearE" class="col-xs-12 col-md-2 text-center"><label for="yearE" style="margin-top: 6px;">Año <span style="color: red;">*</span></label></div>
 												<div class="col-xs-12 col-md-4">
 													<select class="custom-select form-control" style="width: 100%;" id="yearE">
 														<?php for ($i = intval(date('Y')); $i >= 1950; $i--): ?>
@@ -1411,9 +1411,17 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 						if ($this.is(':checked')) {
 							$('#monthE').prop('disabled', true);
 							$('#yearE').prop('disabled', true);
+							$('#monthE').hide();
+							$('#yearE').hide();
+							$('#label_yearE').hide();
+							$('#label_monthE').hide();
 						} else {
 							$('#monthE').prop('disabled', false);
 							$('#yearE').prop('disabled', false);
+							$('#monthE').show();
+							$('#yearE').show();
+							$('#label_yearE').show();
+							$('#label_monthE').show();
 						}
 					});
 

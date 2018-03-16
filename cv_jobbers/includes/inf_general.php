@@ -26,5 +26,5 @@ $pdf->Text(46,56+$linea,"".$datos_trabajadores[0]['fecha_n']."");
 $linea=$linea+4;
 $pdf->Text(20,56+$linea," ".utf8_decode(''.$datos_trabajadores[0]['edad'].' años')." ");  
 
-$pdf->Text(43,285,"".utf8_decode('Cree en tí, como creemos nosotros. Jobbers el mejor portal para encontrar y publicar empleos.').""); 
+$pdf->Text(43,285,"".utf8_decode('Cree en tí, como creemos nosotros. Jobbers el mejor portal para encontrar lo que buscas.').""); 
 ?>

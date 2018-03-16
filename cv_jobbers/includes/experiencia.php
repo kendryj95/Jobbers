@@ -51,7 +51,7 @@ if(count($datos_experiencias)>0)
 				if($contador==0)
 				{
 					$bandera_experiencia=1;
-					$pdf->Cell(190,5,''.utf8_decode("Detalle:".$datos_experiencia."").'',0,1,'0');
+					$pdf->Cell(190,5,''.utf8_decode("Descripción de tareas:".$datos_experiencia."").'',0,1,'0');
 					$datos_experiencia="";
 					$contador++;
 				}
@@ -71,7 +71,7 @@ if(count($datos_experiencias)>0)
 				if($contador==0)
 				{
 					$bandera_experiencia=1;
-					$pdf->Cell(190,5,''.utf8_decode("Detalle:".$datos_experiencia."").'',0,1,'0'); 
+					$pdf->Cell(190,5,''.utf8_decode("Descripción de tareas:".$datos_experiencia."").'',0,1,'0'); 
 					$contador++;
 				}
 				else
