@@ -2,7 +2,7 @@
 	session_start();
 	require_once('../classes/DatabasePDOInstance.function.php');
 	require_once('../classes/Email.class.php');
-	// require_once("../webservice/enviarEmail.php");
+	require_once("../webservice/enviarEmail.php");
 	require('../limpiarCadena.php');
 	$db = DatabasePDOInstance();
 	
@@ -130,21 +130,43 @@
             break;
 		case RESET_PASS:
 			$exist = $db->getRow("SELECT id, CONCAT(nombres,' ',apellidos) AS name FROM trabajadores WHERE correo_electronico='$_REQUEST[email]'");
+
 			if($exist) {
 				$controlador = (string) strtotime(date('Hms'));
 				$para = $_REQUEST["email"];
 
-				$mail = new Email;
-				$mail->userForgotPass($para, $exist['name'], $controlador);
-				
-				if($mail) {
-					$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
-					echo json_encode(array("status" => 1));
+				if ($_SERVER["SERVER_NAME"] == "jobbersargentina.com") {
+
+					do {
+
+						$mail = userForgotPass(2, $para, $exist['name'], $controlador);
+
+					} while (strlen($mail) > 1);
+
+					
+					if($mail == "1") {
+						$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
+						echo json_encode(array("status" => 1));
+					}
+					else {
+						$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
+						echo json_encode(array("status" => 3));
+					}
+					
+				} else {
+					$mail = new Email;
+					$mail->userForgotPass($para, $exist['name'], $controlador);
+					
+					if($mail) {
+						$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
+						echo json_encode(array("status" => 1));
+					}
+					else {
+						$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
+						echo json_encode(array("status" => 3));
+					}
 				}
-				else {
-					$db->query("UPDATE trabajadores SET codigo_recuperacion='$controlador' WHERE correo_electronico='$_REQUEST[email]'");
-					echo json_encode(array("status" => 3));
-				}
+
 			}
 			else {
 				echo json_encode(array("status" => 2));
@@ -305,15 +327,30 @@
 			break;
 		case SOPORTE_TECNICO:
 
-			$mail = new Email;
-			$mail->soporteTecnico($_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
+			if ($_SERVER["SERVER_NAME"] == "jobbersargentina.com") {
+				do {
 
+					$sendMail = soporteTecnico(3, $_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
 
-			if ($mail) {
-				echo json_encode(array("msg" => "OK"));
+				} while(strlen($sendMail) > 1);
+
+				if ($sendMail == "1") {
+					echo json_encode(array("msg" => "OK"));
+				} else {
+					echo json_encode(array("msg" => "ERROR"));
+				}
 			} else {
-				echo json_encode(array("msg" => "ERROR"));
+				$mail = new Email;
+				$mail->soporteTecnico($_REQUEST['email'], ucwords($_REQUEST['name']), $_REQUEST['subject'], $_REQUEST['subject2'], $_REQUEST['message']);
+
+
+				if ($mail) {
+					echo json_encode(array("msg" => "OK"));
+				} else {
+					echo json_encode(array("msg" => "ERROR"));
+				}
 			}
+
 			break;
 		case COOKIES:
 

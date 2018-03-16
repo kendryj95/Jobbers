@@ -29,7 +29,7 @@
 </binding>
 <service name="emails">
   <port name="emailsPort" binding="tns:emailsBinding">
-    <soap:address location="http://localhost/Jobbers/webservice/email.php"/>
+    <soap:address location="http://localhost/jobbers/webservice/email.php"/>
   </port>
 </service>
 </definitions>
