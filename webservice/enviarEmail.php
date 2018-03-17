@@ -17,7 +17,8 @@ function userForgotPass($accion, $destEmail,$destName, $code){
 	$result = $cliente->call("enviarMail", array("accion" => $accion, "params" => $params));
 
 	if ($cliente->fault) {
-	    return false;
+	    // return false;
+	    return $result;
 	}
 	else {
 	    $error = $cliente->getError();

@@ -3,7 +3,7 @@
 	require_once("../../classes/DatabasePDOInstance.function.php");
 	require_once("../../classes/Email.class.php");
 	require_once("../../classes/Chat.class.php");
-	// require_once("$_SERVER[DOCUMENT_ROOT]/webservice/enviarEmail.php"); 
+	require_once("$_SERVER[DOCUMENT_ROOT]/webservice/enviarEmail.php"); 
 
 	define('GET_MESSAGES', 1);
 	define('ADD_MESSAGE', 2);
@@ -62,9 +62,17 @@
                             "Return-path: administracion@jobbers.com\r\n" .
                             "MIME-Version: 1.0\n" .
                             "Content-type: text/html; charset=utf-8");*/
+
+                            if ($_SERVER["SERVER_NAME"] == "jobbersargentina.com") {
+                            	do {
+                            		$enviar = email_chat(1, $empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
+                            	} while(strlen($enviar) > 1);
+                            } else {
+                            	
+                            	$mail->email_chat($empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
+                            }
                             
 
-                            	$mail->email_chat($empresa["nombre"], $trab['correo_electronico'], $trab['nombre'], $msg);
 
 						} else {
 							$empresa = $db->getRow("
@@ -80,9 +88,15 @@
                             "Return-path: administracion@jobbers.com\r\n" .
                             "MIME-Version: 1.0\n" .
                             "Content-type: text/html; charset=utf-8");*/
-                           
 
-                           		$mail->email_chat($trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
+                            if ($_SERVER["SERVER_NAME"] == "jobbersargentina.com") {
+                            	do {
+                            		$enviar = email_chat(1, $trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
+                            	} while(strlen($enviar) > 1);
+                            } else {
+                            	$mail->email_chat($trab["nombre"], $empresa['correo_electronico'], $empresa['nombre'], $msg);
+                            }
+                           		
 						}
 
 						
