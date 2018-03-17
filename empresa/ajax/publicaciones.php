@@ -464,7 +464,7 @@
 					t2.id_trabajador, 
 					t3.uid AS uid_trabajador,  
 					t3.id_sexo,
-					t3.fecha_creacion,
+					t2.fecha_hora,
 					t3.provincia,
 					t4.id_area_estudio,
 					UPPER(CONCAT(t3.nombres,' ',t3.apellidos)) as nombre,
@@ -537,7 +537,7 @@
 							$fila['idiomas'],
 							$fila['actividad_empresa'],
 							$fila['marcador'],
-							$fila['fecha_creacion'],
+							$fila['fecha_hora'],
 							'<div class="acciones-publicacion text-center" data-target="' . $fila["id_trabajador"] . '"> 
 							<a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><img src="img/chat.png">
 							</a> 
