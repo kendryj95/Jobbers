@@ -1004,18 +1004,26 @@
 				<?php endif ?>
 			});
 
-
+ 
 				
 			</script>
+			<script></script>
 			<?php
 			if(isset($_SESSION["ctc"]) && $_SESSION["ctc"]["type"]!=1)
 			{
 				if(isset($_SESSION["ctc"]["id"]))
 			{
 				require_once('classes/DatabasePDOInstance.function.php');
-				$sql="SELECT TOTAL FROM trabajador_porcentaje WHERE id = ".$_SESSION["ctc"]["id"]."";
+				/*$sql="SELECT TOTAL FROM trabajador_porcentaje WHERE id = ".$_SESSION["ctc"]["id"]."";*/
+				
+				$sql="SELECT t1.*,if(sum(t2.remuneracion_pret) is null,'0','1') as info_extra FROM `tbl_porcentaje_de_carga` t1
+				LEFT JOIN trabajadores_infextra t2 ON t2.id_trabajador = t1.id
+				WHERE t1.id = ".$_SESSION["ctc"]["id"]."";
+
 				$info = $db->getRow($sql);
-	 			if($info["TOTAL"]<5)
+				$total_resultado=$info["idiomas"]+$info["estudios"]+$info["TOTAL"]+$info["imagen"]+$info["cuil"]+$info["info_extra"];
+				 
+	 			if($total_resultado<5)
 					{
 						echo '<script type="text/javascript">swal("Importante!", "Recuerde que al completar 100 %  su currículum y tenerlo siempre actualizado tendrá mayor posibilidad de ser contratado por las empresas!  ", "info");</script>'; 
 					}
