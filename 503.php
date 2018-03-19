@@ -1,3 +1,12 @@
+<?php 
+
+    if ($_SERVER["SERVER_NAME"] == "jobbersargentina.com") {
+        header("Location: http://jobbersargentina.net");
+        exit;
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
