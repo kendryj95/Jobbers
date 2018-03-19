@@ -100,7 +100,7 @@
 										</div>
 										<div class="il-item">
 											<!--<a class="text-black" href="curriculum.php?o=view">-->
-											<a class="text-black" href="vendor/tcpdf/pdf/curriculum.php?i=<?php echo $_SESSION["ctc"]["id"]; ?>" target="_blank">
+											<a class="text-black" href="cv_jobbers/cv.php?id=<?php echo $_SESSION["ctc"]["id"]; ?>" target="_blank">
 												Descargar curriculum
 											</a>
 										</div>

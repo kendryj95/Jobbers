@@ -324,7 +324,7 @@
 			 }
         </style>
  
-
+<?php include('google_analitycs.php');?>
     </head>
 
     <body class="large-sidebar fixed-sidebar fixed-header skin-5">

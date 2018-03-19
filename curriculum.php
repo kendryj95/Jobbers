@@ -144,7 +144,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 									<!-- Paso 1 - Datos de contacto -->
 									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Paso 1: Datos de contacto</h4>
-									<p class="text-muted text-center" style="margin-left: 25px;margin-right: 25px; text-align: justify;">Completa los pasos para llenar tu curriculum y podrás aparecer como candidato para la empresas. Recuerda que los campos marcados con (*) son obligatorios</p>
+									<p class="text-muted text-center" style="margin-left: 25px;margin-right: 25px; text-align: justify;">Completa los pasos para llenar tu currículum y podrás aparecer como candidato para la empresas. Recuerda que los campos marcados con (*) son obligatorios</p>
 									<div class="row">
 										<div class="col-md-8 col-md-offset-2">
 											<div class="form-group row">
@@ -1112,7 +1112,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								<!-- SECCION FOTO -->
 								<div class="tab-pane" id="tab7" role="tabpanel">
 									<br><br>
-									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Vista previa de mi curriculum</h4>
+									<h4 style="border-bottom: 1px solid #3e70c9;margin-left: 25px;margin-right: 25px;margin-bottom: 25px;padding-bottom: 5px;">Vista previa de mi currículum</h4>
 									<div class="row">
 										<div class="col-md-12">
 										<div class="col-sm-4 col-md-4 no-padding-lat">
@@ -1164,7 +1164,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="col-sm-8 col-md-8 no-padding-lat">
 											
 											<!-- <div class="tab-content"> -->
-												<div class="col-md-12 card-block active content-perfil" id="curriculum" role="tabpanel" style="padding-right: 0px; padding-left:0px; padding-top: 0px;">
+												<div class="col-md-12 card-block active content-perfil" id="currículum" role="tabpanel" style="padding-right: 0px; padding-left:0px; padding-top: 0px;">
 													<!-- <div class="row"> -->
 													<div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
 													<h4 class="title-cv" style="margin-top: 0px;">&nbsp; INFORMACION PERSONAL</h4>
@@ -2643,7 +2643,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 						$.ajax({
 						  method: "POST",
-						  url: "ajax/curriculum.php",
+						  url: "ajax/currículum.php",
 						  data: {nombre:$("#name").val(),
 								apellido:$("#lastName").val(),
 								correo:$("#email").val(),
