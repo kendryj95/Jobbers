@@ -567,17 +567,17 @@
 									<h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">Noticias Jobbers <i class="fa fa-newspaper-o"></i></h3>
 									<div class="list-group">
 										<a href="#" class="list-group-item sidebar-index-hover item-news">
-											<p class="title-news">Titulo de la noticia</p>
+											<p class="title-news" style="word-break: break-all; hyphens: auto">Titulo de la noticiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
 											<p><i class="fa fa-eye"></i> 1230 &nbsp&nbsp&nbsp<i class="fa fa-calendar"></i> 28/06/2018</p>
 											<i class="fa fa-plus-circle info-icon" style="display: none;"></i>
 										</a>
 										<a class="list-group-item sidebar-index-light-hover item-news">
-										<p class="title-news">Titulo de la noticia</p>
+										<p class="title-news" style="word-break: break-all">Titulo de la noticia</p>
 											<p><i class="fa fa-eye"></i> 1230 &nbsp&nbsp&nbsp<i class="fa fa-calendar"></i> 28/06/2018</p>
 											<i class="fa fa-plus-circle info-icon" style="display: none;"></i>
 										</a>
 										<a class="list-group-item sidebar-index-hover item-news">
-										<p class="title-news">Titulo de la noticia</p>
+										<p class="title-news" style="word-break: break-all">Titulo de la noticia</p>
 											<p><i class="fa fa-eye"></i> 1230 &nbsp&nbsp&nbsp<i class="fa fa-calendar"></i> 28/06/2018</p>
 											<i class="fa fa-plus-circle info-icon" style="display: none;"></i>
 										</a>
