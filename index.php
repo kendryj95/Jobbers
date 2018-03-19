@@ -503,7 +503,10 @@
 									 <?php include('select_localidades.php');?>
 								</div>
 
-								<button class="btn btn-primary form-control" onClick="limpiarfiltros(0)">Limpiar filtros</button>
+								<!-- <button class="btn btn-primary form-control" onClick="limpiarfiltros(0)">Limpiar filtros</button> -->
+								<button class="btn btn-outline btn-primary" id="filterButton" style="height: 38px;margin-bottom: 10px; margin-top: 10px; width: 100%" onclick="limpiarfiltros(0)"><i class="fa fa-filter fa-lg filters"></i> <i class="fa fa-eraser fa-lg clear-filters" style="display:none;">
+									</i> Limpiar Filtros
+								</button>
 							</div>
 						</div>
 
@@ -686,6 +689,7 @@
 </div>
 
 <?php require_once 'includes/libs-js.php';?>
+
 <script>
 	// Boton Alerta de Empleos
 	$('.btn-alert-empleos').hover(onHover, onLeave);
@@ -728,6 +732,18 @@
 			
         });
     });
+
+	// Boton de limpiar filtros
+			$('#filterButton').hover(onHover, onLeave);
+			function onHover(){
+				$('.filters').hide();
+				$('.clear-filters').show();
+			}
+
+			function onLeave(){
+				$('.clear-filters').hide();
+				$('.filters').show();
+			}
 </script>
 
 <script type="text/javascript">
