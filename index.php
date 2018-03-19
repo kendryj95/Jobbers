@@ -556,8 +556,34 @@
 									</a>
 								</div>
 							</div>
-						</div>						
-					</div> <!-- Pegar aqui el codigo cuando esté listo -->
+						</div>	
+											
+						<div class="row container-flotante" >
+							<div class="col-md-12">
+								<div id="caja-flotante" >
+									<h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">Noticias Jobbers <i class="fa fa-newspaper-o"></i></h3>
+									<div class="list-group">
+										<a href="#" class="list-group-item sidebar-index-hover item-news">
+											<p class="title-news">Titulo de la noticia</p>
+											<p><i class="fa fa-eye"></i> 1230 &nbsp&nbsp&nbsp<i class="fa fa-calendar"></i> 28/06/2018</p>
+											<i class="fa fa-plus-circle info-icon" style="display: none;"></i>
+										</a>
+										<a class="list-group-item sidebar-index-light-hover item-news">
+										<p class="title-news">Titulo de la noticia</p>
+											<p><i class="fa fa-eye"></i> 1230 &nbsp&nbsp&nbsp<i class="fa fa-calendar"></i> 28/06/2018</p>
+											<i class="fa fa-plus-circle info-icon" style="display: none;"></i>
+										</a>
+										<a class="list-group-item sidebar-index-hover item-news">
+										<p class="title-news">Titulo de la noticia</p>
+											<p><i class="fa fa-eye"></i> 1230 &nbsp&nbsp&nbsp<i class="fa fa-calendar"></i> 28/06/2018</p>
+											<i class="fa fa-plus-circle info-icon" style="display: none;"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>					
+					</div> 
+					<!-- Pegar aqui el codigo cuando esté listo -->
 <!--Modal alertas trabajos relacionados-->
 
 <div class="modal fade" id="modal_alerta">
@@ -661,6 +687,7 @@
 
 <?php require_once 'includes/libs-js.php';?>
 <script>
+	// Boton Alerta de Empleos
 	$('.btn-alert-empleos').hover(onHover, onLeave);
 	function onHover(){
 		$('.bell').hide();
@@ -675,6 +702,32 @@
 		$('.btn-alert-empleos').css('background-color','#f0ad4e');
 		$('.btn-alert-empleos').css('border','1px solid #f0ad4e');
 	}
+
+	// Noticias flotantes
+	$(function(){
+        $(window).scroll(function(){
+            if ($(window).scrollTop() > 950 && $(window).width() > 500)
+            {
+                $("#caja-flotante").fadeIn();
+				$('#caja-flotante').css('position','fixed');
+				$('#caja-flotante').css('top','100px');
+				$('#caja-flotante').css('width','22%');
+				
+            }
+			else if($(window).scrollTop() > 900 && $(window).width() <= 500){
+				$("#caja-flotante").fadeIn();
+				$('.container-flotante').css('position','relative');
+				// $('.container-flotante').css('width','100%');
+				$('.container-flotante').css('top','0px');
+			}
+            else
+            { 
+                $("#caja-flotante").fadeOut();
+            }
+
+			
+        });
+    });
 </script>
 
 <script type="text/javascript">
