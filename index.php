@@ -26,99 +26,8 @@
 
 	$db = DatabasePDOInstance();
 
-	$areas = $db->getAll("
-		SELECT
-		id,
-		nombre,
-		amigable
-		FROM
-		areas
-		ORDER BY
-		nombre
-	");
+	$top_noticias = $db->getAll("SELECT titulo, CONCAT(amigable,'-',id) AS url, veces_leido, fecha_actualizacion FROM noticias ORDER BY fecha_actualizacion DESC LIMIT 3");
 
- 
-	foreach ($areas as $i => $area) {
-		$areas[$i]["cantidad"] = $db->getOne("
-			SELECT
-			COUNT(*)
-			FROM
-			publicaciones_sectores AS psec
-			INNER JOIN areas_sectores AS asec ON psec.id_sector = asec.id
-			WHERE
-			asec.id_area = $area[id]
-			");
-	}
-
-/**
- *    filtro de disponibilidad para empleos
- */
-
-	$disps = $db->getAll("
-		SELECT
-		id,
-		nombre
-		FROM
-		disponibilidad
-	");
-
-	foreach ($disps as $key => $disp) {
-		$disps[$key]["cantidad"] = $db->getOne("
-			SELECT
-			COUNT(*)
-			FROM
-			publicaciones AS p
-			WHERE
-			p.disponibilidad = $disp[id] AND p.estatus=1
-		");
-	}
-
-	 
-	$momentos = array(
-		array(
-			"nombre"   => "Últimas 24 horas",
-			"amigable" => "ultimas-24-horas",
-			"cantidad" => 0,
-			"diff_s"   => 86400,
-			),
-		array(
-			"nombre"   => "Durante los últimos 3 días",
-			"amigable" => "durante-los-ultimos-3-dias",
-			"cantidad" => 0,
-			"diff_s"   => 259200,
-			),
-		array(
-			"nombre"   => "Durante la última semana",
-			"amigable" => "durante-la-ultima-semana",
-			"cantidad" => 0,
-			"diff_s"   => 604800,
-			),
-		array(
-			"nombre"   => "Durante las ultimas 2 semanas",
-			"amigable" => "durante-las-ultimas-2-semanas",
-			"cantidad" => 0,
-			"diff_s"   => 1209600,
-			),
-		array(
-			"nombre"   => "Hace un mes o menos",
-			"amigable" => "hace-un-mes-o-menos",
-			"cantidad" => 0,
-			"diff_s"   => 2592000,
-			),
-		);
-
-	foreach ($momentos as $i => $momento) {
-		$momentos[$i]["cantidad"] = $db->getOne("
-			SELECT
-			COUNT(*)
-			FROM (
-			SELECT  TIMESTAMPDIFF(SECOND,fecha_creacion,NOW()) AS s
-			FROM publicaciones AS p WHERE p.estatus=1 ) AS r 
-			WHERE
-			r.s <= $momento[diff_s]
-		");
-	}
- 
 
 	$publicaciones_especiales = $db->getAll("
 		SELECT empresas_publicaciones_especiales.*, CONCAT(imagenes.directorio,'/', imagenes.nombre,'.', imagenes.extension) AS imagen, empresas.nombre AS nombre_empresa FROM empresas_publicaciones_especiales INNER JOIN empresas ON empresas.id=empresas_publicaciones_especiales.id_empresa INNER JOIN empresas_planes ON empresas_planes.id_empresa=empresas.id LEFT JOIN imagenes ON imagenes.id=empresas_publicaciones_especiales.id_imagen WHERE empresas_planes.logo_home=3 ORDER BY RAND()
@@ -503,7 +412,10 @@
 									 <?php include('select_localidades.php');?>
 								</div>
 
-								<button class="btn btn-primary form-control" onClick="limpiarfiltros(0)">Limpiar filtros</button>
+								<!-- <button class="btn btn-primary form-control" onClick="limpiarfiltros(0)">Limpiar filtros</button> -->
+								<button class="btn btn-outline btn-primary" id="filterButton" style="height: 38px;margin-bottom: 10px; margin-top: 10px; width: 100%" onclick="limpiarfiltros(0)"><i class="fa fa-filter fa-lg filters"></i> <i class="fa fa-eraser fa-lg clear-filters" style="display:none;">
+									</i> Limpiar Filtros
+								</button>
 							</div>
 						</div>
 
@@ -556,8 +468,28 @@
 									</a>
 								</div>
 							</div>
-						</div>						
-					</div> <!-- Pegar aqui el codigo cuando esté listo -->
+						</div>	
+											
+						<div class="row container-flotante" >
+							<div class="col-md-12">
+								<div id="caja-flotante" >
+									<h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">TOP 3 Noticias Jobbers <i class="fa fa-newspaper-o"></i></h3>
+									<div class="list-group">
+										<?php foreach ($top_noticias as $index => $noticia): ?>
+											<?php $hover = ($index + 1) % 2 == 0 ? 'sidebar-index-light-hover' : 'sidebar-index-hover' ?>
+											<?php $titulo = strlen($noticia["titulo"]) > 35 ? substr($noticia["titulo"], 0, 35) . "..." : $noticia["titulo"] ?>
+										<a href="noticias.php?n=<?= $noticia["url"] ?>" class="list-group-item <?= $hover ?> item-news">
+											<p class="title-news" style="hyphens: auto" title="<?= str_replace("\"","",$noticia["titulo"]) ?>"><?= $titulo ?></p>
+											<p><i class="fa fa-eye"></i> <?= $noticia["veces_leido"] ?> &nbsp;&nbsp;&nbsp;<i class="fa fa-calendar"></i> <?= date("d/m/Y", strtotime($noticia["fecha_actualizacion"])) ?></p>
+											<i class="fa fa-plus-circle info-icon" style="display: none;"></i>
+										</a>
+										<?php endforeach ?>
+									</div>
+								</div>
+							</div>
+						</div>					
+					</div> 
+					<!-- Pegar aqui el codigo cuando esté listo -->
 <!--Modal alertas trabajos relacionados-->
 
 <div class="modal fade" id="modal_alerta">
@@ -660,7 +592,9 @@
 </div>
 
 <?php require_once 'includes/libs-js.php';?>
+
 <script>
+	// Boton Alerta de Empleos
 	$('.btn-alert-empleos').hover(onHover, onLeave);
 	function onHover(){
 		$('.bell').hide();
@@ -675,6 +609,44 @@
 		$('.btn-alert-empleos').css('background-color','#f0ad4e');
 		$('.btn-alert-empleos').css('border','1px solid #f0ad4e');
 	}
+
+	// Noticias flotantes
+	$(function(){
+        $(window).scroll(function(){
+            if ($(window).scrollTop() > 950 && $(window).width() > 500)
+            {
+                $("#caja-flotante").fadeIn();
+				$('#caja-flotante').css('position','fixed');
+				$('#caja-flotante').css('top','100px');
+				$('#caja-flotante').css('width','22%');
+				
+            }
+			else if($(window).scrollTop() > 900 && $(window).width() <= 500){
+				$("#caja-flotante").fadeIn();
+				$('.container-flotante').css('position','relative');
+				// $('.container-flotante').css('width','100%');
+				$('.container-flotante').css('top','0px');
+			}
+            else
+            { 
+                $("#caja-flotante").fadeOut();
+            }
+
+			
+        });
+    });
+
+	// Boton de limpiar filtros
+			$('#filterButton').hover(onHover, onLeave);
+			function onHover(){
+				$('.filters').hide();
+				$('.clear-filters').show();
+			}
+
+			function onLeave(){
+				$('.clear-filters').hide();
+				$('.filters').show();
+			}
 </script>
 
 <script type="text/javascript">
