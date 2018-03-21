@@ -23,7 +23,7 @@
 
 	$experiencias = "SELECT t1.trab_actualmt, t1.nombre_empresa,t1.tipo_puesto,t1.nombre_encargado,t1.tlf_encargado,t1.descripcion_tareas,t2.nombre as pais, concat('',t1.mes_ingreso,'-',t1.ano_ingreso,' a ',t1.mes_egreso,'-',t1.ano_egreso,'') as fecha FROM `trabajadores_experiencia_laboral` t1 
 left JOIN paises t2 ON t1.id_pais = t2.id 
-		WHERE t1.id_trabajador=".$id."";
+		WHERE t1.id_trabajador=".$id." order by t1.ano_ingreso desc";
 	$datos_experiencias=$db->getAll($experiencias);
 
 $estudios = "SELECT t1.id_trabajador,t1.nombre_institucion,t1.titulo,t4.nombre as area ,t1.id_estado_estudio,t2.nombre,t3.nombre as estudio FROM trabajadores_educacion t1

@@ -7,6 +7,7 @@ include('includes/sql.php');
 $pdf = new FPDF();
 $pdf->AddPage();
 
+include('includes/logo_jobbers.php');
 //Pie cabecera
 include('includes/header.php'); 
 validar($pdf);
@@ -27,16 +28,15 @@ include('includes/otros_conocimientos.php');
 validar($pdf);
 //Información extra
 include('includes/info_extra.php'); 
-//Logo jobbers
-include('includes/logo_jobbers.php');
+//Logo jobbers 
 //Pie depagina
 include('includes/fotter.php');
 
 function validar($pdf)
 {
-	if($pdf->GetY()>250)
+	if($pdf->GetY()>230)
 	{
-		$pdf->AddPage();
+		$pdf->AddPage(); 
 	}
 }
 $pdf->Output(); 

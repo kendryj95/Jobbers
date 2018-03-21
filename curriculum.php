@@ -2643,7 +2643,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 						$.ajax({
 						  method: "POST",
-						  url: "ajax/currículum.php",
+						  url: "ajax/curriculum.php",
 						  data: {nombre:$("#name").val(),
 								apellido:$("#lastName").val(),
 								correo:$("#email").val(),
