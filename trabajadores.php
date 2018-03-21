@@ -180,5 +180,18 @@ $( document ).ready(function() {
                     filtro(1,0,0);
                 }); 
 </script>
+<script>
+    // Boton de limpiar filtros
+	$('#filterButton').hover(onHover, onLeave);
+	function onHover(){
+		$('.filters').hide();
+		$('.clear-filters').show();
+	}
+
+	function onLeave(){
+		$('.clear-filters').hide();
+		$('.filters').show();
+	}
+</script>
 </body>
 </html>

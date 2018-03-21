@@ -13,36 +13,6 @@
         <?php require_once('includes/libs-css.php'); ?>
         <link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet">
 		
-		<style>
-			.pub {
-				min-height: 150px;
-				margin-bottom: 30px;
-				max-height: 490px;
-			}
-			.pub-f {
-				min-height: 110px;
-			}
-			.pub, .pub-f {
-				background-color: #f8f8f8 !important;
-				-webkit-transition: all 0.2s ease-in-out;
-				transition: all 0.2s ease-in-out;
-				cursor: pointer;
-			}			
-			.pub:hover, .pub-f:hover {
-				background-color: #3e70c9 !important;
-			}
-			.pub:hover *, .pub-f:hover * {
-				color: #fff !important;
-			}
-			.pub .avatar {
-				max-height: 140px;
-				height: 120px;
-				width: 100%;
-				max-width: 140px;
-				margin: 0 auto;
-			}
-		</style>
-
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script>
 		  (adsbygoogle = window.adsbygoogle || []).push({
