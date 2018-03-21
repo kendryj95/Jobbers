@@ -225,13 +225,15 @@
 				$id = $db->getOne("SELECT id_imagen FROM trabajadores WHERE id=".$_SESSION["ctc"]["id"]);
 				if($id) {
 					//$file = $db->getRow("SELECT directorio, extension FROM imagenes WHERE id=$id");
-					$file = $db->getOne("SELECT CONCAT(directorio, '/', 'id', '.', extension) FROM imagenes WHERE id= $id ");
+					$file = $db->getOne("SELECT CONCAT(directorio, '/', 'id', '.', extension) FROM imagenes WHERE id=$id");
 					if(file_exists("../img/$file")) {
 						unlink("../img/$file");
 					}
-					$db->query("UPDATE extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' FROM imagenes WHERE id=$id");
+					$db->query("UPDATE imagenes SET extension='$ext', fecha_actualizacion='".date('Y-m-d h:i:s')."' WHERE id=$id");
+
 				}
 				else {
+					echo "entro en el else";
 					$id = $db->getOne("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'db678638694' AND TABLE_NAME = 'imagenes'");
 					$db->query("INSERT INTO imagenes (id, titulo, directorio, extension, fecha_creacion, fecha_actualizacion, nombre) VALUES ('$id', '$id', 'profile', '$ext', '".date('Y-m-d h:i:s')."', '".date('Y-m-d h:i:s')."', '$id')");
 					$db->query("UPDATE trabajadores SET id_imagen='$id' WHERE id=".$_SESSION["ctc"]["id"]);
