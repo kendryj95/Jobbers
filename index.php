@@ -808,7 +808,7 @@
 						if(datos[key]["facebook"]!="" && datos[key]["instagram"]!=null){facebook='<a href="'+datos[key]["facebook"]+'"><i class="fa fa-facebook fa-stack-1x social-fb"></i></a>';}
 						if(datos[key]["twitter"]!="" && datos[key]["instagram"]!=null){twitter='<a style="margin-left: 5px;" href="'+datos[key]["twitter"]+'"><i class="fa fa-twitter fa-stack-1x social-tw"></i></a>';}
 						if(datos[key]["instagram"]!="" && datos[key]["instagram"]!=null){instagram='<a style="margin-left: 5px;" href="'+datos[key]["instagram"]+'"><i class="fa fa-instagram fa-stack-1x social-ig"></i></a>' ;}
-						if(datos[key]["linkedin"]!="" && datos[key]["linkedin"]!=null){link='<a style="margin-left: 5px;" href="'+datos[key]["link"]+'"><i class="fa fa-linkedin fa-stack-1x social-in"></i></a>';}
+						if(datos[key]["linkedin"]!="" && datos[key]["linkedin"]!=null){link='<a style="margin-left: 5px;" href="'+datos[key]["linkedin"]+'"><i class="fa fa-linkedin fa-stack-1x social-in"></i></a>';}
 						if(datos[key]["linkedin"] == null && datos[key]["instagram"]=="" && datos[key]["facebook"]=="" && datos[key]["twitter"]==""){socialNone = "margin-bottom: 10px;";}
 
 						// Tamaño imagenes de empresas
