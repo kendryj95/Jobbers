@@ -2090,7 +2090,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								data: 'op=1&opt=' + op + str + e,
 								dataType: 'json',
 								success: function(data) {
-									$(elemento).removeClass('disabled').text('Guardar');
+									$(elemento).removeClass('disabled').html('Guardar <i class="fa fa-floppy-o"></i>');
 									$('.alert.alert-danger').hide();
 									ele.attr("data-i");
 									if (ele.attr("data-target") != 6) {
@@ -2153,14 +2153,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											var text = '';
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2"><i class="ti-close"></i></a></div></td>');
+													currentParent.html('<td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td>');
 													text += '<p style="margin-left: 50px;"> <strong>Empresa: </strong> '+d.nombre_empresa+'<br> <strong>País: </strong> '+d.nombre_pais+'<br> <strong>Actividad: </strong> '+d.actividad_empresa+'<br> <strong>Tipo puesto: </strong> '+d.tipo_puesto+'<br> </p>';
 												});
 												$("#experiencias").append(text);
 											}
 											else {
 												data.data.forEach(function(d) {
-													$("#t2").append('<tr><td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2"><i class="ti-close"></i></a></div></td></tr>');
+													$("#t2").append('<tr><td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td></tr>');
 													text += '<p style="margin-left: 50px;"> <strong>Empresa: </strong> '+d.nombre_empresa+'<br> <strong>País: </strong> '+d.nombre_pais+'<br> <strong>Actividad: </strong> '+d.actividad_empresa+'<br> <strong>Tipo puesto: </strong> '+d.tipo_puesto+'<br> </p>';
 												});
 												$("#experiencias").append(text);
@@ -2236,13 +2236,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											var text = '';
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<tr><td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3"><i class="ti-close"></i></a></div></td></tr>');
+													currentParent.html('<td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_pais+'<br> <strong>Nivel Oral: </strong> '+d.nivel+'<br> <strong>Nivel escrito: </strong> '+d.estado_estudio+'<br> </p>';
 												});
 												$("#idiomas").append(text);
 											}else {
 												data.data.forEach(function(d) {
-													$("#t3").append('<tr><td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3"><i class="ti-close"></i></a></div></td></tr>');
+													$("#t3").append('<tr><td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td></tr>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_pais+'<br> <strong>Nivel Oral: </strong> '+d.nivel+'<br> <strong>Nivel escrito: </strong> '+d.estado_estudio+'<br> </p>';
 												});
 												$("#idiomas").html(text);
@@ -2315,13 +2315,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											$("#contentID").css("display", "block");
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<td>'+d.nombre_idioma+'</td><td>'+d.nivel_oral+'</td><td>'+d.nivel_escrito+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyI" href="javascript:void(0)" data-target="'+d.id+'" data-option="4"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="4"><i class="ti-close"></i></a></div></td>');
+													currentParent.html('<td>'+d.nombre_idioma+'</td><td>'+d.nivel_oral+'</td><td>'+d.nivel_escrito+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyI" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_idioma+'<br> <strong>Nivel Oral: </strong> '+d.nivel_oral+'<br> <strong>Nivel escrito: </strong> '+d.nivel_escrito+'<br> </p>';
 												});
 											}
 											else {
 												data.data.forEach(function(d) {
-													$("#t4").append('<tr><td>'+d.nombre_idioma+'</td><td>'+d.nivel_oral+'</td><td>'+d.nivel_escrito+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyI" href="javascript:void(0)" data-target="'+d.id+'" data-option="4"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="4"><i class="ti-close"></i></a></div></td></tr>');
+													$("#t4").append('<tr><td>'+d.nombre_idioma+'</td><td>'+d.nivel_oral+'</td><td>'+d.nivel_escrito+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyI" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td></tr>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_idioma+'<br> <strong>Nivel Oral: </strong> '+d.nivel_oral+'<br> <strong>Nivel escrito: </strong> '+d.nivel_escrito+'<br> </p>';
 												});
 											}
@@ -2385,7 +2385,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											$("#nameC").val("");
 											$("#descriptionC").val("");
 											
-											console.log('Resultados ======>', Object.keys(data.data).length, 'JSON =====>', data.data);
 											if (Object.keys(data.data).length > 0) {
 												$("#contentOC").css("display", "block");
 												$("#containerSinOtrCon").remove();
@@ -2393,12 +2392,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5"><i class="ti-close"></i></a></div></td>');
+													currentParent.html('<td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td>');
 												});
 											}
 											else {
 												data.data.forEach(function(d) {
-													$("#t5").append('<tr><td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-grey m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5"><i class="ti-pencil-alt"></i></a><a class="text-grey deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5"><i class="ti-close"></i></a></div></td></tr>');
+													$("#t5").append('<tr><td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td></tr>');
 												});
 											}
 
