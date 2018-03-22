@@ -224,9 +224,9 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 														</div>
 													</div>
 												</div>
-												<div class="p-content">
+												<div class="p-content" style="word-break: break-all">
 													<h5 style="margin-top: 0px;"><a class="text-black" href="#"><?php echo $noticia["titulo"]; ?></a></h5>
-													<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
+													<p class="m-b-0" style="word-break: break-all"><?php echo $noticia["descripcion"]; ?></p>
 												</div>
 											</div>
 										</div>
