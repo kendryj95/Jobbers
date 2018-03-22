@@ -347,7 +347,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 									<div class="row container" style="margin-top: 10px">
 										<div class="col-xs-12 col-sm-2 col-sm-offset-5">
-											<button onClick="guardar_datos()" class="btn btn-primary" style="width: 100%">Guardar&nbsp <i class="fa fa-floppy-o"></i></button>
+											<button onClick="guardar_datos()" class="btn btn-primary" style="width: 100%; font-size: 16px;">Guardar&nbsp <i class="fa fa-floppy-o"></i></button>
 										</div>
 									</div>
 
@@ -1300,11 +1300,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<!-- </div> -->
 										</div>
 									</div>
-									
-									<div class="row" style="margin-top: 20px;">
-										<div class="col-md-4" style="text-align: left;"><a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="margin-left: 25px;"><i class="ti-angle-left"></i> Anterior</a></div>
-										<div class="col-md-4" style="text-align: center;"></div>
-										<div class="col-md-4" style="text-align: right;"></div>
+								</div>
+								<div class="row container" style="margin-top: 20px;">
+									<div class="col-xs-12 col-sm-2 col-sm-offset-5">
+										<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="width: 100%; font-size: 16px;"><i class="fa fa-chevron-circle-left"></i> Volver</a>
 									</div>
 								</div>
 							</div>

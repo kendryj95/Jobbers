@@ -10010,6 +10010,11 @@ a.text-grey:hover .underline {
     background-color: #2E3192 !important;
 }
 
+.btn-cookies:hover {
+    border-color: #00AEEF !important;
+    background-color: #00AEEF !important;
+}
+
 .overlay-pub {
     position: absolute;
     width: 100%;

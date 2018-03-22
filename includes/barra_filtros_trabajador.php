@@ -5,8 +5,6 @@
 
     </div>
     <br/>
-    <a href="empresa/publicaciones.php"><img src="empresa/img/back.png"> Volver</a>
-    <br/> <br/>
      <label><strong>Experiencia laboral</strong></label></br>
         <select  onChange="filtro(1,0,0)" id="experiecia_laboral" class="form-control  control_filtro">
             <option value="">Seleccionar</option> 
@@ -128,6 +126,7 @@
         </select>    
     <button class="btn btn-outline btn-primary" id="filterButton" style="height: 38px;margin-bottom: 10px; margin-top: 10px; width: 100%" onclick="limpiar()"><i class="fa fa-filter fa-lg filters"></i> <i class="fa fa-eraser fa-lg clear-filters" style="display:none;">
     	</i> Limpiar Filtros
-	</button>
+    </button>
+    <a class="btn btn-outline btn-primary" style="height: 38px;margin-bottom: 10px; margin-top: 10px; width: 100%" href="empresa/publicaciones.php"><i class="fa fa-reply"></i> Volver</a>
    
 </div>

@@ -236,7 +236,7 @@
 <?php include('google_analitycs.php');?>
     </head>
 
-    <body class="large-sidebar fixed-sidebar fixed-header skin-5">
+    <body class="large-sidebar fixed-sidebar fixed-header">
     	<div class="wrapper">
 
 			<!-- Preloader -->
@@ -595,6 +595,7 @@
 
 <script>
 	// Boton Alerta de Empleos
+	$(function(){
 	$('.btn-alert-empleos').hover(onHover, onLeave);
 	function onHover(){
 		$('.bell').hide();
@@ -611,7 +612,7 @@
 	}
 
 	// Noticias flotantes
-	$(function(){
+	
         $(window).scroll(function(){
             if ($(window).scrollTop() > 950 && $(window).width() > 500)
             {

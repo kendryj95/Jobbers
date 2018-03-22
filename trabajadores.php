@@ -141,7 +141,7 @@ function filtro(par,v1,v2)
                 
             
             }); 
-           $( "#contenedor_publicaciones" ).html(info+'<div class="col-xs-12 text-center " style="padding-top:20px; padding-bottom: 20px;"><button class="btn btn-xs btn-primary" onClick="filtro(0,'+(v1-10)+',0)"><i class="fa fa-arrow-left"></i> Anterior</button><button class="btn btn-xs btn-primary" onClick="filtro(0,'+(v1+10)+',0)">Siguiente <i class="fa fa-arrow-right"></i></button></div> ');
+           $( "#contenedor_publicaciones" ).html(info+'<div class="col-xs-12 text-center " style="padding-top:20px; padding-bottom: 20px;"><button class="btn btn-primary btn-cookies" style="font-size: 16px" onClick="filtro(0,'+(v1-10)+',0)"><i class="fa fa-arrow-circle-left"></i> Anterior</button><button class="btn btn-primary btn-cookies" style="font-size: 16px; margin-left: 10px;" onClick="filtro(0,'+(v1+10)+',0)">Siguiente <i class="fa fa-arrow-circle-right"></i></button></div> ');
 
           });
     } 

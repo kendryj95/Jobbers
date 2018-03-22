@@ -51,7 +51,7 @@
 			</div>
 
 			<!-- Sidebar -->
-			<!-- <?php require_once('includes/sidebar.php'); ?> -->
+			<?php// require_once('includes/sidebar.php'); ?>
 
 			<!-- Sidebar second -->
 			<?php require_once('includes/sidebar-second.php'); ?>
@@ -59,7 +59,7 @@
 			<!-- Header -->
 			<?php require_once('includes/header.php'); ?>
 
-			<div class="container bg-white">
+			<div class="container bg-white" style="margin-top: 70px;">
 				<!-- Content -->
 				<div class="content-area p-y-1">
 					<div class="container-fluid">
@@ -71,54 +71,27 @@
 						<div class="card card-block">
 							<div class="row" id="optionsList">
 								<div class="col-md-4" style="margin-bottom:20px;">
-									<h5>Perfil</h5>
-									<div class="items-list">
-										<div class="il-item">
-											<a class="text-black" href="trabajador-detalle.php?t=<?php echo $_SESSION["ctc"]["name"]."-".$_SESSION["ctc"]["lastName"]."-".$_SESSION["ctc"]["id"]; ?>">
-												Ir a mi perfil
-											</a>
-										</div>
-										<div class="il-item">
-											<a class="text-black" id="addPic" href="javascript:void(0)">
-												Foto
-											</a>
-										</div>
-										<div class="il-item">
-											<a class="text-black" id="addPass" href="javascript:void(0)">
-												Contraseña
-											</a>
-										</div>
+									<h4>Perfil</h4>
+									<div class="list-group" style="font-size: 18px;">
+										<a href="trabajador-detalle.php?t=<?php echo $_SESSION["ctc"]["name"]."-".$_SESSION["ctc"]["lastName"]."-".$_SESSION["ctc"]["id"]; ?>" class="list-group-item sidebar-index-hover"><i class="fa fa-user-circle-o"></i> &nbsp Ir a mi Perfil</a>
+										<a href="javascript:void(0)" id="addPic" class="list-group-item sidebar-index-hover"><i class="fa fa-camera"></i> &nbsp Foto</a>
+										<a href="javascript:void(0)" id="addPass" class="list-group-item sidebar-index-hover"><i class="fa fa-key"></i> &nbsp Contraseña</a>
 									</div>
 								</div>
+
 								<div class="col-md-4" style="margin-bottom:20px;">
-									<h5>Curriculum</h5>
-									<div class="items-list">
-										<div class="il-item">
-											<a class="text-black" href="curriculum.php">
-												Modificar
-											</a>
-										</div>
-										<div class="il-item">
-											<!--<a class="text-black" href="curriculum.php?o=view">-->
-											<a class="text-black" href="cv_jobbers/cv.php?id=<?php echo $_SESSION["ctc"]["id"]; ?>" target="_blank">
-												Descargar curriculum
-											</a>
-										</div>
-										<div class="il-item">
-											<a class="text-black" href="javascript:void(0)" id="privacidad">
-												Privacidad
-											</a>
-										</div>
+									<h4>Curriculum</h4>
+									<div class="list-group" style="font-size: 18px;">
+										<a href="curriculum.php" class="list-group-item sidebar-index-hover"><i class="fa fa-wrench"></i> &nbsp Modificar</a>
+										<a href="cv_jobbers/cv.php?id=<?php echo $_SESSION["ctc"]["id"]; ?>" class="list-group-item sidebar-index-hover" target="_blank"><i class="fa fa-download"></i> &nbsp Descargar</a>
+										<a href="javascript:void(0)" id="privacidad" class="list-group-item sidebar-index-hover"><i class="fa fa-user-secret"></i> &nbsp Privacidad</a>
 									</div>
+	
 								</div>
 								<div class="col-md-4" style="margin-bottom:20px;">
-									<h5>Cuenta</h5>
-									<div class="items-list">
-										<div class="il-item">
-											<a class="text-black" href="javascript:void(0)" id="deleteAccount">
-												Eliminar
-											</a>
-										</div>
+									<h4>Cuenta</h4>
+									<div class="list-group" style="font-size: 18px;">
+										<a href="javascript:void(0)" id="deleteAccount" class="list-group-item sidebar-index-hover"><i class="fa fa-trash"></i> &nbsp Eliminar</a>
 									</div>
 								</div>
 							</div>
