@@ -10538,13 +10538,13 @@ a.list-group-item:hover {
 ================================================================= */
 
 .news-img {
-    float: left;
+    float: right;
     margin: 20px 35px 20px 17px;
 }
 
 @media (max-width: 768px) {
     .news-img {
-        margin-left: 0px;
+        margin-right: 0px;
     }
 }
 
@@ -10830,6 +10830,25 @@ a.list-group-item:hover {
 
 .share-btn.email {
     background: #444444;
+}
+
+
+/* Seccion Mi cuenta */
+
+.dropify-wrapper {
+    border: 2px solid #00AEEF;
+}
+
+.dropify-wrapper:hover {
+    background-size: 30px 30px;
+    background-image: -webkit-linear-gradient(135deg, rgba(0, 174, 239, 0.3) 25%, transparent 25%, transparent 50%, rgba(0, 174, 239, 0.3) 50%, rgba(0, 174, 239, 0.3) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(-45deg, rgba(0, 174, 239, 0.3) 25%, transparent 25%, transparent 50%, rgba(0, 174, 239, 0.3) 50%, rgba(0, 174, 239, 0.3) 75%, transparent 75%, transparent);
+    -webkit-animation: stripes 2s linear infinite;
+    animation: stripes 2s linear infinite;
+}
+
+.dropify-wrapper .dropify-message span.file-icon {
+    color: #00AEEF;
 }
 
 

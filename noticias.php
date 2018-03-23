@@ -124,7 +124,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 
 		<!-- Header -->
 		<?php require_once('includes/header.php'); ?>
-		<div class="site-content bg-white" style="margin-left: 0px;">
+		<div class="site-content bg-white" style="margin-left: 0px;padding-top: 80px;">
 			<!-- Content -->
 			<div class="content-area p-y-1">
 				<div class="container-fluid">
@@ -224,9 +224,9 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 														</div>
 													</div>
 												</div>
-												<div class="p-content" style="word-break: break-all">
+												<div class="p-content text-justify" style="word-wrap: break-word">
 													<h5 style="margin-top: 0px;"><a class="text-black" href="#"><?php echo $noticia["titulo"]; ?></a></h5>
-													<p class="m-b-0" style="word-break: break-all"><?php echo $noticia["descripcion"]; ?></p>
+													<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
 												</div>
 											</div>
 										</div>
@@ -237,9 +237,8 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										<div>
 										<?php foreach($noticias as $n): ?>
 											<div class="col-md-4">
-												<div class="box bg-white post post-3">
+												<div class="box bg-white post post-3" style="border: 1px solid #333695;">
 													<div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);">
-														
 													</div>
 													<div class="p-content" style="min-height: 220px;">
 														<a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><h5><?php echo $n["titulo"]; ?></h5></a>
@@ -247,11 +246,11 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 															<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr(strip_tags($n["descripcion"]), 0, 100)."...") : strip_tags($n["descripcion"]); ?></p> <!-- strip_tags: elimina las etiquetas html de un string -->
 														</div>
 														<p class="small text-uppercase text-muted"><?php echo date('d/m/Y', strtotime($n["fecha_actualizacion"])); ?></p>
-														<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>" class="btn btn-success label-right">Leer más <span class="btn-label"><i class="ti-angle-right"></i></span></a>
+														<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>" class="btn btn-success btn-cookies label-right">Leer más <span class="btn-label"><i class="ti-angle-right"></i></span></a>
 													</div>
 													<div class="p-info clearfix">
 														<div class="pull-xs-right">
-															<a class="text-success" href="#"><i class=" ti-book"></i><?php echo $n["veces_leido"]; ?></a>
+															<a class="color-link" style="font-weight: bolder;" href="#"><i class=" ti-book"></i><?php echo $n["veces_leido"]; ?></a>
 														</div>
 													</div>
 												</div>
@@ -270,12 +269,11 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 						</div>
 						<div class="col-md-3">
 									<div class="card">
-										<div class="card-header text-uppercase"><b>NOTICIAS POPULARES</b></div>
-										<div class="items-list">
+										<div class="card-header text-uppercase" style="margin-bottom: 10px;"><h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">Noticias Populares <i class="fa fa-newspaper-o"></i></h3></div>
+										<div class="list-group">
 											<?php if($noticiasPopulares): ?>
 												<?php foreach($noticiasPopulares as $n): ?>
-													<div class="il-item">
-														<a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>">
+														<a class="list-group-item sidebar-index-hover item-news" style="text-decoration: none" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>">
 															<div class="media">
 																<div class="media-left">
 																	<div class="avatar box-48">
@@ -283,41 +281,35 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 																	</div>
 																</div>
 																<div class="media-body">
-																	<h6 class="media-heading"><?php echo strlen($n["titulo"]) > 17 ? (substr($n["titulo"], 0, 14)."...") : $n["titulo"]; ?></h6>
-																	<span class="text-muted"><?php echo strlen($n["descripcion"]) > 20 ? (substr($n["descripcion"], 0, 18)."...") : $n["descripcion"]; ?></span>
+																	<h5 class="media-heading"><?php echo strlen($n["titulo"]) > 17 ? (substr($n["titulo"], 0, 14)."...") : $n["titulo"]; ?></h5>
+																	<span class="text-muted sidebar-index-hover"><?php echo strlen($n["descripcion"]) > 20 ? (substr($n["descripcion"], 0, 18)."...") : $n["descripcion"]; ?></span>
 																</div>
 															</div>
-															<div class="il-icon"><i class="fa fa-angle-right"></i></div>
-														</a>
-													</div>
+															<i class="fa fa-plus-circle info-icon" style="display: none; bottom: 20px;"></i>
+														</a>		
 												<?php endforeach ?>
 											<?php endif ?>
 										</div>
 										<div class="card-block">
-											<a href="noticias.php?n=populares" class="btn btn-primary btn-block">Ver más</a>
+											<a href="noticias.php?n=populares" class="btn btn-primary btn-cookies btn-block">Ver más <i class="fa fa-plus"></i></a>
 										</div>
 									</div>
 									<div class="card">
-										<div class="card-header text-uppercase" style="margin-top: 35px;"><b>CATEGORÍAS</b></div>
-										<div class="items-list">
+										<div class="card-header text-uppercase" style="margin-top: 35px; margin-bottom:10px;"><h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">Categorias <i class="fa fa-th-list"></i></h3></div>
+										<div class="list-group">
 											<?php if($categorias): ?>
 												<?php foreach($categorias as $c): ?>
-													<div class="il-item">
-														<a class="text-black" href="categorias.php?c=<?php echo "$c[nombre]-$c[id]"; ?>">
-															<div class="media">
-																<div class="media-body">
-																	<h6 class="media-heading"><?php echo $c["nombre"]; ?></h6>
-																</div>
-															</div>
-															<div class="il-icon" style="top: 10px;"><i class="fa fa-angle-right"></i></div>
+													<!-- <div class="sidebar-index-hover"> -->
+														<a class="list-group-item  sidebar-index-hover item-news" href="categorias.php?c=<?php echo "$c[nombre]-$c[id]"; ?>">
+															<h6 style="font-size: 17px;"><?php echo $c["nombre"]; ?></h6>
 														</a>
-													</div>
+													<!-- </div> -->
 								
 												<?php endforeach ?>
 											<?php endif ?>
 										</div>
 										<div class="card-block">
-											<a class="btn btn-primary btn-block" href="categorias.php">Ver más</a>
+											<a class="btn btn-primary btn-cookies btn-block" href="categorias.php">Ver más <i class="fa fa-plus"></i></a>
 										</div>
 									</div>
 								</div>

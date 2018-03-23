@@ -478,7 +478,7 @@
 										<?php foreach ($top_noticias as $index => $noticia): ?>
 											<?php $hover = ($index + 1) % 2 == 0 ? 'sidebar-index-light-hover' : 'sidebar-index-hover' ?>
 											<?php $titulo = strlen($noticia["titulo"]) > 35 ? substr($noticia["titulo"], 0, 35) . "..." : $noticia["titulo"] ?>
-										<a href="noticias.php?n=<?= $noticia["url"] ?>" class="list-group-item <?= $hover ?> item-news">
+											<a href="noticias.php?n=<?= $noticia["url"] ?>" class="list-group-item <?= $hover ?> item-news">
 											<p class="title-news" style="word-break: break-all" title="<?= str_replace("\"","",$noticia["titulo"]) ?>"><?= $titulo ?></p>
 											<p><i class="fa fa-eye"></i> <?= $noticia["veces_leido"] ?> &nbsp;&nbsp;&nbsp;<i class="fa fa-calendar"></i> <?= date("d/m/Y", strtotime($noticia["fecha_actualizacion"])) ?></p>
 											<i class="fa fa-plus-circle info-icon" style="display: none;"></i>

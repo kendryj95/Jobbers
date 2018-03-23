@@ -117,12 +117,11 @@
 								</div>
 							</div>
 							<div class="row" style="margin-top: 20px; display: none;" id="pic">
-								<div class="col-md-2 col-xs-12" style="text-align: center; margin-bottom: 10px;">
+								<div class="col-md-2 col-xs-12 col-md-offset-3" style="text-align: center; margin-bottom: 10px;">
 									<h4>Foto de perfil</h4>
-									<img src="img/<?php echo $_SESSION["ctc"]["pic"]; ?>" alt="" class="img-circle m-r-1" width="100" height="100">
+									<img src="img/<?php echo $_SESSION["ctc"]["pic"]; ?>" alt="" class="img-circle m-r-1" width="100" height="120">
 								</div>
 								<div class="col-md-4 col-xs-12">
-									<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
 									<form method="POST" id="upload">
 										<input class="dropify" name="file" id="file" type="file" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png">
 									</form>
@@ -130,7 +129,10 @@
 									<div class="alert alert-danger" id="prompt" style="display: none">
 										<p><b>Sugerencia!</b> Te invitamos a comprimir tu imagen de perfil <a href="http://compressjpeg.com/es/" target="_blank" style="color: black">aquí</a></p>
 									</div>
-									<a href="javascript:void(0)" style="margin-top: 5px;" id="savePic" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
+								</div>
+								<div class="col-md-4 col-md-offset-4 text-center" style="margin-top: 20px; margin-bottom: 20px;">
+									<a href="javascript:void(0)" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light back" style="font-size: 16px; margin-right: 20px;"><i class="fa fa-chevron-circle-left"></i> &nbsp Regresar</a>
+									<a href="javascript:void(0)" id="savePic" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light" style="font-size: 16px;">Guardar &nbsp <i class="fa fa-floppy-o"></i></a>
 								</div>
 							</div>
 							<div class="row" style="margin-top: 20px; display: none;" id="pass">
