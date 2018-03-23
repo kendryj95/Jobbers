@@ -156,7 +156,7 @@
 															<div class="col-md-7">
 																<div class="pli-content">
 																	<h5><a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><?php echo $n["titulo"]; ?></a></h5>
-																	<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr(0, 100, $n["descripcion"])."...") : $n["descripcion"]; ?></p>
+																	<p class="m-b-0-5"><?php echo strlen($n["descripcion"]) > 100 ? (substr( $n["descripcion"],0, 100)."...") : $n["descripcion"]; ?></p>
 																	<div class="clearfix">
 																		<div class="pull-xs-left">
 																			<a class="text-grey" href="#"><i class=" ti-book"></i><?php echo $n["veces_leido"]; ?></a>
