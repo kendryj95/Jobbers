@@ -3,7 +3,7 @@
 	require_once("../../classes/DatabasePDOInstance.function.php");
 	require_once("../../classes/Email.class.php");
 	require_once("../../classes/Chat.class.php");
-	require_once("$_SERVER[DOCUMENT_ROOT]/webservice/enviarEmail.php"); 
+	require_once("../../webservice/enviarEmail.php"); 
 
 	define('GET_MESSAGES', 1);
 	define('ADD_MESSAGE', 2);

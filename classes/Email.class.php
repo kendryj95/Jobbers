@@ -1,7 +1,14 @@
 <?php
 
-require_once("../vendor/phpmailer/class.phpmailer.php");
-require_once("../vendor/phpmailer/class.smtp.php");
+$dir = '';
+if ($_SERVER["SERVER_NAME"] == "localhost") {
+	$dir = $_SERVER["DOCUMENT_ROOT"] . "/jobbers";
+} else {
+	$dir = $_SERVER["DOCUMENT_ROOT"];
+}
+
+require_once("$dir/vendor/phpmailer/class.phpmailer.php");
+require_once("$dir/vendor/phpmailer/class.smtp.php");
 
 Class Email {
 
@@ -46,17 +53,17 @@ Class Email {
 		        <tr>
 		            <td style="background-color: #fff; text-align: left; padding: 0">
 		                <a href="#" style="text-decoration: none;">
-		                    <img width="30%" style="display:inline; margin: 20px 3% 0px 3%" src="https://jobbersargentina.com/img/logo.png">
+		                    <img width="30%" style="display:inline; margin: 20px 3% 0px 3%" src="https://jobbersargentina.net/img/logo.png">
 		                </a>
 		                <div style="display: inline-block;margin:32px 0; float: right">
 		                    <a href="https://www.facebook.com/jobbersargentina" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/fb.png" alt="FB">
+		                        <img src="https://jobbersargentina.net/img/email/fb.png" alt="FB">
 		                    </a>
 		                    <a href="https://www.instagram.com/jobbersargentina/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/brand2.png" alt="IG">
+		                        <img src="https://jobbersargentina.net/img/email/brand2.png" alt="IG">
 		                    </a>
-		                    <a href="https://jobbersargentina.com/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/sphere.png" alt="WEB">
+		                    <a href="https://jobbersargentina.net/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.net/img/email/sphere.png" alt="WEB">
 		                    </a>
 		                </div>
 		            </td>
@@ -79,7 +86,7 @@ Class Email {
 		                            <li>'.$msg.'.</li>
 		                        </ul>
 		                        <div style="width: 100%; text-align: center; margin-top: 40px;">
-		                            <a style="text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db" href="https://jobbersargentina.com">Responder el Mensaje</a>
+		                            <a style="text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db" href="https://jobbersargentina.net">Responder el Mensaje</a>
 		                        </div>
 		                </div>
 		            </td>
@@ -89,13 +96,13 @@ Class Email {
 		                <p style="color:#3F429A; font-size: 14px; text-align: center;margin: 20px 0 0; font-family: sans-serif">Visitanos en</p>
 		                <div style="display:block;margin:20px 0; text-align: center;">
 		                    <a href="https://www.facebook.com/jobbersargentina" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/fb.png" alt="FB" style="width: 20px; height: 20px;">
+		                        <img src="https://jobbersargentina.net/img/email/fb.png" alt="FB" style="width: 20px; height: 20px;">
 		                    </a>
 		                    <a href="https://www.instagram.com/jobbersargentina/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/brand2.png" alt="IG" style="width: 20px; height: 20px;">
+		                        <img src="https://jobbersargentina.net/img/email/brand2.png" alt="IG" style="width: 20px; height: 20px;">
 		                    </a>
-		                    <a href="https://jobbersargentina.com/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/sphere.png" alt="WEB" style="width: 20px; height: 20px;">
+		                    <a href="https://jobbersargentina.net/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.net/img/email/sphere.png" alt="WEB" style="width: 20px; height: 20px;">
 		                    </a>
 		                </div>
 		                <p style="color:#3F429A; font-size: 12px; text-align: center;margin: 30px 0 0; font-weight: bolder; font-family: sans-serif">© 2017 - 2018 | Jobbers - Todos los derechos reservados</p>
@@ -149,17 +156,17 @@ Class Email {
 		        <tr>
 		            <td style="background-color: #fff; text-align: left; padding: 0">
 		                <a href="#" style="text-decoration: none;">
-		                    <img width="30%" style="display:inline; margin: 20px 3% 0px 3%" src="https://jobbersargentina.com/img/logo.png">
+		                    <img width="30%" style="display:inline; margin: 20px 3% 0px 3%" src="https://jobbersargentina.net/img/logo.png">
 		                </a>
 		                <div style="display: inline-block;margin:32px 0; float: right">
 		                    <a href="https://www.facebook.com/jobbersargentina" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/fb.png" alt="FB">
+		                        <img src="https://jobbersargentina.net/img/email/fb.png" alt="FB">
 		                    </a>
 		                    <a href="https://www.instagram.com/jobbersargentina/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/brand2.png" alt="IG">
+		                        <img src="https://jobbersargentina.net/img/email/brand2.png" alt="IG">
 		                    </a>
-		                    <a href="https://jobbersargentina.com/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/sphere.png" alt="WEB">
+		                    <a href="https://jobbersargentina.net/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.net/img/email/sphere.png" alt="WEB">
 		                    </a>
 		                </div>
 		            </td>
@@ -191,13 +198,13 @@ Class Email {
 		                <p style="color:#3F429A; font-size: 14px; text-align: center;margin: 20px 0 0; font-family: sans-serif">Visitanos en</p>
 		                <div style="display:block;margin:20px 0; text-align: center;">
 		                    <a href="https://www.facebook.com/jobbersargentina" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/fb.png" alt="FB" style="width: 20px; height: 20px;">
+		                        <img src="https://jobbersargentina.net/img/email/fb.png" alt="FB" style="width: 20px; height: 20px;">
 		                    </a>
 		                    <a href="https://www.instagram.com/jobbersargentina/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/brand2.png" alt="IG" style="width: 20px; height: 20px;">
+		                        <img src="https://jobbersargentina.net/img/email/brand2.png" alt="IG" style="width: 20px; height: 20px;">
 		                    </a>
-		                    <a href="https://jobbersargentina.com/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/sphere.png" alt="WEB" style="width: 20px; height: 20px;">
+		                    <a href="https://jobbersargentina.net/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.net/img/email/sphere.png" alt="WEB" style="width: 20px; height: 20px;">
 		                    </a>
 		                </div>
 		                <p style="color:#3F429A; font-size: 12px; text-align: center;margin: 30px 0 0; font-weight: bolder; font-family: sans-serif">© 2017 - 2018 | Jobbers - Todos los derechos reservados</p>
@@ -255,17 +262,17 @@ Class Email {
 		        <tr>
 		            <td style="background-color: #fff; text-align: left; padding: 0">
 		                <a href="#" style="text-decoration: none;">
-		                    <img width="30%" style="display:inline; margin: 20px 3% 0px 3%" src="https://jobbersargentina.com/img/logo.png">
+		                    <img width="30%" style="display:inline; margin: 20px 3% 0px 3%" src="https://jobbersargentina.net/img/logo.png">
 		                </a>
 		                <div style="display: inline-block;margin:32px 0; float: right">
 		                    <a href="https://www.facebook.com/jobbersargentina" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/fb.png" alt="FB">
+		                        <img src="https://jobbersargentina.net/img/email/fb.png" alt="FB">
 		                    </a>
 		                    <a href="https://www.instagram.com/jobbersargentina/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/brand2.png" alt="IG">
+		                        <img src="https://jobbersargentina.net/img/email/brand2.png" alt="IG">
 		                    </a>
-		                    <a href="https://jobbersargentina.com/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/sphere.png" alt="WEB">
+		                    <a href="https://jobbersargentina.net/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.net/img/email/sphere.png" alt="WEB">
 		                    </a>
 		                </div>
 		            </td>
@@ -292,13 +299,13 @@ Class Email {
 		                <p style="color:#3F429A; font-size: 14px; text-align: center;margin: 20px 0 0; font-family: sans-serif">Visitanos en</p>
 		                <div style="display:block;margin:20px 0; text-align: center;">
 		                    <a href="https://www.facebook.com/jobbersargentina" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/fb.png" alt="FB" style="width: 20px; height: 20px;">
+		                        <img src="https://jobbersargentina.net/img/email/fb.png" alt="FB" style="width: 20px; height: 20px;">
 		                    </a>
 		                    <a href="https://www.instagram.com/jobbersargentina/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/brand2.png" alt="IG" style="width: 20px; height: 20px;">
+		                        <img src="https://jobbersargentina.net/img/email/brand2.png" alt="IG" style="width: 20px; height: 20px;">
 		                    </a>
-		                    <a href="https://jobbersargentina.com/" style="text-decoration: none; margin-right: 10px;">
-		                        <img src="https://jobbersargentina.com/img/email/sphere.png" alt="WEB" style="width: 20px; height: 20px;">
+		                    <a href="https://jobbersargentina.net/" style="text-decoration: none; margin-right: 10px;">
+		                        <img src="https://jobbersargentina.net/img/email/sphere.png" alt="WEB" style="width: 20px; height: 20px;">
 		                    </a>
 		                </div>
 		                <p style="color:#3F429A; font-size: 12px; text-align: center;margin: 30px 0 0; font-weight: bolder; font-family: sans-serif">© 2017 - 2018 | Jobbers - Todos los derechos reservados</p>
