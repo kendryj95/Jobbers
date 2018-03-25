@@ -164,7 +164,7 @@
 
 						<li class="menuPCTrabajador">
 							<a class="nav-link color-link sidebar-index-hover" href="curriculum.php">
-								Modificar Curriculum
+								Modificar Currículum
 							</a>
 						</li>
 						<!--<li class="menuPCTrabajador">

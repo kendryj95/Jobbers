@@ -1183,7 +1183,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												<div class="col-md-12 card-block active content-perfil" id="currículum" role="tabpanel" style="padding-right: 0px; padding-left:0px; padding-top: 0px;">
 													<!-- <div class="row"> -->
 													<div class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
-													<h4 class="title-cv" style="margin-top: 0px;">&nbsp; INFORMACION PERSONAL</h4>
+													<h4 class="title-cv" style="margin-top: 0px;">&nbsp; INFORMACIÓN PERSONAL</h4>
 														<p class="content-cv">
 															<strong>DNI: </strong> <span id="labelDNI"><?php echo $data["numero_documento_identificacion"]; ?></span><br>
 															<strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $data["cuil"]; ?></span><br>

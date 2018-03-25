@@ -26,11 +26,11 @@ left JOIN paises t2 ON t1.id_pais = t2.id
 		WHERE t1.id_trabajador=".$id." order by t1.ano_ingreso desc";
 	$datos_experiencias=$db->getAll($experiencias);
 
-$estudios = "SELECT t1.id_trabajador,t1.nombre_institucion,t1.titulo,t4.nombre as area ,t1.id_estado_estudio,t2.nombre,t3.nombre as estudio FROM trabajadores_educacion t1
+$estudios = "SELECT t1.ano_finalizacion, t1.id_trabajador,t1.nombre_institucion,t1.titulo,t4.nombre as area ,t1.id_estado_estudio,t2.nombre,t3.nombre as estudio FROM trabajadores_educacion t1
 	LEFT JOIN paises t2 ON t1.id_pais = t2.id
 	LEFT JOIN nivel_estudio t3 ON t1.id_nivel_estudio = t3.id
 	LEFT JOIN areas_estudio t4 ON t1.id_area_estudio = t4.id
-		WHERE t1.id_trabajador=".$id."";
+		WHERE t1.id_trabajador=".$id." order by t1.ano_inicio desc";
 	$datos_estudios=$db->getAll($estudios);
 
 $otros_conocimentos = "SELECT * FROM `trabajadores_otros_conocimientos`
