@@ -1436,7 +1436,7 @@
                     Veintiocho de Julio
                 </option>
             </select>
-            <select  style="display:none;" class="city select_localidad custom-select form-control" id="localidad_7">
+            <select  style="display:none;" class="city m_select_localidad custom-select form-control" id="m_localidad_7">
             <option value="0">Seleccionar</option>
                 <option value="2383">
                     Córdoba Capital
