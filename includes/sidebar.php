@@ -20,7 +20,7 @@
 			<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "perfil.php" : "empresa/perfil.php") ?>" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-user"></i>&nbsp Mi perfil</a>
 			<?php if($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
 				<a href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../trabajadores.php" : "trabajadores.php") ?>" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-id-badge"></i>&nbsp Ver Jobbers</a>
-				<a href="../index.php" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-file"></i>&nbsp Totas las publicaciones</a>
+				<a href="../index.php" class="list-group-item item-panel sidebar-index-hover"><i class="fa fa-file"></i>&nbsp Página principal</a>
 			<?php else: ?>
 				<a href="javascript:void(0)" class="list-group-item item-panel sidebar-index-hover actualiza_plan" style="cursor: no-drop;"><i class="fa fa-id-badge"></i>&nbsp Ver Jobbers</a>
 			<?php endif; ?>
