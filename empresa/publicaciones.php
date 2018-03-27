@@ -432,7 +432,7 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-4" style="padding-left: 0px;">
+									<div class="col-sm-4 col-lg-4" style="padding-left: 0px;">
 										<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
 										<select id="select2-demo-3" class="form-control" data-plugin="select2">
 											<?php foreach($disps as $disp): ?>
@@ -441,7 +441,7 @@
 										</select>
 									</div>
 
-									<div class="col-sm-4">
+									<div class="col-sm-4 col-lg-4">
 										<label for="select2-demo-3" class="form-control-label">Provincia</label>
 										<select onChange="localidad(this.value)" id="provincias_select" class="form-control" data-plugin="select2">
 										<option  value="0">Seleccionar</option>
@@ -451,7 +451,7 @@
 										</select>
 									</div>
 
-									<div class="col-sm-4" style="padding-right: 0px;">
+									<div class="col-sm-4 col-lg-4" style="padding-right: 0px;">
 										<label for="select2-demo-3" class="form-control-label">Localidad</label>
 										 <?php include('../select_localidades.php');?>
 									</div>
@@ -527,7 +527,7 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-4" style="padding-left: 0px;">
+									<div class="col-sm-4 col-lg-4" style="padding-left: 0px;">
 										<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
 										<select id="select2-demo-3" class="form-control" data-plugin="select2">
 											<?php foreach($disps as $disp): ?>
@@ -536,7 +536,7 @@
 										</select>
 									</div>
 
-									<div class="col-sm-4">
+									<div class="col-sm-4 col-lg-4">
 										<label for="select2-demo-3" class="form-control-label">Provincia</label>
 										<select onChange="modificar_localidad(this.value)" id="m_provincias_select" class="form-control" data-plugin="select2">
 										<option  value="0">Seleccionar</option>
@@ -546,7 +546,7 @@
 										</select>
 									</div>
 
-									<div class="col-sm-4" style="padding-right: 0px;">
+									<div class="col-sm-4 col-lg-4" style="padding-right: 0px;">
 										<label for="select2-demo-3" class="form-control-label">Localidad</label>
 										 <?php include('../select_localidades_modificar.php');?>
 									</div>
@@ -1668,6 +1668,7 @@
 				//alert("#localidad_"+par);
 				m_id_campo_localidades=par;
 				$(".m_select_localidad").hide();
+				console.log("Ejecuta la funcion!!!");
 				$("#m_localidad_"+par).show();
 			}
 		</script>

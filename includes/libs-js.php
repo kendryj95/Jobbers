@@ -29,7 +29,9 @@
 		<?php if(isset($_SESSION["ctc"])): ?>
 		<script type="text/javascript" src="../js/app.js"></script>
 		<script type="text/javascript" src="../vendor/moment/moment.js"></script>
-		<script type="text/javascript" src="../js/chat.js"></script>
+			<?php if ($_SESSION['ctc']['plan']['id_plan'] != 1): ?>
+			<script type="text/javascript" src="../js/chat.js"></script>
+			<?php endif ?>
 		<?php endif; ?>
 	<?php } ?>
 
