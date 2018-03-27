@@ -37,12 +37,7 @@
 		<title>JOBBERS - Publicaciones</title>
 		<?php require_once('includes/libs-css.php'); ?>
 
-		<!-- <link rel="stylesheet" href="vendor/DataTables/css/dataTables.bootstrap4.min.css">
-		<link rel="stylesheet" href="vendor/DataTables/Responsive/css/responsive.bootstrap4.min.css">
-		<link rel="stylesheet" href="vendor/DataTables/Buttons/css/buttons.dataTables.min.css">
-		<link rel="stylesheet" href="vendor/DataTables/Buttons/css/buttons.bootstrap4.min.css"> -->
-		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"> -->
+		 
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.4.2/b-colvis-1.4.2/b-flash-1.4.2/b-html5-1.4.2/b-print-1.4.2/datatables.min.css"/>
 		
 		<link rel="stylesheet" href="vendor/select2/dist/css/select2.min.css">
