@@ -208,7 +208,10 @@
 							</div>
 							<div class="form-group">
 								<label for="modal-agregar-publicacion-titulo">Título</label>
-								<input type="text" class="form-control" name="titulo" id="modal-agregar-publicacion-titulo" placeholder="">
+								<div class="input-group">
+									<input type="text" class="form-control" name="titulo" id="modal-agregar-publicacion-titulo" placeholder="" onkeyup="calcularCaracteres(this.value)">
+									<span class="input-group-addon" id="caracteresDisp">50</span>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="modal-agregar-publicacion-descripcion">Descripción</label>
@@ -443,6 +446,8 @@
 					var descripcion = tinyMCE.get('modal-agregar-publicacion-descripcion').getContent();
 					if(titulo == '' || descripcion == '' || $("#file")[0].files.length == 0) {
 						swal("Error!", "Faltan algunos campos.", "error");
+					} else if (titulo.length > 50) {
+						swal("Error!", "El título solo puede tener un maximo de 50 caracteres.", "error");
 					}
 					else {
 						$("#textoDescripcionNoticiaAgregar").val(descripcion);
@@ -682,6 +687,23 @@
 						});
 					}
 				});
+			}
+
+			function calcularCaracteres(valor) {
+				var tamValor = parseInt(valor.length);
+				var disp = 50;
+
+				var totalDisp = disp - tamValor;
+
+				if (totalDisp <= 0) {
+					$('#caracteresDisp').css('color', 'red');
+				} else {
+					$('#caracteresDisp').css('color', 'black');
+				}
+
+				$('#caracteresDisp').text(totalDisp);
+
+
 			}
 		</script>
 
