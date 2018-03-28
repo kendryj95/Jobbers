@@ -261,7 +261,15 @@
 												foreach ($matches as $key) {
 													 $cadena=str_replace($key, "*******", $subject);
 												}
-												echo $cadena;												
+												if($cadena=="")
+												{
+													echo $publicacion["descripcion"];
+												}
+												else
+												{
+													echo $cadena;
+												}
+																								
 											?>
 											
 
