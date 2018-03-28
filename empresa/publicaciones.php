@@ -401,9 +401,11 @@
 					</div>
 					<div class="modal-body">
 						<ul class="nav nav-tabs nav-tabs-2">
-							<li class="nav-item">
+							<!--
+								<li class="nav-item">
 								<a class="nav-link active" href="#modal-agregar-publicacion-info" data-toggle="tab"><i class="ti-info text-muted m-r-0-25"></i> Información</a>
 							</li> 
+							-->
 						</ul>
 						<div class="tab-content" style="padding: 25px;">
 						  <div id="modal-agregar-publicacion-info" class="tab-pane fade in active">
@@ -489,9 +491,9 @@
 					</div>
 					<div class="modal-body">
 						<ul class="nav nav-tabs nav-tabs-2">
-							<li class="nav-item">
+							<!--<li class="nav-item">
 								<a class="nav-link active" href="#modal-modificar-publicacion-info" data-toggle="tab"><i class="ti-info text-muted m-r-0-25"></i> Información</a>
-							</li> 
+							</li> -->
 						</ul>
 						<div class="tab-content" style="padding: 25px;">
 						  <div id="modal-modificar-publicacion-info" class="tab-pane fade in active">
