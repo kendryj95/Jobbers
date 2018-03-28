@@ -457,8 +457,9 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="modal-agregar-publicacion-titulo">Título</label>
-									<input type="text" class="form-control" id="modal-agregar-publicacion-titulo" placeholder="">
+									<label for="modal-agregar-publicacion-titulo">Título<span id="contador_caracteres_1" style="padding-left: 10px;
+									px;"></span></label>
+									<input onKeyup="contar_caracteres(this.value,1)" maxlength="50" type="text" class="form-control" id="modal-agregar-publicacion-titulo" placeholder="Máximo 50 caracteres">
 								</div>
 								<div class="form-group">
 									<label for="modal-agregar-publicacion-descripcion">Descripción</label>
@@ -551,8 +552,9 @@
 										 <?php include('../select_localidades_modificar.php');?>
 									</div>
 								 <div class="form-group">
-									<label for="modal-modificar-publicacion-titulo">Título</label>
-									<input type="text" class="form-control" id="modal-modificar-publicacion-titulo" placeholder="">
+									<label for="modal-modificar-publicacion-titulo">Título <span id="contador_caracteres_2" style="padding-left: 10px;
+									px;"></span></label>
+									<input onKeyup="contar_caracteres(this.value,2)" maxlength="50" type="text" class="form-control" id="modal-modificar-publicacion-titulo" placeholder="Máximo 50 caracteres">
 								</div>
 
 								<div class="form-group">
@@ -1670,6 +1672,18 @@
 				$(".m_select_localidad").hide();
 				console.log("Ejecuta la funcion!!!");
 				$("#m_localidad_"+par).show();
+			}
+			function contar_caracteres(parametro,tipo)
+			{
+				if(tipo=="1")
+				{
+					$("#contador_caracteres_1").html(" "+50-(parametro.length) + " Caracteres disponibles"); 
+				}
+				else
+				{
+					$("#contador_caracteres_2").html(" "+50-(parametro.length) + " Caracteres disponibles"); 
+				}
+				
 			}
 		</script>
 	</body>

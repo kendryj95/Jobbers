@@ -252,8 +252,19 @@
 										<div class="col-md-12">
 											<b>Disponibilidad: <?php echo $publicacion["disponibilidad"]; ?></b>
 
-											<?php echo $publicacion["descripcion"]; ?>
+											<?php  
+												$subject=$publicacion["descripcion"];
+												$pattern = '/[a-z\d._%+-]+@[a-z\d.-]+\.[a-z]{2,4}\b/i'; 
+												$matches="";
+												$cadena="";
+												preg_match ( $pattern, $subject, $matches );
+												foreach ($matches as $key) {
+													 $cadena=str_replace($key, "*******", $subject);
+												}
+												echo $cadena;												
+											?>
 											
+
 											
 											<?php if(!$postulado && $esTrabajador): ?>
 												<?php if(!$contratado): ?>
