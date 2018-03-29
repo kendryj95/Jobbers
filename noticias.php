@@ -173,7 +173,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 																			<a class="text-grey" href="#"><i class=" ti-book"></i><?php echo $n["veces_leido"]; ?></a>
 																		</div>
 																		<div class="pull-xs-right">
-																			<p class="small text-uppercase text-muted"><?php echo date('d/m/Y', strtotime($n["fecha_actualizacion"])); ?></p>
+																			<p class="small text-uppercase text-muted"><?php echo date('d/m/Y', strtotime($n["fecha_creacion"])); ?></p>
 																		</div>
 																	</div>
 																</div>
