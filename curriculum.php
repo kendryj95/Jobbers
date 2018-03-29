@@ -546,7 +546,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 																	<td>
 																		<div class="pull-xs-left">
 																			<a class="text-success modifyEL" style="font-size: 20px" href="javascript:void(0)" data-target="<?php echo $e["id"]; ?>" data-option="2"><i class="fa fa-pencil-square"></i></a>
-																			<a class="text-danger deleteItem" style="font-size: 20px; margin-left: 5px;" href="javascript:void(0)" data-target="<?php echo $e["id"]; ?>" data-option="2"><i class="fa fa-ban"></i></a>
+																			<a class="text-danger deleteItem" style="font-size: 20px; margin-left: 5px;" href="javascript:void(0)" data-target="<?php echo $e["id"]; ?>" data-option="2"><i class="fa fa-trash"></i></a>
 																		</div>
 																	</td>
 																</tr>
@@ -727,17 +727,18 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<div class="form-group row" id="materias_aprobadas">
-												<div class="col-xs-12 col-md-3 text-center">
+										 
+											<div class="form-group row" id="materias_aprobadas" style="display: none;">
+												<div class="col-xs-12 col-md-3 text-center" style="display: none;">
 													<label for="mat">Materias de la carrera <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-xs-12 col-md-3">
+												<div class="col-xs-12 col-md-3" style="display: none;">
 													<input class="form-control" value="" id="mat" type="text"  onchange="validar(this.id,'num')">
 												</div>
-												<div class="col-xs-12 col-md-3 text-center">
+												<div class="col-xs-12 col-md-3 text-center" style="display: none;">
 													<label for="aprob">Materias aprobadas <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-xs-12 col-md-3">
+												<div class="col-xs-12 col-md-3" style="display: none;">
 													<input class="form-control" value="" id="aprob" type="text"  onchange="validar(this.id,'num')">
 												</div>
 											</div>
@@ -779,7 +780,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 																	<td>
 																		<div class="pull-xs-left">
 																			<a class="text-success m-r-1 modifyES" href="javascript:void(0)" style="font-size: 20px" data-target="<?php echo $e["id"]; ?>" data-option="3"><i class="fa fa-pencil-square"></i></a>
-																			<a class="text-danger deleteItem" href="javascript:void(0)" style="font-size: 20px; margin-left: 5px;" data-target="<?php echo $e["id"]; ?>" data-option="3"><i class="fa fa-ban"></i></a>
+																			<a class="text-danger deleteItem" href="javascript:void(0)" style="font-size: 20px; margin-left: 5px;" data-target="<?php echo $e["id"]; ?>" data-option="3"><i class="fa fa-trash"></i></a>
 																		</div>
 																	</td>
 																</tr>
@@ -909,7 +910,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 																	<td>
 																		<div class="pull-xs-left">
 																			<a class="text-success m-r-1 modifyI" style="font-size: 20px;" href="javascript:void(0)" data-target="<?php echo $i["id"]; ?>" data-option="4"><i class="fa fa-pencil-square"></i></a>
-																			<a class="text-danger deleteItem" style="font-size: 20px; margin-left: 5px;" href="javascript:void(0)" data-target="<?php echo $i["id"]; ?>" data-option="4"><i class="fa fa-ban"></i></a>
+																			<a class="text-danger deleteItem" style="font-size: 20px; margin-left: 5px;" href="javascript:void(0)" data-target="<?php echo $i["id"]; ?>" data-option="4"><i class="fa fa-trash"></i></a>
 																		</div>
 																	</td>
 																</tr>
@@ -1003,7 +1004,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 																	<td>
 																		<div class="pull-xs-left">
 																			<a class="text-success m-r-1 modifyOC" style="font-size: 20px;" href="javascript:void(0)" data-target="<?php echo $o["id"]; ?>" data-option="5"><i class="fa fa-pencil-square"></i></a>
-																			<a class="text-danger deleteItem" style="font-size: 20px; margin-left: 5px;" href="javascript:void(0)" data-target="<?php echo $o["id"]; ?>" data-option="5"><i class="fa fa-ban"></i></a>
+																			<a class="text-danger deleteItem" style="font-size: 20px; margin-left: 5px;" href="javascript:void(0)" data-target="<?php echo $o["id"]; ?>" data-option="5"><i class="fa fa-trash"></i></a>
 																		</div>
 																	</td>
 																</tr>
@@ -1071,49 +1072,50 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<textarea name="" id="sobre_mi" class="form-control" style="max-height: 300px"></textarea>
 												</div>
 											</div>
-											<h5>Mis redes Sociales</h5>
-												<span style="color: grey; font-size: 10px">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
+											 
+											<h5 style="display: none;">Mis redes Sociales</h5>
+												<span style="color: grey; font-size: 10px;display: none;">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
 
 											<hr>
 											<div class="alert alert-danger" style="display: none;">
 												<p><b>Error!</b> <span id="errorRS"></span></p>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="web" class="col-xs-12 col-md-2 text-center">Sitio Web</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["sitio_web"] ?>" id="web" type="text" placeholder="Url de tu pagina web">
 												</div>
-											</div><div class="form-group row">
+											</div><div class="form-group row" style="display: none;">
 												<label for="fb" class="col-xs-12 col-md-2 text-center">Facebook</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["facebook"] ?>" id="fb" type="text" placeholder="Link de tu perfil de Facebook">
 												</div>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="tw" class="col-xs-12 col-md-2 text-center">Twitter</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["twitter"] ?>" id="tw" type="text" placeholder="Link de tu perfil de Twitter">
 												</div>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="ig" class="col-xs-12 col-md-2 text-center">Instagram</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["instagram"] ?>" id="ig" type="text" placeholder="Link de tu perfil de Instagram">
 												</div>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="snap" class="col-xs-12 col-md-2 text-center">Snapchat</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["snapchat"] ?>" id="snap" type="text" placeholder="nombre de perfil de Snapchat">
 												</div>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="lkd" class="col-xs-12 col-md-2 text-center">Linkedin</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["linkedin"] ?>" id="lkd" type="text" placeholder="Link de tu perfil de Linkedin">
 												</div>
 											</div>
-
+											 
 											<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4">
 												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="6">Guardar <i class="fa fa-floppy-o"></i></a> 
 											</div>
@@ -2144,6 +2146,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											$("#monthE").val(1);
 											$("#yearE").val(2016);
 											$("#descriptionArea").val("");
+											$("#nom_enc").val("");
+											$("#tlf_enc").val("");
+											if ($("#trab_actual").is(":checked")) {
+
+												$("#trab_actual").trigger('click');
+											}
 
 											if (Object.keys(data.data).length > 0) {
 												$("#contentEL").css("display", "block");
@@ -2153,14 +2161,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											var text = '';
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td>');
+													currentParent.html('<td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td>');
 													text += '<p style="margin-left: 50px;"> <strong>Empresa: </strong> '+d.nombre_empresa+'<br> <strong>País: </strong> '+d.nombre_pais+'<br> <strong>Actividad: </strong> '+d.actividad_empresa+'<br> <strong>Tipo puesto: </strong> '+d.tipo_puesto+'<br> </p>';
 												});
 												$("#experiencias").append(text);
 											}
 											else {
 												data.data.forEach(function(d) {
-													$("#t2").append('<tr><td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td></tr>');
+													$("#t2").append('<tr><td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td></tr>');
 													text += '<p style="margin-left: 50px;"> <strong>Empresa: </strong> '+d.nombre_empresa+'<br> <strong>País: </strong> '+d.nombre_pais+'<br> <strong>Actividad: </strong> '+d.actividad_empresa+'<br> <strong>Tipo puesto: </strong> '+d.tipo_puesto+'<br> </p>';
 												});
 												$("#experiencias").append(text);
@@ -2236,13 +2244,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											var text = '';
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td>');
+													currentParent.html('<td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_pais+'<br> <strong>Nivel Oral: </strong> '+d.nivel+'<br> <strong>Nivel escrito: </strong> '+d.estado_estudio+'<br> </p>';
 												});
 												$("#idiomas").append(text);
 											}else {
 												data.data.forEach(function(d) {
-													$("#t3").append('<tr><td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td></tr>');
+													$("#t3").append('<tr><td>'+d.nivel+'</td><td>'+d.nombre_pais+'</td><td>'+d.estado_estudio+'</td><td>'+d.nombre_estudio+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyES" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="3" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td></tr>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_pais+'<br> <strong>Nivel Oral: </strong> '+d.nivel+'<br> <strong>Nivel escrito: </strong> '+d.estado_estudio+'<br> </p>';
 												});
 												$("#idiomas").html(text);
@@ -2315,13 +2323,13 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											$("#contentID").css("display", "block");
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<td>'+d.nombre_idioma+'</td><td>'+d.nivel_oral+'</td><td>'+d.nivel_escrito+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyI" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td>');
+													currentParent.html('<td>'+d.nombre_idioma+'</td><td>'+d.nivel_oral+'</td><td>'+d.nivel_escrito+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyI" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_idioma+'<br> <strong>Nivel Oral: </strong> '+d.nivel_oral+'<br> <strong>Nivel escrito: </strong> '+d.nivel_escrito+'<br> </p>';
 												});
 											}
 											else {
 												data.data.forEach(function(d) {
-													$("#t4").append('<tr><td>'+d.nombre_idioma+'</td><td>'+d.nivel_oral+'</td><td>'+d.nivel_escrito+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyI" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td></tr>');
+													$("#t4").append('<tr><td>'+d.nombre_idioma+'</td><td>'+d.nivel_oral+'</td><td>'+d.nivel_escrito+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyI" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="4" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td></tr>');
 													text += '<p style="margin-left: 50px;"> <strong>Idioma: </strong> '+d.nombre_idioma+'<br> <strong>Nivel Oral: </strong> '+d.nivel_oral+'<br> <strong>Nivel escrito: </strong> '+d.nivel_escrito+'<br> </p>';
 												});
 											}
@@ -2392,12 +2400,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td>');
+													currentParent.html('<td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td>');
 												});
 											}
 											else {
 												data.data.forEach(function(d) {
-													$("#t5").append('<tr><td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px; margin-left: 5px"><i class="fa fa-ban"></i></a></div></td></tr>');
+													$("#t5").append('<tr><td>'+d.nombre+'</td><td>'+d.descripcion+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyOC" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="5" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td></tr>');
 												});
 											}
 

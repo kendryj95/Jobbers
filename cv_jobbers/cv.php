@@ -34,7 +34,7 @@ include('includes/fotter.php');
 
 function validar($pdf)
 {
-	if($pdf->GetY()>230)
+	if($pdf->GetY()>220)
 	{
 		$pdf->AddPage(); 
 	}
