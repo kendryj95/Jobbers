@@ -727,22 +727,22 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													</select>
 												</div>
 											</div>
-											<!--
+										 
 											<div class="form-group row" id="materias_aprobadas" style="display: none;">
-												<div class="col-xs-12 col-md-3 text-center">
+												<div class="col-xs-12 col-md-3 text-center" style="display: none;">
 													<label for="mat">Materias de la carrera <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-xs-12 col-md-3">
+												<div class="col-xs-12 col-md-3" style="display: none;">
 													<input class="form-control" value="" id="mat" type="text"  onchange="validar(this.id,'num')">
 												</div>
-												<div class="col-xs-12 col-md-3 text-center">
+												<div class="col-xs-12 col-md-3 text-center" style="display: none;">
 													<label for="aprob">Materias aprobadas <span style="color: red;">*</span></label>
 												</div>
-												<div class="col-xs-12 col-md-3">
+												<div class="col-xs-12 col-md-3" style="display: none;">
 													<input class="form-control" value="" id="aprob" type="text"  onchange="validar(this.id,'num')">
 												</div>
 											</div>
-											  -->
+											  
 											<!-- Botones de Guardar y Borrar -->
 											<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4">
 												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar <i class="fa fa-floppy-o"></i></a>
@@ -1072,50 +1072,50 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<textarea name="" id="sobre_mi" class="form-control" style="max-height: 300px"></textarea>
 												</div>
 											</div>
-											<!--
-											<h5>Mis redes Sociales</h5>
+											 
+											<h5 style="display: none;">Mis redes Sociales</h5>
 												<span style="color: grey; font-size: 10px">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
 
 											<hr>
 											<div class="alert alert-danger" style="display: none;">
 												<p><b>Error!</b> <span id="errorRS"></span></p>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="web" class="col-xs-12 col-md-2 text-center">Sitio Web</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["sitio_web"] ?>" id="web" type="text" placeholder="Url de tu pagina web">
 												</div>
-											</div><div class="form-group row">
+											</div><div class="form-group row" style="display: none;">
 												<label for="fb" class="col-xs-12 col-md-2 text-center">Facebook</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["facebook"] ?>" id="fb" type="text" placeholder="Link de tu perfil de Facebook">
 												</div>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="tw" class="col-xs-12 col-md-2 text-center">Twitter</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["twitter"] ?>" id="tw" type="text" placeholder="Link de tu perfil de Twitter">
 												</div>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="ig" class="col-xs-12 col-md-2 text-center">Instagram</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["instagram"] ?>" id="ig" type="text" placeholder="Link de tu perfil de Instagram">
 												</div>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="snap" class="col-xs-12 col-md-2 text-center">Snapchat</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["snapchat"] ?>" id="snap" type="text" placeholder="nombre de perfil de Snapchat">
 												</div>
 											</div>
-											<div class="form-group row">
+											<div class="form-group row" style="display: none;">
 												<label for="lkd" class="col-xs-12 col-md-2 text-center">Linkedin</label>
 												<div class="col-xs-12 col-md-10">
 													<input class="form-control" value="<?php echo $data["linkedin"] ?>" id="lkd" type="text" placeholder="Link de tu perfil de Linkedin">
 												</div>
 											</div>
-											-->
+											 
 											<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4">
 												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="6">Guardar <i class="fa fa-floppy-o"></i></a> 
 											</div>
