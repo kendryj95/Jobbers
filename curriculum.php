@@ -2148,6 +2148,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											$("#descriptionArea").val("");
 											$("#nom_enc").val("");
 											$("#tlf_enc").val("");
+											if ($("#trab_actual").is(":checked")) {
+
+												$("#trab_actual").trigger('click');
+											}
 
 											if (Object.keys(data.data).length > 0) {
 												$("#contentEL").css("display", "block");
