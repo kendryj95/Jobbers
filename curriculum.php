@@ -1074,7 +1074,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											</div>
 											 
 											<h5 style="display: none;">Mis redes Sociales</h5>
-												<span style="color: grey; font-size: 10px">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
+												<span style="color: grey; font-size: 10px;display: none;">Ojo: Las redes sociales que coloques en el formulario serán visibles por las empresas.</span>
 
 											<hr>
 											<div class="alert alert-danger" style="display: none;">
