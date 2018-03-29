@@ -2146,6 +2146,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											$("#monthE").val(1);
 											$("#yearE").val(2016);
 											$("#descriptionArea").val("");
+											$("#nom_enc").val("");
+											$("#tlf_enc").val("");
 
 											if (Object.keys(data.data).length > 0) {
 												$("#contentEL").css("display", "block");
