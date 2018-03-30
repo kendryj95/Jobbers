@@ -244,7 +244,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										<?php foreach($noticias as $n): ?>
 											<div class="col-md-4">
 												<div class="box bg-white post post-3" style="border: 1px solid #333695;">
-													<img src="img/<?php echo $n["imagen"]; ?>" style="width: 100%; height: 280px; border-bottom: 1px solid rgba(0, 0, 0, 0.125);" alt="Img Noticia">
+													<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><img src="img/<?php echo $n["imagen"]; ?>" style="width: 100%; height: 280px; border-bottom: 1px solid rgba(0, 0, 0, 0.125);" alt="Img Noticia"></a>
 													<!-- <div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);">
 													</div> -->
 													<div class="p-content" style="min-height: 220px;">
