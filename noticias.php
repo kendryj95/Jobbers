@@ -276,7 +276,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 						</div>
 						<div class="col-md-3">
 									<div class="card">
-										<div class="card-header text-uppercase" style="margin-bottom: 10px;"><h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">Noticias Populares <i class="fa fa-newspaper-o"></i></h3></div>
+										<div class="card-header text-uppercase" style="margin-bottom: 10px;"><h3 class="text-center title-rightbar">Noticias Populares <i class="fa fa-newspaper-o"></i></h3></div>
 										<div class="list-group">
 											<?php if($noticiasPopulares): ?>
 												<?php foreach($noticiasPopulares as $n): ?>
@@ -302,7 +302,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 									</div>
 									<div class="card">
-										<div class="card-header text-uppercase" style="margin-top: 35px; margin-bottom:10px;"><h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">Categorias <i class="fa fa-th-list"></i></h3></div>
+										<div class="card-header text-uppercase" style="margin-top: 35px; margin-bottom:10px;"><h3 class="text-center title-rightbar">Categorias <i class="fa fa-th-list"></i></h3></div>
 										<div class="list-group">
 											<?php if($categorias): ?>
 												<?php foreach($categorias as $c): ?>

@@ -133,8 +133,8 @@
 			<?php require_once('includes/header.php'); ?>
 			<div class="site-content bg-white" style="margin-left: 0px;">
 				<!-- Content -->
-				<div class="container container-resp">
-					<div class="container-fluid">
+				<div class="container-fluid" style="margin-top: 20px;">
+					<!-- <div class="container-fluid"> -->
 						<div class="col-md-9">
 							<?php if($publicidadSection): ?>
 								<div class="row" id="ad2">
@@ -277,7 +277,7 @@
 											<?php if(!$postulado && $esTrabajador): ?>
 												<?php if(!$contratado): ?>
 													<div class="col-md-12 content-btn-postulate text-center">
-														<button id="postulate" type="button" class="col-md-6 col-md-offset-3 btn btn-primary btn-postular waves-effect waves-light" style="font-size:20px">Postularme</button>
+														<button id="postulate" type="button" class="col-md-6 col-md-offset-3 btn btn-primary btn-postular waves-effect waves-light" style="font-size:20px">Postularme <i class="fa fa-check-square-o"></i></button>
 													</div>
 												<?php endif ?>
 											<?php endif ?>
@@ -290,11 +290,10 @@
 						<div class="col-md-3">
 							<?php if(count($publicacionesSimilares) > 0): ?>
 							<div class="card">
-								<div class="card-header text-uppercase"><b>Ofertas de empleo similares</b></div>
-									<div class="items-list">
+								<div class="card-header text-uppercase text-center"><h3 class="title-rightbar">Ofertas de empleo similares <i class="fa fa-briefcase"></i></h3></div>
+									<div class="list-group">
 										<?php foreach($publicacionesSimilares as $pub): ?>
-											<div class="il-item">
-												<a class="text-black" href="empleos-detalle.php?a=<?php echo $pub["area_amigable"]; ?>&s=<?php echo $pub["sector_amigable"]; ?>&p=<?php echo $pub["amigable"]; ?>">
+												<a class="list-group-item sidebar-index-hover item-news" style="text-decoration: none" href="empleos-detalle.php?a=<?php echo $pub["area_amigable"]; ?>&s=<?php echo $pub["sector_amigable"]; ?>&p=<?php echo $pub["amigable"]; ?>">
 													<div class="media">
 														<div class="media-left">
 															<div class="avatar box-48">
@@ -303,21 +302,20 @@
 														</div>
 														<div class="media-body">
 															<h6 class="media-heading"><?php echo $pub["empresa_nombre"]; ?></h6>
-															<span class="text-muted"><?php echo $pub["titulo"]; ?></span>
+															<span class="text-muted sidebar-index-hover" style="word-wrap: break-word"><?php echo $pub["titulo"]; ?></span>
 														</div>
 													</div>
-													<div class="il-icon"><i class="fa fa-angle-right"></i></div>
+													<i class="fa fa-plus-circle info-icon" style="display: none; bottom: 25px;"></i>
 												</a>
-											</div>
 										<?php endforeach ?>
 									</div>
 									<div class="card-block">
-										<a class="btn btn-primary btn-block" href="empleos.php?area=<?php echo $publicacion["area_amigable"]; ?>&sector=<?php echo $publicacion["sector_amigable"]; ?>&pagina=1">Ver todas</a>
+										<a class="btn btn-primary btn-cookies btn-block" href="empleos.php?area=<?php echo $publicacion["area_amigable"]; ?>&sector=<?php echo $publicacion["sector_amigable"]; ?>&pagina=1">Ver todas <i class="fa fa-plus"></i></a>
 									</div>
 								</div>
 							<?php endif ?>
 						</div>
-					</div>
+					<!-- </div> -->
 				</div>
 				<?php require_once('includes/footer.php'); ?>
 			</div>

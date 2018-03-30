@@ -47,9 +47,10 @@
 		    enable_page_level_ads: true
 		  });
 		</script>
+
 	</head>
 
-	<body style="background-image: url('img/145.jpg'); background-size: cover;background-position: center">
+	<body style="background-image: url('img/145.jpg'); background-size: cover;background-position: center; height: 100%">
 		<div class="overlay"></div>
 		<div class="auth">
 			<div class="container-fluid">
