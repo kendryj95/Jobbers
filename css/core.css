@@ -10539,7 +10539,7 @@ a.list-group-item:hover {
 
 .news-img {
     float: right;
-    margin: 20px 35px 20px 17px;
+    margin: 20px 0px 20px 17px;
 }
 
 @media (max-width: 768px) {

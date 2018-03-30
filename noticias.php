@@ -213,8 +213,14 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 										<div>
 											<div class="box bg-white post post-1">
-												<div class="p-img img-cover col-xs-12 col-md-5 news-img" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
-													<!--<span class="tag tag-danger">Lifestyle</span>-->
+												<div class="col-xs-12 col-md-5 news-img">
+													<img class="p-img" style="height: 250px; width: 100%; border: 2px solid #333695" src="img/<?php echo $noticia["imagen"]; ?>" alt="Imagen de la noticia">
+													<div class="text-center" style="padding-top: 20px; padding-bottom: 20px; background-color: #333695">
+														<span style="color: #fff; font-weight: bolder"><i class="fa fa-eye"></i> &nbsp <?php echo $noticia["veces_leido"]; ?></span>
+														<span style="color: #fff; font-weight: bolder; margin-left: 10px"><i class="fa fa-calendar"></i> &nbsp <?php echo date('d/m/Y', strtotime($noticia["fecha_actualizacion"])); ?></span>
+													</div>
+												</div>
+												<!-- <div class="p-img img-cover col-xs-12 col-md-5 news-img" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
 													<div class="p-info clearfix">
 														<div class="pull-xs-left">
 															<span class="small text-uppercase"><?php echo date('d/m/Y', strtotime($noticia["fecha_actualizacion"])); ?></span>
@@ -223,7 +229,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 															<span><i class="ti-book"></i><?php echo $noticia["veces_leido"]; ?></span>
 														</div>
 													</div>
-												</div>
+												</div> -->
 												<div class="p-content text-justify" style="word-wrap: break-word">
 													<h5 style="margin-top: 0px;"><a class="text-black" href="#"><?php echo $noticia["titulo"]; ?></a></h5>
 													<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
