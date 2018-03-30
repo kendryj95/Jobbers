@@ -108,7 +108,7 @@
 						<li>
 							<a class="nav-link color-link sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
 								<span>Plan:</span>
-								<span class="tag top" style="top: 0;"><i class="fa fa-trophy icon-free" style="<?php echo $color; ?>; font-size: 26px" aria-hidden="true"></i></span>
+								<span class="tag top" style="top: 0;"><i class="fa fa-trophy trophy-free" style="<?php echo $color; ?>; font-size: 26px" aria-hidden="true"></i></span>
 							</a>
 						</li>
 						<li>
