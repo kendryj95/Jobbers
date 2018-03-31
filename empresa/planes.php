@@ -48,8 +48,8 @@
 	</script>
 </head>
 
-<body class="large-sidebar fixed-sidebar fixed-header">
-	<div class="wrapper">
+<body class="large-sidebar fixed-sidebar fixed-header bg-white">
+	<!-- <div class="wrapper"> -->
 
 		<!-- Preloader -->
 		<div class="content-loader">
@@ -178,26 +178,28 @@
 						<div class="content-loader">
 							<div class="preloader"></div>
 						</div>
-							<div class="card card-block">
-								<h3 class="col-md-8 col-md-offset-2" style="padding-left: 0px;">Información para el pago</h3>
-								<div id="containerFree">
-									<h4 class="text-muted">Datos del plan</h4>
-									<ul class="list-group list-group-flush">
-										<li class="list-group-item b-l-0 b-r-0 text-muted">Tipo: <strong>Gratis</strong></li>
-										<li class="list-group-item b-l-0 b-r-0 text-muted">Precio: 0$</li>
-										<li class="list-group-item b-l-0 b-r-0 text-muted">Valido por: 1 mes</li>
+							<div class="card card-block" style="margin-top: 10vh">
+								<h3 class="col-md-6 col-md-offset-3 text-center title-rightbar">Información para el pago</h3>
+								<div class="col-md-6 col-md-offset-3" id="containerFree">
+									<h4 class="text-center">Datos del plan</h4>
+									<ul class="list-group" style="font-size: 16px;">
+										<li class="list-group-item sidebar-index-hover">Tipo: <span class="label label-default text-uppercase" style="background-color:#00dd0e">Gratis</span></li>
+										<li class="list-group-item sidebar-index-hover">Precio: 0$</li>
+										<li class="list-group-item sidebar-index-hover">Valido por: 1 mes</li>
 									</ul>
-									<a href="javascript:void(0)" id="continue" class="btn btn-primary" style="margin-bottom: 15px;margin-top: 15px;">Continuar</a>
+									<div class="col-md-3 col-md-offset-4">
+										<a href="javascript:void(0)" id="continue" class="btn btn-primary btn-cookies" style="margin-bottom: 15px;margin-top: 15px; font-size: 16px;">Continuar &nbsp <i class="fa fa-chevron-circle-right"></i></a>
+									</div>
 								</div>
 
 								<div class="row m-b-2" id="containerPay" style="display: none;">
-									<div class="col-md-8 col-md-offset-2">
+									<div class="col-md-6 col-md-offset-3">
 										<div class="c-inputs-stacked">
 											<div id="services" style="display: none;">
-												<h4 class="text-muted">Datos del servicio</h4>
-												<ul class="list-group list-group-flush" id="listServices"></ul>
+												<h4 class="text-center">Datos del servicio</h4>
+												<ul class="list-group list-group-flush" id="listServices" style="font-size: 16px"></ul>
 											</div>
-											<div style="text-align: center;"><a href="" id="payMP" name="MP-Checkout" class="btn btn-primary" style="margin-bottom: 15px;margin-top: 15px;"><i class="ti-money"></i> Realizar pago</a></div>
+											<div class="col-md-3 col-md-offset-4"><a href="" id="payMP" name="MP-Checkout" class="btn btn-primary btn-cookies" style="margin-bottom: 15px;margin-top: 15px; font-size: 16px;">Realizar pago &nbsp <i class="fa fa-money"></i></a></div>
 											<div style="text-align: center;"><img src="../img/mercadopago-formas-de-pago.png"></div>
 										</div>
 									</div>
@@ -210,7 +212,7 @@
 			<!-- Footer -->
 			<?php require_once('../includes/footer.php'); ?>
 		</div>
-	</div>
+	<!-- </div> -->
 
 	<?php require_once('../includes/libs-js.php'); ?>
 	
@@ -319,15 +321,26 @@
 							//$("#payMP").attr("data-v", data.data.response.sandbox_init_point);
 							var html = '';
 							var total = 0;
-							html += '<li class="list-group-item b-l-0 b-r-0 text-muted">Tipo: <strong>'+data.servicios.nombre+'</strong></li><li class="list-group-item b-l-0 b-r-0 text-muted">Precio: <strong>'+data.servicios.precio+'</strong></li>';
+							var colorPlan = '';
+							if(data.servicios.nombre == "Bronce"){
+								colorPlan = 'rgb(205, 127, 50)';
+							}
+							else if(data.servicios.nombre == "Plata"){
+								colorPlan = 'rgb(131, 140, 150)';
+							}
+							else{
+								colorPlan = 'rgb(221, 182, 124)';
+							}
+							console.log(colorPlan);
+							html += '<li class="list-group-item sidebar-index-hover">Tipo: <span class="label label-default text-uppercase" style="background-color:'+colorPlan+'">'+data.servicios.nombre+'</span></li><li class="list-group-item sidebar-index-hover">Precio: <strong>'+data.servicios.precio+'</strong></li>';
 							total += parseFloat(data.servicios.precio);
 							if(parseInt(data.servicios.wserv) == 1) {
-								html += '<li class="list-group-item b-l-0 b-r-0 text-muted">Servicio: <strong>'+data.servicios.serv.nombre+'</strong></li><li class="list-group-item b-l-0 b-r-0 text-muted">Precio: <strong>'+data.servicios.serv.precio+'</strong></li>';
+								html += '<li class="list-group-item sidebar-index-hover">Servicio: <strong>'+data.servicios.serv.nombre+'</strong></li><li class="list-group-item sidebar-index-hover">Precio: <strong>'+data.servicios.serv.precio+'</strong></li>';
 								total += parseFloat(data.servicios.serv.precio);
 							}
 							var impuesto = parseFloat(data.iva);
-							html += '<li class="list-group-item b-l-0 b-r-0 text-muted">Impuesto: '+(impuesto * 100)+'% <strong>'+(total * impuesto)+'</strong></li>';
-							html += '<li class="list-group-item b-l-0 b-r-0 text-muted">Total: <strong>'+(total + (total * impuesto))+'</strong></li>';
+							html += '<li class="list-group-item sidebar-index-hover">Impuesto: '+(impuesto * 100)+'% <strong>'+(total * impuesto)+'</strong></li>';
+							html += '<li class="list-group-item sidebar-index-hover">Total: <strong>'+(total + (total * impuesto))+'</strong></li>';
 							//html += '<li class="list-group-item b-l-0 b-r-0 text-muted">Total: <strong>'+total+'</strong></li>';
 							$("#listServices").html(html);
 

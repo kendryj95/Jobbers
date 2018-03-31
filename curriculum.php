@@ -117,25 +117,25 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 							<div class="row">
 							<ul class="nav nav-tabs nav-tabs-2" role="tablist">
 								<li class="nav-item">
-									<a class="nav-link active" data-toggle="tab" href="#tab1" role="tab">Datos personales</a>
+									<a class="nav-link sidebar-index-hover active" style="border-bottom: 0px;" data-toggle="tab" href="#tab1" role="tab">Datos personales</a>
 								</li>
 								<li class="nav-item">
-									<a id="experiencia" class="nav-link <?php echo $attr." ".$attr2; ?>" data-toggle="tab" href="#tab2" role="tab">Experiencia laboral</a>
+									<a id="experiencia" class="sidebar-index-hover nav-link <?php echo $attr." ".$attr2; ?>" style="border-bottom: 0px;" data-toggle="tab" href="#tab2" role="tab">Experiencia laboral</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link <?php echo $attr." ".$attr3; ?>" data-toggle="tab" href="#tab3" role="tab">Estudios</a>
+									<a class="sidebar-index-hover nav-link <?php echo $attr." ".$attr3; ?>" style="border-bottom: 0px;" data-toggle="tab" href="#tab3" role="tab">Estudios</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link <?php echo $attr." ".$attr4; ?>" data-toggle="tab" href="#tab4" role="tab">Idiomas</a>
+									<a class="sidebar-index-hover nav-link <?php echo $attr." ".$attr4; ?>" style="border-bottom: 0px;" data-toggle="tab" href="#tab4" role="tab">Idiomas</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link <?php echo $attr; ?>" data-toggle="tab" href="#tab5" role="tab">Otros conocimientos</a>
+									<a class="sidebar-index-hover nav-link <?php echo $attr; ?>" style="border-bottom: 0px;" data-toggle="tab" href="#tab5" role="tab">Otros conocimientos</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link <?php echo $attr." ".$attr6; ?>" data-toggle="tab" href="#tab6" role="tab">Información Extra</a>
+									<a class="sidebar-index-hover nav-link <?php echo $attr." ".$attr6; ?>" style="border-bottom: 0px;" data-toggle="tab" href="#tab6" role="tab">Información Extra</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link <?php echo $attr; ?>" data-toggle="tab" href="#tab7" role="tab">Vista previa</a>
+									<a class="sidebar-index-hover nav-link <?php echo $attr; ?>" style="border-bottom: 0px;" data-toggle="tab" href="#tab7" role="tab">Vista previa</a>
 								</li>
 							</ul>
 							<div class="tab-content">
