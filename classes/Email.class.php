@@ -26,6 +26,7 @@ Class Email {
 		$mail = new PHPMailer;
 		$mail->isSMTP();
 		$mail->Host = $this->host;
+		$mail->Helo =$this->host; //Muy importante para que llegue a hotmail y otros
 		$mail->SMTPAuth = $this->smtpAuth;
 		$mail->Username = $this->userName;
 		$mail->Password = $this->password;
