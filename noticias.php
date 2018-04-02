@@ -116,7 +116,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 	  });
 	</script>
 </head>
-<body class="large-sidebar fixed-sidebar fixed-header skin-5">
+<body class="large-sidebar fixed-sidebar fixed-header">
 	<!-- <div class="wrapper"> -->
 
 		<!-- Sidebar second -->

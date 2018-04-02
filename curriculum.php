@@ -347,14 +347,14 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 									<div class="row container" style="margin-top: 10px">
 										<div class="col-xs-12 col-sm-2 col-sm-offset-5">
-											<button onClick="guardar_datos()" class="btn btn-primary" style="width: 100%; font-size: 16px;">Guardar&nbsp <i class="fa fa-floppy-o"></i></button>
+											<button onClick="guardar_datos()" class="btn btn-primary btn-cookies" style="width: 100%; font-size: 16px;">Guardar&nbsp <i class="fa fa-floppy-o"></i></button>
 										</div>
 									</div>
 
 									<div class="row container" style="margin-top: 10px">							 
 
 										<?php if($data['numero_documento_identificacion'] != ""): ?>
-											<div class="col-xs-4 col-md-3 pull-right"> <a id="testvic" href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-xs-4 col-md-3 pull-right"> <a id="testvic" href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 btn-cookies pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next <?php echo $attr; ?>" data-target="2">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
  
 									</div>
@@ -510,11 +510,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											  
 											<!-- Botones de Guardar y Borrar -->
 											<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4">
-												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar <i class="fa fa-floppy-o"></i></a> 
+												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 btn-cookies w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="2">Guardar <i class="fa fa-floppy-o"></i></a> 
 											</div>
 
 											<div class="col-xs-12 col-sm-2">
-												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar <i class="fa fa-trash"></i></a>
+												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 btn-cookies w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="2">Borrar <i class="fa fa-trash"></i></a>
 											</div>
 
 										</div>
@@ -582,11 +582,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 									<div class="row container">
 										<div class="col-xs-4 col-sm-3 pull-left">
-											<a href="javascript:void(0)" class="btn btn-primary col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1"><i class="ti-angle-left"></i> Anterior</a>
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-4 col-sm-4 btn-cookies w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="1"><i class="ti-angle-left"></i> Anterior</a>
 										</div>
 										
 										<div class="col-xs-4 col-sm-3 pull-right">
-											<a href="javascript:void(0)" class="btn btn-primary col-xs-4 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3">Siguiente <i class="ti-angle-right"></i></a>
+											<a href="javascript:void(0)" class="btn btn-primary col-xs-4 col-sm-4 btn-cookies pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3">Siguiente <i class="ti-angle-right"></i></a>
 										</div>
 									</div>
 								</div>
@@ -745,10 +745,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											  
 											<!-- Botones de Guardar y Borrar -->
 											<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4">
-												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar <i class="fa fa-floppy-o"></i></a>
+												<a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="3">Guardar <i class="fa fa-floppy-o"></i></a>
 											</div>
 											<div class="col-xs-12 col-sm-2">
-												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar <i class="fa fa-trash"></i></a>
+												<a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="3">Borrar <i class="fa fa-trash"></i></a>
 											</div>
 
 										</div>
@@ -815,12 +815,12 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 									<div class="row container">
 										<div class="col-xs-4 col-sm-3 pull-left">
-											<a href="javascript:void(0)" class="btn btn-primary col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2"><i class="ti-angle-left"></i> Anterior</a>
+											<a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="2"><i class="ti-angle-left"></i> Anterior</a>
 										</div>
 
 										<?php if($educacion || $idiomasT): ?>
 											<div class="col-xs-4 col-sm-3 pull-right"> 
-												<a href="javascript:void(0)" class="btn btn-primary col-xs-4 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4">Siguiente <i class="ti-angle-right"></i></a> 
+												<a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-4 col-sm-4 pull-right w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4">Siguiente <i class="ti-angle-right"></i></a> 
 											</div>
 										<?php endif; ?>
 									</div>
@@ -880,8 +880,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										</div>
 
 										<!-- Botonos de Guardar y Borrar -->
-										<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="4">Guardar <i class="fa fa-floppy-o"></i></a></div>
-										<div class="col-xs-12 col-sm-2"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="4">Borrar <i class="fa fa-trash"></i></a></div>	
+										<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4"><a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="4">Guardar <i class="fa fa-floppy-o"></i></a></div>
+										<div class="col-xs-12 col-sm-2"><a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="4">Borrar <i class="fa fa-trash"></i></a></div>	
 									</div>
 
 									<?php $idiomasT = $db->getAll("SELECT trabajadores_idiomas.*, idiomas.nombre as nombre_idioma FROM trabajadores_idiomas INNER JOIN idiomas ON idiomas.id=trabajadores_idiomas.id_idioma WHERE trabajadores_idiomas.id_trabajador=" . $_SESSION["ctc"]["id"]);?>
@@ -942,10 +942,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<?php endif?>
 
 									<div class="row container">
-										<div class="col-xs-4 col-sm-3 pull-left"><a href="javascript:void(0)" class="btn btn-primary col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3"><i class="ti-angle-left"></i> Anterior</a></div>
+										<div class="col-xs-4 col-sm-3 pull-left"><a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="3"><i class="ti-angle-left"></i> Anterior</a></div>
 			
 										<?php if($idiomasT): ?>
-											<div class="col-xs-4 col-sm-3 pull-right"> <a href="javascript:void(0)" class="btn btn-primary pull-right col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5">Siguiente <i class="ti-angle-right"></i></a> </div>
+											<div class="col-xs-4 col-sm-3 pull-right"> <a href="javascript:void(0)" class="btn btn-primary btn-cookies pull-right col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="5">Siguiente <i class="ti-angle-right"></i></a> </div>
 										<?php endif; ?>
 									</div>
 								</div>
@@ -975,8 +975,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 											</div>
 
-										<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar <i class="fa fa-floppy-o"></i></a></div>
-										<div class="col-xs-12 col-sm-2"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar <i class="fa fa-trash"></i></a></div>
+										<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4"><a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="5">Guardar <i class="fa fa-floppy-o"></i></a></div>
+										<div class="col-xs-12 col-sm-2"><a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 btn-cookies w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="5">Borrar <i class="fa fa-trash"></i></a></div>
 
 
 										</div>
@@ -1035,9 +1035,9 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									<?php endif?>
 
 									<div class="row container">
-										<div class="col-xs-4 col-sm-3 pull-left"><a href="javascript:void(0)" class="btn btn-primary col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4"><i class="ti-angle-left"></i> Anterior</a></div>
+										<div class="col-xs-4 col-sm-3 pull-left"><a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="4"><i class="ti-angle-left"></i> Anterior</a></div>
 
-										<div class="col-xs-4 col-sm-3 pull-right"><a href="javascript:void(0)" class="btn btn-primary pull-right col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6">Siguiente <i class="ti-angle-right"></i></a> </div>
+										<div class="col-xs-4 col-sm-3 pull-right"><a href="javascript:void(0)" class="btn btn-primary btn-cookies pull-right col-xs-4 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6">Siguiente <i class="ti-angle-right"></i></a> </div>
 									</div>
 								</div>
 
@@ -1117,10 +1117,10 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											</div>
 											 
 											<div class="col-xs-12 col-sm-2 col-md-offset-4 col-sm-offset-4">
-												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="6">Guardar <i class="fa fa-floppy-o"></i></a> 
+												<a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light save" data-edit="1"  data-target="6">Guardar <i class="fa fa-floppy-o"></i></a> 
 											</div>
 											<div class="col-xs-12 col-sm-2">
-												<a href="javascript:void(0)" class="btn btn-primary col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="6">Borrar <i class="fa fa-trash"></i></a>
+												<a href="javascript:void(0)" class="btn btn-primary btn-cookies col-xs-12 col-sm-4 w-min-sm m-b-0-25 waves-effect waves-light reset" data-target="6">Borrar <i class="fa fa-trash"></i></a>
 											</div>
 										</div>
 									</div>
@@ -1305,7 +1305,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								</div>
 								<div class="row container" style="margin-top: 20px;">
 									<div class="col-xs-12 col-sm-2 col-sm-offset-5">
-										<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="width: 100%; font-size: 16px;"><i class="fa fa-chevron-circle-left"></i> Volver</a>
+										<a href="javascript:void(0)" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light back-next" data-target="6" style="width: 100%; font-size: 16px;"><i class="fa fa-chevron-circle-left"></i> Volver</a>
 									</div>
 								</div>
 							</div>
