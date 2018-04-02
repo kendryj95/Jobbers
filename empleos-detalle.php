@@ -272,6 +272,11 @@
 																								
 											?>
 											
+											<?php if($_SESSION["ctc"]["type"]==1)
+											{
+
+												echo'<a style="margin-top:-60px;margin-bottom:30px;" class="btn btn-primary" href="empresa/publicaciones.php">Mi panel</a>';
+											}?>
 
 											
 											<?php if(!$postulado && $esTrabajador): ?>
