@@ -106,7 +106,7 @@
 				foreach($data as $i => $row) {
 					$arr["data"][] = array(
 						$i + 1,
-						'<span class="tag tag-primary text-uppercase" style="font-size: 12px;">Postulado</span>',
+						'<span class="label label-success text-uppercase" style="font-size: 12px;">Postulado <i class="fa fa-check"></i></span>',
 						'<a href="empresa/perfil.php?e='.(strtolower(str_replace(" ", "-", $row["empresa_nombre"])))."-$row[empresa_id]".'">'.$row["empresa_nombre"].'</a>',
 						'<a href="empleos-detalle.php?a=' . $row["area_amigable"] . '&s=' . $row["sector_amigable"] . '&p=' . $row["amigable"] . '">' . $row["titulo"] . '</a>',
 						date('d/m/Y h:i:s A', strtotime($row["fecha_hora"])),

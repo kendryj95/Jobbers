@@ -2,7 +2,7 @@
 
 $dir = '';
 if ($_SERVER["SERVER_NAME"] == "localhost") {
-	$dir = $_SERVER["DOCUMENT_ROOT"] . "/app";
+	$dir = $_SERVER["DOCUMENT_ROOT"] . "/jobbers";
 } else {
 	$dir = $_SERVER["DOCUMENT_ROOT"];
 }

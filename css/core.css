@@ -3332,7 +3332,7 @@ footer .f-title {
 
 .auth {
     color: #fff;
-    padding: 23vh 0px;
+    margin: 23vh 0px;
 }
 
 .auth .auth-header {
@@ -7334,8 +7334,14 @@ mark {
     border-radius: 0;
 }
 
+
+/* Botones de paginacion DataTables */
+
 .page-link {
-    color: #999;
+    border-color: #2E3192 !important;
+    background-color: #2E3192 !important;
+    color: #fff !important;
+    font-size: 16px;
 }
 
 .page-link:focus,
@@ -7345,14 +7351,14 @@ mark {
     border-color: #ddd;
 }
 
-.page-item:first-child .page-link {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
+.previous>.page-link:before {
+    font-family: FontAwesome;
+    content: "\f0a8 \09";
 }
 
-.page-item:last-child .page-link {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
+.next>.page-link:after {
+    font-family: FontAwesome;
+    content: "\09 \f0a9";
 }
 
 .pagination-lg .page-item:first-child .page-link {
@@ -7378,8 +7384,15 @@ mark {
 .page-item.active .page-link,
 .page-item.active .page-link:focus,
 .page-item.active .page-link:hover {
-    background-color: #3e70c9;
-    border-color: #3e70c9;
+    border-color: #3DC1F2 !important;
+    background-color: #3DC1F2 !important;
+    color: #fff !important;
+    content: "";
+}
+
+.page-item.active .page-link:before,
+.page-item.active .page-link:after {
+    content: "";
 }
 
 .popover {
@@ -9728,6 +9741,14 @@ a.text-grey:hover .underline {
     transform: rotate(310deg);
 }
 
+.title-rightbar {
+    background-color: #333695;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 4px solid #00AEEF;
+    color: #fff
+}
+
 
 /* =================================================================
   Header
@@ -9771,7 +9792,7 @@ a.text-grey:hover .underline {
     font-size: 17px;
 }
 
-.icon-free {
+.trophy-free {
     color: #43B968;
 }
 
@@ -9902,8 +9923,11 @@ a.text-grey:hover .underline {
 
 .btn-see-pub {
     width: 100px;
-    border-top-left-radius: 0px !important;
-    border-bottom-left-radius: 0px !important;
+    width: 100px;
+    margin-top: 8px;
+    border-radius: 5%;
+    background-color: #2E3192;
+    border-color: #2E3192;
 }
 
 .btn-see-pub:hover {
@@ -10174,6 +10198,16 @@ a.text-grey:hover .underline {
     .mt-jobbers {
         margin-top: 3vh;
     }
+}
+
+
+/* =================================================================
+  Seccion Postulaciones
+================================================================= */
+
+.title-offer {
+    font-size: 14px;
+    font-weight: bolder;
 }
 
 
@@ -10539,7 +10573,7 @@ a.list-group-item:hover {
 
 .news-img {
     float: right;
-    margin: 20px 35px 20px 17px;
+    margin: 20px 0px 20px 17px;
 }
 
 @media (max-width: 768px) {
@@ -10883,4 +10917,34 @@ a.list-group-item:hover {
 
 .flaticon-mouse:before {
     content: "\f100";
+}
+
+
+/* Icomoon Icon Eye */
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('./fonts/icomoon.eot?tixqt2');
+    src: url('./fonts/icomoon.eot?tixqt2#iefix') format('embedded-opentype'), url('./fonts/icomoon.ttf?tixqt2') format('truetype'), url('./fonts/icomoon.woff?tixqt2') format('woff'), url('./fonts/icomoon.svg?tixqt2#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-eye-plus:before {
+    content: "\e9cf";
 }

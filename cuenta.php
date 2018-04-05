@@ -96,8 +96,7 @@
 								</div>
 							</div>
 							<div class="row" style="margin-top: 20px;padding: 10px;padding-top: 0; display:none;" id="containerPrivacy">
-								<div class="col-md-8 col-xs-12">
-									<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
+								<div class="col-md-offset-2 col-md-8 col-xs-12">
 									<h6 class="m-t-2">Seleccione nivel de privacidad</h6>
 									<p>
 										<label class="custom-control custom-radio">
@@ -113,7 +112,10 @@
 											<span class="custom-control-description">Público (tanto las empresas a las que te postules como las que accedan a nuestra base de datos pueden visualizar el contenido completo de tu currículum).</span>
 										</label>
 									</p>
-									<a href="javascript:void(0)" style="margin-top: 5px;" id="saveNivelP" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
+									<div class="text-center" style="padding-top: 10px; padding-bottom: 10px;">
+										<a href="javascript:void(0)" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light back" style="font-size: 16px; margin-right: 20px;"><i class="fa fa-chevron-circle-left"></i> &nbsp Regresar</a>
+										<a href="javascript:void(0)" id="saveNivelP" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light" style="font-size: 16px;">Guardar &nbsp <i class="fa fa-floppy-o"></i></a>
+									</div>
 								</div>
 							</div>
 							<div class="row" style="margin-top: 20px; display: none;" id="pic">
@@ -129,15 +131,14 @@
 									<div class="alert alert-danger" id="prompt" style="display: none">
 										<p><b>Sugerencia!</b> Te invitamos a comprimir tu imagen de perfil <a href="http://compressjpeg.com/es/" target="_blank" style="color: black">aquí</a></p>
 									</div>
-								</div>
-								<div class="col-md-4 col-md-offset-4 text-center" style="margin-top: 20px; margin-bottom: 20px;">
-									<a href="javascript:void(0)" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light back" style="font-size: 16px; margin-right: 20px;"><i class="fa fa-chevron-circle-left"></i> &nbsp Regresar</a>
-									<a href="javascript:void(0)" id="savePic" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light" style="font-size: 16px;">Guardar &nbsp <i class="fa fa-floppy-o"></i></a>
+									<div class="text-center">
+										<a href="javascript:void(0)" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light back" style="font-size: 16px; margin-right: 20px;"><i class="fa fa-chevron-circle-left"></i> &nbsp Regresar</a>
+										<a href="javascript:void(0)" id="savePic" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light" style="font-size: 16px;">Guardar &nbsp <i class="fa fa-floppy-o"></i></a>
+									</div>
 								</div>
 							</div>
 							<div class="row" style="margin-top: 20px; display: none;" id="pass">
-								<div class="col-md-8 col-xs-12">
-									<a href="javascript:void(0)" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light back"><i class="ti-angle-left"></i> Regresar</a>
+								<div class="col-md-offset-3 col-md-6 col-xs-12">
 									<div class="form-group row" style="margin-top: 20px;">
 										<label for="currentPass" class="col-xs-4 col-form-label">Contraseña actual</label>
 										<div class="col-xs-8">
@@ -156,7 +157,10 @@
 											<input class="form-control" id="pass2" type="password">
 										</div>
 									</div>
-									<a href="javascript:void(0)" style="margin-top: 5px;" id="savePass" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light">Guardar</a>
+									<div class="text-center" style="padding-top: 10px; padding-bottom: 10px;">
+										<a href="javascript:void(0)" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light back" style="font-size: 16px; margin-right: 20px;"><i class="fa fa-chevron-circle-left"></i> &nbsp Regresar</a>
+										<a href="javascript:void(0)" id="savePass" class="btn btn-primary btn-cookies w-min-sm m-b-0-25 waves-effect waves-light" style="font-size: 16px;">Guardar &nbsp <i class="fa fa-floppy-o"></i></a>
+									</div>
 								</div>
 							</div>
 						</div>

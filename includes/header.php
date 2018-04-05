@@ -110,7 +110,7 @@
 						<li>
 							<a class="nav-link color-link sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? "planes" : "empresa/planes"; ?>.php">
 								<span>Plan:</span>
-								<span class="tag top" style="top: 0;"><i class="fa fa-trophy icon-free" style="<?php echo $color; ?>; font-size: 26px" aria-hidden="true"></i></span>
+								<span class="tag top" style="top: 0;"><i class="fa fa-trophy trophy-free" style="<?php echo $color; ?>; font-size: 26px" aria-hidden="true"></i></span>
 							</a>
 						</li>
 						<li>
@@ -158,6 +158,11 @@
 				<!-- $_SESSION["ctc"]["type"] ==  2 es usuario -->
 				<?php if($_SESSION["ctc"]["type"] == 2): ?>
 
+						<li>
+							<a class="nav-link color-link sidebar-index-hover" href="<?= strstr($_SERVER["REQUEST_URI"], "empresa") ? "../?empresas=true" : "./" ?>">
+								<i class="fa fa-home" style="font-size: 24px;"></i>
+							</a>
+						</li>
 						<li class="menuPCTrabajador">
 							<a href="cuenta.php?foto=1" class="nav-link color-link sidebar-index-hover">
 								Mi foto
@@ -354,6 +359,11 @@
 			</a>
 		</li>-->
 		<?php $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
+		<li>
+			<a class="nav-link color-link sidebar-index-hover" href="<?= strstr($_SERVER["REQUEST_URI"], "empresa") ? "../?empresas=true" : "./" ?>">
+				<i class="fa fa-home" style="font-size: 24px;"></i>
+			</a>
+		</li>
         <li>
 			<a class="nav-link color-link sidebar-index-hover" href="<?php echo strstr($_SERVER["REQUEST_URI"], "empresa/") ? '../': ''; ?>ingresar.php?returnUri=<?= urlencode($actual_link) ?>">
 				Ingresar

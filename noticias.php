@@ -116,7 +116,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 	  });
 	</script>
 </head>
-<body class="large-sidebar fixed-sidebar fixed-header skin-5">
+<body class="large-sidebar fixed-sidebar fixed-header">
 	<!-- <div class="wrapper"> -->
 
 		<!-- Sidebar second -->
@@ -213,8 +213,14 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 										<div>
 											<div class="box bg-white post post-1">
-												<div class="p-img img-cover col-xs-12 col-md-5 news-img" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
-													<!--<span class="tag tag-danger">Lifestyle</span>-->
+												<div class="col-xs-12 col-md-5 news-img">
+													<img class="p-img" style="height: 250px; width: 100%; border: 2px solid #333695" src="img/<?php echo $noticia["imagen"]; ?>" alt="Imagen de la noticia">
+													<div class="text-center" style="padding-top: 20px; padding-bottom: 20px; background-color: #333695">
+														<span style="color: #fff; font-weight: bolder"><i class="fa fa-eye"></i> &nbsp <?php echo $noticia["veces_leido"]; ?></span>
+														<span style="color: #fff; font-weight: bolder; margin-left: 10px"><i class="fa fa-calendar"></i> &nbsp <?php echo date('d/m/Y', strtotime($noticia["fecha_actualizacion"])); ?></span>
+													</div>
+												</div>
+												<!-- <div class="p-img img-cover col-xs-12 col-md-5 news-img" style="background-image: url(img/<?php echo $noticia["imagen"]; ?>);">
 													<div class="p-info clearfix">
 														<div class="pull-xs-left">
 															<span class="small text-uppercase"><?php echo date('d/m/Y', strtotime($noticia["fecha_actualizacion"])); ?></span>
@@ -223,7 +229,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 															<span><i class="ti-book"></i><?php echo $noticia["veces_leido"]; ?></span>
 														</div>
 													</div>
-												</div>
+												</div> -->
 												<div class="p-content text-justify" style="word-wrap: break-word">
 													<h5 style="margin-top: 0px;"><a class="text-black" href="#"><?php echo $noticia["titulo"]; ?></a></h5>
 													<p class="m-b-0"><?php echo $noticia["descripcion"]; ?></p>
@@ -238,8 +244,9 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										<?php foreach($noticias as $n): ?>
 											<div class="col-md-4">
 												<div class="box bg-white post post-3" style="border: 1px solid #333695;">
-													<div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);">
-													</div>
+													<a href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><img src="img/<?php echo $n["imagen"]; ?>" style="width: 100%; height: 280px; border-bottom: 1px solid rgba(0, 0, 0, 0.125);" alt="Img Noticia"></a>
+													<!-- <div class="p-img img-cover" style="background-image: url(img/<?php echo $n["imagen"]; ?>);">
+													</div> -->
 													<div class="p-content" style="min-height: 220px;">
 														<a class="text-black" href="noticias.php?n=<?php echo "$n[amigable]-$n[id]"; ?>"><h5><?php echo $n["titulo"]; ?></h5></a>
 														<div>
@@ -269,7 +276,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 						</div>
 						<div class="col-md-3">
 									<div class="card">
-										<div class="card-header text-uppercase" style="margin-bottom: 10px;"><h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">Noticias Populares <i class="fa fa-newspaper-o"></i></h3></div>
+										<div class="card-header text-uppercase" style="margin-bottom: 10px;"><h3 class="text-center title-rightbar">Noticias Populares <i class="fa fa-newspaper-o"></i></h3></div>
 										<div class="list-group">
 											<?php if($noticiasPopulares): ?>
 												<?php foreach($noticiasPopulares as $n): ?>
@@ -295,7 +302,7 @@ $categorias = $db->getAll("SELECT * FROM categorias ORDER BY RAND() LIMIT 5");
 										</div>
 									</div>
 									<div class="card">
-										<div class="card-header text-uppercase" style="margin-top: 35px; margin-bottom:10px;"><h3 class="text-center" style="background-color: #333695; padding-top: 10px; padding-bottom: 10px; border-bottom: 4px solid #00AEEF; color: #fff">Categorias <i class="fa fa-th-list"></i></h3></div>
+										<div class="card-header text-uppercase" style="margin-top: 35px; margin-bottom:10px;"><h3 class="text-center title-rightbar">Categorias <i class="fa fa-th-list"></i></h3></div>
 										<div class="list-group">
 											<?php if($categorias): ?>
 												<?php foreach($categorias as $c): ?>

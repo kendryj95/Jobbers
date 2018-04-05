@@ -84,6 +84,24 @@
 		    enable_page_level_ads: true
 		  });
 		</script>
+
+		<style>
+			.dropify-wrapper {
+				border: 2px solid #00AEEF;
+			}
+
+			.dropify-wrapper:hover {
+				background-size: 30px 30px;
+				background-image: -webkit-linear-gradient(135deg, rgba(0, 174, 239, 0.3) 25%, transparent 25%, transparent 50%, rgba(0, 174, 239, 0.3) 50%, rgba(0, 174, 239, 0.3) 75%, transparent 75%, transparent);
+				background-image: linear-gradient(-45deg, rgba(0, 174, 239, 0.3) 25%, transparent 25%, transparent 50%, rgba(0, 174, 239, 0.3) 50%, rgba(0, 174, 239, 0.3) 75%, transparent 75%, transparent);
+				-webkit-animation: stripes 2s linear infinite;
+				animation: stripes 2s linear infinite;
+			}
+
+			.dropify-wrapper .dropify-message span.file-icon {
+				color: #00AEEF;
+			}
+		</style>
 	</head>
 	<body class="large-sidebar fixed-sidebar fixed-header">
 
@@ -366,25 +384,30 @@
 								
 								<div class="modal fade" id="pic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog" role="document">
-										<div class="modal-content">
+										<div class="modal-content col-md-12 col-xs-12">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
-												<h4 class="modal-title" id="exampleModalLabel">Cambiar foto de perfil</h4>
+												<h4 class="modal-title" id="exampleModalLabel">Cambiar foto de perfil <i class="fa fa-camera"></i></h4>
 											</div>
-											<div class="modal-body">
-												<form method="POST" id="upload">
-													<input class="dropify" name="file" id="file" type="file" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png">
-												</form>
+											<div class="col-md-12 col-xs-12 modal-body">
+												<div class="col-md-4 col-xs-12 text-center" style="margin-top: 5vh">
+													<img src="img/<?php echo $_SESSION["ctc"]["pic"]; ?>" alt="" class="m-r-1" width="100" height="120">
+												</div>
+												<div class="col-md-8 col-xs-12">
+													<form method="POST" id="upload">
+														<input class="dropify" name="file" id="file" type="file" data-max-file-size="1M" data-allowed-file-extensions="jpg jpeg png">
+													</form>
+												</div>
 												<br>
 												<div class="alert alert-danger" id="prompt" style="display: none">
 													<p><b>Sugerencia!</b> Te invitamos a comprimir tu imagen de perfil <a href="http://compressjpeg.com/es/" target="_blank" style="color: black">aquí</a></p>
 												</div>
 											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-												<button type="button" id="savePic" class="btn btn-primary">Guardar</button>
+											<div class="col-md-12 col-xs-12 modal-footer text-center">
+												<button type="button" class="btn btn-secondary btn-cookies" style="color: #fff" data-dismiss="modal">Cerrar &nbsp <i class="fa fa-times-circle"></i></button>
+												<button type="button" id="savePic" class="btn btn-primary btn-cookies">Guardar &nbsp <i class="fa fa-floppy-o"></i></button>
 											</div>
 										</div>
 									</div>
