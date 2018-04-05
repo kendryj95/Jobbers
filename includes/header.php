@@ -99,6 +99,8 @@
 							<a class="nav-link color-link sidebar-index-hover" href="<?php echo (strstr($_SERVER["REQUEST_URI"], "empresa/") ? "../" : ""); ?>trabajadores.php">
 								Ver Jobbers
 							</a>
+
+							
 							<?php else: ?>
 							<a class="nav-link color-link sidebar-index-hover actualiza_plan" href="javascript:void(0)" style="cursor: no-drop;">
 								Ver Jobbers

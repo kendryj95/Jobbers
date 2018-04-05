@@ -186,12 +186,20 @@
 
 							<div class="box bg-white product-view col-md-12 no-padding">
 								<div class="box-block">
+								<div class="col-sm-12" style="padding-top: 60px;">
+											<?php if($_SESSION["ctc"]["type"]==1)
+											{
+
+												echo'<a style="margin-top:-60px;margin-bottom:30px;" class="btn btn-primary" href="empresa/publicaciones.php">Mi panel</a>';
+											}?>
+										</div>
 									<div style="margin-bottom: 0px;">
 										<!-- <a href="empresa/perfil.php?e=<?php echo strtolower(str_replace(" ", "-", $publicacion["empresa_nombre"]))."-$publicacion[empresa_id]"; ?>"><?php echo $publicacion["empresa_nombre"]; ?></a> -->
 										
 										<div class="pv-title col-md-12">
 											<a style="font-size: 20px;" href="empresa/perfil.php?e=<?php echo strtolower(str_replace(" ", "-", $publicacion["empresa_nombre"]))."-$publicacion[empresa_id]"; ?>"><?php echo $publicacion["empresa_nombre"]; ?></a>
 											<?php echo $publicacion["titulo"]; ?>
+
 											<span class="pull-right text-muted"><small><?= formatDate(date("Y-m-d H:i:s"), $publicacion["fecha_actualizacion"]) ?></small></span>	
 											<div style="font-size: 13px;color: #999;text-transform: none;"><?php echo $publicacion["area_nombre"]; ?> / <?php echo $publicacion["sector_nombre"]; ?></div>
 											<?php if($publicacion["logo_home"] == 3): ?>
@@ -249,8 +257,10 @@
 												<?php endif ?>	
 											<?php endif ?>
 										</div>
+										
 										<div class="col-md-12">
 											<b>Disponibilidad: <?php echo $publicacion["disponibilidad"]; ?></b>
+
 
 											<?php  
 												$subject=$publicacion["descripcion"];
@@ -272,11 +282,6 @@
 																								
 											?>
 											
-											<?php if($_SESSION["ctc"]["type"]==1)
-											{
-
-												echo'<a style="margin-top:-60px;margin-bottom:30px;" class="btn btn-primary" href="empresa/publicaciones.php">Mi panel</a>';
-											}?>
 
 											
 											<?php if(!$postulado && $esTrabajador): ?>
