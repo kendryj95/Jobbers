@@ -241,6 +241,9 @@ $empresas = $db->getAll("
                                                     <label>Mensaje:</label><br>
                                                         <textarea id="detalle_empresa" class="form-control" placeholder="Mensaje..." style="resize: none; min-height: 150px;"></textarea>
                                                     </div>
+                                                    <div class="col-sm-12">
+                                                        <span style="color: #d10a00;font-size: 10px;">* Su correo se compartirá con el candidato.</span>
+                                                    </div>
                                                     </div>
                                                   </div>
                                                   <div class="modal-footer">
@@ -252,8 +255,8 @@ $empresas = $db->getAll("
                                             </div>
                                     <!--Fin modal contactar-->
                                     <div class="empresas" style="background-color: #e4e6e3; padding: 20px 10px; margin-top: 3px;">
-                                        <h5 style="text-align: left; margin-top: 0px;">EMPRESAS QUE LO HAN CONTACTADO</h5>
-                                        <?php $i = 1;if ($empresas): ?>
+                                        <!--<h5 style="text-align: left; margin-top: 0px;">EMPRESAS QUE LO HAN CONTACTADO</h5>-->
+                                        <?php /* $i = 1;if ($empresas): ?>
                                             <?php foreach ($empresas as $e): ?>
                                                 <?php if ($i <= 5): ?>
                                                     <div class="il-item">
@@ -275,7 +278,7 @@ $empresas = $db->getAll("
                                                     </div>
                                                 <?php endif?>
                                             <?php $i++;endforeach?>
-                                        <?php endif?>
+                                        <?php endif */?>
                                     </div>
 
                                     <!--Estilos estrellas de ranking-->
@@ -455,7 +458,7 @@ $empresas = $db->getAll("
                                                         <?php echo $mes[$e["mes_ingreso"] - 1] . "/" . $e["ano_ingreso"] . " - " . $egreso ?><br>
                                                         <strong>Encargado de Referencias: </strong>
                                                         <?php echo $e["nombre_encargado"] == null ? "No Aplica" : $e["nombre_encargado"] ?><br>
-                                                        <strong>Telefono del Encargado: </strong>
+                                                        <strong>Teléfono del Encargado: </strong>
                                                         <?php echo $e["tlf_encargado"] == null ? "No Aplica" : $e["tlf_encargado"] ?> <br>
                                                         <strong>Descripción de tareas: </strong>
                                                         <span style="word-wrap: break-word;">
