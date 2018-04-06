@@ -56,6 +56,67 @@
 			"amigable" => "hace-un-mes-o-menos"
 		)
 	);
+
+	$sql="
+	SELECT t1.id as id_publicacion,
+	t2.verificado as verificado,  
+	t2.nombre as nombre_empresa,
+	concat('empresa/img/',t7.directorio,'/',t2.id_imagen,'.',t7.extension) as imagen_empresa,
+	t1.descripcion as descripcion_publicacion,
+	t1.titulo as titulo_publicacion, 
+	t3.id_plan as plan,
+	timestampdiff(month,t1.fecha_actualizacion,curdate()) as meses,
+	timestampdiff(day,t1.fecha_actualizacion,curdate()) as dias,
+	timestampdiff(year,t1.fecha_actualizacion,curdate()) as anos,
+	t2.facebook,
+	t2.instagram,
+	t2.twitter,
+	t2.linkedin,
+	t8.provincia,
+	t9.localidad,
+	t1.fecha_actualizacion,
+	t5.amigable as sector,
+	t6.amigable as area,
+	t1.amigable as publicacion,
+	t4.id_sector,
+	t2.id  as id_empresa
+	from publicaciones t1 
+	LEFT JOIN empresas t2 ON t1.id_empresa = t2.id
+	LEFT JOIN empresas_planes t3 ON t1.id_empresa = t3.id_empresa
+
+	LEFT JOIN provincias t8 ON t8.id = t1.provincia
+	LEFT JOIN localidades t9 ON t9.id = t1.localidad
+
+	LEFT JOIN publicaciones_sectores t4 ON t1.id=t4.id_publicacion
+	LEFT JOIN areas_sectores t5 ON t4.id_sector=t5.id 
+	LEFT JOIN areas t6 ON t5.id_area=t6.id 
+	LEFT JOIN imagenes t7 ON t2.id_imagen=t7.id
+	GROUP BY t1.id ORDER BY t3.id_plan DESC,t1.fecha_actualizacion DESC limit 0,4"
+
+	;
+
+	$datos_publicaciones = $db->getAll($sql);
+
+	function formatDate($dateMayor, $dateMenor){
+		$menor = new DateTime($dateMenor);
+		$mayor = new DateTime(date($dateMayor));
+		$intervalo = $mayor->diff($menor);
+
+		if ($intervalo->format("%m") != 0) {
+			$m = $intervalo->format("%m") == 1 ? "mes" : "meses";
+			return $intervalo->format("Hace %m $m");
+		} elseif ($intervalo->format("%a") != 0){
+			$d = $intervalo->format("%a") == 1 ? "día" : "días";
+			return $intervalo->format("Hace %a $d");
+		} elseif ($intervalo->format("%h") != 0){
+			$h = $intervalo->format("%h") == 1 ? "hora" : "horas";
+			return $intervalo->format("Hace %h $h");
+		} elseif ($intervalo->format("%i") != 0){
+			return $intervalo->format("Hace %i min");
+		} else {
+			return $intervalo->format("Hace %s seg");
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,54 +181,20 @@
 					<div id="caja-flotante" >
 						<h3 class="text-center title-rightbar" style="margin-top: 10px; font-family: 'Quattrocento', serif;">Top 4 Ofertas publicadas <i class="fa fa-newspaper-o"></i></h3>
 						<div class="list-group">
-							<a href="#" class="list-group-item sidebar-index-hover" style="border: 1px solid #333695">
+							<?php foreach ($datos_publicaciones as $pub): ?>
+							<a href="empleos-detalle.php?a=<?= $pub["area"] ?>&s=<?= $pub["sector"] ?>&p=<?= $pub["publicacion"] ?>" class="list-group-item sidebar-index-hover" style="border: 1px solid #333695">
 								<div class="media-left">
 									<div class="avatar box-48">
-										<img class="b-a-radius-0-125" src="empresa/img/profile/1784.jpg" alt="">
+										<img class="b-a-radius-0-125" src="<?= $pub["imagen_empresa"] ?>" alt="<?= $pub["nombre_empresa"] ?>">
 									</div>
 								</div>
 								<div class="media-body">
-									<p class="title-offer" style="padding-right: 35px;" title="<?= str_replace("\"","",$noticia["titulo"]) ?>">RH Master Selecciona COORDINADOR DE OPERACIONES</p>
-									<p style="font-size: 12px; margin-bottom: 5px;"><i class="fa fa-map-marker"></i> &nbsp Cordoba - Cordoba Capital</p>
-									<p style="font-size: 12px;"><i class="fa fa-calendar"></i> &nbsp Hoy</p>
+									<p class="title-offer" style="padding-right: 35px;" title="<?= str_replace("\"","",$pub["titulo_publicacion"]) ?>"><?= $pub["titulo_publicacion"] ?></p>
+									<p style="font-size: 12px; margin-bottom: 5px;"><i class="fa fa-map-marker"></i> &nbsp; <?= $pub["provincia"] ?> - <?= $pub["localidad"] ?></p>
+									<p style="font-size: 12px;"><i class="fa fa-calendar"></i> &nbsp; <?= formatDate(date("Y-m-d H:i:s"), $pub["fecha_actualizacion"]) ?></p>
 								</div>
 							</a>
-							<a href="#" class="list-group-item sidebar-index-hover" style="border: 1px solid #333695">
-								<div class="media-left">
-									<div class="avatar box-48">
-										<img class="b-a-radius-0-125" src="empresa/img/profile/1784.jpg" alt="">
-									</div>
-								</div>
-								<div class="media-body">
-									<p class="title-offer" style="padding-right: 35px;" title="<?= str_replace("\"","",$noticia["titulo"]) ?>">Editores de diarios /Revistas de barrio</p>
-									<p style="font-size: 12px; margin-bottom: 5px;"><i class="fa fa-map-marker"></i> &nbsp Cordoba - Cordoba Capital</p>
-									<p style="font-size: 12px;"><i class="fa fa-calendar"></i> &nbsp Hoy</p>
-								</div>
-							</a>
-							<a href="#" class="list-group-item sidebar-index-hover" style="border: 1px solid #333695">
-								<div class="media-left">
-									<div class="avatar box-48">
-										<img class="b-a-radius-0-125" src="empresa/img/profile/1784.jpg" alt="">
-									</div>
-								</div>
-								<div class="media-body">
-									<p class="title-offer" style="padding-right: 35px;" title="<?= str_replace("\"","",$noticia["titulo"]) ?>">RH Master Selecciona Supervisor General/Jefe de Operaciones/ Gerente</p>
-									<p style="font-size: 12px; margin-bottom: 5px;"><i class="fa fa-map-marker"></i> &nbsp Cordoba - Cordoba Capital</p>
-									<p style="font-size: 12px;"><i class="fa fa-calendar"></i> &nbsp Hoy</p>
-								</div>
-							</a>
-							<a href="#" class="list-group-item sidebar-index-hover" style="border: 1px solid #333695">
-								<div class="media-left">
-									<div class="avatar box-48">
-										<img class="b-a-radius-0-125" src="empresa/img/profile/1784.jpg" alt="">
-									</div>
-								</div>
-								<div class="media-body">
-									<p class="title-offer" style="padding-right: 35px;" title="<?= str_replace("\"","",$noticia["titulo"]) ?>">Operador de venta telefonica - Pila o Por mi en Córdoba - Telenik SA</p>
-									<p style="font-size: 12px; margin-bottom: 5px;"><i class="fa fa-map-marker"></i> &nbsp Cordoba - Cordoba Capital</p>
-									<p style="font-size: 12px;"><i class="fa fa-calendar"></i> &nbsp Hoy</p>
-								</div>
-							</a>
+							<?php endforeach ?>
 						</div>
 					</div>
 				</div>
