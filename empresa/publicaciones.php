@@ -277,7 +277,7 @@
 									<th>actividad</th>
 									<th>Estado</th>
 									<th>Fecha y hora</th>
-									<th>Contactar</th>
+									<th>Etapa</th>
 								</tr>
 							</thead>
 							<tbody>

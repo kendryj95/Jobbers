@@ -42,7 +42,9 @@ require('../../limpiarCadena.php');
 							instagram,
 							snapchat,
 							suspendido,
-							confirmar
+							confirmar,
+							correo_electronico,
+							telefono
 						FROM
 							empresas
 						WHERE
@@ -65,6 +67,8 @@ require('../../limpiarCadena.php');
 						else {
 							$_SESSION["ctc"]["empresa"] = $info;
 							$_SESSION["ctc"]["id"] = $info["id"];
+							$_SESSION["ctc"]["correo_empresa"] = $info["correo_electronico"];
+							$_SESSION["ctc"]["telefono_empresa"] = $info["telefono"];
 							$_SESSION["ctc"]["uid"] = $info["uid"];
 							$_SESSION["ctc"]["name"] = $info["nombre"];
 							$_SESSION["ctc"]["type"] = 1;

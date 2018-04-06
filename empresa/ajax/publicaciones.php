@@ -525,7 +525,7 @@
 							<div style="font-size:11px;">
 							<strong>Edad: </strong>' . $fila["edad"] . '<strong> 
 							Sexo: </strong>' . $sexos[$fila["id_sexo"] ]. '
-							<strong>Marcador: </strong>' . $marcadores[$fila["marcador"] ]. '
+							 
 							</div> 
 							',						 
 							$fila['edad'],
@@ -539,9 +539,7 @@
 							$fila['marcador'],
 							$fila['fecha_hora'],
 							'<div class="acciones-publicacion text-center" data-target="' . $fila["id_trabajador"] . '"> 
-							<a class="accion-publicacion contactJobber waves-effect waves-light" href="javascript:void(0)" title="Contactar jobber" data-id="' . $fila["uid_trabajador"] . '" data-toggle="modal" data-target="#contactM" onclick="callEvent(this)"><img src="img/chat.png">
-							</a> 
-
+							 <strong></strong>'. $marcadores[$fila["marcador"]].'
 							</div>',					
 						);
 					}

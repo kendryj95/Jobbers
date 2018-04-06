@@ -1,4 +1,6 @@
-<?php if ((!strstr($_SERVER["REQUEST_URI"], "admin/")) && (@$_SESSION['ctc']['plan']['nombre'] != 'Gratis')): ?>
+<?php 
+/*
+if ((!strstr($_SERVER["REQUEST_URI"], "admin/")) && (@$_SESSION['ctc']['plan']['nombre'] != 'Gratis')): ?>
 
 
 <div class="site-sidebar-second custom-scroll custom-scroll-dark" id="scrollable">
@@ -93,4 +95,4 @@
 		</div>
 	<?php endif ?>
 
-<?php endif; ?>
+<?php endif; */?>

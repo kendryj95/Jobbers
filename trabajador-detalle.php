@@ -188,13 +188,16 @@ $empresas = $db->getAll("
                                                     <?php if ($trabajador["telefono"] != ""): ?>
                                                     <div style="padding-bottom: 20px;">
                                                         <div class="btn-group " role="group" style="margin-top: 20px; width: 100%">
-                                                            <button type="button" class="btn btn-outline-primary btn-block btn-rounded waves-effect dropdown-toggle contact-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%">
+                                                            <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-primary btn-block btn-rounded waves-effect dropdown-toggle contact-btn"  style="width: 100%">
                                                                 Contactar
                                                             </button>
+
+                                                            <!--
                                                             <div class="dropdown-menu col-md-12">
                                                                 <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#contactPhone"><span class="ti-mobile" style="margin-right: 3px;"></span> Whatsapp</a>
                                                                 <a class="dropdown-item" href="javascript:void(0)"  id="contact" data-toggle="modal" data-target="#contactM"><span class="ti-comments" style="margin-right: 3px;"></span> Chat / Correo</a>
                                                             </div>
+                                                            -->
                                                         </div>
                                                     </div>
                                                     <?php else: ?>
@@ -212,7 +215,42 @@ $empresas = $db->getAll("
                                                 <?php endif?>
                                         <?php endif;?>
                                     </div>
+                                    <!--Modal contactar-->
 
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 style="float: left;" class="modal-title" id="exampleModalLabel">Contactar por correo</h5>
+                                                    <button style="float: right;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                        <label>Candidato:</label><br>
+                                                        <input id="correo_cliente" class="form-control" value="<?php echo $trabajador["correo_electronico"]; ?>" readonly="" type="text" name="">
+                                                        <label>Mi correo de contacto:</label><br>
+                                                        <input id="correo_empresa" class="form-control" value="<?php echo $_SESSION["ctc"]["correo_empresa"]; ?>"  type="text" name="">
+                                                        <label>Mi teléfono:</label><br>
+                                                        <input id="telefono_empresa" class="form-control" value="<?php echo $_SESSION["ctc"]["telefono_empresa"]; ?>"  type="text" name="">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                    <label>Mensaje:</label><br>
+                                                        <textarea id="detalle_empresa" class="form-control" placeholder="Mensaje..." style="resize: none; min-height: 150px;"></textarea>
+                                                    </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                    <button onClick="contactar_trabajador()" type="button" class="btn btn-primary">Enviar</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                    <!--Fin modal contactar-->
                                     <div class="empresas" style="background-color: #e4e6e3; padding: 20px 10px; margin-top: 3px;">
                                         <h5 style="text-align: left; margin-top: 0px;">EMPRESAS QUE LO HAN CONTACTADO</h5>
                                         <?php $i = 1;if ($empresas): ?>
@@ -383,7 +421,7 @@ $empresas = $db->getAll("
                                                     <?php if(isset($_SESSION['ctc']['empresa']) || $_SESSION['ctc']['id'] == $idTrab): ?>
                                                     <?php if(@$_SESSION['ctc']['plan']['id_plan'] > 1 || $_SESSION['ctc']['id'] == $idTrab): ?>
                                                     <strong>DNI: </strong> <span id="labelDNI"><?php echo $trabajador["numero_documento_identificacion"]; ?></span><br>
-                                                    <strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $trabajador["cuil"]; ?></span><br>
+                                                    <strong>Número de CUIL: </strong> <span id="labelCuil"><?php echo $trabajador["cuil"]; ?></span><br>
                                                     <?php endif; ?>
                                                     <?php endif; ?>
                                                     <strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $trabajador["localidad"] . ", " . $trabajador["provincia"] . ", " . $trabajador["pais"] ?></span><br>
@@ -395,7 +433,7 @@ $empresas = $db->getAll("
                                                     <strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $trabajador["fecha_nacimiento"] !== null ? date('Y-m-d', strtotime($trabajador["fecha_nacimiento"])) : ""; ?></span><br>
                                                     <strong>Edad: </strong> <span id="edad"><?php echo $trabajador["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($trabajador["fecha_nacimiento"]))) . " años" : ""; ?></span><br>
                                                     <!-- <strong>Correo electrónico: </strong> <span id="labelEmail"><?php echo $trabajador["correo_electronico"]; ?></span><br> -->
-                                                    <strong>Telefonos: </strong> <span id="labelTlf"><?php echo $trabajador["telefono"] . $trabajador["telefono_alternativo"] = !"" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
+                                                    <strong>Teléfonos: </strong> <span id="labelTlf"><?php echo $trabajador["telefono"] . $trabajador["telefono_alternativo"] = !"" ? " / " . $trabajador["telefono_alternativo"] : ''; ?></span>
                                                 </p>
                                                 <h4 class="title-cv">&nbsp EXPERIENCIA LABORAL</h4>
                                                 <div id="experiencias">
@@ -565,6 +603,35 @@ $empresas = $db->getAll("
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            function contactar_trabajador()
+            {
+                $.ajax({
+                            type: 'GET',
+                            url: 'empresa/correo/mail.php',
+                             type:"POST",
+                            data: {
+                                correo_cliente: $("#correo_cliente").val(),
+                                telefono_empresa: $("#telefono_empresa").val(),
+                                correo_empresa: $("#correo_empresa").val(),
+                                detalle_cliente: $("#detalle_empresa").val()
+                            },
+                            success: function (data) {
+                                 if(data)
+                                 {
+                                    swal("Operación exitosa!", "Tu mensaje ha sido enviado satisfactoriamente!", "success");
+                                     $("#detalle_empresa").val("");
+                                     $("#exampleModal").modal("hide");
+                                 }
+                                 else
+                                 {  
+                                    swal("Algo ha salido mal.", "Tu mensaje no sido enviado inténtelo de nuevo!", "success");
+                                     
+                                 }
+                            }
+                        });
+            }
+        </script>
         <script>
             var u1 = <?php echo isset($_SESSION["ctc"]["uid"]) ? $_SESSION["ctc"]["uid"] : 0; ?>;
             var u2 = <?php echo empty($trabajador["uid"]) ? 0 : $trabajador["uid"]; ?>;
