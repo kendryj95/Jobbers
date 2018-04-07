@@ -16,8 +16,10 @@ define('RECORDATORIO_CV', 9);
 define('SEARCH_TRAB', 10);
 
 require_once('../../classes/DatabasePDOInstance.function.php');
+require_once('../../classes/Email.class.php');
 
 $db = DatabasePDOInstance();
+$email = new Email;
 
 $op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : false;
 
@@ -160,20 +162,13 @@ if($op) {
 			break;
 		case RECORDATORIO_CV:
 
-			$datos_personales = $db->getRow("SELECT * FROM trabajadores WHERE id=".$_REQUEST["i"]);
+			$datos_personales = $db->getRow("SELECT nombres, correo_electronico AS correo FROM trabajadores WHERE id=".$_REQUEST["i"]);
 
-			$destinatario = $datos_personales['correo_electronico'];
-			$asunto = "Tu CV está incompleto - Jobbers Argentina";
-			$headers = "MIME-Version: 1.0\r\n";
-			$headers .= "Content-type: text/html; charset= iso-8859-1\r\n";
-			$headers .= "From: Jobbers Argentina < administracion@jobbers.com >\r\n";
+			$destinatario = $datos_personales['correo'];
+			$nombre_destinatario = $datos_personales['nombres'];
 
-			$mensaje = "<h3>Hola $datos_personales[nombres]</h3><br>";
-			$mensaje .= "<h3>No has completado toda la información para tener un CV óptimo.</h3>";
-			$mensaje .= "<h3>Recuerda que mientras más información contenga tu CV tienes mucha más probabilidades de conseguir un buen empleo gracias.</h3><br>";
-			$mensaj .= "<h3>Jobbers Argentina \"Trabajamos para facilitarte tu busqueda de EMPLEO\".</h3><br>";
-
-			$enviado = mail($destinatario,$asunto,$mensaje,$headers);
+			$enviado = $email->recordatorio_cv($destinatario,$nombre_destinatario);
+			var_dump($enviado);
 
 			if ($enviado){
 				$json = array(
