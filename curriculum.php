@@ -488,7 +488,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											<div class="form-group row">
 												<div class="col-xs-12 col-md-2"></div>
 												<div class="col-xs-12 col-md-10">
-													<input type="checkbox" id="trab_actual"> Trabajando actualmente
+													<input   type="checkbox" id="trab_actual"> Trabajando actualmente
 												</div>
 											</div>
 
@@ -545,7 +545,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 																	<td><?php echo $e["tipo_puesto"]; ?></td>
 																	<td>
 																		<div class="pull-xs-left">
-																			<a class="text-success modifyEL" style="font-size: 20px" href="javascript:void(0)" data-target="<?php echo $e["id"]; ?>" data-option="2"><i class="fa fa-pencil-square"></i></a>
+																			<a onClick="habiliar()" class="text-success modifyEL" style="font-size: 20px" href="javascript:void(0)" data-target="<?php echo $e["id"]; ?>" data-option="2"><i class="fa fa-pencil-square"></i></a>
 																			<a class="text-danger deleteItem" style="font-size: 20px; margin-left: 5px;" href="javascript:void(0)" data-target="<?php echo $e["id"]; ?>" data-option="2"><i class="fa fa-trash"></i></a>
 																		</div>
 																	</td>
@@ -1328,8 +1328,17 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 		<script type="text/javascript" src="vendor/bootstrap-switch-master/dist/js/bootstrap-switch.min.js"></script>
 
 			<script>
-
+				function habiliar()
+					{
+						 
+						$("#trab_actual").prop('checked', false);
+						$('#monthE').prop('disabled', false);
+						$('#yearE').prop('disabled', false);
+						
+					} 
 				$(document).ready(function(){
+					
+					$("#trab_actual").prop('checked', false);
 
 					$('#stateS').change(function(){
 						if (parseInt($(this).val()) == 1 || parseInt($(this).val()) == 3){
@@ -1668,6 +1677,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 
 					<?php if ($experiencias): ?>
 					$(".modifyEL").click(function() {
+
 						currentParent = $(this).closest("tr");
 						var target = $(this).attr("data-target");
 						var option = $(this).attr("data-option");
@@ -1704,6 +1714,21 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 								$("#nom_enc").val(data.nombre_encargado);
 								$("#tlf_enc").val(data.tlf_encargado);
 								$("#descriptionArea").val(data.descripcion_tareas);
+								
+								if($('#trab_actual').prop('checked'))
+								{
+									$('#monthE').hide();
+									$('#yearE').hide();
+									$('#label_monthE').hide();
+									$('#label_yearE').hide();
+								}else
+								{
+									$('#monthE').show();
+									$('#yearE').show();
+									$('#label_monthE').show();
+									$('#label_yearE').show();
+								}
+								
 							}
 						});
 					});
@@ -2161,7 +2186,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											var text = '';
 											if(edit == 2) {
 												data.data.forEach(function(d) {
-													currentParent.html('<td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyEL" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px"><i class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td>');
+													currentParent.html('<td>'+d.nombre_empresa+'</td><td>'+d.nombre_pais+'</td><td>'+d.actividad_empresa+'</td><td>'+d.tipo_puesto+'</td><td><div class="pull-xs-left"><a class="text-success m-r-1 modifyEL" href="javascript:void(0)" onClick="habiliar()" data-target="'+d.id+'" data-option="2" style="font-size: 20px"><i  class="fa fa-pencil-square"></i></a> <a class="text-danger deleteItem" href="javascript:void(0)" data-target="'+d.id+'" data-option="2" style="font-size: 20px; margin-left: 5px"><i class="fa fa-trash"></i></a></div></td>');
 													text += '<p style="margin-left: 50px;"> <strong>Empresa: </strong> '+d.nombre_empresa+'<br> <strong>País: </strong> '+d.nombre_pais+'<br> <strong>Actividad: </strong> '+d.actividad_empresa+'<br> <strong>Tipo puesto: </strong> '+d.tipo_puesto+'<br> </p>';
 												});
 												$("#experiencias").append(text);
@@ -2175,6 +2200,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											}
 
 											$(".modifyEL").click(function() {
+												alert("entro");
 												currentParent = $(this).closest("tr");
 												var target = $(this).attr("data-target");
 												var option = $(this).attr("data-option");
@@ -2183,6 +2209,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														$(this).attr("data-edit", 2);
 														$(this).attr("data-i", target);
 													}
+											 
 												});
 
 												$.ajax({
