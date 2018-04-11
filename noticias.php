@@ -66,7 +66,7 @@ else {
 		imagenes
 		ON
 		imagenes.id = noticias.id_imagen
-		ORDER BY noticias.fecha_creacion DESC
+		ORDER BY noticias.fecha_actualizacion DESC
 		");
 }
 

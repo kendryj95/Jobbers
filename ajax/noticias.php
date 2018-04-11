@@ -11,6 +11,7 @@
 	define('DETALLE_NOTICIA', 9);
 	define('MODIFICAR_NOTICIA', 10);
 	define('ELIMINAR_NOTICIA', 11);
+	define('RENOVAR_NOTICIA', 12);
 
 	require_once('../classes/DatabasePDOInstance.function.php');
 	require_once('../slug.function.php');
@@ -82,7 +83,7 @@
 							($pub["nombre"] == "" ? "Sin categoría" : $pub["nombre"]),
 							($pub["nombre"] == "" ? "Sin categoría" : $pub["nombre"]),
 							date('d/m/Y', strtotime($pub["fecha_creacion"])),
-							'<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar noticia"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar noticia" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> </div>'
+							'<div class="acciones-publicacion" data-target="' . $pub["id"] . '"> <button type="button" class="accion-publicacion btn btn-primary waves-effect waves-light" onclick="modificarPublicacion(this);" title="Modificar noticia"><span class="ti-pencil"></span></button> <button type="button" class="accion-publicacion btn btn-danger waves-effect waves-light" title="Eliminar noticia" onclick="eliminarPublicacion(this);"><span class="ti-close"></span></button> <button type="button" class="accion-categoria btn btn-primary waves-effect waves-light" title="Renovar Noticia" onclick="renovarNoticia(this);"><span class="ti-reload"></span></button></div>'
 						);
 					}
 				}
@@ -143,6 +144,11 @@
 				}
 				$db->query("DELETE FROM imagenes WHERE id=$pic[id]");
 				$db->query("DELETE FROM noticias WHERE id=$_REQUEST[i]");
+				echo json_encode(array("msg" => "OK"));
+				break;
+			case RENOVAR_NOTICIA:
+				
+				$db->query("UPDATE noticias SET fecha_actualizacion=CURDATE() WHERE id=$_REQUEST[i]");
 				echo json_encode(array("msg" => "OK"));
 				break;
 		}
