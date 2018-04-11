@@ -792,7 +792,7 @@
 							});  
 						});
 
-						url="empleos-detalle.php?a="+datos[key]["area"]+"&s="+datos[key]["sector"]+"&p="+datos[key]["publicacion"]+"";
+						url="empleos-detalle.php?a="+datos[key]["area"]+"&s="+datos[key]["sector"]+"&p="+datos[key]["publicacion"]+"&e="+datos[key]["id_empresa"];
 
 						// Medallas
 						if(datos[key]["plan"]==4){medalla='<img src="img/gold-medal.png" style="float: right;margin-top: -10px;">';}

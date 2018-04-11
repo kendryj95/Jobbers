@@ -32,6 +32,7 @@
 	$a = isset($_REQUEST["a"]) ? $_REQUEST["a"] : false;
 	$s = isset($_REQUEST["s"]) ? $_REQUEST["s"] : false;
 	$p = isset($_REQUEST["p"]) ? $_REQUEST["p"] : false;
+	$e = isset($_REQUEST["e"]) ? $_REQUEST["e"] : false;
 
 	$publicacion = $db->getRow("
 		SELECT
@@ -63,7 +64,7 @@
 		INNER JOIN empresas AS e ON p.id_empresa = e.id
 		INNER JOIN empresas_planes AS pl ON p.id_empresa = pl.id_empresa
 		INNER JOIN disponibilidad AS d ON d.id = p.disponibilidad
-		WHERE p.amigable = '$p' AND a.amigable = '$a' AND ase.amigable = '$s'
+		WHERE p.amigable = '$p' AND a.amigable = '$a' AND ase.amigable = '$s' AND e.id = $e
 	");
 
 	$publicacionesSimilares = $db->getAll("
@@ -74,6 +75,7 @@
 			p.amigable,
 			CONCAT(img.directorio, '/', img.nombre,'.' ,img.extension) AS empresa_imagen,
 			e.nombre AS empresa_nombre,
+			e.id AS id_empresa,
 			a.id AS area_id,
 			a.nombre AS area_nombre,
 			a.amigable AS area_amigable,
@@ -303,7 +305,7 @@
 								<div class="card-header text-uppercase text-center"><h3 class="title-rightbar">Ofertas de empleo similares <i class="fa fa-briefcase"></i></h3></div>
 									<div class="list-group">
 										<?php foreach($publicacionesSimilares as $pub): ?>
-												<a class="list-group-item sidebar-index-hover item-news" style="text-decoration: none" href="empleos-detalle.php?a=<?php echo $pub["area_amigable"]; ?>&s=<?php echo $pub["sector_amigable"]; ?>&p=<?php echo $pub["amigable"]; ?>">
+												<a class="list-group-item sidebar-index-hover item-news" style="text-decoration: none" href="empleos-detalle.php?a=<?php echo $pub["area_amigable"]; ?>&s=<?php echo $pub["sector_amigable"]; ?>&p=<?php echo $pub["amigable"]; ?>&e=<?= $pub["id_empresa"] ?>">
 													<div class="media">
 														<div class="media-left">
 															<div class="avatar box-48">
