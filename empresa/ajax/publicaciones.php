@@ -450,13 +450,13 @@
 				
 				switch ($plan['id_plan']) {
 					case 1: // Plan Gratis
-						$limit = " LIMIT 10";
+						$limit = "LIMIT 10";
 						break;
 					case 2: // Plan Bronce
-						$limit = " LIMIT 40";
+						$limit = "LIMIT 40";
 						break;
 					case 3: // Plan Plata
-						$limit = " LIMIT 100";
+						$limit = "LIMIT 100";
 						break;
 				}
 				$sql="SELECT 
@@ -487,7 +487,7 @@
 					LEFT JOIN actividades_empresa t10 ON t10.id = t9.id_actividad_empresa
 					                
 					WHERE t1.id=".$id."
-					GROUP by t3.id";
+					GROUP by t3.id $limit";
 
 
 			 
