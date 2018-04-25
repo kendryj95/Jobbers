@@ -46,6 +46,7 @@
 			p.titulo,
 			p.descripcion,
 			p.fecha_actualizacion,
+			p.id_empresa,
 			a.amigable AS area_amigable,
 			a.nombre AS area_nombre,
 			ase.amigable AS sector_amigable,
@@ -437,7 +438,7 @@
 														<span class="font-90 stream-meta">Publicado desde el <?php echo date('d/m/Y', strtotime($p["fecha_actualizacion"])); ?></span>
 														<div class="stream-body">
 															<p><?php echo $p["descripcion"]; ?></p>
-															<a style="color: white; margin-top: 10px; float: right;" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light" href="../empleos-detalle.php?a=<?php echo "$p[area_amigable]&s=$p[sector_amigable]&p=$p[amigable]"; ?>">Ver más..</a>
+															<a style="color: white; margin-top: 10px; float: right;" class="btn btn-primary w-min-sm m-b-0-25 waves-effect waves-light" href="../empleos-detalle.php?a=<?php echo "$p[area_amigable]&s=$p[sector_amigable]&p=$p[amigable]&e=$p[id_empresa]"; ?>">Ver más..</a>
 														</div>
 													</div>
 												</div>

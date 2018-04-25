@@ -210,7 +210,7 @@
 								<label for="modal-agregar-publicacion-titulo">Título</label>
 								<div class="input-group">
 									<input type="text" class="form-control" name="titulo" id="modal-agregar-publicacion-titulo" placeholder="" onkeyup="calcularCaracteres(this.value)">
-									<span class="input-group-addon" id="caracteresDisp">50</span>
+									<span class="input-group-addon caracteresDisp">50</span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -250,7 +250,10 @@
 							</div>
 							<div class="form-group">
 								<label for="modal-modificar-publicacion-titulo">Título</label>
-								<input type="text" class="form-control" name="titulo" id="modal-modificar-publicacion-titulo" placeholder="">
+								<div class="input-group">
+									<input type="text" class="form-control" name="titulo" id="modal-modificar-publicacion-titulo" placeholder="" onkeyup="calcularCaracteres(this.value)">
+									<span class="input-group-addon caracteresDisp">50</span>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="modal-modificar-publicacion-descripcion">Descripción</label>
@@ -484,6 +487,8 @@
 					var descripcion = tinyMCE.get('modal-modificar-publicacion-descripcion').getContent();
 					if(titulo == '' || descripcion == '') {
 						alert("Faltan algunos campos");
+					}else if (titulo.length > 50) {
+						swal("Error!", "El título solo puede tener un maximo de 50 caracteres.", "error");
 					}
 					else {
 						$("#textoDescripcionNoticiaModificar").val(descripcion);
@@ -696,14 +701,53 @@
 				var totalDisp = disp - tamValor;
 
 				if (totalDisp <= 0) {
-					$('#caracteresDisp').css('color', 'red');
+					$('.caracteresDisp').css('color', 'red');
 				} else {
-					$('#caracteresDisp').css('color', 'black');
+					$('.caracteresDisp').css('color', 'black');
 				}
 
-				$('#caracteresDisp').text(totalDisp);
+				$('.caracteresDisp').text(totalDisp);
 
 
+			}
+
+			function renovarNoticia(btn){
+				var $btn = $(btn);
+				var $parent = $btn.closest('.acciones-publicacion');
+				idNoticia = $parent.attr('data-target');
+
+				swal({
+				  title: "Renovación",
+				  text: "Está seguro que desea renovar esta noticia?",
+				  type: "question",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "Aceptar",
+				  cancelButtonText: "Cancelar",
+				  closeOnConfirm: false
+				});
+				$(".show-swal2.visible .swal2-confirm").attr('data-action', 'renovar');
+				$(".show-swal2.visible .swal2-confirm").click(function() {
+					if($(this).attr('data-action') == 'renovar') {
+						$(this).attr('data-action', '');
+						$.ajax({
+							url: '../ajax/noticias.php',
+							type: 'GET',
+							data: 'op=12&i=' + idNoticia,
+							dataType: 'json'
+						}).done(function(data, textStatus, jqXHR) {
+							switch(jqXHR.status) {
+								case 200:
+									var json = JSON.parse(jqXHR.responseText);
+									if(json.msg == 'OK') {
+										swal("Operación exitosa!", "Se renovó la noticia satisfactoriamente", "success");
+										tablaPublicaciones.ajax.reload();
+									}
+									break;
+							}
+						});
+					}
+				});
 			}
 		</script>
 
