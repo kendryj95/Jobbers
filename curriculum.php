@@ -2200,7 +2200,7 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											}
 
 											$(".modifyEL").click(function() {
-												alert("entro");
+										 
 												currentParent = $(this).closest("tr");
 												var target = $(this).attr("data-target");
 												var option = $(this).attr("data-option");
