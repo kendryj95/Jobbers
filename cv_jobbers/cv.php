@@ -31,13 +31,14 @@ validar($pdf);
 include('includes/info_extra.php');
 //Logo jobbers
 //Pie depagina
-include('includes/fotter.php');
+
 
 function validar($pdf)
 {
 	if($pdf->GetY()>220)
 	{
 		$pdf->AddPage();
+		include('includes/fotter.php');
 	}
 }
 $pdf->Output();
