@@ -31,19 +31,23 @@ if(count($datos_otros_conocimentos)>0)
 				else
 				{
 					$partes=explode(" ",$contenido_datos);
+					$datos_mostrar="";
 					foreach ($partes as $key ) {
-						if(strlen($datos_imprimir)>100)
+						$datos_mostrar=$datos_mostrar." ".$key;
+						if(strlen($datos_mostrar)>100)
 						{
-							$pdf->Cell(190,5,''.utf8_decode("".$datos_imprimir."").'',0,1,'0');
-							$variable_bandera=1;
-							$datos_imprimir="";
+							$pdf->Cell(190,5,''.utf8_decode("".$datos_mostrar."").'',0,1,'0');
+							 
+							//$variable_bandera=1;
+							$datos_mostrar="";
 						}
-						else
+						/*else
 						{
 							$datos_imprimir=$datos_imprimir." ".$key;
 							$variable_bandera=0;
-						}
+						}*/
 					}
+					$pdf->Cell(190,5,''.utf8_decode("".$datos_mostrar."").'',0,1,'0');
 				}
 			}
 	}
