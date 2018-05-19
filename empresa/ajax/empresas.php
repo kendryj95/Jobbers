@@ -73,8 +73,56 @@ require('../../limpiarCadena.php');
 							$_SESSION["ctc"]["name"] = $info["nombre"];
 							$_SESSION["ctc"]["type"] = 1;
 
-							$_SESSION["ctc"]["plan"] = $db->getRow("SELECT empresas_planes.*, planes.nombre FROM empresas_planes INNER JOIN planes ON planes.id=empresas_planes.id_plan WHERE empresas_planes.id_empresa=$info[id]");;
-							$_SESSION["ctc"]["servicio"] = $db->getRow("SELECT empresas_servicios.*, servicios.nombre FROM empresas_servicios INNER JOIN servicios ON servicios.id=empresas_servicios.id_servicio WHERE empresas_servicios.id_empresa=$info[id]");;
+							$plan = $db->getRow("SELECT empresas_planes.*, planes.nombre FROM empresas_planes INNER JOIN planes ON planes.id=empresas_planes.id_plan WHERE empresas_planes.id_empresa=$info[id]");
+
+
+							switch ($plan["id_plan"]) {
+								case 2:
+									$timestamp_today = strtotime(date("Y-m-d"));
+									$timestamp_vencimiento = strtotime("+30 day", strtotime($plan["fecha_plan"]));
+
+									if ($timestamp_today >= $timestamp_vencimiento) {
+										$db->query("UPDATE empresas_planes SET id_plan=1, fecha_plan=".date("Y-m-d")." WHERE id_empresa=".$info["id"]);
+										$_SESSION["ctc"]["plan"] = $db->getRow("SELECT empresas_planes.*, planes.nombre FROM empresas_planes INNER JOIN planes ON planes.id=empresas_planes.id_plan WHERE empresas_planes.id_empresa=$info[id]");
+									} else {
+										$_SESSION["ctc"]["plan"] = $plan;
+									}
+									break;
+								
+								case 3:
+									$timestamp_today = strtotime(date("Y-m-d"));
+									$timestamp_vencimiento = strtotime("+30 day", strtotime($plan["fecha_plan"]));
+
+									if ($timestamp_today >= $timestamp_vencimiento) {
+										$db->query("UPDATE empresas_planes SET id_plan=1, fecha_plan=".date("Y-m-d")." WHERE id_empresa=".$info["id"]);
+										$_SESSION["ctc"]["plan"] = $db->getRow("SELECT empresas_planes.*, planes.nombre FROM empresas_planes INNER JOIN planes ON planes.id=empresas_planes.id_plan WHERE empresas_planes.id_empresa=$info[id]");
+									} else {
+										$_SESSION["ctc"]["plan"] = $plan;
+									}
+									break;
+								case 4:
+
+									$timestamp_today = strtotime(date("Y-m-d"));
+									$timestamp_vencimiento = strtotime("+35 day", strtotime($plan["fecha_plan"]));
+
+									if ($timestamp_today >= $timestamp_vencimiento) {
+										$db->query("UPDATE empresas_planes SET id_plan=1, fecha_plan=".date("Y-m-d")." WHERE id_empresa=".$info["id"]);
+										$_SESSION["ctc"]["plan"] = $db->getRow("SELECT empresas_planes.*, planes.nombre FROM empresas_planes INNER JOIN planes ON planes.id=empresas_planes.id_plan WHERE empresas_planes.id_empresa=$info[id]");
+									} else {
+										$_SESSION["ctc"]["plan"] = $plan;
+									}
+
+									break;
+								default:
+
+									$_SESSION["ctc"]["plan"] = $plan;
+
+									break;
+							}
+
+								
+
+							/*$_SESSION["ctc"]["servicio"] = $db->getRow("SELECT empresas_servicios.*, servicios.nombre FROM empresas_servicios INNER JOIN servicios ON servicios.id=empresas_servicios.id_servicio WHERE empresas_servicios.id_empresa=$info[id]");*/
 
 							if($info["id_imagen"] != 0) {
 								$pic = $db->getOne("SELECT CONCAT(directorio,'/',titulo,'.',extension) FROM imagenes WHERE id=".$info["id_imagen"]);
