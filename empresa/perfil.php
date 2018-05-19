@@ -351,33 +351,53 @@
 													<?php echo $infoEmpresa["actividad"]; ?>
 												</a>
 											<?php endif ?>
-											<?php if($infoEmpresa["sitio_web"] && $link_empresa == 1): ?>
-												<a class="list-group-item" href="<?php echo $infoEmpresa["sitio_web"]; ?>">
+											<br>
+											<div class="text-center">
+											 <?php if($infoEmpresa["sitio_web"] && $link_empresa == 1): ?>
+												<!-- <a class="list-group-item" href="<?php echo $infoEmpresa["sitio_web"]; ?>">
 													<i class="ti-world m-r-0-5"></i> <?php echo $infoEmpresa["sitio_web"]; ?>
+												</a> -->
+												<a href="<?php echo $infoEmpresa["sitio_web"]; ?>">
+													<i class="fa fa-globe fa-stack-1x social-web"></i>
 												</a>
-											<?php endif ?>
+											<?php endif ?> 
+											
 											<?php if($infoEmpresa["facebook"]): ?>
-												<a class="list-group-item" href="<?php echo $infoEmpresa["facebook"]; ?>">
+												<!-- <a class="list-group-item" href="<?php echo $infoEmpresa["facebook"]; ?>">
 													<i class="ti-facebook m-r-0-5"></i><?php echo $infoEmpresa["facebook"]; ?>
+												</a> -->
+												<a href="<?php echo $infoEmpresa["facebook"] ?>">
+													<i class="fa fa-facebook fa-stack-1x social-fb"></i>
 												</a>
 											<?php endif ?>
+
 											<?php if($infoEmpresa["twitter"]): ?>
-												<a class="list-group-item" href="<?php echo $infoEmpresa["twitter"]; ?>">
+												<!-- <a class="list-group-item" href="<?php echo $infoEmpresa["twitter"]; ?>">
 													<i class="ti-twitter m-r-0-5"></i> <?php echo $infoEmpresa["twitter"]; ?>
+												</a> -->
+												<a href="<?php echo $infoEmpresa["twitter"]; ?>">
+													<i class="fa fa-twitter fa-stack-1x social-tw"></i>
 												</a>
 											<?php endif ?>
 											<?php if($infoEmpresa["instagram"]): ?>
-												<div class="col-md-12" style="margin-top: 20px;">
+												<!-- <div class="col-md-12" style="margin-top: 20px;">
 													<a class="list-group-item" href="<?php echo $infoEmpresa["instagram"]; ?>">
 														<i class="ti-instagram m-r-0-5"></i> <?php echo $infoEmpresa["instagram"]; ?>
 													</a>
-												</div>
-											<?php endif ?>
-											<?php if($infoEmpresa["linkedin"]): ?>
-												<a class="list-group-item" href="<?php echo $infoEmpresa["linkedin"]; ?>">
-													<i class="ti-linkedin m-r-0-5"></i> <?php echo $infoEmpresa["linkedin"]; ?>
+												</div> -->
+												<a href="<?php echo $infoEmpresa["instagram"]; ?>">
+													<i class="fa fa-instagram fa-stack-1x social-ig"></i>
 												</a>
 											<?php endif ?>
+											<?php if($infoEmpresa["linkedin"]): ?>
+												<!-- <a class="list-group-item" href="<?php echo $infoEmpresa["linkedin"]; ?>">
+													<i class="ti-linkedin m-r-0-5"></i> <?php echo $infoEmpresa["linkedin"]; ?>
+												</a> -->
+												<a href="<?php echo $infoEmpresa["linkedin"]; ?>">
+													<i class="fa fa-linkedin fa-stack-1x social-in"></i>
+												</a>
+											<?php endif ?>
+											</div>
 										<?php endif ?>
 										</div>
 									</ul>

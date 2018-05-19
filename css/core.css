@@ -9955,6 +9955,22 @@ a.text-grey:hover .underline {
     color: #fff;
 }
 
+.social-web {
+    color: grey;
+    background: #fff;
+    border: 2px solid grey;
+    font-size: 25px;
+    border-radius: 25%;
+    width: 35px;
+    height: 35px;
+    position: relative;
+}
+
+.social-web:hover {
+    background: grey;
+    color: #fff;
+}
+
 .social-tw {
     color: #00ACED;
     background: #fff;
