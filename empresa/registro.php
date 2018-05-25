@@ -198,7 +198,7 @@
 													<h4 class="text-uppercase">Bronce</h4>
 													<h3 class="m-b-0 h3-price">
 														<sup>$</sup>
-														<span class="text-big">180</span>
+														<span class="text-big"><?= $planes[0]['precio'] ?></span>
 														<span class="text-small">/ 1 mes</span>
 													</h3>
 												</div>
@@ -220,7 +220,7 @@
 													<h4 class="text-uppercase">Plata</h4>
 													<h3 class="m-b-0 h3-price">
 														<sup>$</sup>
-														<span class="text-big">350</span>
+														<span class="text-big"><?= $planes[1]['precio'] ?></span>
 														<span class="text-small">/ 1 mes</span>
 													</h3>
 												</div>
@@ -242,7 +242,7 @@
 													<h4 class="text-uppercase">Oro</h4>
 													<h3 class="m-b-0 h3-price">
 														<sup>$</sup>
-														<span class="text-big">500</span>
+														<span class="text-big"><?= $planes[2]['precio'] ?></span>
 														<span class="text-small">/ 1 mes</span>
 													</h3>
 												</div>
@@ -370,28 +370,37 @@
 			
 			function execute_my_onreturn (json) {
 				if (json.collection_status=='approved'){
-					alert ('Pago acreditado');
-					
-					$.ajax({
-						type: 'POST',
-						url: 'ajax/empresas.php',
-						data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + $('#phone').val() + '&term=1&plan=' + plan + '&serv=' + serv + '&transaction=' + JSON.stringify(json) + '&cuit=' + $("#cuit").val(),
-						dataType: 'json',
-						success: function(data) {
-							if(data.msg == "OK") {
-								window.location.assign("./");
-							}
-						}
+
+					swal({
+					  position: 'center',
+					  type: 'success',
+					  title: 'Pago Acreditado',
+					  showConfirmButton: false,
+					  timer: 1500
 					});
 					
+					setTimeout(function(){
+						registrarEmpresa(JSON.stringify(json));
+					}, 3000);
+
+					
+					
 				} else if(json.collection_status=='pending'){
-					alert ('El usuario no completó el pago');
+					swal("No completado", "El usuario no completó el proceso de pago, no se ha generado ningún pago", "warning");
+					$("#next").attr("disabled", false);
+					plan = 1;
 				} else if(json.collection_status=='in_process'){    
-					alert ('El pago está siendo revisado');    
+					swal("En revisión", "El pago está siendo revisado. Se le notificará cuando la transacción se complete.", "info");
+					$("#next").attr("disabled", false);
+					plan = 1;
 				} else if(json.collection_status=='rejected'){
-					alert ('El pago fué rechazado, el usuario puede intentar nuevamente el pago');
+					swal("Rechazado", "El pago fué rechazado, el usuario puede intentar nuevamente el pago", "error");
+					$("#next").attr("disabled", false);
+					plan = 1;
 				} else if(json.collection_status==null){
-					alert ('El usuario no completó el proceso de pago, no se ha generado ningún pago');
+					swal("No completado", "El usuario no completó el proceso de pago, no se ha generado ningún pago", "warning");
+					$("#next").attr("disabled", false);
+					plan = 1;
 				}
 			}
 			
@@ -569,7 +578,7 @@
 									dataType: 'json',
 									success: function(data) {
 										console.log(data);
-										$("#payMP").attr("data-v", data.data.response.init_point);
+										$("#payMP").attr("data-v", data.data.response.sandbox_init_point);
 										var html = '';
 										var total = 0;
 										html += '<li class="list-group-item b-l-0 b-r-0 text-muted">Tipo: <strong>'+data.servicios.nombre+'</strong></li><li class="list-group-item b-l-0 b-r-0 text-muted">Precio: <strong>'+data.servicios.precio+'</strong></li>';
@@ -621,28 +630,7 @@
 						}
 						break;
 					case 3:
-						$.ajax({
-							type: 'POST',
-							url: 'ajax/empresas.php',
-							data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + $('#phone').val() + '&term=1&plan=' + plan + '&serv=' + serv + '&cuit=' + $('#cuit').val(),
-							dataType: 'json',
-							success: function(data) {
-								if(data.msg == "OK") {
-									swal("EXITO!", "Registrado Satisfactoriamente...", "success");
-									setTimeout(function(){
-										window.location.assign("./");
-									},3000);
-								} else {
-									swal({
-												title: 'Información!',
-												text: 'El correo electrónico ingresado ya se encuentra en uso.',
-												timer: 3000,
-												confirmButtonClass: 'btn btn-primary btn-lg',
-												buttonsStyling: false
-									});
-								}
-							}
-						});
+						registrarEmpresa();
 						break;
 				}
 			});
@@ -651,6 +639,33 @@
 	  var regex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
 	  return regex.test(email);
 	}
+
+	function registrarEmpresa(transaction=null){
+		$.ajax({
+			type: 'POST',
+			url: 'ajax/empresas.php',
+			data: 'op=3&email=' + $("#email").val() + '&password=' + $("#passw").val() + '&name=' + $("#name").val() + '&lastName=' + $("#lastName").val() + '&company=' + $("#empresa").val() + '&razon=' + $("#razon").val() + '&phone=' + $('#phone').val() + '&term=1&plan=' + plan + '&serv=' + serv + '&transaction='+transaction+'&cuit=' + $('#cuit').val(),
+			dataType: 'json',
+			success: function(data) {
+				if(data.msg == "OK") {
+					swal("EXITO!", "Registrado Satisfactoriamente...", "success");
+					setTimeout(function(){
+						window.location.assign("./");
+					},3000);
+				} else {
+					swal({
+								title: 'Información!',
+								text: 'El correo electrónico ingresado ya se encuentra en uso.',
+								timer: 3000,
+								confirmButtonClass: 'btn btn-primary btn-lg',
+								buttonsStyling: false
+					});
+				}
+			}
+		});
+	}
+
+
 		</script>
 	</body>
 </html>
