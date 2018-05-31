@@ -292,6 +292,10 @@
                                 	if ($pub["estatus"] == 1) { // Si la publicacion caducó pero sigue estando activa, desactivarla.
                                 		$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
                                 	}
+                                } else {
+                                	if ($pub["estatus"] == 0) { // Si la publicacion caducó pero se cambió de plan y la oferta debe seguir vigente, se activa de nuevo.
+                                		$db->query("UPDATE publicaciones SET estatus=1 WHERE id=".$pub["id"]);
+                                	}
                                 }
 
                                 $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><i class="fa fa-pause"></i></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><i class="fa fa-play"></i></button>';
@@ -324,6 +328,10 @@
                                 	if ($pub["estatus"] == 1) { // Si la publicacion caducó pero sigue estando activa, desactivarla.
                                 		$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
                                 	}
+                                } else {
+                                	if ($pub["estatus"] == 0) { // Si la publicacion caducó pero se cambió de plan y la oferta debe seguir vigente, se activa de nuevo.
+                                		$db->query("UPDATE publicaciones SET estatus=1 WHERE id=".$pub["id"]);
+                                	}
                                 }
 
                                 $startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><span class="ti-hand-stop"></span></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><span class="ti-control-play"></span></button>';
@@ -355,6 +363,10 @@
                                 if ($timestamp_today >= $timestamp_final) { // ¿Caducó?
                                 	if ($pub["estatus"] == 1) { // Si la publicacion caducó pero sigue estando activa, desactivarla.
                                 		$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
+                                	}
+                                } else {
+                                	if ($pub["estatus"] == 0) { // Si la publicacion caducó pero se cambió de plan y la oferta debe seguir vigente, se activa de nuevo.
+                                		$db->query("UPDATE publicaciones SET estatus=1 WHERE id=".$pub["id"]);
                                 	}
                                 }
 
@@ -389,7 +401,11 @@
                             		if ($pub["estatus"] == 1) { // Si la publicacion caducó pero sigue estando activa, desactivarla.
                             			$db->query("UPDATE publicaciones SET estatus=0 WHERE id=".$pub["id"]);
                             		}
-                            	}
+                            	} else {
+                                	if ($pub["estatus"] == 0) { // Si la publicacion caducó pero se cambió de plan y la oferta debe seguir vigente, se activa de nuevo.
+                                		$db->query("UPDATE publicaciones SET estatus=1 WHERE id=".$pub["id"]);
+                                	}
+                                }
 
                             	$startStopPub = $pub["estatus"] == 1 ? '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Detener publicación" onclick="stopStartPub(this,0)"><i class="fa fa-pause"></i></button>' : '<button type="button" class="accion-publicacion btn btn-default waves-effect waves-light" title="Renaudar publicación" onclick="stopStartPub(this,1)"><i class="fa fa-play"></i></button>';
 
