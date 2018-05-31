@@ -28,7 +28,7 @@
 									WHERE t1.id_empresa=".$_SESSION['ctc']['empresa']['id']."
 									GROUP BY provincia");
 
-	$provincias = $base->getAll("SELECT * FROM provincias");
+	$provincias = $base->getAll("SELECT * FROM provincias WHERE estatus=1");
 	
 	//Datos para el select actividad empresa	
 	$actividad_empresa = $base->getAll("SELECT t4.id_actividad_empresa,t5.nombre 

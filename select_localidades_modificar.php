@@ -55,6 +55,9 @@
                 <option value="17">
                     Brandsen
                 </option>
+                <option value="2386">
+                    Buenos Aires-GBA
+                </option>
                 <option value="18">
                     Campana
                 </option>
@@ -63,6 +66,9 @@
                 </option>
                 <option value="20">
                     Capilla del Señor
+                </option>
+                <option value="2387">
+                    Capital Federal
                 </option>
                 <option value="21">
                     Capitán Sarmiento

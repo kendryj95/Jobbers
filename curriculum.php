@@ -285,8 +285,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
                                                             class="custom-select form-control">
                                                         <option value="0">Seleccione</option>
                                                       	<option value="1">Buenos Aires</option>
-														<option value="2">Buenos Aires-GBA</option>
-														<option value="3">Capital Federal</option>
 														<option value="4">Catamarca</option>
 														<option value="5">Chaco</option>
 														<option value="6">Chubut</option>
