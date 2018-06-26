@@ -229,9 +229,19 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 													<select class="custom-select form-control" id="country" style="width: 100%;">
 														<option value="0">Seleccione</option>
 														<?php $countries = $db->getAll("SELECT * FROM paises ORDER BY mas_frecuentes DESC, nombre");?>
-														<?php foreach ($countries as $c): ?>
-															<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
-														<?php endforeach?>
+														<optgroup label="Populares">
+															<?php foreach ($countries as $c): ?>
+																<?php if ($c["mas_frecuentes"] == null || $c["mas_frecuentes"] == 0){break;} ?>
+																<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
+															<?php endforeach;?>
+														</optgroup>
+														<optgroup label="Otros">
+															<?php foreach ($countries as $c): ?>
+																<?php if ($c["mas_frecuentes"] != 1): ?>
+																<option value="<?php echo $c["id"]; ?>"><?php echo $c["nombre"]; ?></option>
+																<?php endif ?>
+															<?php endforeach?>
+														</optgroup>
 													</select>
 												</div>
 											</div>
