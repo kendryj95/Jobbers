@@ -276,7 +276,7 @@
                 if($datos) {
 					$datos = array_reverse($datos);
 					foreach($datos as $k => $pub) {
-						$pub["link_postulados"] = $pub["postulados"] > 0 ? ('<a value="'.$pub["titulo"].'" class="text-primary" href="javascript: void(0);" data-toggle="modal" data-target="#modal-postulados" data-id="' . $pub["id"] . '"><span class="underline">' . $pub["postulados"] . ' trabajador(es)</span></a>') : "";
+						$pub["link_postulados"] = $pub["postulados"] > 0 ? ('<a value="'.$pub["titulo"].'" class="text-primary" href="javascript: void(0);" onclick="limpiarFiltros()" data-toggle="modal" data-target="#modal-postulados" data-id="' . $pub["id"] . '"><span class="underline">' . $pub["postulados"] . ' trabajador(es)</span></a>') : "";
 
 						$fecha_creac_pub = date('d/m/Y', strtotime($pub["fecha_actualizacion"]));
 						$fecha_final_pub = '&#x221e;';
