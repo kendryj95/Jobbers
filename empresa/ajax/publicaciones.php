@@ -442,6 +442,7 @@
 				break;
 			case OBTENER_POSTULADOS:
 				$id = isset($_REQUEST["i"]) ? $_REQUEST["i"] : false;
+				$condicion_nivel_estudio = isset($_REQUEST["n"]) ? " AND t4.id_nivel_estudio=" . $_REQUEST["n"] : "";
 				$postulados = array();
 
 				$plan = $db->getRow("SELECT id_plan FROM empresas_planes WHERE id_empresa=".$_SESSION['ctc']['empresa']['id']);
@@ -473,7 +474,8 @@
 					t6.marcador,
 					t7.remuneracion_pret,
 					group_concat(t8.id_idioma) as idiomas,
-					group_concat(t10.nombre) as actividad_empresa
+					group_concat(t10.nombre) as actividad_empresa,
+					IF(t4.ano_finalizacion<>0,YEAR(CURDATE()) - t4.ano_finalizacion,0) AS anio_graduado
 					FROM publicaciones t1
 					LEFT JOIN postulaciones t2 ON t2.id_publicacion = t1.id
 					LEFT JOIN trabajadores t3 ON t3.id = t2.id_trabajador
@@ -486,7 +488,7 @@
 					LEFT JOIN trabajadores_experiencia_laboral t9 ON t9.id_trabajador = t3.id
 					LEFT JOIN actividades_empresa t10 ON t10.id = t9.id_actividad_empresa
 
-					WHERE t1.id=".$id."
+					WHERE t1.id=".$id . $condicion_nivel_estudio."
 					GROUP by t3.id $limit";
 
 
@@ -537,6 +539,7 @@
 							$fila['idiomas'],
 							$fila['actividad_empresa'],
 							$fila['marcador'],
+							$fila['anio_graduado'],
 							$fila['fecha_hora'],
 							'<div class="acciones-publicacion text-center" data-target="' . $fila["id_trabajador"] . '">
 							 <strong></strong>'. $marcadores[$fila["marcador"]].'

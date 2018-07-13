@@ -35,6 +35,14 @@
 	if($sectores === false) {
 		$sectores = array();
 	}
+
+	$niveles_estudios = $db->getAll("
+		SELECT * FROM nivel_estudio
+	");
+
+	if($niveles_estudios === false) {
+		$niveles_estudios = array();
+	}
 		$disps = $db->getAll("SELECT id, nombre, nombre FROM disponibilidad");
 
 	if($disps === false) {
@@ -160,6 +168,16 @@
 
 
                         	</select>
+
+                        	<label>Nivel de Estudio</label><br/>
+                        	<select  onchange="filter_nivel_estudio(this.value)" id="nivel_estudio" class="_filtro form-control select_filtros" style="">
+                        		<option value="0">Todas</option>
+                        		<?php foreach ($niveles_estudios as $nivel_estudio): ?>
+								<option value="<?= $nivel_estudio["id"] ?>"><?= $nivel_estudio["nombre"] ?></option>
+								<?php endforeach ?>
+
+
+                        	</select>
 								  
                         	</div> 
 
@@ -250,6 +268,15 @@
 	                        		<option value="3">Evaluando</option>
 	                        		<option value="4">Finalistas</option>
 	                        		<option value="5">Contratados</option>									 
+	                        	</select>   
+
+	                        	<label>Años de graduado</label><br/>
+	                        	<select id="anio_graduados" class="_filtro form-control select_filtros" style="" disabled>
+	                        		<option value="">Todos</option>
+	                        		<option value="0">Recien graduado</option>
+	                        		<option value="13">1 a 3 Años</option>
+	                        		<option value="35">4 a 6 Años</option>
+	                        		<option value="51">7+ Años</option>
 	                        	</select>   	 	              		
 							</div>
 							<div class="col-md-12" style="margin-top: 10px;">
@@ -276,6 +303,7 @@
 									<th>idioma</th>
 									<th>actividad</th>
 									<th>Estado</th>
+									<th>Años de graduado</th>
 									<th>Fecha y hora</th>
 									<th>Etapa</th>
 								</tr>
@@ -1187,7 +1215,7 @@
 			var tablaPostulados = $tablaPostulados.DataTable( {
 				 "responsive": true,
 				 "aoColumnDefs": [ 
-					{ "visible": false, "targets": 2 },
+					{ "visible": false, "targets": 2 }, 
 					{ "visible": false, "targets": 3 }, 	
 					{ "visible": false, "targets": 4 }, 	
 					{ "visible": false, "targets": 5 }, 	
@@ -1196,6 +1224,7 @@
 					{ "visible": false, "targets": 8 },
 					{ "visible": false, "targets": 9 },
 					{ "visible": false, "targets": 10 }, 	 	 	
+					{ "visible": false, "targets": 11 }, 	 	 	
  	
 
 				  ],
@@ -1273,6 +1302,7 @@
 			$('#modal-postulados').on('show.bs.modal', function (e) {
 				 
 				$("#titulo_postulados").html($(e.relatedTarget).attr('value').toUpperCase());
+				$('#nivel_estudio').attr('data-idpub', $(e.relatedTarget).attr('data-id'));
 				tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + $(e.relatedTarget).attr('data-id'));
 				tablaPostulados.ajax.reload(); 
 			});
@@ -1517,9 +1547,10 @@
 
  	
  		function filtrar(valor,columna)
- 		{	   tablaPostulados.ajax.reload();
- 			   var table = $('#tablaPostulados').DataTable();
-			   table.columns(columna).search(valor).draw(); 			 
+ 		{
+			tablaPostulados.ajax.reload();
+			var table = $('#tablaPostulados').DataTable();
+			table.columns(columna).search(valor).draw();
  		}
 
  	
@@ -1569,6 +1600,51 @@
 		    	else if(valor=="0")
 		    	{
 					return true;
+		    	}		 
+		        if ( ( isNaN( min ) && isNaN( max ) ) ||
+		             ( isNaN( min ) && age <= max ) ||
+		             ( min <= age   && isNaN( max ) ) ||
+		             ( min <= age   && age <= max ) )
+		        {
+		            return true;
+		        }
+		        return false;
+		    }
+		);
+ 			var table = $('#tablaPostulados').DataTable();
+		    table.draw();
+		} );
+
+ 			 $('#anio_graduados').change( function() { 
+ 				$.fn.dataTable.ext.search.push(
+		    	function( settings, data, dataIndex ) {
+		    	var min = 0;
+		        var max = 0;
+		        var valor=$("#anio_graduados").val();
+		        var age = parseInt( data[11] ) || 0; // use data for the age column
+		    	if(valor == "13")
+		    	{
+		    		var min = 1;
+		       		var max = 3;
+		    	}
+		    	else if(valor == "35")
+		    	{
+					var min = 4;
+		       		var max = 6;
+		    	}
+		    	else if(valor == "51")
+		    	{
+					var min = 5;
+		       		var max = 10000;
+		    	} else if (valor == "")
+		    	{
+		    		var min = 0;
+		    		var max = 10000;
+		    	}
+		    	else if(valor=="0")
+		    	{
+		       		var min = 0;
+		        	var max = 0;
 		    	}		 
 		        if ( ( isNaN( min ) && isNaN( max ) ) ||
 		             ( isNaN( min ) && age <= max ) ||
@@ -1635,7 +1711,8 @@
 		 		
 
  		function limpiarFiltros()
- 		{   tablaPostulados.ajax.reload();
+ 		{   
+ 			tablaPostulados.ajax.reload();
  			$("._filtro").prop('selectedIndex', 0);
  			 
  			 var table = $('#tablaPostulados').DataTable();
@@ -1687,6 +1764,22 @@
 				else
 				{
 					$("#contador_caracteres_2").html(" "+50-(parametro.length) + " Caracteres disponibles"); 
+				}
+				
+			}
+
+			function filter_nivel_estudio(value)
+			{
+				var idpub = $('#nivel_estudio').attr('data-idpub');
+				
+				if (value != 0) {
+					$('#anio_graduados').prop('disabled', false);
+					tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + idpub+'&n='+value);
+					tablaPostulados.ajax.reload(); 
+				} else {
+					$('#anio_graduados').prop('disabled', true).val("");
+					tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + idpub);
+					tablaPostulados.ajax.reload(); 
 				}
 				
 			}
