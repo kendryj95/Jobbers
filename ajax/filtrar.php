@@ -13,6 +13,8 @@
 		$provincia=$_POST["provincia"];
 		$remuneracion=$_POST["remuneracion"];
 		$experiencia=$_POST["experiencia"];  
+		$nivel_estudio=$_POST["nivel_estudio"];  
+		$anio_graduados=$_POST["anio_graduados"];  
 
 		$sql="";
 		if($estudio==""){$sql=$sql."id_area_estudio !=00 ";}else{$sql=$sql." id_area_estudio LIKE '".$estudio."'";}; 
@@ -78,6 +80,27 @@
 				$sql=$sql." and remuneracion_pret > 20001 ";
 			}
 		};
+
+		if ($nivel_estudio != "") {
+			$sql .= " and t2.id_nivel_estudio=$nivel_estudio";
+		}
+
+		if ($anio_graduados != "") {
+			$explode = explode("-", $anio_graduados);
+			if (count($explode) > 1) {
+				$min = $explode[0];
+				$max = $explode[1];
+
+				$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0) BETWEEN $min AND $max";
+			} else {
+				if ($explode[0] == 0) {
+					
+					$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0)=$explode[0]";
+				} else {
+					$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0) >= 7";
+				}
+			}
+		}
 
 		 $consulta="SELECT t1.id, t1.id_imagen,upper(concat(t1.nombres,' ',t1.apellidos)) as nombre,
 			t1.id_pais,t1.id_sexo,t1.provincia,t1.localidad,TIMESTAMPDIFF(YEAR,t1.fecha_nacimiento,CURDATE()) AS edad, group_concat(t2.id_area_estudio) as id_area_estudio ,group_concat(t3.id_idioma),t4.remuneracion_pret,group_concat(t4.sobre_mi) as sobre_mi,concat(t5.titulo, '.', t5.extension) as imagen,t6.nombre as pais , group_concat(t7.id_actividad_empresa)  as experiencia,t8.total 

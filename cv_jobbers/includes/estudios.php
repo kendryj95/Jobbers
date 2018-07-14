@@ -18,7 +18,7 @@ $pdf->Cell(190,5,''.utf8_decode("ESTUDIOS REALIZADOS").'',0,1,'C','true');
 	$pdf->SetTextColor(0,0,0);
 
 	$datos_experiencia="";
-	$cadena=$datos_estudios[$i]['estudio']." | ".$datos_estudios[$i]['nombre']." | ".$datos_estudios[$i]['titulo']." | ".estado($datos_estudios[$i]['id_estado_estudio'])." | ".$datos_estudios[$i]['area'];
+	$cadena=$datos_estudios[$i]['estudio']." | ".$datos_estudios[$i]['nombre']." | ".$datos_estudios[$i]['titulo']." | ".estado($datos_estudios[$i]['id_estado_estudio'])." | ". (estado($datos_estudios[$i]['id_estado_estudio']) == "Graduado" ? ($datos_estudios[$i]['mes_finalizacion'] . "/" . $datos_estudios[$i]["ano_finalizacion"] . " | ") : "") . $datos_estudios[$i]['area'];
 	$cadena_experiencia=explode(" ", $cadena);
 
 	foreach ($cadena_experiencia as $key )

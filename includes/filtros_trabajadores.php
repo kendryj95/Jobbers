@@ -35,6 +35,10 @@ $datos_area_estudio = $base->getAll("SELECT t2.nombre, t1.id_area_estudio,count(
 									 LEFT JOIN areas_estudio t2 ON t1.id_area_estudio= t2.id 
 									 GROUP BY t1.id_area_estudio
 									 ORDER BY cantidad DESC");
+
+//Filtro nivel estudio
+$datos_nivel_estudio = $base->getAll("SELECT * FROM nivel_estudio");
+
 //Filtro area remuneracion
 $datos_area_remuneracion = $base->getAll("SELECT remuneracion_pret as nombre 
 										  FROM `trabajadores_infextra`  

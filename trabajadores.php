@@ -98,11 +98,21 @@ include('includes/filtros_trabajadores.php');
 
 <script>
 var select_local="";
-function filtro(par,v1,v2)
+function filtro(par,v1,v2, event = "")
     {
        // $( "#contenedor_publicaciones" ).empty();
         a=v1;
         b=10;
+        if (event.id == "nivel_estudio") {
+            if (event.value != 0) {
+                $('#anio_graduados').prop('disabled', false);
+            } else {
+                $('#anio_graduados').prop({
+                    disabled: true,
+                    selectedIndex: 0,
+                })
+            }
+        }
         
         var f1=$("#area_estudio").val();
         var f2=$("#edad").val();
@@ -112,12 +122,14 @@ function filtro(par,v1,v2)
         var f6=$("#provincia").val();
         var f7=$("#remuneracion").val();
         var f8=$("#experiecia_laboral").val();                
+        var f9=$("#nivel_estudio").val();                
+        var f10=$("#anio_graduados").val();                
 
         $.ajax({
           method: "POST", 
           url: "ajax/filtrar.php",
           dataType:"json",
-          data: { op: "filtro",estudio:f1,edad:f2,genero:f3,idioma:f4,localidad:f5,provincia:f6,remuneracion:f7,experiencia:f8,p1:a,p2:b}
+          data: { op: "filtro",estudio:f1,edad:f2,genero:f3,idioma:f4,localidad:f5,provincia:f6,remuneracion:f7,experiencia:f8,nivel_estudio:f9,anio_graduados:f10,p1:a,p2:b}
         })
           .done(function( datos ) {
             //console.log(datos);
@@ -153,6 +165,7 @@ $( document ).ready(function() {
  function limpiar()
  {
      $(".control_filtro").val("");
+     $("#anio_graduados").prop('disabled', true);
      localidad(0);
      filtro(1,0,0);
  }

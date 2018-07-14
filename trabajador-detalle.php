@@ -485,6 +485,10 @@ $empresas = $db->getAll("
                                                         <?php echo $e["nombre_pais"]; ?><br>
                                                         <strong>Estado estudio: </strong>
                                                         <?php echo $e["estado_estudio"]; ?><br>
+                                                        <?php if ($e["estado_estudio"] == "Graduado"): ?>
+                                                        <strong>Fecha de graduación: </strong>
+                                                        <?php echo $e["mes_finalizacion"] . "/" . $e["ano_finalizacion"]; ?><br>
+                                                        <?php endif; ?>
                                                         <strong>Área estudio: </strong>
                                                         <?php echo $e["nombre_estudio"]; ?><br>
                                                     </p>

@@ -25,6 +25,26 @@
                 }
             }?> 
         </select> 
+
+    <label><strong>Nivel de estudio</strong></label></br>
+        <select id="nivel_estudio" class="form-control control_filtro" onchange="filtro(1,0,0,this)">
+            <option value="">Seleccionar</option>
+            <?php foreach ($datos_nivel_estudio as $key) {
+                if($key['nombre']!="")
+                {
+                    echo'<option value="'.$key["id"].'">'.$key["nombre"]." ".' </option>';
+                }
+            }?> 
+        </select>
+
+        <label><strong>Años de graduados</strong></label></br>
+        <select id="anio_graduados" class="form-control control_filtro" onchange="filtro(1,0,0)" disabled>
+            <option value="">Seleccionar</option>
+            <option value="0">Recien graduado</option>
+             <option value="1-3">1 a 3 años</option>
+             <option value="4-6">4 a 6 años</option> 
+             <option value="7">7+ años</option> 
+        </select>  
         <label><strong>Edad</strong></label></br>
         <select onChange="filtro(1,0,0)" id="edad" class="form-control  control_filtro">
             <option value="">Seleccionar</option>
