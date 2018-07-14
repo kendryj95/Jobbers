@@ -1616,11 +1616,11 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										var mes = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 										if(data.educacion.length > 0) {
 											data.educacion.forEach(function(e) {
-												html += '<p class="content-cv"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>Título o Certificación: </strong> '+e.titulo+' <br /> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
+												let anio_graduado = e.estado_estudio == "Graduado" ? '<strong>Fecha de graduación: </strong>' + e.mes_finalizacion + '/' + e.ano_finalizacion + '<br />' : '';
+												html += '<p class="content-cv"><strong>Nivel estudio: </strong> '+e.nivel+'<br> <strong>Título o Certificación: </strong> '+e.titulo+' <br /> <strong>País: </strong> '+e.nombre_pais+'<br> <strong>Estado estudio: </strong> '+e.estado_estudio+'<br> '+anio_graduado+' <strong>Área estudio: </strong> '+e.nombre_estudio+'<br></p>';
 											});
 											$("#educacion").html(html);
 										}
-										console.dir(data.experiencias);
 										if (data.experiencias.length > 0) {
 											html = "";
 											data.experiencias.forEach(function(ex){
@@ -2484,7 +2484,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 											$(".show-swal2.visible .swal2-confirm").click(function() {
 												if($(this).attr('data-action') == 'sig6') {
 													$(this).attr('data-action', '');
-													console.log('asbdasbdoasndas');
 													$('.nav .nav-item a[href="#tab6"]').click();
 													//$('.back-next[data-target="6"]').click();
 												}
@@ -2575,7 +2574,6 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 									data: 'op=3&i=' + target + '&opt=' + option,
 									dataType: 'json',
 									success: function(data) {
-										console.log(data);
 										element.closest("tr").remove();
 									}
 								});
