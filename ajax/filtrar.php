@@ -95,9 +95,9 @@
 			} else {
 				if ($explode[0] == 0) {
 					
-					$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0)=$explode[0]";
+					$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0)=$explode[0] and t2.id_estado_estudio=2";
 				} else {
-					$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0) >= 7";
+					$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0) >= 7 and t2.id_estado_estudio=2";
 				}
 			}
 		}
