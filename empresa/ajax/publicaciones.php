@@ -442,7 +442,26 @@
 				break;
 			case OBTENER_POSTULADOS:
 				$id = isset($_REQUEST["i"]) ? $_REQUEST["i"] : false;
-				$condicion_nivel_estudio = isset($_REQUEST["n"]) ? " AND t4.id_nivel_estudio=" . $_REQUEST["n"] : "";
+				$condiciones = "";
+				$condiciones .= isset($_REQUEST["n"]) ? " AND t4.id_nivel_estudio=" . $_REQUEST["n"] : ""; // nivel de estudio
+
+				if (isset($_REQUEST["a"]) && $_REQUEST["a"] != "") { //año de graduado
+					$explode = explode("-", $_REQUEST["a"]);
+					if (count($explode) > 1) {
+						$min = $explode[0];
+						$max = $explode[1];
+
+						$condiciones .= " and IF(t4.ano_finalizacion<>0,YEAR(CURDATE()) - t4.ano_finalizacion,0) BETWEEN $min AND $max and t4.id_estado_estudio=2";
+					} else {
+						if ($explode[0] == 0) {
+							
+							$condiciones .= " and IF(t4.ano_finalizacion<>0,YEAR(CURDATE()) - t4.ano_finalizacion,0)=$explode[0] and t4.id_estado_estudio=2";
+						} else {
+							$condiciones .= " and IF(t4.ano_finalizacion<>0,YEAR(CURDATE()) - t4.ano_finalizacion,0) >= 7 and t4.id_estado_estudio=2";
+						}
+					}
+				}
+
 				$postulados = array();
 
 				$plan = $db->getRow("SELECT id_plan FROM empresas_planes WHERE id_empresa=".$_SESSION['ctc']['empresa']['id']);
@@ -488,7 +507,7 @@
 					LEFT JOIN trabajadores_experiencia_laboral t9 ON t9.id_trabajador = t3.id
 					LEFT JOIN actividades_empresa t10 ON t10.id = t9.id_actividad_empresa
 
-					WHERE t1.id=".$id . $condicion_nivel_estudio."
+					WHERE t1.id=".$id . $condiciones."
 					GROUP by t3.id $limit";
 
 

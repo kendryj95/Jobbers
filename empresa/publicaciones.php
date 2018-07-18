@@ -271,12 +271,12 @@
 	                        	</select>   
 
 	                        	<label>Años de graduado</label><br/>
-	                        	<select id="anio_graduados" class="_filtro form-control select_filtros" style="" disabled>
+	                        	<select id="anio_graduados" onchange="filter_anio_graduado(this.value)" class="_filtro form-control select_filtros" style="" disabled>
 	                        		<option value="">Todos</option>
 	                        		<option value="0">Recien graduado</option>
-	                        		<option value="13">1 a 3 Años</option>
-	                        		<option value="35">4 a 6 Años</option>
-	                        		<option value="51">7+ Años</option>
+	                        		<option value="1-3">1 a 3 años</option>
+	                        		<option value="4-6">4 a 6 años</option> 
+	                        		<option value="7">7+ años</option> 
 	                        	</select>   	 	              		
 							</div>
 							<div class="col-md-12" style="margin-top: 10px;">
@@ -1615,7 +1615,7 @@
 		    table.draw();
 		} );
 
- 			 $('#anio_graduados').change( function() { 
+ 			 /*$('#anio_graduados').change( function() { 
  				$.fn.dataTable.ext.search.push(
 		    	function( settings, data, dataIndex ) {
 		    	var min = 0;
@@ -1659,7 +1659,7 @@
  			var table = $('#tablaPostulados').DataTable();
 		    table.draw();
 		} );
-
+*/
  			//Filtrar la edad
  			$('#edad').change( function() { 
  			 tablaPostulados.ajax.reload();				
@@ -1779,6 +1779,20 @@
 				} else {
 					$('#anio_graduados').prop('disabled', true).val("");
 					tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + idpub);
+					tablaPostulados.ajax.reload(); 
+				}
+				
+			}
+
+			function filter_anio_graduado(value)
+			{
+				var idpub = $('#nivel_estudio').attr('data-idpub');
+				
+				if (value != "") {
+					tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + idpub+'&n='+$('#nivel_estudio').val()+'&a='+value);
+					tablaPostulados.ajax.reload(); 
+				} else {
+					tablaPostulados.ajax.url('ajax/publicaciones.php?op=6&i=' + idpub+'&n='+$('#nivel_estudio').val());
 					tablaPostulados.ajax.reload(); 
 				}
 				

@@ -91,7 +91,7 @@
 				$min = $explode[0];
 				$max = $explode[1];
 
-				$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0) BETWEEN $min AND $max";
+				$sql .= " and IF(t2.ano_finalizacion<>0,YEAR(CURDATE()) - t2.ano_finalizacion,0) BETWEEN $min AND $max and t2.id_estado_estudio=2";
 			} else {
 				if ($explode[0] == 0) {
 					
