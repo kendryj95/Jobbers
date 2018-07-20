@@ -5,9 +5,10 @@
 	$trabajadores="SELECT *,TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE())  as edad,DATE_FORMAT( fecha_nacimiento,  '%d-%m-%Y' ) as fecha_n FROM trabajadores WHERE id=".$id."";
 	$datos_trabajadores=$db->getAll($trabajadores);
 	
-	$direccion="SELECT t1.calle,t2.localidad,t3.provincia FROM trabajadores t1 
+	$direccion="SELECT t1.calle,t2.localidad,t3.provincia,t4.nombre AS pais FROM trabajadores t1 
 	left JOIN localidades t2 ON t1.localidad = t2.id
 	left JOIN provincias t3 ON t1.provincia = t3.id
+	left JOIN paises t4 ON t1.id_pais=t4.id
 	WHERE t1.id=".$id."";
 	$datos_direccion=$db->getAll($direccion);
 
