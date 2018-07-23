@@ -286,57 +286,72 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 												</div>
 											</div>
 											 <?php //$provincias = $db->getAll("SELECT * FROM provincias")?>
+
 											<div class="form-group row">
-												<div class="col-xs-12 col-md-2 text-center">
-													<label for="province" style="margin-top: 6px;">Provincia <span style="color: red;">*</span></label>
-												</div>
-												<div class="col-xs-12 col-md-10">
-                                                    <select onChange="seleccionar_localidad(this.value)" name="province" id="vic_provincias"
-                                                            class="custom-select form-control">
-                                                        <option value="0">Seleccione</option>
-                                                      	<option value="1">Buenos Aires</option>
-														<option value="4">Catamarca</option>
-														<option value="5">Chaco</option>
-														<option value="6">Chubut</option>
-														<option value="7">Córdoba</option>
-														<option value="8">Corrientes</option>
-														<option value="9">Entre Ríos</option>
-														<option value="10">Formosa</option>
-														<option value="11">Jujuy</option>
-														<option value="12">La Pampa</option>
-														<option value="13">La Rioja</option>
-														<option value="14">Mendoza</option>
-														<option value="15">Misiones</option>
-														<option value="16">Neuquén</option>
-														<option value="17">Río Negro</option>
-														<option value="18">Salta</option>
-														<option value="19">San Juan</option>
-														<option value="20">San Luis</option>
-														<option value="21">Santa Cruz</option>
-														<option value="22">Santa Fe</option>
-														<option value="23">Santiago del Estero</option>
-														<option value="24">Tierra del Fuego</option>
-														<option value="25">Tucumán</option>
-                                                    </select>
+												<div class="col-xs-12 col-md-12">
+													<div style="border: 1px solid #ccc;">
+														<h5 style="text-align: center;">Dirección de domicilio</h4>
+
+														<div class="form-group row">
+															<div class="col-xs-12 col-md-2 text-center">
+																<label for="province" style="margin-top: 6px;">Provincia <span style="color: red;">*</span></label>
+															</div>
+															<div class="col-xs-12 col-md-9">
+			                                                    <select onChange="seleccionar_localidad(this.value)" name="province" id="vic_provincias"
+			                                                            class="custom-select form-control">
+			                                                        <option value="0">Seleccione</option>
+			                                                      	<option value="1">Buenos Aires</option>
+																	<option value="4">Catamarca</option>
+																	<option value="5">Chaco</option>
+																	<option value="6">Chubut</option>
+																	<option value="7">Córdoba</option>
+																	<option value="8">Corrientes</option>
+																	<option value="9">Entre Ríos</option>
+																	<option value="10">Formosa</option>
+																	<option value="11">Jujuy</option>
+																	<option value="12">La Pampa</option>
+																	<option value="13">La Rioja</option>
+																	<option value="14">Mendoza</option>
+																	<option value="15">Misiones</option>
+																	<option value="16">Neuquén</option>
+																	<option value="17">Río Negro</option>
+																	<option value="18">Salta</option>
+																	<option value="19">San Juan</option>
+																	<option value="20">San Luis</option>
+																	<option value="21">Santa Cruz</option>
+																	<option value="22">Santa Fe</option>
+																	<option value="23">Santiago del Estero</option>
+																	<option value="24">Tierra del Fuego</option>
+																	<option value="25">Tucumán</option>
+			                                                    </select>
+															</div>
+														</div>
+
+														<div class="form-group row">
+															<div class="col-xs-12 col-md-2 text-center">
+																<label for="city" style="margin-top: 6px;">Localidad / Ciudad <span style="color: red;">*</span></label>
+															</div>
+															<div class="col-xs-12 col-md-9">
+			                                                    
+			                                                         <?php include('select_localidades.php');?>
+			                                                    
+															</div>
+														</div>
+
+														<div class="form-group row">
+															<label for="street" class="col-xs-12 col-md-2 text-center">Calle <span style="color: red;">*</span></label>
+															<div class="col-xs-12 col-md-9">
+																<input maxlength="45" class="form-control" value="<?php echo $data["calle"]; ?>" id="street" type="text">
+															</div>
+														</div>
+
+													</div>
 												</div>
 											</div>
+											
                                             <?php //$localidades = $db->getAll("SELECT * FROM localidades WHERE id_provincia=" . $data['provincia'])?>
-											<div class="form-group row">
-												<div class="col-xs-12 col-md-2 text-center">
-													<label for="city" style="margin-top: 6px;">Localidad / Ciudad <span style="color: red;">*</span></label>
-												</div>
-												<div class="col-xs-12 col-md-10">
-                                                    
-                                                         <?php include('select_localidades.php');?>
-                                                    
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="street" class="col-xs-12 col-md-2 text-center">Calle <span style="color: red;">*</span></label>
-												<div class="col-xs-12 col-md-10">
-													<input maxlength="45" class="form-control" value="<?php echo $data["calle"]; ?>" id="street" type="text">
-												</div>
-											</div>
+											
+											
 											<div class="form-group row">
 												<label for="phone" class="col-xs-12 col-md-2 text-center">Teléfono o móvil <span style="color: red;">*</span></label>
 												<div class="col-xs-12 col-md-10">
