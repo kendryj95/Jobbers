@@ -552,18 +552,11 @@
 										<?php endforeach ?>
 									</select>
 								</div>
-								<div class="form-group">
-									<label for="select2-demo-23" class="form-control-label">Disponibilidad</label>
-									<select id="select2-demo-23" class="form-control" data-plugin="select2">
-										<?php foreach($disps as $disp): ?>
-											<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
-										<?php endforeach ?>
-									</select>
-								</div>
+								
 								<div class="form-group">
 									<div class="col-sm-4 col-lg-4" style="padding-left: 0px;">
-										<label for="select2-demo-3" class="form-control-label">Disponibilidad</label>
-										<select id="select2-demo-3" class="form-control" data-plugin="select2">
+										<label for="select2-demo-23" class="form-control-label">Disponibilidad</label>
+										<select id="select2-demo-23" class="form-control" data-plugin="select2">
 											<?php foreach($disps as $disp): ?>
 												<option value="<?php echo $disp["id"]; ?>"><?php echo $disp["nombre"]; ?></option>
 											<?php endforeach ?>
@@ -584,6 +577,8 @@
 										<label for="select2-demo-3" class="form-control-label">Localidad</label>
 										 <?php include('../select_localidades_modificar.php');?>
 									</div>
+
+								</div>
 								 <div class="form-group">
 									<label for="modal-modificar-publicacion-titulo">Título <span id="contador_caracteres_2" style="padding-left: 10px;
 									px;"></span></label>
