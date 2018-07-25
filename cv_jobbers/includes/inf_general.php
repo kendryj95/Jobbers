@@ -20,7 +20,7 @@ $pdf->Text(23,56+$linea,"".$datos_trabajadores[0]['cuil']."");
 $linea=$linea+4;
 $pdf->Text(46,56+$linea,"".utf8_decode( mb_strtoupper($datos_direccion[0]['pais'])).""); 
 $linea=$linea+4;
-$pdf->Text(26,56+$linea,"".utf8_decode( mb_strtoupper($datos_direccion[0]['calle'] . ' / ' . $datos_direccion[0]['localidad'] . ' / ' . $datos_direccion[0]['provincia'])).""); 
+$pdf->Text(27,56+$linea,"".utf8_decode( mb_strtoupper($datos_direccion[0]['calle'] . ' / ' . $datos_direccion[0]['localidad'] . ' / ' . $datos_direccion[0]['provincia'])).""); 
 $linea=$linea+4;
 $pdf->Text(46,56+$linea,"".$datos_trabajadores[0]['fecha_n'].""); 
 $linea=$linea+4;
