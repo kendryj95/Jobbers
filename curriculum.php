@@ -1212,7 +1212,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 														<p class="content-cv">
 															<strong>DNI: </strong> <span id="labelDNI"><?php echo $data["numero_documento_identificacion"]; ?></span><br>
 															<strong>Numero de CUIL: </strong> <span id="labelCuil"><?php echo $data["cuil"]; ?></span><br>
-															<strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $data["localidad"] . ", " . $data["provincia"] . ", " . $data["pais"] ?></span><br>
+															<strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $data["pais"] ?></span><br>
+															<strong>Domicilio: </strong> <span id="labelStreet"><?php echo $data["calle"] . " , " . $data["localidad"] . ", " . $data["provincia"] ?></span><br>
 															<strong>Fecha de Nacimiento: </strong> <span id="fecha_nac"><?php echo $data["fecha_nacimiento"] !== null ? date('Y-m-d', strtotime($data["fecha_nacimiento"])) : ""; ?></span><br>
 															<strong>Edad: </strong> <span id="edad"><?php echo $data["fecha_nacimiento"] !== null ? intval(date('Y')) - intval(date('Y', strtotime($data["fecha_nacimiento"]))) . "años" : ""; ?></span><br>
 															<strong>Telefonos: </strong> <span class="labelTlf"><?php echo $data["telefono"] . $data["telefono_alternativo"] != "" ? " / " . $data["telefono_alternativo"] : ''; ?></span>
@@ -1613,7 +1614,8 @@ if ($data["id_sexo"] == 0 || $data["id_estado_civil"] == 0 || $data["id_tipo_doc
 										$("#labelLastName").html(data.usuario.apellidos);
 										$("#labelDNI").html(data.usuario.dni);
 										$("#labelCuil").html(data.usuario.cuil);
-										$("#labelCountry").html(data.usuario.localidad+", "+data.usuario.provincia+", "+data.usuario.pais);
+										$("#labelCountry").html(data.usuario.pais);
+										$("#labelStreet").html(data.usuario.calle + ", " + data.usuario.localidad+", "+data.usuario.provincia);
 										$("#labelEmail").html(data.usuario.correo_electronico);
 										$(".labelTlf").html(data.usuario.telefono + " / " + data.usuario.telefono_alternativo);
 	                                    var fecha = formato(data.usuario.fecha_nacimiento);

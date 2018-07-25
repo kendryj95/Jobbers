@@ -427,7 +427,8 @@ $empresas = $db->getAll("
                                                     <strong>Número de CUIL: </strong> <span id="labelCuil"><?php echo $trabajador["cuil"]; ?></span><br>
                                                     <?php endif; ?>
                                                     <?php endif; ?>
-                                                    <strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $trabajador["localidad"] . ", " . $trabajador["provincia"] . ", " . $trabajador["pais"] ?></span><br>
+                                                    <strong>Lugar de nacimiento: </strong> <span id="labelCountry"><?php echo $trabajador["pais"] ?></span><br>
+                                                    <strong>Domicilio: </strong> <span id="labelCountry"><?php echo $trabajador["calle"] . ", " . $trabajador["localidad"] . ", " . $trabajador["provincia"] ?></span><br>
                                                     <?php if(isset($_SESSION['ctc']['empresa'])): ?>
                                                     <?php if($_SESSION['ctc']['plan']['id_plan'] > 1): ?>
                                                     <!-- <strong>Dirección: </strong> <span id="labelCalle"><?php echo $trabajador["calle"]; ?></span><br> -->
