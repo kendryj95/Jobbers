@@ -13,6 +13,7 @@ $pdf->Cell(85,4,''.utf8_decode("LUGAR DE NACIMIENTO:").'',0,1,'L','true');
 $pdf->Cell(85,4,''.utf8_decode("DOMICILIO:").'',0,1,'L','true');
 $pdf->Cell(85,4,''.utf8_decode("FECHA DE NACIMIENTO:").'',0,1,'L','true');
 $pdf->Cell(85,4,''.utf8_decode("EDAD:").'',0,1,'L','true');
+$pdf->Cell(85,4,''.utf8_decode("ESTADO CIVIL:").'',0,1,'L','true');
 $linea=4;
 $pdf->SetFont('Arial','',8); 
 $pdf->Text(18,56,"".$datos_trabajadores[0]['numero_documento_identificacion'].""); 
@@ -24,7 +25,9 @@ $pdf->Text(27,56+$linea,"".utf8_decode( mb_strtoupper($datos_direccion[0]['calle
 $linea=$linea+4;
 $pdf->Text(46,56+$linea,"".$datos_trabajadores[0]['fecha_n'].""); 
 $linea=$linea+4;
-$pdf->Text(20,56+$linea," ".utf8_decode(''.$datos_trabajadores[0]['edad'].' años')." ");  
+$pdf->Text(20,56+$linea," ".utf8_decode(''.$datos_trabajadores[0]['edad'].' años')." ");
+$linea=$linea+4;  
+$pdf->Text(32,56+$linea," ".utf8_decode(''.$datos_trabajadores[0]['estado_civil'])." ");  
 
 $pdf->Text(43,288,"".utf8_decode('Cree en tí, como creemos nosotros. Jobbers el mejor portal para encontrar lo que buscas.').""); 
 ?>

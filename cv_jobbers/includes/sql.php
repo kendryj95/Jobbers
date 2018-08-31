@@ -2,7 +2,7 @@
 	$db = DatabasePDOInstance();
 
 	$id=$_GET['id'];
-	$trabajadores="SELECT *,TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE())  as edad,DATE_FORMAT( fecha_nacimiento,  '%d-%m-%Y' ) as fecha_n FROM trabajadores WHERE id=".$id."";
+	$trabajadores="SELECT t.*,TIMESTAMPDIFF(YEAR, t.fecha_nacimiento, CURDATE())  as edad,DATE_FORMAT( t.fecha_nacimiento,  '%d-%m-%Y' ) as fecha_n, ec.nombre AS estado_civil FROM trabajadores t LEFT JOIN estados_civiles ec ON t.id_estado_civil=ec.id WHERE t.id=".$id."";
 	$datos_trabajadores=$db->getAll($trabajadores);
 	
 	$direccion="SELECT t1.calle,t2.localidad,t3.provincia,t4.nombre AS pais FROM trabajadores t1 
